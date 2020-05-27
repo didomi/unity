@@ -1,0 +1,6 @@
+{
+  "name": "com.didomi.unityplugin",
+  "displayName": "Native Didomi",
+  "version": "1.0.0",
+  "description": "Unity plugin helps you to use native didomi functionality on Android and iOS."
+}
