@@ -3,13 +3,13 @@
 ### 1- Problem & Solution
 
 Didomi-android-sdk setupUI takes AppCompatActivity class as argument but unity generates UnityPlayerActivity class which is extending from Activitiy.
-We are not able to set it as argument to setupUI method. With the default settings we are not able use didomi-android-sdk. In order to solve the issue,
+We are not able to set it as argument to setupUI method. With the default settings, we are not able use didomi-android-sdk. In order to solve the issue,
 At PostProcessor.OnPostProcessBuild we changed the generated code. We change UnityPlayerActivity so that it extends from  AppCompatActivity class instead of Activitiy class. 
 
-Default Generated:
+Default Generated Code:
 public class UnityPlayerActivity extends Activity implements IUnityPlayerLifecycleEvents
 
-After PostProcessor.OnPostProcessBuild generated code updated like below.
+After PostProcessor.OnPostProcessBuild, the generated code is updated like below.
 
 import android.support.v7.app.AppCompatActivity;
 
@@ -17,28 +17,37 @@ public class UnityPlayerActivity extends AppCompatActivity implements IUnityPlay
 
 ### 2- Problem & Solution
 
-Since we updated the Activity class to AppCompatActivity we also need to update unityLibrary\src\main\res\values\styles.xml  
-so that we can set AppCompat theme to the activity
+Since we updated the Activity class to AppCompatActivity, we also need to update "unityLibrary\src\main\res\values\styles.xml"  file.
+So that we can set AppCompat theme to the UnityPlayerActivity. Otherwise project code gets build errors.
+
 At PostProcessor.OnPostProcessBuild we added the below line to styles.
 
 ```xml
 <style name=""DidomiTheme"" parent =""Theme.AppCompat.Light.DarkActionBar""
 ```
 
-And at PostProcessor.OnPostProcessBuild  we updated unityLibrary\src\main\AndroidManifest.xml file
- we replaced line @"android:theme=""@style/UnityThemeSelector"""; with 
+And at PostProcessor.OnPostProcessBuild, We updated unityLibrary\src\main\AndroidManifest.xml file
+
+We replaced line the below
+
+```xml
+  @"android:theme=""@style/UnityThemeSelector""";
+```
+ with 
 
 ```xml
   @"android:theme=""@style/DidomiTheme""";
 ```
 
-At the end we now set the theme of android AppCompat theme. 
+We set the theme of UnityPlayerActivity to "AppCompat Theme" by doing the above update.
 
 ### 3- Problem & Solution
 
- Crush while loading.
-styles at diodmi-andorid-sdk are not found error is thrown by default. To solve at 
-PostProcessor.OnPostProcessBuild we updated the dependecies and added required libs to "unityLibrary\build.gradle file.
+Crush while loading.
+
+Styles imported from didomi-android-sdk are not found and error is thrown. To solve the issue 
+
+At PostProcessor.OnPostProcessBuild, We updated the dependencies and added required libs to "unityLibrary\build.gradle file.
 
 Added dependencies to unityLibrary\build.gradle file:
 
@@ -58,6 +67,8 @@ Added dependencies to unityLibrary\build.gradle file:
 ```
 
 ### 4- Problem & Solution
+
+Build errors related to target sdk:
 
 since diodmi-andorid-sdk uses appcompat-v7:27.1.1, For Unity  target sdk must be 27 at android player settings.    
 
