@@ -7,13 +7,18 @@ We are not able to set it as argument to setupUI method. With the default settin
 At PostProcessor.OnPostProcessBuild we changed the generated code. We change UnityPlayerActivity so that it extends from  AppCompatActivity class instead of Activitiy class. 
 
 Default Generated Code:
+
+```java
 public class UnityPlayerActivity extends Activity implements IUnityPlayerLifecycleEvents
+```
 
 After PostProcessor.OnPostProcessBuild, the generated code is updated like below.
 
+```java
 import android.support.v7.app.AppCompatActivity;
 
 public class UnityPlayerActivity extends AppCompatActivity implements IUnityPlayerLifecycleEvents
+```
 
 ### 2- Problem & Solution
 
