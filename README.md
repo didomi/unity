@@ -47,5 +47,4 @@ please use [github's issue tracker](//github.com/didomi/unity/issues).
 
 License
 -------
-[Didomi License](//license .. It will be updated)
-
+[Didomi License](LICENSE)
