@@ -38,7 +38,7 @@ At the end we now set the theme of android AppCompat theme.
 
  Crush while loading.
 styles at diodmi-andorid-sdk are not found error is thrown by default. To solve at 
-PostProcessor.OnPostProcessBuild we updated the dependecies and add required libs to "unityLibrary\build.gradle file.
+PostProcessor.OnPostProcessBuild we updated the dependecies and added required libs to "unityLibrary\build.gradle file.
 
 Added dependencies to unityLibrary\build.gradle file:
 
@@ -61,4 +61,4 @@ Added dependencies to unityLibrary\build.gradle file:
 
 since diodmi-andorid-sdk uses appcompat-v7:27.1.1, For Unity  target sdk must be 27 at android player settings.    
 
-![Target SDK](img\android_target_sdk_setting.png)
+![Target SDK](img/android_target_sdk_setting.png)

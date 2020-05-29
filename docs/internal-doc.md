@@ -186,7 +186,7 @@ Class used to represent Vendor.
 
 To give idea how files are related to each other, You can check below ordered interactions. They are representing generalized scenarios.
 
-![Didomi Interface](img\ididomi_interface.png)
+![Didomi Interface](img/ididomi_interface.png)
 
 
 ### Android Platform Interactions
@@ -233,14 +233,14 @@ If the change is related to internal details of a function, there would be no ch
 
 package.json in plugin file must be updated. Version number in package.json must be updated if it changes.
 
-![Create Unity Package](img\create_plugin_package_unity.png)
+![Create Unity Package](img/create_plugin_package_unity.png)
 
 To be able to create Didomi Unity package, go to menu on UNITY as above image and click "Export Package". In the next dialog, type "Didomi" as name for package.
 Didomi.unitypackage will be created at the selected location. You can publish the Didomi.unitypackage by adding the file on releases section of github repo.
  
 # How to use Didomi Unity Package on Unity
 
-![Install Unity Package](img\install_plugin_package_to_unity_project.png)
+![Install Unity Package](img/install_plugin_package_to_unity_project.png)
 
 To be able to install Didomi Unity package, go to menu on UNITY as above image and click "Import Package" Didomi as name for package. Didomi.unitypackage contents will be copied to Assets folder on Unity project. 
 
@@ -249,7 +249,7 @@ To be able to install Didomi Unity package, go to menu on UNITY as above image a
 
 At the moment we don't have automated tests. So for new releases, We can use demo unity app to test functionality.
 
-![DemoApp](img\demo_app_ui.png)
+![DemoApp](img/demo_app_ui.png)
 
 With Demo application, you can test each function call on SDK manually. Functions on the SDK are grouped. Each group has a few functions. When user touch to the group button, a few functional buttons becomes visible above the message pane. When you touch the functional button, the function is invoked. The result of the function call is displayed on the message pane. Users can also view the source code of the DemoGUI to find code scripts for how to call each function. 
 
