@@ -244,6 +244,14 @@ Didomi.unitypackage will be created at the selected location. You can publish th
 
 To be able to install Didomi Unity package, go to menu on UNITY as above image and click "Import Package" Didomi as name for package. Didomi.unitypackage contents will be copied to Assets folder on Unity project. 
 
+To be able set local configuration file for Didomi, you must create DidomiConfig folder under Assets folder on Unity Project. Put your didomi_config.json file in  DidomiConfig folder.
+
+```text
+Assets/DidomiConfig/didomi_config.json
+```
+
+Creating DidomiConfig is mandatory for local configuration files. Because these files must be moved to right directories when Android and IOS projects are being generated. On the post process of the unity project, Didomi Plugin moves the files in DidomiConfig to Assets folder in Android projects and to Data/Resources folder in IOS projects. For IOS Projects the configuration files will also be added to Copy Bundle Resources.
+
 
 # How to Test Over Demo-Application
 
@@ -251,7 +259,27 @@ At the moment we don't have automated tests. So for new releases, We can use dem
 
 ![DemoApp](img/demo_app_ui.png)
 
-With Demo application, you can test each function call on SDK manually. Functions on the SDK are grouped. Each group has a few functions. When user touch to the group button, a few functional buttons becomes visible above the message pane. When you touch the functional button, the function is invoked. The result of the function call is displayed on the message pane. Users can also view the source code of the DemoGUI to find code scripts for how to call each function. 
+With Demo application, you can test each function call on SDK manually. Functions on the SDK are grouped. Each group has a few functions. When user touches to the group button, a few functional buttons becomes visible above the message pane. When you touch the functional button, the function is invoked. The result of the function call is displayed on the message pane. Users can also view the source code of the DemoGUI to find code scripts for how to call each function. 
+
+
+# Unity Version Dependencies
+
+We already have two cases causing dependency on specific Unity Versions. In summary we have to use Unity Version 2019.3.12f1 or later. Details are below.
+
+## Dependency 1 Unity Version 2019.3.12f1.
+
+Unity Version must be 2019.3.12f1.
+
+This is caused due to bug on https://issuetracker.unity3d.com/issues/ios-swift-language-version-is-not-set-in-xcode-build-settings-when-a-swift-source-plugin-is-added-to-an-unity-project
+
+## Dependency 1 Unity Version 2018.1
+
+Another dependency related json serializing and deserializing. We have dependency for Unity  version 2018.1 due to that.
+
+DefaultJsonUtiliy class doesn't convert array, set and dictionary structures, I have used NewtonSoft.dll json library. This also raised a new problem. It didn't work for ios. 
+So I have used netstandard 2.0 library version of newtonsoft to not get "il2cpp not supported". It worked. But it is mentioned that this library can be used from Unity version 2018.1
+on the following page https://docs.microsoft.com/en-us/dotnet/standard/net-standard. 
+https://stackoverflow.com/questions/16359628/json-net-under-unity3d-for-ios
 
 
 ### Reference Links For Unity Plugin Development.
