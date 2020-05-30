@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using IO.Didomi.SDK.Events;
 using UnityEngine;
 
-namespace IO.Didomi.SDK.Events
+namespace IO.Didomi.SDK.Android
 {
     public class DidomiCallableProxy : AndroidJavaProxy
     {
