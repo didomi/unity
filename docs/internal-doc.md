@@ -270,15 +270,20 @@ We already have two cases causing dependency on specific Unity Versions. In summ
 
 Unity Version must be 2019.3.12f1.
 
-This is caused due to bug on https://issuetracker.unity3d.com/issues/ios-swift-language-version-is-not-set-in-xcode-build-settings-when-a-swift-source-plugin-is-added-to-an-unity-project
+This is caused due to bug expalined on the following page
+
+https://issuetracker.unity3d.com/issues/ios-swift-language-version-is-not-set-in-xcode-build-settings-when-a-swift-source-plugin-is-added-to-an-unity-project
 
 ## Dependency 1 Unity Version 2018.1
 
 Another dependency related json serializing and deserializing. We have dependency for Unity  version 2018.1 due to that.
 
-DefaultJsonUtiliy class doesn't convert array, set and dictionary structures, I have used NewtonSoft.dll json library. This also raised a new problem. It didn't work for ios. 
-So I have used netstandard 2.0 library version of newtonsoft to not get "il2cpp not supported". It worked. But it is mentioned that this library can be used from Unity version 2018.1
-on the following page https://docs.microsoft.com/en-us/dotnet/standard/net-standard. 
+DefaultJsonUtiliy class doesn't convert array, set and dictionary structures, NewtonSoft.dll used as json library. This also raises a new problem. It doesn't work for IOS. 
+So Netstandard 2.0 library version of newtonsoft is used to not get "il2cpp not supported". It works. But it is mentioned that this library can be used from Unity version 2018.1
+on the following page
+
+https://docs.microsoft.com/en-us/dotnet/standard/net-standard. 
+
 https://stackoverflow.com/questions/16359628/json-net-under-unity3d-for-ios
 
 
