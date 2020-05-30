@@ -7,6 +7,8 @@ using UnityEngine;
 
 public static class PostProcessor
 {
+    private static readonly string DidomiConfigPath = Application.dataPath + @"\DidomiConfig";
+
     [PostProcessBuild]
     public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath)
     {
@@ -44,16 +46,18 @@ public static class PostProcessor
 
     private static void CopyDidomiConfigFileToIOSFolder(PBXProject project, string targetGuid, string path)
     {
-        var configFile = "didomi_config_ios.json";
-        var configFileTarget = "didomi_config.json";
+        var files = Directory.GetFiles(DidomiConfigPath);
 
-        var sourceFile = Application.dataPath + @"\Plugins\Didomi\Editor\" + configFile;
-        var newCopyFile = @"Data\Resources\" + configFileTarget;
-        var newCopyFileAbsolutePath = Path.Combine(path, newCopyFile);
+        foreach (var filePath in files)
+        {
+            var fileName = Path.GetFileName(filePath);
+            var newCopyFile = @"Data\Resources\" + fileName;
+            var newCopyFileAbsolutePath = Path.Combine(path, newCopyFile);
 
-        File.Copy(sourceFile, newCopyFileAbsolutePath, true);
-        var fileGuid = project.AddFile(newCopyFile, newCopyFile);
-        project.AddFileToBuild(targetGuid, fileGuid);
+            File.Copy(filePath, newCopyFileAbsolutePath, true);
+            var fileGuid = project.AddFile(newCopyFile, newCopyFile);
+            project.AddFileToBuild(targetGuid, fileGuid);
+        }
     }
 
     private static void AndroidPostProcess(string path)
@@ -104,13 +108,19 @@ public static class PostProcessor
 
     private static void CopyDidomiConfigFileToAssetFolder(string path)
     {
-        var configFile = "didomi_config.json";
+        var files = Directory.GetFiles(DidomiConfigPath);
 
-        var sourceFile = Application.dataPath + @"\Plugins\Didomi\Editor\" + configFile;
-        var newCopyFile = @"unityLibrary\src\main\assets\" + configFile;
-        var newCopyFileAbsolutePath = Path.Combine(path, newCopyFile);
+        foreach (var filePath in files)
+        {
+            var fileName = Path.GetFileName(filePath);
 
-        File.Copy(sourceFile, newCopyFileAbsolutePath, true);
+            var newCopyFile = @"unityLibrary\src\main\assets\" + fileName;
+            var newCopyFileAbsolutePath = Path.Combine(path, newCopyFile);
+
+            File.Copy(filePath, newCopyFileAbsolutePath, true);
+        }
+
+       
     }
 
     private static void UpdateUnityLibraryDependencies(string path)
