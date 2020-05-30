@@ -1,7 +1,5 @@
 ﻿using IO.Didomi.SDK;
 using IO.Didomi.SDK.Events;
-using IO.Didomi.SDK.Tests;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -593,6 +591,10 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
 
+            var didomiCallable = new DidomiCallable();
+            didomiCallable.OnReady += DidomiCallable_OnReady;
+            Didomi.GetInstance().OnReady(didomiCallable);
+
             Didomi.GetInstance().Initialize(
                 apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
                 localConfigurationPath: null,
@@ -601,10 +603,6 @@ public class DemoGUI : MonoBehaviour
                 disableDidomiRemoteConfig: true,
                 languageCode: null);
 
-
-            var didomiCallable = new DidomiCallable();
-            didomiCallable.OnReady += DidomiCallable_OnReady;
-            Didomi.GetInstance().OnReady(didomiCallable);
         }
     }
 
@@ -620,11 +618,6 @@ public class DemoGUI : MonoBehaviour
 
     void Group11()
     {
-        if (GUI.Button(GetFuncRectCenter(), "Automated Test"))
-        {
-            var didomiTests = new DidomiTests();
-            message = didomiTests.RunAll();
-        }
     }
 
     void Group12()
