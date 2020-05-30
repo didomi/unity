@@ -16,8 +16,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return isReady();
             //#endif
-
-            return false;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -30,8 +28,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return setupUI();
             //#endif
-
-            return false;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -69,8 +65,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getTranslatedText(key);
             //#endif
-
-            return string.Empty;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -83,8 +77,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getUserConsentStatusForPurpose(purposeId);
             //#endif
-
-            return false;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -97,8 +89,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getUserConsentStatusForVendor(vendorId);
             //#endif
-
-            return false;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -111,8 +101,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getUserConsentStatusForVendorAndRequiredPurposes(vendorId);
             //#endif
-
-            return false;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -150,8 +138,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return isConsentRequired();
             //#endif
-
-            return false;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -164,8 +150,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return isPreferencesVisible();
             //#endif
-
-            return false;
         }
 
 
@@ -191,8 +175,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return isUserConsentStatusPartial();
             //#endif
-
-            return false;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -217,8 +199,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return setUserAgreeToAll();
             //#endif
-
-            return false;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -231,8 +211,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return setUserDisagreeToAll();
             //#endif
-
-            return false;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -242,11 +220,9 @@ namespace IO.Didomi.SDK.IOS
 
         public static bool ShouldConsentBeCollected()
         {
-           #if UNITY_IOS && !UNITY_EDITOR
+           //#if UNITY_IOS && !UNITY_EDITOR
             return shouldConsentBeCollected();
-           #endif
-
-            return false;
+           //#endif
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -375,8 +351,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getDisabledPurposeIds();
             //#endif
-
-            return string.Empty;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -389,8 +363,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getDisabledVendorIds();
             //#endif
-
-            return string.Empty;
         }
 
         
@@ -405,8 +377,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getEnabledPurposeIds();
             //#endif
-
-            return string.Empty;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -419,8 +389,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getEnabledVendorIds();
             //#endif
-
-            return string.Empty;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -433,8 +401,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getRequiredPurposeIds();
             //#endif
-
-            return string.Empty;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -447,8 +413,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getRequiredVendorIds();
             //#endif
-
-            return string.Empty;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -461,8 +425,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getJavaScriptForWebView();
             //#endif
-
-            return string.Empty;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -475,8 +437,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return getText(key);
             //#endif
-
-            return string.Empty;
         }
 
         //#if UNITY_IOS && !UNITY_EDITOR
@@ -489,8 +449,6 @@ namespace IO.Didomi.SDK.IOS
             //#if UNITY_IOS && !UNITY_EDITOR
             return setUserConsentStatus(enabledPurposeIds, disabledPurposeIds, enabledVendorIds, disabledVendorIds);
             //#endif
-
-            return false;
         }
     }
 }
