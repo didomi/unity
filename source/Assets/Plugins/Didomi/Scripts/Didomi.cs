@@ -364,7 +364,7 @@ namespace IO.Didomi.SDK
         /// Automatically call the function if the SDK is already ready(that's why this is not a standard event)
         /// </summary>
         /// <param name="didomiCallable">that is called once the SDK is ready.</param>
-        public void OnReady(DidomiCallable didomiCallable)
+        public void OnReady(Action didomiCallable)
         {
             didomiForPlatform.OnReady(didomiCallable);
         }

@@ -1,4 +1,5 @@
 ﻿using IO.Didomi.SDK.Events;
+using System;
 using System.Collections.Generic;
 
 namespace IO.Didomi.SDK.Interfaces
@@ -41,7 +42,7 @@ namespace IO.Didomi.SDK.Interfaces
         bool IsNoticeVisible();
         bool IsPreferencesVisible();
         bool IsReady();
-        void OnReady(DidomiCallable didomiCallable);
+        void OnReady(Action didomiCallable);
         void SetupUI();
         void ShowNotice();
         void ShowPreferences();

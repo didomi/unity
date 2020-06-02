@@ -211,8 +211,9 @@ namespace IO.Didomi.SDK.Android
             return CallReturningBoolMethod("isReady");
         }
 
-        public void OnReady(DidomiCallable didomiCallable)
+        public void OnReady(Action didomiCallable)
         {
+
             var didomiCallableProxy = new DidomiCallableProxy(didomiCallable);
 
             CallVoidMethod("onReady", didomiCallableProxy);
@@ -220,17 +221,17 @@ namespace IO.Didomi.SDK.Android
 
         public void SetupUI()
         {
-            CallVoidMethodForSetupUI("setupUI");
+            CallVoidMethodWithActivityArg("setupUI");
         }
 
         public void ShowNotice()
         {
-            CallVoidMethod("showNotice");
+            CallVoidMethodWithActivityArg("showNotice");
         }
 
         public void ShowPreferences()
         {
-            CallReturningJavaObjectMethod("showPreferences");
+            CallVoidMethodWithActivityArg("showPreferences");
         }
 
         public void Reset()
@@ -287,7 +288,7 @@ namespace IO.Didomi.SDK.Android
             return CallReturningMethodBase<AndroidJavaObject>(methodName, args);
         }
 
-        private static void CallVoidMethodForSetupUI(string methodName)
+        private static void CallVoidMethodWithActivityArg(string methodName)
         {
             try
             {

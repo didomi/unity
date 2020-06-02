@@ -1,5 +1,6 @@
 ﻿using Assets.Plugins.Scripts.IOS;
 using IO.Didomi.SDK.Events;
+using System;
 using System.Runtime.InteropServices;
 
 namespace IO.Didomi.SDK.IOS
@@ -249,25 +250,25 @@ namespace IO.Didomi.SDK.IOS
             //#endif
         }
 
-        public delegate void OnReadyDelegate();
-
-        [DllImport("__Internal")]
-        private static extern void onReady(OnReadyDelegate callback);
-
-        public static void OnReady(DidomiCallable didomiCallable)
+        public static void OnReady(Action onReadyAction)
         {
-            didomiCallableInner = didomiCallable;
+            onReadyActionInner = onReadyAction;
             //#if UNITY_IOS && !UNITY_EDITOR
             onReady(CallOnReady);
             //#endif
         }
 
-        static DidomiCallable didomiCallableInner;
+        static Action onReadyActionInner;
+
+        public delegate void OnReadyDelegate();
+
+        [DllImport("__Internal")]
+        private static extern void onReady(OnReadyDelegate callback);
 
         [AOT.MonoPInvokeCallback(typeof(OnReadyDelegate))]
         static void CallOnReady()
         {
-            didomiCallableInner.OnCall();
+            onReadyActionInner?.Invoke();
         }
 
         public delegate void OnEventListenerDelegate(DDMEventType eventType, string argument);

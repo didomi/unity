@@ -1,20 +1,21 @@
 ﻿using IO.Didomi.SDK.Events;
+using System;
 using UnityEngine;
 
 namespace IO.Didomi.SDK.Android
 {
     public class DidomiCallableProxy : AndroidJavaProxy
     {
-        private DidomiCallable _didomiCallable;
+        private Action _didomiCallable;
 
-        public DidomiCallableProxy(DidomiCallable didomiCallable) : base("io.didomi.sdk.functionalinterfaces.DidomiCallable")
+        public DidomiCallableProxy(Action didomiCallable) : base("io.didomi.sdk.functionalinterfaces.DidomiCallable")
         {
             _didomiCallable = didomiCallable;
         }
 
         public void call()
         {
-            _didomiCallable.OnCall();
+            _didomiCallable();
         }
     }
 }

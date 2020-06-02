@@ -31,9 +31,9 @@ namespace IO.Didomi.SDK.Tests
                     disableDidomiRemoteConfig,
                     languageCode);
 
-                var didomiCallable = new DidomiCallable();
-                didomiCallable.OnReady += DidomiCallable_OnReady;
-                Didomi.GetInstance().OnReady(didomiCallable);
+                Didomi.GetInstance().OnReady(
+                    () => { _logs = RunTests(); }
+                    );
             }
             catch (Exception ex)
             {
@@ -42,11 +42,6 @@ namespace IO.Didomi.SDK.Tests
             }
 
             return _logs;
-        }
-
-        private void DidomiCallable_OnReady(object sender, EventArgs e)
-        {
-            _logs = RunTests();
         }
 
         private string RunTests()
@@ -521,7 +516,7 @@ namespace IO.Didomi.SDK.Tests
         {
             logs.AppendLine("TestGetText ...");
 
-            var key = string.Empty;
+            var key = "notice.content.notice";
             var dict = Didomi.GetInstance().GetText(key);
 
             if (dict != null)
@@ -538,10 +533,10 @@ namespace IO.Didomi.SDK.Tests
         {
             logs.AppendLine("TestGetTranslatedText ...");
 
-            var key = "key";
+            var key = "notice.content.notice";
             var value = Didomi.GetInstance().GetTranslatedText(key);
 
-            if (value == key)
+            if (!string.IsNullOrWhiteSpace(value))
             {
                 logs.Append(Succeeded);
             }

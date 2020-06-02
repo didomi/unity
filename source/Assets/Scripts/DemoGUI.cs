@@ -511,7 +511,7 @@ public class DemoGUI : MonoBehaviour
         if (GUI.Button(GetFuncRect2(), "GetText"))
         {
             message = string.Empty;
-            var key = "name";
+            var key = "notice.content.notice";
             var dict = Didomi.GetInstance().GetText(key);
             message += "GetText" + MessageForObject(dict);
         }
@@ -520,7 +520,7 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
 
-            var key = "name";
+            var key = "notice.content.notice";
             var retval = Didomi.GetInstance().GetTranslatedText(key);
 
             message += "GetTranslatedText" + MessageForObject(retval);
@@ -582,18 +582,18 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
 
-            var didomiCallable = new DidomiCallable();
-            didomiCallable.OnReady += DidomiCallable_OnReadyFired;
-            Didomi.GetInstance().OnReady(didomiCallable);
+            Didomi.GetInstance().OnReady(
+                   () => { message = "OnReady Event Fired.";  }
+                   );
         }
 
         if (GUI.Button(GetFuncRect3(), "Initialize"))
         {
             message = string.Empty;
 
-            var didomiCallable = new DidomiCallable();
-            didomiCallable.OnReady += DidomiCallable_OnReady;
-            Didomi.GetInstance().OnReady(didomiCallable);
+            Didomi.GetInstance().OnReady(
+                  () => { message = "Ready"; }
+                  );
 
             Didomi.GetInstance().Initialize(
                 apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
@@ -604,16 +604,6 @@ public class DemoGUI : MonoBehaviour
                 languageCode: null);
 
         }
-    }
-
-    private void DidomiCallable_OnReadyFired(object sender, EventArgs e)
-    {
-        message = "OnReady Event Fired.";
-    }
-
-    private void DidomiCallable_OnReady(object sender, EventArgs e)
-    {
-        message = "Ready";
     }
 
     void Group11()

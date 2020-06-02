@@ -8,7 +8,7 @@ namespace IO.Didomi.SDK.UnityEditor
     public class UnityEditorDidomi : IDidomi
     {
         public bool _isInitialized = false;
-        private DidomiCallable _didomiCallable = null;
+        private Action _onReadyAction = null;
 
         public void AddEventListener(EventListener eventListener)
         {
@@ -141,10 +141,7 @@ namespace IO.Didomi.SDK.UnityEditor
 
             _isInitialized = true;
 
-            if (_didomiCallable != null)
-            {
-                _didomiCallable.OnCall();
-            }
+            _onReadyAction?.Invoke();
         }
 
         public bool IsConsentRequired()
@@ -167,13 +164,13 @@ namespace IO.Didomi.SDK.UnityEditor
             return _isInitialized;
         }
 
-        public void OnReady(DidomiCallable didomiCallable)
+        public void OnReady(Action didomiCallable)
         {
-            _didomiCallable = didomiCallable;
+            _onReadyAction = didomiCallable;
 
-            if (_didomiCallable != null && _isInitialized)
+            if (_isInitialized)
             {
-                _didomiCallable.OnCall();
+                _onReadyAction?.Invoke();
             }
         }
 

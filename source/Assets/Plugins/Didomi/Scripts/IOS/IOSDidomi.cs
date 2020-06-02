@@ -170,7 +170,7 @@ namespace IO.Didomi.SDK.IOS
             return DidomiFramework.CallIsReadyMethod();
         }
 
-        public void OnReady(DidomiCallable didomiCallable)
+        public void OnReady(Action didomiCallable)
         {
             DidomiFramework.OnReady(didomiCallable);
         }
