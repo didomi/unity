@@ -56,4 +56,4 @@ please use [github's issue tracker](//github.com/didomi/unity/issues).
 
 # License
 
-[Didomi License](Source/Plugins/Didomi/LICENSE.txt)
+[Didomi License](source/Plugins/Didomi/LICENSE.txt)
