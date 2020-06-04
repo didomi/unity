@@ -1,59 +1,39 @@
-Unity SDK (Plugin) for the Didomi CMP
+Didomi Unity Plugin
 ==============================
 
-This repository contains the source code for the Didomi Unity
-plugin and sample. This plugin enables Unity developers to easily use Didomi functionality
-on Android and iOS apps without having to write Java or Objective-C code.
-The plugin provides a C# interface for requesting calls on Didomi Native that is used by C#
-scripts in your Unity project.
+[Didomi](https://www.didomi.io) is a leading Consent Management Platform that allows companies to collect, store, and leverage user consent under GDPR, CCPA, and other data privacy regulations. This plugin enables Unity developers to get in compliance and optimize their consent rate and monetization on native mobile apps.
 
-# Downloads
+This repository contains the source code and a sample app for the [Didomi](https://www.didomi.io) Unity
+plugin. This plugin enables Unity developers to easily use [Didomi](https://www.didomi.io)'s Consent Management Platform
+on Android and iOS apps without having to write Java or Objective-C code.  
+The plugin provides a C# interface for collecting consent that is used by C# scripts in your Unity projects.
 
-Please check out our
-[releases](//github.com/didomi/unity/releases)
-for the latest official version of the plugin.
+# Installation
 
-# Documentation
+## Downloads
 
-For instructions on using the plugin, please refer to
-[this developer guide](//developers.didomi.io/cmp/unity-sdk/reference-unity).
+Check out our [releases](https://github.com/didomi/unity/releases) for the latest official version of the plugin.
 
-# Requirements
+## Documentation
+
+For instructions on installing and using the plugin, please read our documentation:
+
+- [Developer guide](https://developers.didomi.io/cmp/unity-sdk).
+- [API reference](https://developers.didomi.io/cmp/unity-sdk/reference)
+
+## Requirements
 
 Unity Version 2019.3.12f1 or later
 
-# SetUp
+# Sample app
 
-For details, please refer to
-[this developer guide](//developers.didomi.io/cmp/unity-sdk/setup-unity).
-
-## Use Sample
-
-Clone this repository and open it in Unity.  You can start to extract projects for Android and IOS.
-
-## To Install plugin in your Unity project
-
-![Install Unity Package](docs/img/install_plugin_package_to_unity_project.png)
-
-To be able to install Didomi Unity package, go to menu on UNITY as above image and click "Import Package" Didomi as name for package. Didomi.unitypackage contents will be copied to Assets folder on Unity project. 
-
-To be able set local configuration file for Didomi, you must create DidomiConfig folder under Assets folder on Unity Project. Put your didomi_config.json file in  DidomiConfig folder.
-
-```text
-Assets/DidomiConfig/didomi_config.json
-```
-
-Creating DidomiConfig is mandatory for local configuration files. Because these files must be moved to right directories when Android and IOS projects are being generated. On the post process of the unity project, Didomi Plugin moves the files in DidomiConfig to Assets folder in Android projects and to Data/Resources folder in IOS projects. For IOS Projects the configuration files will also be added to Copy Bundle Resources.
-
-# Contact
-
-- Email:  jawad.stouli@didomi.io
+Clone this repository and open the `sample/` folder in Unity.
 
 # Suggesting improvements
 
 To file bugs, make feature requests, or to suggest other improvements,
-please use [github's issue tracker](//github.com/didomi/unity/issues).
+please use [Github's issue tracker](https:////github.com/didomi/unity/issues).
 
 # License
 
-[Didomi License](source/Plugins/Didomi/LICENSE.txt)
+This plugin is [released under the LGPL 3.0 license](LICENSE.md).

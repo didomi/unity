@@ -1,1 +1,4 @@
-This plugin is property of Didomi.
+Copyright (C) 2020 Didomi SAS
+
+This plugin and all its source code and related work (binaries, sample app, etc.) are released under the
+LGPL 3.0 license. Its full text can be found at https://www.gnu.org/licenses/lgpl-3.0.txt.
