@@ -21,6 +21,8 @@ For instructions on installing and using the plugin, please read our documentati
 - [Developer guide](https://developers.didomi.io/cmp/unity-sdk).
 - [API reference](https://developers.didomi.io/cmp/unity-sdk/reference)
 
+For instructions on how to contribute to the plugin and its internal architecture, [read our internal documentation](./docs/overview.md).
+
 ## Requirements
 
 Unity Version 2019.3.12f1 or later
