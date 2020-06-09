@@ -1,6 +1,9 @@
 # Unity version
 
-We currently require Unity version 2019.3.12f1 or later.
+We currently require Unity version 2019.3.12f1 or later. The plugin can be installed to Unity projects with version 2019.3.12f1 or later.
+
+But for developing the Unity Plugin, please use exact version  Unity 2019.3.12f1. If you try to open Unity plugin project with a different version, 
+Unity will want to upgrade/downgrade the project. To not have such a problem, use exact Unity 2019.3.12f1 version for development of the plugin.
 
 ## 2019.3.12f1
 
