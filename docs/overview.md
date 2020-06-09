@@ -130,7 +130,18 @@ Releasing a new version of the plugin consists of creating a Unity package from 
 
 #### Update the plugin version number
 
-First, update the `package.json` file to increase the version number.
+First, update the `package.json` file to increase the unity plugin version number. You need to also update the IOS Native SDK and Android Native SDK version numbers if they changed.
+`package.json` file is located at `Assets\Plugins\Didomi\Resources` folder. 
+
+```javascript
+{
+  ...
+  "version": "1.0.0",
+  "iosNativeVersion": "1.20.1",
+  "androidNativeVersion": "1.14.1",
+  .....
+}
+```
 
 #### Create the package
 
