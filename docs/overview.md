@@ -13,7 +13,7 @@ This plugin is built in two parts:
 
 ### Native calls
 
-Unlike other parts of Unity developement, native plugins require platform-specific calls and interfaces for interacting with native code.  
+Unlike other parts of Unity development, native plugins require platform-specific calls and interfaces for interacting with native code.  
 The native part of the plugin interacts with the [Didomi native mobile SDKs](https://developers.didomi.io/cmp/mobile-sdk).
 
 For Android, Unity generates a Java project that is built and released. This plugin uses the `AndroidJavaClass`, `AndroidJavaObject` and `AndroidJavaProxy` C# classes provided by the `UnityEngine` namespace. Those classes are used to make calls to the Didomi Android SDK from C#. In particular, `AndroidJavaProxy` is used to pass C# function as callbacks to Java code.
@@ -145,7 +145,7 @@ First, update the `package.json` file to increase the unity plugin version numbe
 
 #### Create the package
 
-Create the packge in the editor:
+Create the package in the editor:
 
 ![Create Unity Package](img/create_plugin_package_unity.png)
 
