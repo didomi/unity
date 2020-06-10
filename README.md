@@ -29,7 +29,7 @@ Unity Version 2019.3.12f1 or later
 
 # Sample app
 
-Clone this repository and open the `sample/` folder in Unity.
+Clone this repository and open the `source/` folder in Unity.
 
 # Suggesting improvements
 
