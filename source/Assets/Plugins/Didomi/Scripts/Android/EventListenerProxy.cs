@@ -7,6 +7,9 @@ namespace IO.Didomi.SDK.Android
     /// <summary>
     /// Base class for event listeners passed to our SDK
     /// We defined all event handlers as empty functions so that apps can only override the ones that they can about
+    /// Class used to represent an AndroidJavaProxy object for <io.didomi.sdk.functionalinterfaces.DidomiEventListener> interface. 
+    /// With EventListenerProxy we are able to give an event handler DidomiEventListener to Didomi-Android-Sdk.
+    /// When new event is added to DidomiEventListener, this file must be updated.
     /// </summary>
     public class EventListenerProxy : AndroidJavaProxy
     {

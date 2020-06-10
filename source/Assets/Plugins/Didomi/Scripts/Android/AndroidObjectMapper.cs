@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace IO.Didomi.SDK.Android
 {
+    /// <summary>
+    /// Main class used convert objects required by Android Plugin.
+    /// </summary>
     class AndroidObjectMapper
     {
         public static bool ConvertToBoolean(AndroidJavaObject obj)

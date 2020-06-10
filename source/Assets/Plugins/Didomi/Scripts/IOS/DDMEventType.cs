@@ -1,6 +1,9 @@
 ﻿
 namespace Assets.Plugins.Scripts.IOS
 {
+    /// <summary>
+    /// Event Enumeration file for Event types corresponding to didomi-ios-sdk event types.
+    /// </summary>
     public enum DDMEventType
     {
         DDMEventTypeConsentChanged = 0,

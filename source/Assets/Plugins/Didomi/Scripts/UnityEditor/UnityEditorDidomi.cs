@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace IO.Didomi.SDK.UnityEditor
 {
+    /// <summary>
+    /// The mock implementation of IDidomi interface that is called when the app is run on Unity.
+    /// </summary>
     public class UnityEditorDidomi : IDidomi
     {
         public bool _isInitialized = false;

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace IO.Didomi.SDK.Interfaces
 {
+    /// <summary>
+    /// IDidomi interface defines the functionality of Unity Plugin
+    /// </summary>
     public interface IDidomi
     {
         void AddEventListener(EventListener eventListener);

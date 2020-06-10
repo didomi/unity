@@ -5,6 +5,11 @@ using System.Runtime.InteropServices;
 
 namespace IO.Didomi.SDK.IOS
 {
+    /// <summary>
+    /// The file connects C# calls to Objective-C++.
+    /// [DllImport("__Internal")] declaration added to functions so that they are binded to Objective-C++ counterparts. 
+    /// Any function that will be called from Objective-C, must have correspondig declaration in this C# file.
+    /// </summary>
     public class DidomiFramework
     {
         //#if UNITY_IOS && !UNITY_EDITOR

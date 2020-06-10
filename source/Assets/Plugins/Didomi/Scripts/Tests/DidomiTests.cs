@@ -6,6 +6,10 @@ using System.Text;
 
 namespace IO.Didomi.SDK.Tests
 {
+    /// <summary>
+    /// This folder contains automated tests class intended to be used at CI/CD in the future.
+    /// But it is not complete. The contents in that folder can be helpful when automated tests will be created.
+    /// </summary>
     public class DidomiTests
     {
         private const string Succeeded = "Succeeded";

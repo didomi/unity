@@ -7,6 +7,10 @@ using UnityEngine;
 
 namespace IO.Didomi.SDK.Android
 {
+    /// <summary>
+    /// The implementation of IDidomi interface that is called when the app is run on Android platform. 
+    /// AndroidJavaClass, AndroidJavaObject and AndroidJavaProxy classes provided by UnityEngine namespace are used to make Java calls from C#.
+    /// </summary>
     internal class AndroidDidomi : IDidomi
     {
         private const string PluginName = "io.didomi.sdk.Didomi";

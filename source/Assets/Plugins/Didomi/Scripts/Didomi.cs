@@ -10,7 +10,11 @@ using UnityEngine;
 namespace IO.Didomi.SDK
 {
     /// <summary>
-    /// Main class exposed to apps
+    /// Main class exposed to apps.
+    /// Users will use that class to access single instance of Didomi.
+    /// Users make calls to Didomi functionality from Didomi class.
+    /// Depending on the platform It is used, Didomi class directs the calls 
+    /// to right IDidomi implementators like IOSDidomi, AndroidDidomi or UnityEditorDidomi.
     /// </summary>
     public class Didomi
     {

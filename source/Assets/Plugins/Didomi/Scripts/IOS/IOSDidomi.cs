@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace IO.Didomi.SDK.IOS
 {
+    /// <summary>
+    /// The implementation of IDidomi interface that is called when the app is run on IOS platform.
+    /// </summary>
     class IOSDidomi : IDidomi
     {
         private const string NotCallableForObjectiveC = "The function is not callable for IOS platform. Original functions in Didomi-IOS SDK are not available for Objective-C, Please Check IOS-SDK documentation.";

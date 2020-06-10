@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace IO.Didomi.SDK.IOS
 {
+    /// <summary>
+    /// Main class used convert objects required by IOS Plugin.
+    /// </summary>
     class IOSObjectMapper
     {
         public static ISet<string> ConvertToSetString(string jsonText)
