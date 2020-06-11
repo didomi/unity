@@ -15,6 +15,11 @@ namespace IO.Didomi.SDK.Android
     {
         private const string PluginName = "io.didomi.sdk.Didomi";
         private const string UnityPlayerFullClassName = "com.unity3d.player.UnityPlayer";
+		
+		public AndroidDidomi()
+        {
+            OnReady(() => CallVoidMethod("setUserAgent", Package.GetInstance().agentName, Package.GetInstance().version));
+        }
 
         public void AddEventListener(EventListener eventListener)
         {

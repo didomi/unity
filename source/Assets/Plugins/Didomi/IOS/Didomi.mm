@@ -130,7 +130,11 @@ NSString* _Nonnull CreateNSString ( char* string)
 
 
 
+void setUserAgent(char* agentName, char* agentSDKVersion)
+{
 
+         [[Didomi shared]      setUserAgentWithAgentName: CreateNSString(agentName) agentSDKVersion:CreateNSString(agentSDKVersion)];
+}
 
 
 

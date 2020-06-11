@@ -12,6 +12,11 @@ namespace IO.Didomi.SDK.IOS
     {
         private const string NotCallableForObjectiveC = "The function is not callable for IOS platform. Original functions in Didomi-IOS SDK are not available for Objective-C, Please Check IOS-SDK documentation.";
 
+		public IOSDidomi()
+        {
+            DidomiFramework.SetUserAgent();
+        }
+		
         public ISet<Purpose> GetDisabledPurposes()
         {
             throw new NotImplementedException(NotCallableForObjectiveC);

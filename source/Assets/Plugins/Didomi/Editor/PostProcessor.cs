@@ -19,6 +19,10 @@ public static class PostProcessor
     /// The fixed local path Didomi config file must be located on Unity Projects.
     /// </summary>
     private static readonly string DidomiConfigPath = Application.dataPath + @"\DidomiConfig";
+	/// <summary>
+    /// The fixed local path package.json file must be located on Unity Projects.
+    /// </summary>
+	private static readonly string PackageJsonPath = Application.dataPath + @"\Plugins\Didomi\Resources\package.json";
 
     /// <summary>
     /// Main method that will invoked after Unity generates the target project.
@@ -51,6 +55,7 @@ public static class PostProcessor
             proj.AddBuildProperty(targetGuid, "LD_DYLIB_INSTALL_NAME", "@executable_path/../Frameworks/$(EXECUTABLE_PATH)");
           
             CopyDidomiConfigFileToIOSFolder(proj, targetGuid, buildPath);
+			CopyPackageJsonToIOSFolder(proj, targetGuid, buildPath);
 
             proj.WriteToFile(projPath);
         }
@@ -83,6 +88,24 @@ public static class PostProcessor
             project.AddFileToBuild(targetGuid, fileGuid);
         }
     }
+	
+	/// <summary>
+    /// For IOS platform copies package.json file to Data\Resources\ path.
+    /// Also package.json file is added to build so that it can be found when null is set as argument.
+    /// </summary>
+    /// <param name="project"></param>
+    /// <param name="targetGuid"></param>
+    /// <param name="path"></param>
+	private static void CopyPackageJsonToIOSFolder(PBXProject project, string targetGuid, string path)
+    {
+        var fileName = Path.GetFileName(PackageJsonPath);
+        var newCopyFile = @"Data\Resources\" + fileName;
+        var newCopyFileAbsolutePath = Path.Combine(path, newCopyFile);
+
+        File.Copy(PackageJsonPath, newCopyFileAbsolutePath, true);
+        var fileGuid = project.AddFile(newCopyFile, newCopyFile);
+        project.AddFileToBuild(targetGuid, fileGuid);
+    }
 
 
     /// <summary>
@@ -94,6 +117,7 @@ public static class PostProcessor
         UpdateUnityPlayerActivity(path);
         UpdateUnityLibraryDependencies(path);
         CopyDidomiConfigFileToAssetFolder(path);
+		CopyPackageJsonFileToAssetFolder(path);
         UpdateStylesThemeToAppCompat(path);
         UpdateThemeAppCompatInAndroidManifestFile(path);
     }
@@ -143,7 +167,10 @@ public static class PostProcessor
         ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
     }
 
+	/// <summary>
     /// For Android platform copies local Didomi config file to unityLibrary\src\main\assets\ path.
+    /// </summary>
+	/// <param name="path"></param>
     private static void CopyDidomiConfigFileToAssetFolder(string path)
     {
         var files = Directory.GetFiles(DidomiConfigPath);
@@ -157,8 +184,20 @@ public static class PostProcessor
 
             File.Copy(filePath, newCopyFileAbsolutePath, true);
         }
+    }
+	
+	/// <summary>
+    /// For Android platform copies local package.json file to unityLibrary\src\main\assets\ path.
+    /// </summary>
+	/// <param name="path"></param>
+	private static void CopyPackageJsonFileToAssetFolder(string path)
+    {
+        var fileName = Path.GetFileName(PackageJsonPath);
 
-       
+        var newCopyFile = @"unityLibrary\src\main\assets\" + fileName;
+        var newCopyFileAbsolutePath = Path.Combine(path, newCopyFile);
+
+        File.Copy(PackageJsonPath, newCopyFileAbsolutePath, true);
     }
 
     /// <summary>

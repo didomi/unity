@@ -10,7 +10,7 @@ namespace IO.Didomi.SDK.UnityEditor
     /// </summary>
     public class UnityEditorDidomi : IDidomi
     {
-        public bool _isInitialized = false;
+        private bool _isInitialized = false;
         private Action _onReadyAction = null;
 
         public void AddEventListener(EventListener eventListener)
