@@ -2,7 +2,7 @@
 namespace Assets.Plugins.Scripts.IOS
 {
     /// <summary>
-    /// Event Enumeration file for Event types corresponding to didomi-ios-sdk event types.
+    /// List of event types mapping to event types from the iOS SDK.
     /// </summary>
     public enum DDMEventType
     {

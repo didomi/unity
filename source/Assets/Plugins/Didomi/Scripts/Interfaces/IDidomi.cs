@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace IO.Didomi.SDK.Interfaces
 {
     /// <summary>
-    /// IDidomi interface defines the functionality of Unity Plugin
+    /// Functions exposed to Unity apps by the Didomi plugin
     /// </summary>
     public interface IDidomi
     {

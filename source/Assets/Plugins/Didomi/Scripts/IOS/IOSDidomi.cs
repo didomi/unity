@@ -6,11 +6,11 @@ using System.Collections.Generic;
 namespace IO.Didomi.SDK.IOS
 {
     /// <summary>
-    /// The implementation of IDidomi interface that is called when the app is run on IOS platform.
+    /// Convert objects from Objective-C to Unity and back
     /// </summary>
     class IOSDidomi : IDidomi
     {
-        private const string NotCallableForObjectiveC = "The function is not callable for IOS platform. Original functions in Didomi-IOS SDK are not available for Objective-C, Please Check IOS-SDK documentation.";
+        private const string NotCallableForObjectiveC = "The function is not available on iOS. Please check the plugin documentation for more information.";
 
 		public IOSDidomi()
         {

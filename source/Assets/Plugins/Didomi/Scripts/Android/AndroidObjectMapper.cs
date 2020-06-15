@@ -8,7 +8,7 @@ using UnityEngine;
 namespace IO.Didomi.SDK.Android
 {
     /// <summary>
-    /// Main class used convert objects required by Android Plugin.
+    /// Convert objects from Java to Unity and back
     /// </summary>
     class AndroidObjectMapper
     {

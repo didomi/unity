@@ -1,99 +1,18 @@
 {
     "app": {
-        "logoUrl": "logo",
-        "name": "Mondadori",
         "privacyPolicyURL": "http://www.privacy.policy",
         "vendors": {
             "iab": {
-                "all": false,
-                "include": [8, 9, 10, 11, 12, 13, 14, 15],
-                "exclude": []
+                "all": true
             },
             "didomi": [
                 "google",
                 "amazon"
-            ],
-            "custom": [
-                {
-                    "id": "singlespot",
-                    "name": "SingleSpot",
-                    "purposeIds": [
-                        "geo_ads",
-                        "geo_marketing_studies"
-                    ],
-                    "policyUrl": "https://www.singlespot.com/privacy_policy",
-                    "iabId": "435"
-                }
             ]
         },
-        "gdprAppliesGlobally": true,
-        "gdprAppliesWhenUnknown": false,
-        "customPurposes": [
-            {
-                "id": "geo_ads",
-                "name": {
-                    "en": "Storage and access to geolocation information for targeted advertising purposes",
-                    "fr": "La conservation et l’accès aux informations de géolocalisation à des fins de publicité ciblée"
-                },
-                "description": {
-                    "fr": "Notre partenaire géomarketing souhaite, pour le compte de ses clients (magasins de mode, magasins de voitures, hypermarchés, etc.), vous proposer des publicités personnalisées adaptées à vos centres d’intérêt et vous permettre de connaitre les offres disponibles autour de vous. Il est important de bien comprendre, que si vous décidez de refuser la collecte de vos données à des fins de publicité ciblée, cela ne signifie pas pour autant que vous ne verrez plus de publicité mais que celle-ci sera générique c’est à dire pas adaptée à vos centres d'intérêt."
-                }
-            },
-            {
-                "id": "geo_marketing_studies",
-                "name": {
-                    "en": "Storage and access to geolocation information to carry out marketing studies",
-                    "fr": "La conservation et l’accès aux informations de géolocalisation pour réaliser des études marketing"
-                },
-                "description": {
-                    "fr": "Notre partenaire géomarketing souhaite pouvoir réaliser des études marketing pour le compte de ses clients en vue, en particulier, de les aider à avoir une meilleure compréhension du marché et de ses tendances et de les aider à analyser la performance de leurs magasins et celle de leurs concurrents. Ces rapports marketing ne contiendront que des données agrégées et anonymes."
-                }
-            }
-        ]
-    },
-    "theme": {
-        "color": "#207245",
-        "linkColor": "#207245",
-        "buttons": {
-            "regularButtons": {
-                "backgroundColor": "#777777",
-                "textColor": "#999999",
-                "borderColor": "#000000",
-                "borderWidth": "3",
-                "borderRadius": "10"
-            },
-            "highlightButtons": {
-                "backgroundColor": "#207245",
-                "textColor": "#777777",
-                "borderWidth": "5",
-                "borderColor": "#777777",
-                "borderRadius": "20"
-            }
-        }
-    },
-    "languages": {
-        "enabled": ["en", "fr", "hr", "pt"]
-    },
-    "notice": {
-        "daysBeforeShowingAgain": 3,
-        "enable": true
+        "gdprAppliesGlobally": true
     },
     "preferences": {
-        "disableButtonsUntilScroll": true,
-        "showWhenConsentIsMissing": false,
-        "canCloseWhenConsentIsMissing": true,
-        "categories": [{
-            "type": "purpose",
-            "purposeId": "cookies",
-            "icon": "ic_purpose"
-        }, {
-            "type": "purpose",
-            "purposeId": "advertising_personalization",
-            "icon": "ic_purpose"
-        }, {
-            "type": "purpose",
-            "purposeId": "ad_delivery",
-            "icon": "ic_purpose"
-        }]
+        "disableButtonsUntilScroll": true
     }
 }

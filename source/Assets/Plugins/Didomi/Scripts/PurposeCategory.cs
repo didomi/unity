@@ -4,7 +4,7 @@ namespace IO.Didomi.SDK
 {
 
     /**
-     * Class created to represent a purpose category.
+     * Purpose category
      */
     [Serializable]
     public class PurposeCategory
