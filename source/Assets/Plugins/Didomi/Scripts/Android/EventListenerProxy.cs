@@ -13,9 +13,9 @@ namespace IO.Didomi.SDK.Android
     /// </summary>
     public class EventListenerProxy : AndroidJavaProxy
     {
-        private EventListener _eventListener;
+        private DidomiEventListener _eventListener;
 
-        public EventListenerProxy(EventListener eventListener) : base("io.didomi.sdk.functionalinterfaces.DidomiEventListener")
+        public EventListenerProxy(DidomiEventListener eventListener) : base("io.didomi.sdk.functionalinterfaces.DidomiEventListener")
         {
             _eventListener = eventListener;
         }

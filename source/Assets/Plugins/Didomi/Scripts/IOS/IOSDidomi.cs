@@ -57,7 +57,7 @@ namespace IO.Didomi.SDK.IOS
             throw new NotImplementedException(NotCallableForObjectiveC);
         }
 
-        public void AddEventListener(EventListener eventListener)
+        public void AddEventListener(DidomiEventListener eventListener)
         {
             DidomiFramework.AddEventListener(eventListener);
         }

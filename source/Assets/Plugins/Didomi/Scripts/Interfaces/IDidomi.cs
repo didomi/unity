@@ -9,7 +9,7 @@ namespace IO.Didomi.SDK.Interfaces
     /// </summary>
     public interface IDidomi
     {
-        void AddEventListener(EventListener eventListener);
+        void AddEventListener(DidomiEventListener eventListener);
         ISet<string> GetDisabledPurposeIds();
         ISet<Purpose> GetDisabledPurposes();
         ISet<string> GetDisabledVendorIds();

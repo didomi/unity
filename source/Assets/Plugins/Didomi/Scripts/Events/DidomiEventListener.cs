@@ -7,7 +7,7 @@ namespace IO.Didomi.SDK.Events
     /// Base class for event listeners passed to our SDK
     /// We defined all event handlers as empty functions so that apps can only override the ones that they can about
     /// </summary>
-    public class EventListener
+    public class DidomiEventListener
     {
         public event EventHandler<ConsentChangedEvent> ConsentChanged;
         public event EventHandler<HideNoticeEvent> HideNotice;
@@ -25,7 +25,7 @@ namespace IO.Didomi.SDK.Events
         public event EventHandler<PreferencesClickVendorDisagreeEvent> PreferencesClickVendorDisagree;
         public event EventHandler<PreferencesClickVendorSaveChoicesEvent> PreferencesClickVendorSaveChoices;
 
-        public EventListener() { }
+        public DidomiEventListener() { }
 
         public void OnConsentChanged(ConsentChangedEvent @event)
         {

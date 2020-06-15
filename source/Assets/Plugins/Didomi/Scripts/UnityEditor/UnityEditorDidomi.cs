@@ -13,7 +13,7 @@ namespace IO.Didomi.SDK.UnityEditor
         private bool _isInitialized = false;
         private Action _onReadyAction = null;
 
-        public void AddEventListener(EventListener eventListener)
+        public void AddEventListener(DidomiEventListener eventListener)
         {
             throw new NotImplementedException();
         }

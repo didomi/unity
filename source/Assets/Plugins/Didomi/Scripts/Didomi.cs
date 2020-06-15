@@ -67,7 +67,7 @@ namespace IO.Didomi.SDK
         /// Add an event listener
         /// </summary>
         /// <param name="eventListener"></param>
-        public void AddEventListener(EventListener eventListener)
+        public void AddEventListener(DidomiEventListener eventListener)
         {
             didomiForPlatform.AddEventListener(eventListener);
         }

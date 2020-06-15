@@ -21,7 +21,7 @@ namespace IO.Didomi.SDK.Android
             OnReady(() => CallVoidMethod("setUserAgent", Package.GetInstance().agentName, Package.GetInstance().version));
         }
 
-        public void AddEventListener(EventListener eventListener)
+        public void AddEventListener(DidomiEventListener eventListener)
         {
             var eventListenerProxy = new EventListenerProxy(eventListener);
 
@@ -220,12 +220,12 @@ namespace IO.Didomi.SDK.Android
             return CallReturningBoolMethod("isReady");
         }
 
-        public void OnReady(Action didomiCallable)
+        public void OnReady(Action action)
         {
 
-            var didomiCallableProxy = new DidomiCallableProxy(didomiCallable);
+            var didomiCallable = new DidomiCallable(action);
 
-            CallVoidMethod("onReady", didomiCallableProxy);
+            CallVoidMethod("onReady", didomiCallable);
         }
 
         public void SetupUI()

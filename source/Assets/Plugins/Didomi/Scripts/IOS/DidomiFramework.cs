@@ -293,7 +293,7 @@ namespace IO.Didomi.SDK.IOS
         [DllImport("__Internal")]
         private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate);
 
-        public static void AddEventListener(EventListener eventListener)
+        public static void AddEventListener(DidomiEventListener eventListener)
         {
             eventListenerInner = eventListener;
             //#if UNITY_IOS && !UNITY_EDITOR
@@ -301,7 +301,7 @@ namespace IO.Didomi.SDK.IOS
             //#endif
         }
 
-        static EventListener eventListenerInner;
+        static DidomiEventListener eventListenerInner;
 
         [AOT.MonoPInvokeCallback(typeof(OnEventListenerDelegate))]
         static void CallOnEventListenerDelegate(DDMEventType eventType, string argument)

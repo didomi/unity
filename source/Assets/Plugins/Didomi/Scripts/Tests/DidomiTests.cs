@@ -105,7 +105,7 @@ namespace IO.Didomi.SDK.Tests
 
         private void RegisterEventHandlers()
         {
-            EventListener eventListener = new EventListener();
+            DidomiEventListener eventListener = new DidomiEventListener();
             eventListener.ConsentChanged += EventListener_ConsentChanged;
             eventListener.HideNotice += EventListener_HideNotice;
             eventListener.Ready += EventListener_Ready;
