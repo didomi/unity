@@ -7,14 +7,38 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ViewKind
+{
+    Basic,
+    Detailed
+};
+
+public enum FunctionCategory
+{
+    None,
+    Purpose_1,
+    Purpose_2,
+    Vendor_1,
+    Vendor_2,
+    Consent_1,
+    Consent_2,
+    Consent_3,
+    Notice,
+    Preferences,
+    Language,
+    Initialization,
+    Events
+};
+
 public class DemoGUI : MonoBehaviour
 {
     private const string NotCallableForObjectiveC= "The function is not callable for IOS platform. Check IOS-SDK doc. Since Unity creates Objective-C, It is not callable.";
     private const string NullText = "null";
-
+    
     GameObject labelResult;
     GameObject panel;
-    int group = 0;
+    FunctionCategory functionCategory = FunctionCategory.None;
+    ViewKind uiStyle = ViewKind.Basic;
     int centerScreenX;
     int centerScreenY;
     int buttonWidth = 0;
@@ -30,6 +54,7 @@ public class DemoGUI : MonoBehaviour
         labelResult = GameObject.Find("Result");
         panel= GameObject.Find("Panel");
         SetResponsiveLayout();
+        InitilizeDidomi();
     }
 
     void SetResponsiveLayout()
@@ -70,8 +95,6 @@ public class DemoGUI : MonoBehaviour
     private Rect GetLeftRect3() { return new Rect(centerScreenX - buttonWidth * 1.5f, 2.2f * yStep, buttonWidth, buttonHeight); }
     private Rect GetLeftRect4() { return new Rect(centerScreenX - buttonWidth * 1.5f, 3.2f * yStep, buttonWidth, buttonHeight); }
 
-
-
     private Rect GetFuncRect1() { return new Rect(centerScreenX - functionButtonWidth - xStep, 4.2f * yStep, functionButtonWidth, buttonHeight); }
     private Rect GetFuncRect2() { return new Rect(centerScreenX - functionButtonWidth - xStep, 5.2f * yStep, functionButtonWidth, buttonHeight); }
     private Rect GetFuncRect3() { return new Rect(centerScreenX + xStep, 4.2f * yStep, functionButtonWidth, buttonHeight); }
@@ -81,132 +104,167 @@ public class DemoGUI : MonoBehaviour
 
     private void OnGUI()
     {
-        DisplayGroupButtons();
-
-        if (group == 1)
+        if (uiStyle == ViewKind.Basic)
         {
-            Group1();
+            ShowBasicFunctions();
         }
-        else if (group == 2)
+        else if (uiStyle == ViewKind.Detailed)
         {
-            Group2();
+            ShowGroups();
         }
-        else if (group == 3)
-        {
-            Group3();
-        }
-        else if (group == 4)
-        {
-            Group4();
-        }
-        else if (group == 5)
-        {
-            Group5();
-        }
-        else if (group == 6)
-        {
-            Group6();
-        }
-        else if (group == 7)
-        {
-            Group7();
-        }
-        else if (group == 8)
-        {
-            Group8();
-        }
-        else if (group == 9)
-        {
-            Group9();
-        }
-        else if (group == 10)
-        {
-            Group10();
-        }
-        else if (group == 11)
-        {
-            Group11();
-        }
-        else if (group == 12)
-        {
-            Group12();
-        }
-
+       
         var text = labelResult.GetComponent<Text>();
         text.text = message;
     }
 
-    private void DisplayGroupButtons()
+    void ShowGroups()
     {
-        RenderGroupButtons();
+        ShowGroupButtons();
         GUI.enabled = true;
+        ShowFunctionButtons();
     }
 
-    private void RenderGroupButtons()
+    void ShowFunctionButtons()
+    {
+        if (functionCategory == FunctionCategory.Purpose_1)
+        {
+            Purpose_1();
+        }
+        else if (functionCategory == FunctionCategory.Purpose_2)
+        {
+            Purpose_2();
+        }
+        else if (functionCategory == FunctionCategory.Vendor_1)
+        {
+            Vendor_1();
+        }
+        else if (functionCategory == FunctionCategory.Vendor_2)
+        {
+            Vendor_2();
+        }
+        else if (functionCategory == FunctionCategory.Consent_1)
+        {
+            Consent_1();
+        }
+        else if (functionCategory == FunctionCategory.Consent_2)
+        {
+            Consent_2();
+        }
+        else if (functionCategory == FunctionCategory.Consent_3)
+        {
+            Consent_3();
+        }
+        else if (functionCategory == FunctionCategory.Notice)
+        {
+            Notice();
+        }
+        else if (functionCategory == FunctionCategory.Preferences)
+        {
+            Preferences();
+        }
+        else if (functionCategory == FunctionCategory.Language)
+        {
+            Language();
+        }
+        else if (functionCategory == FunctionCategory.Initialization)
+        {
+            Initialization();
+        }
+        else if (functionCategory == FunctionCategory.Events)
+        {
+            Events();
+        }
+    }
+
+    private void ShowGroupButtons()
     {
         GUI.skin.button.fontSize = buttonFontSize;
-        if (GUI.Button(GetLeftRect1(), "Group 1"))
+
+        if (GUI.Button(GetLeftRect1(), "Notice"))
         {
-            group = 1;
+            functionCategory = FunctionCategory.Notice;
         }
 
-        if (GUI.Button(GetMiddleRect1(), "Group 2"))
+        if (GUI.Button(GetMiddleRect1(), "Preferences"))
         {
-            group=2;
+            functionCategory = FunctionCategory.Preferences;
         }
 
-        if (GUI.Button(GetRightRect1(), "Group 3"))
+        if (GUI.Button(GetRightRect1(), "Purpose-1"))
         {
-            group = 3;
+            functionCategory = FunctionCategory.Purpose_1;
         }
 
-        if (GUI.Button(GetLeftRect2(), "Group 4"))
+        if (GUI.Button(GetLeftRect2(), "Purpose-2"))
         {
-            group = 4;
+            functionCategory= FunctionCategory.Purpose_2;
         }
 
-        if (GUI.Button(GetMiddleRect2(), "Group 5"))
+        if (GUI.Button(GetMiddleRect2(), "Vendor-1"))
         {
-            group = 5;
+            functionCategory = FunctionCategory.Vendor_1;
         }
 
-        if (GUI.Button(GetRightRect2(), "Group 6"))
+        if (GUI.Button(GetRightRect2(), "Vendor-2"))
         {
-            group = 6;
+            functionCategory = FunctionCategory.Vendor_2;
         }
 
-        if (GUI.Button(GetLeftRect3(), "Group 7"))
+        if (GUI.Button(GetLeftRect3(), "Consent-1"))
         {
-            group = 7;
-        }
-        if (GUI.Button(GetMiddleRect3(), "Group 8"))
-        {
-            group = 8;
+            functionCategory = FunctionCategory.Consent_1;
         }
 
-        if (GUI.Button(GetRightRect3(), "Group 9"))
+        if (GUI.Button(GetMiddleRect3(), "Consent-2"))
         {
-            group = 9;
+            functionCategory = FunctionCategory.Consent_2;
         }
 
-        if (GUI.Button(GetLeftRect4(), "Group 10"))
+        if (GUI.Button(GetRightRect3(), "Consent-3"))
         {
-            group = 10;
+            functionCategory = FunctionCategory.Consent_3;
+        }
+        
+        if (GUI.Button(GetLeftRect4(), "Language"))
+        {
+            functionCategory = FunctionCategory.Language;
         }
 
-        if (GUI.Button(GetMiddleRect4(), "Group 11"))
+        if (GUI.Button(GetMiddleRect4(), "Initialization"))
         {
-            group = 11;
+            functionCategory = FunctionCategory.Initialization;
         }
-        if (GUI.Button(GetRightRect4(), "Group 12"))
+
+        if (GUI.Button(GetRightRect4(), "Events"))
         {
-            group = 12;
+            functionCategory = FunctionCategory.Events;
         }
     }
 
-    private void Group1()
+    private void Purpose_1()
     {
-        if (GUI.Button(GetFuncRect1(), "GetDisabledPurposes"))
+        if (GUI.Button(GetFuncRect1(), "GetEnabledPurposes"))
+        {
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                message = string.Empty;
+                var retval = Didomi.GetInstance().GetEnabledPurposes();
+                message += "GetEnabledPurposes" + MessageForObject(retval);
+            }
+            else
+            {
+                message = NotCallableForObjectiveC;
+            }
+        }
+
+        if (GUI.Button(GetFuncRect2(), "GetEnabledPurposeIds"))
+        {
+            message = string.Empty;
+            var retval = Didomi.GetInstance().GetEnabledPurposeIds();
+            message += "GetEnabledPurposeIds" + MessageForObject(retval);
+        }
+
+        if (GUI.Button(GetFuncRect3(), "GetDisabledPurposes"))
         {
             if (Application.platform == RuntimePlatform.Android)
             {
@@ -220,11 +278,74 @@ public class DemoGUI : MonoBehaviour
             }
         }
 
-        if (GUI.Button(GetFuncRect2(), "GetDisabledPurposeIds"))
+        if (GUI.Button(GetFuncRect4(), "GetDisabledPurposeIds"))
         {
             message = string.Empty;
             var retval = Didomi.GetInstance().GetDisabledPurposeIds();
             message += "GetDisabledPurposeIds" + MessageForObject(retval);
+        }
+    }
+
+    private void Purpose_2()
+    {
+        if (GUI.Button(GetFuncRect1(), "GetRequiredPurposes"))
+        {
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                message = string.Empty;
+                var retval = Didomi.GetInstance().GetRequiredPurposes();
+                message = "GetRequiredPurposes" + MessageForObject(retval);
+            }
+            else
+            {
+                message = NotCallableForObjectiveC;
+            }
+        }
+
+        if (GUI.Button(GetFuncRect2(), "GetRequiredPurposeIds"))
+        {
+            message = string.Empty;
+            var retval = Didomi.GetInstance().GetRequiredPurposeIds();
+            message += "GetRequiredPurposeIds" + MessageForObject(retval);
+        }
+
+        if (GUI.Button(GetFuncRect3(), "GetPurpose"))
+        {
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                message = string.Empty;
+                var purposeId = GetFirstRequiredPurposeId();
+                var retval = Didomi.GetInstance().GetPurpose(purposeId);
+                message += "GetPurpose" + MessageForObject(retval);
+            }
+            else
+            {
+                message = NotCallableForObjectiveC;
+            }
+        }
+    }
+
+    private void Vendor_1()
+    {
+        if (GUI.Button(GetFuncRect1(), "GetEnabledVendors"))
+        {
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                message = string.Empty;
+                var retval = Didomi.GetInstance().GetEnabledVendors();
+                message += "GetEnabledVendors" + MessageForObject(retval);
+            }
+            else
+            {
+                message = NotCallableForObjectiveC;
+            }
+        }
+
+        if (GUI.Button(GetFuncRect2(), "GetEnabledVendorIds"))
+        {
+            message = string.Empty;
+            var retval = Didomi.GetInstance().GetEnabledVendorIds();
+            message += "GetEnabledVendorIds" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect3(), "GetDisabledVendors"))
@@ -249,75 +370,9 @@ public class DemoGUI : MonoBehaviour
         }
     }
 
-    private void Group2()
-    { 
-        if (GUI.Button(GetFuncRect1(), "GetEnabledPurposes"))
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetEnabledPurposes();
-                message += "GetEnabledPurposes" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
-        }
-
-        if (GUI.Button(GetFuncRect2(), "GetEnabledPurposeIds"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().GetEnabledPurposeIds();
-            message += "GetEnabledPurposeIds" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect3(), "GetEnabledVendors"))
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetEnabledVendors();
-                message += "GetEnabledVendors" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
-        }
-
-        if (GUI.Button(GetFuncRect4(), "GetEnabledVendorIds"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().GetEnabledVendorIds();
-            message += "GetEnabledVendorIds" + MessageForObject(retval);
-        }
-    }
-
-    private void Group3()
+    private void Vendor_2()
     {
-        if (GUI.Button(GetFuncRect1(), "GetRequiredPurposes"))
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetRequiredPurposes();
-                message = "GetRequiredPurposes" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
-        }
-
-        if (GUI.Button(GetFuncRect2(), "GetRequiredPurposeIds"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().GetRequiredPurposeIds();
-            message += "GetRequiredPurposeIds" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect3(), "GetRequiredVendors"))
+        if (GUI.Button(GetFuncRect1(), "GetRequiredVendors"))
         {
             if (Application.platform == RuntimePlatform.Android)
             {
@@ -331,66 +386,14 @@ public class DemoGUI : MonoBehaviour
             }
         }
 
-        if (GUI.Button(GetFuncRect4(), "GetRequiredVendorIds"))
+        if (GUI.Button(GetFuncRect2(), "GetRequiredVendorIds"))
         {
             message = string.Empty;
             var retval = Didomi.GetInstance().GetRequiredVendorIds();
             message += "GetRequiredVendorIds" + MessageForObject(retval);
         }
-    }
 
-    private void Group4()
-    { 
-        if (GUI.Button(GetFuncRect1(), "GetJavaScriptForWebView"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().GetJavaScriptForWebView();
-            message += "GetJavaScriptForWebView" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect2(), "GetPurpose"))
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var purposeId = GetFirstRequiredPurposeId();
-                var retval = Didomi.GetInstance().GetPurpose(purposeId);
-                message += "GetPurpose" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
-        }
-
-        if (GUI.Button(GetFuncRect3(), "GetUserConsentStatusForPurpose"))
-        {
-            message = string.Empty;
-            var purposeId = GetFirstRequiredPurposeId();
-            var retval = Didomi.GetInstance().GetUserConsentStatusForPurpose(purposeId);
-            message += "GetUserConsentStatusForPurpose" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect4(), "GetUserConsentStatusForVendor"))
-        {
-            message = string.Empty;
-            var vendorId = GetFirstRequiredVendorId();
-            var retval = Didomi.GetInstance().GetUserConsentStatusForVendor(vendorId);
-            message += "GetUserConsentStatusForVendor" + MessageForObject(retval);
-        }
-    }
-
-    private void Group5()
-    {
-        if (GUI.Button(GetFuncRect1(), $"GetUserConsentStatusForVendor{Environment.NewLine}AndRequiredPurposes"))
-        {
-            message = string.Empty;
-            var vendorId = GetFirstRequiredVendorId();
-            var retval = Didomi.GetInstance().GetUserConsentStatusForVendorAndRequiredPurposes(vendorId);
-            message += "GetUserConsentStatusForVendorAndRequiredPurposes" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect2(), "GetVendor"))
+        if (GUI.Button(GetFuncRect3(), "GetVendor"))
         {
             if (Application.platform == RuntimePlatform.Android)
             {
@@ -404,55 +407,37 @@ public class DemoGUI : MonoBehaviour
                 message = NotCallableForObjectiveC;
             }
         }
+    }
 
-        if (GUI.Button(GetFuncRect3(), "IsConsentRequired"))
+    private void Consent_1()
+    {
+        if (GUI.Button(GetFuncRect1(), "GetUserConsentStatusForPurpose"))
         {
             message = string.Empty;
-            var retval = Didomi.GetInstance().IsConsentRequired();
-            message += "IsConsentRequired" + MessageForObject(retval);
+            var purposeId = GetFirstRequiredPurposeId();
+            var retval = Didomi.GetInstance().GetUserConsentStatusForPurpose(purposeId);
+            message += "GetUserConsentStatusForPurpose" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect4(), "IsUserConsentStatusPartial"))
+        if (GUI.Button(GetFuncRect2(), "GetUserConsentStatusForVendor"))
         {
             message = string.Empty;
-            var retval = Didomi.GetInstance().IsUserConsentStatusPartial();
-            message += "IsUserConsentStatusPartial" + MessageForObject(retval);
+            var vendorId = GetFirstRequiredVendorId();
+            var retval = Didomi.GetInstance().GetUserConsentStatusForVendor(vendorId);
+            message += "GetUserConsentStatusForVendor" + MessageForObject(retval);
+        }
+
+        if (GUI.Button(GetFuncRect3(), $"GetUserConsentStatusForVendor{Environment.NewLine}AndRequiredPurposes"))
+        {
+            message = string.Empty;
+            var vendorId = GetFirstRequiredVendorId();
+            var retval = Didomi.GetInstance().GetUserConsentStatusForVendorAndRequiredPurposes(vendorId);
+            message += "GetUserConsentStatusForVendorAndRequiredPurposes" + MessageForObject(retval);
         }
     }
 
-    private void Group6()
-    { 
-        if (GUI.Button(GetFuncRect1(), "IsNoticeVisible"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().IsNoticeVisible();
-            message += "IsNoticeVisible" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect2(), "IsPreferencesVisible"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().IsPreferencesVisible();
-            message += "IsPreferencesVisible" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect3(), "IsReady"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().IsReady();
-            message += "IsReady" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect4(), "Reset"))
-        {
-            message = string.Empty;
-            Didomi.GetInstance().Reset();
-            message += "Reset called";
-        }
-    }
-
-    private void Group7()
-    { 
+    private void Consent_2()
+    {
         if (GUI.Button(GetFuncRect1(), "SetUserAgreeToAll"))
         {
             message = string.Empty;
@@ -490,25 +475,100 @@ public class DemoGUI : MonoBehaviour
 
             message += "SetUserConsentStatus" + MessageForObject(retval);
         }
+    }
 
-        if (GUI.Button(GetFuncRect4(), "ShouldConsentBeCollected"))
+    private void Consent_3()
+    {
+        if (GUI.Button(GetFuncRect1(), "IsConsentRequired"))
+        {
+            message = string.Empty;
+            var retval = Didomi.GetInstance().IsConsentRequired();
+            message += "IsConsentRequired" + MessageForObject(retval);
+        }
+
+        if (GUI.Button(GetFuncRect2(), "IsUserConsentStatusPartial"))
+        {
+            message = string.Empty;
+            var retval = Didomi.GetInstance().IsUserConsentStatusPartial();
+            message += "IsUserConsentStatusPartial" + MessageForObject(retval);
+        }
+
+        if (GUI.Button(GetFuncRect3(), "ShouldConsentBeCollected"))
         {
             message = string.Empty;
             var retval = Didomi.GetInstance().ShouldConsentBeCollected();
             message += "ShouldConsentBeCollected" + MessageForObject(retval);
         }
-    }
 
-    private void Group8()
-    {
-        if (GUI.Button(GetFuncRect1(), "AddEventListener"))
+        if (GUI.Button(GetFuncRect4(), "GetJavaScriptForWebView"))
         {
             message = string.Empty;
-            RegisterEventHandlers();
-            message += "AddEventListener";
+            var retval = Didomi.GetInstance().GetJavaScriptForWebView();
+            message += "GetJavaScriptForWebView" + MessageForObject(retval);
+        }
+    }
+
+    private void Notice()
+    {
+        if (GUI.Button(GetFuncRect1(), "SetupUI"))
+        {
+            message = string.Empty;
+            Didomi.GetInstance().Reset();
+            Didomi.GetInstance().SetupUI();
+            message += "SetupUI";
         }
 
-        if (GUI.Button(GetFuncRect2(), "GetText"))
+        if (GUI.Button(GetFuncRect2(), "ShowNotice"))
+        {
+            message = string.Empty;
+            Didomi.GetInstance().Reset();
+            Didomi.GetInstance().ShowNotice();
+            message += "ShowNotice";
+        }
+
+        if (GUI.Button(GetFuncRect3(), "HideNotice"))
+        {
+            message = string.Empty;
+            Didomi.GetInstance().HideNotice();
+            message += "HideNotice";
+        }
+
+        if (GUI.Button(GetFuncRect4(), "IsNoticeVisible"))
+        {
+            message = string.Empty;
+            var retval = Didomi.GetInstance().IsNoticeVisible();
+            message += "IsNoticeVisible" + MessageForObject(retval);
+        }
+    }
+
+    private void Preferences()
+    {
+        if (GUI.Button(GetFuncRect1(), "ShowPreferences"))
+        {
+            message = string.Empty;
+            Didomi.GetInstance().Reset();
+            Didomi.GetInstance().ShowPreferences();
+            message += "showPreferences";
+        }
+
+        if (GUI.Button(GetFuncRect2(), "HidePreferences"))
+        {
+            message = string.Empty;
+            Didomi.GetInstance().HidePreferences();
+            message += "HidePreferences";
+        }
+
+        if (GUI.Button(GetFuncRect3(), "IsPreferencesVisible"))
+        {
+            message = string.Empty;
+            var retval = Didomi.GetInstance().IsPreferencesVisible();
+            message += "IsPreferencesVisible" + MessageForObject(retval);
+        }
+    }
+
+    private void Language()
+    {
+        if (GUI.Button(GetFuncRect1(), "GetText"))
         {
             message = string.Empty;
             var key = "notice.content.notice";
@@ -516,7 +576,7 @@ public class DemoGUI : MonoBehaviour
             message += "GetText" + MessageForObject(dict);
         }
 
-        if (GUI.Button(GetFuncRect3(), "GetTranslatedText"))
+        if (GUI.Button(GetFuncRect2(), "GetTranslatedText"))
         {
             message = string.Empty;
 
@@ -526,7 +586,7 @@ public class DemoGUI : MonoBehaviour
             message += "GetTranslatedText" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect4(), "UpdateSelectedLanguage"))
+        if (GUI.Button(GetFuncRect3(), "UpdateSelectedLanguage"))
         {
             message = string.Empty;
 
@@ -538,81 +598,120 @@ public class DemoGUI : MonoBehaviour
         }
     }
 
-    private void Group9()
+    void Initialization()
     {
-        if (GUI.Button(GetFuncRect1(), "HideNotice"))
+        if (GUI.Button(GetFuncRect1(), "Initialize"))
         {
-            message = string.Empty;
-            Didomi.GetInstance().HideNotice();
-            message += "HideNotice";
+            InitilizeDidomi();
         }
 
-        if (GUI.Button(GetFuncRect2(), "HidePreferences"))
+        if (GUI.Button(GetFuncRect2(), "IsReady"))
         {
             message = string.Empty;
-            Didomi.GetInstance().HidePreferences();
-            message += "HidePreferences";
+            var retval = Didomi.GetInstance().IsReady();
+            message += "IsReady" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect3(), "ShowNotice"))
+        if (GUI.Button(GetFuncRect3(), "Reset"))
         {
             message = string.Empty;
+            Didomi.GetInstance().Reset();
+            message += "Reset called";
+        }
+    }
+
+    private void InitilizeDidomi()
+    {
+        message = string.Empty;
+
+        Didomi.GetInstance().OnReady(
+              () => { message = "Ready"; }
+              );
+
+        Didomi.GetInstance().Initialize(
+            apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
+            localConfigurationPath: null,
+            remoteConfigurationURL: null,
+            providerId: null,
+            disableDidomiRemoteConfig: true,
+            languageCode: null);
+    }
+
+    void Events()
+    {
+        if (GUI.Button(GetFuncRect1(), "AddEventListener"))
+        {
+            message = string.Empty;
+            RegisterEventHandlers();
+            message += "AddEventListener";
+        }
+
+        if (GUI.Button(GetFuncRect3(), "OnReady"))
+        {
+            message = string.Empty;
+
+            Didomi.GetInstance().OnReady(
+                   () => { message = "OnReady Event Fired."; }
+                   );
+        }
+    }
+
+    private void ShowBasicFunctions()
+    {
+        if (GUI.Button(GetMiddleRect1(), "ShowNotice"))
+        {
+            message = string.Empty;
+            Didomi.GetInstance().Reset();
             Didomi.GetInstance().ShowNotice();
             message += "ShowNotice";
         }
 
-        if (GUI.Button(GetFuncRect4(), "showPreferences"))
+        if (GUI.Button(GetMiddleRect2(), "ShowPreferences"))
         {
             message = string.Empty;
+            Didomi.GetInstance().Reset();
             Didomi.GetInstance().ShowPreferences();
             message += "showPreferences";
         }
-    }
 
-    private void Group10()
-    {
-        if (GUI.Button(GetFuncRect1(), "SetupUI"))
+        if (GUI.Button(GetMiddleRect3(), "Reset"))
         {
             message = string.Empty;
-            Didomi.GetInstance().SetupUI();
-            message += "SetupUI";
+            Didomi.GetInstance().Reset();
+            message += "Reset called";
         }
 
-        if (GUI.Button(GetFuncRect2(), "OnReady"))
+        if (GUI.Button(GetMiddleRect4(), "More Functions"))
         {
-            message = string.Empty;
-
-            Didomi.GetInstance().OnReady(
-                   () => { message = "OnReady Event Fired.";  }
-                   );
+            uiStyle = ViewKind.Detailed;
         }
+        //if (GUI.Button(GetLeftRect3(), "ShowNotice"))
+        //{
+        //    message = string.Empty;
+        //    Didomi.GetInstance().Reset();
+        //    Didomi.GetInstance().ShowNotice();
+        //    message += "ShowNotice";
+        //}
 
-        if (GUI.Button(GetFuncRect3(), "Initialize"))
-        {
-            message = string.Empty;
+        //if (GUI.Button(GetMiddleRect3(), "ShowPreferences"))
+        //{
+        //    message = string.Empty;
+        //    Didomi.GetInstance().Reset();
+        //    Didomi.GetInstance().ShowPreferences();
+        //    message += "showPreferences";
+        //}
 
-            Didomi.GetInstance().OnReady(
-                  () => { message = "Ready"; }
-                  );
+        //if (GUI.Button(GetRightRect3(), "Reset"))
+        //{
+        //    message = string.Empty;
+        //    Didomi.GetInstance().Reset();
+        //    message += "Reset called";
+        //}
 
-            Didomi.GetInstance().Initialize(
-                apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
-                localConfigurationPath: null,
-                remoteConfigurationURL: null,
-                providerId: null,
-                disableDidomiRemoteConfig: true,
-                languageCode: null);
-
-        }
-    }
-
-    void Group11()
-    {
-    }
-
-    void Group12()
-    {
-    
+        //if (GUI.Button(GetMiddleRect4(), "More Functions"))
+        //{
+        //    uiStyle = UIStyle.Groups;
+        //}
     }
 
     private void RegisterEventHandlers()
