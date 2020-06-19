@@ -210,6 +210,7 @@ public static class PostProcessor
         var unityPlayerFileAbsolutePath = Path.Combine(path, unityPlayerFile);
         var oldValue = "dependencies {";
         var newValue = @"dependencies {
+    ext.kotlin_version = '1.3.72'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
@@ -218,6 +219,7 @@ public static class PostProcessor
     // Force customtabs 27.1.1 as com.google.android.gms:play-services-ads:15.0.1 depends on 26.0.1 by default
     // See https://stackoverflow.com/questions/50009286/gradle-mixing-versions-27-1-1-and-26-1-0
     implementation 'com.android.support:customtabs:27.1.1'
+    implementation ""org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version""
     api 'com.iab.gdpr_android:gdpr_android:1.0.1'
     api 'com.google.code.gson:gson:2.8.5'
     api 'com.rm:rmswitch:1.2.2'";
