@@ -127,7 +127,12 @@
 				"special_feature_1_description_legal": "Vendors can:\n* Collect and process precise geolocation data in support of one or more purposes.\nN.B. Precise geolocation means that there are no restrictions on the precision of a user’s location; this can be accurate to within several meters.",
 				"special_feature_2_name": "Actively scan device characteristics for identification",
 				"special_feature_2_description": "Your device can be identified based on a scan of your device's unique combination of characteristics.",
-				"special_feature_2_description_legal": "Vendors can:\n* Create an identifier using data collected via actively scanning a device for specific characteristics, e.g. installed fonts or screen resolution.\n* Use such an identifier to re-identify a device."
+				"special_feature_2_description_legal": "Vendors can:\n* Create an identifier using data collected via actively scanning a device for specific characteristics, e.g. installed fonts or screen resolution.\n* Use such an identifier to re-identify a device.",
+				"consent": "Consent",
+				"legitimate_interest": "Legitimate Interest",
+				"purpose_details": "Purpose Details",
+				"iab_vendor_disclaimer": "%{name} participates in the <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> and is subject to its policies. You can learn more about this partner and its data processing in its <a href=\"%{policyUrl}\" target=\"_blank\">privacy policy</a>.",
+				"non_iab_vendor_disclaimer": "You can learn more about %{name} and its data processing in its <a href=\"%{policyUrl}\" target=\"_blank\">privacy policy</a>."
 			},
 			"fr": {
 				"information_storage_and_access_19227997": "Conservation et accès aux informations ",
@@ -192,14 +197,14 @@
 				"purpose_5_description": "Un profil peut être créé sur vous et sur vos centres d’intérêt afin de vous présenter du contenu personnalisé susceptible de vous intéresser.",
 				"purpose_5_description_legal": "Pour créer un profil pour afficher du contenu personnalisé, les partenaires peuvent :\n* Collecter des informations sur un utilisateur, y compris l’activité d’un utilisateur, ses centres d’intérêt, les sites qu’il a visités ou les applications qu’il a utilisées, ses données démographiques ou sa localisation, pour créer ou modifier un profil utilisateur pour afficher du contenu personnalisé.\n",
 				"purpose_6_name": "Sélectionner du contenu personnalisé",
-				"purpose_6_description": "Du contenu personnalisé peut vous être présenté sur la base de votre profil utilisateur.     ",
+				"purpose_6_description": "Du contenu personnalisé peut vous être présenté sur la base de votre profil utilisateur.",
 				"purpose_6_description_legal": "Pour sélectionner du contenu personnalisé, les partenaires peuvent :\n* Sélectionner du contenu personnalisé sur la base d’un profil utilisateur induit des données relatives à son activité en ligne, ses centres d’intérêt, les sites qu’il a visités, les applications qu’il a utilisées, sa localisation ou ses données socio-démographiques.\n",
 				"purpose_7_name": "Mesurer la performance des publicités",
 				"purpose_7_description": "La performance et l’efficacité des publicités que vous voyez ou avec lesquelles vous interagissez peuvent être mesurées.",
 				"purpose_7_description_legal": "Pour mesurer la performance des publicités, les partenaires peuvent:\n* Mesurer si et comment des publicités ont été présentée  à un utilisateur et comment celui-ci a interagi avec celles-ci\n* Générer des rapports sur les publicités, notamment  sur leur performance\n* Générer des rapports sur les utilisateurs ayant interagi avec des publicités en utilisant des données issues de cette interaction     \n* Fournir des rapports aux éditeurs sur les publicités présentées/affichées sur leurs propriétés numériques     \n* Évaluer si une publicité diffusée dans un contexte éditorial approprié (conforme à l’image de la marque) sans danger pour la marque)\n* Déterminer le pourcentage du visionnage éventuel de la publicité et sa durée      \n* Combiner ces informations avec d’autres informations collectées au préalable, pouvant provenir de sites internet et applications\nLes partenaires ne peuvent pas:     \n* Croiser des données d’audience, issues ou dérivées d’un panel, avec des données de mesure de performance, sans base légale pour  titre \"Finalité 9\". \n",
 				"purpose_8_name": "Mesurer la performance du contenu",
 				"purpose_8_description": "La performance et l’efficacité du contenu que vous voyez ou avec lequel vous interagissez peuvent être mesurées.",
-				"purpose_8_description_legal": "Pour mesurer la performance du contenu, les partenaires peuvent:\n* Mesurer comment le contenu a été diffusé et comment les utilisateurs ont interagi avec, et générer des rapports.\n* Générer des rapports à l’aide d’informations directement mesurables ou connues, sur les utilisateurs qui ont interagi avec le contenu\nLes partenaires ne peuvent pas:\n* Mesurer si et comment des publicités (y compris des publicités natives) ont été présentées à un utilisateur et comment celui-ci a interagi avec, sans base légale distincte\n* Croiser des données d’audience, issues ou dérivées d’un panel, avec des données de mesure de performance, sans base légale pour titre \"Finalité 9”. ",
+				"purpose_8_description_legal": "Pour mesurer la performance du contenu, les partenaires peuvent:\n* Mesurer comment le contenu a été diffusé et comment les utilisateurs ont interagi avec, et générer des rapports.\n* Générer des rapports à l’aide d’informations directement mesurables ou connues, sur les utilisateurs qui ont interagi avec le contenu\nLes partenaires ne peuvent pas:\n* Mesurer si et comment des publicités (y compris des publicités natives) ont été présentées à un utilisateur et comment celui-ci a interagi avec, sans base légale distincte\n* Croiser des données d’audience, issues ou dérivées d’un panel, avec des données de mesure de performance, sans base légale pour titre \"Finalité 9”.",
 				"purpose_9_name": "Exploiter des études de marché afin de générer des données d’audience",
 				"purpose_9_description": "Les études de marché peuvent servir à en apprendre davantage sur les audiences qui visitent des sites/utilisent des applications et voient des publicités.",
 				"purpose_9_description_legal": "Pour utiliser des études de marché afin de générer des données d’audience, les partenaires peuvent:\n* Fournir des rapports agrégés aux annonceurs ou à leurs représentants sur les audiences exposées à leurs publicités, en utilisant des données issues d’un panel ou d’un autre dispositif.\n* Fournir des rapports agrégés aux éditeurs sur les audiences  exposées à des contenus et/ou des publicités ou qui ont interagi avec des contenus et/ou les publicités sur leurs sites, en utilisant des données issues d’un panel ou d’un autre dispositif. \n* Combiner des données hors ligne à celles d’un utilisateur en ligne dans le cadre d’études de marché pour générer des données d’audience si les partenaires ont déclaré faire correspondre et associer des sources de données hors ligne (Fonctionnalité 1)\n* Texte dans la version anglaise : Combiner ces informations avec des données déjà collectées que ce soit sur le web ou via des applications. \nLes partenaires ne peuvent pas : \n* Mesurer la performance et l’efficacité des publicités qui ont été présentées à un utilisateur en particulier, ou avec lesquelles il a interagi, sans s’appuyer sur une base légale spécifique pour la mesure de la performance publicitaire.\n* Évaluer le contenu qui a été présenté à un utilisateur en particulier et la façon dont ce dernier a réagi sans s’appuyer sur une base légale spécifique pour la mesure de la performance des contenus.\n",
@@ -226,7 +231,12 @@
 				"special_feature_1_description_legal": "Les partnenaires peuvent :\n* Collecter et traiter des données de géolocalisation précises à l’appui d’une ou de plusieurs finalités.\nN.B. Une géolocalisation précise signifie qu’il n’y a aucune restriction à la précision de la localisation d’un utilisateur ; elle peut être précise à quelques mètres près.\n",
 				"special_feature_2_name": "Analyser activement les caractéristiques du terminal pour l’identification",
 				"special_feature_2_description": "Votre terminal peut être identifié sur la base d’une analyse de la combinaison unique de caractéristiques de votre terminal.",
-				"special_feature_2_description_legal": "Les partenaires peuvent :\n* Créer un identifiant à l’aide des données collectées via une analyse active d’un terminal pour l’identification de caractéristiques spécifiques, par exemple des polices installées ou la résolution d’écran. \n* Utiliser cet identifiant pour ré-identifier un terminal.\n"
+				"special_feature_2_description_legal": "Les partenaires peuvent :\n* Créer un identifiant à l’aide des données collectées via une analyse active d’un terminal pour l’identification de caractéristiques spécifiques, par exemple des polices installées ou la résolution d’écran. \n* Utiliser cet identifiant pour ré-identifier un terminal.\n",
+				"consent": "Consentement",
+				"legitimate_interest": "Intérêt légitime",
+				"purpose_details": "Détails de l'objectif",
+				"iab_vendor_disclaimer": "%{name} fait partie du <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> et est assujetti par ses règlements. Vous pouvez en apprendre davantage sur ce partenaire et sur la façon dont il traite les données dans sa <a href=\"%{policyUrl}\" target=\"_blank\">politique de confidentialité</a>.",
+				"non_iab_vendor_disclaimer": "Vous pouvez en apprendre davantage sur %{name} et sur la façon dont cette entité traite les données dans sa <a href=\"%{policyUrl}\" target=\"_blank\">politique de confidentialité</a>."
 			},
 			"de": {
 				"information_storage_and_access_19227997": "Speicherung und Zugriff auf Informationen",
@@ -283,7 +293,7 @@
 				"purpose_2_description_legal": "Für die Auswahl einfacher Anzeigen können Anbieter:\n* Echtzeit-Informationen über den Kontext, in dem die Anzeige dargestellt wird, verwenden, einschließlich Informationen über das inhaltliche Umfeld sowie das verwendete Gerät, wie z. B. Gerätetyp und -funktionen, Browser-Kennung, URL, IP-Adresse; \n* die ungefähren Standortdaten eines Nutzers verwenden;\n* die Häufigkeit der Anzeige-Einblendungen steuern\n* die Reihenfolge der Anzeige-Einblendungen steuern;\n* verhindern, dass eine Anzeige in einem ungeeigneten redaktionellen Umfeld (brand-unsafe) eingeblendet wird.\nAnbieter dürfen nicht:\n* Mit diesen Informationen ein personalisiertes Anzeigen-Profil für die Auswahl zukünftiger Anzeigen erstellen, ohne eine eigene Rechtsgrundlage für die Erstellung eines personalisierten Anzeigenprofils zu haben.\nAnmerkung: ungefähr bedeutet, dass nur eine grobe Standortbestimmung mit einem Radius von mindestens 500 Metern erlaubt ist.\n",
 				"purpose_3_name": "Ein personalisiertes Anzeigen-Profil erstellen",
 				"purpose_3_description": "Über Sie und Ihre Interessen kann ein Profil erstellt werden, um Ihnen für Sie relevante personalisierte Anzeigen einzublenden.",
-				"purpose_3_description_legal": "* Um ein personalisiertes Anzeigen-Profil zu erstellen, können Anbieter:\n* Informationen über einen Nutzer sammeln, einschließlich dessen Aktivitäten, Interessen, den Besuchen auf Webseiten oder der Verwendung von Anwendungen, demographischen Informationen oder Standorts, um ein ",
+				"purpose_3_description_legal": "* Um ein personalisiertes Anzeigen-Profil zu erstellen, können Anbieter:\n* Informationen über einen Nutzer sammeln, einschließlich dessen Aktivitäten, Interessen, den Besuchen auf Webseiten oder der Verwendung von Anwendungen, demographischen Informationen oder Standorts, um ein Nutzer-Profil für die Personalisierung von Anzeigen zu erstellen oder zu bearbeiten.",
 				"purpose_4_name": "Personalisierte Anzeigen auswählen",
 				"purpose_4_description": "Personalisierte Anzeigen können Ihnen basierend auf einem über Sie erstellten Profil eingeblendet werden.",
 				"purpose_4_description_legal": "Für die Auswahl personalisierter Anzeigen können Anbieter:\n* Personalisierte Anzeigen, basierend auf einem Nutzer-Profil oder anderen historischen Nutzungsdaten, einschließlich der früheren Aktivitäten, der Interessen, den Besuchen auf Webseiten oder der Verwendung von Anwendungen, des Standorts oder demografischen Informationen, auswählen.\n",
@@ -305,7 +315,7 @@
 				"purpose_10_name": "Produkte entwickeln und verbessern",
 				"purpose_10_description": "Ihre Daten können verwendet werden, um bestehende Systeme und Software zu verbessern und neue Produkte zu entwickeln.",
 				"purpose_10_description_legal": "* Um Produkte zu entwickeln und zu verbessern, können Anbieter:\n* Informationen verwenden, um ihre bestehenden Produkte durch neue Funktionen zu verbessern und neue Produkte zu entwickeln;\n* neue Rechenmodelle und Algorithmen mit Hilfe maschinellen Lernens erstellen.\nAnbieter können nicht:\n* Datenverarbeitungen durchführen, die in einem der anderen Verarbeitungszwecke definiert sind.\n",
-				"special_purpose_1_name": "Sicherheit gewährleisten, Betrug verhindern und Fehler beheben ",
+				"special_purpose_1_name": "Sicherheit gewährleisten, Betrug verhindern und Fehler beheben",
 				"special_purpose_1_description": "Ihre Daten können verwendet werden, um betrügerische Aktivitäten zu identifizieren und zu verhindern, und um sicherzustellen, dass Systeme und Prozesse ordnungsgemäß und sicher funktionieren.",
 				"special_purpose_1_description_legal": "Zur Gewährleistung von Sicherheit, Verhinderung von Betrug und Behebung von Fehlern können Anbieter:\n* sicherstellen, dass Daten sicher übermittelt werden; \n* schädliche, betrügerische, ungültige oder illegale Aktivitäten ausfindig machen und verhindern;\n* den korrekten und effizienten Betrieb von Systemen und Prozessen - einschließlich der Überwachung und Verbesserung der Leistung von Systemen und Prozessen - im Rahmen der erlaubten Verarbeitungszwecke sicherstellen.\nAnbieter können nicht:\n* Datenverarbeitungen durchführen, die in einem der anderen Verarbeitungszwecke definiert sind.\nHinweis: Daten, die gesammelt und verwendet werden, um die Sicherheit zu gewährleisten, Betrug zu verhindern und Fehler zu beseitigen.\nkönnen automatisch gesendete Geräteeigenschaften zur Identifizierung beinhalten, präzise Geolokalisierungsdaten und Daten, die durch aktive Abtastung der Vorrichtung erhalten werden. Merkmale zur Identifizierung ohne gesonderte Offenlegung und/oder Opt-in.\n",
 				"special_purpose_2_name": "Anzeigen oder Inhalte technisch bereitstellen",
@@ -325,7 +335,12 @@
 				"special_feature_1_description_legal": "Anbieter können:\n* genaue Standortdaten verarbeiten, um sie für einen oder mehrere Verarbeitungszwecke zu nutzen.\nAnmerkung: “Genaue Standortdaten” bedeutet, dass es hinsichtlich der Genauigkeit des Standortes keine Einschränkungen gibt; diese kann bis auf wenige Meter genau sein.\n",
 				"special_feature_2_name": "Geräteeigenschaften zur Identifikation aktiv abfragen",
 				"special_feature_2_description": "Ihr Gerät kann über eine Abfrage seiner spezifischen Merkmale erkannt werden.",
-				"special_feature_2_description_legal": "Anbieter können:\n* aus Daten, die aus der aktiven Abfrage bestimmter Eigenschaften eines Geräts - z. B. der installierten Schriftarten oder der Bildschirmauflösung - gewonnen wurden, eine Kennung erstellen;\n* eine solche Kennung verwenden, um ein Gerät erneut zu identifizieren.\n"
+				"special_feature_2_description_legal": "Anbieter können:\n* aus Daten, die aus der aktiven Abfrage bestimmter Eigenschaften eines Geräts - z. B. der installierten Schriftarten oder der Bildschirmauflösung - gewonnen wurden, eine Kennung erstellen;\n* eine solche Kennung verwenden, um ein Gerät erneut zu identifizieren.\n",
+				"consent": "Einverständnis",
+				"legitimate_interest": "Legitimes Interesse",
+				"purpose_details": "Zweck-Details",
+				"iab_vendor_disclaimer": "%{name} beteiligt sich am <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> und unterliegt dessen Richtlinien. Sie können mehr über diesen Partner und dessen Datenverarbeitungspraxis in dessen <a href=\"%{policyUrl}\" target=\"_blank\">Datenschutzrichtlinie</a> erfahren.",
+				"non_iab_vendor_disclaimer": "Sie können mehr über %{name} und dessen Datenverarbeitungspraxis in dessen <a href=\"%{policyUrl}\" target=\"_blank\">Datenschutzrichtlinie</a> erfahren."
 			},
 			"pt": {
 				"information_storage_and_access_19227997": "Conservação e acesso a informações",
@@ -420,11 +435,16 @@
 				"feature_3_description": "É possível distinguir o seu dispositivo de outros dispositivos, com base nas informações que envia automaticamente, tais como o endereço IP ou o tipo de navegador.",
 				"feature_3_description_legal": "Os fornecedores podem:\n* Criar um identificador utilizando os dados recolhidos automaticamente a partir de um dispositivo para obter características específicas, p. ex., endereço IP, sequência do agente do utilizador.\n* Utilizar o identificador para tentar reidentificar um dispositivo.\nOs fornecedores não podem:\n* Criar um identificador utilizando dados recolhidos através da leitura ativa de um dispositivo, para obter características específicas, p. ex., tipos de letra instalados ou resolução de ecrã sem uma autorização explícita do utilizador para a leitura ativa das características do dispositivo, para fins de identificação.\n* Utilizar um identificador para identificar novamente um dispositivo.\n",
 				"special_feature_1_name": "Utilizar dados de geolocalização precisos",
-				"special_feature_1_description": "Os seus dados de geolocalização precisa podem ser utilizados para apoiar uma ou mais finalidades. Isto significa que a sua localização pode ser precisa até alguns metros. ",
+				"special_feature_1_description": "Os seus dados de geolocalização precisa podem ser utilizados para apoiar uma ou mais finalidades. Isto significa que a sua localização pode ser precisa até alguns metros.",
 				"special_feature_1_description_legal": "Os fornecedores podem:\n* Recolher e processar dados exatos de geolocalização, para apoiar uma ou mais finalidades.\nN.B. Geolocalização precisa significa que não existem restrições na precisão da localização de um utilizador; isto pode ser preciso até alguns metros.\n",
 				"special_feature_2_name": "Procurar ativamente as características do dispositivo para identificação",
 				"special_feature_2_description": "O seu dispositivo pode ser identificado com base na respetiva leitura da combinação única de características.",
-				"special_feature_2_description_legal": "Os fornecedores podem:\n* Criar um identificador utilizando dados recolhidos através da leitura ativa de um dispositivo para características específicas, por exemplo, tipos de letra instalados ou resolução de ecrã. \n* Utilizar um identificador para identificar novamente um dispositivo.\n"
+				"special_feature_2_description_legal": "Os fornecedores podem:\n* Criar um identificador utilizando dados recolhidos através da leitura ativa de um dispositivo para características específicas, por exemplo, tipos de letra instalados ou resolução de ecrã. \n* Utilizar um identificador para identificar novamente um dispositivo.\n",
+				"consent": "Autorização",
+				"legitimate_interest": "Interesse legítimo",
+				"purpose_details": "Detalhes dos fins",
+				"iab_vendor_disclaimer": "O parceiro %{name} participa na <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Estrutura de Transparência e Consentimento do IAB</a> e está sujeito às respetivas políticas. Pode obter mais informações sobre este parceiro e o processamento de dados que realiza na respetiva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacidade</a>.",
+				"non_iab_vendor_disclaimer": "Pode obter mais informações sobre o parceiro %{name} e o processamento de dados que realiza na respetiva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacidade</a>."
 			},
 			"it": {
 				"information_storage_and_access_19227997": "Conservazione e accesso alle informazioni",
@@ -473,7 +493,7 @@
 				"disable_buttons_until_scroll_indicator": "Scorri verso il basso per dare il consenso",
 				"essential_purpose_label": "Necessario",
 				"view_our_partners": "I nostri partner",
-				"purpose_1_name": "Archiviare e/o accedere a informazioni su un dispositivo ",
+				"purpose_1_name": "Archiviare e/o accedere a informazioni su un dispositivo",
 				"purpose_1_description": "I cookie, gli identificatori del dispositivo o altre informazioni possono essere archiviati o reperiti sul dispositivo dell’utente per le finalità presentate.",
 				"purpose_1_description_legal": "I vendor possono:\n* Archiviare e accedere alle informazioni sul dispositivo, quali cookie e identificatori del dispositivo stesso, per le finalità presentate a un utente.\n",
 				"purpose_2_name": "Selezionare annunci basici (basic ads)",
@@ -519,11 +539,16 @@
 				"feature_3_description": "Un dispositivo può essere distinto da altri dispositivi in base alle informazioni che invia automaticamente, come l’indirizzo IP o il tipo di browser.",
 				"feature_3_description_legal": "I vendor possono: \n* Creare un identificatore, utilizzando i dati che un dispositivo raccoglie automaticamente in base alle sue caratteristiche, ad es. indirizzo IP, stringa dell’utente\n* Utilizzare il suddetto identificatore per provare a identificare nuovamente un dispositivo\nI vendor non possono:\n* Creare un identificatore, utilizzando i dati raccolti tramite uno scanning attivo di caratteristiche specifiche un dispositivo, come ad esempio la risoluzione dello schermo o i caratteri installati, senza l’opt-in dell’utente in merito alla scansionare attiva delle caratteristiche del dispositivo per la sua identificazione.\n* Utilizzare tale identificatore per identificare nuovamente un dispositivo\n",
 				"special_feature_1_name": "Utilizzare dati di geolocalizzazione precisi",
-				"special_feature_1_description": "I dati di geolocalizzazione precisi possono essere utilizzati a supporto di una o varie finalità. Ciò significa che la posizione dell’utente potrà determinarsi con esattezza nel raggio di alcuni metri. ",
+				"special_feature_1_description": "I dati di geolocalizzazione precisi possono essere utilizzati a supporto di una o varie finalità. Ciò significa che la posizione dell’utente potrà determinarsi con esattezza nel raggio di alcuni metri.",
 				"special_feature_1_description_legal": "I vendor possono:\n* Raccogliere e trattare dati relativi alla posizione geografica esatta, a supporto di una o varie finalità.\nN.B.: Esatta geolocalizzazione significa che non esistono restrizioni sulla determinazione precisa della posizione geografica di un utente; il margine di precisione può avere un raggio di alcuni metri\n",
 				"special_feature_2_name": "Scansione attiva delle caratteristiche del dispositivo ai fini dell’identificazione",
 				"special_feature_2_description": "Il dispositivo può essere identificato in base a una scansione della combinazione unica di caratteristiche del dispositivo.",
-				"special_feature_2_description_legal": "I vendor possono:\n* Creare un identificatore utilizzando i dati raccolti mediante la scansione attiva di un dispositivo ai fini dell’individuazione di caratteristiche specifiche, ad es., tipi di caratteri installati o risoluzione dello schermo. \n* Utilizzare tale identificatore per individuare ripetutamente un dispositivo. \n"
+				"special_feature_2_description_legal": "I vendor possono:\n* Creare un identificatore utilizzando i dati raccolti mediante la scansione attiva di un dispositivo ai fini dell’individuazione di caratteristiche specifiche, ad es., tipi di caratteri installati o risoluzione dello schermo. \n* Utilizzare tale identificatore per individuare ripetutamente un dispositivo. \n",
+				"consent": "Consenso",
+				"legitimate_interest": "Legittimo interesse",
+				"purpose_details": "Dettagli sullo scopo",
+				"iab_vendor_disclaimer": "%{name} partecipa all'accordo <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> ed è soggetto alle sue politiche. Ulteriori informazioni sul partner selezionato e l'elaborazione dei dati sono disponibili nell'<a href=\"%{policyUrl}\" target=\"_blank\">Informativa sulla privacy</a>.",
+				"non_iab_vendor_disclaimer": "Ulteriori informazioni su %{name} e l'elaborazione dei dati sono disponibili nell'<a href=\"%{policyUrl}\" target=\"_blank\">Informativa sulla privacy</a>."
 			},
 			"nl": {
 				"information_storage_and_access_19227997": "Opslag van en toegang tot informatie",
@@ -618,11 +643,16 @@
 				"feature_3_description": "Uw apparaat kan onderscheiden worden van andere apparaten op basis van informatie die het automatisch verzendt, zoals IP-adres of browsertype.",
 				"feature_3_description_legal": "Leveranciers kunnen:\n* Een identificator aanmaken met gegevens die automatisch uit een apparaat worden verzameld voor specifieke kenmerken, bijv. IP-adres, platforminformatiestring.\n* Een dergelijke identificator gebruiken om een apparaat opnieuw te trachten te identificeren.\nLeveranciers kunnen niet:\n* Een identificator aanmaken met behulp van gegevens die zijn verzameld via het actief scannen van een apparaat op specifieke kenmerken, zoals geïnstalleerde lettertypen of schermresolutie zonder de afzonderlijke opt-in van gebruikers met betrekking tot het actief scannen van apparaat kenmerken ter identificatie.\n* Een dergelijke identificator gebruiken om een apparaat opnieuw te identificeren.\n",
 				"special_feature_1_name": "Precieze geolocatie gegevens gebruiken",
-				"special_feature_1_description": "Uw precieze geolocatie gegevens kunnen worden gebruikt ter ondersteuning van een of meer doeleinden. Dit betekent dat uw locatie binnen verschillende meters nauwkeurig kan zijn. ",
+				"special_feature_1_description": "Uw precieze geolocatie gegevens kunnen worden gebruikt ter ondersteuning van een of meer doeleinden. Dit betekent dat uw locatie binnen verschillende meters nauwkeurig kan zijn.",
 				"special_feature_1_description_legal": "Leveranciers kunnen:\n* Precieze geolocatie gegevens verzamelen en verwerken ter ondersteuning van een of meer doeleinden.\nNB Precieze geolocatie betekent dat er geen beperkingen zijn op de precisie van de locatie van een gebruiker; dit kan binnen verschillende meters nauwkeurig zijn.\nOpmerking: Bepaalde vormen van gebruik van deze gegevens voor beveiliging of fraudepreventie zijn afzonderlijk gedekt en vereisen geen afzonderlijke gebruikersopt-in voor het gebruik van nauwkeurige geolocatie gegevens. \n",
 				"special_feature_2_name": "De apparaat kenmerken actief scannen voor identificatie",
 				"special_feature_2_description": "Uw apparaat kan worden geïdentificeerd op basis van een scan van de unieke combinatie van kenmerken van uw apparaat.",
-				"special_feature_2_description_legal": "Leveranciers kunnen:\n* Een identificator aanmaken met behulp van gegevens die zijn verzameld via het actief scannen van een apparaat op specifieke kenmerken, zoals geïnstalleerde lettertypen of schermresolutie. \n* Een dergelijke identificator gebruiken om een apparaat opnieuw te identificeren.\nOpmerking: Bepaalde vormen van gebruik van deze gegevens in het kader van beveiliging of fraudepreventie zijn afzonderlijk gedekt en vereisen geen afzonderlijke opt-in van de gebruiker voor het actief scannen van apparaat kenmerken voor identificatie.\n"
+				"special_feature_2_description_legal": "Leveranciers kunnen:\n* Een identificator aanmaken met behulp van gegevens die zijn verzameld via het actief scannen van een apparaat op specifieke kenmerken, zoals geïnstalleerde lettertypen of schermresolutie. \n* Een dergelijke identificator gebruiken om een apparaat opnieuw te identificeren.\nOpmerking: Bepaalde vormen van gebruik van deze gegevens in het kader van beveiliging of fraudepreventie zijn afzonderlijk gedekt en vereisen geen afzonderlijke opt-in van de gebruiker voor het actief scannen van apparaat kenmerken voor identificatie.\n",
+				"consent": "Toestemming",
+				"legitimate_interest": "Legitiem belang",
+				"purpose_details": "Informatie over doeleinden",
+				"iab_vendor_disclaimer": "%{name} draagt bij aan het <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> en houdt zich aan het beleid daarvan. Meer informatie over deze partner en de manier waarop deze gegevens verwerkt kunt u vinden in het <a href=\"%{policyUrl}\" target=\"_blank\">privacybeleid</a>.",
+				"non_iab_vendor_disclaimer": "Meer informatie over %{name} en de manier waarop deze partner gegevens verwerkt kunt u vinden in het bijbehorende <a href=\"%{policyUrl}\" target=\"_blank\">privacybeleid</a>."
 			},
 			"ca": {
 				"information_storage_and_access_19227997": "Accés i emmagatzematge de la informació",
@@ -713,15 +743,20 @@
 				"feature_2_name": "Vincular diferents dispositius",
 				"feature_2_description": "Es pot determinar que diferents dispositius pertanyen a vostè o a la seva llar per a una o més finalitats.",
 				"feature_2_description_legal": "Els proveïdors poden:\n* Determinar de manera determinista que dos o més dispositius pertanyen al mateix usuari o la mateixa llar.\n* Determinar de manera probabilística que dos o més dispositius pertanyen al mateix usuari o la mateixa llar.\n* Explorar activament les característiques del dispositiu per trobar la seva identificació probabilística si els usuaris han permès als proveïdors explorar activament les característiques del dispositiu per la seva identificació (funcionalitat especial 2).\n",
-				"feature_3_name": "Rebre i utilitzar per a la seva identificació les característiques del dispositiu que s’envien automàticament ",
+				"feature_3_name": "Rebre i utilitzar per a la seva identificació les característiques del dispositiu que s’envien automàticament",
 				"feature_3_description": "El seu dispositiu pot distingir-se d’altres dispositius a partir de la informació que envia automàticament, com l’adreça IP o el tipus de navegador.",
 				"feature_3_description_legal": "Els proveïdors poden:\n* Crear un identificador usant les dades recollides automàticament en un dispositiu per a funcions específiques, per exemple, adreça IP, la cadena d’usuari-agent.\n* Utilitzar aquest identificador per intentar tornar a identificar un dispositiu.\nEls proveïdors no poden:\n* Crear un identificador utilitzant dades recollides mitjançant l’exploració activa d’un dispositiu per trobar característiques específiques; per exemple, el tipus de lletra instal·lat o la resolució de pantalla, sense que l’usuari hagi donat el consentiment per separat per explorar activament les característiques del dispositiu para a la seva identificació.\n* Utilitzar aquest identificador per tornar a identificar un dispositiu.\n",
 				"special_feature_1_name": "Utilitzar dades de geolocalització precises",
-				"special_feature_1_description": "Les seves dades de geolocalització precisa es poden utilitzar per a una o més finalitats. Això vol dir que la seva ubicació pot tenir una precisió de pocs metres. ",
+				"special_feature_1_description": "Les seves dades de geolocalització precisa es poden utilitzar per a una o més finalitats. Això vol dir que la seva ubicació pot tenir una precisió de pocs metres.",
 				"special_feature_1_description_legal": "Els proveïdors poden:\n* Recollir i tractar dades de geolocalització precises per a una o més finalitats.\nNota: la geolocalització precisa significa que no hi ha restriccions per a la precisió de la ubicació d’un usuari; pot tenir una precisió de pocs metres.\n",
 				"special_feature_2_name": "Explorar activament les característiques del dispositiu per a la seva identificació",
 				"special_feature_2_description": "Es pot identificar el seu dispositiu en funció de l’anàlisi de la combinació única de característiques del seu dispositiu.",
-				"special_feature_2_description_legal": "Els proveïdors poden:\n* Crear un identificador utilitzant dades recollides mitjançant la exploració activa d’un dispositiu per trobar característiques específiques, per exemple, els tipus de lletra instal·lat o la resolució de pantalla. \n* Utilitzar aquest identificador per tornar a identificar un dispositiu.\n"
+				"special_feature_2_description_legal": "Els proveïdors poden:\n* Crear un identificador utilitzant dades recollides mitjançant la exploració activa d’un dispositiu per trobar característiques específiques, per exemple, els tipus de lletra instal·lat o la resolució de pantalla. \n* Utilitzar aquest identificador per tornar a identificar un dispositiu.\n",
+				"consent": "Consentiment",
+				"legitimate_interest": "Interès legítim",
+				"purpose_details": "Detalls de la finalitat",
+				"iab_vendor_disclaimer": "%{name} participa al <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Marc de Feina amb Transparència i Consentiment del IAB</a> i està subjecte a llurs polítiques. Podeu obtenir més informació sobre aquest soci i llur processament de dades a la seva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacitat</a>.",
+				"non_iab_vendor_disclaimer": "Podeu obtenir més informació sobre %{name} i llur processament de dades a la seva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacitat</a>."
 			},
 			"es": {
 				"information_storage_and_access_19227997": "Almacenamiento y acceso a la información",
@@ -803,7 +838,7 @@
 				"special_purpose_1_name": "Garantizar la seguridad, evitar fraudes y depurar errores",
 				"special_purpose_1_description": "Sus datos pueden utilizarse para supervisar y evitar actividades fraudulentas, y para asegurar que los sistemas y procesos funcionen de forma correcta y segura.",
 				"special_purpose_1_description_legal": "Para garantizar la seguridad, evitar fraudes y depurar errores, los proveedores pueden:\n* Asegurarse de que los datos se transmitan de forma segura \n* Detectar y evitar actividades maliciosas, fraudulentas, inaceptables o ilegales.\n* Asegurar el funcionamiento correcto y eficaz de los sistemas y procesos, lo que incluye supervisar y mejorar el rendimiento de los sistemas y procesos empleados en las finalidades permitidas\nLos proveedores no pueden:\n* Llevar a cabo ninguna otra operación de tratamiento de datos permitida en virtud de una finalidad distinta.\nNota: Los datos recopilados y utilizados para garantizar la seguridad, evitar el fraude y depurar errores pueden incluir características del dispositivo enviadas automáticamente para su identificación, datos de geolocalización precisos y datos obtenidos analizando de forma activa las características del dispositivo para su identificación sin que sea necesario revelar más información y/o una aceptación independiente.  \n",
-				"special_purpose_2_name": "Servir técnicamente anuncios o contenido ",
+				"special_purpose_2_name": "Servir técnicamente anuncios o contenido",
 				"special_purpose_2_description": "Su dispositivo puede recibir y enviar información que le permita ver e interactuar con anuncios y contenido.",
 				"special_purpose_2_description_legal": "Para servir información y responder a solicitudes técnicas, los proveedores pueden:\n* Utilizar la dirección IP de un usuario para entregar un anuncio a través de Internet\n* Responder a la interacción de un usuario con un anuncio enviando al usuario a una página de destino\n* Utilizar la dirección IP de un usuario para entregar contenido a través de Internet\n* Responder a la interacción de un usuario con el contenido enviando al usuario a una página de destino\n* Utilizar información sobre el tipo de dispositivo y sus capacidades para entregar anuncios o contenido, por ejemplo, para entregar el archivo publicitario o de vídeo de tamaño adecuado en un formato compatible con el dispositivo\nLos proveedores no pueden:\n* Llevar a cabo, según esta finalidad, ninguna otra operación de tratamiento de datos permitida en virtud de una finalidad distinta.\n",
 				"feature_1_name": "Cotejar y combinar fuentes de datos off line",
@@ -816,11 +851,16 @@
 				"feature_3_description": "Su dispositivo puede distinguirse de otros dispositivos a partir de la información que envía automáticamente, como la dirección IP o el tipo de navegador.",
 				"feature_3_description_legal": "Los proveedores pueden:\n* Crear un identificador utilizando los datos recopilados automáticamente en un dispositivo para características específicas, por ejemplo, dirección IP o la cadena de agente de usuario.\n* Utilizar este identificador para intentar volver a identificar un dispositivo.\nLos proveedores no pueden:\n* Crear un identificador utilizando datos recogidos mediante el análisis activo de un dispositivo para hallar funcionalidads específicas, por ejemplo, fuentes instaladas o resolución de pantalla sin aceptación independiente del usuario para analizar de forma activa las características del dispositivo para su identificación.\n* Utilizar este identificador para volver a identificar un dispositivo.\n",
 				"special_feature_1_name": "Utilizar datos de localización geográfica precisa",
-				"special_feature_1_description": "Sus datos de localización geográfica precisa se pueden utilizar para una o más finalidades. Esto significa que su ubicación puede tener una precisión de varios metros. ",
+				"special_feature_1_description": "Sus datos de localización geográfica precisa se pueden utilizar para una o más finalidades. Esto significa que su ubicación puede tener una precisión de varios metros.",
 				"special_feature_1_description_legal": "Los proveedores pueden:\n* Recoger y tratar datos de localización geográfica precisa para una o más finalidades.\nNota: La localización geográfica precisa significa que no existen restricciones sobre la precisión de la ubicación de un usuario; esto puede tener una precisión de varios metros.\n",
 				"special_feature_2_name": "Analizar activamente las características del dispositivo para su identificación",
 				"special_feature_2_description": "Su dispositivo puede identificarse basándose en un análisis de la combinación única de las características de su dispositivo.",
-				"special_feature_2_description_legal": "Los proveedores pueden:\n* Crear un identificador utilizando datos recogidos mediante el análisis activo de un dispositivo para hallar características específicas, por ejemplo, fuentes instaladas o resolución de pantalla. \n* Utilizar este identificador para volver a identificar un dispositivo.\n"
+				"special_feature_2_description_legal": "Los proveedores pueden:\n* Crear un identificador utilizando datos recogidos mediante el análisis activo de un dispositivo para hallar características específicas, por ejemplo, fuentes instaladas o resolución de pantalla. \n* Utilizar este identificador para volver a identificar un dispositivo.\n",
+				"consent": "Consentimiento",
+				"legitimate_interest": "Interés legítimo",
+				"purpose_details": "Detalles del propósito",
+				"iab_vendor_disclaimer": "%{name} participa en el <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Marco de Transparencia y Consentimiento de IAB</a> y está sujeto a sus políticas. Puede obtener más información acerca de este socio y de su procesamiento de datos en su <a href=\"%{policyUrl}\" target=\"_blank\">política de privacidad</a>.",
+				"non_iab_vendor_disclaimer": "Puede obtener más información acerca de %{name} y de su procesamiento de datos en su <a href=\"%{policyUrl}\" target=\"_blank\">política de privacidad</a>."
 			},
 			"ro": {
 				"information_storage_and_access_19227997": "Stocarea și accesarea informațiilor",
@@ -915,11 +955,16 @@
 				"feature_3_description": "Dispozitivul dvs. poate fi deosebit de alte dispozitive pe baza informațiilor pe care le trimite automat, cum ar fi adresa IP sau tipul de browser.",
 				"feature_3_description_legal": "Furnizorii pot:\n* crea un identificator utilizând datele colectate automat de pe un dispozitiv pentru caracteristici specifice, de ex. adresa IP, șirul utilizator-agent.\n* utiliza un astfel de identificator pentru a încerca să reidentifice un dispozitiv.\nFurnizorii nu pot:\n* crea un identificator utilizând datele colectate prin scanarea activă a unui dispozitiv pentru caracteristici specifice, de exemplu fontul instalat sau rezoluția ecranului fără optarea separată din partea utilizatorilor pentru scanarea activă a caracteristicilor dispozitivului în scopul identificării.\n* utiliza un astfel de identificator pentru a reidentifica un dispozitiv.\n",
 				"special_feature_1_name": "Utilizarea unor date precise de geolocație",
-				"special_feature_1_description": "Datele dvs. de geolocație precise pot fi utilizate pentru susținerea unuia sau mai multor scopuri. Aceasta înseamnă că locația dvs. poate fi exactă în limita câtorva metri. ",
+				"special_feature_1_description": "Datele dvs. de geolocație precise pot fi utilizate pentru susținerea unuia sau mai multor scopuri. Aceasta înseamnă că locația dvs. poate fi exactă în limita câtorva metri.",
 				"special_feature_1_description_legal": "Furnizorii pot:\n* colecta și prelucra date precise de geolocație în sprijinul unuia sau mai multor scopuri.\nN.B. Geolocația precisă înseamnă că nu există restricții privind precizia locației unui utilizator; acest lucru poate fi exact în limita câtorva metri.\n",
 				"special_feature_2_name": "Scanarea activă a caracteristicilor dispozitivului pentru identificare",
 				"special_feature_2_description": "Dispozitivul dvs. poate fi identificat pe baza unei scanări a combinației unice de caracteristici ale dispozitivului dvs.",
-				"special_feature_2_description_legal": "Furnizorii pot:\n* crea un identificator utilizând datele colectate prin scanarea activă a unui dispozitiv pentru caracteristici specifice, de exemplu fonturile instalate sau rezoluția ecranului \n* utiliza un astfel de identificator pentru a reidentifica un dispozitiv.\n"
+				"special_feature_2_description_legal": "Furnizorii pot:\n* crea un identificator utilizând datele colectate prin scanarea activă a unui dispozitiv pentru caracteristici specifice, de exemplu fonturile instalate sau rezoluția ecranului \n* utiliza un astfel de identificator pentru a reidentifica un dispozitiv.\n",
+				"consent": "Consimțământ",
+				"legitimate_interest": "Interes legitim",
+				"purpose_details": "Detalii privind scopul",
+				"iab_vendor_disclaimer": "%{name} participă la <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Cadrul IAB pentru transparență și consimțământ</a> și respectă politicile sale. Puteți afla mai multe despre acest partener și modul în care prelucrează datele în <a href=\"%{policyUrl}\" target=\"_blank\">politica sa de confidențialitate</a>.",
+				"non_iab_vendor_disclaimer": "Puteți afla mai multe despre %{name} și modul în care prelucrează datele în <a href=\"%{policyUrl}\" target=\"_blank\">politica sa de confidențialitate</a>."
 			},
 			"hr": {
 				"information_storage_and_access_19227997": "Pohrana i pristup podacima",
@@ -1018,7 +1063,12 @@
 				"special_feature_1_description_legal": "Pružatelji usluga mogu:\n* prikupljati i obrađivati precizne geolokacijske podatke za podršku jednoj ili više svrha.\nNapomena: precizna geolokacija znači da nema ograničenja u preciznosti utvrđivanja lokacije korisnika, to može biti točno na nekoliko metara.",
 				"special_feature_2_name": "Aktivno skeniranje karakteristika uređaja radi identifikacije",
 				"special_feature_2_description": "Vaš uređaj je moguće identificirati na temelju skeniranja jedinstvene kombinacije karakteristika vašeg uređaja.",
-				"special_feature_2_description_legal": "Pružatelji usluga mogu:\n* načiniti identifikator pomoću podataka prikupljenih aktivnim skeniranjem specifičnih karakteristika uređaja, na primjer instaliranih fontova ili razlučivosti zaslona.\n* Koristiti takav identifikator radi ponovne identifikacije uređaja."
+				"special_feature_2_description_legal": "Pružatelji usluga mogu:\n* načiniti identifikator pomoću podataka prikupljenih aktivnim skeniranjem specifičnih karakteristika uređaja, na primjer instaliranih fontova ili razlučivosti zaslona.\n* Koristiti takav identifikator radi ponovne identifikacije uređaja.",
+				"consent": "Pristanak",
+				"legitimate_interest": "Legitimni interes",
+				"purpose_details": "Pojedinosti o svrsi",
+				"iab_vendor_disclaimer": "%{name} sudjeluje u <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Okvir IAB transparentnosti i suglasnosti</a> pa se na njega odnose ta pravila. Više o ovom partneru i obradi podataka koju vrši možete saznati u njihovim <a href=\"%{policyUrl}\" target=\"_blank\">pravilima o zaštiti privatnosti</a>.",
+				"non_iab_vendor_disclaimer": "Više o %{name} i načinu obrade podataka koju vrše možete saznati u njihovim <a href=\"%{policyUrl}\" target=\"_blank\">pravilima o zaštiti privatnosti</a>."
 			},
 			"cs": {
 				"information_storage_and_access_19227997": "Uložení informací a přístup k nim",
@@ -1107,7 +1157,7 @@
 				"feature_1_description": "Data z offline zdrojů lze kombinovat s vaší online aktivitou za účelem podpory jednoho nebo více účelů.",
 				"feature_1_description_legal": "Prodejci mohou:\n● Kombinovat data získaná offline s daty shromážděnými online za účelem podpory jednoho nebo více účelů nebo zvláštních účelů.",
 				"feature_2_name": "Propojení různých zařízení",
-				"feature_2_description": "Abychom mohli lépe naplnit jeden či více účelů, můžeme určit, že vám nebo vaší domácnosti patří různá zařízení. ",
+				"feature_2_description": "Abychom mohli lépe naplnit jeden či více účelů, můžeme určit, že vám nebo vaší domácnosti patří různá zařízení.",
 				"feature_2_description_legal": "Prodejci mohou:\n● Deterministickou metodou určit, že dvě nebo více zařízení patří stejnému uživateli nebo domácnosti.\n● Pravděpodobnostní metodou určit, že dvě nebo více zařízení patří stejnému uživateli nebo domácnosti.\n● Aktivně vyhledávat pravděpodobnostní identifikační údaje v rámci vlastností zařízení, pokud uživatelé prodejcům aktivní vyhledávání identifikačních údajů v rámci vlastností zařízení povolili (zvláštní funkce 2).",
 				"feature_3_name": "Přijetí a použití automaticky zasílaných specifických vlastností zařízení pro identifikaci",
 				"feature_3_description": "Vaše zařízení může být odlišeno od jiných zařízení na základě informací, které vaše zařízení automaticky zasílá, jako např. IP adresa nebo typ prohlížeče.",
@@ -1117,7 +1167,12 @@
 				"special_feature_1_description_legal": "Prodejci mohou:\n● Shromažďovat a zpracovávat přesné údaje o geografické poloze za účelem podpory jednoho nebo více účelů.\nPozn.: Výraz přesná geografická poloha znamená, že neexistují žádná omezení týkající se přesnosti uživatelovy polohy; polohu lze určit s přesností na několik metrů.",
 				"special_feature_2_name": "Aktivní vyhledávání identifikačních údajů v rámci vlastností zařízení",
 				"special_feature_2_description": "Vaše zařízení lze identifikovat na základě prohledání jedinečné kombinace vlastností vašeho zařízení.",
-				"special_feature_2_description_legal": "Prodejci mohou:\n● Vytvořit identifikátor pomocí údajů shromážděných prostřednictvím aktivního vyhledávání specifických vlastností v rámci zařízení, např. instalovaných písem nebo rozlišení obrazovky.\n● Používat tento identifikátor za účelem opětovné identifikace zařízení."
+				"special_feature_2_description_legal": "Prodejci mohou:\n● Vytvořit identifikátor pomocí údajů shromážděných prostřednictvím aktivního vyhledávání specifických vlastností v rámci zařízení, např. instalovaných písem nebo rozlišení obrazovky.\n● Používat tento identifikátor za účelem opětovné identifikace zařízení.",
+				"consent": "Souhlas",
+				"legitimate_interest": "Oprávněný zájem",
+				"purpose_details": "Podrobnosti o účelu",
+				"iab_vendor_disclaimer": "%{name} je účastníkem <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> a podléhá jeho zásadám. Další informace o tomto partnerovi a jeho zpracování údajů najdete v jeho <a href=\"%{policyUrl}\" target=\"_blank\">Zásadách ochrany osobních údajů</a>.",
+				"non_iab_vendor_disclaimer": "Více o %{name} a způsobu, jakým zpracovává údaje se dozvíte v <a href=\"%{policyUrl}\" target=\"_blank\">Zásadách ochrany osobních údajů</a>."
 			},
 			"tr": {
 				"information_storage_and_access_19227997": "Bilgilerin depolanması ve erişim",
@@ -1216,7 +1271,12 @@
 				"special_feature_1_description_legal": "Satıcılar şunları yapabilir:\n* Kesin coğrafi konum verilerini bir ya da daha fazla amacı desteklemek için toplamak ve işlemek.\nLütfen dikkat edin: Kesin coğrafi konum, kullanıcının konumunun tespit edilmesinde kısıtlamalar olmadığı anlamına gelir; bu konum birkaç metre hassaslığında doğru olabilir.",
 				"special_feature_2_name": "Tanımlama için cihaz karakteristiklerini aktif olarak taramak",
 				"special_feature_2_description": "Cihazınız, cihazınızın benzersiz karakteristik kombinasyonunun taranması temel alınarak tanımlanabilir.",
-				"special_feature_2_description_legal": "Satıcılar şunları yapabilir:\n* Belirli karakteristikler için (örnek olarak, kurulan yazı tipleri ya da ekran çözünürlüğü) bir cihazdan aktif olarak tarama yoluyla toplanan verileri kullanarak bir kimlik tanıtıcı oluşturmak.\n* Bir cihazı tekrar tanımlama için böylesi bir kimlik tanıtıcıyı kullanmak."
+				"special_feature_2_description_legal": "Satıcılar şunları yapabilir:\n* Belirli karakteristikler için (örnek olarak, kurulan yazı tipleri ya da ekran çözünürlüğü) bir cihazdan aktif olarak tarama yoluyla toplanan verileri kullanarak bir kimlik tanıtıcı oluşturmak.\n* Bir cihazı tekrar tanımlama için böylesi bir kimlik tanıtıcıyı kullanmak.",
+				"consent": "Rıza",
+				"legitimate_interest": "Meşru Çıkar",
+				"purpose_details": "Amaç Ayrıntıları",
+				"iab_vendor_disclaimer": "%{name} <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Saydamlık ve Rıza Çerçevesine</a> katılmaktadır ve onun politikalarına tabidir. Bu ortak ve veri işlemesi hakkında daha fazla bilgiyi <a href=\"%{policyUrl}\" target=\"_blank\">gizlilik politikasından</a> edinebilirsiniz.",
+				"non_iab_vendor_disclaimer": "%{name} ve veri işlemesi hakkında daha fazla bilgiyi <a href=\"%{policyUrl}\" target=\"_blank\">gizlilik politikasından</a> edinebilirsiniz."
 			},
 			"pl": {
 				"information_storage_and_access_19227997": "Przechowywanie i dostęp do informacji",
@@ -1311,11 +1371,16 @@
 				"feature_3_description": "Urządzenie może się odróżniać od innych urządzeń w oparciu o informacje, które automatycznie przesyła, takie jak adres IP lub typ przeglądarki.",
 				"feature_3_description_legal": "Dostawcy mogą:\n* stworzyć identyfikator za pomocą danych zebranych automatycznie z urządzenia pod względem określonych cech, np. adres IP, ciąg agenta użytkownika.\n* użyć takiego identyfikatora, aby podjąć próbę ponownej identyfikacji urządzenia.\nDostawcy nie mogą:\n* stworzyć identyfikatora przy użyciu danych zebranych poprzez aktywne skanowanie urządzenia w celu uzyskania określonych cech, np. zainstalowanych czcionek lub rozdzielczości ekranu, bez odrębnej zgody użytkowników na aktywne skanowanie charakterystyki urządzenia do identyfikacji.\n* użyć takiego identyfikatora, aby ponownie zidentyfikować urządzenie.\n",
 				"special_feature_1_name": "Użycie dokładnych danych geolokalizacyjnych",
-				"special_feature_1_description": "Dokładne dane geolokalizacyjne użytkownika mogą być wykorzystywane na potrzeby realizacji jednego albo większej liczby celów. Oznacza to, że lokalizacja użytkownika może być dokładna do kilku metrów. ",
+				"special_feature_1_description": "Dokładne dane geolokalizacyjne użytkownika mogą być wykorzystywane na potrzeby realizacji jednego albo większej liczby celów. Oznacza to, że lokalizacja użytkownika może być dokładna do kilku metrów.",
 				"special_feature_1_description_legal": "Dostawcy mogą:\n* gromadzić i obsługiwać dokładne dane geolokalizacyjne na potrzeby realizacji jednego albo większej liczby celów.\nUwaga: Dokładna geolokalizacja oznacza, że nie ma ograniczeń w dokładności lokalizacji użytkownika; może być dokładna do kilku metrów.\n",
 				"special_feature_2_name": "Aktywne skanowanie charakterystyki urządzenia do celów identyfikacji",
 				"special_feature_2_description": "Urządzenie użytkownika można zidentyfikować na podstawie skanu unikalnej kombinacji cech urządzenia.",
-				"special_feature_2_description_legal": "Dostawcy mogą:\n* stworzyć identyfikator przy użyciu danych zebranych poprzez aktywne skanowanie urządzenia w celu uzyskania określonych cech, np. zainstalowanych czcionek lub rozdzielczości ekranu. \n* użyć takiego identyfikatora, aby ponownie zidentyfikować urządzenie.\n"
+				"special_feature_2_description_legal": "Dostawcy mogą:\n* stworzyć identyfikator przy użyciu danych zebranych poprzez aktywne skanowanie urządzenia w celu uzyskania określonych cech, np. zainstalowanych czcionek lub rozdzielczości ekranu. \n* użyć takiego identyfikatora, aby ponownie zidentyfikować urządzenie.\n",
+				"consent": "Zgoda",
+				"legitimate_interest": "Prawnie uzasadniony interes",
+				"purpose_details": "Szczegóły celu",
+				"iab_vendor_disclaimer": "%{name} jest częścią <a href=\"%{IABPolicyUrl}\" target=\"_blank\"> IAB Transparency and Consent Framework</a> i podlega jej zasadom. Możesz dowiedzieć się więcej o tym partnerze i jego zasadach przetwarzania danych w jego <a href=\"%{policyUrl}\" target=\"_blank\">polityce prywatności</a>.",
+				"non_iab_vendor_disclaimer": "Możesz dowiedzieć się więcej o %{name} i ich zasadach przetwarzania danych w ich <a href=\"%{policyUrl}\" target=\"_blank\">polityce prywatności</a>."
 			},
 			"fi": {
 				"information_storage_and_access_19227997": "Tietojen tallennus ja tietoihin pääsy",
@@ -1396,7 +1461,7 @@
 				"purpose_10_description_legal": "Tuotekehitystä varten toimittajat voivat\n* käyttää tietoja parantaakseen olemassa olevia tuotteitaan uusilla ominaisuuksilla tai kehittääkseen uusia tuotteita\n* luoda uusia matemaattisia malleja ja algoritmeja koneoppimisen avulla\nToimittajat eivät voi\n* toteuttaa tämän tarkoituksen perusteella muuta sellaista tietojenkäsittelyä, joka sallitaan jotain muuta tarkoitusta varten.\n",
 				"special_purpose_1_name": "Tietoturva, väärinkäytösten ehkäisy ja virheiden korjaaminen",
 				"special_purpose_1_description": "Tietojasi voidaan käyttää väärinkäytösten valvontaan ja ehkäisyyn sekä järjestelmien ja prosessien toiminnan ja turvallisuuden varmistamiseksi.",
-				"special_purpose_1_description_legal": " Turvallisuuden varmistamiseksi, väärinkäytösten ehkäisyyn ja virheiden korjaamiseksi toimittajat voivat\n* varmistaa, että tietojen siirtäminen tapahtuu turvallisesti \n* havaita ja ehkäistä vahingollisia, petollisia, virheellisiä tai laittomia toimia\n* varmistaa järjestelmien ja prosessien asianmukaisen ja tehokkaan toiminnan, mukaan lukien järjestelmien ja sallittuihin tarkoituksiin käytettyjen prosessien suorituskyvyn valvominen ja tehostaminen.\nToimittajat eivät voi\n* suorittaa tämän tarkoituksen perusteella muuta tiedonkäsittelyä, joka sallitaan muun tarkoituksen perusteella.\nHuom: Tiedot, joita kerätään ja käytetään turvallisuuden varmistamiseksi, väärinkäytösten ehkäisyyn ja virheiden korjaamiseksi saattavat sisältää automaattisesti lähetettäviä, laitteen tunnistavia ominaisuuksia, tarkkoja sijaintitietoja, ja tietoa, jota saadaan skannaamalla aktiivisesti laitteen ominaisuuksia sen tunnistamista varten.\n\n",
+				"special_purpose_1_description_legal": "Turvallisuuden varmistamiseksi, väärinkäytösten ehkäisyyn ja virheiden korjaamiseksi toimittajat voivat\n* varmistaa, että tietojen siirtäminen tapahtuu turvallisesti \n* havaita ja ehkäistä vahingollisia, petollisia, virheellisiä tai laittomia toimia\n* varmistaa järjestelmien ja prosessien asianmukaisen ja tehokkaan toiminnan, mukaan lukien järjestelmien ja sallittuihin tarkoituksiin käytettyjen prosessien suorituskyvyn valvominen ja tehostaminen.\nToimittajat eivät voi\n* suorittaa tämän tarkoituksen perusteella muuta tiedonkäsittelyä, joka sallitaan muun tarkoituksen perusteella.\nHuom: Tiedot, joita kerätään ja käytetään turvallisuuden varmistamiseksi, väärinkäytösten ehkäisyyn ja virheiden korjaamiseksi saattavat sisältää automaattisesti lähetettäviä, laitteen tunnistavia ominaisuuksia, tarkkoja sijaintitietoja, ja tietoa, jota saadaan skannaamalla aktiivisesti laitteen ominaisuuksia sen tunnistamista varten.\n\n",
 				"special_purpose_2_name": "Mainonnan tai sisällön tekninen jakelu",
 				"special_purpose_2_description": "Laitteesi voi vastaanottaa ja lähettää tietoja, joiden avulla voit nähdä mainoksia ja sisältöä.",
 				"special_purpose_2_description_legal": "Tietojen teknistä jakelua varten ja teknisiin pyyntöihin vastaamiseksi toimittajat voivat\n* käyttää käyttäjän IP-osoitetta välittääkseen teknisesti mainoksen internetin kautta\n* siirtää käyttäjän mainostajan sivulle käyttäjän reagoidessa mainokseen \n* käyttää käyttäjän IP-osoitetta välittääkseen sisältöä internetin kautta\n* siirtää käyttäjän mainostajan sivulle käyttäjän reagoidessa sisältöön \n* käyttää laitteen tyyppiä ja ominaisuuksia koskevia tietoja mainosten tai sisällön tekniseen jakeluun, esim. oikean kokoisen mainoksen tai videotiedoston jakamiseksi laitteen tukemassa muodossa.\nToimittajat eivät voi\n* suorittaa tämän tarkoituksen perusteella muuta tiedonkäsittelyä, joka sallitaan muun tarkoituksen perusteella.\n",
@@ -1410,11 +1475,16 @@
 				"feature_3_description": "Laitteesi tunnistamisessa ja erottamisessa muista laitteista voidaan käyttää sen automaattisesti lähettämää tietoa kuten IP-osoitetta tai selaimen tyyppiä",
 				"feature_3_description_legal": "Toimittajat voivat:\n* luoda tunnistimen perustuen dataan, jota laite lähettää automaattisesti, kuten IP-osoite tai selaimen tiedot (user-agent) \n* käyttää tunnistetta udelleen tunnistaakseen laitteen\nToimittajat eivät voi:\n* Luoda käyttäjästä tunnisteen käyttäen tietoja, joita on kerätty skannaamalla aktiivisesti tiettyjä laitteen ominaisuuksia, kuten asennettuja fontteja ja näytön resoluutiota, ellei käyttäjä ole erikseen antanut lupaa laitteen ominaisuuksien aktiiviseen skannaamiseen tunnistamista varten. \n* Käyttää tunnistetta uudelleen tunnistaakseen laitteen.\n",
 				"special_feature_1_name": "Tarkkojen sijaintitietojen käyttö",
-				"special_feature_1_description": "Laitteesi tarkkoja sijaintitietojasi voidaan käyttää yhtä tai useampaa ",
+				"special_feature_1_description": "Laitteesi tarkkoja sijaintitietojasi voidaan käyttää yhtä tai useampaa",
 				"special_feature_1_description_legal": "Toimittajat voivat\n* kerätä ja käsitellä tarkkoja sijaintitietoja yhden tai useamman tarkoituksen tueksi.\nHuom. Tarkat sijaintitiedot tarkoittavat, että käyttäjän sijainnin tarkkuutta koskevia rajoituksia ei ole; sijainti voidaan määrittää muutaman metrin tarkkuudella.\n",
 				"special_feature_2_name": "Laitteen ominaisuuksien aktiivinen skannaus tunnistamista varten",
 				"special_feature_2_description": "Laitteesi voidaan tunnistaa sen ominaisuuksien yhdistelmän skannauksen perusteella.",
-				"special_feature_2_description_legal": "Toimittajat voivat\n* luoda tunnisteen käyttäen tietoja, joita on kerätty skannaamalla aktiivisesti tiettyjä laitteen ominaisuuksia, kuten asennettuja fontteja ja näytön resoluutiota \n* käyttää tällaista tunnistetta laitteen tunnistamiseksi uudelleen.\n"
+				"special_feature_2_description_legal": "Toimittajat voivat\n* luoda tunnisteen käyttäen tietoja, joita on kerätty skannaamalla aktiivisesti tiettyjä laitteen ominaisuuksia, kuten asennettuja fontteja ja näytön resoluutiota \n* käyttää tällaista tunnistetta laitteen tunnistamiseksi uudelleen.\n",
+				"consent": "Suostumus",
+				"legitimate_interest": "Oikeutettu etu",
+				"purpose_details": "Tarkoituksen tiedot",
+				"iab_vendor_disclaimer": "%{name} on mukana <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB:n Transparency and Consent Framework -ohjelmassa</a> ja noudattaa sen käytäntöjä. Lisätietoja tästä yhteistyökumppanista sekä heidän tietojenkäsittelystään on löydettävissä heidän <a href=\"%{policyUrl}\" target=\"_blank\">tietosuojalausekkeestaan</a>.",
+				"non_iab_vendor_disclaimer": "%{name} tarjoaa lisätietoja itsestään ja tietojenkäsittelystään <a href=\"%{policyUrl}\" target=\"_blank\">tietosuojalausekkeessaan</a>."
 			},
 			"el": {
 				"information_storage_and_access_19227997": "Αποθήκευση και πρόσβαση πληροφοριών",
@@ -1503,7 +1573,7 @@
 				"feature_1_description": "Ενδέχεται να συνδυαστούν δεδομένα από μη ηλεκτρονικές πηγές δεδομένων με τη δραστηριότητά σας στο διαδίκτυο προς υποστήριξη ενός ή περισσότερων σκοπών.",
 				"feature_1_description_legal": "Οι προμηθευτές μπορούν: \n* Να συνδυάζουν δεδομένα που αποκτήθηκαν εκτός σύνδεσης με δεδομένα που συλλέχθηκαν ηλεκτρονικά προς υποστήριξη ενός ή περισσότερων σκοπών ή ειδικών σκοπών\n",
 				"feature_2_name": "Σύνδεση διαφορετικών συσκευών",
-				"feature_2_description": "Διαφορετικές συσκευές είναι δυνατόν να καθοριστούν ότι ανήκουν σε εσάς ή το νοικοκυριό σας με στη στήριξη ενός ή περισσοτέρων σκοπών ",
+				"feature_2_description": "Διαφορετικές συσκευές είναι δυνατόν να καθοριστούν ότι ανήκουν σε εσάς ή το νοικοκυριό σας με στη στήριξη ενός ή περισσοτέρων σκοπών",
 				"feature_2_description_legal": "Οι προμηθευτές μπορούν:\n* Να συμπεραίνουν ότι δύο ή περισσότερες συσκευές ανήκουν στον ίδιο χρήστη ή το ίδιο νοικοκυριό\n* Να πιθανολογούν ότι δύο ή περισσότερες συσκευές ανήκουν στον ίδιο χρήστη ή το ίδιο νοικοκυριό\n* Να σαρώνουν ενεργά τα χαρακτηριστικά μιας συσκευής για να αναγνωρίζουν την ταυτότητά της με ακρίβεια ή κατά προσέγγιση, σε περίπτωση που οι χρήστες τους έχουν επιτρέψει τη διαδικασία αυτή (Ειδικό χαρακτηριστικό 2)\n",
 				"feature_3_name": "Λήψη και χρήση χαρακτηριστικών συσκευών που απεστάλησαν αυτόματα για ταυτοποίηση",
 				"feature_3_description": "Η συσκευή σας μπορεί να διακρίνεται από άλλες συσκευές βάσει των πληροφοριών που αποστέλλει αυτόματα, όπως η διεύθυνση IP ή ο τύπος του προγράμματος περιήγησης.",
@@ -1513,7 +1583,12 @@
 				"special_feature_1_description_legal": "Οι προμηθευτές μπορούν:\n* Να συλλέγουν και να επεξεργάζονται ακριβή δεδομένα γεωγραφικού εντοπισμού προς υποστήριξη ενός ή περισσότερων σκοπών\nΣημείωση: «Ακριβής γεω-εντοπισμός» σημαίνει ότι δεν υπάρχουν περιορισμοί ως προς την ακρίβεια της τοποθεσίας ενός χρήστη σε ακτίνα λίγων μέτρων.\n",
 				"special_feature_2_name": "Ακριβής σάρωση χαρακτηριστικών συσκευής για αναγνώριση ταυτότητας",
 				"special_feature_2_description": "Η ταυτότητα της συσκευή σας μπορεί να αναγνωριστεί κατόπιν σάρωσης του μοναδικού συνδυασμού χαρακτηριστικών της.",
-				"special_feature_2_description_legal": "Οι προμηθευτές μπορούν:\n* Να δημιουργούν ένα αναγνωριστικό χρησιμοποιώντας δεδομένα που συλλέγονται μέσω ενεργούς σάρωσης μιας συσκευής για συγκεκριμένα χαρακτηριστικά, π.χ. εγκατεστημένες γραμματοσειρές ή ανάλυση οθόνης. \n* Να χρησιμοποιούν ένα τέτοιο αναγνωριστικό για να επαναλαμβάνουν την αναγνώριση της ταυτότητας μιας συσκευής.\n"
+				"special_feature_2_description_legal": "Οι προμηθευτές μπορούν:\n* Να δημιουργούν ένα αναγνωριστικό χρησιμοποιώντας δεδομένα που συλλέγονται μέσω ενεργούς σάρωσης μιας συσκευής για συγκεκριμένα χαρακτηριστικά, π.χ. εγκατεστημένες γραμματοσειρές ή ανάλυση οθόνης. \n* Να χρησιμοποιούν ένα τέτοιο αναγνωριστικό για να επαναλαμβάνουν την αναγνώριση της ταυτότητας μιας συσκευής.\n",
+				"consent": "Συγκατάθεση",
+				"legitimate_interest": "Έννομο συμφέρον",
+				"purpose_details": "Πληροφορίες για τον σκοπό",
+				"iab_vendor_disclaimer": "Ο/Η %{name} συμμετέχει στο <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Πλαίσιο Διαφάνειας και Συγκατάθεσης IAB</a> και υπόκειται στις πολιτικές της. Μπορείτε να μάθετε περισσότερα σχετικά με αυτόν τον συνεργάτη και την επεξεργασία δεδομένων που πραγματοποιεί στην <a href=\"%{policyUrl}\" target=\"_blank\">πολιτική απορρήτου</a> του.",
+				"non_iab_vendor_disclaimer": "Μπορείτε να μάθετε περισσότερα σχετικά με τον/την %{name} και την επεξεργασία δεδομένων που πραγματοποιεί στην <a href=\"%{policyUrl}\" target=\"_blank\">πολιτική απορρήτου</a> του/της."
 			},
 			"hu": {
 				"information_storage_and_access_19227997": "Az adatok tárolása és az azokhoz való hozzáférés",
@@ -1591,7 +1666,7 @@
 				"purpose_9_description_legal": "Nézettségi adatok generálása érdekében, piackutatás felhasználásával, a beszállítók:\n* Összesített jelentést nyújthatnak a hirdetőknek vagy képviselőiknek a hirdetéseik által elérhető közönségekről, a panelalapú és hasonló módon szerzett nézettségi adatok révén.\n* Összesített jelentést nyújthatnak a kiadóknak azokról a közönségekről, amelyek számára vagyontárgyukon megjelenített tartalmat és/vagy hirdetéseket szolgáltattak vagy azokkal kapcsolatba kerültek, panelalapú és hasonlóan szerzett nézettségi adatok alkalmazásával.\n* Összekapcsolhatnak offline adatokat egy online felhasználóval piackutatás céljából, hogy nézettségi adatokat generáljanak, ha a beszállítók megerősítették az offline adatforrások egyeztetését és összevonását (1. funkció)\nA beszállítók nem:\n* Nem mérhetik az adott felhasználó részére szolgáltatott vagy általuk megtekintett hirdetések teljesítményét és hatékonyságát, a hirdetés teljesítményének mérésére szolgáló külön jogalap nélkül.\n* Nem mérhetik, hogy egy adott felhasználó részére milyen tartalmat szolgáltattak, és azzal hogyan került kapcsolatba, a tartalom teljesítményének mérésére szolgáló külön jogalap nélkül.\n",
 				"purpose_10_name": "Termékek fejlesztése és javítása",
 				"purpose_10_description": "Az Ön adatai felhasználhatók a meglévő rendszerek és szoftverek javítása, valamint az új termékek fejlesztése érdekében",
-				"purpose_10_description_legal": "Új termékek fejlesztése, és a termékek javítása érdekében a beszállítók:\n* Felhasználhatják az információkat a meglévő termékek új funkciókkal történő feljavítása, valamint új termékek fejlesztése érdekében\n* Gépi tanulás útján létrehozhatnak új modelleket és algoritmusokat\nA beszállítók nem:\n* Nem végezhetnek semmiféle egyéb adatkezelési műveletet ezen ",
+				"purpose_10_description_legal": "Új termékek fejlesztése, és a termékek javítása érdekében a beszállítók:\n* Felhasználhatják az információkat a meglévő termékek új funkciókkal történő feljavítása, valamint új termékek fejlesztése érdekében\n* Gépi tanulás útján létrehozhatnak új modelleket és algoritmusokat\nA beszállítók nem:\n* Nem végezhetnek semmiféle egyéb adatkezelési műveletet ezen",
 				"special_purpose_1_name": "Biztonság, csalás megelőzése és hibakeresés biztosítása",
 				"special_purpose_1_description": "Az Ön adatai felhasználhatók a csalárd tevékenységek ellenőrzése és megelőzése érdekében, valamint a rendszerek és folyamatok megfelelő és biztonságos működésének biztosítására.",
 				"special_purpose_1_description_legal": "A biztonság, csalás megelőzése és a hibakeresés biztosítása érdekében a beszállítók:\n* Meggyőződhetnek arról, hogy az adatok továbbítására biztonságos módon kerül sor\n* Észlelhetik és megelőzhetik a rosszindulatú, csalárd, érvénytelen vagy jogellenes tevékenységeket.\n* Biztosíthatják a rendszerek és folyamatok helyes és hatékony működését, beleértve a megengedett céllal működő rendszerek és folyamatok teljesítményének figyelemmel kísérését és javítását\nA beszállítók nem:\n* Nem végezhetnek semmiféle egyéb adatkezelési műveletet ezen cél érdekében, amelyre más célból adtak engedélyt.\nMegjegyzés: A biztonság, a csalások megakadályozása és a hibák kijavítása érdekében gyűjtött és felhasznált adatok tartalmazhatnak azonosítás érdekében automatikusan küldött eszközjellemzőket, pontos geolokációs adatokat és az eszközjellemzők azonosítás érdekében történt aktív leolvasásával nyert adatokat, kifejezett nyilvánosságra hozatal és/vagy feliratkozás nélkül.\n",
@@ -1612,7 +1687,12 @@
 				"special_feature_1_description_legal": "A beszállítók:\n* Összegyűjthetik és kezelhetik a pontos geolokációs adatokat egy vagy több cél érdekében.\nMegjegyzés: A pontos geolokáció azt jelenti, hogy nincsenek korlátozások a felhasználó helyének pontosságára vonatkozóan; ez több méteres pontosságú lehet.\n",
 				"special_feature_2_name": "Az eszköz jellemzőinek aktív vizsgálata az azonosításhoz",
 				"special_feature_2_description": "Az Ön eszköze az eszköz egyedi jellemzőire vonatkozó kombináció vizsgálatával azonosítható.",
-				"special_feature_2_description_legal": "A beszállítók:\n* Létrehozhatnak valamely azonosítót egy adott eszköz, konkrét jellemzők érdekében történő, aktív vizsgálata során gyűjtött adatok alapján, pl. telepített betűtípusok vagy képernyőfelbontás.\n* Az ilyen azonosítót az eszköz ismételt azonosítása érdekében használhatják fel.\n"
+				"special_feature_2_description_legal": "A beszállítók:\n* Létrehozhatnak valamely azonosítót egy adott eszköz, konkrét jellemzők érdekében történő, aktív vizsgálata során gyűjtött adatok alapján, pl. telepített betűtípusok vagy képernyőfelbontás.\n* Az ilyen azonosítót az eszköz ismételt azonosítása érdekében használhatják fel.\n",
+				"consent": "Beleegyezés",
+				"legitimate_interest": "Jogos érdek",
+				"purpose_details": "A cél részletei",
+				"iab_vendor_disclaimer": "%{name} részt vesz az <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Átláthatósági és hozzájárulási keretrendszerben</a>, és betartja annak irányelveit. E partnerünkről és adatfeldolgozásáról bővebben az <a href=\"%{policyUrl}\" target=\"_blank\">adatvédelmi szabályzatában</a> olvashat.",
+				"non_iab_vendor_disclaimer": "%{name} és adatfeldolgozása leírásáról bővebben az <a href=\"%{policyUrl}\" target=\"_blank\">adatvédelmi szabályzatában</a> olvashat."
 			},
 			"da": {
 				"information_storage_and_access_19227997": "Opbevaring af og adgang til oplysninger",
@@ -1707,11 +1787,16 @@
 				"feature_3_description": "Din enhed kan skelnes fra andre enheder baseret på oplysninger, som den automatisk sender, såsom IP-adresse eller browsertype.",
 				"feature_3_description_legal": "Leverandører kan:\n* Oprette en identifikator ved hjælp af oplysninger, der indsamles automatisk fra en enhed, for specifikke karakteristika f.eks. IP-adresse og brugeragent-streng.\n* Bruge en sådan identifikator til at forsøge at genidentificere en enhed.\nLeverandører kan ikke:\n* Oprette en identifikator ved hjælp af oplysninger, der indsamles via aktiv scanning af en enhed, for specifikke karakteristika, f.eks. installerede skrifttyper eller skærmopløsning, uden brugernes tilvalg af aktiv scanning af enhedskarakteristika til identifikation.\n* Bruge en sådan identifikator til at genidentificere en enhed.\n",
 				"special_feature_1_name": "Bruge præcise geoplaceringsoplysninger",
-				"special_feature_1_description": "Dine præcise geoplaceringsoplysninger kan bruges til understøttelse af et eller flere formål. Det betyder, at din placering kan være nøjagtig til inden for få meter. ",
+				"special_feature_1_description": "Dine præcise geoplaceringsoplysninger kan bruges til understøttelse af et eller flere formål. Det betyder, at din placering kan være nøjagtig til inden for få meter.",
 				"special_feature_1_description_legal": "Leverandører kan:\n* Indsamle og behandle præcise geoplaceringsoplysninger til understøttelse af et eller flere formål.\nNB. Præcis geoplacering betyder, at der ikke er nogen begrænsninger på nøjagtigheden af en brugers placering. Denne kan være nøjagtig til inden for flere meter.\n",
 				"special_feature_2_name": "Aktivt scanne enhedskarakteristika til identifikation",
 				"special_feature_2_description": "Din enhed kan identificeres baseret på en scanning af din enheds unikke kombination af karakteristika.",
-				"special_feature_2_description_legal": "Leverandører kan:\n* Oprette en identifikator ved hjælp af oplysninger, der indsamles via aktiv scanning af en enhed for specifikke karakteristika f.eks. installerede skrifttyper eller skærmopløsning. \n* Bruge en sådan identifikator til at genidentificere en enhed.\n"
+				"special_feature_2_description_legal": "Leverandører kan:\n* Oprette en identifikator ved hjælp af oplysninger, der indsamles via aktiv scanning af en enhed for specifikke karakteristika f.eks. installerede skrifttyper eller skærmopløsning. \n* Bruge en sådan identifikator til at genidentificere en enhed.\n",
+				"consent": "Accept",
+				"legitimate_interest": "Legitim interesse",
+				"purpose_details": "Detaljer om formål",
+				"iab_vendor_disclaimer": "%{name} deltager i <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB's forskrifter for gennemsigtighed og samtykke</a> og er underlagt disse regler. Du kan lære mere om denne partner og databehandlingen i <a href=\"%{policyUrl}\" target=\"_blank\">fortrolighedspolitikken</a>.",
+				"non_iab_vendor_disclaimer": "Du kan lære mere om %{name} og databehandlingen i <a href=\"%{policyUrl}\" target=\"_blank\">fortrolighedspolitikken</a>."
 			},
 			"sk": {
 				"information_storage_and_access_19227997": "Uchovávanie informácií a prístup k nim",
@@ -1806,11 +1891,16 @@
 				"feature_3_description": "Vaše zariadenie možno odlíšiť od iných zariadení na základe informácií, ktoré automaticky odosiela, napríklad IP adresy alebo typu prehliadača.",
 				"feature_3_description_legal": "Dodávatelia môžu:\n* vytvoriť identifikátor pomocou údajov, ktoré sa automaticky zbierajú zo zariadenia, pre konkrétne charakteristiky, napr. IP adresa, reťazec používateľského agenta,\n* používať takýto identifikátor v snahe znova identifikovať zariadenie.\nDodávatelia nemôžu:\n* vytvoriť identifikátor pomocou údajov získaných prostredníctvom aktívneho skenovania zariadenia s ohľadom na špecifické funkcie, napr. nainštalované písma alebo rozlíšenie obrazovky, bez toho, aby si používateľ osobitne vybral aktívne skenovanie charakteristík zariadenia na identifikáciu,\n* používať takýto identifikátor na identifikáciu zariadenia.\n",
 				"special_feature_1_name": "Používanie presných údajov o geografickej polohe",
-				"special_feature_1_description": "Vaše presné údaje o geografickej polohe možno použiť na podporu jedného alebo viacerých účelov. To znamená, že vaša poloha môže byť presná do niekoľkých metrov. ",
+				"special_feature_1_description": "Vaše presné údaje o geografickej polohe možno použiť na podporu jedného alebo viacerých účelov. To znamená, že vaša poloha môže byť presná do niekoľkých metrov.",
 				"special_feature_1_description_legal": "Dodávatelia môžu:\n* získavať a spracúvať presné údaje o geografickej polohe na podporu jedného alebo viacerých účelov.\nPoznámka: Používanie presných údajov o geografickej polohe znamená, že neexistujú žiadne obmedzenia týkajúce sa presnosti umiestnenia používateľa. To môže byť presné do niekoľkých metrov.\n",
 				"special_feature_2_name": "Aktívne skenovanie charakteristík zariadenia na identifikáciu",
 				"special_feature_2_description": "Vaše zariadenie možno identifikovať na základe skenovania jedinečnej kombinácie vlastností vášho zariadenia.",
-				"special_feature_2_description_legal": "Dodávatelia môžu:\n* vytvoriť identifikátor pomocou údajov získaných prostredníctvom aktívneho skenovania zariadenia s ohľadom na špecifické funkcie, napr. nainštalované písma alebo rozlíšenie obrazovky. \n* Používať takýto identifikátor na identifikáciu zariadenia.\n"
+				"special_feature_2_description_legal": "Dodávatelia môžu:\n* vytvoriť identifikátor pomocou údajov získaných prostredníctvom aktívneho skenovania zariadenia s ohľadom na špecifické funkcie, napr. nainštalované písma alebo rozlíšenie obrazovky. \n* Používať takýto identifikátor na identifikáciu zariadenia.\n",
+				"consent": "Súhlas",
+				"legitimate_interest": "Legitímny záujem",
+				"purpose_details": "Podrobnosti účelu",
+				"iab_vendor_disclaimer": "Partner %{name} sa zapája do <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Rámca transparentnosti a súhlasu združenia IAB</a> a uplatňujú sa na neho pravidlá tohto rámca. Viac informácií o tomto partnerovi a jeho spracovaní údajov sa dozviete v jeho <a href=\"%{policyUrl}\" target=\"_blank\">pravidlách ochrany súkromia</a>.",
+				"non_iab_vendor_disclaimer": "Viac o partnerovi %{name} a jeho spracúvaní údajov sa dozviete v jeho <a href=\"%{policyUrl}\" target=\"_blank\">pravidlách ochrany súkromia</a>."
 			},
 			"bg": {
 				"information_storage_and_access_19227997": "Съхранение и достъп до информация",
@@ -1905,11 +1995,16 @@
 				"feature_3_description": "Вашето устройство може да се разграничи от други устройства въз основа на информацията, която автоматично изпраща, като например IP адрес или тип на браузъра.",
 				"feature_3_description_legal": "Доставчиците могат:\n* Да създават идентификатор чрез автоматично събиране на данни от устройство на специфични характеристики, например IP адрес, стринг на потребителския агент.\n* Да използват такъв идентификатор при опит за повторно идентифициране на устройство.\nДоставчиците не могат:\n* Да създават идентификатор чрез използване на данни, събрани чрез активно сканиране на устройство за специфични характеристики, например инсталирани шрифтове или разделителна способност на екрана, без отделна функция за включване на потребителите за активно сканиране на характеристиките на устройството за идентификация.\n* Да използват такъв идентификатор за повторно идентифициране на устройство.\n",
 				"special_feature_1_name": "Използване на точни данни за географско позициониране",
-				"special_feature_1_description": "Вашите точни данни за географско позициониране могат да се използват в подкрепа на една или повече цели. Това означава, че местоположението Ви може да бъде с точност в рамките на няколко метра. ",
+				"special_feature_1_description": "Вашите точни данни за географско позициониране могат да се използват в подкрепа на една или повече цели. Това означава, че местоположението Ви може да бъде с точност в рамките на няколко метра.",
 				"special_feature_1_description_legal": "Доставчиците могат:\n* Да събират и обработват точни данни за географско позициониране в подкрепа на една или повече цели.\nВнимание: точно географско позициониране означава, че няма ограничения за точността на местоположението на даден потребител; Това може да бъде с точност в рамките на няколко метра.\n",
 				"special_feature_2_name": "Активно сканиране на характеристиките на устройството за идентификация",
 				"special_feature_2_description": "Вашето устройство може да бъде идентифицирано въз основа на сканиране на уникалната комбинация от характеристики на Вашето устройство.",
-				"special_feature_2_description_legal": "Доставчиците могат:\n* Да създават идентификатор чрез използване на данни, събрани чрез активно сканиране на устройство за специфични характеристики, например инсталирани шрифтове или разделителна способност на екрана. \n* Да използват такъв идентификатор за повторно идентифициране на устройство.\n"
+				"special_feature_2_description_legal": "Доставчиците могат:\n* Да създават идентификатор чрез използване на данни, събрани чрез активно сканиране на устройство за специфични характеристики, например инсталирани шрифтове или разделителна способност на екрана. \n* Да използват такъв идентификатор за повторно идентифициране на устройство.\n",
+				"consent": "Съгласие",
+				"legitimate_interest": "Законен интерес",
+				"purpose_details": "Подробности за целта",
+				"iab_vendor_disclaimer": "%{name} участва в <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB  Рамка за прозрачност и съгласие</a> и подлежи на нейните политики. Можете да научите повече за този партньор и за обработването на данни в <a href=\"%{policyUrl}\" target=\"_blank\">политика за поверителност</a>.",
+				"non_iab_vendor_disclaimer": "Можете да научите повече за %{name} и за обработването на данни в <a href=\"%{policyUrl}\" target=\"_blank\">политика за поверителност</a>."
 			},
 			"et": {
 				"information_storage_and_access_19227997": "Teabe säilitamine ja sellele juurdepääs",
@@ -2004,11 +2099,16 @@
 				"feature_3_description": "Teie seadet võidakse eristada teistest seadmetest sellest automaatselt saadetavate andmete põhjal, nagu IP-aadress või brauseri tüüp.",
 				"feature_3_description_legal": "Müüjad saavad:\n* luua identifikaatori, kasutades automaatselt seadme eriomaduste kohta kogutud andmeid, nt IP-aadress, kasutaja-programmi string\n* kasutada seda identifikaatoriseadme uuesti tuvastamise katseks\nMüüjad ei saa:\n* luua identifikaatorit seadme eriomaduste, nt installitud fontide või ekraaniresolutsiooni suhtes aktiivse skaneerimise teel kogutud andmete põhjal, ilma kasutaja tehtud eraldi valikuta\n* kasutada seda identifikaatorit seadme uuesti tuvastamiseks\n",
 				"special_feature_1_name": "Täpsete geolokatsiooniandmete kasutamine",
-				"special_feature_1_description": "Teie täpseid geolokatsiooniandmeid võidakse kasutada ühe või mitme eesmärgi toetamiseks. See tähendab, et teie asukoht võib olla määratud kuni mõne meetri täpsusega. ",
+				"special_feature_1_description": "Teie täpseid geolokatsiooniandmeid võidakse kasutada ühe või mitme eesmärgi toetamiseks. See tähendab, et teie asukoht võib olla määratud kuni mõne meetri täpsusega.",
 				"special_feature_1_description_legal": "Müüjad saavad:\n* koguda ja töödelda täpseid geolokatsiooniandmeid ühe või mitme eesmärgi toetamiseks\nNB! Täpsed geolokatsiooniandmed tähendavad, et kasutaja asukoha täpsus ei ole piiratud; see võib olla määratud kuni mõne meetri täpsusega.\nMärkus. Nende andmete teatavat kasutamist turvalisuse eesmärgil või pettuste tõkestamiseks on käsitletud eraldi ning kasutaja ei pea tegema täpsete geolokatsiooniandmete kasutamise suhtes eraldi valikut. \n",
 				"special_feature_2_name": "Seadme omaduste aktiivne skaneerimine tuvastamiseks",
 				"special_feature_2_description": "Teie seadet võidakse tuvastada teie seadme ainulaadse omaduste kombinatsiooni skaneerimise teel.",
-				"special_feature_2_description_legal": "Müüjad saavad:\n* luua identifikaator seadme eriomaduste, nt installitud fontide või ekraaniresolutsiooni suhtes aktiivse skaneerimise teel kogutud andmete põhjal \n* kasutada seda identifikaatorit seadme uuesti tuvastamiseks\nMärkus. Nende andmete teatavat kasutamist turvalisuse eesmärgil või pettuste tõkestamiseks on käsitletud eraldi ning kasutaja ei pea tegema aktiivse skaneerimise teel omandatud seadme identifitseerimisandmete kasutamise suhtes eraldi valikut.\n"
+				"special_feature_2_description_legal": "Müüjad saavad:\n* luua identifikaator seadme eriomaduste, nt installitud fontide või ekraaniresolutsiooni suhtes aktiivse skaneerimise teel kogutud andmete põhjal \n* kasutada seda identifikaatorit seadme uuesti tuvastamiseks\nMärkus. Nende andmete teatavat kasutamist turvalisuse eesmärgil või pettuste tõkestamiseks on käsitletud eraldi ning kasutaja ei pea tegema aktiivse skaneerimise teel omandatud seadme identifitseerimisandmete kasutamise suhtes eraldi valikut.\n",
+				"consent": "Nõusolek",
+				"legitimate_interest": "Õigustatud huvi",
+				"purpose_details": "Eesmärgi teave",
+				"iab_vendor_disclaimer": "%{name} on liitunud <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB läbipaistvuse ja nõusoleku raamistikuga</a> ja järgib selle põhimõtteid. Lisateavet leiate partneri <a href=\"%{policyUrl}\" target=\"_blank\">privaatsuspõhimõtetest</a>.",
+				"non_iab_vendor_disclaimer": "Lisateavet firma %{name} ja tema andmetöötluse kohta leiate selle <a href=\"%{policyUrl}\" target=\"_blank\">privaatsuspõhimõtetest</a>."
 			},
 			"sl": {
 				"information_storage_and_access_19227997": "Shranjevanje podatkov in dostop do njih",
@@ -2103,11 +2203,16 @@
 				"feature_3_description": "Vašo napravo je mogoče od drugih naprav ločiti na podlagi podatkov, ki jih samodejno pošilja, npr. IP-naslov ali vrsta brskalnika.",
 				"feature_3_description_legal": "Dobavitelji lahko:\n* Ustvarijo identifikator s podatki, samodejno zbranimi z naprave za določene značilnosti, npr. IP-naslov, niz uporabniških agentov.\n* Ta identifikator lahko uporabijo za poskus ponovne identifikacije naprave.\nDobavitelji ne smejo:\n* Ustvarjati identifikatorjev s podatki, ki so bili zbrani prek aktivnega skeniranja naprave za specifične značilnosti, npr. nameščene pisave ali ločljivost zaslona, brez ločene vključitve naprave uporabnikov v aktivno skeniranje z namenom identifikacije.\n* Tovrsten identifikator uporabijo za ponovno identifikacijo naprave.\n",
 				"special_feature_1_name": "Uporaba natančnih geolokacijskih podatkov",
-				"special_feature_1_description": "Vaši natančni geolokacijski podatki se lahko uporabljajo za podporo enemu ali več namenom. To pomeni, da je vaša lokacija lahko natančna na nekaj metrov. ",
+				"special_feature_1_description": "Vaši natančni geolokacijski podatki se lahko uporabljajo za podporo enemu ali več namenom. To pomeni, da je vaša lokacija lahko natančna na nekaj metrov.",
 				"special_feature_1_description_legal": "Dobavitelji lahko:\n* zbirajo in obdelujejo natančne geolokacijske podatke za podporo enemu ali več namenom.\nOPOMBA. Natančna geolokacija pomeni, da ni nobenih omejitev glede natančnosti uporabnikove lokacije, ki je lahko natančna na nekaj metrov.\n",
 				"special_feature_2_name": "Aktivno skeniranje značilnosti naprave za identifikacijo",
 				"special_feature_2_description": "Vaša naprava je lahko identificirana na podlagi skeniranja edinstvene kombinacije značilnosti vaše naprave.",
-				"special_feature_2_description_legal": "Dobavitelji lahko:\n* ustvarijo identifikator s podatki, ki so bili zbrani prek aktivnega skeniranja naprave za specifične značilnosti, npr. nameščene pisave ali ločljivost zaslona, \n* Tovrsten identifikator uporabijo za ponovno identifikacijo naprave."
+				"special_feature_2_description_legal": "Dobavitelji lahko:\n* ustvarijo identifikator s podatki, ki so bili zbrani prek aktivnega skeniranja naprave za specifične značilnosti, npr. nameščene pisave ali ločljivost zaslona, \n* Tovrsten identifikator uporabijo za ponovno identifikacijo naprave.",
+				"consent": "Soglasje",
+				"legitimate_interest": "Zakonit interes",
+				"purpose_details": "Podrobnosti namena",
+				"iab_vendor_disclaimer": "%{name} sodeluje v <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Okvirju za preglednost in soglasje IAB</a> in je predmet njegovih politik. Več o tem partnerju in o tem, kako obdeluje podatke, lahko najdete v <a href=\"%{policyUrl}\" target=\"_blank\">politiki zasebnosti</a>.",
+				"non_iab_vendor_disclaimer": "Več o %{name} in o tem, kako obdeluje podatke, lahko najdete v <a href=\"%{policyUrl}\" target=\"_blank\">politiki zasebnosti</a>."
 			},
 			"lv": {
 				"information_storage_and_access_19227997": "Informācijas uzglabāšana un tās pieejamība",
@@ -2202,11 +2307,16 @@
 				"feature_3_description": "Jūsu ierīci var atšķirt no citām ierīcēm, pamatojoties uz informāciju, ko tā automātiski nosūta, piemēram, IP adresi vai pārlūka veidu.",
 				"feature_3_description_legal": "Piegādātāji var:\n* izveidot identifikatoru, izmantojot datus, kas automātiski apkopoti no ierīces, īpašiem raksturlielumiem, piemēram, IP adresei, lietotāja aģenta virknei;\n* izmantot šos identifikatorus ierīču atkārtotai identificēšanai.\nPiegādātāji nevar:\n* izveidot identifikatorus, izmantojot datus, kas apkopoti, aktīvi skenējot ierīces konkrētu parametru, piemēram, instalēto burtrakstu vai ekrāna izšķirtspējas, noteikšanai;\n* izmantot šos identifikatorus ierīču atkārtotai identificēšanai.\n",
 				"special_feature_1_name": "Precīzas atrašanās vietas izmantošana",
-				"special_feature_1_description": "Var tikt izmantoti precīzi jūsu atrašanās vietas dati viena vai vairāku nolūku izpildei. Tas nozīmē to, ka jūsu atrašanās vietas precizitātes līmenis var būt pāris metru rādiusā. ",
+				"special_feature_1_description": "Var tikt izmantoti precīzi jūsu atrašanās vietas dati viena vai vairāku nolūku izpildei. Tas nozīmē to, ka jūsu atrašanās vietas precizitātes līmenis var būt pāris metru rādiusā.",
 				"special_feature_1_description_legal": "Piegādātāji var:\n* vākt un apstrādāt precīzas atrašanās vietas datus viena vai vairāku nolūku izpildei.\nIevērot labi, precīza atrašanās vieta nozīmē to, ka nepastāv ierobežojumi attiecībā uz lietotāja atrašanās vietas izmantošanu; precizitātes līmenis var būt dažu metru rādiusā.\nPiezīme. Dažu šo datu izmantošana drošībai vai krāpšanas novēršanai ir apskatīta atsevišķi, un nav nepieciešama atsevišķa lietotāja izvēle precīzu ģeogrāfiskās atrašanās vietas datu izmantošanai. \n",
 				"special_feature_2_name": "Ierīces parametru aktīva skenēšana identifikācijas nolūkā",
 				"special_feature_2_description": "Jūsu ierīce var tikt identificēta, pamatojoties uz jūsu ierīces unikālo parametru kombinācijas skenēšanu.",
-				"special_feature_2_description_legal": "Piegādātāji var:\n* izveidot identifikatorus, izmantojot datus, kas iegūti, aktīvi skenējot ierīces konkrētu parametru, piemēram, instalēto burtrakstu vai ekrāna izšķirtspējas, noteikšanai. \n* Izmantot šos identifikatorus ierīču atkārtotai identificēšanai.\nPiezīme. Dažu šo datu izmantošana drošībai vai krāpšanas novēršanai ir aplūkota atsevišķi, un tai nav nepieciešama atsevišķa lietotāja izvēle aktīvai ierīces īpašību skenēšanai, lai identificētu."
+				"special_feature_2_description_legal": "Piegādātāji var:\n* izveidot identifikatorus, izmantojot datus, kas iegūti, aktīvi skenējot ierīces konkrētu parametru, piemēram, instalēto burtrakstu vai ekrāna izšķirtspējas, noteikšanai. \n* Izmantot šos identifikatorus ierīču atkārtotai identificēšanai.\nPiezīme. Dažu šo datu izmantošana drošībai vai krāpšanas novēršanai ir aplūkota atsevišķi, un tai nav nepieciešama atsevišķa lietotāja izvēle aktīvai ierīces īpašību skenēšanai, lai identificētu.",
+				"consent": "Piekrišana",
+				"legitimate_interest": "Likumīgās intereses",
+				"purpose_details": "Mērķa apraksts",
+				"iab_vendor_disclaimer": "%{name} piedalās <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB caurspīdības un piekrišanas ietvarā</a> un ir tā politiku subjekts. Vairāk par šo partneri un tā veikto datu apstrādi varat uzzināt partnera <a href=\"%{policyUrl}\" target=\"_blank\">privātuma politikā</a>.",
+				"non_iab_vendor_disclaimer": "Jūs varat uzzināt vairāk par %{name} un šī partnera veikto datu apstrādi tā <a href=\"%{policyUrl}\" target=\"_blank\">privātuma politikā</a>."
 			},
 			"lt": {
 				"information_storage_and_access_19227997": "Informacijos saugojimas ir prieiga",
@@ -2305,7 +2415,12 @@
 				"special_feature_1_description_legal": "Tiekėjai gali:\n* Rinkti ir tvarkyti tikslius geografinės vietos duomenis siekdami vieno ar daugiau tikslų.\nPastaba. Tikslūs geografinės vietos duomenys reiškia, kad nėra jokių naudojo vietos tikslumo apribojimų; vieta gali būti nustatoma kelių metrų tikslumu.\nPastaba. Tam tikras šių duomenų naudojimas apsaugai ar sukčiavimo prevencijai yra atskirai aprašytas ir nereikalaujama atskiro vartotojo sprendimo naudoti tikslius geografinės padėties duomenis.\n",
 				"special_feature_2_name": "Aktyviai skenuoti įrenginio charakteristikas identifikavimo tikslais",
 				"special_feature_2_description": "Jūsų įrenginys gali būti identifikuotas remiantis jūsų įrenginio unikalių charakteristikų derinio skenavimo duomenimis.",
-				"special_feature_2_description_legal": "Tiekėjai gali:\n* Sukurti identifikatorių, naudodami duomenis, surinktus aktyviai skenuojant įrenginį dėl konkrečių jo charakteristikų, pvz., įdiegtų šriftų ar ekrano skiriamosios gebos. \n* Tokį identifikatorių naudoti įrenginiui pakartotinai identifikuoti.\nPastaba. Tam tikras šių duomenų naudojimas apsaugai ar sukčiavimui reglamentuotas atskirai ir nereikalauja atskiro vartotojo sprendimo aktyviai skenuoti įrenginio charakteristikas identifikavimo tikslais.\n"
+				"special_feature_2_description_legal": "Tiekėjai gali:\n* Sukurti identifikatorių, naudodami duomenis, surinktus aktyviai skenuojant įrenginį dėl konkrečių jo charakteristikų, pvz., įdiegtų šriftų ar ekrano skiriamosios gebos. \n* Tokį identifikatorių naudoti įrenginiui pakartotinai identifikuoti.\nPastaba. Tam tikras šių duomenų naudojimas apsaugai ar sukčiavimui reglamentuotas atskirai ir nereikalauja atskiro vartotojo sprendimo aktyviai skenuoti įrenginio charakteristikas identifikavimo tikslais.\n",
+				"consent": "Sutikimas",
+				"legitimate_interest": "Teisėtas interesas",
+				"purpose_details": "Paskirties duomenys",
+				"iab_vendor_disclaimer": "%{name} laikosi <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB skaidrumo ir sutikimo principų</a> ir jai taikoma jos politika. Daugiau apie šį partnerį ir jo duomenų tvarkymą galite sužinoti jo <a href=\"%{policyUrl}\" target=\"_blank\">privatumo politikoje</a>.",
+				"non_iab_vendor_disclaimer": "Daugiau apie %{name} ir jo duomenų tvarkymą galite sužinoti jo <a href=\"%{policyUrl}\" target=\"_blank\">privatumo politikoje</a>."
 			},
 			"sv": {
 				"information_storage_and_access_19227997": "Lagring och tillgång av information",
@@ -2387,7 +2502,7 @@
 				"special_purpose_1_name": "Säkerställa säkerhet, förhindra bedrägerier samt felsökning/korrigering",
 				"special_purpose_1_description": "Dina uppgifter kan användas för att övervaka och förhindra bedrägliga aktiviteter och säkerställa att system och processer fungerar korrekt och säkert.",
 				"special_purpose_1_description_legal": "För att säkerställa säkerhet, förhindra bedrägerier samt utföra felsökning/korrigering kan leverantörer:\n* Säkerställa att uppgifter överförs säkert \n* Upptäcka och förhindra skadlig, bedräglig, ogiltig eller olaglig aktivitet.\n* Säkerställa korrekt och effektiv drift av system och processer, inklusive för att övervaka och förbättra prestanda för system och processer som används för tillåtna syften\nLeverantörer kan inte:\n* För detta syfte utföra någon annan uppgiftsbehandling som är tillåten enligt något annat syfte.\nNotera: Data som samlas in och används för att säkerställa säkerhet, förebygga bedrägeri och felsökning kan inkludera automatiskt överförd identifiering från enheter om dess egenskaper för exakt geografisk positioneringsdata och data erhållna genom aktiv skanning av enheters egenskaper för identifiering utan separat avslöjande och/eller opt-in.\n",
-				"special_purpose_2_name": "Välja personanpassat innehåll",
+				"special_purpose_2_name": "Tekniskt levererad annons eller innehåll",
 				"special_purpose_2_description": "Din enhet kan ta emot och skicka information som gör att du kan se och interagera med annonser och innehåll.",
 				"special_purpose_2_description_legal": "För att leverera information och svara på en teknisk begäran kan leverantörer:\n* Utnyttja en användares IP-adress för att leverera en annons via Internet\n* Svara på en användares interaktion med en annons genom att skicka användaren till en landningssida\n* Utnyttja en användares IP-adress för att leverera innehåll via Internet\n* Svara på användarens interaktion med specifikt innehåll genom att skicka användaren till en landningssida\n* Använda information om enhetstyp och kapacitet för att leverera annonser eller innehåll, till exempel för att leverera annonsmaterial eller videor i rätt storlek och i ett format som stöds av den aktuella enheten\nLeverantörer kan inte:\n* För detta syfte utföra någon annan uppgiftsbehandling som är tillåten enligt något annat syfte\n",
 				"feature_1_name": "Matcha och kombinera datakällor offline",
@@ -2400,11 +2515,16 @@
 				"feature_3_description": "Din enhet kan skilja sig från andra enheter baserat på data den skickar automatiskt, t ex IP-adress eller webbläsartyp.",
 				"feature_3_description_legal": "Leverantören kan:\n* Skapa en identifierare med hjälp av data som samlas in automatiskt från en enhet med specifika egenskaper, t.ex. IP-adress, user-agent string.\n* En sådan identifierare används för att försöka identifiera en enhet igen.\n\nLeverantören kan inte:\n* Skapa en identifierare med hjälp av data som samlas in genom aktiv skanning av enheter efter specifika egenskaper, t.ex. installerat teckensnitt eller skärmens upplösning utan användares separata opt-in för att aktivt skanna enheters egenskaper för identifiering.\n* Skapa en sådan identifierare för att identifiera en enhet igen.",
 				"special_feature_1_name": "Använda exakta uppgifter om geografisk positionering",
-				"special_feature_1_description": "Dina exakta uppgifter om geografisk positionering kan användas till stöd för ett eller flera syften. Detta innebär att din plats kan vara exakt inom flera meter. ",
+				"special_feature_1_description": "Dina exakta uppgifter om geografisk positionering kan användas till stöd för ett eller flera syften. Detta innebär att din plats kan vara exakt inom flera meter.",
 				"special_feature_1_description_legal": "Leverantörer kan:\n* Samla in och underhålla exakta uppgifter om geografisk positionering för att främja ett eller flera syften.\nObs! Exakt lokalisering innebär att det inte finns några begränsningar när det gäller en användares lokaliseringsuppgifter. Detta kan innebära en exakthet på flera meter.\n",
 				"special_feature_2_name": "Läsa av enhetens egenskaper aktivt för identifiering",
 				"special_feature_2_description": "Din enhet kan identifieras baserat på din enhets kombination av egenskaper.",
-				"special_feature_2_description_legal": "Leverantörer kan:\n* Skapa en identifierare med hjälp av data som samlas in genom aktiv skanning av enheters specifika egenskaper t.ex. installerade teckensnitt eller skärmupplösning.\n* Använd en sådan identifierare för att identifiera en enhet igen."
+				"special_feature_2_description_legal": "Leverantörer kan:\n* Skapa en identifierare med hjälp av data som samlas in genom aktiv skanning av enheters specifika egenskaper t.ex. installerade teckensnitt eller skärmupplösning.\n* Använd en sådan identifierare för att identifiera en enhet igen.",
+				"consent": "Samtycke",
+				"legitimate_interest": "Legitimt intresse",
+				"purpose_details": "Uppgifter om syfte",
+				"iab_vendor_disclaimer": "%{name} deltar i <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB:s öppenhets- och samtyckesramverk</a> och omfattas därmed av dess policyer. Mer information om denna partner och dess databearbetning finns i <a href=\"%{policyUrl}\" target=\"_blank\">integritetspolicyn</a>.",
+				"non_iab_vendor_disclaimer": "Mer information om %{name} och dess databearbetning finns i <a href=\"%{policyUrl}\" target=\"_blank\">integritetspolicyn</a>."
 			},
 			"ru": {
 				"information_storage_and_access_19227997": "Хранение данных и доступ к ним",
@@ -2499,11 +2619,16 @@
 				"feature_3_description": "Ваше устройство можно отличить от других устройств на основе информации, которую оно автоматически отправляет, например, IP-адрес или тип браузера.",
 				"feature_3_description_legal": "Поставщики вправе:\n* Создавать идентификатор, используя данные, автоматически собранные с устройства для определенных характеристик, например IP-адрес, строка агента пользователя.\n* Использовать такой идентификатор для повторной попытки идентификации устройства.\nПоставщики не вправе:\n* Создавать идентификатор с использованием данных, собранных при активном сканировании устройства для определенных характеристик, например, установленного шрифта или разрешения экрана, без отдельного разрешения пользователя на активное сканирование характеристик устройства для идентификации.\n* Использовать такой идентификатор для повторной идентификации устройства.\n",
 				"special_feature_1_name": "Использование точных данных геолокации",
-				"special_feature_1_description": "Ваши точные данные геолокации могут быть использованы для поддержки одной или нескольких целей. Это означает, что ваше местоположение может быть определено с точностью до нескольких метров. ",
+				"special_feature_1_description": "Ваши точные данные геолокации могут быть использованы для поддержки одной или нескольких целей. Это означает, что ваше местоположение может быть определено с точностью до нескольких метров.",
 				"special_feature_1_description_legal": "Поставщики вправе:\n* Собирать и обрабатывать точные геолокационные данные для поддержки одной или нескольких целей.\nПримечание. Точная геолокация означает, что нет никаких ограничений на определение точного местоположения пользователя; местоположение может определяться с точностью до нескольких метров.",
 				"special_feature_2_name": "Активное сканирование характеристик устройства для идентификации",
 				"special_feature_2_description": "Ваше устройство может быть идентифицировано на основе сканирования уникальной комбинации характеристик устройства.",
-				"special_feature_2_description_legal": "Поставщики вправе:\n* Создавать идентификатор, используя данные, собранные при активном сканировании устройства для определенных характеристик, например, установленных шрифтов или разрешения экрана. \n* Использовать такой идентификатор для повторной идентификации устройства.\n"
+				"special_feature_2_description_legal": "Поставщики вправе:\n* Создавать идентификатор, используя данные, собранные при активном сканировании устройства для определенных характеристик, например, установленных шрифтов или разрешения экрана. \n* Использовать такой идентификатор для повторной идентификации устройства.\n",
+				"consent": "Согласие",
+				"legitimate_interest": "Законные интересы",
+				"purpose_details": "Сведения о цели",
+				"iab_vendor_disclaimer": "%{name} участвует в программе <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> и подпадает под действие ее политик. Подробные сведения об этом партнере и его порядке обработки данных приведены в его <a href=\"%{policyUrl}\" target=\"_blank\">политике конфиденциальности</a>.",
+				"non_iab_vendor_disclaimer": "Подробные сведения о партнере %{name} и его порядке обработки данных приведены в его <a href=\"%{policyUrl}\" target=\"_blank\">политике конфиденциальности</a>."
 			},
 			"uk": {
 				"information_storage_and_access_19227997": "Зберігання інформації та доступ до неї",
@@ -2602,7 +2727,12 @@
 				"special_feature_1_description_legal": "Постачальники можуть:\n* збирати та обробляти точні дані про географічне розташування для окремих цілей.\nПримітка. Термін \"точні\" означає, що точність географічного розташування користувача не обмежується та може сягати кількох метрів.",
 				"special_feature_2_name": "Активне сканування характеристик пристрою для ідентифікації",
 				"special_feature_2_description": "Ваш пристрій може ідентифікуватися на основі просканованої унікальної комбінації його характеристик.",
-				"special_feature_2_description_legal": "Постачальники можуть:\n* створювати ідентифікатор на основі даних, зібраних за допомогою активного сканування певних характеристик пристрою, наприклад інстальованих шрифтів або роздільної здатності екрана;\n* використовувати такий ідентифікатор для повторної ідентифікації пристрою."
+				"special_feature_2_description_legal": "Постачальники можуть:\n* створювати ідентифікатор на основі даних, зібраних за допомогою активного сканування певних характеристик пристрою, наприклад інстальованих шрифтів або роздільної здатності екрана;\n* використовувати такий ідентифікатор для повторної ідентифікації пристрою.",
+				"consent": "Згода",
+				"legitimate_interest": "Законні інтереси",
+				"purpose_details": "Відомості про мету",
+				"iab_vendor_disclaimer": "%{name} бере участь у програмі <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> та підпадає під дію її політик. Докладні відомості про цього партнера та його порядок обробки даних наведено в його <a href=\"%{policyUrl}\" target=\"_blank\">політиці конфіденційності</a>.",
+				"non_iab_vendor_disclaimer": "Докладні відомості про партнера %{name} та його порядок обробки даних наведено в його <a href=\"%{policyUrl}\" target=\"_blank\">політиці конфіденційності</a>."
 			}
 		}
 	},
