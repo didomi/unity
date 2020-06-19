@@ -3,7 +3,7 @@
   "displayName": "Native Didomi",
   "agentName": "Unity SDK",
   "version": "1.0.0",
-  "iosNativeVersion": "1.20.1",
-  "androidNativeVersion": "1.14.1",
+  "iosNativeVersion": "1.22.0",
+  "androidNativeVersion": "1.17.0",
   "description": "Unity plugin helps you to use native didomi functionality on Android and iOS."
 }
