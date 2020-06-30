@@ -6,36 +6,34 @@ using UnityEditor.iOS.Xcode;
 using UnityEngine;
 
 /// <summary>
-/// PostProcessor contains OnPostProcessBuild function.
-/// Plugin does post processing of the generated project. 
-/// You can do custom changes on the generated project.
-/// "PostProcessBuild" attribute on Unity allows developer to add post processing while Unity generates AndroidStudio project or IOS XCode project.
-/// You can add the class to your plugin and the method will run after projects are generated.
-/// Thanks to "PostProcessor.OnPostProcessBuild" we solve a few of issues related to using Didomi Native libs.
+/// The PostProcessor updates the generated project for Android and iOS.
+/// We update native mobile projects to work with the Didomi SDKs (activity type, build settings, etc.).
+/// The "PostProcessBuild" attribute on Unity allows developers to add post-processing when Unity generates
+/// the Android Studio and Xcode projects.
 /// </summary>
 public static class PostProcessor
 {
     /// <summary>
-    /// The fixed local path Didomi config file must be located on Unity Projects.
+    /// Path of the folder that contains the `didomi_config.json` file in Unity projects.
     /// </summary>
     private static readonly string DidomiConfigPath = Application.dataPath + @"\DidomiConfig";
 	/// <summary>
-    /// The fixed local path package.json file must be located on Unity Projects.
+    /// Path of the `package.json` file.
     /// </summary>
 	private static readonly string PackageJsonPath = Application.dataPath + @"\Plugins\Didomi\Resources\package.json";
 
     /// <summary>
-    /// Main method that will invoked after Unity generates the target project.
+    /// Method called when Unity generates native projects.
     /// </summary>
-    /// <param name="buildTarget">The platform IOS, Android, etc. </param>
-    /// <param name="buildPath">The generated project location path</param>
+    /// <param name="buildTarget">Platform (Android, iOS)</param>
+    /// <param name="buildPath">Generated project path</param>
     [PostProcessBuild]
     public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath)
     {
         Debug.Log("OnPostProcessBuild for " + buildTarget);
         if (buildTarget == BuildTarget.iOS)
         {
-            // So PBXProject.GetPBXProjectPath returns wrong path, we need to construct path by ourselves instead
+            // PBXProject.GetPBXProjectPath returns the wrong path, we need to construct path by ourselves instead
             // var projPath = PBXProject.GetPBXProjectPath(buildPath);
             var projPath = buildPath + "/Unity-iPhone.xcodeproj/project.pbxproj";
             var proj = new PBXProject();
@@ -65,10 +63,9 @@ public static class PostProcessor
         }
     }
 
-
     /// <summary>
-    /// For IOS platform copies local Didomi config file to Data\Resources\ path.
-    /// Also config file is added to build so that it can be found when null is set as argument.
+    /// For iOS, copy the local `didomi_config.json` file to `Data/Resources/`.
+    /// It also gets added to the build to be available in the final app.
     /// </summary>
     /// <param name="project"></param>
     /// <param name="targetGuid"></param>
@@ -90,8 +87,8 @@ public static class PostProcessor
     }
 	
 	/// <summary>
-    /// For IOS platform copies package.json file to Data\Resources\ path.
-    /// Also package.json file is added to build so that it can be found when null is set as argument.
+    /// For iOS, copy the `package.json` file to `Data/Resources/`.
+    /// It also gets added to the build to be available in the final app.
     /// </summary>
     /// <param name="project"></param>
     /// <param name="targetGuid"></param>
@@ -107,9 +104,8 @@ public static class PostProcessor
         project.AddFileToBuild(targetGuid, fileGuid);
     }
 
-
     /// <summary>
-    /// Runs tasks for Android Platfform.
+    /// Runs tasks for Android Platform.
     /// </summary>
     /// <param name="path"></param>
     private static void AndroidPostProcess(string path)
@@ -123,7 +119,7 @@ public static class PostProcessor
     }
 
     /// <summary>
-    /// Updates the AndroidManifest file. Sets theme for AppCompat.
+    /// Update the `AndroidManifest` file. Set theme for `AppCompat`.
     /// </summary>
     /// <param name="path"></param>
     private static void UpdateThemeAppCompatInAndroidManifestFile(string path)
@@ -152,7 +148,7 @@ public static class PostProcessor
     }
 
     /// <summary>
-    /// Updates the styles resources file. Adds AppCompat theme to styles.
+    /// Update the `styles.xml` resource file by adding styles for AppCompat.
     /// </summary>
     /// <param name="path"></param>
     private static void UpdateStylesThemeToAppCompat(string path)
@@ -168,7 +164,7 @@ public static class PostProcessor
     }
 
 	/// <summary>
-    /// For Android platform copies local Didomi config file to unityLibrary\src\main\assets\ path.
+    /// For Android, copy the local `didomi_config.json` file to `unityLibrary\src\main\assets\`.
     /// </summary>
 	/// <param name="path"></param>
     private static void CopyDidomiConfigFileToAssetFolder(string path)
@@ -187,7 +183,7 @@ public static class PostProcessor
     }
 	
 	/// <summary>
-    /// For Android platform copies local package.json file to unityLibrary\src\main\assets\ path.
+    /// For Android, copy the local `package.json` to `unityLibrary\src\main\assets\`.
     /// </summary>
 	/// <param name="path"></param>
 	private static void CopyPackageJsonFileToAssetFolder(string path)
@@ -201,7 +197,7 @@ public static class PostProcessor
     }
 
     /// <summary>
-    /// Updates gradle file dependencies for Android project. 
+    /// Update gradle dependencies in the Android project. 
     /// </summary>
     /// <param name="path"></param>
     private static void UpdateUnityLibraryDependencies(string path)
@@ -227,8 +223,8 @@ public static class PostProcessor
     }
 
     /// <summary>
-    /// Updates Activity class generated by Default. Converts Activity class to AppCompatActivity.
-    /// Didomi SDK accepts AppCompatActivity class as argument. Thanks to that change we are able to call functions like SetupUI.
+    /// Convert the Activity class generated by Unity to AppCompatActivity as that is
+    /// what is expected by the Didomi SDK.
     /// </summary>
     /// <param name="path"></param>
     private static void UpdateUnityPlayerActivity(string path)
@@ -241,7 +237,7 @@ public static class PostProcessor
     }
 
     /// <summary>
-    /// Utility inner function, replaces given arguments in the file located at given path.
+    /// Replace arguments in path
     /// </summary>
     /// <param name="path"></param>
     /// <param name="oldValue"></param>

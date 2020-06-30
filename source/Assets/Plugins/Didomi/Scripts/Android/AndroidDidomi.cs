@@ -8,8 +8,9 @@ using UnityEngine;
 namespace IO.Didomi.SDK.Android
 {
     /// <summary>
-    /// The implementation of IDidomi interface that is called when the app is run on Android platform. 
-    /// AndroidJavaClass, AndroidJavaObject and AndroidJavaProxy classes provided by UnityEngine namespace are used to make Java calls from C#.
+    /// Android implementation of the IDidomi interface
+    /// This class uses JNI to make calls to the native Android SDK through the
+    /// `AndroidJavaClass`, `AndroidJavaObject`, and `AndroidJavaProxy` classes.
     /// </summary>
     internal class AndroidDidomi : IDidomi
     {
@@ -406,8 +407,8 @@ namespace IO.Didomi.SDK.Android
         }
 
         /// <summary>
-        /// Android Libs in Unity cannot handle C# null values, MethodNotFound Exception is thrown
-        /// when null value is used. In order to make it working, below mapping required.
+        /// Android libraries in Unity cannot handle C# null values and throw a MethodNotFound exception
+        /// when null is provided. This function maps null values to avoid that issue..
         /// </summary>
         /// <param name="args"></param>
         private static void MapNullValuesToJava(object[] args)

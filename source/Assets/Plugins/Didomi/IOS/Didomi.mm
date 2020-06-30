@@ -13,12 +13,11 @@
 
 #pragma mark - C interface
 
-
-//The file contains Objective-C++ code. 
-//The native functionality is provided as Objective-C++ code for external use. 
-//Unity C# dll can invoke the functions declared in the file. 
-//Each new function added to didomi sdk, must contain correspondig declaration in this file.
-
+/**
+ * Objective-C++ code that exposes the SDK interface to Unity C#
+ * When adding a new function from the SDK, update this file to also
+ * reference that new function
+ */
 
 char* cStringCopy(const char* string){
 
