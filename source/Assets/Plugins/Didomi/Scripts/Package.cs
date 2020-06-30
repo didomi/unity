@@ -1,14 +1,12 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace IO.Didomi.SDK
 {
+    [Serializable]
     public class Package
     {
         public static Package _instance;
@@ -19,9 +17,26 @@ namespace IO.Didomi.SDK
             {
                 try
                 {
+                    _instance = new Package();
+
                     var packageJsonContent = Resources.Load<TextAsset>("package");
-                    _instance = JsonConvert.DeserializeObject<Package>(packageJsonContent.text);
-                    Debug.Log(packageJsonContent.text);
+
+                    //instead of using "JsonConvert.DeserializeObject<Package>(packageJsonContent.text)"
+                    //token based parsing used to fill Package. JsonConvert didnot worked.
+
+                    StringReader jsonReaderString = new StringReader(packageJsonContent.text);
+
+                    using (JsonTextReader reader = new JsonTextReader(jsonReaderString))
+                    {
+                        JObject o2 = (JObject)JToken.ReadFrom(reader);
+                        _instance.name = o2.Value<string>("name");
+                        _instance.displayName = o2.Value<string>("displayName");
+                        _instance.agentName = o2.Value<string>("agentName");
+                        _instance.version = o2.Value<string>("version");
+                        _instance.iosNativeVersion = o2.Value<string>("iosNativeVersion");
+                        _instance.androidNativeVersion = o2.Value<string>("androidNativeVersion");
+                        _instance.description = o2.Value<string>("description");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -43,12 +58,12 @@ namespace IO.Didomi.SDK
             return _instance;
         }
 
-        public string name;
-        public string displayName;
-        public string agentName;
-        public string version;
-        public string iosNativeVersion;
-        public string androidNativeVersion;
-        public string description;
+        public string name { get; set; }
+        public string displayName { get; set; }
+        public string agentName { get; set; }
+        public string version { get; set; }
+        public string iosNativeVersion { get; set; }
+        public string androidNativeVersion { get; set; }
+        public string description { get; set; }
     }
 }
