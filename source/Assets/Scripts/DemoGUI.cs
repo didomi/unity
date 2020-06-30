@@ -1,6 +1,4 @@
-﻿using IO.Didomi.SDK;
-using IO.Didomi.SDK.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -69,7 +67,7 @@ public class DemoGUI : MonoBehaviour
         yStep = buttonHeight + 10;
         functionButtonWidth = (int) (1.5f * buttonWidth);
         RectTransform rt = panel.GetComponent<RectTransform>();
-        int panelTop = (int)(6.5f * yStep);
+        int panelTop = (int)(7f * yStep);
         int panelbottom = 1 * yStep;
         rt.offsetMax = new Vector2(rt.offsetMax.x, -panelTop);
         buttonFontSize = Screen.width/34;
@@ -80,27 +78,27 @@ public class DemoGUI : MonoBehaviour
 
     }
 
-    private Rect GetMiddleRect1() { return new Rect(centerScreenX - buttonWidth * 0.5f, 0.2f * yStep, buttonWidth, buttonHeight); }
-    private Rect GetMiddleRect2() { return new Rect(centerScreenX - buttonWidth * 0.5f, 1.2f * yStep, buttonWidth, buttonHeight); }
-    private Rect GetMiddleRect3() { return new Rect(centerScreenX - buttonWidth * 0.5f, 2.2f * yStep, buttonWidth, buttonHeight); }
-    private Rect GetMiddleRect4() { return new Rect(centerScreenX - buttonWidth * 0.5f, 3.2f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetGoBackRect() { return new Rect(10, 0.1f * yStep, Screen.width - 20, buttonHeight/2); }
 
-    private Rect GetRightRect1() { return new Rect(centerScreenX + buttonWidth * 0.5f, 0.2f * yStep, buttonWidth, buttonHeight); }
-    private Rect GetRightRect2() { return new Rect(centerScreenX + buttonWidth * 0.5f, 1.2f * yStep, buttonWidth, buttonHeight); }
-    private Rect GetRightRect3() { return new Rect(centerScreenX + buttonWidth * 0.5f, 2.2f * yStep, buttonWidth, buttonHeight); }
-    private Rect GetRightRect4() { return new Rect(centerScreenX + buttonWidth * 0.5f, 3.2f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetMiddleRect1() { return new Rect(centerScreenX - buttonWidth * 0.5f, 0.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetMiddleRect2() { return new Rect(centerScreenX - buttonWidth * 0.5f, 1.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetMiddleRect3() { return new Rect(centerScreenX - buttonWidth * 0.5f, 2.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetMiddleRect4() { return new Rect(centerScreenX - buttonWidth * 0.5f, 3.7f * yStep, buttonWidth, buttonHeight); }
 
-    private Rect GetLeftRect1() { return new Rect(centerScreenX - buttonWidth * 1.5f, 0.2f * yStep, buttonWidth, buttonHeight); }
-    private Rect GetLeftRect2() { return new Rect(centerScreenX - buttonWidth * 1.5f, 1.2f * yStep, buttonWidth, buttonHeight); }
-    private Rect GetLeftRect3() { return new Rect(centerScreenX - buttonWidth * 1.5f, 2.2f * yStep, buttonWidth, buttonHeight); }
-    private Rect GetLeftRect4() { return new Rect(centerScreenX - buttonWidth * 1.5f, 3.2f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetRightRect1() { return new Rect(centerScreenX + buttonWidth * 0.5f, 0.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetRightRect2() { return new Rect(centerScreenX + buttonWidth * 0.5f, 1.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetRightRect3() { return new Rect(centerScreenX + buttonWidth * 0.5f, 2.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetRightRect4() { return new Rect(centerScreenX + buttonWidth * 0.5f, 3.7f * yStep, buttonWidth, buttonHeight); }
 
-    private Rect GetFuncRect1() { return new Rect(centerScreenX - functionButtonWidth - xStep, 4.2f * yStep, functionButtonWidth, buttonHeight); }
-    private Rect GetFuncRect2() { return new Rect(centerScreenX - functionButtonWidth - xStep, 5.2f * yStep, functionButtonWidth, buttonHeight); }
-    private Rect GetFuncRect3() { return new Rect(centerScreenX + xStep, 4.2f * yStep, functionButtonWidth, buttonHeight); }
-    private Rect GetFuncRect4() { return new Rect(centerScreenX + xStep, 5.2f * yStep, functionButtonWidth, buttonHeight); }
+    private Rect GetLeftRect1() { return new Rect(centerScreenX - buttonWidth * 1.5f, 0.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetLeftRect2() { return new Rect(centerScreenX - buttonWidth * 1.5f, 1.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetLeftRect3() { return new Rect(centerScreenX - buttonWidth * 1.5f, 2.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetLeftRect4() { return new Rect(centerScreenX - buttonWidth * 1.5f, 3.7f * yStep, buttonWidth, buttonHeight); }
 
-    private Rect GetFuncRectCenter() { return new Rect(centerScreenX - functionButtonWidth * 0.5f, 4.5f * yStep, functionButtonWidth, buttonHeight); }
+    private Rect GetFuncRect1() { return new Rect(centerScreenX - functionButtonWidth - xStep, 4.7f * yStep, functionButtonWidth, buttonHeight); }
+    private Rect GetFuncRect2() { return new Rect(centerScreenX - functionButtonWidth - xStep, 5.7f * yStep, functionButtonWidth, buttonHeight); }
+    private Rect GetFuncRect3() { return new Rect(centerScreenX + xStep, 4.7f * yStep, functionButtonWidth, buttonHeight); }
+    private Rect GetFuncRect4() { return new Rect(centerScreenX + xStep, 5.7f * yStep, functionButtonWidth, buttonHeight); }
 
     private void OnGUI()
     {
@@ -180,6 +178,11 @@ public class DemoGUI : MonoBehaviour
     {
         GUI.skin.button.fontSize = buttonFontSize;
 
+        if(GUI.Button(GetGoBackRect(), "Go to Basic Functions View"))
+        {
+            uiStyle = ViewKind.Basic;
+        }
+      
         if (GUI.Button(GetLeftRect1(), "Notice"))
         {
             functionCategory = FunctionCategory.Notice;
@@ -685,33 +688,6 @@ public class DemoGUI : MonoBehaviour
         {
             uiStyle = ViewKind.Detailed;
         }
-        //if (GUI.Button(GetLeftRect3(), "ShowNotice"))
-        //{
-        //    message = string.Empty;
-        //    Didomi.GetInstance().Reset();
-        //    Didomi.GetInstance().ShowNotice();
-        //    message += "ShowNotice";
-        //}
-
-        //if (GUI.Button(GetMiddleRect3(), "ShowPreferences"))
-        //{
-        //    message = string.Empty;
-        //    Didomi.GetInstance().Reset();
-        //    Didomi.GetInstance().ShowPreferences();
-        //    message += "showPreferences";
-        //}
-
-        //if (GUI.Button(GetRightRect3(), "Reset"))
-        //{
-        //    message = string.Empty;
-        //    Didomi.GetInstance().Reset();
-        //    message += "Reset called";
-        //}
-
-        //if (GUI.Button(GetMiddleRect4(), "More Functions"))
-        //{
-        //    uiStyle = UIStyle.Groups;
-        //}
     }
 
     private void RegisterEventHandlers()
