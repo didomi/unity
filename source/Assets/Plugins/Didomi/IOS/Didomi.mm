@@ -472,6 +472,7 @@ void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigu
 
 
 
+
 	bool setUserDisagreeToAll()
 
 
@@ -480,7 +481,7 @@ void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigu
 
 
 
-	return [[Didomi shared] setUserDisagreeToAll];
+	return [[Didomi shared] setUserDisagreeToAllWithConsent:true legitimateInterest:true];
 
 
 
