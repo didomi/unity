@@ -2,6 +2,7 @@
 using IO.Didomi.SDK.Interfaces;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace IO.Didomi.SDK.UnityEditor
 {
@@ -179,12 +180,12 @@ namespace IO.Didomi.SDK.UnityEditor
 
         public void SetupUI()
         {
-            throw new NotImplementedException();
+            ShowNoticeMockUI();
         }
 
         public void ShowPreferences()
         {
-            throw new NotImplementedException();
+            ShowPreferencesMockUI();
         }
 
         public bool IsUserConsentStatusPartial()
@@ -194,7 +195,6 @@ namespace IO.Didomi.SDK.UnityEditor
 
         public void Reset()
         {
-            throw new NotImplementedException();
         }
 
         public bool SetUserAgreeToAll()
@@ -219,7 +219,24 @@ namespace IO.Didomi.SDK.UnityEditor
 
         public void ShowNotice()
         {
-            throw new NotImplementedException();
+            ShowNoticeMockUI();
+        }
+
+        private void ShowNoticeMockUI()
+        {
+            GetMockUIScript().ShowNoticeUI();
+        }
+
+        private void ShowPreferencesMockUI()
+        {
+            GetMockUIScript().ShowPurposesUI();
+        }
+
+        private UnityEditorMockUI GetMockUIScript()
+        {
+            GameObject mockUI = new GameObject("DidomiPluginMockUI");
+            mockUI.AddComponent<UnityEditorMockUI>();
+            return mockUI.GetComponent<UnityEditorMockUI>();
         }
 
         public void UpdateSelectedLanguage(string languageCode)
