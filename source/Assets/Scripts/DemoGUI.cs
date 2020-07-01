@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IO.Didomi.SDK;
+using IO.Didomi.SDK.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

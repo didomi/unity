@@ -84,31 +84,20 @@ namespace IO.Didomi.SDK.UnityEditor
                     if (PurposesCrossCloseClicked() && !_partnersUIVisible)
                     {
                         _showPreferencesUIVisible = false;
-
-                        if (!_noticeUIVisible)
-                        {
-                            CloseUI();
-                        }
                     }
 
                     if (PurposesDisAgreeToAllClicked() && !_partnersUIVisible)
                     {
                         _showPreferencesUIVisible = false;
 
-                        if (!_noticeUIVisible)
-                        {
-                            CloseUI();
-                        }
+                        CloseUI();
                     }
 
                     if (PurposesAgreeToAllClicked() && !_partnersUIVisible)
                     {
                         _showPreferencesUIVisible = false;
 
-                        if (!_noticeUIVisible)
-                        {
-                            CloseUI();
-                        }
+                        CloseUI();
                     }
 
                     if (PurposesViewOurPartnersClicked() && !_partnersUIVisible)
