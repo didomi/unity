@@ -104,6 +104,8 @@ public class DemoGUI : MonoBehaviour
 
     private void OnGUI()
     {
+        GUI.skin.button.fontSize = buttonFontSize;
+
         if (uiStyle == ViewKind.Basic)
         {
             ShowBasicFunctions();
@@ -178,8 +180,6 @@ public class DemoGUI : MonoBehaviour
 
     private void ShowGroupButtons()
     {
-        GUI.skin.button.fontSize = buttonFontSize;
-
         if(GUI.Button(GetGoBackRect(), "Go to Basic Functions View"))
         {
             uiStyle = ViewKind.Basic;
