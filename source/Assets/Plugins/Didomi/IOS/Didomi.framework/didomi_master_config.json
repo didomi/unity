@@ -132,7 +132,8 @@
 				"legitimate_interest": "Legitimate Interest",
 				"purpose_details": "Purpose Details",
 				"iab_vendor_disclaimer": "%{name} participates in the <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> and is subject to its policies. You can learn more about this partner and its data processing in its <a href=\"%{policyUrl}\" target=\"_blank\">privacy policy</a>.",
-				"non_iab_vendor_disclaimer": "You can learn more about %{name} and its data processing in its <a href=\"%{policyUrl}\" target=\"_blank\">privacy policy</a>."
+				"non_iab_vendor_disclaimer": "You can learn more about %{name} and its data processing in its <a href=\"%{policyUrl}\" target=\"_blank\">privacy policy</a>.",
+				"opt_in": "Opt-in"
 			},
 			"fr": {
 				"information_storage_and_access_19227997": "Conservation et accès aux informations ",
@@ -236,7 +237,8 @@
 				"legitimate_interest": "Intérêt légitime",
 				"purpose_details": "Détails de l'objectif",
 				"iab_vendor_disclaimer": "%{name} fait partie du <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> et est assujetti par ses règlements. Vous pouvez en apprendre davantage sur ce partenaire et sur la façon dont il traite les données dans sa <a href=\"%{policyUrl}\" target=\"_blank\">politique de confidentialité</a>.",
-				"non_iab_vendor_disclaimer": "Vous pouvez en apprendre davantage sur %{name} et sur la façon dont cette entité traite les données dans sa <a href=\"%{policyUrl}\" target=\"_blank\">politique de confidentialité</a>."
+				"non_iab_vendor_disclaimer": "Vous pouvez en apprendre davantage sur %{name} et sur la façon dont cette entité traite les données dans sa <a href=\"%{policyUrl}\" target=\"_blank\">politique de confidentialité</a>.",
+				"opt_in": "Accepter"
 			},
 			"de": {
 				"information_storage_and_access_19227997": "Speicherung und Zugriff auf Informationen",
@@ -340,7 +342,8 @@
 				"legitimate_interest": "Legitimes Interesse",
 				"purpose_details": "Zweck-Details",
 				"iab_vendor_disclaimer": "%{name} beteiligt sich am <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> und unterliegt dessen Richtlinien. Sie können mehr über diesen Partner und dessen Datenverarbeitungspraxis in dessen <a href=\"%{policyUrl}\" target=\"_blank\">Datenschutzrichtlinie</a> erfahren.",
-				"non_iab_vendor_disclaimer": "Sie können mehr über %{name} und dessen Datenverarbeitungspraxis in dessen <a href=\"%{policyUrl}\" target=\"_blank\">Datenschutzrichtlinie</a> erfahren."
+				"non_iab_vendor_disclaimer": "Sie können mehr über %{name} und dessen Datenverarbeitungspraxis in dessen <a href=\"%{policyUrl}\" target=\"_blank\">Datenschutzrichtlinie</a> erfahren.",
+				"opt_in": "Ein"
 			},
 			"pt": {
 				"information_storage_and_access_19227997": "Conservação e acesso a informações",
@@ -444,7 +447,8 @@
 				"legitimate_interest": "Interesse legítimo",
 				"purpose_details": "Detalhes dos fins",
 				"iab_vendor_disclaimer": "O parceiro %{name} participa na <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Estrutura de Transparência e Consentimento do IAB</a> e está sujeito às respetivas políticas. Pode obter mais informações sobre este parceiro e o processamento de dados que realiza na respetiva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacidade</a>.",
-				"non_iab_vendor_disclaimer": "Pode obter mais informações sobre o parceiro %{name} e o processamento de dados que realiza na respetiva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacidade</a>."
+				"non_iab_vendor_disclaimer": "Pode obter mais informações sobre o parceiro %{name} e o processamento de dados que realiza na respetiva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacidade</a>.",
+				"opt_in": "Ativar"
 			},
 			"it": {
 				"information_storage_and_access_19227997": "Conservazione e accesso alle informazioni",
@@ -548,7 +552,8 @@
 				"legitimate_interest": "Legittimo interesse",
 				"purpose_details": "Dettagli sullo scopo",
 				"iab_vendor_disclaimer": "%{name} partecipa all'accordo <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> ed è soggetto alle sue politiche. Ulteriori informazioni sul partner selezionato e l'elaborazione dei dati sono disponibili nell'<a href=\"%{policyUrl}\" target=\"_blank\">Informativa sulla privacy</a>.",
-				"non_iab_vendor_disclaimer": "Ulteriori informazioni su %{name} e l'elaborazione dei dati sono disponibili nell'<a href=\"%{policyUrl}\" target=\"_blank\">Informativa sulla privacy</a>."
+				"non_iab_vendor_disclaimer": "Ulteriori informazioni su %{name} e l'elaborazione dei dati sono disponibili nell'<a href=\"%{policyUrl}\" target=\"_blank\">Informativa sulla privacy</a>.",
+				"opt_in": "Opt-in"
 			},
 			"nl": {
 				"information_storage_and_access_19227997": "Opslag van en toegang tot informatie",
@@ -652,7 +657,8 @@
 				"legitimate_interest": "Legitiem belang",
 				"purpose_details": "Informatie over doeleinden",
 				"iab_vendor_disclaimer": "%{name} draagt bij aan het <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> en houdt zich aan het beleid daarvan. Meer informatie over deze partner en de manier waarop deze gegevens verwerkt kunt u vinden in het <a href=\"%{policyUrl}\" target=\"_blank\">privacybeleid</a>.",
-				"non_iab_vendor_disclaimer": "Meer informatie over %{name} en de manier waarop deze partner gegevens verwerkt kunt u vinden in het bijbehorende <a href=\"%{policyUrl}\" target=\"_blank\">privacybeleid</a>."
+				"non_iab_vendor_disclaimer": "Meer informatie over %{name} en de manier waarop deze partner gegevens verwerkt kunt u vinden in het bijbehorende <a href=\"%{policyUrl}\" target=\"_blank\">privacybeleid</a>.",
+				"opt_in": "Inschrijven"
 			},
 			"ca": {
 				"information_storage_and_access_19227997": "Accés i emmagatzematge de la informació",
@@ -756,7 +762,8 @@
 				"legitimate_interest": "Interès legítim",
 				"purpose_details": "Detalls de la finalitat",
 				"iab_vendor_disclaimer": "%{name} participa al <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Marc de Feina amb Transparència i Consentiment del IAB</a> i està subjecte a llurs polítiques. Podeu obtenir més informació sobre aquest soci i llur processament de dades a la seva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacitat</a>.",
-				"non_iab_vendor_disclaimer": "Podeu obtenir més informació sobre %{name} i llur processament de dades a la seva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacitat</a>."
+				"non_iab_vendor_disclaimer": "Podeu obtenir més informació sobre %{name} i llur processament de dades a la seva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacitat</a>.",
+				"opt_in": "Optar-hi"
 			},
 			"es": {
 				"information_storage_and_access_19227997": "Almacenamiento y acceso a la información",
@@ -860,7 +867,8 @@
 				"legitimate_interest": "Interés legítimo",
 				"purpose_details": "Detalles del propósito",
 				"iab_vendor_disclaimer": "%{name} participa en el <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Marco de Transparencia y Consentimiento de IAB</a> y está sujeto a sus políticas. Puede obtener más información acerca de este socio y de su procesamiento de datos en su <a href=\"%{policyUrl}\" target=\"_blank\">política de privacidad</a>.",
-				"non_iab_vendor_disclaimer": "Puede obtener más información acerca de %{name} y de su procesamiento de datos en su <a href=\"%{policyUrl}\" target=\"_blank\">política de privacidad</a>."
+				"non_iab_vendor_disclaimer": "Puede obtener más información acerca de %{name} y de su procesamiento de datos en su <a href=\"%{policyUrl}\" target=\"_blank\">política de privacidad</a>.",
+				"opt_in": "Alta"
 			},
 			"ro": {
 				"information_storage_and_access_19227997": "Stocarea și accesarea informațiilor",
@@ -964,7 +972,8 @@
 				"legitimate_interest": "Interes legitim",
 				"purpose_details": "Detalii privind scopul",
 				"iab_vendor_disclaimer": "%{name} participă la <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Cadrul IAB pentru transparență și consimțământ</a> și respectă politicile sale. Puteți afla mai multe despre acest partener și modul în care prelucrează datele în <a href=\"%{policyUrl}\" target=\"_blank\">politica sa de confidențialitate</a>.",
-				"non_iab_vendor_disclaimer": "Puteți afla mai multe despre %{name} și modul în care prelucrează datele în <a href=\"%{policyUrl}\" target=\"_blank\">politica sa de confidențialitate</a>."
+				"non_iab_vendor_disclaimer": "Puteți afla mai multe despre %{name} și modul în care prelucrează datele în <a href=\"%{policyUrl}\" target=\"_blank\">politica sa de confidențialitate</a>.",
+				"opt_in": "Optare"
 			},
 			"hr": {
 				"information_storage_and_access_19227997": "Pohrana i pristup podacima",
@@ -1068,7 +1077,8 @@
 				"legitimate_interest": "Legitimni interes",
 				"purpose_details": "Pojedinosti o svrsi",
 				"iab_vendor_disclaimer": "%{name} sudjeluje u <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Okvir IAB transparentnosti i suglasnosti</a> pa se na njega odnose ta pravila. Više o ovom partneru i obradi podataka koju vrši možete saznati u njihovim <a href=\"%{policyUrl}\" target=\"_blank\">pravilima o zaštiti privatnosti</a>.",
-				"non_iab_vendor_disclaimer": "Više o %{name} i načinu obrade podataka koju vrše možete saznati u njihovim <a href=\"%{policyUrl}\" target=\"_blank\">pravilima o zaštiti privatnosti</a>."
+				"non_iab_vendor_disclaimer": "Više o %{name} i načinu obrade podataka koju vrše možete saznati u njihovim <a href=\"%{policyUrl}\" target=\"_blank\">pravilima o zaštiti privatnosti</a>.",
+				"opt_in": "Pristanak"
 			},
 			"cs": {
 				"information_storage_and_access_19227997": "Uložení informací a přístup k nim",
@@ -1172,7 +1182,8 @@
 				"legitimate_interest": "Oprávněný zájem",
 				"purpose_details": "Podrobnosti o účelu",
 				"iab_vendor_disclaimer": "%{name} je účastníkem <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> a podléhá jeho zásadám. Další informace o tomto partnerovi a jeho zpracování údajů najdete v jeho <a href=\"%{policyUrl}\" target=\"_blank\">Zásadách ochrany osobních údajů</a>.",
-				"non_iab_vendor_disclaimer": "Více o %{name} a způsobu, jakým zpracovává údaje se dozvíte v <a href=\"%{policyUrl}\" target=\"_blank\">Zásadách ochrany osobních údajů</a>."
+				"non_iab_vendor_disclaimer": "Více o %{name} a způsobu, jakým zpracovává údaje se dozvíte v <a href=\"%{policyUrl}\" target=\"_blank\">Zásadách ochrany osobních údajů</a>.",
+				"opt_in": "Přihlásit se"
 			},
 			"tr": {
 				"information_storage_and_access_19227997": "Bilgilerin depolanması ve erişim",
@@ -1276,7 +1287,8 @@
 				"legitimate_interest": "Meşru Çıkar",
 				"purpose_details": "Amaç Ayrıntıları",
 				"iab_vendor_disclaimer": "%{name} <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Saydamlık ve Rıza Çerçevesine</a> katılmaktadır ve onun politikalarına tabidir. Bu ortak ve veri işlemesi hakkında daha fazla bilgiyi <a href=\"%{policyUrl}\" target=\"_blank\">gizlilik politikasından</a> edinebilirsiniz.",
-				"non_iab_vendor_disclaimer": "%{name} ve veri işlemesi hakkında daha fazla bilgiyi <a href=\"%{policyUrl}\" target=\"_blank\">gizlilik politikasından</a> edinebilirsiniz."
+				"non_iab_vendor_disclaimer": "%{name} ve veri işlemesi hakkında daha fazla bilgiyi <a href=\"%{policyUrl}\" target=\"_blank\">gizlilik politikasından</a> edinebilirsiniz.",
+				"opt_in": "İsteğe bağlı katılım"
 			},
 			"pl": {
 				"information_storage_and_access_19227997": "Przechowywanie i dostęp do informacji",
@@ -1380,7 +1392,8 @@
 				"legitimate_interest": "Prawnie uzasadniony interes",
 				"purpose_details": "Szczegóły celu",
 				"iab_vendor_disclaimer": "%{name} jest częścią <a href=\"%{IABPolicyUrl}\" target=\"_blank\"> IAB Transparency and Consent Framework</a> i podlega jej zasadom. Możesz dowiedzieć się więcej o tym partnerze i jego zasadach przetwarzania danych w jego <a href=\"%{policyUrl}\" target=\"_blank\">polityce prywatności</a>.",
-				"non_iab_vendor_disclaimer": "Możesz dowiedzieć się więcej o %{name} i ich zasadach przetwarzania danych w ich <a href=\"%{policyUrl}\" target=\"_blank\">polityce prywatności</a>."
+				"non_iab_vendor_disclaimer": "Możesz dowiedzieć się więcej o %{name} i ich zasadach przetwarzania danych w ich <a href=\"%{policyUrl}\" target=\"_blank\">polityce prywatności</a>.",
+				"opt_in": "Wyraź zgodę"
 			},
 			"fi": {
 				"information_storage_and_access_19227997": "Tietojen tallennus ja tietoihin pääsy",
@@ -1484,7 +1497,8 @@
 				"legitimate_interest": "Oikeutettu etu",
 				"purpose_details": "Tarkoituksen tiedot",
 				"iab_vendor_disclaimer": "%{name} on mukana <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB:n Transparency and Consent Framework -ohjelmassa</a> ja noudattaa sen käytäntöjä. Lisätietoja tästä yhteistyökumppanista sekä heidän tietojenkäsittelystään on löydettävissä heidän <a href=\"%{policyUrl}\" target=\"_blank\">tietosuojalausekkeestaan</a>.",
-				"non_iab_vendor_disclaimer": "%{name} tarjoaa lisätietoja itsestään ja tietojenkäsittelystään <a href=\"%{policyUrl}\" target=\"_blank\">tietosuojalausekkeessaan</a>."
+				"non_iab_vendor_disclaimer": "%{name} tarjoaa lisätietoja itsestään ja tietojenkäsittelystään <a href=\"%{policyUrl}\" target=\"_blank\">tietosuojalausekkeessaan</a>.",
+				"opt_in": "Osallistu"
 			},
 			"el": {
 				"information_storage_and_access_19227997": "Αποθήκευση και πρόσβαση πληροφοριών",
@@ -1588,7 +1602,8 @@
 				"legitimate_interest": "Έννομο συμφέρον",
 				"purpose_details": "Πληροφορίες για τον σκοπό",
 				"iab_vendor_disclaimer": "Ο/Η %{name} συμμετέχει στο <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Πλαίσιο Διαφάνειας και Συγκατάθεσης IAB</a> και υπόκειται στις πολιτικές της. Μπορείτε να μάθετε περισσότερα σχετικά με αυτόν τον συνεργάτη και την επεξεργασία δεδομένων που πραγματοποιεί στην <a href=\"%{policyUrl}\" target=\"_blank\">πολιτική απορρήτου</a> του.",
-				"non_iab_vendor_disclaimer": "Μπορείτε να μάθετε περισσότερα σχετικά με τον/την %{name} και την επεξεργασία δεδομένων που πραγματοποιεί στην <a href=\"%{policyUrl}\" target=\"_blank\">πολιτική απορρήτου</a> του/της."
+				"non_iab_vendor_disclaimer": "Μπορείτε να μάθετε περισσότερα σχετικά με τον/την %{name} και την επεξεργασία δεδομένων που πραγματοποιεί στην <a href=\"%{policyUrl}\" target=\"_blank\">πολιτική απορρήτου</a> του/της.",
+				"opt_in": "Συμμετοχή"
 			},
 			"hu": {
 				"information_storage_and_access_19227997": "Az adatok tárolása és az azokhoz való hozzáférés",
@@ -1692,7 +1707,8 @@
 				"legitimate_interest": "Jogos érdek",
 				"purpose_details": "A cél részletei",
 				"iab_vendor_disclaimer": "%{name} részt vesz az <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Átláthatósági és hozzájárulási keretrendszerben</a>, és betartja annak irányelveit. E partnerünkről és adatfeldolgozásáról bővebben az <a href=\"%{policyUrl}\" target=\"_blank\">adatvédelmi szabályzatában</a> olvashat.",
-				"non_iab_vendor_disclaimer": "%{name} és adatfeldolgozása leírásáról bővebben az <a href=\"%{policyUrl}\" target=\"_blank\">adatvédelmi szabályzatában</a> olvashat."
+				"non_iab_vendor_disclaimer": "%{name} és adatfeldolgozása leírásáról bővebben az <a href=\"%{policyUrl}\" target=\"_blank\">adatvédelmi szabályzatában</a> olvashat.",
+				"opt_in": "Részvétel"
 			},
 			"da": {
 				"information_storage_and_access_19227997": "Opbevaring af og adgang til oplysninger",
@@ -1796,7 +1812,8 @@
 				"legitimate_interest": "Legitim interesse",
 				"purpose_details": "Detaljer om formål",
 				"iab_vendor_disclaimer": "%{name} deltager i <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB's forskrifter for gennemsigtighed og samtykke</a> og er underlagt disse regler. Du kan lære mere om denne partner og databehandlingen i <a href=\"%{policyUrl}\" target=\"_blank\">fortrolighedspolitikken</a>.",
-				"non_iab_vendor_disclaimer": "Du kan lære mere om %{name} og databehandlingen i <a href=\"%{policyUrl}\" target=\"_blank\">fortrolighedspolitikken</a>."
+				"non_iab_vendor_disclaimer": "Du kan lære mere om %{name} og databehandlingen i <a href=\"%{policyUrl}\" target=\"_blank\">fortrolighedspolitikken</a>.",
+				"opt_in": "Tilvælg"
 			},
 			"sk": {
 				"information_storage_and_access_19227997": "Uchovávanie informácií a prístup k nim",
@@ -1900,7 +1917,8 @@
 				"legitimate_interest": "Legitímny záujem",
 				"purpose_details": "Podrobnosti účelu",
 				"iab_vendor_disclaimer": "Partner %{name} sa zapája do <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Rámca transparentnosti a súhlasu združenia IAB</a> a uplatňujú sa na neho pravidlá tohto rámca. Viac informácií o tomto partnerovi a jeho spracovaní údajov sa dozviete v jeho <a href=\"%{policyUrl}\" target=\"_blank\">pravidlách ochrany súkromia</a>.",
-				"non_iab_vendor_disclaimer": "Viac o partnerovi %{name} a jeho spracúvaní údajov sa dozviete v jeho <a href=\"%{policyUrl}\" target=\"_blank\">pravidlách ochrany súkromia</a>."
+				"non_iab_vendor_disclaimer": "Viac o partnerovi %{name} a jeho spracúvaní údajov sa dozviete v jeho <a href=\"%{policyUrl}\" target=\"_blank\">pravidlách ochrany súkromia</a>.",
+				"opt_in": "Aktivovať"
 			},
 			"bg": {
 				"information_storage_and_access_19227997": "Съхранение и достъп до информация",
@@ -2004,7 +2022,8 @@
 				"legitimate_interest": "Законен интерес",
 				"purpose_details": "Подробности за целта",
 				"iab_vendor_disclaimer": "%{name} участва в <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB  Рамка за прозрачност и съгласие</a> и подлежи на нейните политики. Можете да научите повече за този партньор и за обработването на данни в <a href=\"%{policyUrl}\" target=\"_blank\">политика за поверителност</a>.",
-				"non_iab_vendor_disclaimer": "Можете да научите повече за %{name} и за обработването на данни в <a href=\"%{policyUrl}\" target=\"_blank\">политика за поверителност</a>."
+				"non_iab_vendor_disclaimer": "Можете да научите повече за %{name} и за обработването на данни в <a href=\"%{policyUrl}\" target=\"_blank\">политика за поверителност</a>.",
+				"opt_in": "Приемане"
 			},
 			"et": {
 				"information_storage_and_access_19227997": "Teabe säilitamine ja sellele juurdepääs",
@@ -2108,7 +2127,8 @@
 				"legitimate_interest": "Õigustatud huvi",
 				"purpose_details": "Eesmärgi teave",
 				"iab_vendor_disclaimer": "%{name} on liitunud <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB läbipaistvuse ja nõusoleku raamistikuga</a> ja järgib selle põhimõtteid. Lisateavet leiate partneri <a href=\"%{policyUrl}\" target=\"_blank\">privaatsuspõhimõtetest</a>.",
-				"non_iab_vendor_disclaimer": "Lisateavet firma %{name} ja tema andmetöötluse kohta leiate selle <a href=\"%{policyUrl}\" target=\"_blank\">privaatsuspõhimõtetest</a>."
+				"non_iab_vendor_disclaimer": "Lisateavet firma %{name} ja tema andmetöötluse kohta leiate selle <a href=\"%{policyUrl}\" target=\"_blank\">privaatsuspõhimõtetest</a>.",
+				"opt_in": "Tellimine"
 			},
 			"sl": {
 				"information_storage_and_access_19227997": "Shranjevanje podatkov in dostop do njih",
@@ -2212,7 +2232,8 @@
 				"legitimate_interest": "Zakonit interes",
 				"purpose_details": "Podrobnosti namena",
 				"iab_vendor_disclaimer": "%{name} sodeluje v <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Okvirju za preglednost in soglasje IAB</a> in je predmet njegovih politik. Več o tem partnerju in o tem, kako obdeluje podatke, lahko najdete v <a href=\"%{policyUrl}\" target=\"_blank\">politiki zasebnosti</a>.",
-				"non_iab_vendor_disclaimer": "Več o %{name} in o tem, kako obdeluje podatke, lahko najdete v <a href=\"%{policyUrl}\" target=\"_blank\">politiki zasebnosti</a>."
+				"non_iab_vendor_disclaimer": "Več o %{name} in o tem, kako obdeluje podatke, lahko najdete v <a href=\"%{policyUrl}\" target=\"_blank\">politiki zasebnosti</a>.",
+				"opt_in": "Privoli"
 			},
 			"lv": {
 				"information_storage_and_access_19227997": "Informācijas uzglabāšana un tās pieejamība",
@@ -2316,7 +2337,8 @@
 				"legitimate_interest": "Likumīgās intereses",
 				"purpose_details": "Mērķa apraksts",
 				"iab_vendor_disclaimer": "%{name} piedalās <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB caurspīdības un piekrišanas ietvarā</a> un ir tā politiku subjekts. Vairāk par šo partneri un tā veikto datu apstrādi varat uzzināt partnera <a href=\"%{policyUrl}\" target=\"_blank\">privātuma politikā</a>.",
-				"non_iab_vendor_disclaimer": "Jūs varat uzzināt vairāk par %{name} un šī partnera veikto datu apstrādi tā <a href=\"%{policyUrl}\" target=\"_blank\">privātuma politikā</a>."
+				"non_iab_vendor_disclaimer": "Jūs varat uzzināt vairāk par %{name} un šī partnera veikto datu apstrādi tā <a href=\"%{policyUrl}\" target=\"_blank\">privātuma politikā</a>.",
+				"opt_in": "Pieteikties"
 			},
 			"lt": {
 				"information_storage_and_access_19227997": "Informacijos saugojimas ir prieiga",
@@ -2420,7 +2442,8 @@
 				"legitimate_interest": "Teisėtas interesas",
 				"purpose_details": "Paskirties duomenys",
 				"iab_vendor_disclaimer": "%{name} laikosi <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB skaidrumo ir sutikimo principų</a> ir jai taikoma jos politika. Daugiau apie šį partnerį ir jo duomenų tvarkymą galite sužinoti jo <a href=\"%{policyUrl}\" target=\"_blank\">privatumo politikoje</a>.",
-				"non_iab_vendor_disclaimer": "Daugiau apie %{name} ir jo duomenų tvarkymą galite sužinoti jo <a href=\"%{policyUrl}\" target=\"_blank\">privatumo politikoje</a>."
+				"non_iab_vendor_disclaimer": "Daugiau apie %{name} ir jo duomenų tvarkymą galite sužinoti jo <a href=\"%{policyUrl}\" target=\"_blank\">privatumo politikoje</a>.",
+				"opt_in": "Pasirinkti"
 			},
 			"sv": {
 				"information_storage_and_access_19227997": "Lagring och tillgång av information",
@@ -2524,7 +2547,8 @@
 				"legitimate_interest": "Legitimt intresse",
 				"purpose_details": "Uppgifter om syfte",
 				"iab_vendor_disclaimer": "%{name} deltar i <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB:s öppenhets- och samtyckesramverk</a> och omfattas därmed av dess policyer. Mer information om denna partner och dess databearbetning finns i <a href=\"%{policyUrl}\" target=\"_blank\">integritetspolicyn</a>.",
-				"non_iab_vendor_disclaimer": "Mer information om %{name} och dess databearbetning finns i <a href=\"%{policyUrl}\" target=\"_blank\">integritetspolicyn</a>."
+				"non_iab_vendor_disclaimer": "Mer information om %{name} och dess databearbetning finns i <a href=\"%{policyUrl}\" target=\"_blank\">integritetspolicyn</a>.",
+				"opt_in": "Anmäl"
 			},
 			"ru": {
 				"information_storage_and_access_19227997": "Хранение данных и доступ к ним",
@@ -2628,7 +2652,8 @@
 				"legitimate_interest": "Законные интересы",
 				"purpose_details": "Сведения о цели",
 				"iab_vendor_disclaimer": "%{name} участвует в программе <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> и подпадает под действие ее политик. Подробные сведения об этом партнере и его порядке обработки данных приведены в его <a href=\"%{policyUrl}\" target=\"_blank\">политике конфиденциальности</a>.",
-				"non_iab_vendor_disclaimer": "Подробные сведения о партнере %{name} и его порядке обработки данных приведены в его <a href=\"%{policyUrl}\" target=\"_blank\">политике конфиденциальности</a>."
+				"non_iab_vendor_disclaimer": "Подробные сведения о партнере %{name} и его порядке обработки данных приведены в его <a href=\"%{policyUrl}\" target=\"_blank\">политике конфиденциальности</a>.",
+				"opt_in": "Присоединиться"
 			},
 			"uk": {
 				"information_storage_and_access_19227997": "Зберігання інформації та доступ до неї",
@@ -2732,7 +2757,8 @@
 				"legitimate_interest": "Законні інтереси",
 				"purpose_details": "Відомості про мету",
 				"iab_vendor_disclaimer": "%{name} бере участь у програмі <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> та підпадає під дію її політик. Докладні відомості про цього партнера та його порядок обробки даних наведено в його <a href=\"%{policyUrl}\" target=\"_blank\">політиці конфіденційності</a>.",
-				"non_iab_vendor_disclaimer": "Докладні відомості про партнера %{name} та його порядок обробки даних наведено в його <a href=\"%{policyUrl}\" target=\"_blank\">політиці конфіденційності</a>."
+				"non_iab_vendor_disclaimer": "Докладні відомості про партнера %{name} та його порядок обробки даних наведено в його <a href=\"%{policyUrl}\" target=\"_blank\">політиці конфіденційності</a>.",
+				"opt_in": "Приєднатися"
 			}
 		}
 	},
@@ -2875,7 +2901,16 @@
 				"advertising_personalization",
 				"content_personalization",
 				"ad_delivery",
-				"analytics"
+				"analytics",
+				"select_basic_ads",
+				"create_ads_profile",
+				"select_personalized_ads",
+				"create_content_profile",
+				"select_personalized_content",
+				"measure_ad_performance",
+				"measure_content_performance",
+				"market_research",
+				"improve_products"
 			],
 			"legIntPurposeIds": [],
 			"policyUrl": "https://aps.amazon.com/aps/privacy-policy/index.html",
@@ -2919,7 +2954,16 @@
 				"advertising_personalization",
 				"content_personalization",
 				"ad_delivery",
-				"analytics"
+				"analytics",
+				"select_basic_ads",
+				"create_ads_profile",
+				"select_personalized_ads",
+				"create_content_profile",
+				"select_personalized_content",
+				"measure_ad_performance",
+				"measure_content_performance",
+				"market_research",
+				"improve_products"
 			],
 			"legIntPurposeIds": [],
 			"policyUrl": "https://policies.google.com/privacy",
@@ -2933,7 +2977,16 @@
 				"advertising_personalization",
 				"content_personalization",
 				"ad_delivery",
-				"analytics"
+				"analytics",
+				"select_basic_ads",
+				"create_ads_profile",
+				"select_personalized_ads",
+				"create_content_profile",
+				"select_personalized_content",
+				"measure_ad_performance",
+				"measure_content_performance",
+				"market_research",
+				"improve_products"
 			],
 			"legIntPurposeIds": [],
 			"policyUrl": "https://policies.google.com/privacy",
@@ -2947,7 +3000,16 @@
 				"advertising_personalization",
 				"content_personalization",
 				"ad_delivery",
-				"analytics"
+				"analytics",
+				"select_basic_ads",
+				"create_ads_profile",
+				"select_personalized_ads",
+				"create_content_profile",
+				"select_personalized_content",
+				"measure_ad_performance",
+				"measure_content_performance",
+				"market_research",
+				"improve_products"
 			],
 			"legIntPurposeIds": [],
 			"policyUrl": "https://policies.google.com/privacy",
@@ -2961,7 +3023,16 @@
 				"advertising_personalization",
 				"content_personalization",
 				"ad_delivery",
-				"analytics"
+				"analytics",
+				"select_basic_ads",
+				"create_ads_profile",
+				"select_personalized_ads",
+				"create_content_profile",
+				"select_personalized_content",
+				"measure_ad_performance",
+				"measure_content_performance",
+				"market_research",
+				"improve_products"
 			],
 			"legIntPurposeIds": [],
 			"policyUrl": "https://policies.google.com/privacy",
@@ -2975,7 +3046,16 @@
 				"advertising_personalization",
 				"content_personalization",
 				"ad_delivery",
-				"analytics"
+				"analytics",
+				"select_basic_ads",
+				"create_ads_profile",
+				"select_personalized_ads",
+				"create_content_profile",
+				"select_personalized_content",
+				"measure_ad_performance",
+				"measure_content_performance",
+				"market_research",
+				"improve_products"
 			],
 			"legIntPurposeIds": [],
 			"policyUrl": "http://www.addthis.com/privacy",
@@ -2990,7 +3070,16 @@
 				"cookies",
 				"advertising_personalization",
 				"ad_delivery",
-				"analytics"
+				"analytics",
+				"select_basic_ads",
+				"create_ads_profile",
+				"select_personalized_ads",
+				"create_content_profile",
+				"select_personalized_content",
+				"measure_ad_performance",
+				"measure_content_performance",
+				"market_research",
+				"improve_products"
 			],
 			"iabId": "124",
 			"legIntPurposeIds": [],

@@ -6,11 +6,11 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		rgde6FXVUAdeRqji89mIcHlu5J4=
+		bspL3Ywwtau95WrqFM++YjaBbxI=
 		</data>
 		<key>Headers/Didomi-Swift.h</key>
 		<data>
-		eZp12fBWbbIzveXRGBjRzTvhTEY=
+		jP031xz2YJ/VVJtwlP5092QYZ/Y=
 		</data>
 		<key>Headers/Didomi.h</key>
 		<data>
@@ -18,55 +18,55 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		edIgKPmDPUl5bKO6j0LgGU2I6ZE=
+		/RtApsFpkf1QyfCz4mgmolDwUeU=
 		</data>
 		<key>Modules/Didomi.swiftmodule/Project/i386-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		2caUA2CvqpRr1rnzUIEEOFpIZ08=
+		FVL80yKNfJhLDckyEcimCCXrNf4=
 		</data>
 		<key>Modules/Didomi.swiftmodule/Project/i386.swiftsourceinfo</key>
 		<data>
-		2caUA2CvqpRr1rnzUIEEOFpIZ08=
+		FVL80yKNfJhLDckyEcimCCXrNf4=
 		</data>
 		<key>Modules/Didomi.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		5DXv+yv+lmjNr0SSEFMIZLzo/XA=
+		91+MWsoEn8lXLFL19ysCTwhuyJY=
 		</data>
 		<key>Modules/Didomi.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<data>
-		5DXv+yv+lmjNr0SSEFMIZLzo/XA=
+		91+MWsoEn8lXLFL19ysCTwhuyJY=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
-		wLse0mPkgZ1xm5Vhl39t0jZkJqU=
+		iFqw4JVXdb7m7HdtuiDmfDq/76o=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		v0psB74T+qvRYD/CwncRzyvsB9A=
+		REA55vDrM59848nxq+IVNC8wNbw=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386.swiftdoc</key>
 		<data>
-		wLse0mPkgZ1xm5Vhl39t0jZkJqU=
+		iFqw4JVXdb7m7HdtuiDmfDq/76o=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386.swiftmodule</key>
 		<data>
-		v0psB74T+qvRYD/CwncRzyvsB9A=
+		REA55vDrM59848nxq+IVNC8wNbw=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		4htiO8p723YYQarJf8LGD7nn+Qw=
+		bZfRG13/HLNuojxIJbEo40ZFvk0=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		PFTN8jBbsrsd+BfVy1TwBi2+xbk=
+		wH4zthrOk/+AIka911gmJj9xkxc=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		4htiO8p723YYQarJf8LGD7nn+Qw=
+		bZfRG13/HLNuojxIJbEo40ZFvk0=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		PFTN8jBbsrsd+BfVy1TwBi2+xbk=
+		wH4zthrOk/+AIka911gmJj9xkxc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -74,15 +74,15 @@
 		</data>
 		<key>didomi_iab_config.json</key>
 		<data>
-		0EZmokdCAHJLqiKf2vRILJbZLTQ=
+		w109vulXFTO6gS6RA9iqJPCzDWo=
 		</data>
 		<key>didomi_iab_config_v2.json</key>
 		<data>
-		FNLTn8lhkJlO7y33CpHw1UY1mTU=
+		95ahb3H+uqOK9v66XQsEQkdjYIY=
 		</data>
 		<key>didomi_master_config.json</key>
 		<data>
-		tYE4UvRbUx3qis3NJWPwn+BZe8Q=
+		4UtqUIBXc+A2hfy/5TKG6VdE7rQ=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -91,22 +91,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			rgde6FXVUAdeRqji89mIcHlu5J4=
+			bspL3Ywwtau95WrqFM++YjaBbxI=
 			</data>
 			<key>hash2</key>
 			<data>
-			F7u7Pf/DfBTTpo3Rij6wak8y9lf5vZ+UljS9LWB9V1o=
+			wJ5iR7pvY2OIZXbJ6ZkS1y8B7+Y4eiEI64S9H87cgGY=
 			</data>
 		</dict>
 		<key>Headers/Didomi-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			eZp12fBWbbIzveXRGBjRzTvhTEY=
+			jP031xz2YJ/VVJtwlP5092QYZ/Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			izpvXuLjy9Bx2/GfSkZ03wDNT8pBpxLOyhSzpfOh7Gk=
+			urOjXSs9kMnHQAXK4h7+F6CQBG3yPDw1GiGKrWz8VbE=
 			</data>
 		</dict>
 		<key>Headers/Didomi.h</key>
@@ -124,132 +124,132 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2caUA2CvqpRr1rnzUIEEOFpIZ08=
+			FVL80yKNfJhLDckyEcimCCXrNf4=
 			</data>
 			<key>hash2</key>
 			<data>
-			geMGc3Ge0GaFcj8/rwZSakk5zBgoiEIDvX6YHMn4c5g=
+			srOVGbyIFfyp3RIMz44PeMxtDii+TipywpkIQ99V6Xk=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/Project/i386.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			2caUA2CvqpRr1rnzUIEEOFpIZ08=
+			FVL80yKNfJhLDckyEcimCCXrNf4=
 			</data>
 			<key>hash2</key>
 			<data>
-			geMGc3Ge0GaFcj8/rwZSakk5zBgoiEIDvX6YHMn4c5g=
+			srOVGbyIFfyp3RIMz44PeMxtDii+TipywpkIQ99V6Xk=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5DXv+yv+lmjNr0SSEFMIZLzo/XA=
+			91+MWsoEn8lXLFL19ysCTwhuyJY=
 			</data>
 			<key>hash2</key>
 			<data>
-			DybfDpcQL3xN8GZwcatv7a1789hPvLYxPI4NSz6LDfY=
+			EujlUN7TL8GgUJp9+NiFJMOfx0F1mOmvruYdUXDv8cQ=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5DXv+yv+lmjNr0SSEFMIZLzo/XA=
+			91+MWsoEn8lXLFL19ysCTwhuyJY=
 			</data>
 			<key>hash2</key>
 			<data>
-			DybfDpcQL3xN8GZwcatv7a1789hPvLYxPI4NSz6LDfY=
+			EujlUN7TL8GgUJp9+NiFJMOfx0F1mOmvruYdUXDv8cQ=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wLse0mPkgZ1xm5Vhl39t0jZkJqU=
+			iFqw4JVXdb7m7HdtuiDmfDq/76o=
 			</data>
 			<key>hash2</key>
 			<data>
-			UBOrp9f5t475wje2x3ak+PhspimBSZwwjrp3Bn3l8Sc=
+			OcyY2dnqlUBgfzImGNHCAgLy8jYLNwqPo8M5j98Pv6I=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			v0psB74T+qvRYD/CwncRzyvsB9A=
+			REA55vDrM59848nxq+IVNC8wNbw=
 			</data>
 			<key>hash2</key>
 			<data>
-			TMayNJ2ozptARsDwJ727ogD784bnhX7KbQtTIHQfTjY=
+			L9ECg7cg2YYFg5qqHb1kuYGR+vRzErFmyh5ZBXSsCB4=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wLse0mPkgZ1xm5Vhl39t0jZkJqU=
+			iFqw4JVXdb7m7HdtuiDmfDq/76o=
 			</data>
 			<key>hash2</key>
 			<data>
-			UBOrp9f5t475wje2x3ak+PhspimBSZwwjrp3Bn3l8Sc=
+			OcyY2dnqlUBgfzImGNHCAgLy8jYLNwqPo8M5j98Pv6I=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			v0psB74T+qvRYD/CwncRzyvsB9A=
+			REA55vDrM59848nxq+IVNC8wNbw=
 			</data>
 			<key>hash2</key>
 			<data>
-			TMayNJ2ozptARsDwJ727ogD784bnhX7KbQtTIHQfTjY=
+			L9ECg7cg2YYFg5qqHb1kuYGR+vRzErFmyh5ZBXSsCB4=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4htiO8p723YYQarJf8LGD7nn+Qw=
+			bZfRG13/HLNuojxIJbEo40ZFvk0=
 			</data>
 			<key>hash2</key>
 			<data>
-			G5lYrTlRRKWJTVsrjYGH4woEgO1lGI4IqPRN6LMuvnk=
+			J1sh1VYYrEhZ0DXXVeyI6C2LISO3Rd0zvWc7kc+L3A4=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PFTN8jBbsrsd+BfVy1TwBi2+xbk=
+			wH4zthrOk/+AIka911gmJj9xkxc=
 			</data>
 			<key>hash2</key>
 			<data>
-			nutLu2m+sH9+cOS4tDAk90H7+FguGtI1nhjsZTaG+c8=
+			3OMz1PU6pJQWQjS0cVqk+GSZtfoegVW/qwawwnMe2NQ=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4htiO8p723YYQarJf8LGD7nn+Qw=
+			bZfRG13/HLNuojxIJbEo40ZFvk0=
 			</data>
 			<key>hash2</key>
 			<data>
-			G5lYrTlRRKWJTVsrjYGH4woEgO1lGI4IqPRN6LMuvnk=
+			J1sh1VYYrEhZ0DXXVeyI6C2LISO3Rd0zvWc7kc+L3A4=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PFTN8jBbsrsd+BfVy1TwBi2+xbk=
+			wH4zthrOk/+AIka911gmJj9xkxc=
 			</data>
 			<key>hash2</key>
 			<data>
-			nutLu2m+sH9+cOS4tDAk90H7+FguGtI1nhjsZTaG+c8=
+			3OMz1PU6pJQWQjS0cVqk+GSZtfoegVW/qwawwnMe2NQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -267,33 +267,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0EZmokdCAHJLqiKf2vRILJbZLTQ=
+			w109vulXFTO6gS6RA9iqJPCzDWo=
 			</data>
 			<key>hash2</key>
 			<data>
-			so7Ev2Nk7TsPdY3TTgK17FfMfWGVXbo+eOhMFnVCSz4=
+			tEYPHn4/snLJop/tDnxp6C0lkg+0QM0ZdGIm1ikeZ7Y=
 			</data>
 		</dict>
 		<key>didomi_iab_config_v2.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FNLTn8lhkJlO7y33CpHw1UY1mTU=
+			95ahb3H+uqOK9v66XQsEQkdjYIY=
 			</data>
 			<key>hash2</key>
 			<data>
-			PKwx25e+QU4k7Gk1jRIgM8d3sOocvQp5Xx1mEA5ZZaQ=
+			VASbsbi8+XugS5/a/6YQYAQVabJ05VgZZMnxJRJ0qsU=
 			</data>
 		</dict>
 		<key>didomi_master_config.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			tYE4UvRbUx3qis3NJWPwn+BZe8Q=
+			4UtqUIBXc+A2hfy/5TKG6VdE7rQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			PLH94hxyelSAUpTj07LVD/xdM5syhZIz/Ui3Gzlw3ec=
+			XTLgd2Uu2TG7/mSMp0yj4WV78CPwGLOlMxk0myvvUJ8=
 			</data>
 		</dict>
 	</dict>
