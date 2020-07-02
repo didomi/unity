@@ -12,11 +12,20 @@ namespace IO.Didomi.SDK.UnityEditor
     public class UnityEditorDidomi : IDidomi
     {
         private bool _isInitialized = false;
+        private bool _disableMockUI = false;
         private Action _onReadyAction = null;
 
         public void AddEventListener(DidomiEventListener eventListener)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Disables showing mock UIs If platform is Unity Editor.
+        /// </summary>
+        public void DisableMockUI(bool disable)
+        {
+            _disableMockUI = disable;
         }
 
         public ISet<string> GetDisabledPurposeIds()
@@ -180,11 +189,21 @@ namespace IO.Didomi.SDK.UnityEditor
 
         public void SetupUI()
         {
+            if (_disableMockUI)
+            {
+                return;
+            }
+
             ShowNoticeMockUI();
         }
 
         public void ShowPreferences()
         {
+            if (_disableMockUI)
+            {
+                return;
+            }
+
             ShowPreferencesMockUI();
         }
 
@@ -219,6 +238,11 @@ namespace IO.Didomi.SDK.UnityEditor
 
         public void ShowNotice()
         {
+            if (_disableMockUI)
+            {
+                return;
+            }
+
             ShowNoticeMockUI();
         }
 
@@ -235,8 +259,7 @@ namespace IO.Didomi.SDK.UnityEditor
         private UnityEditorMockUI GetMockUIScript()
         {
             GameObject mockUI = new GameObject("DidomiPluginMockUI");
-            mockUI.AddComponent<UnityEditorMockUI>();
-            return mockUI.GetComponent<UnityEditorMockUI>();
+            return mockUI.AddComponent<UnityEditorMockUI>();
         }
 
         public void UpdateSelectedLanguage(string languageCode)

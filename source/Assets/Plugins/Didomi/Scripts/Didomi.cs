@@ -72,6 +72,19 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Disables or enables showing mock UIs If platform is Unity Editor.
+        /// </summary>
+        /// <param name="disable">True disables, otherwise false.</param>
+        public void DisableMockUI(bool disable)
+        {
+            UnityEditorDidomi editorPlatform = didomiForPlatform as UnityEditorDidomi;
+            if (editorPlatform != null)
+            {
+                editorPlatform.DisableMockUI(disable);
+            }
+        }
+
+        /// <summary>
         /// Get the disabled purposes
         /// </summary>
         /// <returns></returns>
