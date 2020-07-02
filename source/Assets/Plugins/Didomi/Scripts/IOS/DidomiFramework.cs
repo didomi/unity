@@ -14,7 +14,7 @@ namespace IO.Didomi.SDK.IOS
     {
 		//#if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void setUserAgent(string agentName, string agentSDKVersion);
+        private static extern void setUserAgent(string name, string version);
         //#endif
 
         public static void SetUserAgent()

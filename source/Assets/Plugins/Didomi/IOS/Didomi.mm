@@ -129,10 +129,10 @@ NSString* _Nonnull CreateNSString ( char* string)
 
 
 
-void setUserAgent(char* agentName, char* agentSDKVersion)
+void setUserAgent(char* name, char* version)
 {
 
-         [[Didomi shared]      setUserAgentWithAgentName: CreateNSString(agentName) agentSDKVersion:CreateNSString(agentSDKVersion)];
+         [[Didomi shared]      setUserAgentWithName: CreateNSString(name) version:CreateNSString(version)];
 }
 
 
@@ -398,8 +398,7 @@ void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigu
 	{
 
 
-
-	[[Didomi shared] showPreferences];
+	[[Didomi shared] showPreferences:(nil) :(ViewsPurposes)];
 
 
 
