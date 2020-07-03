@@ -55,6 +55,7 @@ public class DemoGUI : MonoBehaviour
         panel= GameObject.Find("Panel");
         SetResponsiveLayout();
         InitilizeDidomi();
+        Didomi.GetInstance().SetupUI();
     }
 
     void SetResponsiveLayout()
