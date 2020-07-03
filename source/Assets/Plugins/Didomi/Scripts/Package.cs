@@ -10,6 +10,17 @@ namespace IO.Didomi.SDK
     public class Package
     {
         public static Package _instance;
+        public static string _packageJsonContent = string.Empty;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        static void LoadPackageJson()
+        {
+            var packageJsonContentTextAsset = Resources.Load<TextAsset>("package");
+            if (packageJsonContentTextAsset != null)
+            {
+                _packageJsonContent = packageJsonContentTextAsset.text;
+            }
+        }
 
         public static Package GetInstance()
         {
@@ -19,12 +30,10 @@ namespace IO.Didomi.SDK
                 {
                     _instance = new Package();
 
-                    var packageJsonContent = Resources.Load<TextAsset>("package");
-
-                    //instead of using "JsonConvert.DeserializeObject<Package>(packageJsonContent.text)"
+                    //instead of using "JsonConvert.DeserializeObject<Package>(_packageJsonContent)"
                     //token based parsing used to fill Package. JsonConvert didnot worked.
 
-                    StringReader jsonReaderString = new StringReader(packageJsonContent.text);
+                    StringReader jsonReaderString = new StringReader(_packageJsonContent);
 
                     using (JsonTextReader reader = new JsonTextReader(jsonReaderString))
                     {
