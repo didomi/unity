@@ -241,7 +241,7 @@ namespace IO.Didomi.SDK.Android
 
         public void ShowPreferences()
         {
-            CallVoidMethodWithActivityArg("showPreferences");
+            CallReturningMethodWithActivityArg("showPreferences");
         }
 
         public void Reset()
@@ -311,6 +311,31 @@ namespace IO.Didomi.SDK.Android
                             var pluginInstance = _pluginClass.CallStatic<AndroidJavaObject>("getInstance");
 
                             pluginInstance.Call(methodName, activity);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(string.Format("Exception:{0}", ex.ToString()));
+
+                throw ex;
+            }
+        }
+
+        private static void CallReturningMethodWithActivityArg(string methodName)
+        {
+            try
+            {
+                using (var playerClass = new AndroidJavaClass(UnityPlayerFullClassName))
+                {
+                    using (var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity"))
+                    {
+                        using (var _pluginClass = new AndroidJavaClass(PluginName))
+                        {
+                            var pluginInstance = _pluginClass.CallStatic<AndroidJavaObject>("getInstance");
+
+                            pluginInstance.Call<AndroidJavaObject>(methodName, activity);
                         }
                     }
                 }
