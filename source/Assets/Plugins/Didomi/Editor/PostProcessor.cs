@@ -217,8 +217,7 @@ public static class PostProcessor
     implementation 'com.android.support:customtabs:27.1.1'
     implementation ""org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version""
     api 'com.iab.gdpr_android:gdpr_android:1.0.1'
-    api 'com.google.code.gson:gson:2.8.5'
-    api 'com.rm:rmswitch:1.2.2'";
+    api 'com.google.code.gson:gson:2.8.5'";
         ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
     }
 
