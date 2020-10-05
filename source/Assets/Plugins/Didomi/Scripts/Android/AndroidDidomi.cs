@@ -264,8 +264,12 @@ namespace IO.Didomi.SDK.Android
                 "setUserConsentStatus",
                 AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledPurposeIds),
                 AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledPurposeIds),
+				AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(new HashSet<string>()),
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(new HashSet<string>()),
                 AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledVendorIds),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledVendorIds));
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledVendorIds),
+				AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(new HashSet<string>()),
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(new HashSet<string>()));
         }
 
         public bool SetUserDisagreeToAll()

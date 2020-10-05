@@ -464,7 +464,7 @@ public class DemoGUI : MonoBehaviour
 
             ISet<string> enabledPurposeIds = Didomi.GetInstance().GetRequiredPurposeIds();
             ISet<string> disabledPurposeIds = new HashSet<string>();
-            ISet<string> enabledVendorIds = Didomi.GetInstance().GetRequiredVendorIds();
+            ISet<string> enabledVendorIds = new HashSet<string>();
             ISet<string> disabledVendorIds = new HashSet<string>();
 
             var retval = Didomi.GetInstance().SetUserConsentStatus(

@@ -135,6 +135,7 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     // See https://stackoverflow.com/questions/50009286/gradle-mixing-versions-27-1-1-and-26-1-0
     implementation 'com.android.support:customtabs:27.1.1'
     implementation ""org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version""
+	implementation ""org.apmem.tools:layouts:1.10""
     api 'com.iab.gdpr_android:gdpr_android:1.0.1'
     api 'com.google.code.gson:gson:2.8.5'";
         PostProcessor.ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
