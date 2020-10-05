@@ -398,7 +398,7 @@ void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigu
 	{
 
 
-	[[Didomi shared] showPreferences:(nil) :(ViewsPurposes)];
+	[[Didomi shared] showPreferencesWithController:(nil) view:(ViewsPurposes)];
 
 
 

@@ -133,7 +133,9 @@
 				"purpose_details": "Purpose Details",
 				"iab_vendor_disclaimer": "%{name} participates in the <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> and is subject to its policies. You can learn more about this partner and its data processing in its <a href=\"%{policyUrl}\" target=\"_blank\">privacy policy</a>.",
 				"non_iab_vendor_disclaimer": "You can learn more about %{name} and its data processing in its <a href=\"%{policyUrl}\" target=\"_blank\">privacy policy</a>.",
-				"opt_in": "Opt-in"
+				"opt_in": "Opt-in",
+				"list_of_additional_data_processing_on_purposes": "By agreeing to the purposes above, you also allow this app and its partners to operate the following data processing:",
+				"additional_data_processing": "Additional data processing"
 			},
 			"fr": {
 				"information_storage_and_access_19227997": "Conservation et accès aux informations ",
@@ -223,13 +225,13 @@
 				"feature_1_description_legal": "Les partenaires peuvent : \n* Combiner des données obtenues hors ligne avec des données collectées en ligne à l’appui d’une ou de plusieurs Finalités ou Finalités spéciales.\n",
 				"feature_2_name": "Relier différents terminaux",
 				"feature_2_description": "Différents terminaux peuvent être identifiés comme vous appartenant ou appartenant à votre foyer à l’appui d’une ou de plusieurs finalités",
-				"feature_2_description_legal": "Les partnenaires peuvent :\n* Déterminer, selon une approche déterministe, que deux terminaux ou plus appartiennent au même utilisateur ou au même foyer\n* Déterminer, selon une approche probabiliste, que deux terminaux ou plus appartiennent au même utilisateur ou au même foyer\n* Analyser activement les caractéristiques du terminal pour l’identification probabiliste si les utilisateurs ont autorisé les partenanaires à analyser activement les caractéristiques du terminal pour l’identification (Fonctionnalité spéciale 2)\n",
+				"feature_2_description_legal": "Les partenaires peuvent :\n* Déterminer, selon une approche déterministe, que deux terminaux ou plus appartiennent au même utilisateur ou au même foyer\n* Déterminer, selon une approche probabiliste, que deux terminaux ou plus appartiennent au même utilisateur ou au même foyer\n* Analyser activement les caractéristiques du terminal pour l’identification probabiliste si les utilisateurs ont autorisé les partenaires à analyser activement les caractéristiques du terminal pour l’identification (Fonctionnalité spéciale 2)\n",
 				"feature_3_name": "Recevoir et utiliser des caractéristiques d’identification d’appareil envoyées automatiquement",
 				"feature_3_description": "Votre appareil peut être distingué d’autres appareils en fonction des informations qu’il envoie automatiquement, telles que l’adresse IP ou le type de navigateur.",
 				"feature_3_description_legal": "Les partenaires peuvent :\n* Créer un identifiant à l’aide des données collectées automatiquement à partir d’un appareil pour des caractéristiques spécifiques ; par ex., adresse IP, chaîne d’agent utilisateur.\n* Utiliser cet identifiant pour réidentifier un appareil.\nLes partenaires ne peuvent pas :\n* Créer un identifiant à l’aide des données collectées via une analyse active d’un terminal pour l’identification de caractéristiques spécifiques (par exemple, des polices installées ou la résolution d’écran) sans une adhésion distincte de l’utilisateur à l’analyse active des caractéristiques de l’appareil à des fins d’identification.\n* Utiliser cet identifiant pour ré-identifier un terminal.\n",
 				"special_feature_1_name": "Utiliser des données de géolocalisation précises",
 				"special_feature_1_description": "Vos données de géolocalisation précises peuvent être utilisées à l’appui d’une ou de plusieurs finalités. Cela signifie que votre localisation peut être précise à plusieurs mètres près.",
-				"special_feature_1_description_legal": "Les partnenaires peuvent :\n* Collecter et traiter des données de géolocalisation précises à l’appui d’une ou de plusieurs finalités.\nN.B. Une géolocalisation précise signifie qu’il n’y a aucune restriction à la précision de la localisation d’un utilisateur ; elle peut être précise à quelques mètres près.\n",
+				"special_feature_1_description_legal": "Les partenaires peuvent :\n* Collecter et traiter des données de géolocalisation précises à l’appui d’une ou de plusieurs finalités.\nN.B. Une géolocalisation précise signifie qu’il n’y a aucune restriction à la précision de la localisation d’un utilisateur ; elle peut être précise à quelques mètres près.\n",
 				"special_feature_2_name": "Analyser activement les caractéristiques du terminal pour l’identification",
 				"special_feature_2_description": "Votre terminal peut être identifié sur la base d’une analyse de la combinaison unique de caractéristiques de votre terminal.",
 				"special_feature_2_description_legal": "Les partenaires peuvent :\n* Créer un identifiant à l’aide des données collectées via une analyse active d’un terminal pour l’identification de caractéristiques spécifiques, par exemple des polices installées ou la résolution d’écran. \n* Utiliser cet identifiant pour ré-identifier un terminal.\n",
@@ -238,7 +240,9 @@
 				"purpose_details": "Détails de l'objectif",
 				"iab_vendor_disclaimer": "%{name} fait partie du <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> et est assujetti par ses règlements. Vous pouvez en apprendre davantage sur ce partenaire et sur la façon dont il traite les données dans sa <a href=\"%{policyUrl}\" target=\"_blank\">politique de confidentialité</a>.",
 				"non_iab_vendor_disclaimer": "Vous pouvez en apprendre davantage sur %{name} et sur la façon dont cette entité traite les données dans sa <a href=\"%{policyUrl}\" target=\"_blank\">politique de confidentialité</a>.",
-				"opt_in": "Accepter"
+				"opt_in": "Accepter",
+				"list_of_additional_data_processing_on_purposes": "En donnant votre consentement aux finalités ci-dessus, vous autorisez également cette application et ses partenaires à réaliser les traitements de données suivants :",
+				"additional_data_processing": "Traitements de données supplémentaires"
 			},
 			"de": {
 				"information_storage_and_access_19227997": "Speicherung und Zugriff auf Informationen",
@@ -343,7 +347,9 @@
 				"purpose_details": "Zweck-Details",
 				"iab_vendor_disclaimer": "%{name} beteiligt sich am <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> und unterliegt dessen Richtlinien. Sie können mehr über diesen Partner und dessen Datenverarbeitungspraxis in dessen <a href=\"%{policyUrl}\" target=\"_blank\">Datenschutzrichtlinie</a> erfahren.",
 				"non_iab_vendor_disclaimer": "Sie können mehr über %{name} und dessen Datenverarbeitungspraxis in dessen <a href=\"%{policyUrl}\" target=\"_blank\">Datenschutzrichtlinie</a> erfahren.",
-				"opt_in": "Ein"
+				"opt_in": "Ein",
+				"list_of_additional_data_processing_on_purposes": "Mit Ihrer Zustimmung zu den oben genannten Zwecken gestatten Sie dieser App und ihren Partnern außerdem folgende Datenverarbeitung:",
+				"additional_data_processing": "Zusätzliche Datenverarbeitung"
 			},
 			"pt": {
 				"information_storage_and_access_19227997": "Conservação e acesso a informações",
@@ -448,7 +454,9 @@
 				"purpose_details": "Detalhes dos fins",
 				"iab_vendor_disclaimer": "O parceiro %{name} participa na <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Estrutura de Transparência e Consentimento do IAB</a> e está sujeito às respetivas políticas. Pode obter mais informações sobre este parceiro e o processamento de dados que realiza na respetiva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacidade</a>.",
 				"non_iab_vendor_disclaimer": "Pode obter mais informações sobre o parceiro %{name} e o processamento de dados que realiza na respetiva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacidade</a>.",
-				"opt_in": "Ativar"
+				"opt_in": "Ativar",
+				"list_of_additional_data_processing_on_purposes": "Ao concordar com os fins acima mencionados, também permite que esta aplicação e os respetivos parceiros realizem o processamento dos seguintes dados:",
+				"additional_data_processing": "Processamento adicional de dados"
 			},
 			"it": {
 				"information_storage_and_access_19227997": "Conservazione e accesso alle informazioni",
@@ -553,7 +561,9 @@
 				"purpose_details": "Dettagli sullo scopo",
 				"iab_vendor_disclaimer": "%{name} partecipa all'accordo <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> ed è soggetto alle sue politiche. Ulteriori informazioni sul partner selezionato e l'elaborazione dei dati sono disponibili nell'<a href=\"%{policyUrl}\" target=\"_blank\">Informativa sulla privacy</a>.",
 				"non_iab_vendor_disclaimer": "Ulteriori informazioni su %{name} e l'elaborazione dei dati sono disponibili nell'<a href=\"%{policyUrl}\" target=\"_blank\">Informativa sulla privacy</a>.",
-				"opt_in": "Opt-in"
+				"opt_in": "Opt-in",
+				"list_of_additional_data_processing_on_purposes": "Accettando le finalità sopra indicate, l'utente consente all'app e ai suoi partner di eseguire la seguente elaborazione dei dati:",
+				"additional_data_processing": "Elaborazione dei dati supplementare"
 			},
 			"nl": {
 				"information_storage_and_access_19227997": "Opslag van en toegang tot informatie",
@@ -658,7 +668,9 @@
 				"purpose_details": "Informatie over doeleinden",
 				"iab_vendor_disclaimer": "%{name} draagt bij aan het <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> en houdt zich aan het beleid daarvan. Meer informatie over deze partner en de manier waarop deze gegevens verwerkt kunt u vinden in het <a href=\"%{policyUrl}\" target=\"_blank\">privacybeleid</a>.",
 				"non_iab_vendor_disclaimer": "Meer informatie over %{name} en de manier waarop deze partner gegevens verwerkt kunt u vinden in het bijbehorende <a href=\"%{policyUrl}\" target=\"_blank\">privacybeleid</a>.",
-				"opt_in": "Inschrijven"
+				"opt_in": "Inschrijven",
+				"list_of_additional_data_processing_on_purposes": "Door akkoord te gaan met de bovenstaande doeleinden, geeft u deze app en zijn partners ook toestemming om de volgende gegevensverwerking toe te passen:",
+				"additional_data_processing": "Aanvullende gegevensverwerking"
 			},
 			"ca": {
 				"information_storage_and_access_19227997": "Accés i emmagatzematge de la informació",
@@ -763,7 +775,9 @@
 				"purpose_details": "Detalls de la finalitat",
 				"iab_vendor_disclaimer": "%{name} participa al <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Marc de Feina amb Transparència i Consentiment del IAB</a> i està subjecte a llurs polítiques. Podeu obtenir més informació sobre aquest soci i llur processament de dades a la seva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacitat</a>.",
 				"non_iab_vendor_disclaimer": "Podeu obtenir més informació sobre %{name} i llur processament de dades a la seva <a href=\"%{policyUrl}\" target=\"_blank\">Política de Privacitat</a>.",
-				"opt_in": "Optar-hi"
+				"opt_in": "Optar-hi",
+				"list_of_additional_data_processing_on_purposes": "Quan doneu el consentiment als objectius anteriors també permeteu a aquest lloc web i a llurs socis que operin els següents processaments de dades:",
+				"additional_data_processing": "Processament de dades actuals"
 			},
 			"es": {
 				"information_storage_and_access_19227997": "Almacenamiento y acceso a la información",
@@ -868,7 +882,9 @@
 				"purpose_details": "Detalles del propósito",
 				"iab_vendor_disclaimer": "%{name} participa en el <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Marco de Transparencia y Consentimiento de IAB</a> y está sujeto a sus políticas. Puede obtener más información acerca de este socio y de su procesamiento de datos en su <a href=\"%{policyUrl}\" target=\"_blank\">política de privacidad</a>.",
 				"non_iab_vendor_disclaimer": "Puede obtener más información acerca de %{name} y de su procesamiento de datos en su <a href=\"%{policyUrl}\" target=\"_blank\">política de privacidad</a>.",
-				"opt_in": "Alta"
+				"opt_in": "Alta",
+				"list_of_additional_data_processing_on_purposes": "Al aceptar los fines mencionados arriba, también permite que esta aplicación y sus socios efectúen el siguiente tratamiento de datos:",
+				"additional_data_processing": "Tratamiento de datos adicional"
 			},
 			"ro": {
 				"information_storage_and_access_19227997": "Stocarea și accesarea informațiilor",
@@ -973,7 +989,9 @@
 				"purpose_details": "Detalii privind scopul",
 				"iab_vendor_disclaimer": "%{name} participă la <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Cadrul IAB pentru transparență și consimțământ</a> și respectă politicile sale. Puteți afla mai multe despre acest partener și modul în care prelucrează datele în <a href=\"%{policyUrl}\" target=\"_blank\">politica sa de confidențialitate</a>.",
 				"non_iab_vendor_disclaimer": "Puteți afla mai multe despre %{name} și modul în care prelucrează datele în <a href=\"%{policyUrl}\" target=\"_blank\">politica sa de confidențialitate</a>.",
-				"opt_in": "Optare"
+				"opt_in": "Optare",
+				"list_of_additional_data_processing_on_purposes": "Prin exprimarea acordului cu obiectivele susmenționate, permiteți, de asemenea, acestei aplicații și partenerilor săi să efectueze prelucrarea următoarelor date:",
+				"additional_data_processing": "Prelucrarea datelor suplimentare"
 			},
 			"hr": {
 				"information_storage_and_access_19227997": "Pohrana i pristup podacima",
@@ -1078,7 +1096,9 @@
 				"purpose_details": "Pojedinosti o svrsi",
 				"iab_vendor_disclaimer": "%{name} sudjeluje u <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Okvir IAB transparentnosti i suglasnosti</a> pa se na njega odnose ta pravila. Više o ovom partneru i obradi podataka koju vrši možete saznati u njihovim <a href=\"%{policyUrl}\" target=\"_blank\">pravilima o zaštiti privatnosti</a>.",
 				"non_iab_vendor_disclaimer": "Više o %{name} i načinu obrade podataka koju vrše možete saznati u njihovim <a href=\"%{policyUrl}\" target=\"_blank\">pravilima o zaštiti privatnosti</a>.",
-				"opt_in": "Pristanak"
+				"opt_in": "Pristanak",
+				"list_of_additional_data_processing_on_purposes": "Pristankom na gore navedene svrhe, ovoj aplikaciji i njezinim partnerima dopuštate obradu sljedećih podataka:",
+				"additional_data_processing": "Dodatna obrada podataka"
 			},
 			"cs": {
 				"information_storage_and_access_19227997": "Uložení informací a přístup k nim",
@@ -1183,7 +1203,9 @@
 				"purpose_details": "Podrobnosti o účelu",
 				"iab_vendor_disclaimer": "%{name} je účastníkem <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> a podléhá jeho zásadám. Další informace o tomto partnerovi a jeho zpracování údajů najdete v jeho <a href=\"%{policyUrl}\" target=\"_blank\">Zásadách ochrany osobních údajů</a>.",
 				"non_iab_vendor_disclaimer": "Více o %{name} a způsobu, jakým zpracovává údaje se dozvíte v <a href=\"%{policyUrl}\" target=\"_blank\">Zásadách ochrany osobních údajů</a>.",
-				"opt_in": "Přihlásit se"
+				"opt_in": "Přihlásit se",
+				"list_of_additional_data_processing_on_purposes": "Vaším souhlasem s výše uvedenými účely této aplikaci a jejím partnerům rovněž povolujete provozovat následující zpracování údajů:",
+				"additional_data_processing": "Další zpracování údajů"
 			},
 			"tr": {
 				"information_storage_and_access_19227997": "Bilgilerin depolanması ve erişim",
@@ -1288,7 +1310,9 @@
 				"purpose_details": "Amaç Ayrıntıları",
 				"iab_vendor_disclaimer": "%{name} <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Saydamlık ve Rıza Çerçevesine</a> katılmaktadır ve onun politikalarına tabidir. Bu ortak ve veri işlemesi hakkında daha fazla bilgiyi <a href=\"%{policyUrl}\" target=\"_blank\">gizlilik politikasından</a> edinebilirsiniz.",
 				"non_iab_vendor_disclaimer": "%{name} ve veri işlemesi hakkında daha fazla bilgiyi <a href=\"%{policyUrl}\" target=\"_blank\">gizlilik politikasından</a> edinebilirsiniz.",
-				"opt_in": "İsteğe bağlı katılım"
+				"opt_in": "İsteğe bağlı katılım",
+				"list_of_additional_data_processing_on_purposes": "Yukarıdaki amaçlar için izin vererek ayrıca bu uygulama ve ortaklarının aşağıdaki veri işlemelerini gerçekleştirmelerine izin vermiş olursunuz:",
+				"additional_data_processing": "İlave veri işleme"
 			},
 			"pl": {
 				"information_storage_and_access_19227997": "Przechowywanie i dostęp do informacji",
@@ -1393,7 +1417,9 @@
 				"purpose_details": "Szczegóły celu",
 				"iab_vendor_disclaimer": "%{name} jest częścią <a href=\"%{IABPolicyUrl}\" target=\"_blank\"> IAB Transparency and Consent Framework</a> i podlega jej zasadom. Możesz dowiedzieć się więcej o tym partnerze i jego zasadach przetwarzania danych w jego <a href=\"%{policyUrl}\" target=\"_blank\">polityce prywatności</a>.",
 				"non_iab_vendor_disclaimer": "Możesz dowiedzieć się więcej o %{name} i ich zasadach przetwarzania danych w ich <a href=\"%{policyUrl}\" target=\"_blank\">polityce prywatności</a>.",
-				"opt_in": "Wyraź zgodę"
+				"opt_in": "Wyraź zgodę",
+				"list_of_additional_data_processing_on_purposes": "Zgadzając się na powyższe cele, zezwalasz również tej aplikacji i jej partnerom na przetwarzanie następujących danych:",
+				"additional_data_processing": "Dodatkowe przetwarzanie danych"
 			},
 			"fi": {
 				"information_storage_and_access_19227997": "Tietojen tallennus ja tietoihin pääsy",
@@ -1498,7 +1524,9 @@
 				"purpose_details": "Tarkoituksen tiedot",
 				"iab_vendor_disclaimer": "%{name} on mukana <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB:n Transparency and Consent Framework -ohjelmassa</a> ja noudattaa sen käytäntöjä. Lisätietoja tästä yhteistyökumppanista sekä heidän tietojenkäsittelystään on löydettävissä heidän <a href=\"%{policyUrl}\" target=\"_blank\">tietosuojalausekkeestaan</a>.",
 				"non_iab_vendor_disclaimer": "%{name} tarjoaa lisätietoja itsestään ja tietojenkäsittelystään <a href=\"%{policyUrl}\" target=\"_blank\">tietosuojalausekkeessaan</a>.",
-				"opt_in": "Osallistu"
+				"opt_in": "Osallistu",
+				"list_of_additional_data_processing_on_purposes": "Hyväksymällä yllä mainitut käyttötarkoitukset annat lisäksi tälle sovellukselle ja sen yhteistyökumppaneille valtuudet seuraavaan tietojen käsittelyyn:",
+				"additional_data_processing": "Tietojen lisäkäsittely"
 			},
 			"el": {
 				"information_storage_and_access_19227997": "Αποθήκευση και πρόσβαση πληροφοριών",
@@ -1603,7 +1631,9 @@
 				"purpose_details": "Πληροφορίες για τον σκοπό",
 				"iab_vendor_disclaimer": "Ο/Η %{name} συμμετέχει στο <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Πλαίσιο Διαφάνειας και Συγκατάθεσης IAB</a> και υπόκειται στις πολιτικές της. Μπορείτε να μάθετε περισσότερα σχετικά με αυτόν τον συνεργάτη και την επεξεργασία δεδομένων που πραγματοποιεί στην <a href=\"%{policyUrl}\" target=\"_blank\">πολιτική απορρήτου</a> του.",
 				"non_iab_vendor_disclaimer": "Μπορείτε να μάθετε περισσότερα σχετικά με τον/την %{name} και την επεξεργασία δεδομένων που πραγματοποιεί στην <a href=\"%{policyUrl}\" target=\"_blank\">πολιτική απορρήτου</a> του/της.",
-				"opt_in": "Συμμετοχή"
+				"opt_in": "Συμμετοχή",
+				"list_of_additional_data_processing_on_purposes": "Συμφωνώντας με τους ως άνω σκοπούς, επιτρέπετε επίσης σε αυτήν την εφαρμογή και τους συνεργάτες της να πραγματοποιούν την ακόλουθη επεξεργασία δεδομένων:",
+				"additional_data_processing": "Επιπλέον επεξεργασία δεδομένων"
 			},
 			"hu": {
 				"information_storage_and_access_19227997": "Az adatok tárolása és az azokhoz való hozzáférés",
@@ -1708,7 +1738,9 @@
 				"purpose_details": "A cél részletei",
 				"iab_vendor_disclaimer": "%{name} részt vesz az <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Átláthatósági és hozzájárulási keretrendszerben</a>, és betartja annak irányelveit. E partnerünkről és adatfeldolgozásáról bővebben az <a href=\"%{policyUrl}\" target=\"_blank\">adatvédelmi szabályzatában</a> olvashat.",
 				"non_iab_vendor_disclaimer": "%{name} és adatfeldolgozása leírásáról bővebben az <a href=\"%{policyUrl}\" target=\"_blank\">adatvédelmi szabályzatában</a> olvashat.",
-				"opt_in": "Részvétel"
+				"opt_in": "Részvétel",
+				"list_of_additional_data_processing_on_purposes": "A fenti célokkal való egyetértéssel azt is engedélyezi, hogy a webhely és partnerei elvégezzék az alábbi adatkezelési műveleteket:",
+				"additional_data_processing": "További adatkezelés"
 			},
 			"da": {
 				"information_storage_and_access_19227997": "Opbevaring af og adgang til oplysninger",
@@ -1813,7 +1845,9 @@
 				"purpose_details": "Detaljer om formål",
 				"iab_vendor_disclaimer": "%{name} deltager i <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB's forskrifter for gennemsigtighed og samtykke</a> og er underlagt disse regler. Du kan lære mere om denne partner og databehandlingen i <a href=\"%{policyUrl}\" target=\"_blank\">fortrolighedspolitikken</a>.",
 				"non_iab_vendor_disclaimer": "Du kan lære mere om %{name} og databehandlingen i <a href=\"%{policyUrl}\" target=\"_blank\">fortrolighedspolitikken</a>.",
-				"opt_in": "Tilvælg"
+				"opt_in": "Tilvælg",
+				"list_of_additional_data_processing_on_purposes": "Ved at acceptere ovenstående formål tillader du også, at denne app og dens partnere udfører følgende databehandling:",
+				"additional_data_processing": "Yderligere databehandling"
 			},
 			"sk": {
 				"information_storage_and_access_19227997": "Uchovávanie informácií a prístup k nim",
@@ -1918,7 +1952,9 @@
 				"purpose_details": "Podrobnosti účelu",
 				"iab_vendor_disclaimer": "Partner %{name} sa zapája do <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Rámca transparentnosti a súhlasu združenia IAB</a> a uplatňujú sa na neho pravidlá tohto rámca. Viac informácií o tomto partnerovi a jeho spracovaní údajov sa dozviete v jeho <a href=\"%{policyUrl}\" target=\"_blank\">pravidlách ochrany súkromia</a>.",
 				"non_iab_vendor_disclaimer": "Viac o partnerovi %{name} a jeho spracúvaní údajov sa dozviete v jeho <a href=\"%{policyUrl}\" target=\"_blank\">pravidlách ochrany súkromia</a>.",
-				"opt_in": "Aktivovať"
+				"opt_in": "Aktivovať",
+				"list_of_additional_data_processing_on_purposes": "Odsúhlasením účelov vyššie povoľujete tejto aplikácii a jej partnerom vykonávať aj spracovanie nasledujúcich údajov:",
+				"additional_data_processing": "Ďalšie spracovanie údajov"
 			},
 			"bg": {
 				"information_storage_and_access_19227997": "Съхранение и достъп до информация",
@@ -2023,7 +2059,9 @@
 				"purpose_details": "Подробности за целта",
 				"iab_vendor_disclaimer": "%{name} участва в <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB  Рамка за прозрачност и съгласие</a> и подлежи на нейните политики. Можете да научите повече за този партньор и за обработването на данни в <a href=\"%{policyUrl}\" target=\"_blank\">политика за поверителност</a>.",
 				"non_iab_vendor_disclaimer": "Можете да научите повече за %{name} и за обработването на данни в <a href=\"%{policyUrl}\" target=\"_blank\">политика за поверителност</a>.",
-				"opt_in": "Приемане"
+				"opt_in": "Приемане",
+				"list_of_additional_data_processing_on_purposes": "Като давате съгласието си за посочените по-горе цели, Вие позволявате също на това приложение и неговите партньори да извършват следното \nобработване на данни:",
+				"additional_data_processing": "Допълнително обработване на данни"
 			},
 			"et": {
 				"information_storage_and_access_19227997": "Teabe säilitamine ja sellele juurdepääs",
@@ -2128,7 +2166,9 @@
 				"purpose_details": "Eesmärgi teave",
 				"iab_vendor_disclaimer": "%{name} on liitunud <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB läbipaistvuse ja nõusoleku raamistikuga</a> ja järgib selle põhimõtteid. Lisateavet leiate partneri <a href=\"%{policyUrl}\" target=\"_blank\">privaatsuspõhimõtetest</a>.",
 				"non_iab_vendor_disclaimer": "Lisateavet firma %{name} ja tema andmetöötluse kohta leiate selle <a href=\"%{policyUrl}\" target=\"_blank\">privaatsuspõhimõtetest</a>.",
-				"opt_in": "Tellimine"
+				"opt_in": "Tellimine",
+				"list_of_additional_data_processing_on_purposes": "Eelnevate eesmärkidega nõustudes lubate ka rakendusel ja selle partneritel töödelda andmeid järgnevatel viisidel:",
+				"additional_data_processing": "Täiendav andmetöötlus"
 			},
 			"sl": {
 				"information_storage_and_access_19227997": "Shranjevanje podatkov in dostop do njih",
@@ -2233,7 +2273,9 @@
 				"purpose_details": "Podrobnosti namena",
 				"iab_vendor_disclaimer": "%{name} sodeluje v <a href=\"%{IABPolicyUrl}\" target=\"_blank\">Okvirju za preglednost in soglasje IAB</a> in je predmet njegovih politik. Več o tem partnerju in o tem, kako obdeluje podatke, lahko najdete v <a href=\"%{policyUrl}\" target=\"_blank\">politiki zasebnosti</a>.",
 				"non_iab_vendor_disclaimer": "Več o %{name} in o tem, kako obdeluje podatke, lahko najdete v <a href=\"%{policyUrl}\" target=\"_blank\">politiki zasebnosti</a>.",
-				"opt_in": "Privoli"
+				"opt_in": "Privoli",
+				"list_of_additional_data_processing_on_purposes": "S soglašanjem z zgornjimi nameni tej aplikaciji in njenim partnerjem dovoljujete opravljanje naslednje obdelave podatkov:",
+				"additional_data_processing": "Dodatna obdelava podatkov"
 			},
 			"lv": {
 				"information_storage_and_access_19227997": "Informācijas uzglabāšana un tās pieejamība",
@@ -2338,7 +2380,9 @@
 				"purpose_details": "Mērķa apraksts",
 				"iab_vendor_disclaimer": "%{name} piedalās <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB caurspīdības un piekrišanas ietvarā</a> un ir tā politiku subjekts. Vairāk par šo partneri un tā veikto datu apstrādi varat uzzināt partnera <a href=\"%{policyUrl}\" target=\"_blank\">privātuma politikā</a>.",
 				"non_iab_vendor_disclaimer": "Jūs varat uzzināt vairāk par %{name} un šī partnera veikto datu apstrādi tā <a href=\"%{policyUrl}\" target=\"_blank\">privātuma politikā</a>.",
-				"opt_in": "Pieteikties"
+				"opt_in": "Pieteikties",
+				"list_of_additional_data_processing_on_purposes": "Piekrītot augstāk aprakstītajiem apstrādes mērķiem, jūs ļausiet šai lietotnei un tās partneriem veikt tālāk norādīto datu apstrādi:",
+				"additional_data_processing": "Papildu datu apstrāde"
 			},
 			"lt": {
 				"information_storage_and_access_19227997": "Informacijos saugojimas ir prieiga",
@@ -2443,7 +2487,9 @@
 				"purpose_details": "Paskirties duomenys",
 				"iab_vendor_disclaimer": "%{name} laikosi <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB skaidrumo ir sutikimo principų</a> ir jai taikoma jos politika. Daugiau apie šį partnerį ir jo duomenų tvarkymą galite sužinoti jo <a href=\"%{policyUrl}\" target=\"_blank\">privatumo politikoje</a>.",
 				"non_iab_vendor_disclaimer": "Daugiau apie %{name} ir jo duomenų tvarkymą galite sužinoti jo <a href=\"%{policyUrl}\" target=\"_blank\">privatumo politikoje</a>.",
-				"opt_in": "Pasirinkti"
+				"opt_in": "Pasirinkti",
+				"list_of_additional_data_processing_on_purposes": "Sutikdami su pirmiau minėtais tikslais taip pat leidžiate šiai programėlei ir jos partneriams atlikti šių duomenų apdorojimą:",
+				"additional_data_processing": "Papildomų duomenų apdorojimas"
 			},
 			"sv": {
 				"information_storage_and_access_19227997": "Lagring och tillgång av information",
@@ -2548,7 +2594,9 @@
 				"purpose_details": "Uppgifter om syfte",
 				"iab_vendor_disclaimer": "%{name} deltar i <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB:s öppenhets- och samtyckesramverk</a> och omfattas därmed av dess policyer. Mer information om denna partner och dess databearbetning finns i <a href=\"%{policyUrl}\" target=\"_blank\">integritetspolicyn</a>.",
 				"non_iab_vendor_disclaimer": "Mer information om %{name} och dess databearbetning finns i <a href=\"%{policyUrl}\" target=\"_blank\">integritetspolicyn</a>.",
-				"opt_in": "Anmäl"
+				"opt_in": "Anmäl",
+				"list_of_additional_data_processing_on_purposes": "Genom att godkänna syftena ovan tillåter du även att denna app och dess partners genomför följande databehandling:",
+				"additional_data_processing": "Ytterligare databehandling"
 			},
 			"ru": {
 				"information_storage_and_access_19227997": "Хранение данных и доступ к ним",
@@ -2653,7 +2701,9 @@
 				"purpose_details": "Сведения о цели",
 				"iab_vendor_disclaimer": "%{name} участвует в программе <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> и подпадает под действие ее политик. Подробные сведения об этом партнере и его порядке обработки данных приведены в его <a href=\"%{policyUrl}\" target=\"_blank\">политике конфиденциальности</a>.",
 				"non_iab_vendor_disclaimer": "Подробные сведения о партнере %{name} и его порядке обработки данных приведены в его <a href=\"%{policyUrl}\" target=\"_blank\">политике конфиденциальности</a>.",
-				"opt_in": "Присоединиться"
+				"opt_in": "Присоединиться",
+				"list_of_additional_data_processing_on_purposes": "Предоставляя согласие для указанных выше целей, вы также разрешаете данному приложению и его партнерам выполнять обработку следующих данных:",
+				"additional_data_processing": "Обработка дополнительных данных"
 			},
 			"uk": {
 				"information_storage_and_access_19227997": "Зберігання інформації та доступ до неї",
@@ -2758,7 +2808,9 @@
 				"purpose_details": "Відомості про мету",
 				"iab_vendor_disclaimer": "%{name} бере участь у програмі <a href=\"%{IABPolicyUrl}\" target=\"_blank\">IAB Transparency and Consent Framework</a> та підпадає під дію її політик. Докладні відомості про цього партнера та його порядок обробки даних наведено в його <a href=\"%{policyUrl}\" target=\"_blank\">політиці конфіденційності</a>.",
 				"non_iab_vendor_disclaimer": "Докладні відомості про партнера %{name} та його порядок обробки даних наведено в його <a href=\"%{policyUrl}\" target=\"_blank\">політиці конфіденційності</a>.",
-				"opt_in": "Приєднатися"
+				"opt_in": "Приєднатися",
+				"list_of_additional_data_processing_on_purposes": "Погоджуючись із наведеними вище цілями, ви також дозволяєте цій програмі та її партнерам обробляти дані таким чином:",
+				"additional_data_processing": "Обробка додаткових даних"
 			}
 		}
 	},
@@ -2967,7 +3019,10 @@
 			],
 			"legIntPurposeIds": [],
 			"policyUrl": "https://policies.google.com/privacy",
-			"namespace": "didomi"
+			"namespace": "didomi",
+            "namespaces": {
+                "iab2": "755"
+            }
 		},
 		{
 			"id": "google-adsense",

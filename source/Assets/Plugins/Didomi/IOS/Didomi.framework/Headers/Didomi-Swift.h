@@ -211,12 +211,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @class NSCoder;
 
-SWIFT_CLASS("_TtC6Didomi17ConsentBannerView")
-@interface ConsentBannerView : UIView
+SWIFT_CLASS("_TtC6Didomi16BottomNoticeView")
+@interface BottomNoticeView : UIView
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)updateConstraints;
+- (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
@@ -230,8 +231,8 @@ SWIFT_PROTOCOL("_TtP6Didomi26TranslatableViewController_")
 
 @class NSBundle;
 
-SWIFT_CLASS("_TtC6Didomi27ConsentBannerViewController")
-@interface ConsentBannerViewController : UIViewController <TranslatableViewController>
+SWIFT_CLASS("_TtC6Didomi26BottomNoticeViewController")
+@interface BottomNoticeViewController : UIViewController <TranslatableViewController>
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)loadView;
@@ -242,27 +243,11 @@ SWIFT_CLASS("_TtC6Didomi27ConsentBannerViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
+@class UITextView;
 
-SWIFT_CLASS("_TtC6Didomi16ConsentPopupView")
-@interface ConsentPopupView : UIView
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
-- (void)updateConstraints;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-@end
-
-
-SWIFT_CLASS("_TtC6Didomi26ConsentPopupViewController")
-@interface ConsentPopupViewController : UIViewController <TranslatableViewController>
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
-- (void)viewDidLayoutSubviews;
-- (void)loadView;
-- (void)viewDidLoad;
-/// Method used to update the texts of the different elements displayed on the screen that are part of the notice.
-- (void)updateTexts;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@interface BottomNoticeViewController (SWIFT_EXTENSION(Didomi)) <UITextViewDelegate>
+/// We implement the UITextViewDelegate to intercept links in the notice so we can deep link into the vendors view.
+- (BOOL)textView:(UITextView * _Nonnull)textView shouldInteractWithURL:(NSURL * _Nonnull)URL inRange:(NSRange)characterRange SWIFT_WARN_UNUSED_RESULT;
 @end
 
 /// Consent status to a vendor or purpose.
@@ -282,21 +267,36 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 + (void)setShared:(Didomi * _Nonnull)value;
 @property (nonatomic, weak) id <ViewProviderDelegate> _Nullable viewProviderDelegate;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-/// We need to be able to call the initialize method after the singleton has been created.
-/// \param apiKey api key string used to initialize the Didomi SDK.
+/// Initialize the Didomi SDK
+/// \param apiKey Public API key of the organization from the Didomi Console.
 ///
-/// \param localConfigurationPath The path to your local config file. Defaults to didomi_config.json if nil.
+/// \param localConfigurationPath Path to your local config file. Defaults to didomi_config.json if nil.
 ///
-/// \param remoteConfigurationURL The URL to a remote configuration file to load during initialization. This parameter is not used yet. Set it to nil for now.
+/// \param remoteConfigurationURL URL to a remote configuration file to load during initialization. This parameter is not used yet. Set it to nil for now.
 ///
 /// \param providerId Your provider ID (if any).
 ///
+/// \param disableDidomiRemoteConfig Whether to disable loading the remove configuration from the Didomi config. Keep this to “false” for loading configuration from the Didomi Console.
+///
 /// \param languageCode Language in which the consent UI should be displayed. By default, the consent UI is displayed in the language configured in the device settings. This property allows you to override the default setting and specify a language to display the UI in. String containing the language code e.g.: “es”, “fr”, etc.
 ///
-///
-/// returns:
-/// An instance of Didomi class.
 - (void)initializeWithApiKey:(NSString * _Nonnull)apiKey localConfigurationPath:(NSString * _Nullable)localConfigurationPath remoteConfigurationURL:(NSString * _Nullable)remoteConfigurationURL providerId:(NSString * _Nullable)providerId disableDidomiRemoteConfig:(BOOL)disableDidomiRemoteConfig languageCode:(NSString * _Nullable)languageCode;
+/// Initialize the Didomi SDK
+/// \param apiKey Public API key of the organization from the Didomi Console.
+///
+/// \param localConfigurationPath Path to your local config file. Defaults to didomi_config.json if nil.
+///
+/// \param remoteConfigurationURL URL to a remote configuration file to load during initialization. This parameter is not used yet. Set it to nil for now.
+///
+/// \param providerId Your provider ID (if any).
+///
+/// \param disableDidomiRemoteConfig Whether to disable loading the remove configuration from the Didomi config. Keep this to “false” for loading configuration from the Didomi Console.
+///
+/// \param languageCode Language in which the consent UI should be displayed. By default, the consent UI is displayed in the language configured in the device settings. This property allows you to override the default setting and specify a language to display the UI in. String containing the language code e.g.: “es”, “fr”, etc.
+///
+/// \param noticeId ID of the notice configuration to load from the Didomi Console.
+///
+- (void)initializeWithApiKey:(NSString * _Nonnull)apiKey localConfigurationPath:(NSString * _Nullable)localConfigurationPath remoteConfigurationURL:(NSString * _Nullable)remoteConfigurationURL providerId:(NSString * _Nullable)providerId disableDidomiRemoteConfig:(BOOL)disableDidomiRemoteConfig languageCode:(NSString * _Nullable)languageCode noticeId:(NSString * _Nullable)noticeId;
 /// Set custom user agent name and version.
 /// \param name Agent name.
 ///
@@ -337,6 +337,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 /// returns:
 /// <em>true</em> if consent is required and consent information is available, <em>false</em> otherwise.
 - (BOOL)isUserConsentStatusPartial SWIFT_WARN_UNUSED_RESULT;
+/// Determine if legitimate interest information is available for all purposes and vendors that are required
+///
+/// returns:
+/// <em>true</em> if consent is required and legitimate interest information is available, <em>false</em> otherwise.
+- (BOOL)isUserLegitimateInterestStatusPartial SWIFT_WARN_UNUSED_RESULT;
 /// Get the user consent status for a specific purpose
 /// \param purposeId The purpose ID to check consent for
 ///
@@ -465,17 +470,16 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 /// the view controller associated to the notice.
 - (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
 /// Method used to provide a view controller that will be used to display the preferences/purposes view.
-/// <em>This function replace old getPreferencesViewController()</em>
 ///
 /// returns:
 /// the view controller associated to the preferences/purposes view.
-- (UIViewController * _Nonnull)getPreferencesViewControllerWithView:(enum Views)view SWIFT_WARN_UNUSED_RESULT;
+- (UIViewController * _Nonnull)getPreferencesViewController SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
 @interface Didomi (SWIFT_EXTENSION(Didomi)) <ViewProviderDelegate>
 - (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
-- (UIViewController * _Nonnull)getPreferencesViewControllerWithView:(enum Views)view SWIFT_WARN_UNUSED_RESULT;
+- (UIViewController * _Nonnull)getPreferencesViewController SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -522,10 +526,14 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 - (BOOL)shouldConsentBeCollected SWIFT_WARN_UNUSED_RESULT;
 /// <ul>
 ///   <li>
-///     Show the preferences popup for purposes
+///     Show the preferences screen. By default the purposes list will be displayed.
 ///   </li>
 /// </ul>
-- (void)showPreferences:(UIViewController * _Nullable)controller :(enum Views)view;
+/// \param controller view controller from where preferences will be presented.
+///
+/// \param view a value from <code>Didomi.Views</code>. It can be <code>.purposes</code> or <code>.vendors</code> (<code>ViewsPurposes</code> or <code>ViewsVendors</code> in Objective-C)
+///
+- (void)showPreferencesWithController:(UIViewController * _Nullable)controller view:(enum Views)view;
 /// <ul>
 ///   <li>
 ///     Hide the preferences popup for purposes
@@ -603,6 +611,22 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 /// \param minLevel Minimum level of messages to log
 ///
 - (void)setLogLevelWithMinLevel:(uint8_t)minLevel;
+/// Set user information
+/// \param id Organization user ID 
+///
+- (void)setUserWithId:(NSString * _Nonnull)id;
+/// Set user information with authentication
+/// \param id Organization user ID 
+///
+/// \param algorithm Algorithm used for computing the digest 
+///
+/// \param secretId ID of the secret used for computing the digest 
+///
+/// \param salt Salt used for computing the digest (optional) 
+///
+/// \param digest Digest of the organization user ID and secret 
+///
+- (void)setUserWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretId:(NSString * _Nonnull)secretId salt:(NSString * _Nullable)salt digest:(NSString * _Nonnull)digest;
 @end
 
 enum DDMEventType : NSInteger;
@@ -651,6 +675,38 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", closed) {
 
 
 
+
+
+
+
+SWIFT_CLASS("_TtC6Didomi15PopupNoticeView")
+@interface PopupNoticeView : UIView
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+- (void)layoutSubviews;
+- (void)updateConstraints;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC6Didomi25PopupNoticeViewController")
+@interface PopupNoticeViewController : UIViewController <TranslatableViewController>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+- (void)loadView;
+- (void)viewDidAppear:(BOOL)animated;
+- (void)viewDidLoad;
+/// Method used to update the texts of the different elements displayed on the screen that are part of the notice.
+- (void)updateTexts;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
+@interface PopupNoticeViewController (SWIFT_EXTENSION(Didomi)) <UITextViewDelegate>
+/// We implement the UITextViewDelegate to intercept links in the notice so we can deep link into the vendors view.
+- (BOOL)textView:(UITextView * _Nonnull)textView shouldInteractWithURL:(NSURL * _Nonnull)URL inRange:(NSRange)characterRange SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
@@ -885,12 +941,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @class NSCoder;
 
-SWIFT_CLASS("_TtC6Didomi17ConsentBannerView")
-@interface ConsentBannerView : UIView
+SWIFT_CLASS("_TtC6Didomi16BottomNoticeView")
+@interface BottomNoticeView : UIView
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)updateConstraints;
+- (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
@@ -904,8 +961,8 @@ SWIFT_PROTOCOL("_TtP6Didomi26TranslatableViewController_")
 
 @class NSBundle;
 
-SWIFT_CLASS("_TtC6Didomi27ConsentBannerViewController")
-@interface ConsentBannerViewController : UIViewController <TranslatableViewController>
+SWIFT_CLASS("_TtC6Didomi26BottomNoticeViewController")
+@interface BottomNoticeViewController : UIViewController <TranslatableViewController>
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)loadView;
@@ -916,27 +973,11 @@ SWIFT_CLASS("_TtC6Didomi27ConsentBannerViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
+@class UITextView;
 
-SWIFT_CLASS("_TtC6Didomi16ConsentPopupView")
-@interface ConsentPopupView : UIView
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
-- (void)updateConstraints;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-@end
-
-
-SWIFT_CLASS("_TtC6Didomi26ConsentPopupViewController")
-@interface ConsentPopupViewController : UIViewController <TranslatableViewController>
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
-- (void)viewDidLayoutSubviews;
-- (void)loadView;
-- (void)viewDidLoad;
-/// Method used to update the texts of the different elements displayed on the screen that are part of the notice.
-- (void)updateTexts;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@interface BottomNoticeViewController (SWIFT_EXTENSION(Didomi)) <UITextViewDelegate>
+/// We implement the UITextViewDelegate to intercept links in the notice so we can deep link into the vendors view.
+- (BOOL)textView:(UITextView * _Nonnull)textView shouldInteractWithURL:(NSURL * _Nonnull)URL inRange:(NSRange)characterRange SWIFT_WARN_UNUSED_RESULT;
 @end
 
 /// Consent status to a vendor or purpose.
@@ -956,21 +997,36 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 + (void)setShared:(Didomi * _Nonnull)value;
 @property (nonatomic, weak) id <ViewProviderDelegate> _Nullable viewProviderDelegate;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-/// We need to be able to call the initialize method after the singleton has been created.
-/// \param apiKey api key string used to initialize the Didomi SDK.
+/// Initialize the Didomi SDK
+/// \param apiKey Public API key of the organization from the Didomi Console.
 ///
-/// \param localConfigurationPath The path to your local config file. Defaults to didomi_config.json if nil.
+/// \param localConfigurationPath Path to your local config file. Defaults to didomi_config.json if nil.
 ///
-/// \param remoteConfigurationURL The URL to a remote configuration file to load during initialization. This parameter is not used yet. Set it to nil for now.
+/// \param remoteConfigurationURL URL to a remote configuration file to load during initialization. This parameter is not used yet. Set it to nil for now.
 ///
 /// \param providerId Your provider ID (if any).
 ///
+/// \param disableDidomiRemoteConfig Whether to disable loading the remove configuration from the Didomi config. Keep this to “false” for loading configuration from the Didomi Console.
+///
 /// \param languageCode Language in which the consent UI should be displayed. By default, the consent UI is displayed in the language configured in the device settings. This property allows you to override the default setting and specify a language to display the UI in. String containing the language code e.g.: “es”, “fr”, etc.
 ///
-///
-/// returns:
-/// An instance of Didomi class.
 - (void)initializeWithApiKey:(NSString * _Nonnull)apiKey localConfigurationPath:(NSString * _Nullable)localConfigurationPath remoteConfigurationURL:(NSString * _Nullable)remoteConfigurationURL providerId:(NSString * _Nullable)providerId disableDidomiRemoteConfig:(BOOL)disableDidomiRemoteConfig languageCode:(NSString * _Nullable)languageCode;
+/// Initialize the Didomi SDK
+/// \param apiKey Public API key of the organization from the Didomi Console.
+///
+/// \param localConfigurationPath Path to your local config file. Defaults to didomi_config.json if nil.
+///
+/// \param remoteConfigurationURL URL to a remote configuration file to load during initialization. This parameter is not used yet. Set it to nil for now.
+///
+/// \param providerId Your provider ID (if any).
+///
+/// \param disableDidomiRemoteConfig Whether to disable loading the remove configuration from the Didomi config. Keep this to “false” for loading configuration from the Didomi Console.
+///
+/// \param languageCode Language in which the consent UI should be displayed. By default, the consent UI is displayed in the language configured in the device settings. This property allows you to override the default setting and specify a language to display the UI in. String containing the language code e.g.: “es”, “fr”, etc.
+///
+/// \param noticeId ID of the notice configuration to load from the Didomi Console.
+///
+- (void)initializeWithApiKey:(NSString * _Nonnull)apiKey localConfigurationPath:(NSString * _Nullable)localConfigurationPath remoteConfigurationURL:(NSString * _Nullable)remoteConfigurationURL providerId:(NSString * _Nullable)providerId disableDidomiRemoteConfig:(BOOL)disableDidomiRemoteConfig languageCode:(NSString * _Nullable)languageCode noticeId:(NSString * _Nullable)noticeId;
 /// Set custom user agent name and version.
 /// \param name Agent name.
 ///
@@ -1011,6 +1067,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 /// returns:
 /// <em>true</em> if consent is required and consent information is available, <em>false</em> otherwise.
 - (BOOL)isUserConsentStatusPartial SWIFT_WARN_UNUSED_RESULT;
+/// Determine if legitimate interest information is available for all purposes and vendors that are required
+///
+/// returns:
+/// <em>true</em> if consent is required and legitimate interest information is available, <em>false</em> otherwise.
+- (BOOL)isUserLegitimateInterestStatusPartial SWIFT_WARN_UNUSED_RESULT;
 /// Get the user consent status for a specific purpose
 /// \param purposeId The purpose ID to check consent for
 ///
@@ -1139,17 +1200,16 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 /// the view controller associated to the notice.
 - (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
 /// Method used to provide a view controller that will be used to display the preferences/purposes view.
-/// <em>This function replace old getPreferencesViewController()</em>
 ///
 /// returns:
 /// the view controller associated to the preferences/purposes view.
-- (UIViewController * _Nonnull)getPreferencesViewControllerWithView:(enum Views)view SWIFT_WARN_UNUSED_RESULT;
+- (UIViewController * _Nonnull)getPreferencesViewController SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
 @interface Didomi (SWIFT_EXTENSION(Didomi)) <ViewProviderDelegate>
 - (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
-- (UIViewController * _Nonnull)getPreferencesViewControllerWithView:(enum Views)view SWIFT_WARN_UNUSED_RESULT;
+- (UIViewController * _Nonnull)getPreferencesViewController SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1196,10 +1256,14 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 - (BOOL)shouldConsentBeCollected SWIFT_WARN_UNUSED_RESULT;
 /// <ul>
 ///   <li>
-///     Show the preferences popup for purposes
+///     Show the preferences screen. By default the purposes list will be displayed.
 ///   </li>
 /// </ul>
-- (void)showPreferences:(UIViewController * _Nullable)controller :(enum Views)view;
+/// \param controller view controller from where preferences will be presented.
+///
+/// \param view a value from <code>Didomi.Views</code>. It can be <code>.purposes</code> or <code>.vendors</code> (<code>ViewsPurposes</code> or <code>ViewsVendors</code> in Objective-C)
+///
+- (void)showPreferencesWithController:(UIViewController * _Nullable)controller view:(enum Views)view;
 /// <ul>
 ///   <li>
 ///     Hide the preferences popup for purposes
@@ -1277,6 +1341,22 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 /// \param minLevel Minimum level of messages to log
 ///
 - (void)setLogLevelWithMinLevel:(uint8_t)minLevel;
+/// Set user information
+/// \param id Organization user ID 
+///
+- (void)setUserWithId:(NSString * _Nonnull)id;
+/// Set user information with authentication
+/// \param id Organization user ID 
+///
+/// \param algorithm Algorithm used for computing the digest 
+///
+/// \param secretId ID of the secret used for computing the digest 
+///
+/// \param salt Salt used for computing the digest (optional) 
+///
+/// \param digest Digest of the organization user ID and secret 
+///
+- (void)setUserWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretId:(NSString * _Nonnull)secretId salt:(NSString * _Nullable)salt digest:(NSString * _Nonnull)digest;
 @end
 
 enum DDMEventType : NSInteger;
@@ -1325,6 +1405,38 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", closed) {
 
 
 
+
+
+
+
+SWIFT_CLASS("_TtC6Didomi15PopupNoticeView")
+@interface PopupNoticeView : UIView
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+- (void)layoutSubviews;
+- (void)updateConstraints;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC6Didomi25PopupNoticeViewController")
+@interface PopupNoticeViewController : UIViewController <TranslatableViewController>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+- (void)loadView;
+- (void)viewDidAppear:(BOOL)animated;
+- (void)viewDidLoad;
+/// Method used to update the texts of the different elements displayed on the screen that are part of the notice.
+- (void)updateTexts;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
+@interface PopupNoticeViewController (SWIFT_EXTENSION(Didomi)) <UITextViewDelegate>
+/// We implement the UITextViewDelegate to intercept links in the notice so we can deep link into the vendors view.
+- (BOOL)textView:(UITextView * _Nonnull)textView shouldInteractWithURL:(NSURL * _Nonnull)URL inRange:(NSRange)characterRange SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
