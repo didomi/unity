@@ -6,7 +6,7 @@
 
 
 
-#import "Frameworks/Plugins/Didomi/IOS/Didomi.framework/Headers/Didomi-Swift.h"
+#import "Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-armv7_arm64/Didomi.framework/Headers/Didomi-Swift.h"
 
 
 

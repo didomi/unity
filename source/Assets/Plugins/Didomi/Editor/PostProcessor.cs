@@ -5,7 +5,7 @@ using UnityEditor.Android;
 using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
 using UnityEngine;
-
+using UnityEditor.iOS.Xcode.Extensions;
 
 /// <summary>
 /// The PostProcessorGradleAndroidProject updates the generated project for Android.
@@ -173,11 +173,11 @@ public static class PostProcessor
     public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath)
     {
         Debug.Log("Didomi OnPostProcessBuild invoked" + buildPath);
-
+        
         if (buildTarget == BuildTarget.iOS)
         {
             PostProcessorSettings.InitSettings();
-
+            
             // PBXProject.GetPBXProjectPath returns the wrong path, we need to construct path by ourselves instead
             // var projPath = PBXProject.GetPBXProjectPath(buildPath);
             var projPath = buildPath + $"{PostProcessorSettings.FilePathSeperator}Unity-iPhone.xcodeproj{PostProcessorSettings.FilePathSeperator}project.pbxproj";
@@ -197,11 +197,51 @@ public static class PostProcessor
             proj.AddBuildProperty(targetGuid, "DYLIB_INSTALL_NAME_BASE", "@rpath");
             proj.AddBuildProperty(targetGuid, "LD_DYLIB_INSTALL_NAME", "@executable_path/../Frameworks/$(EXECUTABLE_PATH)");
 
+            SetupDidomiFrameworkForTargetSDK(proj, targetGuid, buildPath);
             CopyDidomiConfigFileToIOSFolder(proj, targetGuid, buildPath);
             CopyPackageJsonToIOSFolder(proj, targetGuid, buildPath);
 
             proj.WriteToFile(projPath);
         }
+    }
+
+    /// <summary>
+    /// For iOS platform, setups and configures didomi native libs for target SDK Device or Simulator.
+    /// </summary>
+    /// <param name="project"></param>
+    /// <param name="targetGuid"></param>
+    /// <param name="path"></param>
+    private static void SetupDidomiFrameworkForTargetSDK(PBXProject project, string targetGuid, string path)
+    {
+        var xcframeworkPath = $"Frameworks{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.xcframework";
+        var unusedSDKPath = string.Empty;
+        var simulatorPath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-i386_x86_64-simulator";
+        var devicePath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-armv7_arm64";
+
+        if (PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK)
+        {
+            unusedSDKPath = simulatorPath;
+        }
+        else
+        {
+            unusedSDKPath = devicePath;
+            var mmFile = $"{path}{PostProcessorSettings.FilePathSeperator}Libraries{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.mm";
+            var headerFilePath = $"Didomi.framework{PostProcessorSettings.FilePathSeperator}Headers{PostProcessorSettings.FilePathSeperator}Didomi-Swift.h";
+            var mmFilePathTargetDevice = $@"#import ""{devicePath}{PostProcessorSettings.FilePathSeperator}{headerFilePath}""";
+            var mmFilePathTargetSimulator = $@"#import ""{simulatorPath}{PostProcessorSettings.FilePathSeperator}{headerFilePath}""";
+            ReplaceLineInFile(mmFile, mmFilePathTargetDevice, mmFilePathTargetSimulator);
+        }
+
+        Directory.Delete($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}", true);
+
+        var frameworkPath = $@"{unusedSDKPath}{PostProcessorSettings.FilePathSeperator}Didomi.framework";
+        var guid = project.FindFileGuidByProjectPath(frameworkPath);
+        var unityFrameworkGuid = project.GetUnityFrameworkTargetGuid();
+
+        project.RemoveFileFromBuild(targetGuid, guid);
+        project.RemoveFileFromBuild(unityFrameworkGuid, guid);
+        project.RemoveFrameworkFromProject(targetGuid, frameworkPath);
+        project.RemoveFrameworkFromProject(unityFrameworkGuid, frameworkPath);
     }
 
     /// <summary>
