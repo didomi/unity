@@ -127,6 +127,7 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
         var newValue = @"dependencies {
     ext.kotlin_version = '1.3.72'
     implementation 'com.android.support:appcompat-v7:27.1.1'
+	implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
     implementation ""android.arch.lifecycle:extensions:1.1.0""
