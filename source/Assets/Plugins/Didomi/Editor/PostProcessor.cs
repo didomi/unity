@@ -233,16 +233,20 @@ public static class PostProcessor
             ReplaceLineInFile(mmFile, mmFilePathTargetDevice, mmFilePathTargetSimulator);
         }
 
-        Directory.Delete($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}", true);
+		if(Directory.Exists($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}"))
+		{
+			Directory.Delete($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}", true);
+			var frameworkPath = $@"{unusedSDKPath}{PostProcessorSettings.FilePathSeperator}Didomi.framework";
+			var guid = project.FindFileGuidByProjectPath(frameworkPath);
+			var unityFrameworkGuid = project.GetUnityFrameworkTargetGuid();
 
-        var frameworkPath = $@"{unusedSDKPath}{PostProcessorSettings.FilePathSeperator}Didomi.framework";
-        var guid = project.FindFileGuidByProjectPath(frameworkPath);
-        var unityFrameworkGuid = project.GetUnityFrameworkTargetGuid();
+			project.RemoveFileFromBuild(targetGuid, guid);
+			project.RemoveFileFromBuild(unityFrameworkGuid, guid);
+			project.RemoveFrameworkFromProject(targetGuid, frameworkPath);
+			project.RemoveFrameworkFromProject(unityFrameworkGuid, frameworkPath);
+		}
 
-        project.RemoveFileFromBuild(targetGuid, guid);
-        project.RemoveFileFromBuild(unityFrameworkGuid, guid);
-        project.RemoveFrameworkFromProject(targetGuid, frameworkPath);
-        project.RemoveFrameworkFromProject(unityFrameworkGuid, frameworkPath);
+
     }
 
     /// <summary>
