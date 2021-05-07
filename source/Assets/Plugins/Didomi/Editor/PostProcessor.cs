@@ -216,8 +216,8 @@ public static class PostProcessor
     {
         var xcframeworkPath = $"Frameworks{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.xcframework";
         var unusedSDKPath = string.Empty;
-        var simulatorPath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-i386_x86_64-simulator";
-        var devicePath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-armv7_arm64";
+        var simulatorPath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_i386_x86_64-simulator";
+        var devicePath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_armv7";
 
         if (PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK)
         {
@@ -245,8 +245,6 @@ public static class PostProcessor
 			project.RemoveFrameworkFromProject(targetGuid, frameworkPath);
 			project.RemoveFrameworkFromProject(unityFrameworkGuid, frameworkPath);
 		}
-
-
     }
 
     /// <summary>
