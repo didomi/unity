@@ -96,8 +96,8 @@ PluginImporter:
     second:
       enabled: 1
       settings:
-        AddToEmbeddedBinaries: false
-        CPU: AnyCPU
+        AddToEmbeddedBinaries: true
+        CPU: X64
         CompileFlags: 
         FrameworkDependencies: 
   - first:
