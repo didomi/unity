@@ -127,6 +127,7 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
         var newValue = @"dependencies {
     ext.kotlin_version = '1.3.72'
     implementation 'com.android.support:appcompat-v7:27.1.1'
+	implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
     implementation ""android.arch.lifecycle:extensions:1.1.0""
@@ -215,8 +216,8 @@ public static class PostProcessor
     {
         var xcframeworkPath = $"Frameworks{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.xcframework";
         var unusedSDKPath = string.Empty;
-        var simulatorPath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-i386_x86_64-simulator";
-        var devicePath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-armv7_arm64";
+        var simulatorPath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_i386_x86_64-simulator";
+        var devicePath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_armv7";
 
         if (PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK)
         {
@@ -232,16 +233,18 @@ public static class PostProcessor
             ReplaceLineInFile(mmFile, mmFilePathTargetDevice, mmFilePathTargetSimulator);
         }
 
-        Directory.Delete($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}", true);
+		if(Directory.Exists($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}"))
+		{
+			Directory.Delete($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}", true);
+			var frameworkPath = $@"{unusedSDKPath}{PostProcessorSettings.FilePathSeperator}Didomi.framework";
+			var guid = project.FindFileGuidByProjectPath(frameworkPath);
+			var unityFrameworkGuid = project.GetUnityFrameworkTargetGuid();
 
-        var frameworkPath = $@"{unusedSDKPath}{PostProcessorSettings.FilePathSeperator}Didomi.framework";
-        var guid = project.FindFileGuidByProjectPath(frameworkPath);
-        var unityFrameworkGuid = project.GetUnityFrameworkTargetGuid();
-
-        project.RemoveFileFromBuild(targetGuid, guid);
-        project.RemoveFileFromBuild(unityFrameworkGuid, guid);
-        project.RemoveFrameworkFromProject(targetGuid, frameworkPath);
-        project.RemoveFrameworkFromProject(unityFrameworkGuid, frameworkPath);
+			project.RemoveFileFromBuild(targetGuid, guid);
+			project.RemoveFileFromBuild(unityFrameworkGuid, guid);
+			project.RemoveFrameworkFromProject(targetGuid, frameworkPath);
+			project.RemoveFrameworkFromProject(unityFrameworkGuid, frameworkPath);
+		}
     }
 
     /// <summary>

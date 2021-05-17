@@ -6,7 +6,7 @@
 
 
 
-#import "Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-armv7_arm64/Didomi.framework/Headers/Didomi-Swift.h"
+#import "Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h"
 
 
 
@@ -479,7 +479,7 @@ void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigu
 
 
 
-	return [[Didomi shared] setUserDisagreeToAllWithConsent:true legitimateInterest:true];
+	return [[Didomi shared] setUserDisagreeToAll];
 
 
 
