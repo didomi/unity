@@ -1,5 +1,4 @@
-Didomi Unity Plugin
-==============================
+# Didomi Unity Plugin
 
 [Didomi](https://www.didomi.io) is a leading Consent Management Platform that allows companies to collect, store, and leverage user consent under GDPR, CCPA, and other data privacy regulations. This plugin enables Unity developers to get in compliance and optimize their consent rate and monetization on native mobile apps.
 
@@ -38,4 +37,4 @@ please use [Github's issue tracker](https:////github.com/didomi/unity/issues).
 
 # License
 
-This plugin is [released under the LGPL 3.0 license](LICENSE.md).
+This plugin is [released under the BSD-3 license](LICENSE.md).
