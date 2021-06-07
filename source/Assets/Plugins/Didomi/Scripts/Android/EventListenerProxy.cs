@@ -28,6 +28,14 @@ namespace IO.Didomi.SDK.Android
             // The consent status of the user has changed
         }
 
+        public void error(AndroidJavaObject @event)
+        {
+            var errorEvent = ConvertToErrorEvent(@event);
+
+            _eventListener.OnError(errorEvent);
+            // The error occured.
+        }
+
         public void hideNotice(AndroidJavaObject @event)
         {
             var hideNoticeEvent = ConvertToHideNoticeEvent(@event);
@@ -154,6 +162,18 @@ namespace IO.Didomi.SDK.Android
         private static ConsentChangedEvent ConvertToConsentChangedEvent(AndroidJavaObject @event)
         {
             return new ConsentChangedEvent();
+        }
+
+        private static ErrorEvent ConvertToErrorEvent(AndroidJavaObject @event)
+        {
+            var errorMessage = GetErrorMessage(@event);
+
+            return new ErrorEvent { ErrorMessage = errorMessage };
+        }
+
+        private static string GetErrorMessage(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getErrorMessage");
         }
 
         private static HideNoticeEvent ConvertToHideNoticeEvent(AndroidJavaObject @event)

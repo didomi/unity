@@ -158,6 +158,25 @@ namespace IO.Didomi.SDK.Android
             return AndroidObjectMapper.ConvertToBoolean(boolObject);
         }
 
+        public bool GetUserLegitimateInterestStatusForPurpose(string purposeId)
+        {
+            var boolObject = CallReturningJavaObjectMethod("getUserLegitimateInterestStatusForPurpose", purposeId);
+
+            return AndroidObjectMapper.ConvertToBoolean(boolObject);
+        }
+
+        public bool GetUserLegitimateInterestStatusForVendor(string vendorId)
+        {
+            var boolObject = CallReturningJavaObjectMethod("getUserLegitimateInterestStatusForVendor", vendorId);
+
+            return AndroidObjectMapper.ConvertToBoolean(boolObject);
+        }
+
+        public bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
+        {
+            return CallReturningBoolMethod("getUserLegitimateInterestStatusForVendorAndRequiredPurposes", vendorId);
+        }
+
         public Vendor GetVendor(string vendorId)
         {
             var obj = CallReturningJavaObjectMethod("getVendor", vendorId);
@@ -221,9 +240,15 @@ namespace IO.Didomi.SDK.Android
             return CallReturningBoolMethod("isReady");
         }
 
+        public void OnError(Action action)
+        {
+            var didomiCallable = new DidomiCallable(action);
+
+            CallVoidMethod("onError", didomiCallable);
+        }
+
         public void OnReady(Action action)
         {
-
             var didomiCallable = new DidomiCallable(action);
 
             CallVoidMethod("onReady", didomiCallable);
@@ -241,7 +266,7 @@ namespace IO.Didomi.SDK.Android
 
         public void ShowPreferences()
         {
-            CallReturningMethodWithActivityArg("showPreferences");
+            CallVoidMethodWithActivityArg("showPreferences");
         }
 
         public void Reset()
@@ -254,6 +279,7 @@ namespace IO.Didomi.SDK.Android
             return CallReturningBoolMethod("setUserAgreeToAll");
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use SetUserStatus instead.")]
         public bool SetUserConsentStatus(
             ISet<string> enabledPurposeIds,
             ISet<string> disabledPurposeIds,
@@ -270,6 +296,42 @@ namespace IO.Didomi.SDK.Android
                 AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledVendorIds),
 				AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(new HashSet<string>()),
                 AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(new HashSet<string>()));
+        }
+   
+        public bool SetUserStatus(
+            ISet<string> enabledConsentPurposeIds,
+            ISet<string> disabledConsentPurposeIds,
+            ISet<string> enabledLIPurposeIds,
+            ISet<string> disabledLIPurposeIds,
+            ISet<string> enabledConsentVendorIds,
+            ISet<string> disabledConsentVendorIds,
+            ISet<string> enabledLIVendorIds,
+            ISet<string> disabledLIVendorIds)
+        {
+            return CallReturningBoolMethod(
+                "setUserStatus",
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledConsentPurposeIds),
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledConsentPurposeIds),
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledLIPurposeIds),
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledLIPurposeIds),
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledConsentVendorIds),
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledConsentVendorIds),
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledLIVendorIds),
+                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledLIVendorIds));
+        }
+
+        public bool SetUserStatus(
+            bool purposesConsentStatus,
+            bool purposesLIStatus,
+            bool vendorsConsentStatus,
+            bool vendorsLIStatus)
+        {
+            return CallReturningBoolMethod(
+                "setUserStatus",
+                purposesConsentStatus,
+                purposesLIStatus,
+                vendorsConsentStatus,
+                vendorsLIStatus);
         }
 
         public bool SetUserDisagreeToAll()
