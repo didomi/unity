@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,7 @@ public enum FunctionCategory
     Consent_1,
     Consent_2,
     Consent_3,
+    Legitimate,
     Notice,
     Preferences,
     Language,
@@ -58,6 +60,11 @@ public class DemoGUI : MonoBehaviour
         Didomi.GetInstance().SetupUI();
     }
 
+    void Update()
+    {
+
+    }
+
     void SetResponsiveLayout()
     {
         xStep = 10;
@@ -70,16 +77,13 @@ public class DemoGUI : MonoBehaviour
         yStep = buttonHeight + 10;
         functionButtonWidth = (int) (1.5f * buttonWidth);
         RectTransform rt = panel.GetComponent<RectTransform>();
-        int panelTop = (int)(7f * yStep);
+        int panelTop = (int)(8f * yStep);
         int panelbottom = 1 * yStep;
         rt.offsetMax = new Vector2(rt.offsetMax.x, -panelTop);
         buttonFontSize = Screen.width/34;
     }
 
-    void Update()
-    {
 
-    }
 
     private Rect GetGoBackRect() { return new Rect(10, 0.1f * yStep, Screen.width - 20, buttonHeight/2); }
 
@@ -87,21 +91,24 @@ public class DemoGUI : MonoBehaviour
     private Rect GetMiddleRect2() { return new Rect(centerScreenX - buttonWidth * 0.5f, 1.7f * yStep, buttonWidth, buttonHeight); }
     private Rect GetMiddleRect3() { return new Rect(centerScreenX - buttonWidth * 0.5f, 2.7f * yStep, buttonWidth, buttonHeight); }
     private Rect GetMiddleRect4() { return new Rect(centerScreenX - buttonWidth * 0.5f, 3.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetMiddleRect5() { return new Rect(centerScreenX - buttonWidth * 0.5f, 4.7f * yStep, buttonWidth, buttonHeight); }
 
     private Rect GetRightRect1() { return new Rect(centerScreenX + buttonWidth * 0.5f, 0.7f * yStep, buttonWidth, buttonHeight); }
     private Rect GetRightRect2() { return new Rect(centerScreenX + buttonWidth * 0.5f, 1.7f * yStep, buttonWidth, buttonHeight); }
     private Rect GetRightRect3() { return new Rect(centerScreenX + buttonWidth * 0.5f, 2.7f * yStep, buttonWidth, buttonHeight); }
     private Rect GetRightRect4() { return new Rect(centerScreenX + buttonWidth * 0.5f, 3.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetRightRect5() { return new Rect(centerScreenX + buttonWidth * 0.5f, 4.7f * yStep, buttonWidth, buttonHeight); }
 
     private Rect GetLeftRect1() { return new Rect(centerScreenX - buttonWidth * 1.5f, 0.7f * yStep, buttonWidth, buttonHeight); }
     private Rect GetLeftRect2() { return new Rect(centerScreenX - buttonWidth * 1.5f, 1.7f * yStep, buttonWidth, buttonHeight); }
     private Rect GetLeftRect3() { return new Rect(centerScreenX - buttonWidth * 1.5f, 2.7f * yStep, buttonWidth, buttonHeight); }
     private Rect GetLeftRect4() { return new Rect(centerScreenX - buttonWidth * 1.5f, 3.7f * yStep, buttonWidth, buttonHeight); }
+    private Rect GetLeftRect5() { return new Rect(centerScreenX - buttonWidth * 1.5f, 4.7f * yStep, buttonWidth, buttonHeight); }
 
-    private Rect GetFuncRect1() { return new Rect(centerScreenX - functionButtonWidth - xStep, 4.7f * yStep, functionButtonWidth, buttonHeight); }
-    private Rect GetFuncRect2() { return new Rect(centerScreenX - functionButtonWidth - xStep, 5.7f * yStep, functionButtonWidth, buttonHeight); }
-    private Rect GetFuncRect3() { return new Rect(centerScreenX + xStep, 4.7f * yStep, functionButtonWidth, buttonHeight); }
-    private Rect GetFuncRect4() { return new Rect(centerScreenX + xStep, 5.7f * yStep, functionButtonWidth, buttonHeight); }
+    private Rect GetFuncRect1() { return new Rect(centerScreenX - functionButtonWidth - xStep, 5.7f * yStep, functionButtonWidth, buttonHeight); }
+    private Rect GetFuncRect2() { return new Rect(centerScreenX - functionButtonWidth - xStep, 6.7f * yStep, functionButtonWidth, buttonHeight); }
+    private Rect GetFuncRect3() { return new Rect(centerScreenX + xStep, 5.7f * yStep, functionButtonWidth, buttonHeight); }
+    private Rect GetFuncRect4() { return new Rect(centerScreenX + xStep, 6.7f * yStep, functionButtonWidth, buttonHeight); }
 
     private void OnGUI()
     {
@@ -156,6 +163,10 @@ public class DemoGUI : MonoBehaviour
         else if (functionCategory == FunctionCategory.Consent_3)
         {
             Consent_3();
+        }
+        else if (functionCategory == FunctionCategory.Legitimate)
+        {
+            Legitimate();
         }
         else if (functionCategory == FunctionCategory.Notice)
         {
@@ -230,7 +241,7 @@ public class DemoGUI : MonoBehaviour
         {
             functionCategory = FunctionCategory.Consent_3;
         }
-        
+
         if (GUI.Button(GetLeftRect4(), "Language"))
         {
             functionCategory = FunctionCategory.Language;
@@ -242,6 +253,21 @@ public class DemoGUI : MonoBehaviour
         }
 
         if (GUI.Button(GetRightRect4(), "Events"))
+        {
+            functionCategory = FunctionCategory.Events;
+        }
+
+        if (GUI.Button(GetLeftRect5(), "Legitimate"))
+        {
+            functionCategory = FunctionCategory.Legitimate;
+        }
+
+        if (GUI.Button(GetMiddleRect5(), ""))
+        {
+            functionCategory = FunctionCategory.Initialization;
+        }
+
+        if (GUI.Button(GetRightRect5(), ""))
         {
             functionCategory = FunctionCategory.Events;
         }
@@ -442,6 +468,33 @@ public class DemoGUI : MonoBehaviour
         }
     }
 
+    private void Legitimate()
+    {
+        if (GUI.Button(GetFuncRect1(), $"GetUserLegitimate{Environment.NewLine}InterestStatusForPurpose"))
+        {
+            message = string.Empty;
+            var purposeId = GetFirstRequiredPurposeId();
+            var retval = Didomi.GetInstance().GetUserLegitimateInterestStatusForPurpose(purposeId);
+            message += "GetUserLegitimateInterestStatusForPurpose" + MessageForObject(retval);
+        }
+
+        if (GUI.Button(GetFuncRect2(), $"GetUserLegitimate{Environment.NewLine}InterestStatusForVendor"))
+        {
+            message = string.Empty;
+            var vendorId = GetFirstRequiredVendorId();
+            var retval = Didomi.GetInstance().GetUserLegitimateInterestStatusForVendor(vendorId);
+            message += "GetUserLegitimateInterestStatusForVendor" + MessageForObject(retval);
+        }
+
+        if (GUI.Button(GetFuncRect3(), $"GetUserLegitimateInterestStatus{Environment.NewLine}ForVendorAndRequiredPurposes"))
+        {
+            message = string.Empty;
+            var vendorId = GetFirstRequiredVendorId();
+            var retval = Didomi.GetInstance().GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(vendorId);
+            message += "GetUserLegitimateInterestStatusForVendorAndRequiredPurposes" + MessageForObject(retval);
+        }
+    }
+
     private void Consent_2()
     {
         if (GUI.Button(GetFuncRect1(), "SetUserAgreeToAll"))
@@ -458,28 +511,48 @@ public class DemoGUI : MonoBehaviour
             message += "SetUserDisagreeToAll" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect3(), "SetUserConsentStatus"))
+        if (GUI.Button(GetFuncRect3(), "SetUserStatus 1"))
         {
             message = string.Empty;
 
-            ISet<string> enabledPurposeIds = Didomi.GetInstance().GetRequiredPurposeIds();
-            ISet<string> disabledPurposeIds = new HashSet<string>();
-            ISet<string> enabledVendorIds = new HashSet<string>();
-            ISet<string> disabledVendorIds = new HashSet<string>();
+            ISet<string> enabledConsentPurposeIds = Didomi.GetInstance().GetRequiredPurposeIds();
+            ISet<string> disabledConsentPurposeIds = new HashSet<string>();
+            ISet<string> enabledLIPurposeIds = new HashSet<string>();
+            ISet<string> disabledLIPurposeIds = new HashSet<string>();
+            ISet<string> enabledConsentVendorIds = new HashSet<string>();
+            ISet<string> disabledConsentVendorIds = new HashSet<string>();
+            ISet<string> enabledLIVendorIds = new HashSet<string>();
+            ISet<string> disabledLIVendorIds = new HashSet<string>();
 
-            var retval = Didomi.GetInstance().SetUserConsentStatus(
-                enabledPurposeIds,
-                disabledPurposeIds,
-                enabledVendorIds,
-                disabledVendorIds);
+            var retval = Didomi.GetInstance().SetUserStatus(
+                enabledConsentPurposeIds,
+                disabledConsentPurposeIds,
+                enabledLIPurposeIds,
+                disabledLIPurposeIds,
+                enabledConsentVendorIds,
+                disabledConsentVendorIds,
+                enabledLIVendorIds,
+                disabledLIVendorIds);
 
-            Didomi.GetInstance().SetUserConsentStatus(
-                enabledPurposeIds,
-                disabledPurposeIds,
-                enabledVendorIds,
-                disabledVendorIds);
+            message += "SetUserStatus 1" + MessageForObject(retval);
+        }
 
-            message += "SetUserConsentStatus" + MessageForObject(retval);
+        if (GUI.Button(GetFuncRect4(), "SetUserStatus 2"))
+        {
+            message = string.Empty;
+
+            bool purposesConsentStatus = true;
+            bool purposesLIStatus = false;
+            bool vendorsConsentStatus = false;
+            bool vendorsLIStatus = false;
+
+            var retval = Didomi.GetInstance().SetUserStatus(
+                purposesConsentStatus,
+                purposesLIStatus,
+                vendorsConsentStatus,
+                vendorsLIStatus);
+
+            message += "SetUserStatus 2" + MessageForObject(retval);
         }
     }
 
@@ -652,6 +725,15 @@ public class DemoGUI : MonoBehaviour
             message += "AddEventListener";
         }
 
+        if (GUI.Button(GetFuncRect2(), "OnError"))
+        {
+            message = string.Empty;
+
+            Didomi.GetInstance().OnError(
+                   () => { message = "OnError Event Fired."; }
+                   );
+        }
+
         if (GUI.Button(GetFuncRect3(), "OnReady"))
         {
             message = string.Empty;
@@ -699,6 +781,7 @@ public class DemoGUI : MonoBehaviour
         eventListener.ConsentChanged += EventListener_ConsentChanged;
         eventListener.HideNotice += EventListener_HideNotice;
         eventListener.Ready += EventListener_Ready;
+        eventListener.Error += EventListener_Error;
         eventListener.NoticeClickAgree += EventListener_NoticeClickAgree;
         eventListener.NoticeClickMoreInfo += EventListener_NoticeClickMoreInfo;
         eventListener.PreferencesClickAgreeToAll += EventListener_PreferencesClickAgreeToAll;
@@ -718,6 +801,11 @@ public class DemoGUI : MonoBehaviour
     private void EventListener_Ready(object sender, ReadyEvent e)
     {
         message += "EventListener_ReadyEvent Fired.";
+    }
+
+    private void EventListener_Error(object sender, ErrorEvent e)
+    {
+        message += "EventListener_Error Fired. Error:" + e.getErrorMessage();
     }
 
     private void EventListener_ShowNotice(object sender, ShowNoticeEvent e)
