@@ -309,6 +309,20 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 /// returns:
 /// The user consent status for the specified purpose
 - (enum ConsentStatus)getUserConsentStatusForPurposeWithPurposeId:(NSString * _Nonnull)purposeId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user legitimate interest status for a specific purpose.
+/// \param purposeId purpose ID.
+///
+///
+/// returns:
+/// LI status of a purpose.
+- (enum ConsentStatus)getUserLegitimateInterestStatusForPurposeWithPurposeId:(NSString * _Nonnull)purposeId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user consent and legitimate interest status for a specific vendor.
+/// \param vendorId vendor ID.
+///
+///
+/// returns:
+/// status that represents both consent and legitimate interest status of a vendor.
+- (enum ConsentStatus)getUserStatusForVendorWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
 /// Get the user consent status for a specific vendor
 /// \param vendorId The vendor ID to check consent for
 ///
@@ -316,13 +330,27 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 /// returns:
 /// The user consent status for the specified vendor
 - (enum ConsentStatus)getUserConsentStatusForVendorWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user legitimate interest status for a specific vendor.
+/// \param vendorId vendor ID.
+///
+///
+/// returns:
+/// LI status of a vendor.
+- (enum ConsentStatus)getUserLegitimateInterestStatusForVendorWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
 /// Get the user consent status for a specific vendor and all its purposes
 /// \param vendorId The ID of the vendor
 ///
 ///
 /// returns:
-/// The user consent status corresponding to the specified vendor and all its required purposes
+/// The user consent status corresponding to the specified vendor and all its required purposes.
 - (enum ConsentStatus)getUserConsentStatusForVendorAndRequiredPurposesWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user LI status for a specific vendor and all its purposes.
+/// \param vendorId vendor ID.
+///
+///
+/// returns:
+/// The user LI status corresponding to the specified vendor and all its required purposes.
+- (enum ConsentStatus)getUserLegitimateInterestStatusForVendorAndRequiredPurposesWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
 /// Set the user status for purposes and vendors for consent and legitimate interest.
 /// <ul>
 ///   <li>
@@ -359,7 +387,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 ///
 /// \param disabledLIVendorIds List of vendor IDs to disable for LI.
 ///
-- (BOOL)setUserStatusWithEnabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)enabledConsentPurposeIds disabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)disabledConsentPurposeIds enabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)enabledLIPurposeIds disabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)disabledLIPurposeIds enabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)enabledConsentVendorIds disabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)disabledConsentVendorIds enabledLIVendorIds:(NSSet<NSString *> * _Nonnull)enabledLIVendorIds disabledLIVendorIds:(NSSet<NSString *> * _Nonnull)disabledLIVendorIds sendAPIEvent:(BOOL)sendAPIEvent;
+- (BOOL)setUserStatusWithEnabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)enabledConsentPurposeIds disabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)disabledConsentPurposeIds enabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)enabledLIPurposeIds disabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)disabledLIPurposeIds enabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)enabledConsentVendorIds disabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)disabledConsentVendorIds enabledLIVendorIds:(NSSet<NSString *> * _Nonnull)enabledLIVendorIds disabledLIVendorIds:(NSSet<NSString *> * _Nonnull)disabledLIVendorIds;
 /// Method that allows to enable consent and legitimate interest for all the required purposes.
 ///
 /// returns:
@@ -662,6 +690,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
   DDMEventTypePreferencesClickVendorSaveChoices = 25,
   DDMEventTypeSyncDone = 26,
 };
+
 
 
 
@@ -992,6 +1021,20 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 /// returns:
 /// The user consent status for the specified purpose
 - (enum ConsentStatus)getUserConsentStatusForPurposeWithPurposeId:(NSString * _Nonnull)purposeId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user legitimate interest status for a specific purpose.
+/// \param purposeId purpose ID.
+///
+///
+/// returns:
+/// LI status of a purpose.
+- (enum ConsentStatus)getUserLegitimateInterestStatusForPurposeWithPurposeId:(NSString * _Nonnull)purposeId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user consent and legitimate interest status for a specific vendor.
+/// \param vendorId vendor ID.
+///
+///
+/// returns:
+/// status that represents both consent and legitimate interest status of a vendor.
+- (enum ConsentStatus)getUserStatusForVendorWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
 /// Get the user consent status for a specific vendor
 /// \param vendorId The vendor ID to check consent for
 ///
@@ -999,13 +1042,27 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 /// returns:
 /// The user consent status for the specified vendor
 - (enum ConsentStatus)getUserConsentStatusForVendorWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user legitimate interest status for a specific vendor.
+/// \param vendorId vendor ID.
+///
+///
+/// returns:
+/// LI status of a vendor.
+- (enum ConsentStatus)getUserLegitimateInterestStatusForVendorWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
 /// Get the user consent status for a specific vendor and all its purposes
 /// \param vendorId The ID of the vendor
 ///
 ///
 /// returns:
-/// The user consent status corresponding to the specified vendor and all its required purposes
+/// The user consent status corresponding to the specified vendor and all its required purposes.
 - (enum ConsentStatus)getUserConsentStatusForVendorAndRequiredPurposesWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user LI status for a specific vendor and all its purposes.
+/// \param vendorId vendor ID.
+///
+///
+/// returns:
+/// The user LI status corresponding to the specified vendor and all its required purposes.
+- (enum ConsentStatus)getUserLegitimateInterestStatusForVendorAndRequiredPurposesWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
 /// Set the user status for purposes and vendors for consent and legitimate interest.
 /// <ul>
 ///   <li>
@@ -1042,7 +1099,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 ///
 /// \param disabledLIVendorIds List of vendor IDs to disable for LI.
 ///
-- (BOOL)setUserStatusWithEnabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)enabledConsentPurposeIds disabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)disabledConsentPurposeIds enabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)enabledLIPurposeIds disabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)disabledLIPurposeIds enabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)enabledConsentVendorIds disabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)disabledConsentVendorIds enabledLIVendorIds:(NSSet<NSString *> * _Nonnull)enabledLIVendorIds disabledLIVendorIds:(NSSet<NSString *> * _Nonnull)disabledLIVendorIds sendAPIEvent:(BOOL)sendAPIEvent;
+- (BOOL)setUserStatusWithEnabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)enabledConsentPurposeIds disabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)disabledConsentPurposeIds enabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)enabledLIPurposeIds disabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)disabledLIPurposeIds enabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)enabledConsentVendorIds disabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)disabledConsentVendorIds enabledLIVendorIds:(NSSet<NSString *> * _Nonnull)enabledLIVendorIds disabledLIVendorIds:(NSSet<NSString *> * _Nonnull)disabledLIVendorIds;
 /// Method that allows to enable consent and legitimate interest for all the required purposes.
 ///
 /// returns:
@@ -1345,6 +1402,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
   DDMEventTypePreferencesClickVendorSaveChoices = 25,
   DDMEventTypeSyncDone = 26,
 };
+
 
 
 
@@ -1675,6 +1733,20 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 /// returns:
 /// The user consent status for the specified purpose
 - (enum ConsentStatus)getUserConsentStatusForPurposeWithPurposeId:(NSString * _Nonnull)purposeId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user legitimate interest status for a specific purpose.
+/// \param purposeId purpose ID.
+///
+///
+/// returns:
+/// LI status of a purpose.
+- (enum ConsentStatus)getUserLegitimateInterestStatusForPurposeWithPurposeId:(NSString * _Nonnull)purposeId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user consent and legitimate interest status for a specific vendor.
+/// \param vendorId vendor ID.
+///
+///
+/// returns:
+/// status that represents both consent and legitimate interest status of a vendor.
+- (enum ConsentStatus)getUserStatusForVendorWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
 /// Get the user consent status for a specific vendor
 /// \param vendorId The vendor ID to check consent for
 ///
@@ -1682,13 +1754,27 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 /// returns:
 /// The user consent status for the specified vendor
 - (enum ConsentStatus)getUserConsentStatusForVendorWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user legitimate interest status for a specific vendor.
+/// \param vendorId vendor ID.
+///
+///
+/// returns:
+/// LI status of a vendor.
+- (enum ConsentStatus)getUserLegitimateInterestStatusForVendorWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
 /// Get the user consent status for a specific vendor and all its purposes
 /// \param vendorId The ID of the vendor
 ///
 ///
 /// returns:
-/// The user consent status corresponding to the specified vendor and all its required purposes
+/// The user consent status corresponding to the specified vendor and all its required purposes.
 - (enum ConsentStatus)getUserConsentStatusForVendorAndRequiredPurposesWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
+/// Get the user LI status for a specific vendor and all its purposes.
+/// \param vendorId vendor ID.
+///
+///
+/// returns:
+/// The user LI status corresponding to the specified vendor and all its required purposes.
+- (enum ConsentStatus)getUserLegitimateInterestStatusForVendorAndRequiredPurposesWithVendorId:(NSString * _Nonnull)vendorId SWIFT_WARN_UNUSED_RESULT;
 /// Set the user status for purposes and vendors for consent and legitimate interest.
 /// <ul>
 ///   <li>
@@ -1725,7 +1811,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 ///
 /// \param disabledLIVendorIds List of vendor IDs to disable for LI.
 ///
-- (BOOL)setUserStatusWithEnabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)enabledConsentPurposeIds disabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)disabledConsentPurposeIds enabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)enabledLIPurposeIds disabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)disabledLIPurposeIds enabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)enabledConsentVendorIds disabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)disabledConsentVendorIds enabledLIVendorIds:(NSSet<NSString *> * _Nonnull)enabledLIVendorIds disabledLIVendorIds:(NSSet<NSString *> * _Nonnull)disabledLIVendorIds sendAPIEvent:(BOOL)sendAPIEvent;
+- (BOOL)setUserStatusWithEnabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)enabledConsentPurposeIds disabledConsentPurposeIds:(NSSet<NSString *> * _Nonnull)disabledConsentPurposeIds enabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)enabledLIPurposeIds disabledLIPurposeIds:(NSSet<NSString *> * _Nonnull)disabledLIPurposeIds enabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)enabledConsentVendorIds disabledConsentVendorIds:(NSSet<NSString *> * _Nonnull)disabledConsentVendorIds enabledLIVendorIds:(NSSet<NSString *> * _Nonnull)enabledLIVendorIds disabledLIVendorIds:(NSSet<NSString *> * _Nonnull)disabledLIVendorIds;
 /// Method that allows to enable consent and legitimate interest for all the required purposes.
 ///
 /// returns:
@@ -2028,6 +2114,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
   DDMEventTypePreferencesClickVendorSaveChoices = 25,
   DDMEventTypeSyncDone = 26,
 };
+
 
 
 

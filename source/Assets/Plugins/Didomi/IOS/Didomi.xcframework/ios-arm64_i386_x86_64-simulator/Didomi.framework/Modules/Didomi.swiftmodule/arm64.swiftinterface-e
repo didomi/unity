@@ -118,12 +118,16 @@ extension Purpose : Swift.Equatable {
   @objc public func isUserConsentStatusPartial() -> Swift.Bool
   @objc public func isUserLegitimateInterestStatusPartial() -> Swift.Bool
   @objc public func getUserConsentStatusForPurpose(purposeId: Swift.String) -> Didomi.ConsentStatus
+  @objc public func getUserLegitimateInterestStatusForPurpose(purposeId: Swift.String) -> Didomi.ConsentStatus
+  @objc public func getUserStatusForVendor(vendorId: Swift.String) -> Didomi.ConsentStatus
   @objc public func getUserConsentStatusForVendor(vendorId: Swift.String) -> Didomi.ConsentStatus
+  @objc public func getUserLegitimateInterestStatusForVendor(vendorId: Swift.String) -> Didomi.ConsentStatus
   @objc public func getUserConsentStatusForVendorAndRequiredPurposes(vendorId: Swift.String) -> Didomi.ConsentStatus
+  @objc public func getUserLegitimateInterestStatusForVendorAndRequiredPurposes(vendorId: Swift.String) -> Didomi.ConsentStatus
   @discardableResult
   @objc public func setUserStatus(purposesConsentStatus: Swift.Bool, purposesLIStatus: Swift.Bool, vendorsConsentStatus: Swift.Bool, vendorsLIStatus: Swift.Bool) -> Swift.Bool
   @discardableResult
-  @objc public func setUserStatus(enabledConsentPurposeIds: Swift.Set<Swift.String>, disabledConsentPurposeIds: Swift.Set<Swift.String>, enabledLIPurposeIds: Swift.Set<Swift.String>, disabledLIPurposeIds: Swift.Set<Swift.String>, enabledConsentVendorIds: Swift.Set<Swift.String>, disabledConsentVendorIds: Swift.Set<Swift.String>, enabledLIVendorIds: Swift.Set<Swift.String>, disabledLIVendorIds: Swift.Set<Swift.String>, sendAPIEvent: Swift.Bool) -> Swift.Bool
+  @objc public func setUserStatus(enabledConsentPurposeIds: Swift.Set<Swift.String>, disabledConsentPurposeIds: Swift.Set<Swift.String>, enabledLIPurposeIds: Swift.Set<Swift.String>, disabledLIPurposeIds: Swift.Set<Swift.String>, enabledConsentVendorIds: Swift.Set<Swift.String>, disabledConsentVendorIds: Swift.Set<Swift.String>, enabledLIVendorIds: Swift.Set<Swift.String>, disabledLIVendorIds: Swift.Set<Swift.String>) -> Swift.Bool
   @discardableResult
   @objc public func setUserAgreeToAll() -> Swift.Bool
   @discardableResult

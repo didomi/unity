@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/Didomi-Swift.h</key>
 		<data>
-		kq5b1t8p47iREAtCP11SXDYyUxs=
+		FavAHrYZf8JS6A9l9SvXruSeuyo=
 		</data>
 		<key>Headers/Didomi.h</key>
 		<data>
@@ -18,79 +18,79 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		2GprcCxRODu7XNryOd4nWKLAJtA=
+		ZV4NJEHhmgR01VdBIhlg32o51gA=
 		</data>
 		<key>Modules/Didomi.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		75u6vMPRIlNDKZWHMZ6elESJz+M=
+		uphEbZbrs2gc1VaL9tdXQFzgfAA=
 		</data>
 		<key>Modules/Didomi.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		KXcQwd060SycygZJbRFGaRvjT8k=
+		sq7LtGo8pO+qK3kUDg7hY6mDbgA=
 		</data>
 		<key>Modules/Didomi.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		+NpmZtM+M/cKMkd81KtO6f+rKI8=
+		hrIfvir8Bv1+DBhpwP83CMer70o=
 		</data>
 		<key>Modules/Didomi.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		75u6vMPRIlNDKZWHMZ6elESJz+M=
+		uphEbZbrs2gc1VaL9tdXQFzgfAA=
 		</data>
 		<key>Modules/Didomi.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		KXcQwd060SycygZJbRFGaRvjT8k=
+		sq7LtGo8pO+qK3kUDg7hY6mDbgA=
 		</data>
 		<key>Modules/Didomi.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		+NpmZtM+M/cKMkd81KtO6f+rKI8=
+		hrIfvir8Bv1+DBhpwP83CMer70o=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
-		0B/9sM6P1fhrDy8U8DXJlaJhV6w=
+		xWjafkNHuJSxjaMHS67ToNxOMPM=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<data>
-		KKVHDsQFWIQRjFIr8p8ox/0Yb+Q=
+		IqlK/BiG7ZCUNJC2262BGN/SciE=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		06NynFgm7iAfdrFszJc//mfQn8Q=
+		BU+jdW2MbMBhlcJxtcLprVilzsw=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386.swiftdoc</key>
 		<data>
-		0B/9sM6P1fhrDy8U8DXJlaJhV6w=
+		xWjafkNHuJSxjaMHS67ToNxOMPM=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386.swiftinterface</key>
 		<data>
-		KKVHDsQFWIQRjFIr8p8ox/0Yb+Q=
+		IqlK/BiG7ZCUNJC2262BGN/SciE=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386.swiftmodule</key>
 		<data>
-		06NynFgm7iAfdrFszJc//mfQn8Q=
+		BU+jdW2MbMBhlcJxtcLprVilzsw=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		KX7cNONCkbOWIWDc2KMmOrr33bk=
+		pcswCWIwEeyFyqdnkwU9JYfcmAE=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		oZicvzsUZurCZaePpzwWg2ylZ2o=
+		gwt36aHRffqOKqQm0eCNnuwwYvI=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		sevRrsdcOV9OaoleXS/KgVzyKzE=
+		kTCQl5Dz/4i6nJqWCcwT+siKmJw=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		KX7cNONCkbOWIWDc2KMmOrr33bk=
+		pcswCWIwEeyFyqdnkwU9JYfcmAE=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		oZicvzsUZurCZaePpzwWg2ylZ2o=
+		gwt36aHRffqOKqQm0eCNnuwwYvI=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		sevRrsdcOV9OaoleXS/KgVzyKzE=
+		kTCQl5Dz/4i6nJqWCcwT+siKmJw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -106,7 +106,7 @@
 		</data>
 		<key>didomi_master_config.json</key>
 		<data>
-		pLRtmD2tnES5lOc66s3mvcq7vWA=
+		LL5CQUPbIPFGaBfwX/U3a66smis=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -126,11 +126,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			kq5b1t8p47iREAtCP11SXDYyUxs=
+			FavAHrYZf8JS6A9l9SvXruSeuyo=
 			</data>
 			<key>hash2</key>
 			<data>
-			0yiG2MnV9b1mk4Ppz6wBLoKfZV6MwaGA5LYD87LUDpE=
+			VhtsZhe41PgvjeWYi7wdkGmbDH6pLHeJVCujn0QmSTk=
 			</data>
 		</dict>
 		<key>Headers/Didomi.h</key>
@@ -148,198 +148,198 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			75u6vMPRIlNDKZWHMZ6elESJz+M=
+			uphEbZbrs2gc1VaL9tdXQFzgfAA=
 			</data>
 			<key>hash2</key>
 			<data>
-			+bXWQ85lQXG7t64HR77Ff26+MIqCXKTVPUo0c5BeE+w=
+			8EwOu13sRZLJ/cc1W15EL2qnuk42et4Rfg0gPDWZi7w=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KXcQwd060SycygZJbRFGaRvjT8k=
+			sq7LtGo8pO+qK3kUDg7hY6mDbgA=
 			</data>
 			<key>hash2</key>
 			<data>
-			2IZH/AhpZCYnnXZgYBq0x3AE6+5SPndH8XdnB5zq1N8=
+			32brOKqeVPZ+GSZQheWEJ+bDedKvquL9Di/aI64KE7A=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+NpmZtM+M/cKMkd81KtO6f+rKI8=
+			hrIfvir8Bv1+DBhpwP83CMer70o=
 			</data>
 			<key>hash2</key>
 			<data>
-			4Ipi67Lg+9lFM8nDtEALF2ZbrPxTKmBFwpiMhMCVvsA=
+			ftgE6RaqqpshnbRbqGT9e9aPSqC67ycbhvE4Tw50l10=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			75u6vMPRIlNDKZWHMZ6elESJz+M=
+			uphEbZbrs2gc1VaL9tdXQFzgfAA=
 			</data>
 			<key>hash2</key>
 			<data>
-			+bXWQ85lQXG7t64HR77Ff26+MIqCXKTVPUo0c5BeE+w=
+			8EwOu13sRZLJ/cc1W15EL2qnuk42et4Rfg0gPDWZi7w=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KXcQwd060SycygZJbRFGaRvjT8k=
+			sq7LtGo8pO+qK3kUDg7hY6mDbgA=
 			</data>
 			<key>hash2</key>
 			<data>
-			2IZH/AhpZCYnnXZgYBq0x3AE6+5SPndH8XdnB5zq1N8=
+			32brOKqeVPZ+GSZQheWEJ+bDedKvquL9Di/aI64KE7A=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+NpmZtM+M/cKMkd81KtO6f+rKI8=
+			hrIfvir8Bv1+DBhpwP83CMer70o=
 			</data>
 			<key>hash2</key>
 			<data>
-			4Ipi67Lg+9lFM8nDtEALF2ZbrPxTKmBFwpiMhMCVvsA=
+			ftgE6RaqqpshnbRbqGT9e9aPSqC67ycbhvE4Tw50l10=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0B/9sM6P1fhrDy8U8DXJlaJhV6w=
+			xWjafkNHuJSxjaMHS67ToNxOMPM=
 			</data>
 			<key>hash2</key>
 			<data>
-			0JVWhb3yE2mH+upyKzOGxkOkuqfB8+MPam3LKNgm/n8=
+			ctAjid6jfGUIEnX4a9zvI5+zGfw1z7hFjTLy4Pppx8U=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KKVHDsQFWIQRjFIr8p8ox/0Yb+Q=
+			IqlK/BiG7ZCUNJC2262BGN/SciE=
 			</data>
 			<key>hash2</key>
 			<data>
-			BcoHR9VIL9PvLWUhgDv6MHeQPHFy7OxXb6qEM8rBAFY=
+			IKFFvglQLU8v0GyI+x2OdMdKiaan/YfnB628UUqK2kw=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			06NynFgm7iAfdrFszJc//mfQn8Q=
+			BU+jdW2MbMBhlcJxtcLprVilzsw=
 			</data>
 			<key>hash2</key>
 			<data>
-			JdE04QJGkF7qpCqYRmqZk9mxcRI6NqxPBH2aWxESjIc=
+			vJs7GAv5ybTh8RazOscbiyuV3GQuXQz2kZHDw+zafp8=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0B/9sM6P1fhrDy8U8DXJlaJhV6w=
+			xWjafkNHuJSxjaMHS67ToNxOMPM=
 			</data>
 			<key>hash2</key>
 			<data>
-			0JVWhb3yE2mH+upyKzOGxkOkuqfB8+MPam3LKNgm/n8=
+			ctAjid6jfGUIEnX4a9zvI5+zGfw1z7hFjTLy4Pppx8U=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KKVHDsQFWIQRjFIr8p8ox/0Yb+Q=
+			IqlK/BiG7ZCUNJC2262BGN/SciE=
 			</data>
 			<key>hash2</key>
 			<data>
-			BcoHR9VIL9PvLWUhgDv6MHeQPHFy7OxXb6qEM8rBAFY=
+			IKFFvglQLU8v0GyI+x2OdMdKiaan/YfnB628UUqK2kw=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			06NynFgm7iAfdrFszJc//mfQn8Q=
+			BU+jdW2MbMBhlcJxtcLprVilzsw=
 			</data>
 			<key>hash2</key>
 			<data>
-			JdE04QJGkF7qpCqYRmqZk9mxcRI6NqxPBH2aWxESjIc=
+			vJs7GAv5ybTh8RazOscbiyuV3GQuXQz2kZHDw+zafp8=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KX7cNONCkbOWIWDc2KMmOrr33bk=
+			pcswCWIwEeyFyqdnkwU9JYfcmAE=
 			</data>
 			<key>hash2</key>
 			<data>
-			Lru7TTlw+fQsLNoLVSaXyXgZ8tXHJXrFFojNAGI8/Ek=
+			bv6sI8i7xLN581uUyz65PAuwVwCZ8fnq2t73WX+MHf0=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			oZicvzsUZurCZaePpzwWg2ylZ2o=
+			gwt36aHRffqOKqQm0eCNnuwwYvI=
 			</data>
 			<key>hash2</key>
 			<data>
-			Hjnp6kRjmk+QORJFJFyIU8KogSAuORFYMi3Z0sl5Cjw=
+			6tX+5SLg1P4Bi1daWZHlk4NpgJUooZeVoMrbpiZSyKs=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sevRrsdcOV9OaoleXS/KgVzyKzE=
+			kTCQl5Dz/4i6nJqWCcwT+siKmJw=
 			</data>
 			<key>hash2</key>
 			<data>
-			xeU+pBlrw9i+I4O5pMd++l6xnv538oUFOBJd1XXKxeU=
+			FFoQ82aBVSq4jryp4PVcOJdTgtjXxyshsICTGApMpR0=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KX7cNONCkbOWIWDc2KMmOrr33bk=
+			pcswCWIwEeyFyqdnkwU9JYfcmAE=
 			</data>
 			<key>hash2</key>
 			<data>
-			Lru7TTlw+fQsLNoLVSaXyXgZ8tXHJXrFFojNAGI8/Ek=
+			bv6sI8i7xLN581uUyz65PAuwVwCZ8fnq2t73WX+MHf0=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			oZicvzsUZurCZaePpzwWg2ylZ2o=
+			gwt36aHRffqOKqQm0eCNnuwwYvI=
 			</data>
 			<key>hash2</key>
 			<data>
-			Hjnp6kRjmk+QORJFJFyIU8KogSAuORFYMi3Z0sl5Cjw=
+			6tX+5SLg1P4Bi1daWZHlk4NpgJUooZeVoMrbpiZSyKs=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sevRrsdcOV9OaoleXS/KgVzyKzE=
+			kTCQl5Dz/4i6nJqWCcwT+siKmJw=
 			</data>
 			<key>hash2</key>
 			<data>
-			xeU+pBlrw9i+I4O5pMd++l6xnv538oUFOBJd1XXKxeU=
+			FFoQ82aBVSq4jryp4PVcOJdTgtjXxyshsICTGApMpR0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -379,11 +379,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			pLRtmD2tnES5lOc66s3mvcq7vWA=
+			LL5CQUPbIPFGaBfwX/U3a66smis=
 			</data>
 			<key>hash2</key>
 			<data>
-			GhGL302ETuYQihsmbGv36DUbAO+SzfENv7Xzw7CaHVU=
+			03K+VTHmCHEu20qaa9PGdVo4RH2gad2zHdv9JEaHa6w=
 			</data>
 		</dict>
 	</dict>
