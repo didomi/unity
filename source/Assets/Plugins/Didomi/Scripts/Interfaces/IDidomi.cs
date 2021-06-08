@@ -29,6 +29,9 @@ namespace IO.Didomi.SDK.Interfaces
         bool GetUserConsentStatusForPurpose(string purposeId);
         bool GetUserConsentStatusForVendor(string vendorId);
         bool GetUserConsentStatusForVendorAndRequiredPurposes(string vendorId);
+        bool GetUserLegitimateInterestStatusForPurpose(string purposeId);
+        bool GetUserLegitimateInterestStatusForVendor(string vendorId);
+        bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId);
         Vendor GetVendor(string vendorId);
         void HideNotice();
         void HidePreferences();
@@ -45,14 +48,30 @@ namespace IO.Didomi.SDK.Interfaces
         bool IsNoticeVisible();
         bool IsPreferencesVisible();
         bool IsReady();
+        void OnError(Action didomiCallable);
         void OnReady(Action didomiCallable);
         void SetupUI();
         void ShowNotice();
         void ShowPreferences();
         void Reset();
         bool SetUserAgreeToAll();
+        [ObsoleteAttribute("This method is deprecated. Use SetUserStatus instead.")]
         bool SetUserConsentStatus(ISet<string> enabledPurposeIds, ISet<string> disabledPurposeIds, ISet<string> enabledVendorIds, ISet<string> disabledVendorIds);
         bool SetUserDisagreeToAll();
+        bool SetUserStatus(
+            ISet<string> enabledConsentPurposeIds,
+            ISet<string> disabledConsentPurposeIds,
+            ISet<string> enabledLIPurposeIds,
+            ISet<string> disabledLIPurposeIds,
+            ISet<string> enabledConsentVendorIds,
+            ISet<string> disabledConsentVendorIds,
+            ISet<string> enabledLIVendorIds,
+            ISet<string> disabledLIVendorIds);
+        bool SetUserStatus(
+            bool purposesConsentStatus,
+            bool purposesLIStatus,
+            bool vendorsConsentStatus,
+            bool vendorsLIStatus);
         bool ShouldConsentBeCollected();
         void UpdateSelectedLanguage(string languageCode);
     }

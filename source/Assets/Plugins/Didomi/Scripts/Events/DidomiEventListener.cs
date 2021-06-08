@@ -10,6 +10,7 @@ namespace IO.Didomi.SDK.Events
     public class DidomiEventListener
     {
         public event EventHandler<ConsentChangedEvent> ConsentChanged;
+        public event EventHandler<ErrorEvent> Error;
         public event EventHandler<HideNoticeEvent> HideNotice;
         public event EventHandler<ReadyEvent> Ready;
         public event EventHandler<ShowNoticeEvent> ShowNotice;
@@ -33,6 +34,11 @@ namespace IO.Didomi.SDK.Events
             // The consent status of the user has changed
         }
 
+        public void OnError(ErrorEvent @event)
+        {
+            Error?.Invoke(this, @event);
+            // The consent status of the user has changed
+        }
 
         public void OnHideNotice(HideNoticeEvent @event)
         {
