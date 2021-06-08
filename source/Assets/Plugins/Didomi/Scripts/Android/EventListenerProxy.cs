@@ -168,7 +168,7 @@ namespace IO.Didomi.SDK.Android
         {
             var errorMessage = GetErrorMessage(@event);
 
-            return new ErrorEvent { ErrorMessage = errorMessage };
+            return new ErrorEvent(errorMessage);
         }
 
         private static string GetErrorMessage(AndroidJavaObject @event)
