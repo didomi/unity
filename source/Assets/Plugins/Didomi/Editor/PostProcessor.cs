@@ -230,10 +230,9 @@ public static class PostProcessor
         {
             unusedSDKPath = devicePath;
             var mmFile = $"{path}{PostProcessorSettings.FilePathSeperator}Libraries{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.mm";
-            var headerFilePath = $"Didomi.framework{PostProcessorSettings.FilePathSeperator}Headers{PostProcessorSettings.FilePathSeperator}Didomi-Swift.h";
-            var mmFilePathTargetDevice = $@"#import ""{devicePath}{PostProcessorSettings.FilePathSeperator}{headerFilePath}""";
-            var mmFilePathTargetSimulator = $@"#import ""{simulatorPath}{PostProcessorSettings.FilePathSeperator}{headerFilePath}""";
-            ReplaceLineInFile(mmFile, mmFilePathTargetDevice, mmFilePathTargetSimulator);
+            var headerFileImportLineDevice = @"#import ""Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h""";
+            var headerFileImportLineSimulator = @"#import ""Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_i386_x86_64-simulator/Didomi.framework/Headers/Didomi-Swift.h""";
+            ReplaceLineInFile(mmFile, headerFileImportLineDevice, headerFileImportLineSimulator);
         }
 
 		if(Directory.Exists($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}"))
