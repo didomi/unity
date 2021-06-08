@@ -305,8 +305,47 @@ void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigu
 
 	    }
 
+	int getUserLegitimateInterestStatusForPurpose(char* purposeId)
 
 
+
+	{
+
+
+
+          return [[Didomi shared] getUserLegitimateInterestStatusForPurposeWithPurposeId: CreateNSString(purposeId)];
+
+
+
+	    }
+	
+	int getUserLegitimateInterestStatusForVendor(char* vendorId)
+
+
+
+	{
+
+
+
+          return [[Didomi shared] getUserLegitimateInterestStatusForVendorWithVendorId: CreateNSString(vendorId)];
+
+
+
+	    }
+
+	int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(char* vendorId)
+
+
+
+	{
+
+
+
+          return [[Didomi shared] getUserLegitimateInterestStatusForVendorAndRequiredPurposesWithVendorId: CreateNSString(vendorId)];
+
+
+
+	    }
 
 
 
@@ -649,6 +688,24 @@ bool setUserConsentStatus(char* enabledPurposeIds, char* disabledPurposeIds, cha
     return [[Didomi shared] setUserConsentStatusWithEnabledPurposeIds:enabledPurposeIdsSet disabledPurposeIds:enabledPurposeIdsSet enabledVendorIds:enabledVendorIdsSet disabledVendorIds:disabledVendorIdsSet];
 }
 
+bool setUserStatus(char* enabledConsentPurposeIds, char* disabledConsentPurposeIds, char* enabledLIPurposeIds, char* disabledLIPurposeIds, char* enabledConsentVendorIds, char* disabledConsentVendorIds, char* enabledLIVendorIds, char* disabledLIVendorIds)
+{
+	NSSet<NSString *> * enabledConsentPurposeIdsSet=ConvertJsonToSet(enabledConsentPurposeIds);
+	NSSet<NSString *> * disabledConsentPurposeIdsSet=ConvertJsonToSet(disabledConsentPurposeIds);
+	NSSet<NSString *> * enabledLIPurposeIdsSet=ConvertJsonToSet(enabledLIPurposeIds);
+	NSSet<NSString *> * disabledLIPurposeIdsSet=ConvertJsonToSet(disabledLIPurposeIds);
+	NSSet<NSString *> * enabledConsentVendorIdsSet=ConvertJsonToSet(enabledConsentVendorIds);
+	NSSet<NSString *> * disabledConsentVendorIdsSet=ConvertJsonToSet(disabledConsentVendorIds);
+	NSSet<NSString *> * enabledLIVendorIdsSet=ConvertJsonToSet(enabledLIVendorIds);
+	NSSet<NSString *> * disabledLIVendorIdsSet=ConvertJsonToSet(disabledLIVendorIds);
+
+    return [[Didomi shared] setUserStatusWithEnabledConsentPurposeIds:enabledConsentPurposeIdsSet disabledConsentPurposeIds:disabledConsentPurposeIdsSet enabledLIPurposeIds:enabledLIPurposeIdsSet disabledLIPurposeIds:disabledLIPurposeIdsSet enabledConsentVendorIds:enabledConsentVendorIdsSet disabledConsentVendorIds:disabledConsentVendorIdsSet enabledLIVendorIds:enabledLIVendorIdsSet disabledLIVendorIds:disabledLIVendorIdsSet];
+}
+
+bool setUserStatus1(BOOL purposesConsentStatus, BOOL purposesLIStatus, BOOL vendorsConsentStatus, BOOL vendorsLIStatus)
+{
+    return [[Didomi shared] setUserStatusWithPurposesConsentStatus:purposesConsentStatus purposesLIStatus:purposesLIStatus vendorsConsentStatus:vendorsConsentStatus vendorsLIStatus:vendorsLIStatus];
+}
 
 
 	void updateSelectedLanguage(char* languageCode)
@@ -683,6 +740,26 @@ void onReady(callback_function pFunc)
 
 }
 
+typedef void  (*callback_error_function)( void);
+
+void onError(callback_error_function errorFunc)
+
+
+
+{
+
+
+    [[Didomi shared] onErrorWithCallback:^(DDMErrorEvent * _Nonnull){
+
+
+
+          errorFunc();
+
+
+
+      }];
+
+}
 
 
 
@@ -691,7 +768,7 @@ static DDMEventListener *eventListener = [[DDMEventListener alloc]init];
 
 
 
-void addEventListener( void (*event_listener_handler) (DDMEventType, NSString * _Nullable ))
+void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable ))
 
 
 
@@ -733,6 +810,12 @@ void addEventListener( void (*event_listener_handler) (DDMEventType, NSString * 
 	eventListener.onReady = ^(DDMEventType eventType){
 
         event_listener_handler(eventType,@"");
+
+    };
+
+	eventListener.onError = ^(DDMErrorEvent * errorEvent){
+
+        event_listener_handler(1000 , errorEvent.descriptionText);
 
     };
 

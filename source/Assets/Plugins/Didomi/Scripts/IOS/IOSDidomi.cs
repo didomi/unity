@@ -136,6 +136,27 @@ namespace IO.Didomi.SDK.IOS
             return DidomiFramework.GetUserConsentStatusForVendorAndRequiredPurposes(vendorId);
         }
 
+        //public enum ConsenStatus { Enable = 0, Disable = 1, Unknown = 2 }
+        public bool GetUserLegitimateInterestStatusForPurpose(string purposeId)
+        {
+            var result = DidomiFramework.GetUserLegitimateInterestStatusForPurpose(purposeId);
+
+            return result == 0;
+        }
+
+        public bool GetUserLegitimateInterestStatusForVendor(string vendorId)
+        {
+            var result = DidomiFramework.GetUserLegitimateInterestStatusForVendor(vendorId);
+
+            return result == 0;
+        }
+
+        public bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
+        {
+            var result = DidomiFramework.GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(vendorId);
+            return result == 0;
+        }
+
         public void HideNotice()
         {
             DidomiFramework.HideNotice();
@@ -178,6 +199,11 @@ namespace IO.Didomi.SDK.IOS
             return DidomiFramework.CallIsReadyMethod();
         }
 
+        public void OnError(Action didomiCallable)
+        {
+            DidomiFramework.OnError(didomiCallable);
+        }
+
         public void OnReady(Action didomiCallable)
         {
             DidomiFramework.OnReady(didomiCallable);
@@ -208,6 +234,7 @@ namespace IO.Didomi.SDK.IOS
             return DidomiFramework.SetUserAgreeToAll();
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use SetUserStatus instead.")]
         public bool SetUserConsentStatus(ISet<string> enabledPurposeIds, ISet<string> disabledPurposeIds, ISet<string> enabledVendorIds, ISet<string> disabledVendorIds)
         {
             return DidomiFramework.SetUserConsentStatus(
@@ -220,6 +247,40 @@ namespace IO.Didomi.SDK.IOS
         public bool SetUserDisagreeToAll()
         {
             return DidomiFramework.SetUserDisagreeToAll();
+        }
+
+        public bool SetUserStatus(
+            ISet<string> enabledConsentPurposeIds,
+            ISet<string> disabledConsentPurposeIds,
+            ISet<string> enabledLIPurposeIds,
+            ISet<string> disabledLIPurposeIds,
+            ISet<string> enabledConsentVendorIds,
+            ISet<string> disabledConsentVendorIds,
+            ISet<string> enabledLIVendorIds,
+            ISet<string> disabledLIVendorIds)
+        {
+            return DidomiFramework.SetUserStatus(
+             IOSObjectMapper.ConvertFromHasSetStringToJson(enabledConsentPurposeIds),
+             IOSObjectMapper.ConvertFromHasSetStringToJson(disabledConsentPurposeIds),
+             IOSObjectMapper.ConvertFromHasSetStringToJson(enabledLIPurposeIds),
+             IOSObjectMapper.ConvertFromHasSetStringToJson(disabledLIPurposeIds),
+             IOSObjectMapper.ConvertFromHasSetStringToJson(enabledConsentVendorIds),
+             IOSObjectMapper.ConvertFromHasSetStringToJson(disabledConsentVendorIds),
+             IOSObjectMapper.ConvertFromHasSetStringToJson(enabledLIVendorIds),
+             IOSObjectMapper.ConvertFromHasSetStringToJson(disabledLIVendorIds));
+        }
+
+        public bool SetUserStatus(
+            bool purposesConsentStatus,
+            bool purposesLIStatus,
+            bool vendorsConsentStatus,
+            bool vendorsLIStatus)
+        {
+            return DidomiFramework.SetUserStatus(
+                purposesConsentStatus,
+                purposesLIStatus,
+                vendorsConsentStatus,
+                vendorsLIStatus);
         }
 
         public bool ShouldConsentBeCollected()
