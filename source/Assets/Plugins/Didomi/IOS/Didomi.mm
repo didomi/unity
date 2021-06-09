@@ -1,15 +1,5 @@
 ﻿#import <Foundation/Foundation.h>
-
-
-
-
-
-
-
 #import "Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h"
-
-
-
 
 #pragma mark - C interface
 
@@ -21,550 +11,139 @@
 
 char* cStringCopy(const char* string){
 
-
-
-
-
-
-
      if (string == NULL){
-
-
-
-
-
-
-
           return NULL;
-
-
-
-
-
-
-
      }
 
-
-
-
-
-
-
      char* res = (char*)malloc(strlen(string)+1);
-
-
-
-
-
-
-
      strcpy(res, string);
-
-
-
-
-
-
-
      return res;
-
-
-
-
-
-
-
 }
 
 
 
 extern "C" {
 
-
-
-
-
-	    void setupUI() {
-
-
-
-          [[Didomi shared]       setupUIWithContainerController:UnityGetGLViewController()];
-
-
-
-      }
-
-
-
-
-
-
-
-
-
+void setupUI() {
+  [[Didomi shared]       setupUIWithContainerController:UnityGetGLViewController()];
+}
 
 
 NSString* _Nonnull CreateNSString ( char* string)
-
-
-
 {
-
-
-
-
-
-
-
     return [NSString stringWithUTF8String:string ?: ""];
-
-
-
-
-
-
-
 }
-
-
 
 void setUserAgent(char* name, char* version)
 {
-
-         [[Didomi shared]      setUserAgentWithName: CreateNSString(name) version:CreateNSString(version)];
+    [[Didomi shared]      setUserAgentWithName: CreateNSString(name) version:CreateNSString(version)];
 }
-
-
-
-
-
-
-
-
-
-
 
 void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig,char* languageCode)
-
-
-
-
-
-
-
 {
-
-
-
-
-
-
-
     [[Didomi shared]      initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSString(localConfigurationPath) remoteConfigurationURL:CreateNSString(remoteConfigurationURL)
-
-
-
-
-
-
-
         providerId:CreateNSString(providerId)
 
-
-
-
-
-
-
-                     disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSString(languageCode)];
-
-
-
+    disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSString(languageCode)];
 }
 
-
-
-
-
-
-
-
-
-
-
-	bool isReady()
-
-
-
-	{
-
-
-
+bool isReady()
+{
 	return [[Didomi shared]       isReady];
-
-
-
-	}
-
-
-
-
-
-
-
-	char* getTranslatedText(char* key)
-
-
-
-	{
-
-
-
-          NSString *returnString = [[Didomi shared] getTranslatedTextWithKey: CreateNSString(key)];
-
-
-
-
-
-
-
-         
-
-
-
-          return cStringCopy([returnString UTF8String]);
-
-
-
-
-
-
-
-	    }
-
-
-
-
-
-
-
-
-
-	bool getUserConsentStatusForPurpose(char* purposeId)
-
-
-
-	{
-
-
-
-          return [[Didomi shared] getUserConsentStatusForPurposeWithPurposeId: CreateNSString(purposeId)];
-
-
-
-	    }
-
-
-
-
-
-
-
-	bool getUserConsentStatusForVendor(char* vendorId)
-
-
-
-	{
-
-
-
-          return [[Didomi shared] getUserConsentStatusForVendorWithVendorId: CreateNSString(vendorId)];
-
-
-
-	    }
-
-
-
-
-
-
-
-	bool getUserConsentStatusForVendorAndRequiredPurposes(char* vendorId)
-
-
-
-	{
-
-
-
-          return [[Didomi shared] getUserConsentStatusForVendorAndRequiredPurposesWithVendorId: CreateNSString(vendorId)];
-
-
-
-	    }
-
-	int getUserLegitimateInterestStatusForPurpose(char* purposeId)
-
-
-
-	{
-
-
-
-          return [[Didomi shared] getUserLegitimateInterestStatusForPurposeWithPurposeId: CreateNSString(purposeId)];
-
-
-
-	    }
+}
+
+char* getTranslatedText(char* key)
+{
+    NSString *returnString = [[Didomi shared] getTranslatedTextWithKey: CreateNSString(key)];
+
+    return cStringCopy([returnString UTF8String]);
+}
+
+bool getUserConsentStatusForPurpose(char* purposeId)
+{
+     return [[Didomi shared] getUserConsentStatusForPurposeWithPurposeId: CreateNSString(purposeId)];
+}
+
+bool getUserConsentStatusForVendor(char* vendorId)
+{
+    return [[Didomi shared] getUserConsentStatusForVendorWithVendorId: CreateNSString(vendorId)];
+}
+
+bool getUserConsentStatusForVendorAndRequiredPurposes(char* vendorId)
+{
+	return [[Didomi shared] getUserConsentStatusForVendorAndRequiredPurposesWithVendorId: CreateNSString(vendorId)];
+}
+
+int getUserLegitimateInterestStatusForPurpose(char* purposeId)
+{
+    return [[Didomi shared] getUserLegitimateInterestStatusForPurposeWithPurposeId: CreateNSString(purposeId)];
+}
 	
-	int getUserLegitimateInterestStatusForVendor(char* vendorId)
+int getUserLegitimateInterestStatusForVendor(char* vendorId)
+{
+	return [[Didomi shared] getUserLegitimateInterestStatusForVendorWithVendorId: CreateNSString(vendorId)];
+}
 
+int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(char* vendorId)
+{
+    return [[Didomi shared] getUserLegitimateInterestStatusForVendorAndRequiredPurposesWithVendorId: CreateNSString(vendorId)];
+}
 
+void hideNotice()
+{
+    [[Didomi shared] hideNotice];
+}
 
-	{
+void hidePreferences()
+{
+	[[Didomi shared] hidePreferences];
+}
 
-
-
-          return [[Didomi shared] getUserLegitimateInterestStatusForVendorWithVendorId: CreateNSString(vendorId)];
-
-
-
-	    }
-
-	int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(char* vendorId)
-
-
-
-	{
-
-
-
-          return [[Didomi shared] getUserLegitimateInterestStatusForVendorAndRequiredPurposesWithVendorId: CreateNSString(vendorId)];
-
-
-
-	    }
-
-
-
-
-	void hideNotice()
-
-
-
-	{
-
-
-
-           [[Didomi shared] hideNotice];
-
-
-
-        }
-
-
-
-
-
-
-
-	void hidePreferences()
-
-
-
-	{
-
-
-
-           [[Didomi shared] hidePreferences];
-
-
-
-        }
-
-
-
-
-
-
-
-	bool isConsentRequired()
-
-
-
-	{
-
-
-
+bool isConsentRequired()
+{
 	return [[Didomi shared] isConsentRequired];
+}
 
-
-
-	}
-
-
-
-
-
-
-
-	bool isPreferencesVisible()
-
-
-
-	{
-
-
-
+bool isPreferencesVisible()
+{
 	return [[Didomi shared] isPreferencesVisible];
+}
 
-
-
-	}
-
-
-
-
-
-
-
-	void showPreferences()
-
-
-
-	{
-
-
+void showPreferences()
+{
 	[[Didomi shared] showPreferencesWithController:(nil) view:(ViewsPurposes)];
+}
 
-
-
-	}
-
-
-
-
-
-
-
-	bool isUserConsentStatusPartial()
-
-
-
-	{
-
-
-
+bool isUserConsentStatusPartial()
+{
 	return [[Didomi shared] isUserConsentStatusPartial];
+}
 
+void reset()
+{
+    [[Didomi shared] reset];
+}
 
-
-	}
-
-
-
-
-
-
-
-	void reset()
-
-
-
-	{
-
-
-
-           [[Didomi shared] reset];
-
-
-
-        }
-
-
-
-
-
-
-
-	bool setUserAgreeToAll()
-
-
-
-	{
-
-
-
+bool setUserAgreeToAll()
+{
 	return [[Didomi shared] setUserAgreeToAll];
+}
 
-
-
-	}
-
-
-
-
-
-
-
-
-	bool setUserDisagreeToAll()
-
-
-
-	{
-
-
-
+bool setUserDisagreeToAll()
+{
 	return [[Didomi shared] setUserDisagreeToAll];
+}
 
-
-
-	}
-
-
-
-
-
-
-
-	bool shouldConsentBeCollected()
-
-
-
-	{
-
-
-
+bool shouldConsentBeCollected()
+{
 	return [[Didomi shared] shouldConsentBeCollected];
+}
 
+void showNotice()
+{
+    [[Didomi shared] showNotice];
+}
 
-
-	}
-
-
-
-
-
-
-
-	void showNotice()
-
-
-
-	{
-
-           [[Didomi shared] showNotice];
-
-
-
-        }
-
-
-
- 
  char* ConvertSetToJsonText( NSSet<NSString *> * dataSet)
  {
 	NSArray<NSString *> * dataArray= [dataSet allObjects ];
@@ -581,7 +160,6 @@ void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigu
 
 char* getDisabledPurposeIds()
 {
-
     NSSet<NSString *> * dataSet=[[Didomi shared] getDisabledPurposeIds];
 	
 	return ConvertSetToJsonText(dataSet);    
@@ -589,7 +167,6 @@ char* getDisabledPurposeIds()
 
 char* getDisabledVendorIds()
 {
-
     NSSet<NSString *> * dataSet=[[Didomi shared] getDisabledVendorIds];
 	
 	return ConvertSetToJsonText(dataSet);    
@@ -597,7 +174,6 @@ char* getDisabledVendorIds()
 
 char* getEnabledPurposeIds()
 {
-
     NSSet<NSString *> * dataSet=[[Didomi shared] getEnabledPurposeIds];
 	
 	return ConvertSetToJsonText(dataSet);    
@@ -605,7 +181,6 @@ char* getEnabledPurposeIds()
 
 char* getEnabledVendorIds()
 {
-
     NSSet<NSString *> * dataSet=[[Didomi shared] getEnabledVendorIds];
 	
 	return ConvertSetToJsonText(dataSet);    
@@ -613,7 +188,6 @@ char* getEnabledVendorIds()
 
 char* getJavaScriptForWebView()
 {
-
     NSString *returnString = [[Didomi shared] getJavaScriptForWebViewWithExtra:@""];
 
     return cStringCopy([returnString UTF8String]);
@@ -621,7 +195,6 @@ char* getJavaScriptForWebView()
 
 char* getRequiredPurposeIds()
 {
-
     NSSet<NSString *> * dataSet=[[Didomi shared] getRequiredPurposeIds];
 	
 	return ConvertSetToJsonText(dataSet);    
@@ -629,7 +202,6 @@ char* getRequiredPurposeIds()
 
 char* getRequiredVendorIds()
 {
-
     NSSet<NSString *> * dataSet=[[Didomi shared] getRequiredVendorIds];
 	
 	return ConvertSetToJsonText(dataSet);    
@@ -637,7 +209,6 @@ char* getRequiredVendorIds()
  
  char* ConvertDictinaryToJsonText( NSDictionary<NSString *, NSString *> * dataDict)
  {
-
 	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil];
 	
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -660,22 +231,16 @@ char* getText(char* key)
 }
 
 NSSet<NSString *> * ConvertJsonToSet(char* jsonText)
- {
-     
- NSString *jsonString=CreateNSString(jsonText);
+{
+	NSString *jsonString=CreateNSString(jsonText);
 
-     
-     
-NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+	NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+	NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
 
-     
-     
-NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+	NSSet<NSString *> * retval= [[NSSet alloc] initWithArray:jsonArray];
 
-     
-NSSet<NSString *> * retval= [[NSSet alloc] initWithArray:jsonArray];
-
-     return retval;
+	return retval;
  }
 
 bool setUserConsentStatus(char* enabledPurposeIds, char* disabledPurposeIds, char* enabledVendorIds, char* disabledVendorIds)
@@ -707,89 +272,39 @@ bool setUserStatus1(BOOL purposesConsentStatus, BOOL purposesLIStatus, BOOL vend
     return [[Didomi shared] setUserStatusWithPurposesConsentStatus:purposesConsentStatus purposesLIStatus:purposesLIStatus vendorsConsentStatus:vendorsConsentStatus vendorsLIStatus:vendorsLIStatus];
 }
 
-
-	void updateSelectedLanguage(char* languageCode)
-
-
-
-	{
-
-            return [[Didomi shared] updateSelectedLanguageWithLanguageCode: CreateNSString(languageCode)];
-    }
-
+void updateSelectedLanguage(char* languageCode)
+{
+	return [[Didomi shared] updateSelectedLanguageWithLanguageCode: CreateNSString(languageCode)];
+}
 
 typedef void  (*callback_function)(void);
 
 void onReady(callback_function pFunc)
-
-
-
 {
-
-
-
     [[Didomi shared] onReadyWithCallback:^{
-
-
-
           pFunc();
-
-
-
       }];
-
 }
 
 typedef void  (*callback_error_function)( void);
 
 void onError(callback_error_function errorFunc)
-
-
-
 {
-
-
     [[Didomi shared] onErrorWithCallback:^(DDMErrorEvent * _Nonnull){
-
-
-
           errorFunc();
-
-
-
       }];
-
 }
-
-
 
 
 static DDMEventListener *eventListener = [[DDMEventListener alloc]init];
 
-
-
 void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable ))
-
-
-
 {
 
     if(eventListener==nil)
-
 	{
-
-  
-
-	eventListener = [[DDMEventListener alloc]init];
-
-
-
+		eventListener = [[DDMEventListener alloc]init];
     }
-
-    
-
-
-    
 
     eventListener.onConsentChanged = ^(DDMEventType eventType){
 
@@ -797,15 +312,11 @@ void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable
 
     };
 
-
-
 	eventListener.onHideNotice = ^(DDMEventType eventType){
 
         event_listener_handler(eventType,@"");
 
     };
-
-
 
 	eventListener.onReady = ^(DDMEventType eventType){
 
@@ -815,11 +326,10 @@ void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable
 
 	eventListener.onError = ^(DDMErrorEvent * errorEvent){
 
-        event_listener_handler(1000 , errorEvent.descriptionText);
+		int errorEventEnumValue = 1000;
+        event_listener_handler(errorEventEnumValue , errorEvent.descriptionText);
 
     };
-
-
 
 	eventListener.onShowNotice = ^(DDMEventType eventType){
 
@@ -827,15 +337,11 @@ void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable
 
     };
 
-
-
 	eventListener.onNoticeClickAgree = ^(DDMEventType eventType){
 
         event_listener_handler(eventType,@"");
 
     };
-
-
 
 	eventListener.onNoticeClickMoreInfo = ^(DDMEventType eventType){
 
@@ -843,15 +349,11 @@ void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable
 
     };
 
-
-
 	eventListener.onPreferencesClickAgreeToAll = ^(enum DDMEventType eventType){
 
         event_listener_handler(eventType,@"");
 
     };
-
-
 
 	eventListener.onPreferencesClickDisagreeToAll = ^(DDMEventType eventType){
 
@@ -859,15 +361,11 @@ void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable
 
     };
 
-
-
 	eventListener.onPreferencesClickPurposeAgree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
 
         event_listener_handler(eventType, purposeId);
 
     };
-
-
 
 	eventListener.onPreferencesClickPurposeDisagree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
 
@@ -875,15 +373,11 @@ void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable
 
     };
 
-
-
 	eventListener.onPreferencesClickViewVendors = ^(DDMEventType eventType){
 
         event_listener_handler(eventType,@"");
 
     };
-
-
 
 	eventListener.onPreferencesClickSaveChoices = ^(DDMEventType eventType){
 
@@ -891,15 +385,11 @@ void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable
 
     };
 
-
-
 	eventListener.onPreferencesClickVendorAgree = ^(DDMEventType eventType, NSString * _Nullable vendorId){
 
         event_listener_handler(eventType, vendorId);
 
     };
-
-
 
 	eventListener.onPreferencesClickVendorDisagree = ^(DDMEventType eventType, NSString * _Nullable vendorId){
 
@@ -907,38 +397,17 @@ void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable
 
     };
 
-
-
 	eventListener.onPreferencesClickVendorSaveChoices = ^(DDMEventType eventType){
 
         event_listener_handler(eventType,@"");
 
     };
 
-
-
    [[Didomi shared] addEventListenerWithListener:eventListener];
 
 }
 
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
