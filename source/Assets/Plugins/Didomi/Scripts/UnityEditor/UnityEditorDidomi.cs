@@ -123,6 +123,21 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
+        public bool GetUserLegitimateInterestStatusForPurpose(string purposeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool GetUserLegitimateInterestStatusForVendor(string vendorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Vendor GetVendor(string vendorId)
         {
             throw new NotImplementedException();
@@ -177,6 +192,11 @@ namespace IO.Didomi.SDK.UnityEditor
             return _isInitialized;
         }
 
+        public void OnError(Action didomiCallable)
+        {
+            throw new NotImplementedException();
+        }
+
         public void OnReady(Action didomiCallable)
         {
             _onReadyAction = didomiCallable;
@@ -227,6 +247,28 @@ namespace IO.Didomi.SDK.UnityEditor
         }
 
         public bool SetUserDisagreeToAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SetUserStatus(
+            ISet<string> enabledConsentPurposeIds,
+            ISet<string> disabledConsentPurposeIds,
+            ISet<string> enabledLIPurposeIds,
+            ISet<string> disabledLIPurposeIds,
+            ISet<string> enabledConsentVendorIds,
+            ISet<string> disabledConsentVendorIds,
+            ISet<string> enabledLIVendorIds,
+            ISet<string> disabledLIVendorIds)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SetUserStatus(
+            bool purposesConsentStatus,
+            bool purposesLIStatus,
+            bool vendorsConsentStatus,
+            bool vendorsLIStatus)
         {
             throw new NotImplementedException();
         }

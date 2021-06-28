@@ -270,6 +270,36 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Get the user legitimate interest status for a specific purpose.
+        /// </summary>
+        /// <param name="purposeId"></param>
+        /// <returns></returns>
+        public bool GetUserLegitimateInterestStatusForPurpose(string purposeId)
+        {
+            return didomiForPlatform.GetUserLegitimateInterestStatusForPurpose(purposeId);
+        }
+
+        /// <summary>
+        /// Get the user legitimate interest status for a specific vendor.
+        /// </summary>
+        /// <param name="vendorId"></param>
+        /// <returns></returns>
+        public bool GetUserLegitimateInterestStatusForVendor(string vendorId)
+        {
+            return didomiForPlatform.GetUserLegitimateInterestStatusForVendor(vendorId);
+        }
+
+        /// <summary>
+        /// Get the user LI status for a specific vendor and all its purposes.
+        /// </summary>
+        /// <param name="vendorId"></param>
+        /// <returns></returns>
+        public bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
+        {
+            return didomiForPlatform.GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(vendorId);
+        }
+
+        /// <summary>
         /// Get a vendor from its ID
         /// </summary>
         /// <param name="vendorId"></param>
@@ -376,6 +406,15 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Provide a function that needs to be called if the SDK encounters an error during initialization.
+        /// </summary>
+        /// <param name="didomiCallable">that is called when an error occurs.</param>
+        public void OnError(Action didomiCallable)
+        {
+            didomiForPlatform.OnError(didomiCallable);
+        }
+
+        /// <summary>
         /// Provide a function that needs to be called once the SDK is ready, 
         /// Automatically call the function if the SDK is already ready(that's why this is not a standard event)
         /// </summary>
@@ -426,6 +465,7 @@ namespace IO.Didomi.SDK
             return didomiForPlatform.SetUserAgreeToAll();
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use SetUserStatus instead.")]
         /// <summary>
         /// Set the user consent status
         /// </summary>
@@ -454,6 +494,60 @@ namespace IO.Didomi.SDK
         public bool SetUserDisagreeToAll()
         {
             return didomiForPlatform.SetUserDisagreeToAll();
+        }
+        
+        /// <summary>
+        /// Set the user consent status
+        /// </summary>
+        /// <param name="enabledConsentPurposeIds"></param>
+        /// <param name="disabledConsentPurposeIds"></param>
+        /// <param name="enabledLIPurposeIds"></param>
+        /// <param name="disabledLIPurposeIds"></param>
+        /// <param name="enabledConsentVendorIds"></param>
+        /// <param name="disabledConsentVendorIds"></param>
+        /// <param name="enabledLIVendorIds"></param>
+        /// <param name="disabledLIVendorIds"></param>
+        /// <returns></returns>
+        public bool SetUserStatus(
+            ISet<string> enabledConsentPurposeIds,
+            ISet<string> disabledConsentPurposeIds,
+            ISet<string> enabledLIPurposeIds,
+            ISet<string> disabledLIPurposeIds,
+            ISet<string> enabledConsentVendorIds,
+            ISet<string> disabledConsentVendorIds,
+            ISet<string> enabledLIVendorIds,
+            ISet<string> disabledLIVendorIds)
+        {
+            return didomiForPlatform.SetUserStatus(
+                enabledConsentPurposeIds,
+                disabledConsentPurposeIds,
+                enabledLIPurposeIds,
+                disabledLIPurposeIds,
+                enabledConsentVendorIds,
+                disabledConsentVendorIds,
+                enabledLIVendorIds,
+                disabledLIVendorIds);
+        }
+        
+        /// <summary>
+        /// Set the user consent status
+        /// </summary>
+        /// <param name="purposesConsentStatus"></param>
+        /// <param name="purposesLIStatus"></param>
+        /// <param name="vendorsConsentStatus"></param>
+        /// <param name="vendorsLIStatus"></param>
+        /// <returns></returns>
+        public bool SetUserStatus(
+            bool purposesConsentStatus,
+            bool purposesLIStatus,
+            bool vendorsConsentStatus,
+            bool vendorsLIStatus)
+        {
+            return didomiForPlatform.SetUserStatus(
+                purposesConsentStatus,
+                purposesLIStatus,
+                vendorsConsentStatus,
+                vendorsLIStatus);
         }
 
         /// <summary>

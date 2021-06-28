@@ -126,19 +126,22 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
         var oldValue = "dependencies {";
         var newValue = @"dependencies {
     ext.kotlin_version = '1.3.72'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-	implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.google.android.gms:play-services-ads:15.0.1'
-    implementation ""android.arch.lifecycle:extensions:1.1.0""
-    implementation 'android.arch.lifecycle:viewmodel:1.1.0'
-    // Force customtabs 27.1.1 as com.google.android.gms:play-services-ads:15.0.1 depends on 26.0.1 by default
-    // See https://stackoverflow.com/questions/50009286/gradle-mixing-versions-27-1-1-and-26-1-0
-    implementation 'com.android.support:customtabs:27.1.1'
-    implementation ""org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version""
-	implementation ""org.apmem.tools:layouts:1.10""
-    api 'com.iab.gdpr_android:gdpr_android:1.0.1'
-    api 'com.google.code.gson:gson:2.8.5'";
+
+
+    api(""com.iab.gdpr_android:gdpr_android:1.0.1"")
+    api(""com.google.code.gson:gson:2.8.6"")
+
+    implementation(""androidx.appcompat:appcompat:1.2.0"")
+    implementation(""androidx.constraintlayout:constraintlayout:2.0.4"")
+    implementation(""androidx.lifecycle:lifecycle-extensions:2.2.0"")
+    implementation(""androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"")
+    implementation(""androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"")
+    implementation(""androidx.preference:preference-ktx:1.1.1"")
+    implementation(""com.google.android.material:material:1.3.0"")
+    implementation(""com.google.zxing:core:3.3.2"")
+    implementation(""org.apmem.tools:layouts:1.10"")
+    implementation(""org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"")
+    implementation(""org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.2"")";
         PostProcessor.ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
     }
 
@@ -152,7 +155,7 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
         var unityPlayerFile = $@"src{PostProcessorSettings.FilePathSeperator}main{PostProcessorSettings.FilePathSeperator}java{PostProcessorSettings.FilePathSeperator}com{PostProcessorSettings.FilePathSeperator}unity3d{PostProcessorSettings.FilePathSeperator}player{PostProcessorSettings.FilePathSeperator}UnityPlayerActivity.java";
         var unityPlayerFileAbsolutePath = Path.Combine(path, unityPlayerFile);
         var oldValue = "public class UnityPlayerActivity extends Activity implements IUnityPlayerLifecycleEvents";
-        var newValue = $"import android.support.v7.app.AppCompatActivity;{System.Environment.NewLine}{System.Environment.NewLine}public class UnityPlayerActivity extends AppCompatActivity implements IUnityPlayerLifecycleEvents";
+        var newValue = $"import androidx.appcompat.app.AppCompatActivity;{System.Environment.NewLine}{System.Environment.NewLine}public class UnityPlayerActivity extends AppCompatActivity implements IUnityPlayerLifecycleEvents";
         PostProcessor.ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
     }
 }
@@ -227,10 +230,9 @@ public static class PostProcessor
         {
             unusedSDKPath = devicePath;
             var mmFile = $"{path}{PostProcessorSettings.FilePathSeperator}Libraries{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.mm";
-            var headerFilePath = $"Didomi.framework{PostProcessorSettings.FilePathSeperator}Headers{PostProcessorSettings.FilePathSeperator}Didomi-Swift.h";
-            var mmFilePathTargetDevice = $@"#import ""{devicePath}{PostProcessorSettings.FilePathSeperator}{headerFilePath}""";
-            var mmFilePathTargetSimulator = $@"#import ""{simulatorPath}{PostProcessorSettings.FilePathSeperator}{headerFilePath}""";
-            ReplaceLineInFile(mmFile, mmFilePathTargetDevice, mmFilePathTargetSimulator);
+            var headerFileImportLineDevice = @"#import ""Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h""";
+            var headerFileImportLineSimulator = @"#import ""Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_i386_x86_64-simulator/Didomi.framework/Headers/Didomi-Swift.h""";
+            ReplaceLineInFile(mmFile, headerFileImportLineDevice, headerFileImportLineSimulator);
         }
 
 		if(Directory.Exists($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}"))

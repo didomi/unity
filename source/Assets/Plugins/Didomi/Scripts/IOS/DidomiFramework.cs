@@ -123,6 +123,42 @@ namespace IO.Didomi.SDK.IOS
 
         //#if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern int getUserLegitimateInterestStatusForPurpose(string purposeId);
+        //#endif
+
+        public static int GetUserLegitimateInterestStatusForPurpose(string purposeId)
+        {
+            //#if UNITY_IOS && !UNITY_EDITOR
+            return getUserLegitimateInterestStatusForPurpose(purposeId);
+            //#endif
+        }
+
+        //#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern int getUserLegitimateInterestStatusForVendor(string vendorId);
+        //#endif
+
+        public static int GetUserLegitimateInterestStatusForVendor(string vendorId)
+        {
+            //#if UNITY_IOS && !UNITY_EDITOR
+            return getUserLegitimateInterestStatusForVendor(vendorId);
+            //#endif
+        }
+
+        //#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId);
+        //#endif
+
+        public static int GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
+        {
+            //#if UNITY_IOS && !UNITY_EDITOR
+            return getUserLegitimateInterestStatusForVendorAndRequiredPurposes(vendorId);
+            //#endif
+        }
+
+        //#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern void hideNotice();
         //#endif
 
@@ -267,6 +303,27 @@ namespace IO.Didomi.SDK.IOS
             //#endif
         }
 
+        public static void OnError(Action onErrorAction)
+        {
+            onErrorActionInner = onErrorAction;
+            //#if UNITY_IOS && !UNITY_EDITOR
+            onError(CallOnError);
+            //#endif
+        }
+
+        static Action onErrorActionInner;
+
+        public delegate void OnErrorDelegate(string errorEvent);
+
+        [DllImport("__Internal")]
+        private static extern void onError(OnErrorDelegate callback);
+
+        [AOT.MonoPInvokeCallback(typeof(OnErrorDelegate))]
+        static void CallOnError(string errorEvent)
+        {
+            onErrorActionInner?.Invoke();
+        }
+
         public static void OnReady(Action onReadyAction)
         {
             onReadyActionInner = onReadyAction;
@@ -288,7 +345,7 @@ namespace IO.Didomi.SDK.IOS
             onReadyActionInner?.Invoke();
         }
 
-        public delegate void OnEventListenerDelegate(DDMEventType eventType, string argument);
+        public delegate void OnEventListenerDelegate(int eventType, string argument);
 
         [DllImport("__Internal")]
         private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate);
@@ -304,9 +361,10 @@ namespace IO.Didomi.SDK.IOS
         static DidomiEventListener eventListenerInner;
 
         [AOT.MonoPInvokeCallback(typeof(OnEventListenerDelegate))]
-        static void CallOnEventListenerDelegate(DDMEventType eventType, string argument)
+        static void CallOnEventListenerDelegate(int eventType, string argument)
         {
-            switch (eventType)
+            DDMEventType eventTypeEnum = (DDMEventType)eventType;
+            switch (eventTypeEnum)
             {
                 case DDMEventType.DDMEventTypeConsentChanged:
                     eventListenerInner.OnConsentChanged(new ConsentChangedEvent());
@@ -316,6 +374,9 @@ namespace IO.Didomi.SDK.IOS
                     break;
                 case DDMEventType.DDMEventTypeReady:
                     eventListenerInner.OnReady(new ReadyEvent());
+                    break;
+                case DDMEventType.DDMEventTypeError:
+                    eventListenerInner.OnError(new ErrorEvent(argument));
                     break;
                 case DDMEventType.DDMEventTypeShowNotice:
                     eventListenerInner.OnShowNotice(new ShowNoticeEvent());
@@ -466,6 +527,54 @@ namespace IO.Didomi.SDK.IOS
         {
             //#if UNITY_IOS && !UNITY_EDITOR
             return setUserConsentStatus(enabledPurposeIds, disabledPurposeIds, enabledVendorIds, disabledVendorIds);
+            //#endif
+        }
+
+        //#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern bool setUserStatus(string enabledConsentPurposeIds,
+            string disabledConsentPurposeIds,
+            string enabledLIPurposeIds,
+            string disabledLIPurposeIds,
+            string enabledConsentVendorIds,
+            string disabledConsentVendorIds,
+            string enabledLIVendorIds,
+            string disabledLIVendorIds);
+        //#endif
+
+        public static bool SetUserStatus(
+            string enabledConsentPurposeIds,
+            string disabledConsentPurposeIds,
+            string enabledLIPurposeIds,
+            string disabledLIPurposeIds,
+            string enabledConsentVendorIds,
+            string disabledConsentVendorIds,
+            string enabledLIVendorIds,
+            string disabledLIVendorIds)
+        {
+            //#if UNITY_IOS && !UNITY_EDITOR
+            return setUserStatus(
+                enabledConsentPurposeIds,
+                disabledConsentPurposeIds,
+                enabledLIPurposeIds,
+                disabledLIPurposeIds,
+                enabledConsentVendorIds,
+                disabledConsentVendorIds,
+                enabledLIVendorIds,
+                disabledLIVendorIds);
+            //#endif
+        }
+
+
+        //#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern bool setUserStatus1(bool purposesConsentStatus, bool purposesLIStatus, bool vendorsConsentStatus, bool vendorsLIStatus);
+        //#endif
+
+        public static bool SetUserStatus(bool purposesConsentStatus, bool purposesLIStatus, bool vendorsConsentStatus, bool vendorsLIStatus)
+        {
+            //#if UNITY_IOS && !UNITY_EDITOR
+            return setUserStatus1(purposesConsentStatus, purposesLIStatus, vendorsConsentStatus, vendorsLIStatus);
             //#endif
         }
     }
