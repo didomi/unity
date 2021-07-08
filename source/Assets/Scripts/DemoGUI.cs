@@ -684,14 +684,19 @@ public class DemoGUI : MonoBehaviour
             InitilizeDidomi();
         }
 
-        if (GUI.Button(GetFuncRect2(), "IsReady"))
+        if (GUI.Button(GetFuncRect2(), "Initialize1"))
+        {
+            Initilize1Didomi();
+        }
+
+        if (GUI.Button(GetFuncRect3(), "IsReady"))
         {
             message = string.Empty;
             var retval = Didomi.GetInstance().IsReady();
             message += "IsReady" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect3(), "Reset"))
+        if (GUI.Button(GetFuncRect4(), "Reset"))
         {
             message = string.Empty;
             Didomi.GetInstance().Reset();
@@ -714,6 +719,24 @@ public class DemoGUI : MonoBehaviour
             providerId: null,
             disableDidomiRemoteConfig: true,
             languageCode: null);
+    }
+
+    private void Initilize1Didomi()
+    {
+        message = string.Empty;
+
+        Didomi.GetInstance().OnReady(
+              () => { message = "Ready"; }
+              );
+
+        Didomi.GetInstance().Initialize(
+            apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
+            localConfigurationPath: null,
+            remoteConfigurationURL: null,
+            providerId: null,
+            disableDidomiRemoteConfig: true,
+            languageCode: null,
+            noticeId: null);
     }
 
     void Events()

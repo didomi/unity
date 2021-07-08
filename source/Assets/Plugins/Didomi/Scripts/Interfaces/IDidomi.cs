@@ -43,6 +43,15 @@ namespace IO.Didomi.SDK.Interfaces
           bool disableDidomiRemoteConfig,
           string languageCode
           );
+        void Initialize(
+          string apiKey,
+          string localConfigurationPath,
+          string remoteConfigurationURL,
+          string providerId,
+          bool disableDidomiRemoteConfig,
+          string languageCode,
+          string noticeId
+          );
         bool IsConsentRequired();
         bool IsUserConsentStatusPartial();
         bool IsNoticeVisible();

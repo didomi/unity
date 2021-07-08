@@ -75,6 +75,33 @@ namespace IO.Didomi.SDK.IOS
 
         //#if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern void initializeWithNoticeId(string apiKey,
+            string localConfigurationPath,
+            string remoteConfigurationPath,
+            string providerId,
+            bool disableDidomiRemoteConfig,
+            string languageCode,
+            string noticeId);
+        //#endif
+
+        public static bool Initialize(
+          string apiKey,
+          string localConfigurationPath,
+          string remoteConfigurationPath,
+          string providerId,
+          bool disableDidomiRemoteConfig,
+          string languageCode,
+          string noticeId)
+        {
+            //#if UNITY_IOS && !UNITY_EDITOR
+            initializeWithNoticeId(apiKey, localConfigurationPath, remoteConfigurationPath, providerId, disableDidomiRemoteConfig, languageCode, noticeId);
+            //#endif
+
+            return false;
+        }
+
+        //#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern string getTranslatedText(string key);
         //#endif
 

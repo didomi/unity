@@ -39,12 +39,16 @@ void setUserAgent(char* name, char* version)
     [[Didomi shared]      setUserAgentWithName: CreateNSString(name) version:CreateNSString(version)];
 }
 
-void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig,char* languageCode)
+void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode)
 {
     [[Didomi shared]      initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSString(localConfigurationPath) remoteConfigurationURL:CreateNSString(remoteConfigurationURL)
-        providerId:CreateNSString(providerId)
+        providerId:CreateNSString(providerId) disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSString(languageCode)];
+}
 
-    disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSString(languageCode)];
+void initializeWithNoticeId( char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId)
+{
+    [[Didomi shared]      initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSString(localConfigurationPath) remoteConfigurationURL:CreateNSString(remoteConfigurationURL)
+        providerId:CreateNSString(providerId) disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSString(languageCode) noticeId: CreateNSString(noticeId)];
 }
 
 bool isReady()

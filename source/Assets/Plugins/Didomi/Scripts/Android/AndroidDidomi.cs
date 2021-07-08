@@ -215,6 +215,29 @@ namespace IO.Didomi.SDK.Android
                 args);
         }
 
+        public void Initialize(
+            string apiKey,
+            string localConfigurationPath,
+            string remoteConfigurationURL,
+            string providerId,
+            bool disableDidomiRemoteConfig,
+            string languageCode,
+            string noticeId)
+        {
+            object[] args = new object[6];
+            args[0] = apiKey;
+            args[1] = localConfigurationPath;
+            args[2] = remoteConfigurationURL;
+            args[3] = providerId;
+            args[4] = new AndroidJavaObject("java.lang.Boolean", disableDidomiRemoteConfig.ToString());
+            args[5] = languageCode;
+            args[6] = noticeId;
+
+            CallVoidMethodForInitialize(
+                "initialize",
+                args);
+        }
+
         public bool IsConsentRequired()
         {
             return CallReturningBoolMethod("isConsentRequired");

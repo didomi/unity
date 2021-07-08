@@ -172,6 +172,26 @@ namespace IO.Didomi.SDK.UnityEditor
             _onReadyAction?.Invoke();
         }
 
+        public void Initialize(
+          string apiKey,
+          string localConfigurationPath,
+          string remoteConfigurationPath,
+          string providerId,
+          bool disableDidomiRemoteConfig,
+          string languageCode,
+          string noticeId
+          )
+        {
+            if (_isInitialized)
+            {
+                return;
+            }
+
+            _isInitialized = true;
+
+            _onReadyAction?.Invoke();
+        }
+
         public bool IsConsentRequired()
         {
             throw new NotImplementedException();
