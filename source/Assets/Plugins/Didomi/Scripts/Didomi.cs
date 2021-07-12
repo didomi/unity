@@ -358,6 +358,41 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// The initial configuration of the SDK. This should be called from an Application onCreate method. (Method with disableDidomiRemoteConfig)
+        /// </summary>
+        /// <param name="apiKey">Your API key</param>
+        /// <param name="localConfigurationPath">Path to client specific config file in JSON format. If not specified,
+        /// by defalut is set as didomi_config.json in the app assets.</param>
+        /// <param name="remoteConfigurationURL">URL to client specific remote config file in JSON format</param>
+        /// <param name="providerId">Your provider ID (if any)</param>
+        /// <param name="disableDidomiRemoteConfig">Used to disable remote configuration.</param>
+        /// <param name="languageCode">Language in which the consent UI should be displayed.
+        /// <param name="noticeId">ID of the notice configuration to load if your are not using app ID targeting
+        /// By default, the consent UI is displayed in the language configured in the device settings,
+        /// if langauge is availabe and enabled by your configuration. 
+        /// This property allows you to override the default setting and specify a language to display the UI in.
+        /// String containing the language code e.g.: "es", "fr", etc.</param>
+        public void Initialize(
+            string apiKey,
+            string localConfigurationPath,
+            string remoteConfigurationURL,
+            string providerId,
+            bool disableDidomiRemoteConfig,
+            string languageCode = null,
+            string noticeId = null
+            )
+        {
+            didomiForPlatform.Initialize(
+                apiKey,
+                localConfigurationPath,
+                remoteConfigurationURL,
+                providerId,
+                disableDidomiRemoteConfig,
+                languageCode,
+                noticeId);
+        }
+
+        /// <summary>
         /// Determine if consent is required for the user. The rules are (OR):
         /// - The user country is in the EU
         /// - The company is from the EU
