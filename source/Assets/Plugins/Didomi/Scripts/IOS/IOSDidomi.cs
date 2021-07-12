@@ -179,6 +179,19 @@ namespace IO.Didomi.SDK.IOS
             DidomiFramework.Initialize(apiKey, localConfigurationPath, remoteConfigurationPath, providerId, disableDidomiRemoteConfig, languageCode);
         }
 
+        public void Initialize(
+          string apiKey,
+          string localConfigurationPath,
+          string remoteConfigurationPath,
+          string providerId,
+          bool disableDidomiRemoteConfig,
+          string languageCode,
+          string noticeId
+          )
+        {
+            DidomiFramework.Initialize(apiKey, localConfigurationPath, remoteConfigurationPath, providerId, disableDidomiRemoteConfig, languageCode, noticeId);
+        }
+
         public bool IsConsentRequired()
         {
             return DidomiFramework.IsConsentRequired();
