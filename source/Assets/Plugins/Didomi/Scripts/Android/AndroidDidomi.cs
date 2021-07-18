@@ -224,7 +224,7 @@ namespace IO.Didomi.SDK.Android
             string languageCode,
             string noticeId)
         {
-            object[] args = new object[6];
+            object[] args = new object[7];
             args[0] = apiKey;
             args[1] = localConfigurationPath;
             args[2] = remoteConfigurationURL;
