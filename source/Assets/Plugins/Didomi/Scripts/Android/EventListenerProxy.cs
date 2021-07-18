@@ -70,6 +70,14 @@ namespace IO.Didomi.SDK.Android
             // Click on agree on notice
         }
         
+        public void noticeClickDisagree(AndroidJavaObject @event)
+        {
+            var noticeClickDisagreeEvent = ConvertToNoticeClickDisagreeEvent(@event);
+
+            _eventListener.OnNoticeClickDisagree(noticeClickDisagreeEvent);
+            // Click on disagree on notice
+        }
+
         public void noticeClickMoreInfo(AndroidJavaObject @event)
         {
             var noticeClickMoreInfoEvent = ConvertToNoticeClickMoreInfoEvent(@event);
@@ -194,6 +202,11 @@ namespace IO.Didomi.SDK.Android
         private static NoticeClickAgreeEvent ConvertToNoticeClickAgreeEvent(AndroidJavaObject @event)
         {
             return new NoticeClickAgreeEvent();
+        }
+
+        private static NoticeClickDisagreeEvent ConvertToNoticeClickDisagreeEvent(AndroidJavaObject @event)
+        {
+            return new NoticeClickDisagreeEvent();
         }
 
         private static NoticeClickMoreInfoEvent ConvertToNoticeClickMoreInfoEvent(AndroidJavaObject @event)
