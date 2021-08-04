@@ -34,6 +34,16 @@ NSString* _Nonnull CreateNSString ( char* string)
     return [NSString stringWithUTF8String:string ?: ""];
 }
 
+NSString* _Nullable CreateNSStringNullable ( char* string)
+{
+	if(string==NULL)
+	{
+		return NULL;
+	}
+	
+    return [NSString stringWithUTF8String:string ?: NULL];
+}
+
 void setUserAgent(char* name, char* version)
 {
     [[Didomi shared]      setUserAgentWithName: CreateNSString(name) version:CreateNSString(version)];
@@ -41,14 +51,14 @@ void setUserAgent(char* name, char* version)
 
 void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode)
 {
-    [[Didomi shared]      initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSString(localConfigurationPath) remoteConfigurationURL:CreateNSString(remoteConfigurationURL)
-        providerId:CreateNSString(providerId) disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSString(languageCode)];
+    [[Didomi shared]      initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL:CreateNSStringNullable(remoteConfigurationURL)
+        providerId:CreateNSStringNullable(providerId) disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSStringNullable(languageCode)];
 }
 
 void initializeWithNoticeId( char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId)
 {
-    [[Didomi shared]      initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSString(localConfigurationPath) remoteConfigurationURL:CreateNSString(remoteConfigurationURL)
-        providerId:CreateNSString(providerId) disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSString(languageCode) noticeId: CreateNSString(noticeId)];
+    [[Didomi shared]      initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL:CreateNSStringNullable(remoteConfigurationURL)
+        providerId:CreateNSStringNullable(providerId) disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSStringNullable(languageCode) noticeId: CreateNSStringNullable(noticeId)];
 }
 
 bool isReady()
