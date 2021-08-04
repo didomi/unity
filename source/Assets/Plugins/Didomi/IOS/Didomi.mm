@@ -357,6 +357,12 @@ void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable
 
     };
 
+    eventListener.onNoticeClickDisagree = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType,@"");
+
+    };
+
 	eventListener.onNoticeClickMoreInfo = ^(DDMEventType eventType){
 
         event_listener_handler(eventType,@"");
