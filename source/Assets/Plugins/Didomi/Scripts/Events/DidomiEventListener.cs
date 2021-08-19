@@ -15,6 +15,7 @@ namespace IO.Didomi.SDK.Events
         public event EventHandler<ReadyEvent> Ready;
         public event EventHandler<ShowNoticeEvent> ShowNotice;
         public event EventHandler<NoticeClickAgreeEvent> NoticeClickAgree;
+        public event EventHandler<NoticeClickDisagreeEvent> NoticeClickDisagree;
         public event EventHandler<NoticeClickMoreInfoEvent> NoticeClickMoreInfo;
         public event EventHandler<PreferencesClickAgreeToAllEvent> PreferencesClickAgreeToAll;
         public event EventHandler<PreferencesClickDisagreeToAllEvent> PreferencesClickDisagreeToAll;
@@ -66,6 +67,11 @@ namespace IO.Didomi.SDK.Events
             // Click on agree on notice
         }
 
+        public void OnNoticeClickDisagree(NoticeClickDisagreeEvent @event)
+        {
+            NoticeClickDisagree?.Invoke(this, @event);
+            // Click on disagree on notice
+        }
 
         public void OnNoticeClickMoreInfo(NoticeClickMoreInfoEvent @event)
         {
