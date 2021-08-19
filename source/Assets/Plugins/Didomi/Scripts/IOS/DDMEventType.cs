@@ -36,4 +36,3 @@ namespace Assets.Plugins.Scripts.IOS
         DDMEventTypeError = 1000,
     };
 }
-#endif
