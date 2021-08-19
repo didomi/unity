@@ -1,4 +1,4 @@
-﻿#import <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 #import "Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h"
 
 #pragma mark - C interface
@@ -372,7 +372,7 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     eventListener.onNoticeClickDisagree = ^(DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
