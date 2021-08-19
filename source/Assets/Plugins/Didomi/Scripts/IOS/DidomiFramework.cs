@@ -411,6 +411,9 @@ namespace IO.Didomi.SDK.IOS
                 case DDMEventType.DDMEventTypeNoticeClickAgree:
                     eventListenerInner.OnNoticeClickAgree(new NoticeClickAgreeEvent());
                     break;
+                case DDMEventType.DDMEventTypeNoticeClickDisagree:
+                    eventListenerInner.OnNoticeClickDisagree(new NoticeClickDisagreeEvent());
+                    break;
                 case DDMEventType.DDMEventTypeNoticeClickMoreInfo:
                     eventListenerInner.OnConsentChanged(new ConsentChangedEvent());
                     break;
