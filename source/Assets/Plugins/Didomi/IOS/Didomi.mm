@@ -312,7 +312,20 @@ void onError(callback_error_function errorFunc)
 
 static DDMEventListener *eventListener = [[DDMEventListener alloc]init];
 
-void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable ))
+char* convertNSStringToCString(NSString * _Nullable nsString)
+{
+    if (nsString == NULL)
+        return NULL;
+
+    const char* nsStringUtf8 = [nsString UTF8String];
+    //create a null terminated C string on the heap so that our string's memory isn't wiped out right after method's return
+    char* cString = (char*)malloc(strlen(nsStringUtf8) + 1);
+    strcpy(cString, nsStringUtf8);
+
+    return cString;
+}
+
+void addEventListener( void (*event_listener_handler) (int, char *))
 {
 
     if(eventListener==nil)
@@ -322,98 +335,98 @@ void addEventListener( void (*event_listener_handler) (int, NSString * _Nullable
 
     eventListener.onConsentChanged = ^(DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
 	eventListener.onHideNotice = ^(DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
 	eventListener.onReady = ^(DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
 	eventListener.onError = ^(DDMErrorEvent * errorEvent){
 
-		int errorEventEnumValue = 1000;
-        event_listener_handler(errorEventEnumValue , errorEvent.descriptionText);
+        int errorEventEnumValue = 1000;
+        event_listener_handler(errorEventEnumValue , convertNSStringToCString(errorEvent.descriptionText));
 
     };
 
 	eventListener.onShowNotice = ^(DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
 	eventListener.onNoticeClickAgree = ^(DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
 	eventListener.onNoticeClickMoreInfo = ^(DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
 	eventListener.onPreferencesClickAgreeToAll = ^(enum DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
 	eventListener.onPreferencesClickDisagreeToAll = ^(DDMEventType eventType){
 
-        event_listener_handler(DDMEventTypePreferencesClickDisagreeToAll,@"");
+        event_listener_handler(DDMEventTypePreferencesClickDisagreeToAll, NULL);
 
     };
 
 	eventListener.onPreferencesClickPurposeAgree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
 
-        event_listener_handler(eventType, purposeId);
+        event_listener_handler(eventType, convertNSStringToCString(purposeId));
 
     };
 
 	eventListener.onPreferencesClickPurposeDisagree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
 
-        event_listener_handler(eventType, purposeId);
+        event_listener_handler(eventType, convertNSStringToCString(purposeId));
 
     };
 
 	eventListener.onPreferencesClickViewVendors = ^(DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
 	eventListener.onPreferencesClickSaveChoices = ^(DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
 	eventListener.onPreferencesClickVendorAgree = ^(DDMEventType eventType, NSString * _Nullable vendorId){
 
-        event_listener_handler(eventType, vendorId);
+        event_listener_handler(eventType, convertNSStringToCString(vendorId));
 
     };
 
 	eventListener.onPreferencesClickVendorDisagree = ^(DDMEventType eventType, NSString * _Nullable vendorId){
 
-        event_listener_handler(eventType, vendorId);
+        event_listener_handler(eventType, convertNSStringToCString(vendorId));
 
     };
 
 	eventListener.onPreferencesClickVendorSaveChoices = ^(DDMEventType eventType){
 
-        event_listener_handler(eventType,@"");
+        event_listener_handler(eventType, NULL);
 
     };
 
