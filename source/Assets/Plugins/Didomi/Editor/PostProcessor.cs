@@ -89,6 +89,11 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     /// <param name="path"></param>
     private static void CopyDidomiConfigFileToAssetFolder(string path)
     {
+        if (!Directory.Exists(PostProcessorSettings.DidomiConfigPath))
+        {
+            return;
+        }
+
         var files = Directory.GetFiles(PostProcessorSettings.DidomiConfigPath);
 
         foreach (var filePath in files)
