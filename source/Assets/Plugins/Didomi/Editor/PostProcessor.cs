@@ -31,6 +31,7 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     {
         UpdateUnityPlayerActivity(path);
         UpdateUnityLibraryDependencies(path);
+        UpdateGradleProperties(path);
         CopyDidomiConfigFileToAssetFolder(path);
         CopyPackageJsonFileToAssetFolder(path);
         UpdateStylesThemeToAppCompat(path);
@@ -88,6 +89,11 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     /// <param name="path"></param>
     private static void CopyDidomiConfigFileToAssetFolder(string path)
     {
+        if (!Directory.Exists(PostProcessorSettings.DidomiConfigPath))
+        {
+            return;
+        }
+
         var files = Directory.GetFiles(PostProcessorSettings.DidomiConfigPath);
 
         foreach (var filePath in files)
@@ -143,6 +149,26 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     implementation(""org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"")
     implementation(""org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.2"")";
         PostProcessor.ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
+    }
+
+    /// <summary>
+    /// Update gradle properties in the Android project. 
+    /// </summary>
+    /// <param name="path"></param>
+    private static void UpdateGradleProperties(string path)
+    {
+        var unityGradleProperties = $@"..{PostProcessorSettings.FilePathSeperator}gradle.properties";
+        var unityGradleAbsolutePath = Path.Combine(path, unityGradleProperties);
+        var gradleProperties = File.ReadAllText(unityGradleAbsolutePath);
+
+        if (gradleProperties.Contains("android.useAndroidX=false"))
+        {
+            PostProcessorSettings.ReplaceLineInFile(unityGradleAbsolutePath, "android.useAndroidX=false", "android.useAndroidX=true");
+        }
+        else if (!gradleProperties.Contains("android.useAndroidX=true"))
+        {
+            File.AppendAllText(unityGradleAbsolutePath, System.Environment.NewLine + "android.useAndroidX=true");
+        }
     }
 
     /// <summary>
