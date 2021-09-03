@@ -12,43 +12,47 @@ namespace IO.Didomi.SDK.IOS
     /// </summary>
     public class DidomiFramework
     {
-		//#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void setUserAgent(string name, string version);
-        //#endif
+        #endif
 
         public static void SetUserAgent()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             setUserAgent(Package.GetInstance().agentName, Package.GetInstance().version);
-            //#endif
+            #endif
         }
-		
-        //#if UNITY_IOS && !UNITY_EDITOR
+        
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool isReady();
-        //#endif
+        #endif
 
         public static bool CallIsReadyMethod()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return isReady();
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool setupUI();
-        //#endif
+        #endif
 
         public static bool SetupUI()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return setupUI();
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void initialize(string apiKey,
             string localConfigurationPath,
@@ -56,7 +60,7 @@ namespace IO.Didomi.SDK.IOS
             string providerId,
             bool disableDidomiRemoteConfig,
             string languageCode);
-        //#endif
+        #endif
 
         public static bool Initialize(
           string apiKey,
@@ -66,14 +70,14 @@ namespace IO.Didomi.SDK.IOS
           bool disableDidomiRemoteConfig,
           string languageCode)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             initialize(apiKey, localConfigurationPath, remoteConfigurationPath, providerId, disableDidomiRemoteConfig, languageCode);
-            //#endif
+            #endif
 
             return false;
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void initializeWithNoticeId(string apiKey,
             string localConfigurationPath,
@@ -82,7 +86,7 @@ namespace IO.Didomi.SDK.IOS
             bool disableDidomiRemoteConfig,
             string languageCode,
             string noticeId);
-        //#endif
+        #endif
 
         public static bool Initialize(
           string apiKey,
@@ -93,257 +97,285 @@ namespace IO.Didomi.SDK.IOS
           string languageCode,
           string noticeId)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             initializeWithNoticeId(apiKey, localConfigurationPath, remoteConfigurationPath, providerId, disableDidomiRemoteConfig, languageCode, noticeId);
-            //#endif
+            #endif
 
             return false;
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern string getTranslatedText(string key);
-        //#endif
+        #endif
 
         public static string GetTranslatedText(string key)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getTranslatedText(key);
-            //#endif
+            #else
+            return String.Empty;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool getUserConsentStatusForPurpose(string purposeId);
-        //#endif
+        #endif
 
         public static bool GetUserConsentStatusForPurpose(string purposeId)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getUserConsentStatusForPurpose(purposeId);
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool getUserConsentStatusForVendor(string vendorId);
-        //#endif
+        #endif
 
         public static bool GetUserConsentStatusForVendor(string vendorId)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getUserConsentStatusForVendor(vendorId);
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool getUserConsentStatusForVendorAndRequiredPurposes(string vendorId);
-        //#endif
+        #endif
 
         public static bool GetUserConsentStatusForVendorAndRequiredPurposes(string vendorId)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getUserConsentStatusForVendorAndRequiredPurposes(vendorId);
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern int getUserLegitimateInterestStatusForPurpose(string purposeId);
-        //#endif
+        #endif
 
         public static int GetUserLegitimateInterestStatusForPurpose(string purposeId)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getUserLegitimateInterestStatusForPurpose(purposeId);
-            //#endif
+            #else
+            return 0;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern int getUserLegitimateInterestStatusForVendor(string vendorId);
-        //#endif
+        #endif
 
         public static int GetUserLegitimateInterestStatusForVendor(string vendorId)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getUserLegitimateInterestStatusForVendor(vendorId);
-            //#endif
+            #else
+            return 0;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId);
-        //#endif
+        #endif
 
         public static int GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getUserLegitimateInterestStatusForVendorAndRequiredPurposes(vendorId);
-            //#endif
+            #else
+            return 0;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void hideNotice();
-        //#endif
+        #endif
 
         public static void HideNotice()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             hideNotice();
-            //#endif
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void hidePreferences();
-        //#endif
+        #endif
 
         public static void HidePreferences()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             hidePreferences();
-            //#endif
+            #endif
         }
 
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool isConsentRequired();
-        //#endif
+        #endif
 
         public static bool IsConsentRequired()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return isConsentRequired();
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool isPreferencesVisible();
-        //#endif
+        #endif
 
         public static bool IsPreferencesVisible()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return isPreferencesVisible();
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void showPreferences();
-        //#endif
+        #endif
 
         public static void ShowPreferences()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             showPreferences();
-            //#endif
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool isUserConsentStatusPartial();
-        //#endif
+        #endif
 
         public static bool IsUserConsentStatusPartial()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return isUserConsentStatusPartial();
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void reset();
-        //#endif
+        #endif
 
         public static void Reset()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             reset();
-            //#endif
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool setUserAgreeToAll();
-        //#endif
+        #endif
 
         public static bool SetUserAgreeToAll()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return setUserAgreeToAll();
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool setUserDisagreeToAll();
-        //#endif
+        #endif
 
         public static bool SetUserDisagreeToAll()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return setUserDisagreeToAll();
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool shouldConsentBeCollected();
-        //#endif
+        #endif
 
         public static bool ShouldConsentBeCollected()
         {
-           //#if UNITY_IOS && !UNITY_EDITOR
+           #if UNITY_IOS && !UNITY_EDITOR
             return shouldConsentBeCollected();
-           //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void showNotice();
-        //#endif
+        #endif
 
         public static void ShowNotice()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             showNotice();
-            //#endif
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void updateSelectedLanguage(string languageCode);
-        //#endif
+        #endif
 
         public static void UpdateSelectedLanguage(string languageCode)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             updateSelectedLanguage(languageCode);
-            //#endif
+            #endif
         }
 
         public static void OnError(Action onErrorAction)
         {
             onErrorActionInner = onErrorAction;
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             onError(CallOnError);
-            //#endif
+            #endif
         }
 
         static Action onErrorActionInner;
 
         public delegate void OnErrorDelegate(string errorEvent);
 
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void onError(OnErrorDelegate callback);
+        #endif
 
         [AOT.MonoPInvokeCallback(typeof(OnErrorDelegate))]
         static void CallOnError(string errorEvent)
@@ -354,17 +386,19 @@ namespace IO.Didomi.SDK.IOS
         public static void OnReady(Action onReadyAction)
         {
             onReadyActionInner = onReadyAction;
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             onReady(CallOnReady);
-            //#endif
+            #endif
         }
 
         static Action onReadyActionInner;
 
         public delegate void OnReadyDelegate();
 
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void onReady(OnReadyDelegate callback);
+        #endif
 
         [AOT.MonoPInvokeCallback(typeof(OnReadyDelegate))]
         static void CallOnReady()
@@ -374,15 +408,17 @@ namespace IO.Didomi.SDK.IOS
 
         public delegate void OnEventListenerDelegate(int eventType, string argument);
 
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate);
+        #endif
 
         public static void AddEventListener(DidomiEventListener eventListener)
         {
             eventListenerInner = eventListener;
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             addEventListener(CallOnEventListenerDelegate);
-            //#endif
+            #endif
         }
 
         static DidomiEventListener eventListenerInner;
@@ -450,117 +486,135 @@ namespace IO.Didomi.SDK.IOS
 
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern string getDisabledPurposeIds();
-        //#endif
+        #endif
 
         public static string GetDisabledPurposeIds()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getDisabledPurposeIds();
-            //#endif
+            #else
+            return String.Empty;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern string getDisabledVendorIds();
-        //#endif
+        #endif
 
         public static string GetDisabledVendorIds()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getDisabledVendorIds();
-            //#endif
+            #else
+            return String.Empty;
+            #endif
         }
 
         
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern string getEnabledPurposeIds();
-        //#endif
+        #endif
 
         public static string GetEnabledPurposeIds()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getEnabledPurposeIds();
-            //#endif
+            #else
+            return String.Empty;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern string getEnabledVendorIds();
-        //#endif
+        #endif
 
         public static string GetEnabledVendorIds()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getEnabledVendorIds();
-            //#endif
+            #else
+            return String.Empty;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern string getRequiredPurposeIds();
-        //#endif
+        #endif
 
         public static string GetRequiredPurposeIds()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getRequiredPurposeIds();
-            //#endif
+            #else
+            return String.Empty;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern string getRequiredVendorIds();
-        //#endif
+        #endif
 
         public static string GetRequiredVendorIds()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getRequiredVendorIds();
-            //#endif
+            #else
+            return String.Empty;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern string getJavaScriptForWebView();
-        //#endif
+        #endif
 
         public static string GetJavaScriptForWebView()
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getJavaScriptForWebView();
-            //#endif
+            #else
+            return String.Empty;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern string getText(string key);
-        //#endif
+        #endif
 
         public static string GetText(string key)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return getText(key);
-            //#endif
+            #else
+            return String.Empty;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool setUserConsentStatus(string enabledPurposeIds, string disabledPurposeIds, string enabledVendorIds, string disabledVendorIds);
-        //#endif
+        #endif
 
         public static bool SetUserConsentStatus(string enabledPurposeIds, string disabledPurposeIds, string enabledVendorIds, string disabledVendorIds)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return setUserConsentStatus(enabledPurposeIds, disabledPurposeIds, enabledVendorIds, disabledVendorIds);
-            //#endif
+            #else
+            return false;
+            #endif
         }
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool setUserStatus(string enabledConsentPurposeIds,
             string disabledConsentPurposeIds,
@@ -570,7 +624,7 @@ namespace IO.Didomi.SDK.IOS
             string disabledConsentVendorIds,
             string enabledLIVendorIds,
             string disabledLIVendorIds);
-        //#endif
+        #endif
 
         public static bool SetUserStatus(
             string enabledConsentPurposeIds,
@@ -582,7 +636,7 @@ namespace IO.Didomi.SDK.IOS
             string enabledLIVendorIds,
             string disabledLIVendorIds)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
             return setUserStatus(
                 enabledConsentPurposeIds,
                 disabledConsentPurposeIds,
@@ -592,20 +646,24 @@ namespace IO.Didomi.SDK.IOS
                 disabledConsentVendorIds,
                 enabledLIVendorIds,
                 disabledLIVendorIds);
-            //#endif
+        #else
+            return false;
+        #endif
         }
 
 
-        //#if UNITY_IOS && !UNITY_EDITOR
+        #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern bool setUserStatus1(bool purposesConsentStatus, bool purposesLIStatus, bool vendorsConsentStatus, bool vendorsLIStatus);
-        //#endif
+        #endif
 
         public static bool SetUserStatus(bool purposesConsentStatus, bool purposesLIStatus, bool vendorsConsentStatus, bool vendorsLIStatus)
         {
-            //#if UNITY_IOS && !UNITY_EDITOR
+            #if UNITY_IOS && !UNITY_EDITOR
             return setUserStatus1(purposesConsentStatus, purposesLIStatus, vendorsConsentStatus, vendorsLIStatus);
-            //#endif
+            #else
+            return false;
+            #endif
         }
     }
 }
