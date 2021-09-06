@@ -463,11 +463,13 @@ namespace IO.Didomi.SDK.Tests
             ISet<string> enabledVendorIds = Didomi.GetInstance().GetRequiredVendorIds();
             ISet<string> disabledVendorIds = new HashSet<string>();
 
+#pragma warning disable CS0618 // Disable obsolete warning in tests
             var changed = Didomi.GetInstance().SetUserConsentStatus(
                 enabledPurposeIds,
                 disabledPurposeIds,
                 enabledVendorIds,
                 disabledVendorIds);
+#pragma warning restore CS0618
 
             var enabledPurposeIdSet = Didomi.GetInstance().GetEnabledPurposeIds();
 
