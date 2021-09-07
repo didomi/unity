@@ -149,13 +149,17 @@ Create the package in the editor:
 
 ![Create Unity Package](img/create_plugin_package_unity.png)
 
-Go to the project menu in Unity and select "Export Package". In the next dialog, set "Didomi" as the name for the package.
+Go to the project menu in Unity and select "Export Package". In the next dialog, remove the example scene `Plugins/Scenes/SampleScene.unity` from the exported files list, and set "Didomi" as the name for the package.
 
 The `Didomi.unitypackage` file will be created at the selected location.
 
+To support Unity version 2020.3.12f1 and above, we also need to provide a package without the file `Plugins/Didomi/IOS/Newtonsoft.Json.dll`. Select "Export Package" again, remove this file from the exported files list, and set "Didomi-noDll" as the name for the new package.
+
+The `Didomi-noDll.unitypackage` file will be created at the selected location.
+
 #### Create a Github release
 
-Create a new Github release and attach the created  `Didomi.unitypackage` file to it.
+Create a new Github release and attach the created  `Didomi.unitypackage` and `Didomi-noDll.unitypackage` files to it.
 
 ## Tests
 
