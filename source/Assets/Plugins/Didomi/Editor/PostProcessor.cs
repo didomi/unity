@@ -80,6 +80,9 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
 
 </resources>";
 
+	var content = File.ReadAllText(unityPlayerFileAbsolutePath);
+
+        if (content.Contains(newValue)) return;
         PostProcessor.ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
     }
 
