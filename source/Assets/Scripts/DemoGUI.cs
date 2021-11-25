@@ -778,7 +778,7 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
             var userStatus = Didomi.GetInstance().GetUserStatus();
-            message += "Purposes: global -" +
+            message += "Purposes: global - " +
                 userStatus.GetPurposes().GetGlobal().GetEnabled().Count + " enabled, " +
                 userStatus.GetPurposes().GetGlobal().GetDisabled().Count + " disabled ; " +
                 userStatus.GetPurposes().GetEssential().Count + " essential";
@@ -788,12 +788,12 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
             var userStatus = Didomi.GetInstance().GetUserStatus();
-            message += "Vendors: global -" +
+            message += "Vendors: global - " +
                 userStatus.GetVendors().GetGlobal().GetEnabled().Count + " enabled, " +
                 userStatus.GetVendors().GetGlobal().GetDisabled().Count + " disabled ; " +
                 " consent - " +
-                userStatus.GetVendors().GetConsent().GetEnabled().Count + "enabled, " +
-                userStatus.GetVendors().GetConsent().GetDisabled().Count + "disabled";
+                userStatus.GetVendors().GetConsent().GetEnabled().Count + " enabled, " +
+                userStatus.GetVendors().GetConsent().GetDisabled().Count + " disabled";
         }
 
         if (GUI.Button(GetFuncRect3(), "UserId"))
