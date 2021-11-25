@@ -239,6 +239,7 @@ namespace IO.Didomi.SDK
             return didomiForPlatform.GetTranslatedText(key);
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use GetUserStatus instead. Search the vendorId in GetUserStatus().GetPurposes().GetConsent().GetEnabled() or GetUserStatus().GetPurposes().GetConsent().GetDisabled()")]
         /// <summary>
         /// Get the user consent status for a specific purpose
         /// </summary>
@@ -249,6 +250,7 @@ namespace IO.Didomi.SDK
             return didomiForPlatform.GetUserConsentStatusForPurpose(purposeId);
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use GetUserStatus instead. Search the vendorId in GetUserStatus().GetVendors().GetGlobalConsent().GetEnabled() or GetUserStatus().GetVendors().GetConsent().GetDisabled()")]
         /// <summary>
         /// Get the user consent status for a specific vendor
         /// </summary>
@@ -259,6 +261,7 @@ namespace IO.Didomi.SDK
             return didomiForPlatform.GetUserConsentStatusForVendor(vendorId);
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use GetUserStatus instead. Search the vendorId in GetUserStatus().GetVendors().GetGlobalConsent().GetEnabled() or GetUserStatus().GetVendors().GetGlobalConsent().GetDisabled().")]
         /// <summary>
         /// Check if a vendor has consent for all the purposes that it requires
         /// </summary>
@@ -269,6 +272,7 @@ namespace IO.Didomi.SDK
             return didomiForPlatform.GetUserConsentStatusForVendorAndRequiredPurposes(vendorId);
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use GetUserStatus instead. Search the purposeId in GetUserStatus().GetPurposes().GetLegitimateInterest().GetEnabled() or GetUserStatus().GetPurposes().GetLegitimateInterest().GetDisabled()")]
         /// <summary>
         /// Get the user legitimate interest status for a specific purpose.
         /// </summary>
@@ -279,6 +283,7 @@ namespace IO.Didomi.SDK
             return didomiForPlatform.GetUserLegitimateInterestStatusForPurpose(purposeId);
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use GetUserStatus instead. Search the vendorId in GetUserStatus().GetVendors().GetLegitimateInterest().GetEnabled() or GetUserStatus().GetVendors().GetLegitimateInterest().GetDisabled()")]
         /// <summary>
         /// Get the user legitimate interest status for a specific vendor.
         /// </summary>
@@ -289,6 +294,7 @@ namespace IO.Didomi.SDK
             return didomiForPlatform.GetUserLegitimateInterestStatusForVendor(vendorId);
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use GetUserStatus instead. Search the vendorId in GetUserStatus().GetVendors().GetGlobalLegitimateInterest().GetEnabled() or GetUserStatus().GetVendors().GetGlobalLegitimateInterest().GetDisabled()")]
         /// <summary>
         /// Get the user LI status for a specific vendor and all its purposes.
         /// </summary>
@@ -297,6 +303,15 @@ namespace IO.Didomi.SDK
         public bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
         {
             return didomiForPlatform.GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(vendorId);
+        }
+
+        /// <summary>
+        /// Get the user consent status as a UserStatus object.
+        /// </summary>
+        /// <returns></returns>
+        public UserStatus GetUserStatus()
+        {
+            return didomiForPlatform.GetUserStatus();
         }
 
         /// <summary>

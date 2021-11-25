@@ -29,7 +29,8 @@ public enum FunctionCategory
     Preferences,
     Language,
     Initialization,
-    Events
+    Events,
+    GetUserStatus
 };
 
 public class DemoGUI : MonoBehaviour
@@ -56,7 +57,7 @@ public class DemoGUI : MonoBehaviour
         labelResult = GameObject.Find("Result");
         panel= GameObject.Find("Panel");
         SetResponsiveLayout();
-        InitilizeDidomi();
+        InitializeDidomi();
         Didomi.GetInstance().SetupUI();
     }
 
@@ -188,6 +189,10 @@ public class DemoGUI : MonoBehaviour
         {
             Events();
         }
+        else if (functionCategory == FunctionCategory.GetUserStatus)
+        {
+            GetUserStatus();
+        }
     }
 
     private void ShowGroupButtons()
@@ -262,9 +267,9 @@ public class DemoGUI : MonoBehaviour
             functionCategory = FunctionCategory.Legitimate;
         }
 
-        if (GUI.Button(GetMiddleRect5(), ""))
+        if (GUI.Button(GetMiddleRect5(), "GetUserStatus"))
         {
-            functionCategory = FunctionCategory.Initialization;
+            functionCategory = FunctionCategory.GetUserStatus;
         }
 
         if (GUI.Button(GetRightRect5(), ""))
@@ -681,12 +686,12 @@ public class DemoGUI : MonoBehaviour
     {
         if (GUI.Button(GetFuncRect1(), "Initialize"))
         {
-            InitilizeDidomi();
+            InitializeDidomi();
         }
 
         if (GUI.Button(GetFuncRect2(), "Initialize1"))
         {
-            Initilize1Didomi();
+            Initialize1Didomi();
         }
 
         if (GUI.Button(GetFuncRect3(), "IsReady"))
@@ -704,7 +709,7 @@ public class DemoGUI : MonoBehaviour
         }
     }
 
-    private void InitilizeDidomi()
+    private void InitializeDidomi()
     {
         message = string.Empty;
 
@@ -721,7 +726,7 @@ public class DemoGUI : MonoBehaviour
             languageCode: null);
     }
 
-    private void Initilize1Didomi()
+    private void Initialize1Didomi()
     {
         message = string.Empty;
 
@@ -764,6 +769,45 @@ public class DemoGUI : MonoBehaviour
             Didomi.GetInstance().OnReady(
                    () => { message = "OnReady Event Fired."; }
                    );
+        }
+    }
+
+    void GetUserStatus()
+    {
+        if (GUI.Button(GetFuncRect1(), "Purposes"))
+        {
+            message = string.Empty;
+            var userStatus = Didomi.GetInstance().GetUserStatus();
+            message += "Purposes: global -" +
+                userStatus.GetPurposes().GetGlobal().GetEnabled().Count + " enabled, " +
+                userStatus.GetPurposes().GetGlobal().GetDisabled().Count + " disabled ; " +
+                userStatus.GetPurposes().GetEssential().Count + " essential";
+        }
+
+        if (GUI.Button(GetFuncRect2(), "Vendors"))
+        {
+            message = string.Empty;
+            var userStatus = Didomi.GetInstance().GetUserStatus();
+            message += "Vendors: global -" +
+                userStatus.GetVendors().GetGlobal().GetEnabled().Count + " enabled, " +
+                userStatus.GetVendors().GetGlobal().GetDisabled().Count + " disabled ; " +
+                " consent - " +
+                userStatus.GetVendors().GetConsent().GetEnabled().Count + "enabled, " +
+                userStatus.GetVendors().GetConsent().GetDisabled().Count + "disabled";
+        }
+
+        if (GUI.Button(GetFuncRect3(), "UserId"))
+        {
+            message = string.Empty;
+            var userStatus = Didomi.GetInstance().GetUserStatus();
+            message += "User id = " + userStatus.GetUserId();
+        }
+
+        if (GUI.Button(GetFuncRect4(), "ConsentString"))
+        {
+            message = string.Empty;
+            var userStatus = Didomi.GetInstance().GetUserStatus();
+            message += "ConsentString = " + userStatus.GetConsentString();
         }
     }
 

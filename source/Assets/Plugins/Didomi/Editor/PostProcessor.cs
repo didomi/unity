@@ -147,7 +147,8 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     implementation(""com.google.zxing:core:3.3.2"")
     implementation(""org.apmem.tools:layouts:1.10"")
     implementation(""org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"")
-    implementation(""org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.2"")";
+    implementation(""org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.2"")
+    implementation(""com.google.dagger:dagger:2.38.1"")";
         PostProcessor.ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
     }
 

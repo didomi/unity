@@ -157,6 +157,11 @@ namespace IO.Didomi.SDK.IOS
             return result == 0;
         }
 
+        public UserStatus GetUserStatus()
+        {
+            throw new NotImplementedException();
+        }
+
         public void HideNotice()
         {
             DidomiFramework.HideNotice();

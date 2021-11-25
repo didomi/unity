@@ -32,6 +32,7 @@ namespace IO.Didomi.SDK.Interfaces
         bool GetUserLegitimateInterestStatusForPurpose(string purposeId);
         bool GetUserLegitimateInterestStatusForVendor(string vendorId);
         bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId);
+        UserStatus GetUserStatus();
         Vendor GetVendor(string vendorId);
         void HideNotice();
         void HidePreferences();
