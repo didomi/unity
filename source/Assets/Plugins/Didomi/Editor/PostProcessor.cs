@@ -325,6 +325,8 @@ public static class PostProcessor
     public static void ReplaceLineInFile(string path, string oldValue, string newValue)
     {
         string text = File.ReadAllText(path);
+        if (text.Contains(newValue)) return;
+
         text = text.Replace(oldValue, newValue);
         File.WriteAllText(path, text);
     }
