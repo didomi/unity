@@ -48,7 +48,7 @@ namespace IO.Didomi.SDK.IOS
             return new Dictionary<string, string>(); ;
         }
 
-        public static string ConvertFromHasSetStringToJson(ISet<string> objSet)
+        public static string ConvertFromHashSetStringToJson(ISet<string> objSet)
         {
             if (objSet != null)
             {

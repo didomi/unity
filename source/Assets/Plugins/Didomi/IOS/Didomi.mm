@@ -103,6 +103,20 @@ int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(char* vendorId)
     return [[Didomi shared] getUserLegitimateInterestStatusForVendorAndRequiredPurposesWithVendorId: CreateNSString(vendorId)];
 }
 
+char* getUserStatus()
+{
+    DDMUserStatus *userStatus = [[Didomi shared] getUserStatus];
+
+    // TODO Convert UserStatus to json string
+    NSString *jsonString = userStatus.userID;
+    //NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userStatus options:NSJSONWritingPrettyPrinted error:nil];
+    //NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    //NSLog(@"jsonData as string:\n%@", jsonString);
+    NSLog(@"user id:\n%@", jsonString);
+    
+    return cStringCopy([jsonString UTF8String]);
+}
+
 void hideNotice()
 {
     [[Didomi shared] hideNotice];

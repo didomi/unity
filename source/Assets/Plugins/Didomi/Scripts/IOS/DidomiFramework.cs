@@ -204,6 +204,21 @@ namespace IO.Didomi.SDK.IOS
 
         #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern string getUserStatus();
+        #endif
+
+        public static string GetUserStatus()
+        {
+            #if UNITY_IOS && !UNITY_EDITOR
+            return getUserStatus();
+            #else
+            return String.Empty;
+            #endif
+        }
+
+
+        #if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern void hideNotice();
         #endif
 

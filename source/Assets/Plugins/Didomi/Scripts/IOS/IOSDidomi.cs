@@ -159,7 +159,9 @@ namespace IO.Didomi.SDK.IOS
 
         public UserStatus GetUserStatus()
         {
-            throw new NotImplementedException();
+            var jsonText = DidomiFramework.GetUserStatus();
+            // For testing, create a dummy UserStatus with the retrieved json description as user id 
+            return new UserStatus(new UserStatus.Purposes(null, null, null, null), new UserStatus.Vendors(null, null, null, null, null), jsonText, null, null, null, null);
         }
 
         public void HideNotice()
@@ -256,10 +258,10 @@ namespace IO.Didomi.SDK.IOS
         public bool SetUserConsentStatus(ISet<string> enabledPurposeIds, ISet<string> disabledPurposeIds, ISet<string> enabledVendorIds, ISet<string> disabledVendorIds)
         {
             return DidomiFramework.SetUserConsentStatus(
-              IOSObjectMapper.ConvertFromHasSetStringToJson(enabledPurposeIds),
-              IOSObjectMapper.ConvertFromHasSetStringToJson(disabledPurposeIds),
-              IOSObjectMapper.ConvertFromHasSetStringToJson(enabledVendorIds),
-              IOSObjectMapper.ConvertFromHasSetStringToJson(disabledVendorIds));
+              IOSObjectMapper.ConvertFromHashSetStringToJson(enabledPurposeIds),
+              IOSObjectMapper.ConvertFromHashSetStringToJson(disabledPurposeIds),
+              IOSObjectMapper.ConvertFromHashSetStringToJson(enabledVendorIds),
+              IOSObjectMapper.ConvertFromHashSetStringToJson(disabledVendorIds));
         }
 
         public bool SetUserDisagreeToAll()
@@ -278,14 +280,14 @@ namespace IO.Didomi.SDK.IOS
             ISet<string> disabledLIVendorIds)
         {
             return DidomiFramework.SetUserStatus(
-             IOSObjectMapper.ConvertFromHasSetStringToJson(enabledConsentPurposeIds),
-             IOSObjectMapper.ConvertFromHasSetStringToJson(disabledConsentPurposeIds),
-             IOSObjectMapper.ConvertFromHasSetStringToJson(enabledLIPurposeIds),
-             IOSObjectMapper.ConvertFromHasSetStringToJson(disabledLIPurposeIds),
-             IOSObjectMapper.ConvertFromHasSetStringToJson(enabledConsentVendorIds),
-             IOSObjectMapper.ConvertFromHasSetStringToJson(disabledConsentVendorIds),
-             IOSObjectMapper.ConvertFromHasSetStringToJson(enabledLIVendorIds),
-             IOSObjectMapper.ConvertFromHasSetStringToJson(disabledLIVendorIds));
+             IOSObjectMapper.ConvertFromHashSetStringToJson(enabledConsentPurposeIds),
+             IOSObjectMapper.ConvertFromHashSetStringToJson(disabledConsentPurposeIds),
+             IOSObjectMapper.ConvertFromHashSetStringToJson(enabledLIPurposeIds),
+             IOSObjectMapper.ConvertFromHashSetStringToJson(disabledLIPurposeIds),
+             IOSObjectMapper.ConvertFromHashSetStringToJson(enabledConsentVendorIds),
+             IOSObjectMapper.ConvertFromHashSetStringToJson(disabledConsentVendorIds),
+             IOSObjectMapper.ConvertFromHashSetStringToJson(enabledLIVendorIds),
+             IOSObjectMapper.ConvertFromHashSetStringToJson(disabledLIVendorIds));
         }
 
         public bool SetUserStatus(
