@@ -1,5 +1,6 @@
 ﻿using IO.Didomi.SDK;
 using IO.Didomi.SDK.Events;
+using IO.Didomi.SDK.Tests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,8 @@ public enum FunctionCategory
     Language,
     Initialization,
     Events,
-    GetUserStatus
+    GetUserStatus,
+    Tests
 };
 
 public class DemoGUI : MonoBehaviour
@@ -57,8 +59,8 @@ public class DemoGUI : MonoBehaviour
         labelResult = GameObject.Find("Result");
         panel= GameObject.Find("Panel");
         SetResponsiveLayout();
-        InitializeDidomi();
-        Didomi.GetInstance().SetupUI();
+        //InitializeDidomi();
+        //Didomi.GetInstance().SetupUI();
     }
 
     void Update()
@@ -193,6 +195,10 @@ public class DemoGUI : MonoBehaviour
         {
             GetUserStatus();
         }
+        else if (functionCategory == FunctionCategory.Tests)
+        {
+            Tests();
+        }
     }
 
     private void ShowGroupButtons()
@@ -272,9 +278,9 @@ public class DemoGUI : MonoBehaviour
             functionCategory = FunctionCategory.GetUserStatus;
         }
 
-        if (GUI.Button(GetRightRect5(), ""))
+        if (GUI.Button(GetRightRect5(), "Tests"))
         {
-            functionCategory = FunctionCategory.Events;
+            functionCategory = FunctionCategory.Tests;
         }
     }
 
@@ -808,6 +814,16 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
             var userStatus = Didomi.GetInstance().GetUserStatus();
             message += "ConsentString = " + userStatus.GetConsentString();
+        }
+    }
+
+    void Tests()
+    {
+        if (GUI.Button(GetFuncRect3(), "Run tests"))
+        {
+            message = string.Empty;
+            var testsResult = new DidomiTests().RunAll();
+            message += testsResult;
         }
     }
 

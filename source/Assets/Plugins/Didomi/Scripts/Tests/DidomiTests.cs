@@ -12,7 +12,7 @@ namespace IO.Didomi.SDK.Tests
     public class DidomiTests
     {
         private const string Succeeded = "Succeeded";
-        private const string Fail = "Failed";
+        private const string Fail = "! Failed !";
         private string _logs = string.Empty;
 
         public string RunAll()
@@ -26,6 +26,8 @@ namespace IO.Didomi.SDK.Tests
                 bool disableDidomiRemoteConfig = true;
                 string languageCode = null;
 
+                _logs += $"{Environment.NewLine} Initializing sdk - ";
+
                 Didomi.GetInstance().Initialize(
                     apiKey,
                     localConfigurationPath,
@@ -35,7 +37,10 @@ namespace IO.Didomi.SDK.Tests
                     languageCode);
 
                 Didomi.GetInstance().OnReady(
-                    () => { _logs = RunTests(); }
+                    () => {
+                        _logs += $"{Environment.NewLine} Starting tests - ";
+                        _logs += RunTests();
+                    }
                     );
             }
             catch (Exception ex)
@@ -165,11 +170,11 @@ namespace IO.Didomi.SDK.Tests
 
             if (disabledSum == 0 && enabledSum == 0 && requiredSum > 0)
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
             else
             {
-                logs.Append(Fail);
+                logs.AppendLine(Fail);
             }
         }
 
@@ -215,11 +220,11 @@ namespace IO.Didomi.SDK.Tests
 
             if (disabledSum == 0 && enabledSum > 0 && requiredSum > 0)
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
             else
             {
-                logs.Append(Fail);
+                logs.AppendLine(Fail);
             }
         }
 
@@ -265,11 +270,11 @@ namespace IO.Didomi.SDK.Tests
 
             if (disabledSum > 0 && enabledSum == 0 && requiredSum > 0)
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
             else
             {
-                logs.Append(Fail);
+                logs.AppendLine(Fail);
             }
         }
 
@@ -300,16 +305,16 @@ namespace IO.Didomi.SDK.Tests
 
                 if (purpose?.GetId() == purposeId)
                 {
-                    logs.Append(Succeeded);
+                    logs.AppendLine(Succeeded);
                 }
                 else
                 {
-                    logs.Append("Failed. Purpose not found.");
+                    logs.AppendLine("Failed. Purpose not found.");
                 }
             }
             else
             {
-                logs.Append("Failed. Test cannot run. No purpose id found to test");
+                logs.AppendLine("Failed. Test cannot run. No purpose id found to test");
             }
         }
 
@@ -338,16 +343,16 @@ namespace IO.Didomi.SDK.Tests
                 var vendor = Didomi.GetInstance().GetVendor(vendorId);
                 if (vendor?.GetId() == vendorId)
                 {
-                    logs.Append(Succeeded);
+                    logs.AppendLine(Succeeded);
                 }
                 else
                 {
-                    logs.Append("Failed. Vendor not found.");
+                    logs.AppendLine("Failed. Vendor not found.");
                 }
             }
             else
             {
-                logs.Append("Failed. Test cannot run. No vendor id found to test");
+                logs.AppendLine("Failed. Test cannot run. No vendor id found to test");
             }
         }
 
@@ -359,11 +364,11 @@ namespace IO.Didomi.SDK.Tests
 
             if (string.IsNullOrWhiteSpace(retval))
             {
-                logs.Append(Fail);
+                logs.AppendLine(Fail);
             }
             else
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
         }
 
@@ -382,16 +387,16 @@ namespace IO.Didomi.SDK.Tests
 
                 if (result)
                 {
-                    logs.Append(Succeeded);
+                    logs.AppendLine(Succeeded);
                 }
                 else
                 {
-                    logs.Append("Failed. Purpose not found to set consent.");
+                    logs.AppendLine("Failed. Purpose not found to set consent.");
                 }
             }
             else
             {
-                logs.Append("Failed. Test cannot run. No purpose id found to test consent");
+                logs.AppendLine("Failed. Test cannot run. No purpose id found to test consent");
             }
         }
 
@@ -410,16 +415,16 @@ namespace IO.Didomi.SDK.Tests
 
                 if (result)
                 {
-                    logs.Append(Succeeded);
+                    logs.AppendLine(Succeeded);
                 }
                 else
                 {
-                    logs.Append("Failed. Vendor not found to set consent.");
+                    logs.AppendLine("Failed. Vendor not found to set consent.");
                 }
             }
             else
             {
-                logs.Append("Failed. Test cannot run. No vendor id found to test consent");
+                logs.AppendLine("Failed. Test cannot run. No vendor id found to test consent");
             }
         }
 
@@ -438,16 +443,16 @@ namespace IO.Didomi.SDK.Tests
 
                 if (result)
                 {
-                    logs.Append(Succeeded);
+                    logs.AppendLine(Succeeded);
                 }
                 else
                 {
-                    logs.Append("Failed. Vendor not found to set consent for required purposes.");
+                    logs.AppendLine("Failed. Vendor not found to set consent for required purposes.");
                 }
             }
             else
             {
-                logs.Append("Failed. Test cannot run. No vendor id found to test consent for required purposes");
+                logs.AppendLine("Failed. Test cannot run. No vendor id found to test consent for required purposes");
             }
         }
 
@@ -475,11 +480,11 @@ namespace IO.Didomi.SDK.Tests
 
             if (changed && enabledPurposeIds.Count > 0)
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
             else
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
         }
 
@@ -491,11 +496,11 @@ namespace IO.Didomi.SDK.Tests
 
             if (isReady)
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
             else
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
         }
 
@@ -505,7 +510,7 @@ namespace IO.Didomi.SDK.Tests
 
             Didomi.GetInstance().IsConsentRequired();
 
-            logs.Append(Succeeded);
+            logs.AppendLine(Succeeded);
         }
 
         private void TestIsUserConsentStatusPartial(StringBuilder logs)
@@ -514,7 +519,7 @@ namespace IO.Didomi.SDK.Tests
 
             Didomi.GetInstance().IsUserConsentStatusPartial();
 
-            logs.Append(Succeeded);
+            logs.AppendLine(Succeeded);
         }
 
         private void TestGetText(StringBuilder logs)
@@ -526,11 +531,11 @@ namespace IO.Didomi.SDK.Tests
 
             if (dict != null)
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
             else
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
         }
 
@@ -543,11 +548,11 @@ namespace IO.Didomi.SDK.Tests
 
             if (!string.IsNullOrWhiteSpace(value))
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
             else
             {
-                logs.Append(Succeeded);
+                logs.AppendLine(Succeeded);
             }
         }
 
@@ -559,7 +564,7 @@ namespace IO.Didomi.SDK.Tests
 
             Didomi.GetInstance().UpdateSelectedLanguage(languageCode);
 
-            logs.Append(Succeeded);
+            logs.AppendLine(Succeeded);
         }
 
 
@@ -568,10 +573,12 @@ namespace IO.Didomi.SDK.Tests
         {
             Didomi.GetInstance().HideNotice();
             Didomi.GetInstance().Reset();
+            var success = true;
 
             if (Didomi.GetInstance().IsNoticeVisible())
             {
-                logs.Append("Notice must be invisible after reset call.");
+                logs.AppendLine("Notice must be invisible after reset call.");
+                success = false;
             }
 
             logs.AppendLine("SetupUI processing...");
@@ -579,13 +586,20 @@ namespace IO.Didomi.SDK.Tests
 
             if (!Didomi.GetInstance().IsNoticeVisible())
             {
-                logs.Append("Notice must be visible after SetupUI call");
+                logs.AppendLine("Notice must be visible after SetupUI call");
+                success = false;
             }
 
             Didomi.GetInstance().HideNotice();
             if (Didomi.GetInstance().IsNoticeVisible())
             {
-                logs.Append("Notice must be invisible after HideNotice call");
+                logs.AppendLine("Notice must be invisible after HideNotice call");
+                success = false;
+            }
+
+            if (success)
+            {
+                logs.AppendLine(Succeeded);
             }
         }
 
@@ -593,10 +607,13 @@ namespace IO.Didomi.SDK.Tests
         {
             Didomi.GetInstance().HideNotice();
             Didomi.GetInstance().Reset();
+            var success = true;
+
 
             if (Didomi.GetInstance().IsNoticeVisible())
             {
-                logs.Append("Notice must be invisible after reset call.");
+                logs.AppendLine("Notice must be invisible after reset call.");
+                success = false;
             }
 
             logs.AppendLine("ShowNotice processing...");
@@ -604,13 +621,20 @@ namespace IO.Didomi.SDK.Tests
 
             if (!Didomi.GetInstance().IsNoticeVisible())
             {
-                logs.Append("Notice must be visible after ShowNotice call");
+                logs.AppendLine("Notice must be visible after ShowNotice call");
+                success = false;
             }
 
             Didomi.GetInstance().HideNotice();
             if (Didomi.GetInstance().IsNoticeVisible())
             {
-                logs.Append("Notice must be invisible after HideNotice call");
+                logs.AppendLine("Notice must be invisible after HideNotice call");
+                success = false;
+            }
+
+            if (success)
+            {
+                logs.AppendLine(Succeeded);
             }
         }
 
@@ -619,9 +643,12 @@ namespace IO.Didomi.SDK.Tests
             Didomi.GetInstance().HidePreferences();
             Didomi.GetInstance().Reset();
 
+            var success = true;
+
             if (Didomi.GetInstance().IsPreferencesVisible())
             {
-                logs.Append("Preferences must be invisible after reset call.");
+                logs.AppendLine("Preferences must be invisible after reset call.");
+                success = false;
             }
 
             logs.AppendLine("ShowPreferences processing...");
@@ -629,13 +656,20 @@ namespace IO.Didomi.SDK.Tests
 
             if (!Didomi.GetInstance().IsPreferencesVisible())
             {
-                logs.Append("Preferences must be visible after ShowPreferences call");
+                logs.AppendLine("Preferences must be visible after ShowPreferences call");
+                success = false;
             }
 
             Didomi.GetInstance().HidePreferences();
             if (Didomi.GetInstance().IsPreferencesVisible())
             {
-                logs.Append("Preferences must be invisible after HidePreferences call");
+                logs.AppendLine("Preferences must be invisible after HidePreferences call");
+                success = false;
+            }
+
+            if (success)
+            {
+                logs.AppendLine(Succeeded);
             }
         }
 
