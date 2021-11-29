@@ -3,6 +3,7 @@ using IO.Didomi.SDK.Events;
 using IO.Didomi.SDK.Tests;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -821,10 +822,24 @@ public class DemoGUI : MonoBehaviour
     {
         if (GUI.Button(GetFuncRect3(), "Run tests"))
         {
-            message = string.Empty;
-            var testsResult = new DidomiTests().RunAll();
-            message += testsResult;
+            StartCoroutine(LaunchTests());
         }
+    }
+
+    IEnumerator LaunchTests()
+    {
+        message = "Tests started...";
+        var tests = new DidomiTests();
+        yield return tests.RunAll();
+        if (tests.DidTestsFail())
+        {
+            message = "Tests: Failed !";
+        } else
+        {
+            message = "Tests: Passed.";
+        }
+        Debug.Log(message);
+        message += tests.GetResults();
     }
 
     private void ShowBasicFunctions()
