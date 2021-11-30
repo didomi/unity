@@ -20,36 +20,44 @@ namespace IO.Didomi.SDK.Tests
         private bool testsComplete = false;
         private bool testsFailure = false;
 
-        public IEnumerator RunAll()
+        public IEnumerator RunAll(bool remoteNotice = false)
         {
             _logs = string.Empty;
             try
             {
-                string apiKey = "c3cd5b46-bf36-4700-bbdc-4ee9176045aa";
+                string apiKey = remoteNotice ? "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba" : "c3cd5b46-bf36-4700-bbdc-4ee9176045aa";
+                string noticeId = remoteNotice ? "Ar7NPQ72" : null;
                 string localConfigurationPath = null;
                 string remoteConfigurationURL = null;
                 string providerId = null;
-                bool disableDidomiRemoteConfig = true;
+                bool disableDidomiRemoteConfig = !remoteNotice;
                 string languageCode = null;
 
                 Debug.Log("Tests: Initializing sdk");
                 _logs += $"{Environment.NewLine}Initializing sdk - ";
 
-                Didomi.GetInstance().Initialize(
+                Didomi didomi = Didomi.GetInstance();
+                if (didomi.IsReady())
+                {
+                    throw new Exception("SDK was already initialized. To run the tests, close and restart the app without initializing SDK.");
+                }
+
+                didomi.Initialize(
                     apiKey,
                     localConfigurationPath,
                     remoteConfigurationURL,
                     providerId,
                     disableDidomiRemoteConfig,
-                    languageCode);
+                    languageCode,
+                    noticeId);
 
-                Didomi.GetInstance().OnReady(
+                didomi.OnReady(
                     () => {
-                        _logs += RunTests();
+                        _logs += RunTests(remoteNotice);
                         testsComplete = true;
                     }
                     );
-                Didomi.GetInstance().OnError(
+                didomi.OnError(
                     () => {
                         _logs += $"{Environment.NewLine}Error initializing SDK.";
                         testsComplete = true;
@@ -60,6 +68,7 @@ namespace IO.Didomi.SDK.Tests
             {
                 _logs += $"{Environment.NewLine}Exception : {ex.Message}";
                 _logs += $"{Environment.NewLine}Exception : {ex.StackTrace}";
+                testsFailure = true;
                 testsComplete = true;
             }
 
@@ -84,7 +93,7 @@ namespace IO.Didomi.SDK.Tests
             return testsFailure;
         }
 
-        private string RunTests()
+        private string RunTests(bool remoteNotice)
         {
             var logsBuilder = new StringBuilder(Environment.NewLine);
 
@@ -128,6 +137,8 @@ namespace IO.Didomi.SDK.Tests
 
                 TestUpdateSelectedLanguage(logsBuilder);
 
+                TestGetUserStatus(logsBuilder, remoteNotice);
+
                 TestSetupUI(logsBuilder);
 
                 TestShowNotice(logsBuilder);
@@ -160,6 +171,37 @@ namespace IO.Didomi.SDK.Tests
         {
             AddLogLine(logs, text);
             testsFailure = true;
+        }
+
+        private bool AssertNotEmpty(StringBuilder logs, string element, string failureMessage)
+        {
+            if (element == null || element.Length == 0)
+            {
+                TestFailed(logs, text: $"{Fail} - {failureMessage}");
+                return false;
+            }
+            return true;
+        }
+
+        private bool AssertContains(StringBuilder logs, ISet<string> set, string element, string failureMessage)
+        {
+            if (!set.Contains(element))
+            {
+                TestFailed(logs, text: $"{Fail} - {failureMessage}");
+                return false;
+            }
+            return true;
+        }
+
+
+        private bool AssertDoesNotContain(StringBuilder logs, ISet<string> set, string element, string failureMessage)
+        {
+            if (set.Contains(element))
+            {
+                TestFailed(logs, text: $"{Fail} - {failureMessage}");
+                return false;
+            }
+            return true;
         }
 
         private void RegisterEventHandlers()
@@ -622,10 +664,135 @@ namespace IO.Didomi.SDK.Tests
             TestSucceeded(logs);
         }
 
+        private void TestGetUserStatus(StringBuilder logs, bool tcfEnabled)
+        {
+            AddLogLine(logs, "GetUserStatus processing...");
 
+            // Tested vendor: Adssets AB
+            string vendorId = "205";
+            string purposeId = "select_personalized_ads";
+
+            Didomi didomi = Didomi.GetInstance();
+
+            bool success = true;
+
+            didomi.SetUserStatus(
+                purposesConsentStatus: true,
+                purposesLIStatus: true,
+                vendorsConsentStatus: true,
+                vendorsLIStatus: true
+                );
+
+            UserStatus userStatus = didomi.GetUserStatus();
+
+            if (tcfEnabled)
+            {
+                success &= AssertNotEmpty(logs, userStatus.GetConsentString(), "No consent string");
+            }
+            success &= AssertNotEmpty(logs, userStatus.GetUserId(), "No user id");
+            success &= AssertNotEmpty(logs, userStatus.GetCreated(), "No created date");
+            success &= AssertNotEmpty(logs, userStatus.GetUpdated(), "No updated date");
+
+            success &= AssertContains(logs, userStatus.GetVendors().GetGlobal().GetEnabled(), vendorId, "Vendor should be in global.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetGlobal().GetDisabled(), vendorId, "Vendor should not be in global.disabled");
+
+            success &= AssertContains(logs, userStatus.GetVendors().GetGlobalConsent().GetEnabled(), vendorId, "Vendor should be in globalConsent.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetGlobalConsent().GetDisabled(), vendorId, "Vendor should not be in globalConsent.disabled");
+
+            success &= AssertContains(logs, userStatus.GetVendors().GetGlobalLegitimateInterest().GetEnabled(), vendorId, "Vendor should be in globalLegitimateInterest.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetGlobalLegitimateInterest().GetDisabled(), vendorId, "Vendor should not be in globalLegitimateInterest.disabled");
+
+            success &= AssertContains(logs, userStatus.GetVendors().GetConsent().GetEnabled(), vendorId, "Vendor should be in consent.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetConsent().GetDisabled(), vendorId, "Vendor should not be in consent.disabled");
+
+            success &= AssertContains(logs, userStatus.GetVendors().GetLegitimateInterest().GetEnabled(), vendorId, "Vendor should be in LegitimateInterest.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetLegitimateInterest().GetDisabled(), vendorId, "Vendor should not be in legitimateInterest.disabled");
+
+            success &= AssertContains(logs, userStatus.GetPurposes().GetGlobal().GetEnabled(), purposeId, "Purpose should be in global.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetGlobal().GetDisabled(), purposeId, "Purpose should not be in global.disabled");
+
+            success &= AssertContains(logs, userStatus.GetPurposes().GetConsent().GetEnabled(), purposeId, "Purpose should be in consent.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetConsent().GetDisabled(), purposeId, "Purpose should not be in consent.disabled");
+
+            success &= AssertContains(logs, userStatus.GetPurposes().GetLegitimateInterest().GetEnabled(), purposeId, "Purpose should be in legitimateInterest.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetLegitimateInterest().GetDisabled(), purposeId, "Purpose should not be in legitimateInterest.disabled");
+
+            didomi.SetUserStatus(
+                purposesConsentStatus: false,
+                purposesLIStatus: false,
+                vendorsConsentStatus: true,
+                vendorsLIStatus: true
+                );
+
+            userStatus = didomi.GetUserStatus();
+
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetGlobal().GetEnabled(), vendorId, "Vendor should not be in global.enabled");
+            success &= AssertContains(logs, userStatus.GetVendors().GetGlobal().GetDisabled(), vendorId, "Vendor should be in global.disabled");
+
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetGlobalConsent().GetEnabled(), vendorId, "Vendor should not be in globalConsent.enabled");
+            success &= AssertContains(logs, userStatus.GetVendors().GetGlobalConsent().GetDisabled(), vendorId, "Vendor should be in globalConsent.disabled");
+
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetGlobalLegitimateInterest().GetEnabled(), vendorId, "Vendor should not be in globalLegitimateInterest.enabled");
+            success &= AssertContains(logs, userStatus.GetVendors().GetGlobalLegitimateInterest().GetDisabled(), vendorId, "Vendor should be in globalLegitimateInterest.disabled");
+
+            success &= AssertContains(logs, userStatus.GetVendors().GetConsent().GetEnabled(), vendorId, "Vendor should be in consent.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetConsent().GetDisabled(), vendorId, "Vendor should not be in consent.disabled");
+
+            success &= AssertContains(logs, userStatus.GetVendors().GetLegitimateInterest().GetEnabled(), vendorId, "Vendor should be in LegitimateInterest.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetLegitimateInterest().GetDisabled(), vendorId, "Vendor should not be in legitimateInterest.disabled");
+
+            success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetGlobal().GetEnabled(), purposeId, "Purpose should not be in global.enabled");
+            success &= AssertContains(logs, userStatus.GetPurposes().GetGlobal().GetDisabled(), purposeId, "Purpose should be in global.disabled");
+
+            success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetConsent().GetEnabled(), purposeId, "Purpose should not be in consent.enabled");
+            success &= AssertContains(logs, userStatus.GetPurposes().GetConsent().GetDisabled(), purposeId, "Purpose should be in consent.disabled");
+
+            success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetLegitimateInterest().GetEnabled(), purposeId, "Purpose should not be in legitimateInterest.enabled");
+            success &= AssertContains(logs, userStatus.GetPurposes().GetLegitimateInterest().GetDisabled(), purposeId, "Purpose should be in legitimateInterest.disabled");
+
+            didomi.SetUserStatus(
+                purposesConsentStatus: true,
+                purposesLIStatus: false,
+                vendorsConsentStatus: true,
+                vendorsLIStatus: false
+                );
+
+            userStatus = didomi.GetUserStatus();
+
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetGlobal().GetEnabled(), vendorId, "Vendor should not be in global.enabled");
+            success &= AssertContains(logs, userStatus.GetVendors().GetGlobal().GetDisabled(), vendorId, "Vendor should be in global.disabled");
+
+            success &= AssertContains(logs, userStatus.GetVendors().GetGlobalConsent().GetEnabled(), vendorId, "Vendor should be in globalConsent.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetGlobalConsent().GetDisabled(), vendorId, "Vendor should not be in globalConsent.disabled");
+
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetGlobalLegitimateInterest().GetEnabled(), vendorId, "Vendor should not be in globalLegitimateInterest.enabled");
+            success &= AssertContains(logs, userStatus.GetVendors().GetGlobalLegitimateInterest().GetDisabled(), vendorId, "Vendor should be in globalLegitimateInterest.disabled");
+
+            success &= AssertContains(logs, userStatus.GetVendors().GetConsent().GetEnabled(), vendorId, "Vendor should not be in consent.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetConsent().GetDisabled(), vendorId, "Vendor should be in consent.disabled");
+
+            success &= AssertDoesNotContain(logs, userStatus.GetVendors().GetLegitimateInterest().GetEnabled(), vendorId, "Vendor should not be in LegitimateInterest.enabled");
+            success &= AssertContains(logs, userStatus.GetVendors().GetLegitimateInterest().GetDisabled(), vendorId, "Vendor should be in legitimateInterest.disabled");
+
+            success &= AssertContains(logs, userStatus.GetPurposes().GetGlobal().GetEnabled(), purposeId, "Purpose should be in global.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetGlobal().GetDisabled(), purposeId, "Purpose should not be in global.disabled");
+
+            success &= AssertContains(logs, userStatus.GetPurposes().GetConsent().GetEnabled(), purposeId, "Purpose should be in consent.enabled");
+            success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetConsent().GetDisabled(), purposeId, "Purpose should not be in consent.disabled");
+
+            success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetLegitimateInterest().GetEnabled(), purposeId, "Purpose should not be in legitimateInterest.enabled");
+            success &= AssertContains(logs, userStatus.GetPurposes().GetLegitimateInterest().GetDisabled(), purposeId, "Purpose should be in legitimateInterest.disabled");
+
+            if (success)
+            {
+                TestSucceeded(logs);
+            }
+        }
 
         private void TestSetupUI(StringBuilder logs)
         {
+            AddLogLine(logs, "SetupUI processing...");
+
             Didomi.GetInstance().HideNotice();
             Didomi.GetInstance().Reset();
             var success = true;
@@ -636,7 +803,6 @@ namespace IO.Didomi.SDK.Tests
                 success = false;
             }
 
-            AddLogLine(logs, "SetupUI processing...");
             Didomi.GetInstance().SetupUI();
 
             if (!Didomi.GetInstance().IsNoticeVisible())
@@ -660,6 +826,8 @@ namespace IO.Didomi.SDK.Tests
 
         private void TestShowNotice(StringBuilder logs)
         {
+            AddLogLine(logs, "ShowNotice processing...");
+
             Didomi.GetInstance().HideNotice();
             Didomi.GetInstance().Reset();
             var success = true;
@@ -671,7 +839,6 @@ namespace IO.Didomi.SDK.Tests
                 success = false;
             }
 
-            AddLogLine(logs, "ShowNotice processing...");
             Didomi.GetInstance().ShowNotice();
 
             if (!Didomi.GetInstance().IsNoticeVisible())
@@ -695,6 +862,8 @@ namespace IO.Didomi.SDK.Tests
 
         private void TestShowPreferences(StringBuilder logs)
         {
+            AddLogLine(logs, "ShowPreferences processing...");
+
             Didomi.GetInstance().HidePreferences();
             Didomi.GetInstance().Reset();
 
@@ -706,7 +875,6 @@ namespace IO.Didomi.SDK.Tests
                 success = false;
             }
 
-            AddLogLine(logs, "ShowPreferences processing...");
             Didomi.GetInstance().ShowPreferences();
 
             if (!Didomi.GetInstance().IsPreferencesVisible())

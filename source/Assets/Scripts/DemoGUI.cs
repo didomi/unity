@@ -820,17 +820,22 @@ public class DemoGUI : MonoBehaviour
 
     void Tests()
     {
-        if (GUI.Button(GetFuncRect3(), "Run tests"))
+        if (GUI.Button(GetFuncRect1(), "Run local config tests"))
         {
             StartCoroutine(LaunchTests());
         }
+
+        if (GUI.Button(GetFuncRect2(), "Run remote config tests"))
+        {
+            StartCoroutine(LaunchTests(true));
+        }
     }
 
-    IEnumerator LaunchTests()
+    IEnumerator LaunchTests(bool remoteNotice = false)
     {
         message = "Tests started...";
         var tests = new DidomiTests();
-        yield return tests.RunAll();
+        yield return tests.RunAll(remoteNotice);
         if (tests.DidTestsFail())
         {
             message = "Tests: Failed !";
