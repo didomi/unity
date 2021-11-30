@@ -3,12 +3,6 @@
 
 #pragma mark - C interface
 
-/**
- * Objective-C++ code that exposes the SDK interface to Unity C#
- * When adding a new function from the SDK, update this file to also
- * reference that new function
- */
-
 char* cStringCopy(const char* string){
 
      if (string == NULL){
@@ -19,6 +13,71 @@ char* cStringCopy(const char* string){
      strcpy(res, string);
      return res;
 }
+
+/**
+ Method used to create a dictionary based on an instance of DDMUserStatusIDs.
+ */
+NSDictionary<NSString *, NSArray<NSString *> *> * CreateDictionaryFromStatusIDs(DDMUserStatusIDs *ids)
+{
+    return @{
+        @"enabled": [[ids enabled] allObjects],
+        @"disabled": [[ids disabled] allObjects]
+    };
+}
+
+/**
+ Method used to create a string from a dictionary that doesn't have the form <NSString *, NSString *>.
+ */
+char* ConvertComplexDictionaryToString(NSDictionary * dataDict)
+{
+   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil];
+   NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+   NSLog(@"jsonData dictionary as string:\n%@", jsonString);
+   return cStringCopy([jsonString UTF8String]);
+}
+
+/**
+ Method used to map user status from DDMUserStatus to a JSON string.
+ */
+char* MapUserStatus(DDMUserStatus *userStatus) {
+    // String properties
+    NSString *userID = [userStatus userID];
+    NSString *created = [userStatus created];
+    NSString *updated = [userStatus updated];
+    NSString *consentString = [userStatus consentString];
+    NSString *additionalConsent = [userStatus additionalConsent];
+    
+    DDMUserStatusPurposes *purposeStatus = [userStatus purposes];
+    DDMUserStatusVendors *vendorsStatus = [userStatus vendors];
+    
+    NSDictionary *dictionary = @{
+        @"user_id": userID,
+        @"created" : created,
+        @"updated": updated,
+        @"consent_string": consentString,
+        @"addtl_consent": additionalConsent,
+        @"purposes": @{
+            @"consent": CreateDictionaryFromStatusIDs([purposeStatus consent]),
+            @"legitimate_interest": CreateDictionaryFromStatusIDs([purposeStatus legitimateInterest]),
+            @"global": CreateDictionaryFromStatusIDs([purposeStatus global])
+        },
+        @"vendors": @{
+            @"consent": CreateDictionaryFromStatusIDs([vendorsStatus consent]),
+            @"legitimate_interest": CreateDictionaryFromStatusIDs([vendorsStatus legitimateInterest]),
+            @"global": CreateDictionaryFromStatusIDs([vendorsStatus global]),
+            @"global_consent": CreateDictionaryFromStatusIDs([vendorsStatus globalConsent]),
+            @"global_li": CreateDictionaryFromStatusIDs([vendorsStatus globalLegitimateInterest])
+        }
+    };
+    
+    return ConvertComplexDictionaryToString(dictionary);
+}
+
+/**
+ * Objective-C++ code that exposes the SDK interface to Unity C#
+ * When adding a new function from the SDK, update this file to also
+ * reference that new function
+ */
 
 
 
@@ -105,16 +164,9 @@ int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(char* vendorId)
 
 char* getUserStatus()
 {
-    DDMUserStatus *userStatus = [[Didomi shared] getUserStatus];
-
-    // TODO Convert UserStatus to json string
-    NSString *jsonString = userStatus.userID;
-    //NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userStatus options:NSJSONWritingPrettyPrinted error:nil];
-    //NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    //NSLog(@"jsonData as string:\n%@", jsonString);
-    NSLog(@"user id:\n%@", jsonString);
-    
-    return cStringCopy([jsonString UTF8String]);
+    Didomi *didomi = [Didomi shared];
+    DDMUserStatus *userStatus = [didomi getUserStatus];
+    return MapUserStatus(userStatus);
 }
 
 void hideNotice()
