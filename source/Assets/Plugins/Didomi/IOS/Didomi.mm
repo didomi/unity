@@ -59,7 +59,8 @@ char* MapUserStatus(DDMUserStatus *userStatus) {
         @"purposes": @{
             @"consent": CreateDictionaryFromStatusIDs([purposeStatus consent]),
             @"legitimate_interest": CreateDictionaryFromStatusIDs([purposeStatus legitimateInterest]),
-            @"global": CreateDictionaryFromStatusIDs([purposeStatus global])
+            @"global": CreateDictionaryFromStatusIDs([purposeStatus global]),
+            @"essential": [[purposeStatus essential] allObjects]
         },
         @"vendors": @{
             @"consent": CreateDictionaryFromStatusIDs([vendorsStatus consent]),
