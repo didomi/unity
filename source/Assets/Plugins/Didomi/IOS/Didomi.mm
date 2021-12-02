@@ -80,8 +80,6 @@ char* MapUserStatus(DDMUserStatus *userStatus) {
  * reference that new function
  */
 
-
-
 extern "C" {
 
 void setupUI() {
