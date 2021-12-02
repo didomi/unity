@@ -160,8 +160,8 @@ namespace IO.Didomi.SDK.IOS
         public UserStatus GetUserStatus()
         {
             var jsonText = DidomiFramework.GetUserStatus();
-            // For testing, create a dummy UserStatus with the retrieved json description as user id 
-            return new UserStatus(new UserStatus.Purposes(null, null, null, null), new UserStatus.Vendors(null, null, null, null, null), jsonText, null, null, null, null);
+
+            return IOSObjectMapper.ConvertToUserStatus(jsonText);
         }
 
         public void HideNotice()

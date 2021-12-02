@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using static IO.Didomi.SDK.IOS.IOSObjectMapper;
 
 namespace IO.Didomi.SDK
 {
@@ -9,37 +11,49 @@ namespace IO.Didomi.SDK
         /// <summary>
         /// Property that contains the user status associated to purposes.
         /// </summary>
+        [JsonProperty("purposes")]
         private Purposes purposes;
 
         /// <summary>
         /// Property that contains the user status associated to vendors.
         /// </summary>
+        [JsonProperty("vendors")]
         private Vendors vendors;
 
         /// <summary>
         /// Didomi user id
         /// </summary>
+        [JsonProperty("user_id")]
         private string userId;
 
         /// <summary>
         /// User choices creation date
         /// </summary>
+        [JsonProperty("created")]
         private string created;
 
         /// <summary>
         /// User choices update date
         /// </summary>
+        [JsonProperty("updated")]
         private string updated;
 
         /// <summary>
         /// TCF consent as string
         /// </summary>
+        [JsonProperty("consent_string")]
         private string consentString;
 
         /// <summary>
         /// Additional consent
         /// </summary>
+        [JsonProperty("addtl_consent")]
         private string additionalConsent;
+
+        // Empty constructor for Json deserialization
+        public UserStatus(): this(null, null, null, null, null, null, null)
+        {
+        }
 
         public UserStatus(
             Purposes purposes,
@@ -132,22 +146,32 @@ namespace IO.Didomi.SDK
             /// Computed sets/lists of enabled and disabled IDs of purposes that have been chosen by the user regarding the consent or legitimate interest Legal Basis.
             /// Purposes considered as essential will be part of the enabled IDs.
             /// </summary>
+            [JsonProperty("global")]
             private Ids global;
 
             /// <summary>
             /// Enabled and disabled IDs of purposes that have been explicitly chosen by the user regarding the consent Legal Basis.
             /// </summary>
+            [JsonProperty("consent")]
             private Ids consent;
 
             /// <summary>
             /// Enabled and disabled IDs of purposes that have been explicitly chosen by the user regarding the legitimate interest Legal Basis.
             /// </summary>
+            [JsonProperty("legitimate_interest")]
             private Ids legitimateInterest;
 
             /// <summary>
-			/// Ids of purposes that are considered essential.
-			/// </summary>
+            /// Ids of purposes that are considered essential.
+            /// </summary>
+            [JsonProperty("essential")]
+            [JsonConverter(typeof(JsonSetStringConverter))]
             private ISet<string> essential;
+
+            // Empty constructor for Json deserialization
+            public Purposes() : this(null, null, null, null)
+            {
+            }
 
             public Purposes(Ids global, Ids consent, Ids legitimateInterest, ISet<string> essential)
             {
@@ -204,6 +228,7 @@ namespace IO.Didomi.SDK
             /// <summary>
             /// Computed sets/lists of enabled and disabled IDs of vendors that have been chosen by the user regarding the consent or legitimate interest Legal Basis.
             /// </summary>
+            [JsonProperty("global")]
             private Ids global;
 
             /// <summary>
@@ -211,6 +236,8 @@ namespace IO.Didomi.SDK
             /// This takes into account the consent required purposes linked to vendors.
             /// When computing this property, essential purposes will be considered as enabled.
             /// </summary>
+
+            [JsonProperty("global_consent")]
             private Ids globalConsent;
 
             /// <summary>
@@ -218,17 +245,25 @@ namespace IO.Didomi.SDK
             /// This takes into account the legitimate interest required purposes linked to vendors.
             /// When computing this property, essential purposes will be considered as enabled.
             /// </summary>
+            [JsonProperty("global_li")]
             private Ids globalLegitimateInterest;
 
             /// <summary>
             /// Enabled and disabled IDs of vendors that have been explicitly chosen by the user regarding the consent Legal Basis.
             /// </summary>
+            [JsonProperty("consent")]
             private Ids consent;
 
             /// <summary>
             /// Enabled and disabled IDs of vendors that have been explicitly chosen by the user regarding the legitimate interest Legal Basis.
             /// </summary>
+            [JsonProperty("legitimate_interest")]
             private Ids legitimateInterest;
+
+            // Empty constructor for Json deserialization
+            public Vendors(): this(null, null, null, null, null)
+            {
+            }
 
             public Vendors(Ids global, Ids globalConsent, Ids globalLegitimateInterest, Ids consent, Ids legitimateInterest)
             {
@@ -295,11 +330,15 @@ namespace IO.Didomi.SDK
             /// <summary>
 			/// List of enabled ids
 			/// </summary>
+            [JsonProperty("enabled")]
+            [JsonConverter(typeof(JsonSetStringConverter))]
             private ISet<string> enabled;
 
             /// <summary>
             /// List of disabled ids
             /// </summary>
+            [JsonProperty("disabled")]
+            [JsonConverter(typeof(JsonSetStringConverter))]
             private ISet<string> disabled;
 
             public Ids(ISet<string> enabled, ISet<string> disabled)
@@ -308,6 +347,7 @@ namespace IO.Didomi.SDK
                 this.disabled = disabled;
             }
 
+            // Empty constructor for Json deserialization
             public Ids() : this(new HashSet<string>(), new HashSet<string>())
             {
             }

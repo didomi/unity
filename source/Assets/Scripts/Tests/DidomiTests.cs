@@ -150,7 +150,7 @@ namespace IO.Didomi.SDK.Tests
             catch (Exception ex)
             {
                 AddLogLine(logsBuilder, $"Exception : {ex.Message }");
-                AddLogLine(logsBuilder, $"Exception : {ex.StackTrace }");
+                TestFailed(logsBuilder, text: $"Exception : {ex.StackTrace }");
             }
 
             return logsBuilder.ToString();

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using UnityEngine;
 namespace IO.Didomi.SDK.IOS
 {
     /// <summary>
-    /// Main class used convert objects required by IOS Plugin.
+    /// Main class used to convert objects required by IOS Plugin.
     /// </summary>
     class IOSObjectMapper
     {
@@ -37,7 +38,7 @@ namespace IO.Didomi.SDK.IOS
             {
                 try
                 {
-                    return JsonConvert.DeserializeObject<Dictionary<string,string>>(jsonText);
+                    return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonText);
                 }
                 catch (Exception ex)
                 {
@@ -56,6 +57,51 @@ namespace IO.Didomi.SDK.IOS
             }
 
             return "[]";
+        }
+
+        public static UserStatus ConvertToUserStatus(string jsonText)
+        {
+            UserStatus result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject<UserStatus>(jsonText);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
+        public class JsonSetStringConverter : JsonConverter<ISet<string>>
+        {
+            public override ISet<string> ReadJson(JsonReader reader, Type objectType, ISet<string> existingValue, bool hasExistingValue, JsonSerializer serializer)
+            {
+                ISet<string> result = null;
+                JArray array = JArray.Load(reader);
+                if (array == null)
+                {
+                    result = new HashSet<string>();
+                }
+                else
+                {
+                    // We have to convert it to list first, as direct conversion to HashSet fails on iOS
+                    List<string> resultAsList = array.ToObject<List<string>>();
+                    result = new HashSet<string>(resultAsList);
+                }
+                return result;
+            }
+
+            public override void WriteJson(JsonWriter writer, ISet<string> value, JsonSerializer serializer)
+            {
+                // Not used
+                throw new NotImplementedException();
+            }
         }
     }
 }
