@@ -37,7 +37,7 @@ namespace IO.Didomi.SDK.Tests
                 _logs += $"{Environment.NewLine}Initializing sdk - ";
 
                 Didomi didomi = Didomi.GetInstance();
-                if (didomi.IsReady())
+                if (Application.platform == RuntimePlatform.Android && didomi.IsReady())
                 {
                     throw new Exception("SDK was already initialized. To run the tests, close and restart the app without initializing SDK.");
                 }
@@ -150,7 +150,7 @@ namespace IO.Didomi.SDK.Tests
             catch (Exception ex)
             {
                 AddLogLine(logsBuilder, $"Exception : {ex.Message }");
-                TestFailed(logsBuilder, text: $"Exception : {ex.StackTrace }");
+                TestFailed(logsBuilder, description: $"Exception : {ex.StackTrace }");
             }
 
             return logsBuilder.ToString();
@@ -167,17 +167,27 @@ namespace IO.Didomi.SDK.Tests
             AddLogLine(logs, Succeeded);
         }
 
-        private void TestFailed(StringBuilder logs, string text = Fail)
+        private void TestFailed(StringBuilder logs, string description = null)
         {
-            AddLogLine(logs, text);
+            string message = description != null ? $"{Fail} - ${description}" : Fail;
+            AddLogLine(logs, message);
             testsFailure = true;
+        }
+
+        private bool AssertEmptiness<T>(StringBuilder logs, ISet<T> element, bool expectEmpty, string failureMessage)
+        {
+            if (element != null)
+            {
+                return (element.Count == 0) == expectEmpty;
+            }
+            return false;
         }
 
         private bool AssertNotEmpty(StringBuilder logs, string element, string failureMessage)
         {
             if (element == null || element.Length == 0)
             {
-                TestFailed(logs, text: $"{Fail} - {failureMessage}");
+                TestFailed(logs, description: failureMessage);
                 return false;
             }
             return true;
@@ -187,7 +197,7 @@ namespace IO.Didomi.SDK.Tests
         {
             if (!set.Contains(element))
             {
-                TestFailed(logs, text: $"{Fail} - {failureMessage}");
+                TestFailed(logs, description: failureMessage);
                 return false;
             }
             return true;
@@ -198,7 +208,7 @@ namespace IO.Didomi.SDK.Tests
         {
             if (set.Contains(element))
             {
-                TestFailed(logs, text: $"{Fail} - {failureMessage}");
+                TestFailed(logs, description: failureMessage);
                 return false;
             }
             return true;
@@ -232,46 +242,43 @@ namespace IO.Didomi.SDK.Tests
 
             Didomi.GetInstance().Reset();
 
-            var disabledPurposeIds = Didomi.GetInstance().GetDisabledPurposeIds();
-            var disabledPurposes = Didomi.GetInstance().GetDisabledPurposes();
-            var disabledVendorIds = Didomi.GetInstance().GetDisabledVendorIds();
-            var disabledVendors = Didomi.GetInstance().GetDisabledVendors();
+            AssertPurposesAndVendorsCount(logs, true, false, false);
+        }
 
-            var enabledPurposeIds = Didomi.GetInstance().GetEnabledPurposeIds();
-            var enabledPurposes = Didomi.GetInstance().GetEnabledPurposes();
-            var enabledVendorIds = Didomi.GetInstance().GetEnabledVendorIds();
-            var enabledVendors = Didomi.GetInstance().GetEnabledVendors();
+        private void AssertPurposesAndVendorsCount(
+            StringBuilder logs,
+            bool hasRequiredElements,
+            bool hasEnabledElements,
+            bool hasDisabledElements)
+        {
 
-            var requiredPurposeIds = Didomi.GetInstance().GetRequiredPurposeIds();
-            var requiredPurposes = Didomi.GetInstance().GetRequiredPurposes();
-            var requiredVendorIds = Didomi.GetInstance().GetRequiredVendorIds();
-            var requiredVendors = Didomi.GetInstance().GetRequiredVendors();
+            bool success = true;
 
-            var disabledSum =
-                disabledPurposeIds.Count()
-                + disabledPurposes.Count()
-                + disabledVendorIds.Count()
-                + disabledVendors.Count();
+            success &= AssertEmptiness(logs, Didomi.GetInstance().GetRequiredPurposeIds(), hasRequiredElements, "requiredPurposeIds");
+            success &= AssertEmptiness(logs, Didomi.GetInstance().GetRequiredVendorIds(), hasRequiredElements, "requiredVendorIds");
 
-            var enabledSum =
-                enabledPurposeIds.Count()
-                + enabledPurposes.Count()
-                + enabledVendorIds.Count()
-                + enabledVendors.Count();
+            success &= AssertEmptiness(logs, Didomi.GetInstance().GetEnabledPurposeIds(), hasEnabledElements, "enabledPurposeIds");
+            success &= AssertEmptiness(logs, Didomi.GetInstance().GetEnabledVendorIds(), hasEnabledElements, "enabledVendorIds");
 
-            var requiredSum =
-               requiredPurposeIds.Count()
-               + requiredPurposes.Count()
-               + requiredVendorIds.Count()
-               + requiredVendors.Count();
+            success &= AssertEmptiness(logs, Didomi.GetInstance().GetDisabledPurposeIds(), hasDisabledElements, "disabledPurposeIds");
+            success &= AssertEmptiness(logs, Didomi.GetInstance().GetDisabledVendorIds(), hasDisabledElements, "disabledVendorIds");
 
-            if (disabledSum == 0 && enabledSum == 0 && requiredSum > 0)
+            // Vendor and purpose models are not available on iOS
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                success &= AssertEmptiness(logs, Didomi.GetInstance().GetRequiredPurposes(), hasRequiredElements, "requiredPurposes");
+                success &= AssertEmptiness(logs, Didomi.GetInstance().GetRequiredVendors(), hasRequiredElements, "requiredVendors");
+
+                success &= AssertEmptiness(logs, Didomi.GetInstance().GetEnabledPurposes(), hasEnabledElements, "enabledPurposes");
+                success &= AssertEmptiness(logs, Didomi.GetInstance().GetEnabledVendors(), hasEnabledElements, "enabledVendors");
+
+                success &= AssertEmptiness(logs, Didomi.GetInstance().GetDisabledPurposes(), hasDisabledElements, "disabledPurposes");
+                success &= AssertEmptiness(logs, Didomi.GetInstance().GetDisabledVendors(), hasDisabledElements, "disabledVendors");
+            }
+
+            if (success)
             {
                 TestSucceeded(logs);
-            }
-            else
-            {
-                TestFailed(logs);
             }
         }
 
@@ -282,47 +289,7 @@ namespace IO.Didomi.SDK.Tests
             Didomi.GetInstance().Reset();
             Didomi.GetInstance().SetUserAgreeToAll();
 
-            var disabledPurposeIds = Didomi.GetInstance().GetDisabledPurposeIds();
-            var disabledPurposes = Didomi.GetInstance().GetDisabledPurposes();
-            var disabledVendorIds = Didomi.GetInstance().GetDisabledVendorIds();
-            var disabledVendors = Didomi.GetInstance().GetDisabledVendors();
-
-            var enabledPurposeIds = Didomi.GetInstance().GetEnabledPurposeIds();
-            var enabledPurposes = Didomi.GetInstance().GetEnabledPurposes();
-            var enabledVendorIds = Didomi.GetInstance().GetEnabledVendorIds();
-            var enabledVendors = Didomi.GetInstance().GetEnabledVendors();
-
-            var requiredPurposeIds = Didomi.GetInstance().GetRequiredPurposeIds();
-            var requiredPurposes = Didomi.GetInstance().GetRequiredPurposes();
-            var requiredVendorIds = Didomi.GetInstance().GetRequiredVendorIds();
-            var requiredVendors = Didomi.GetInstance().GetRequiredVendors();
-
-            var disabledSum =
-                disabledPurposeIds.Count()
-                + disabledPurposes.Count()
-                + disabledVendorIds.Count()
-                + disabledVendors.Count();
-
-            var enabledSum =
-                enabledPurposeIds.Count()
-                + enabledPurposes.Count()
-                + enabledVendorIds.Count()
-                + enabledVendors.Count();
-
-            var requiredSum =
-               requiredPurposeIds.Count()
-               + requiredPurposes.Count()
-               + requiredVendorIds.Count()
-               + requiredVendors.Count();
-
-            if (disabledSum == 0 && enabledSum > 0 && requiredSum > 0)
-            {
-                TestSucceeded(logs);
-            }
-            else
-            {
-                TestFailed(logs);
-            }
+            AssertPurposesAndVendorsCount(logs, true, true, false);
         }
 
         private void TestPurposesAndVendorsCountAfterUserDisagreeToAll(StringBuilder logs)
@@ -332,47 +299,7 @@ namespace IO.Didomi.SDK.Tests
             Didomi.GetInstance().Reset();
             Didomi.GetInstance().SetUserDisagreeToAll();
 
-            var disabledPurposeIds = Didomi.GetInstance().GetDisabledPurposeIds();
-            var disabledPurposes = Didomi.GetInstance().GetDisabledPurposes();
-            var disabledVendorIds = Didomi.GetInstance().GetDisabledVendorIds();
-            var disabledVendors = Didomi.GetInstance().GetDisabledVendors();
-
-            var enabledPurposeIds = Didomi.GetInstance().GetEnabledPurposeIds();
-            var enabledPurposes = Didomi.GetInstance().GetEnabledPurposes();
-            var enabledVendorIds = Didomi.GetInstance().GetEnabledVendorIds();
-            var enabledVendors = Didomi.GetInstance().GetEnabledVendors();
-
-            var requiredPurposeIds = Didomi.GetInstance().GetRequiredPurposeIds();
-            var requiredPurposes = Didomi.GetInstance().GetRequiredPurposes();
-            var requiredVendorIds = Didomi.GetInstance().GetRequiredVendorIds();
-            var requiredVendors = Didomi.GetInstance().GetRequiredVendors();
-
-            var disabledSum =
-                disabledPurposeIds.Count()
-                + disabledPurposes.Count()
-                + disabledVendorIds.Count()
-                + disabledVendors.Count();
-
-            var enabledSum =
-                enabledPurposeIds.Count()
-                + enabledPurposes.Count()
-                + enabledVendorIds.Count()
-                + enabledVendors.Count();
-
-            var requiredSum =
-               requiredPurposeIds.Count()
-               + requiredPurposes.Count()
-               + requiredVendorIds.Count()
-               + requiredVendors.Count();
-
-            if (disabledSum > 0 && enabledSum == 0 && requiredSum > 0)
-            {
-                TestSucceeded(logs);
-            }
-            else
-            {
-                TestFailed(logs);
-            }
+            AssertPurposesAndVendorsCount(logs, true, false, true);
         }
 
         private string GetFirstRequiredPurposeId()
@@ -395,23 +322,30 @@ namespace IO.Didomi.SDK.Tests
             var purposeId = GetFirstRequiredPurposeId();
 
 
-
             if (!string.IsNullOrEmpty(purposeId))
             {
-                var purpose = Didomi.GetInstance().GetPurpose(purposeId);
-
-                if (purpose?.GetId() == purposeId)
+                if (Application.platform == RuntimePlatform.Android)
                 {
-                    TestSucceeded(logs);
+                    // Purpose model not available on iOS
+                    var purpose = Didomi.GetInstance().GetPurpose(purposeId);
+
+                    if (purpose?.GetId() == purposeId)
+                    {
+                        TestSucceeded(logs);
+                    }
+                    else
+                    {
+                        TestFailed(logs, description: "Purpose not found.");
+                    }
                 }
                 else
                 {
-                    TestFailed(logs, text: "Failed. Purpose not found.");
+                    TestSucceeded(logs);
                 }
             }
             else
             {
-                TestFailed(logs, text: "Failed. Test cannot run. No purpose id found to test");
+                TestFailed(logs, description: "Test cannot run. No purpose id found to test");
             }
         }
 
@@ -432,24 +366,31 @@ namespace IO.Didomi.SDK.Tests
         {
             AddLogLine(logs, "TestGetVendor ...");
 
-
             var vendorId = GetFirstRequiredVendorId();
 
             if (!string.IsNullOrEmpty(vendorId))
             {
-                var vendor = Didomi.GetInstance().GetVendor(vendorId);
-                if (vendor?.GetId() == vendorId)
+                if (Application.platform == RuntimePlatform.Android)
                 {
-                    TestSucceeded(logs);
+                    // Vendor model not available on iOS
+                    var vendor = Didomi.GetInstance().GetVendor(vendorId);
+                    if (vendor?.GetId() == vendorId)
+                    {
+                        TestSucceeded(logs);
+                    }
+                    else
+                    {
+                        TestFailed(logs, description: "Vendor not found.");
+                    }
                 }
                 else
                 {
-                    TestFailed(logs, text: "Failed. Vendor not found.");
+                    TestSucceeded(logs);
                 }
             }
             else
             {
-                TestFailed(logs, text: "Failed. Test cannot run. No vendor id found to test");
+                TestFailed(logs, description: "Test cannot run. No vendor id found to test");
             }
         }
 
@@ -488,12 +429,12 @@ namespace IO.Didomi.SDK.Tests
                 }
                 else
                 {
-                    TestFailed(logs, text: "Failed. Purpose not found to set consent.");
+                    TestFailed(logs, description: "Purpose not found to set consent.");
                 }
             }
             else
             {
-                TestFailed(logs, text: "Failed. Test cannot run. No purpose id found to test consent");
+                TestFailed(logs, description: "Test cannot run. No purpose id found to test consent");
             }
         }
 
@@ -516,12 +457,12 @@ namespace IO.Didomi.SDK.Tests
                 }
                 else
                 {
-                    TestFailed(logs, text: "Failed. Vendor not found to set consent.");
+                    TestFailed(logs, description: "Vendor not found to set consent.");
                 }
             }
             else
             {
-                TestFailed(logs, text: "Failed. Test cannot run. No vendor id found to test consent");
+                TestFailed(logs, description: "Test cannot run. No vendor id found to test consent");
             }
         }
 
@@ -544,12 +485,12 @@ namespace IO.Didomi.SDK.Tests
                 }
                 else
                 {
-                    TestFailed(logs, text: "Failed. Vendor not found to set consent for required purposes.");
+                    TestFailed(logs, description: "Vendor not found to set consent for required purposes.");
                 }
             }
             else
             {
-                TestFailed(logs, text: "Failed. Test cannot run. No vendor id found to test consent for required purposes");
+                TestFailed(logs, description: "Test cannot run. No vendor id found to test consent for required purposes");
             }
         }
 
@@ -789,7 +730,7 @@ namespace IO.Didomi.SDK.Tests
             }
         }
 
-        private void TestSetupUI(StringBuilder logs)
+        private IEnumerator TestSetupUI(StringBuilder logs)
         {
             AddLogLine(logs, "SetupUI processing...");
 
@@ -805,6 +746,7 @@ namespace IO.Didomi.SDK.Tests
 
             Didomi.GetInstance().SetupUI();
 
+            yield return new WaitForSeconds(1);
             if (!Didomi.GetInstance().IsNoticeVisible())
             {
                 TestFailed(logs, "Notice must be visible after SetupUI call");
@@ -824,14 +766,13 @@ namespace IO.Didomi.SDK.Tests
             }
         }
 
-        private void TestShowNotice(StringBuilder logs)
+        private IEnumerator TestShowNotice(StringBuilder logs)
         {
             AddLogLine(logs, "ShowNotice processing...");
 
             Didomi.GetInstance().HideNotice();
             Didomi.GetInstance().Reset();
             var success = true;
-
 
             if (Didomi.GetInstance().IsNoticeVisible())
             {
@@ -841,6 +782,7 @@ namespace IO.Didomi.SDK.Tests
 
             Didomi.GetInstance().ShowNotice();
 
+            yield return new WaitForSeconds(1);
             if (!Didomi.GetInstance().IsNoticeVisible())
             {
                 TestFailed(logs, "Notice must be visible after ShowNotice call");
@@ -860,7 +802,7 @@ namespace IO.Didomi.SDK.Tests
             }
         }
 
-        private void TestShowPreferences(StringBuilder logs)
+        private IEnumerator TestShowPreferences(StringBuilder logs)
         {
             AddLogLine(logs, "ShowPreferences processing...");
 
@@ -877,6 +819,7 @@ namespace IO.Didomi.SDK.Tests
 
             Didomi.GetInstance().ShowPreferences();
 
+            yield return new WaitForSeconds(1);
             if (!Didomi.GetInstance().IsPreferencesVisible())
             {
                 TestFailed(logs, "Preferences must be visible after ShowPreferences call");
