@@ -60,8 +60,8 @@ public class DemoGUI : MonoBehaviour
         labelResult = GameObject.Find("Result");
         panel= GameObject.Find("Panel");
         SetResponsiveLayout();
-        //InitializeDidomi();
-        //Didomi.GetInstance().SetupUI();
+        InitializeDidomi();
+        Didomi.GetInstance().SetupUI();
     }
 
     void Update()
