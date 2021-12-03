@@ -93,7 +93,6 @@ namespace IO.Didomi.SDK.Android
                GetMethodStringValue(obj, "getIabId"));
 
             return vendor;
-
         }
 
         public static ISet<string> ConvertToSetString(AndroidJavaObject obj)
@@ -115,7 +114,7 @@ namespace IO.Didomi.SDK.Android
             return null;
         }
 
-        public static AndroidJavaObject ConvertFromHasSetStringToSetAndroidJavaObject(ISet<string> objSet)
+        public static AndroidJavaObject ConvertFromHashSetStringToSetAndroidJavaObject(ISet<string> objSet)
         {
             if (objSet != null)
             {
@@ -203,6 +202,53 @@ namespace IO.Didomi.SDK.Android
             }
 
             return null;
+        }
+
+        public static UserStatus ConvertToUserStatus(AndroidJavaObject obj)
+        {
+            var userStatus = new UserStatus(
+                purposes: ConvertToUserStatusPurposes(obj.Call<AndroidJavaObject>("getPurposes")),
+                vendors: ConvertToUserStatusVendors(obj.Call<AndroidJavaObject>("getVendors")),
+                userId: obj.Call<string>("getUserId"),
+                created: obj.Call<string>("getCreated"),
+                updated: obj.Call<string>("getUpdated"),
+                consentString: obj.Call<string>("getConsentString"),
+                additionalConsent: obj.Call<string>("getAdditionalConsent")
+            );
+
+            return userStatus;
+        }
+
+        public static UserStatus.Purposes ConvertToUserStatusPurposes(AndroidJavaObject obj)
+        {
+            var purposes = new UserStatus.Purposes(
+                global: ConvertToUserStatusIds(obj.Call<AndroidJavaObject>("getGlobal")),
+                consent: ConvertToUserStatusIds(obj.Call<AndroidJavaObject>("getConsent")),
+                legitimateInterest: ConvertToUserStatusIds(obj.Call<AndroidJavaObject>("getLegitimateInterest")),
+                essential: ConvertToSetString(obj.Call<AndroidJavaObject>("getEssential"))
+            );
+            return purposes;
+        }
+
+        public static UserStatus.Vendors ConvertToUserStatusVendors(AndroidJavaObject obj)
+        {
+            var vendors = new UserStatus.Vendors(
+                global: ConvertToUserStatusIds(obj.Call<AndroidJavaObject>("getGlobal")),
+                globalConsent: ConvertToUserStatusIds(obj.Call<AndroidJavaObject>("getGlobalConsent")),
+                globalLegitimateInterest: ConvertToUserStatusIds(obj.Call<AndroidJavaObject>("getGlobalLegitimateInterest")),
+                consent: ConvertToUserStatusIds(obj.Call<AndroidJavaObject>("getConsent")),
+                legitimateInterest: ConvertToUserStatusIds(obj.Call<AndroidJavaObject>("getLegitimateInterest"))
+            );
+            return vendors;
+        }
+
+        public static UserStatus.Ids ConvertToUserStatusIds(AndroidJavaObject obj)
+        {
+            var ids = new UserStatus.Ids(
+                enabled: ConvertToSetString(obj.Call<AndroidJavaObject>("getEnabled")),
+                disabled: ConvertToSetString(obj.Call<AndroidJavaObject>("getDisabled"))
+            );
+            return ids;
         }
     }
 }

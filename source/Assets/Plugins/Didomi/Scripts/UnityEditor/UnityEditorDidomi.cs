@@ -138,6 +138,11 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
+        public UserStatus GetUserStatus()
+        {
+            throw new NotImplementedException();
+        }
+
         public Vendor GetVendor(string vendorId)
         {
             throw new NotImplementedException();

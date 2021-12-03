@@ -3,7 +3,8 @@
         "privacyPolicyURL": "http://www.privacy.policy",
         "vendors": {
             "iab": {
-                "all": true
+                "all": true,
+                "version":  2
             },
             "didomi": [
                 "google",

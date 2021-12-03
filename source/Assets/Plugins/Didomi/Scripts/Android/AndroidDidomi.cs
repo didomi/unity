@@ -177,6 +177,13 @@ namespace IO.Didomi.SDK.Android
             return CallReturningBoolMethod("getUserLegitimateInterestStatusForVendorAndRequiredPurposes", vendorId);
         }
 
+        public UserStatus GetUserStatus()
+        {
+            var userStatusObject = CallReturningJavaObjectMethod("getUserStatus");
+
+            return AndroidObjectMapper.ConvertToUserStatus(userStatusObject);
+        }
+
         public Vendor GetVendor(string vendorId)
         {
             var obj = CallReturningJavaObjectMethod("getVendor", vendorId);
@@ -311,14 +318,14 @@ namespace IO.Didomi.SDK.Android
         {
             return CallReturningBoolMethod(
                 "setUserConsentStatus",
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledPurposeIds),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledPurposeIds),
-				AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(new HashSet<string>()),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(new HashSet<string>()),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledVendorIds),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledVendorIds),
-				AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(new HashSet<string>()),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(new HashSet<string>()));
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(enabledPurposeIds),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(disabledPurposeIds),
+				AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(new HashSet<string>()),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(new HashSet<string>()),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(enabledVendorIds),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(disabledVendorIds),
+				AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(new HashSet<string>()),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(new HashSet<string>()));
         }
    
         public bool SetUserStatus(
@@ -333,14 +340,14 @@ namespace IO.Didomi.SDK.Android
         {
             return CallReturningBoolMethod(
                 "setUserStatus",
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledConsentPurposeIds),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledConsentPurposeIds),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledLIPurposeIds),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledLIPurposeIds),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledConsentVendorIds),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledConsentVendorIds),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(enabledLIVendorIds),
-                AndroidObjectMapper.ConvertFromHasSetStringToSetAndroidJavaObject(disabledLIVendorIds));
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(enabledConsentPurposeIds),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(disabledConsentPurposeIds),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(enabledLIPurposeIds),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(disabledLIPurposeIds),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(enabledConsentVendorIds),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(disabledConsentVendorIds),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(enabledLIVendorIds),
+                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(disabledLIVendorIds));
         }
 
         public bool SetUserStatus(

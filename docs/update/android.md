@@ -7,7 +7,8 @@ To update the native Didomi Android SDK, two steps need to be followed:
 
 ## Library
 
-To update the native `aar` library embedded in the plugin, copy the `android-didomi.aar` file from the published Didomi Android SDK into [`Plugins/Didomi/Android/libs`](../../source/Plugins/Didomi/Android/libs).
+To update the native `aar` library embedded in the plugin, copy the `aar` file from the published Didomi Android SDK into [`Plugins/Didomi/Android/libs`](../../source/Plugins/Didomi/Android/libs).
+The Android SDK release can be found on [`mavenCentral`](https://search.maven.org/search?q=didomi).
 
 ## Functions
 
