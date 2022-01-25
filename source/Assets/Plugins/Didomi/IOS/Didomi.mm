@@ -429,6 +429,18 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     };
 
+    eventListener.onHidePreferences = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
+    eventListener.onShowPreferences = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+
 	eventListener.onNoticeClickAgree = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);

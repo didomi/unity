@@ -61,7 +61,23 @@ namespace IO.Didomi.SDK.Android
             _eventListener.OnShowNotice(showNoticeEvent);
             // The notice is being shown
         }
-       
+
+        public void hidePreferences(AndroidJavaObject @event)
+        {
+            var hidePreferencesEvent = ConvertToHidePreferencesEvent(@event);
+
+            _eventListener.OnHidePreferences(hidePreferencesEvent);
+            // The preferences screen is being hidden
+        }
+
+        public void showPreferences(AndroidJavaObject @event)
+        {
+            var showPreferencesEvent = ConvertToShowPreferencesEvent(@event);
+
+            _eventListener.OnShowPreferences(showPreferencesEvent);
+            // The preferences screen is being shown
+        }
+
         public void noticeClickAgree(AndroidJavaObject @event)
         {
             var noticeClickAgreeEvent = ConvertToNoticeClickAgreeEvent(@event);
@@ -209,6 +225,16 @@ namespace IO.Didomi.SDK.Android
         private static ShowNoticeEvent ConvertToShowNoticeEvent(AndroidJavaObject @event)
         {
             return new ShowNoticeEvent();
+        }
+
+        private static HidePreferencesEvent ConvertToHidePreferencesEvent(AndroidJavaObject @event)
+        {
+            return new HidePreferencesEvent();
+        }
+
+        private static ShowPreferencesEvent ConvertToShowPreferencesEvent(AndroidJavaObject @event)
+        {
+            return new ShowPreferencesEvent();
         }
 
         private static NoticeClickAgreeEvent ConvertToNoticeClickAgreeEvent(AndroidJavaObject @event)

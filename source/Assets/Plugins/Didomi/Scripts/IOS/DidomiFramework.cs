@@ -495,6 +495,12 @@ namespace IO.Didomi.SDK.IOS
                 case DDMEventType.DDMEventTypePreferencesClickVendorSaveChoices:
                     eventListenerInner.OnPreferencesClickVendorSaveChoices(new PreferencesClickVendorSaveChoicesEvent());
                     break;
+                case DDMEventType.DDMEventTypeHidePreferences:
+                    eventListenerInner.OnHidePreferences(new HidePreferencesEvent());
+                    break;
+                case DDMEventType.DDMEventTypeShowPreferences:
+                    eventListenerInner.OnShowPreferences(new ShowPreferencesEvent());
+                    break;
                 default:
                     break;
             }
