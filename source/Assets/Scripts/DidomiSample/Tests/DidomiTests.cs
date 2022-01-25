@@ -17,11 +17,20 @@ namespace IO.Didomi.SDK.Tests
         private const string Fail = "! Failed !";
         private string _logs = string.Empty;
 
+        private MonoBehaviour mono;
         private bool testsComplete = false;
         private bool testsFailure = false;
 
-        public IEnumerator RunAll(bool remoteNotice = false)
+        // Test events
+        private bool noticeDisplayed = false;
+        private bool noticeHidden = false;
+        private bool preferencesDisplayed = false;
+        private bool preferencesHidden = false;
+        private bool consentChanged = false;
+
+        public IEnumerator RunAll(MonoBehaviour mono, bool remoteNotice = false)
         {
+            this.mono = mono;
             _logs = string.Empty;
             try
             {
@@ -53,8 +62,7 @@ namespace IO.Didomi.SDK.Tests
 
                 didomi.OnReady(
                     () => {
-                        _logs += RunTests(remoteNotice);
-                        testsComplete = true;
+                        mono.StartCoroutine(RunTests(remoteNotice));
                     }
                     );
                 didomi.OnError(
@@ -93,7 +101,7 @@ namespace IO.Didomi.SDK.Tests
             return testsFailure;
         }
 
-        private string RunTests(bool remoteNotice)
+        private IEnumerator RunTests(bool remoteNotice)
         {
             var logsBuilder = new StringBuilder(Environment.NewLine);
 
@@ -138,14 +146,6 @@ namespace IO.Didomi.SDK.Tests
                 TestUpdateSelectedLanguage(logsBuilder);
 
                 TestGetUserStatus(logsBuilder, remoteNotice);
-
-                TestSetupUI(logsBuilder);
-
-                TestShowNotice(logsBuilder);
-
-                TestShowPreferences(logsBuilder);
-
-                AddLogLine(logsBuilder, "Tests complete.");
             }
             catch (Exception ex)
             {
@@ -153,7 +153,18 @@ namespace IO.Didomi.SDK.Tests
                 TestFailed(logsBuilder, description: $"Exception : {ex.StackTrace }");
             }
 
-            return logsBuilder.ToString();
+            yield return TestSetupUI(logsBuilder);
+
+            yield return TestShowNotice(logsBuilder);
+
+            yield return TestShowPreferences(logsBuilder);
+
+            yield return TestEventListener(logsBuilder);
+
+            AddLogLine(logsBuilder, "Tests complete.");
+
+            _logs += logsBuilder.ToString();
+            testsComplete = true;
         }
 
         private void AddLogLine(StringBuilder logs, string text)
@@ -169,7 +180,7 @@ namespace IO.Didomi.SDK.Tests
 
         private void TestFailed(StringBuilder logs, string description = null)
         {
-            string message = description != null ? $"{Fail} - ${description}" : Fail;
+            string message = description != null ? $"{Fail} - {description}" : Fail;
             AddLogLine(logs, message);
             testsFailure = true;
         }
@@ -232,6 +243,8 @@ namespace IO.Didomi.SDK.Tests
             eventListener.PreferencesClickVendorSaveChoices += EventListener_PreferencesClickVendorSaveChoices;
             eventListener.PreferencesClickViewVendors += EventListener_PreferencesClickViewVendors;
             eventListener.ShowNotice += EventListener_ShowNotice;
+            eventListener.HidePreferences += EventListener_HidePreferences;
+            eventListener.ShowPreferences += EventListener_ShowPreferences;
 
             Didomi.GetInstance().AddEventListener(eventListener);
         }
@@ -732,7 +745,7 @@ namespace IO.Didomi.SDK.Tests
 
         private IEnumerator TestSetupUI(StringBuilder logs)
         {
-            AddLogLine(logs, "SetupUI processing...");
+            AddLogLine(logs, "TestSetupUI processing...");
 
             Didomi.GetInstance().HideNotice();
             Didomi.GetInstance().Reset();
@@ -768,7 +781,7 @@ namespace IO.Didomi.SDK.Tests
 
         private IEnumerator TestShowNotice(StringBuilder logs)
         {
-            AddLogLine(logs, "ShowNotice processing...");
+            AddLogLine(logs, "TestShowNotice processing...");
 
             Didomi.GetInstance().HideNotice();
             Didomi.GetInstance().Reset();
@@ -804,7 +817,7 @@ namespace IO.Didomi.SDK.Tests
 
         private IEnumerator TestShowPreferences(StringBuilder logs)
         {
-            AddLogLine(logs, "ShowPreferences processing...");
+            AddLogLine(logs, "TestShowPreferences processing...");
 
             Didomi.GetInstance().HidePreferences();
             Didomi.GetInstance().Reset();
@@ -839,14 +852,95 @@ namespace IO.Didomi.SDK.Tests
             }
         }
 
+        private IEnumerator TestEventListener(StringBuilder logs)
+        {
+            AddLogLine(logs, "TestEventsListener processing...");
+
+            Didomi.GetInstance().Reset();
+
+            noticeDisplayed = false;
+            noticeHidden = false;
+            preferencesDisplayed = false;
+            preferencesHidden = false;
+            consentChanged = false;
+
+            Didomi.GetInstance().ShowNotice();
+            yield return new WaitForSeconds(1);
+            var success = CheckEvents(logs, true, false, false, false, false);
+
+            Didomi.GetInstance().HideNotice();
+            yield return new WaitForSeconds(1);
+            success &= CheckEvents(logs, true, true, false, false, false);
+
+            Didomi.GetInstance().ShowPreferences();
+            yield return new WaitForSeconds(1);
+            success &= CheckEvents(logs, true, true, true, false, false);
+
+            Didomi.GetInstance().HidePreferences();
+            yield return new WaitForSeconds(1);
+            success &= CheckEvents(logs, true, true, true, true, false);
+
+            Didomi.GetInstance().SetUserAgreeToAll();
+            success &= CheckEvents(logs, true, true, true, true, true);
+
+            if (success)
+            {
+                TestSucceeded(logs);
+            }
+        }
+
+        private bool CheckEvents(StringBuilder logs, bool expectNoticeDisplayed, bool expectNoticeHidden, bool expectPreferencesDisplayed, bool expectPreferencesHidden, bool expectConsentChanged)
+        {
+            bool success = true;
+
+            if(noticeDisplayed != expectNoticeDisplayed)
+            {
+                TestFailed(logs, "Wrong value for noticeDisplayed event, expected " + expectNoticeDisplayed);
+                success = false;
+            }
+            if (noticeHidden != expectNoticeHidden)
+            {
+                TestFailed(logs, "Wrong value for noticeHidden event, expected " + expectNoticeHidden);
+                success = false;
+            }
+            if (preferencesDisplayed != expectPreferencesDisplayed)
+            {
+                TestFailed(logs, "Wrong value for preferencesDisplayed event, expected " + expectPreferencesDisplayed);
+                success = false;
+            }
+            if (preferencesHidden != expectPreferencesHidden)
+            {
+                TestFailed(logs, "Wrong value for preferencesHidden event, expected " + expectPreferencesHidden);
+                success = false;
+            }
+            if (consentChanged != expectConsentChanged)
+            {
+                TestFailed(logs, "Wrong value for consentChanged event, expected " + expectConsentChanged);
+                success = false;
+            }
+
+            return success;
+        }
+
+
         private void EventListener_Ready(object sender, ReadyEvent e)
         {
-
+            
         }
 
         private void EventListener_ShowNotice(object sender, ShowNoticeEvent e)
         {
+            noticeDisplayed = true;
+        }
 
+        private void EventListener_HidePreferences(object sender, HidePreferencesEvent e)
+        {
+            preferencesHidden = true;
+        }
+
+        private void EventListener_ShowPreferences(object sender, ShowPreferencesEvent e)
+        {
+            preferencesDisplayed = true;
         }
 
         private void EventListener_PreferencesClickViewVendors(object sender, PreferencesClickViewVendorsEvent e)
@@ -906,12 +1000,12 @@ namespace IO.Didomi.SDK.Tests
 
         private void EventListener_HideNotice(object sender, HideNoticeEvent e)
         {
-
+            noticeHidden = true;
         }
 
         private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)
         {
-
+            consentChanged = true;
         }
     }
 }

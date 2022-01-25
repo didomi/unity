@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -835,7 +834,7 @@ public class DemoGUI : MonoBehaviour
     {
         message = "Tests started...";
         var tests = new DidomiTests();
-        yield return tests.RunAll(remoteNotice);
+        yield return tests.RunAll(this, remoteNotice);
         if (tests.DidTestsFail())
         {
             message = "Tests: Failed !";
