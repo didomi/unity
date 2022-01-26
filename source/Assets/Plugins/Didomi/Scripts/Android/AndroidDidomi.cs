@@ -19,7 +19,7 @@ namespace IO.Didomi.SDK.Android
 		
 		public AndroidDidomi()
         {
-            OnReady(() => CallVoidMethod("setUserAgent", Package.GetInstance().agentName, Package.GetInstance().version));
+            CallVoidMethod("setUserAgent", Package.GetInstance().agentName, Package.GetInstance().version);
         }
 
         public void AddEventListener(DidomiEventListener eventListener)
