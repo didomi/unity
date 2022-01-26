@@ -161,7 +161,7 @@ namespace IO.Didomi.SDK.Android
                 while (iteratorJavaObject.Call<bool>("hasNext"))
                 {
                     var key = iteratorJavaObject.Call<string>("next");
-                    var val = obj.Call<string>("get");
+                    var val = obj.Call<string>("get", key);
                     retval.Add(key, val);
                 }
 
