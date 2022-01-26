@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -835,7 +834,7 @@ public class DemoGUI : MonoBehaviour
     {
         message = "Tests started...";
         var tests = new DidomiTests();
-        yield return tests.RunAll(remoteNotice);
+        yield return tests.RunAll(this, remoteNotice);
         if (tests.DidTestsFail())
         {
             message = "Tests: Failed !";
@@ -897,6 +896,9 @@ public class DemoGUI : MonoBehaviour
         eventListener.PreferencesClickVendorSaveChoices += EventListener_PreferencesClickVendorSaveChoices;
         eventListener.PreferencesClickViewVendors += EventListener_PreferencesClickViewVendors;
         eventListener.ShowNotice += EventListener_ShowNotice;
+        eventListener.HidePreferences += EventListener_HidePreferences;
+        eventListener.ShowPreferences += EventListener_ShowPreferences;
+
 
         Didomi.GetInstance().AddEventListener(eventListener);
     }
@@ -974,6 +976,16 @@ public class DemoGUI : MonoBehaviour
     private void EventListener_HideNotice(object sender, HideNoticeEvent e)
     {
         message += "EventListener_HideNoticeEvent Fired.";
+    }
+
+    private void EventListener_ShowPreferences(object sender, ShowPreferencesEvent e)
+    {
+        message += "EventListener_ShowPreferencesEvent Fired.";
+    }
+
+    private void EventListener_HidePreferences(object sender, HidePreferencesEvent e)
+    {
+        message += "EventListener_HidePreferencesEvent Fired.";
     }
 
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)

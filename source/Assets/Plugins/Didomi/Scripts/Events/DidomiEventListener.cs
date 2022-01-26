@@ -14,6 +14,8 @@ namespace IO.Didomi.SDK.Events
         public event EventHandler<HideNoticeEvent> HideNotice;
         public event EventHandler<ReadyEvent> Ready;
         public event EventHandler<ShowNoticeEvent> ShowNotice;
+        public event EventHandler<HidePreferencesEvent> HidePreferences;
+        public event EventHandler<ShowPreferencesEvent> ShowPreferences;
         public event EventHandler<NoticeClickAgreeEvent> NoticeClickAgree;
         public event EventHandler<NoticeClickDisagreeEvent> NoticeClickDisagree;
         public event EventHandler<NoticeClickMoreInfoEvent> NoticeClickMoreInfo;
@@ -53,13 +55,23 @@ namespace IO.Didomi.SDK.Events
             // The Didomi is ready
         }
 
-
         public void OnShowNotice(ShowNoticeEvent @event)
         {
             ShowNotice?.Invoke(this, @event);
             // The notice is being shown
         }
 
+        public void OnHidePreferences(HidePreferencesEvent @event)
+        {
+            HidePreferences?.Invoke(this, @event);
+            // The preferences screen is being shown
+        }
+
+        public void OnShowPreferences(ShowPreferencesEvent @event)
+        {
+            ShowPreferences?.Invoke(this, @event);
+            // The preferences screen is being shown
+        }
 
         public void OnNoticeClickAgree(NoticeClickAgreeEvent @event)
         {

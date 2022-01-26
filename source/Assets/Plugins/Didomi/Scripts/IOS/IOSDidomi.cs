@@ -206,7 +206,7 @@ namespace IO.Didomi.SDK.IOS
 
         public bool IsNoticeVisible()
         {
-            return DidomiFramework.IsPreferencesVisible();
+            return DidomiFramework.IsNoticeVisible();
         }
 
         public bool IsPreferencesVisible()

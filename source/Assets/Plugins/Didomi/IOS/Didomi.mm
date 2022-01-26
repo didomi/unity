@@ -188,6 +188,11 @@ bool isPreferencesVisible()
 	return [[Didomi shared] isPreferencesVisible];
 }
 
+bool isNoticeVisible()
+{
+    return [[Didomi shared] isNoticeVisible];
+}
+
 void showPreferences()
 {
 	[[Didomi shared] showPreferencesWithController:(nil) view:(ViewsPurposes)];
@@ -424,6 +429,18 @@ void addEventListener( void (*event_listener_handler) (int, char *))
     };
 
 	eventListener.onShowNotice = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+
+    eventListener.onHidePreferences = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
+    eventListener.onShowPreferences = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
