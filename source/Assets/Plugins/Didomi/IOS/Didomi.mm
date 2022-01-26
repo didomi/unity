@@ -188,6 +188,11 @@ bool isPreferencesVisible()
 	return [[Didomi shared] isPreferencesVisible];
 }
 
+bool isNoticeVisible()
+{
+    return [[Didomi shared] isNoticeVisible];
+}
+
 void showPreferences()
 {
 	[[Didomi shared] showPreferencesWithController:(nil) view:(ViewsPurposes)];

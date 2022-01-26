@@ -258,6 +258,20 @@ namespace IO.Didomi.SDK.IOS
 
         #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern bool isNoticeVisible();
+        #endif
+
+        public static bool IsNoticeVisible()
+        {
+            #if UNITY_IOS && !UNITY_EDITOR
+            return isNoticeVisible();
+            #else
+            return false;
+            #endif
+        }
+
+        #if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern bool isPreferencesVisible();
         #endif
 

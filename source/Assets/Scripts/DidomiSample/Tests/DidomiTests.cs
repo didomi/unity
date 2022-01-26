@@ -107,6 +107,9 @@ namespace IO.Didomi.SDK.Tests
 
             AddLogLine(logsBuilder, "Starting tests -");
 
+            // Security wait before beginning tests
+            yield return new WaitForSeconds(1);
+
             try
             {
                 testsFailure = false;
@@ -185,11 +188,18 @@ namespace IO.Didomi.SDK.Tests
             testsFailure = true;
         }
 
-        private bool AssertEmptiness<T>(StringBuilder logs, ISet<T> element, bool expectEmpty, string failureMessage)
+        private bool AssertEmptiness<T>(StringBuilder logs, ISet<T> element, bool expectContent, string checkedElement)
         {
             if (element != null)
             {
-                return (element.Count == 0) == expectEmpty;
+                if ((element.Count > 0) == expectContent)
+                {
+                    return true;
+                }
+                TestFailed(logs, description: $"{checkedElement} count = {element.Count}, expected content? {expectContent}");
+            } else
+            {
+                TestFailed(logs, description: $"{checkedElement} is null");
             }
             return false;
         }
@@ -434,7 +444,9 @@ namespace IO.Didomi.SDK.Tests
 
             if (!string.IsNullOrEmpty(purposeId))
             {
+#pragma warning disable CS0618 // Disable obsolete warning in tests
                 var result = Didomi.GetInstance().GetUserConsentStatusForPurpose(purposeId);
+#pragma warning restore CS0618
 
                 if (result)
                 {
@@ -462,7 +474,9 @@ namespace IO.Didomi.SDK.Tests
 
             if (!string.IsNullOrEmpty(vendorId))
             {
+#pragma warning disable CS0618 // Disable obsolete warning in tests
                 var result = Didomi.GetInstance().GetUserConsentStatusForVendor(vendorId);
+#pragma warning restore CS0618
 
                 if (result)
                 {
@@ -490,7 +504,9 @@ namespace IO.Didomi.SDK.Tests
 
             if (!string.IsNullOrEmpty(vendorId))
             {
+#pragma warning disable CS0618 // Disable obsolete warning in tests
                 var result = Didomi.GetInstance().GetUserConsentStatusForVendorAndRequiredPurposes(vendorId);
+#pragma warning restore CS0618
 
                 if (result)
                 {
@@ -529,7 +545,7 @@ namespace IO.Didomi.SDK.Tests
 
             var enabledPurposeIdSet = Didomi.GetInstance().GetEnabledPurposeIds();
 
-            if (changed && enabledPurposeIds.Count > 0)
+            if (changed && enabledPurposeIdSet.Count > 0)
             {
                 TestSucceeded(logs);
             }
@@ -751,6 +767,7 @@ namespace IO.Didomi.SDK.Tests
             Didomi.GetInstance().Reset();
             var success = true;
 
+            yield return new WaitForSeconds(1);
             if (Didomi.GetInstance().IsNoticeVisible())
             {
                 TestFailed(logs, "Notice must be invisible after reset call.");
@@ -767,6 +784,7 @@ namespace IO.Didomi.SDK.Tests
             }
 
             Didomi.GetInstance().HideNotice();
+            yield return new WaitForSeconds(1);
             if (Didomi.GetInstance().IsNoticeVisible())
             {
                 TestFailed(logs, "Notice must be invisible after HideNotice call");
@@ -787,6 +805,7 @@ namespace IO.Didomi.SDK.Tests
             Didomi.GetInstance().Reset();
             var success = true;
 
+            yield return new WaitForSeconds(1);
             if (Didomi.GetInstance().IsNoticeVisible())
             {
                 TestFailed(logs, "Notice must be invisible after reset call.");
@@ -803,6 +822,8 @@ namespace IO.Didomi.SDK.Tests
             }
 
             Didomi.GetInstance().HideNotice();
+
+            yield return new WaitForSeconds(1);
             if (Didomi.GetInstance().IsNoticeVisible())
             {
                 TestFailed(logs, "Notice must be invisible after HideNotice call");
@@ -824,6 +845,7 @@ namespace IO.Didomi.SDK.Tests
 
             var success = true;
 
+            yield return new WaitForSeconds(1);
             if (Didomi.GetInstance().IsPreferencesVisible())
             {
                 TestFailed(logs, "Preferences must be invisible after reset call.");
@@ -840,6 +862,8 @@ namespace IO.Didomi.SDK.Tests
             }
 
             Didomi.GetInstance().HidePreferences();
+
+            yield return new WaitForSeconds(1);
             if (Didomi.GetInstance().IsPreferencesVisible())
             {
                 TestFailed(logs, "Preferences must be invisible after HidePreferences call");
