@@ -7,7 +7,8 @@ To update the native Didomi iOS SDK, two steps need to be followed:
 
 ## Library
 
-To update the native iOS library embedded in the plugin, copy the `Didomi.framework` folders from the published Didomi iOS SDK `Didomi.xcframework/ios-arm64_armv7` and `Didomi.xcframework/ios-arm64_i386_x86_64-simulator` folders into [`Plugins/Didomi/IOS/Didomi.xcframework`](../../source/Plugins/Didomi/IOS). Make sure the `.meta` files of `Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7` and `Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_i386_x86_64-simulator` are not modified (discard these files using git if necessary).
+To update the native iOS library embedded in the plugin, copy the `Didomi.framework` folders from the published Didomi iOS SDK `Didomi.xcframework/ios-arm64_armv7` and `Didomi.xcframework/ios-arm64_i386_x86_64-simulator` folders into [`Plugins/Didomi/IOS/Didomi.xcframework`](../../source/Plugins/Didomi/IOS), removing `BCSymbolMaps` and `dSYMs` folders if they are present. 
+Make sure the `.meta` files of `Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7` and `Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_i386_x86_64-simulator` are not modified (discard these files using git if necessary).
 The iOS SDK release can be found [`on our servers`](https://developers.didomi.io/cmp/mobile-sdk/ios/setup#manually).
 
 ## Functions
@@ -91,3 +92,7 @@ if (GUI.Button(GetFuncRect2(), "GetDisabledPurposeIds"))
     message += "GetDisabledPurposeIds" + MessageForObject(retval);
 }
 ```
+
+### Events
+
+If there are any changes in the iOS sdk class `EventListener` (events added or removed), make sure the file `Assets/Plugins/Didomi/Scripts/iOS/DDMEventType.cs` is properly updated. The enum values must be in the same order as in the `EventListener` class.
