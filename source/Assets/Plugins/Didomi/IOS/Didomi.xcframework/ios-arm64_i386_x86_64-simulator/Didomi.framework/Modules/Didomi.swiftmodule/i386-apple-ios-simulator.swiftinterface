@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)
 // swift-module-flags: -target i386-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Didomi
 import CoreLocation
 @_exported import Didomi
@@ -7,6 +7,7 @@ import Foundation
 import Swift
 import SystemConfiguration
 import UIKit
+import _Concurrency
 import os
 @objc public protocol UserAuth {
   @objc var id: Swift.String { get }
@@ -17,7 +18,6 @@ import os
   public var secretID: Swift.String
   public var expiration: Foundation.TimeInterval?
   @objc deinit
-  @objc override dynamic public init()
 }
 @_hasMissingDesignatedInitializers @objcMembers public class UserAuthWithoutParams : UserAuth {
   @objc public var id: Swift.String
@@ -63,8 +63,8 @@ import os
   case preferencesClickVendorSaveChoices
   case syncDone
   case syncError
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -99,8 +99,8 @@ extension Vendor : Swift.Hashable {
   case notReady
   case failedAlready
   case configFileError
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -108,14 +108,12 @@ extension Vendor : Swift.Hashable {
 @objc public class DidomiInitializeParameters : ObjectiveC.NSObject {
   @objc public init(apiKey: Swift.String, localConfigurationPath: Swift.String? = nil, remoteConfigurationURL: Swift.String? = nil, providerID: Swift.String? = nil, disableDidomiRemoteConfig: Swift.Bool = false, languageCode: Swift.String? = nil, noticeID: Swift.String? = nil)
   @objc deinit
-  @objc override dynamic public init()
 }
 @objc(DDMErrorEvent) public class DidomiErrorEvent : ObjectiveC.NSObject, Swift.Error {
   @objc final public let descriptionText: Swift.String
   @objc final public let type: DidomiErrorEventType
   public init(descriptionText: Swift.String, type: DidomiErrorEventType)
   @objc deinit
-  @objc override dynamic public init()
 }
 public struct Purpose {
   public var id: Swift.String?
@@ -133,8 +131,8 @@ extension Purpose : Swift.Equatable {
   @objc public enum Views : Swift.Int, Swift.RawRepresentable {
     case purposes = 0
     case vendors
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
@@ -238,10 +236,9 @@ extension Didomi {
   @objc final public let consentString: Swift.String
   @objc final public let additionalConsent: Swift.String
   @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
-  @objc override dynamic public init()
-  required public init(from decoder: Swift.Decoder) throws
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
 }
 extension UserStatus {
   @_hasMissingDesignatedInitializers @objc(DDMUserStatusPurposes) @objcMembers public class Purposes : ObjectiveC.NSObject, Swift.Codable {
@@ -251,7 +248,6 @@ extension UserStatus {
     @objc final public let essential: Swift.Set<Swift.String>
     required public init(from decoder: Swift.Decoder) throws
     @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
-    @objc override dynamic public init()
     @objc deinit
     public func encode(to encoder: Swift.Encoder) throws
   }
@@ -265,7 +261,6 @@ extension UserStatus {
     @objc final public let globalLegitimateInterest: UserStatus.IDs
     required public init(from decoder: Swift.Decoder) throws
     @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
-    @objc override dynamic public init()
     @objc deinit
     public func encode(to encoder: Swift.Encoder) throws
   }
@@ -275,44 +270,43 @@ extension UserStatus {
     @objc final public let enabled: Swift.Set<Swift.String>
     @objc final public let disabled: Swift.Set<Swift.String>
     @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
-    @objc override dynamic public init()
-    required public init(from decoder: Swift.Decoder) throws
     @objc deinit
     public func encode(to encoder: Swift.Encoder) throws
+    required public init(from decoder: Swift.Decoder) throws
   }
 }
 @_inheritsConvenienceInitializers @objc(DDMEventListener) public class EventListener : ObjectiveC.NSObject {
-  @objc public var onConsentChanged: (EventType) -> Swift.Void
-  @objc public var onHideNotice: (EventType) -> Swift.Void
-  @objc public var onReady: (EventType) -> Swift.Void
-  @objc public var onError: (DidomiErrorEvent) -> Swift.Void
-  @objc public var onShowNotice: (EventType) -> Swift.Void
-  @objc public var onShowPreferences: (EventType) -> Swift.Void
-  @objc public var onHidePreferences: (EventType) -> Swift.Void
-  @objc public var onNoticeClickAgree: (EventType) -> Swift.Void
-  @objc public var onNoticeClickDisagree: (EventType) -> Swift.Void
-  @objc public var onNoticeClickMoreInfo: (EventType) -> Swift.Void
-  @objc public var onNoticeClickViewVendors: (EventType) -> Swift.Void
-  @objc public var onNoticeClickPrivacyPolicy: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickAgreeToAll: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickDisagreeToAll: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickAgreeToAllPurposes: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickDisagreeToAllPurposes: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickResetAllPurposes: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickAgreeToAllVendors: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickDisagreeToAllVendors: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickPurposeAgree: (EventType, Swift.String?) -> Swift.Void
-  @objc public var onPreferencesClickPurposeDisagree: (EventType, Swift.String?) -> Swift.Void
-  @objc public var onPreferencesClickCategoryAgree: (EventType, Swift.String?) -> Swift.Void
-  @objc public var onPreferencesClickCategoryDisagree: (EventType, Swift.String?) -> Swift.Void
-  @objc public var onPreferencesClickViewVendors: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickViewPurposes: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickSaveChoices: (EventType) -> Swift.Void
-  @objc public var onPreferencesClickVendorAgree: (EventType, Swift.String?) -> Swift.Void
-  @objc public var onPreferencesClickVendorDisagree: (EventType, Swift.String?) -> Swift.Void
-  @objc public var onPreferencesClickVendorSaveChoices: (EventType) -> Swift.Void
-  @objc public var onSyncDone: (EventType, Swift.String?) -> Swift.Void
-  @objc public var onSyncError: (EventType, Swift.String?) -> Swift.Void
+  @objc public var onConsentChanged: (_ event: EventType) -> Swift.Void
+  @objc public var onHideNotice: (_ event: EventType) -> Swift.Void
+  @objc public var onReady: (_ event: EventType) -> Swift.Void
+  @objc public var onError: (_ error: DidomiErrorEvent) -> Swift.Void
+  @objc public var onShowNotice: (_ event: EventType) -> Swift.Void
+  @objc public var onShowPreferences: (_ event: EventType) -> Swift.Void
+  @objc public var onHidePreferences: (_ event: EventType) -> Swift.Void
+  @objc public var onNoticeClickAgree: (_ event: EventType) -> Swift.Void
+  @objc public var onNoticeClickDisagree: (_ event: EventType) -> Swift.Void
+  @objc public var onNoticeClickMoreInfo: (_ event: EventType) -> Swift.Void
+  @objc public var onNoticeClickViewVendors: (_ event: EventType) -> Swift.Void
+  @objc public var onNoticeClickPrivacyPolicy: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickAgreeToAll: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickDisagreeToAll: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickAgreeToAllPurposes: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickDisagreeToAllPurposes: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickResetAllPurposes: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickAgreeToAllVendors: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickDisagreeToAllVendors: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickPurposeAgree: (_ event: EventType, _ purposeId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickPurposeDisagree: (_ event: EventType, _ purposeId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickCategoryAgree: (_ event: EventType, _ purposeId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickCategoryDisagree: (_ event: EventType, _ purposeId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickViewVendors: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickViewPurposes: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickSaveChoices: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickVendorAgree: (_ event: EventType, _ vendorId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickVendorDisagree: (_ event: EventType, _ vendorId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickVendorSaveChoices: (_ event: EventType) -> Swift.Void
+  @objc public var onSyncDone: (_ event: EventType, _ organizationUserId: Swift.String?) -> Swift.Void
+  @objc public var onSyncError: (_ event: EventType, _ error: Swift.String?) -> Swift.Void
   @objc override dynamic public init()
   @objc deinit
 }
@@ -320,8 +314,8 @@ extension UserStatus {
   case enable
   case disable
   case unknown
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
