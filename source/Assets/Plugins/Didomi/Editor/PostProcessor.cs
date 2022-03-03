@@ -285,6 +285,11 @@ public static class PostProcessor
     /// <param name="path"></param>
     private static void CopyDidomiConfigFileToIOSFolder(PBXProject project, string targetGuid, string path)
     {
+        if (!Directory.Exists(PostProcessorSettings.DidomiConfigPath))
+        {
+            return;
+        }
+
         var files = Directory.GetFiles(PostProcessorSettings.DidomiConfigPath);
 
         foreach (var filePath in files)
