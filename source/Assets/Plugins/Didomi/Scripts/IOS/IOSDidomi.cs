@@ -317,5 +317,15 @@ namespace IO.Didomi.SDK.IOS
         {
             DidomiFramework.UpdateSelectedLanguage(languageCode);
         }
+
+        public void SetUser(string organizationUserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetUser(UserAuthParams userAuthParams)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -2,21 +2,21 @@
 namespace IO.Didomi.SDK.Events
 {
     /// <summary>
-    /// An error occurred within the SDK
+    /// An error occurred while trying to synchronize
     /// </summary>
-    public class ErrorEvent : Event
-    { 
+    public class SyncErrorEvent : Event
+    {
         /**
-         * Description of the error
+         * description of the error
          */
         private string errorMessage;
 
         /**
          * Constructor
          *
-         * @param errorMessage Description of the error
+         * @param errorMessage description of the error
          */
-        public ErrorEvent(
+        public SyncErrorEvent(
             string errorMessage
         )
         {

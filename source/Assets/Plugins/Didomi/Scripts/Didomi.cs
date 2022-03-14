@@ -618,5 +618,23 @@ namespace IO.Didomi.SDK
         {
             didomiForPlatform.UpdateSelectedLanguage(languageCode);
         }
+
+        /// <summary>
+        /// Set custom user information from organization
+        /// </summary>
+        /// <param name="organizationUserId">Organization user id</param>
+        public void SetUser(string organizationUserId)
+        {
+            didomiForPlatform.SetUser(organizationUserId);
+        }
+
+        /// <summary>
+        /// Set custom user information from organization
+        /// </summary>
+        /// <param name="userAuthParams">Parameters to synchronize the user consent</param>
+        public void SetUser(UserAuthParams userAuthParams)
+        {
+            didomiForPlatform.SetUser(userAuthParams);
+        }
     }
 }

@@ -84,5 +84,7 @@ namespace IO.Didomi.SDK.Interfaces
             bool vendorsLIStatus);
         bool ShouldConsentBeCollected();
         void UpdateSelectedLanguage(string languageCode);
+        void SetUser(string organizationUserId);
+        void SetUser(UserAuthParams userAuthParams);
     }
 }
