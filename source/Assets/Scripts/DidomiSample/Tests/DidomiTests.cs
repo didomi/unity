@@ -46,10 +46,6 @@ namespace IO.Didomi.SDK.Tests
                 _logs += $"{Environment.NewLine}Initializing sdk - ";
 
                 Didomi didomi = Didomi.GetInstance();
-                if (Application.platform == RuntimePlatform.Android && didomi.IsReady())
-                {
-                    throw new Exception("SDK was already initialized. To run the tests, close and restart the app without initializing SDK.");
-                }
 
                 didomi.Initialize(
                     apiKey,
