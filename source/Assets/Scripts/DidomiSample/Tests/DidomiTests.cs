@@ -27,6 +27,8 @@ namespace IO.Didomi.SDK.Tests
         private bool preferencesDisplayed = false;
         private bool preferencesHidden = false;
         private bool consentChanged = false;
+        private string syncDoneUserId = null;
+        private bool syncError = false;
 
         public IEnumerator RunAll(MonoBehaviour mono, bool remoteNotice = false)
         {
@@ -152,6 +154,12 @@ namespace IO.Didomi.SDK.Tests
                 TestFailed(logsBuilder, description: $"Exception : {ex.StackTrace }");
             }
 
+            // Sync should be enabled in the remote notice
+            if (remoteNotice)
+            {
+                yield return TestSyncUser(logsBuilder);
+            }
+
             yield return TestSetupUI(logsBuilder);
 
             yield return TestShowNotice(logsBuilder);
@@ -251,6 +259,8 @@ namespace IO.Didomi.SDK.Tests
             eventListener.ShowNotice += EventListener_ShowNotice;
             eventListener.HidePreferences += EventListener_HidePreferences;
             eventListener.ShowPreferences += EventListener_ShowPreferences;
+            eventListener.SyncDone += EventListener_SyncDone;
+            eventListener.SyncError += EventListener_SyncError;
 
             Didomi.GetInstance().AddEventListener(eventListener);
         }
@@ -755,6 +765,88 @@ namespace IO.Didomi.SDK.Tests
             }
         }
 
+        private IEnumerator TestSyncUser(StringBuilder logs)
+        {
+            AddLogLine(logs, "TestSyncUser ...");
+
+            Didomi.GetInstance().Reset();
+            string testUserId =
+    "d13e49f6255c8729cbb201310f49d70d65f365415a67f034b567b7eac962b944eda131376594ef5e23b025fada4e4259e953ceb45ea57a2ced7872c567e6d1fae8dcc3a9772ead783d8513032e77d3fd";
+            bool success = true;
+
+            syncError = false;
+
+            Didomi.GetInstance().SetUser(new UserAuthWithEncryptionParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: "testsdks-PEap2wBx",
+                initializationVector: "3ff223854400259e5592cbb992be93cf",
+                expiration: 3_600_000
+            ));
+
+            yield return new WaitForSeconds(1);
+
+            if (!syncError)
+            {
+                TestFailed(logs, "Called SetUser with incorrect algorithm value, but SyncError was not called");
+                AddLogLine(logs, "Note: The last sync may be too recent. Make sure app data was cleared before relaunching the test.");
+                success = false;
+            }
+
+            syncDoneUserId = null;
+
+            Didomi.GetInstance().SetUser("abcd");
+
+            yield return new WaitForSeconds(1);
+
+            if (syncDoneUserId != "abcd")
+            {
+                TestFailed(logs, "SyncDone with simple user returned an incorrect UserId: " + syncDoneUserId);
+                success = false;
+            }
+
+            syncDoneUserId = null;
+
+            Didomi.GetInstance().SetUser(new UserAuthWithEncryptionParams(
+                id: testUserId,
+                algorithm: "aes-256-cbc",
+                secretId: "testsdks-PEap2wBx",
+                initializationVector: "3ff223854400259e5592cbb992be93cf"
+            ));
+
+            yield return new WaitForSeconds(1);
+
+            if (syncDoneUserId != testUserId)
+            {
+                TestFailed(logs, "SyncDone with Encryption params returned an incorrect UserId: " + syncDoneUserId);
+                success = false;
+            }
+
+            syncDoneUserId = null;
+
+            Didomi.GetInstance().SetUser(new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: "testsdks-PEap2wBx",
+                digest: "test-digest",
+                salt: "test-salt",
+                expiration: 3_600_000
+            ));
+
+            yield return new WaitForSeconds(1);
+
+            if (syncDoneUserId != testUserId)
+            {
+                TestFailed(logs, "SyncDone with Hash params returned an incorrect UserId: " + syncDoneUserId);
+                success = false;
+            }
+
+            if (success)
+            {
+                TestSucceeded(logs);
+            }
+        }
+
         private IEnumerator TestSetupUI(StringBuilder logs)
         {
             AddLogLine(logs, "TestSetupUI processing...");
@@ -1026,6 +1118,16 @@ namespace IO.Didomi.SDK.Tests
         private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)
         {
             consentChanged = true;
+        }
+
+        private void EventListener_SyncDone(object sender, SyncDoneEvent e)
+        {
+            syncDoneUserId = e.getOrganizationUserId();
+        }
+
+        private void EventListener_SyncError(object sender, SyncErrorEvent e)
+        {
+            syncError = true;
         }
     }
 }
