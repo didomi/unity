@@ -320,12 +320,21 @@ namespace IO.Didomi.SDK.IOS
 
         public void SetUser(string organizationUserId)
         {
-            throw new NotImplementedException();
+            DidomiFramework.SetUser(organizationUserId);
         }
 
         public void SetUser(UserAuthParams userAuthParams)
         {
-            throw new NotImplementedException();
+            if (userAuthParams is UserAuthWithEncryptionParams)
+            {
+                DidomiFramework.SetUserWithEncryptionParams((UserAuthWithEncryptionParams)userAuthParams);
+            } else if (userAuthParams is UserAuthWithHashParams)
+            {
+                DidomiFramework.SetUserWithHashParams((UserAuthWithHashParams)userAuthParams);
+            } else
+            {
+                throw new NotImplementedException("Unsupported User Auth parameters type");
+            }
         }
     }
 }

@@ -35,6 +35,7 @@ namespace Assets.Plugins.Scripts.IOS
         DDMEventTypePreferencesClickVendorDisagree = 26,
         DDMEventTypePreferencesClickVendorSaveChoices = 27,
         DDMEventTypeSyncDone = 28,
+        DDMEventTypeSyncError = 29,
         DDMEventTypeError = 1000,
     };
 }
