@@ -738,6 +738,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
 
 
 
+
 /// Protocol for User Authentication
 /// declare the user id
 SWIFT_PROTOCOL("_TtP6Didomi8UserAuth_")
@@ -761,6 +762,9 @@ SWIFT_CLASS("_TtC6Didomi14UserAuthParams")
 /// User Authentication Parameters with encryption
 SWIFT_CLASS("_TtC6Didomi28UserAuthWithEncryptionParams")
 @interface UserAuthWithEncryptionParams : UserAuthParams
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID initializationVector:(NSString * _Nonnull)initializationVector;
+/// Initializer for Objective-C
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID initializationVector:(NSString * _Nonnull)initializationVector legacyExpiration:(NSTimeInterval)legacyExpiration;
 /// Initialization Vector used for computing the user ID
 @property (nonatomic, copy) NSString * _Nonnull initializationVector;
 @end
@@ -769,6 +773,9 @@ SWIFT_CLASS("_TtC6Didomi28UserAuthWithEncryptionParams")
 /// User Authentication Parameters with hash
 SWIFT_CLASS("_TtC6Didomi22UserAuthWithHashParams")
 @interface UserAuthWithHashParams : UserAuthParams
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID digest:(NSString * _Nonnull)digest salt:(NSString * _Nullable)salt;
+/// Initializer for Objective-C
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID digest:(NSString * _Nonnull)digest salt:(NSString * _Nullable)salt legacyExpiration:(NSTimeInterval)legacyExpiration;
 /// Salt used for computing the user ID (optional)
 @property (nonatomic, copy) NSString * _Nullable salt;
 /// Digest used for representing the user ID
@@ -798,13 +805,12 @@ SWIFT_CLASS_NAMED("UserStatus")
 
 @class DDMUserStatusIDs;
 
-SWIFT_CLASS_NAMED("Vendors")
-@interface DDMUserStatusVendors : NSObject
+SWIFT_CLASS_NAMED("Purposes")
+@interface DDMUserStatusPurposes : NSObject
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
+@property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull essential;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -829,12 +835,13 @@ SWIFT_CLASS_NAMED("IDs")
 @end
 
 
-SWIFT_CLASS_NAMED("Purposes")
-@interface DDMUserStatusPurposes : NSObject
+SWIFT_CLASS_NAMED("Vendors")
+@interface DDMUserStatusVendors : NSObject
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
-@property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull essential;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -1587,6 +1594,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
 
 
 
+
 /// Protocol for User Authentication
 /// declare the user id
 SWIFT_PROTOCOL("_TtP6Didomi8UserAuth_")
@@ -1610,6 +1618,9 @@ SWIFT_CLASS("_TtC6Didomi14UserAuthParams")
 /// User Authentication Parameters with encryption
 SWIFT_CLASS("_TtC6Didomi28UserAuthWithEncryptionParams")
 @interface UserAuthWithEncryptionParams : UserAuthParams
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID initializationVector:(NSString * _Nonnull)initializationVector;
+/// Initializer for Objective-C
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID initializationVector:(NSString * _Nonnull)initializationVector legacyExpiration:(NSTimeInterval)legacyExpiration;
 /// Initialization Vector used for computing the user ID
 @property (nonatomic, copy) NSString * _Nonnull initializationVector;
 @end
@@ -1618,6 +1629,9 @@ SWIFT_CLASS("_TtC6Didomi28UserAuthWithEncryptionParams")
 /// User Authentication Parameters with hash
 SWIFT_CLASS("_TtC6Didomi22UserAuthWithHashParams")
 @interface UserAuthWithHashParams : UserAuthParams
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID digest:(NSString * _Nonnull)digest salt:(NSString * _Nullable)salt;
+/// Initializer for Objective-C
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID digest:(NSString * _Nonnull)digest salt:(NSString * _Nullable)salt legacyExpiration:(NSTimeInterval)legacyExpiration;
 /// Salt used for computing the user ID (optional)
 @property (nonatomic, copy) NSString * _Nullable salt;
 /// Digest used for representing the user ID
@@ -1647,13 +1661,12 @@ SWIFT_CLASS_NAMED("UserStatus")
 
 @class DDMUserStatusIDs;
 
-SWIFT_CLASS_NAMED("Vendors")
-@interface DDMUserStatusVendors : NSObject
+SWIFT_CLASS_NAMED("Purposes")
+@interface DDMUserStatusPurposes : NSObject
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
+@property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull essential;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -1678,12 +1691,13 @@ SWIFT_CLASS_NAMED("IDs")
 @end
 
 
-SWIFT_CLASS_NAMED("Purposes")
-@interface DDMUserStatusPurposes : NSObject
+SWIFT_CLASS_NAMED("Vendors")
+@interface DDMUserStatusVendors : NSObject
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
-@property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull essential;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -2436,6 +2450,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
 
 
 
+
 /// Protocol for User Authentication
 /// declare the user id
 SWIFT_PROTOCOL("_TtP6Didomi8UserAuth_")
@@ -2459,6 +2474,9 @@ SWIFT_CLASS("_TtC6Didomi14UserAuthParams")
 /// User Authentication Parameters with encryption
 SWIFT_CLASS("_TtC6Didomi28UserAuthWithEncryptionParams")
 @interface UserAuthWithEncryptionParams : UserAuthParams
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID initializationVector:(NSString * _Nonnull)initializationVector;
+/// Initializer for Objective-C
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID initializationVector:(NSString * _Nonnull)initializationVector legacyExpiration:(NSTimeInterval)legacyExpiration;
 /// Initialization Vector used for computing the user ID
 @property (nonatomic, copy) NSString * _Nonnull initializationVector;
 @end
@@ -2467,6 +2485,9 @@ SWIFT_CLASS("_TtC6Didomi28UserAuthWithEncryptionParams")
 /// User Authentication Parameters with hash
 SWIFT_CLASS("_TtC6Didomi22UserAuthWithHashParams")
 @interface UserAuthWithHashParams : UserAuthParams
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID digest:(NSString * _Nonnull)digest salt:(NSString * _Nullable)salt;
+/// Initializer for Objective-C
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretID:(NSString * _Nonnull)secretID digest:(NSString * _Nonnull)digest salt:(NSString * _Nullable)salt legacyExpiration:(NSTimeInterval)legacyExpiration;
 /// Salt used for computing the user ID (optional)
 @property (nonatomic, copy) NSString * _Nullable salt;
 /// Digest used for representing the user ID
@@ -2496,13 +2517,12 @@ SWIFT_CLASS_NAMED("UserStatus")
 
 @class DDMUserStatusIDs;
 
-SWIFT_CLASS_NAMED("Vendors")
-@interface DDMUserStatusVendors : NSObject
+SWIFT_CLASS_NAMED("Purposes")
+@interface DDMUserStatusPurposes : NSObject
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
+@property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull essential;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -2527,12 +2547,13 @@ SWIFT_CLASS_NAMED("IDs")
 @end
 
 
-SWIFT_CLASS_NAMED("Purposes")
-@interface DDMUserStatusPurposes : NSObject
+SWIFT_CLASS_NAMED("Vendors")
+@interface DDMUserStatusVendors : NSObject
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
-@property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull essential;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
