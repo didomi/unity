@@ -781,7 +781,7 @@ namespace IO.Didomi.SDK.Tests
                 algorithm: "hash-md5",
                 secretId: "testsdks-PEap2wBx",
                 initializationVector: "3ff223854400259e5592cbb992be93cf",
-                expiration: 3_600_000
+                expiration: 3_600
             ));
 
             yield return new WaitForSeconds(1);
@@ -830,7 +830,7 @@ namespace IO.Didomi.SDK.Tests
                 secretId: "testsdks-PEap2wBx",
                 digest: "test-digest",
                 salt: "test-salt",
-                expiration: 3_600_000
+                expiration: 3_600
             ));
 
             yield return new WaitForSeconds(1);

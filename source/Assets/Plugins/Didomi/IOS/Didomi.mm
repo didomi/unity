@@ -361,9 +361,9 @@ void setUser(char* organizationUserId)
     return [[Didomi shared] setUserWithId: CreateNSString(organizationUserId)];
 }
 
-void setUserWithEncryptionParams(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector, long expirationInSeconds)
+void setUserWithEncryptionParams(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector, long expiration)
 {
-    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc] initWithId:organizationUserId algorithm:algorithm secretID:secretID initializationVector:initializationVector expirationInSeconds:expirationInSeconds]
+    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc] initWithId:organizationUserId algorithm:algorithm secretID:secretID initializationVector:initializationVector legacyExpiration:(double)expiration]
     [[Didomi shared] setUserWithUserAuthParams:userAuthParameters];
 }
 
@@ -373,9 +373,9 @@ void setUserWithEncryptionParams(char* organizationUserId, char* algorithm, char
     [[Didomi shared] setUserWithUserAuthParams:userAuthParameters];
 }
 
-void setUserWithHashParams(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt, long expirationInSeconds)
+void setUserWithHashParams(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt, long expiration)
 {
-    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc] initWithId:organizationUserId algorithm:algorithm secretID:secretID digest:digest salt:salt expirationInSeconds:expirationInSeconds]
+    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc] initWithId:organizationUserId algorithm:algorithm secretID:secretID digest:digest salt:salt legacyExpiration:(double)expiration]
     [[Didomi shared] setUserWithUserAuthParams: userAuthParameters];
 }
 

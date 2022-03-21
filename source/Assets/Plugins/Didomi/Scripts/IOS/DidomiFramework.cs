@@ -732,13 +732,13 @@ namespace IO.Didomi.SDK.IOS
             if (parameters.Expiration != null)
             {
 #if UNITY_IOS && !UNITY_EDITOR
-                setUserWithEncryptionParams(encryptionParameters.Id, encryptionParameters.Algorithm, encryptionParameters.SecretId, encryptionParameters.InitializationVector, encryptionParameters.Expiration);
+                setUserWithEncryptionParams(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector, parameters.Expiration);
 #endif
             }
             else
             {
 #if UNITY_IOS && !UNITY_EDITOR
-                setUserWithEncryptionParams(encryptionParameters.Id, encryptionParameters.Algorithm, encryptionParameters.SecretId, encryptionParameters.InitializationVector);
+                setUserWithEncryptionParams(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector);
 #endif
             }
         }
@@ -756,13 +756,13 @@ namespace IO.Didomi.SDK.IOS
             if (parameters.Expiration != null)
             {
 #if UNITY_IOS && !UNITY_EDITOR
-                setUserWithHashParams(encryptionParameters.Id, encryptionParameters.Algorithm, encryptionParameters.SecretId, encryptionParameters.Digest, encryptionParameters.Salt, encryptionParameters.Expiration);
+                setUserWithHashParams(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt, parameters.Expiration);
 #endif
             }
             else
             {
 #if UNITY_IOS && !UNITY_EDITOR
-                setUserWithHashParams(encryptionParameters.Id, encryptionParameters.Algorithm, encryptionParameters.SecretId, encryptionParameters.Digest, encryptionParameters.Salt);
+                setUserWithHashParams(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt);
 #endif
             }
         }
