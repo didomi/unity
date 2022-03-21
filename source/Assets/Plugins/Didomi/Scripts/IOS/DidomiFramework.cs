@@ -721,7 +721,7 @@ namespace IO.Didomi.SDK.IOS
 
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserWithEncryptionParams(string organizationUserId, string algorithm, string secretID, string initializationVector, long expiration);
+        private static extern bool setUserWithEncryptionParamsWithExpiration(string organizationUserId, string algorithm, string secretID, string initializationVector, long expiration);
 
         [DllImport("__Internal")]
         private static extern bool setUserWithEncryptionParams(string organizationUserId, string algorithm, string secretID, string initializationVector);
@@ -729,10 +729,11 @@ namespace IO.Didomi.SDK.IOS
 
         public static void SetUserWithEncryptionParams(UserAuthWithEncryptionParams parameters)
         {
-            if (parameters.Expiration != null)
+            long? expiration = parameters.Expiration;
+            if (expiration.HasValue)
             {
 #if UNITY_IOS && !UNITY_EDITOR
-                setUserWithEncryptionParams(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector, parameters.Expiration);
+                setUserWithEncryptionParamsWithExpiration(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector, expiration.Value);
 #endif
             }
             else
@@ -745,7 +746,7 @@ namespace IO.Didomi.SDK.IOS
 
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserWithHashParams(string organizationUserId, string algorithm, string secretID, string digest, string salt, long expiration);
+        private static extern bool setUserWithHashParamsWithExpiration(string organizationUserId, string algorithm, string secretID, string digest, string salt, long expiration);
 
         [DllImport("__Internal")]
         private static extern bool setUserWithHashParams(string organizationUserId, string algorithm, string secretID, string digest, string salt);
@@ -753,10 +754,11 @@ namespace IO.Didomi.SDK.IOS
 
         public static void SetUserWithHashParams(UserAuthWithHashParams parameters)
         {
-            if (parameters.Expiration != null)
+            long? expiration = parameters.Expiration;
+            if (expiration.HasValue)
             {
 #if UNITY_IOS && !UNITY_EDITOR
-                setUserWithHashParams(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt, parameters.Expiration);
+                setUserWithHashParamsWithExpiration(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt, expiration.Value);
 #endif
             }
             else
