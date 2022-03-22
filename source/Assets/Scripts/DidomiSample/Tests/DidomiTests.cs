@@ -784,6 +784,7 @@ namespace IO.Didomi.SDK.Tests
 
             syncError = false;
 
+            AddLogLine(logs, "Sync with Encryption with expiration");
             Didomi.GetInstance().SetUser(new UserAuthWithEncryptionParams(
                 id: testUserId,
                 algorithm: "hash-md5",
@@ -803,6 +804,7 @@ namespace IO.Didomi.SDK.Tests
 
             syncDoneUserId = null;
 
+            AddLogLine(logs, "Sync with User Id");
             Didomi.GetInstance().SetUser("abcd");
 
             yield return new WaitForSeconds(1);
@@ -815,6 +817,7 @@ namespace IO.Didomi.SDK.Tests
 
             syncDoneUserId = null;
 
+            AddLogLine(logs, "Sync with Encryption without expiration");
             Didomi.GetInstance().SetUser(new UserAuthWithEncryptionParams(
                 id: testUserId,
                 algorithm: "aes-256-cbc",
@@ -832,6 +835,7 @@ namespace IO.Didomi.SDK.Tests
 
             syncDoneUserId = null;
 
+            AddLogLine(logs, "Sync with Hash with salt and expiration ");
             Didomi.GetInstance().SetUser(new UserAuthWithHashParams(
                 id: testUserId,
                 algorithm: "hash-md5",
@@ -839,6 +843,45 @@ namespace IO.Didomi.SDK.Tests
                 digest: "test-digest",
                 salt: "test-salt",
                 expiration: 3_600
+            ));
+
+            yield return new WaitForSeconds(1);
+
+            if (syncDoneUserId != testUserId)
+            {
+                TestFailed(logs, "SyncDone with Hash params returned an incorrect UserId: " + syncDoneUserId);
+                success = false;
+            }
+
+            syncDoneUserId = null;
+
+            AddLogLine(logs, "Sync with Hash with expiration without salt");
+            Didomi.GetInstance().SetUser(new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: "testsdks-PEap2wBx",
+                digest: "test-digest",
+                salt: null,
+                expiration: 3_600
+            ));
+
+            yield return new WaitForSeconds(1);
+
+            if (syncDoneUserId != testUserId)
+            {
+                TestFailed(logs, "SyncDone with Hash params returned an incorrect UserId: " + syncDoneUserId);
+                success = false;
+            }
+
+            syncDoneUserId = null;
+
+            AddLogLine(logs, "Sync with Hash without salt nor expiration");
+            Didomi.GetInstance().SetUser(new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: "testsdks-PEap2wBx",
+                digest: "test-digest",
+                salt: null
             ));
 
             yield return new WaitForSeconds(1);
