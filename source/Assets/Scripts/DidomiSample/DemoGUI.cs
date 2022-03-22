@@ -740,13 +740,13 @@ public class DemoGUI : MonoBehaviour
               );
 
         Didomi.GetInstance().Initialize(
-            apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
+            apiKey: "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba",
             localConfigurationPath: null,
             remoteConfigurationURL: null,
             providerId: null,
-            disableDidomiRemoteConfig: true,
+            disableDidomiRemoteConfig: false,
             languageCode: null,
-            noticeId: null);
+            noticeId: "Ar7NPQ72");
     }
 
     void Events()

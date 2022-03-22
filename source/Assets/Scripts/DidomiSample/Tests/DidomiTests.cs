@@ -49,6 +49,12 @@ namespace IO.Didomi.SDK.Tests
 
                 Didomi didomi = Didomi.GetInstance();
 
+                if (didomi.IsReady())
+                {
+                    Debug.Log("Didomi SDK was already initialized. " +
+                        "To avoid any issue, make sure SDK is not initialized when tests start.");
+                }
+
                 didomi.Initialize(
                     apiKey,
                     localConfigurationPath,
@@ -65,6 +71,7 @@ namespace IO.Didomi.SDK.Tests
                     );
                 didomi.OnError(
                     () => {
+                        Debug.Log("!!!!!!!! STOPP");
                         _logs += $"{Environment.NewLine}Error initializing SDK.";
                         testsComplete = true;
                     }
@@ -112,7 +119,7 @@ namespace IO.Didomi.SDK.Tests
             {
                 testsFailure = false;
 
-                RegisterEventHandlers();
+                RegisterEventHandlers(logsBuilder);
 
                 TestPurposesAndVendorsCountAfterReset(logsBuilder);
 
@@ -239,8 +246,9 @@ namespace IO.Didomi.SDK.Tests
             return true;
         }
 
-        private void RegisterEventHandlers()
+        private void RegisterEventHandlers(StringBuilder logs)
         {
+            AddLogLine(logs, "RegisterEventHandlers ...");
             DidomiEventListener eventListener = new DidomiEventListener();
             eventListener.ConsentChanged += EventListener_ConsentChanged;
             eventListener.HideNotice += EventListener_HideNotice;
