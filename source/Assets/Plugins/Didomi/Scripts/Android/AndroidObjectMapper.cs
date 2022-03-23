@@ -250,5 +250,40 @@ namespace IO.Didomi.SDK.Android
             );
             return ids;
         }
+
+        public static AndroidJavaObject ConvertToJavaUserAuthParams(UserAuthParams parameters)
+        {
+            AndroidJavaObject expiration = ConvertToJavaLong(parameters.Expiration);
+            if (parameters is UserAuthWithEncryptionParams)
+            {
+                UserAuthWithEncryptionParams encryptionParameters = (UserAuthWithEncryptionParams)parameters;
+                return new AndroidJavaObject(
+                    "io.didomi.sdk.user.UserAuthWithEncryptionParams",
+                    encryptionParameters.Id,
+                    encryptionParameters.Algorithm,
+                    encryptionParameters.SecretId,
+                    encryptionParameters.InitializationVector,
+                    expiration);
+            } else {
+                UserAuthWithHashParams hashParameters = (UserAuthWithHashParams)parameters;
+                return new AndroidJavaObject(
+                    "io.didomi.sdk.user.UserAuthWithHashParams",
+                    hashParameters.Id,
+                    hashParameters.Algorithm,
+                    hashParameters.SecretId,
+                    hashParameters.Digest,
+                    hashParameters.Salt,
+                    expiration);
+            }
+        }
+
+        public static AndroidJavaObject ConvertToJavaLong(long? longValue)
+        {
+            if (longValue == null)
+            {
+                return null;
+            }
+            return new AndroidJavaObject("java.lang.Long", longValue);
+        }
     }
 }

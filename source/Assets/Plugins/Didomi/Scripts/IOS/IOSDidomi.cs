@@ -317,5 +317,24 @@ namespace IO.Didomi.SDK.IOS
         {
             DidomiFramework.UpdateSelectedLanguage(languageCode);
         }
+
+        public void SetUser(string organizationUserId)
+        {
+            DidomiFramework.SetUser(organizationUserId);
+        }
+
+        public void SetUser(UserAuthParams userAuthParams)
+        {
+            if (userAuthParams is UserAuthWithEncryptionParams)
+            {
+                DidomiFramework.SetUserWithEncryptionParams((UserAuthWithEncryptionParams)userAuthParams);
+            } else if (userAuthParams is UserAuthWithHashParams)
+            {
+                DidomiFramework.SetUserWithHashParams((UserAuthWithHashParams)userAuthParams);
+            } else
+            {
+                throw new NotImplementedException("Unsupported User Auth parameters type");
+            }
+        }
     }
 }

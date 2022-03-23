@@ -334,7 +334,7 @@ bool setUserConsentStatus(char* enabledPurposeIds, char* disabledPurposeIds, cha
 	NSSet<NSString *> * enabledVendorIdsSet=ConvertJsonToSet(enabledVendorIds);
 	NSSet<NSString *> * disabledVendorIdsSet=ConvertJsonToSet(disabledVendorIds);
 
-    return [[Didomi shared] setUserConsentStatusWithEnabledPurposeIds:enabledPurposeIdsSet disabledPurposeIds:enabledPurposeIdsSet enabledVendorIds:enabledVendorIdsSet disabledVendorIds:disabledVendorIdsSet];
+    return [[Didomi shared] setUserConsentStatusWithEnabledPurposeIds:enabledPurposeIdsSet disabledPurposeIds:disabledPurposeIdsSet enabledVendorIds:enabledVendorIdsSet disabledVendorIds:disabledVendorIdsSet];
 }
 
 bool setUserStatus(char* enabledConsentPurposeIds, char* disabledConsentPurposeIds, char* enabledLIPurposeIds, char* disabledLIPurposeIds, char* enabledConsentVendorIds, char* disabledConsentVendorIds, char* enabledLIVendorIds, char* disabledLIVendorIds)
@@ -354,6 +354,55 @@ bool setUserStatus(char* enabledConsentPurposeIds, char* disabledConsentPurposeI
 bool setUserStatus1(BOOL purposesConsentStatus, BOOL purposesLIStatus, BOOL vendorsConsentStatus, BOOL vendorsLIStatus)
 {
     return [[Didomi shared] setUserStatusWithPurposesConsentStatus:purposesConsentStatus purposesLIStatus:purposesLIStatus vendorsConsentStatus:vendorsConsentStatus vendorsLIStatus:vendorsLIStatus];
+}
+
+void setUser(char* organizationUserId)
+{
+    return [[Didomi shared] setUserWithId: CreateNSString(organizationUserId)];
+}
+
+void setUserWithEncryptionParams(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector)
+{
+    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc]
+                                                        initWithId: CreateNSString(organizationUserId)
+                                                        algorithm: CreateNSString(algorithm)
+                                                        secretID: CreateNSString(secretID)
+                                                        initializationVector: CreateNSString(initializationVector)];
+    [[Didomi shared] setUserWithUserAuthParams:userAuthParameters];
+}
+
+void setUserWithEncryptionParamsWithExpiration(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector, long expiration)
+{
+    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc]
+                                                        initWithId: CreateNSString(organizationUserId)
+                                                        algorithm: CreateNSString(algorithm)
+                                                        secretID: CreateNSString(secretID)
+                                                        initializationVector: CreateNSString(initializationVector)
+                                                        legacyExpiration:(double)expiration];
+    [[Didomi shared] setUserWithUserAuthParams:userAuthParameters];
+}
+
+void setUserWithHashParams(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt)
+{
+    UserAuthWithHashParams *userAuthParameters = [[UserAuthWithHashParams alloc]
+                                                        initWithId:CreateNSString(organizationUserId)
+                                                        algorithm: CreateNSString(algorithm)
+                                                        secretID: CreateNSString(secretID)
+                                                        digest: CreateNSString(digest)
+                                                        salt: CreateNSStringNullable(salt)];
+    [[Didomi shared] setUserWithUserAuthParams: userAuthParameters];
+}
+
+void setUserWithHashParamsWithExpiration(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt, long expiration)
+{
+    UserAuthWithHashParams *userAuthParameters = [[UserAuthWithHashParams alloc]
+                                                        initWithId: CreateNSString(organizationUserId)
+                                                        algorithm: CreateNSString(algorithm)
+                                                        secretID: CreateNSString(secretID)
+                                                        digest: CreateNSString(digest)
+                                                        salt: CreateNSStringNullable(salt)
+                                                        legacyExpiration:(double)expiration];
+    [[Didomi shared] setUserWithUserAuthParams: userAuthParameters];
 }
 
 void updateSelectedLanguage(char* languageCode)
@@ -515,6 +564,18 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 	eventListener.onPreferencesClickVendorSaveChoices = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
+
+    };
+    
+    eventListener.onSyncDone = ^(DDMEventType eventType, NSString * _Nullable organizationUserId){
+
+        event_listener_handler(eventType, convertNSStringToCString(organizationUserId));
+
+    };
+    
+    eventListener.onSyncError = ^(DDMEventType eventType, NSString * _Nullable error){
+
+        event_listener_handler(eventType, convertNSStringToCString(error));
 
     };
 

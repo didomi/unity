@@ -104,7 +104,6 @@ namespace IO.Didomi.SDK.Android
         public void preferencesClickResetAllPurposes(AndroidJavaObject @event) { }
         public void preferencesClickAgreeToAllVendors(AndroidJavaObject @event) { }
         public void preferencesClickDisagreeToAllVendors(AndroidJavaObject @event) { }
-        public void syncDone(AndroidJavaObject @event) { }
 
         public void noticeClickMoreInfo(AndroidJavaObject @event)
         {
@@ -135,8 +134,6 @@ namespace IO.Didomi.SDK.Android
             var preferencesClickPurposeAgreeEvent = ConvertToPreferencesClickPurposeAgreeEvent(@event);
 
             _eventListener.OnPreferencesClickPurposeAgree(preferencesClickPurposeAgreeEvent);
-
-            string vendorId = preferencesClickPurposeAgreeEvent.getPurposeId();
             // Click on agree to a purpose on preferences popup
         }
         
@@ -171,8 +168,6 @@ namespace IO.Didomi.SDK.Android
             var preferencesClickVendorAgreeEvent = ConvertToPreferencesClickVendorAgreeEvent(@event);
 
             _eventListener.OnPreferencesClickVendorAgree(preferencesClickVendorAgreeEvent);
-
-            string vendorId = preferencesClickVendorAgreeEvent.getVendorId();
             // Click on agree to a vendor on preferences popup
         }
        
@@ -181,8 +176,6 @@ namespace IO.Didomi.SDK.Android
             var preferencesClickVendorDisagreeEvent = ConvertToPreferencesClickVendorDisagreeEvent(@event);
 
             _eventListener.OnPreferencesClickVendorDisagree(preferencesClickVendorDisagreeEvent);
-
-            string vendorId = preferencesClickVendorDisagreeEvent.getVendorId();
             // Click on disagree to a vendor on preferences popup
         }
        
@@ -191,9 +184,23 @@ namespace IO.Didomi.SDK.Android
             var preferencesClickVendorSaveChoicesEvent = ConvertToPreferencesClickVendorSaveChoicesEvent(@event);
 
             _eventListener.OnPreferencesClickVendorSaveChoices(preferencesClickVendorSaveChoicesEvent);
-
             // Click on save on the vendors view on preferences popup
         }
+
+        public void syncDone(AndroidJavaObject @event)
+        {
+            var SyncDoneEvent = ConvertToSyncDoneEvent(@event);
+
+            _eventListener.OnSyncDone(SyncDoneEvent);
+        }
+
+        public void syncError(AndroidJavaObject @event)
+        {
+            var SyncErrorEvent = ConvertToSyncErrorEvent(@event);
+
+            _eventListener.OnSyncError(SyncErrorEvent);
+        }
+
 
         private static ConsentChangedEvent ConvertToConsentChangedEvent(AndroidJavaObject @event)
         {
@@ -305,6 +312,20 @@ namespace IO.Didomi.SDK.Android
             return new PreferencesClickVendorSaveChoicesEvent();
         }
 
+        private static SyncDoneEvent ConvertToSyncDoneEvent(AndroidJavaObject @event)
+        {
+            var organizationUserId = GetOrganizationUserId(@event);
+
+            return new SyncDoneEvent(organizationUserId);
+        }
+
+        private static SyncErrorEvent ConvertToSyncErrorEvent(AndroidJavaObject @event)
+        {
+            var error = GetError(@event);
+
+            return new SyncErrorEvent(error);
+        }
+
         private static string GetPurposeId(AndroidJavaObject @event)
         {
            return AndroidObjectMapper.GetMethodStringValue(@event, "getPurposeId");
@@ -313,6 +334,16 @@ namespace IO.Didomi.SDK.Android
         private static string GetVendorId(AndroidJavaObject @event)
         {
             return AndroidObjectMapper.GetMethodStringValue(@event, "getVendorId");
+        }
+
+        private static string GetOrganizationUserId(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getOrganizationUserId");
+        }
+
+        private static string GetError(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getError");
         }
     }
 }

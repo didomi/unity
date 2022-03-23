@@ -379,6 +379,17 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethod("updateSelectedLanguage", languageCode);
         }
 
+        public void SetUser(string organizationUserId)
+        {
+            CallVoidMethod("setUser", organizationUserId);
+        }
+
+        public void SetUser(UserAuthParams userAuthParams)
+        {
+            AndroidJavaObject nativeParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
+            CallVoidMethod("setUser", nativeParams);
+        }
+
         private static bool CallReturningBoolMethod(string methodName, params object[] args)
         {
             return CallReturningMethodBase<bool>(methodName, args);

@@ -22,8 +22,8 @@ public enum FunctionCategory
     Purpose_2,
     Vendor_1,
     Vendor_2,
-    Consent_1,
-    Consent_2,
+    SetUser,
+    SetUserStatus,
     Consent_3,
     Legitimate,
     Notice,
@@ -155,13 +155,13 @@ public class DemoGUI : MonoBehaviour
         {
             Vendor_2();
         }
-        else if (functionCategory == FunctionCategory.Consent_1)
+        else if (functionCategory == FunctionCategory.SetUser)
         {
-            Consent_1();
+            SetUser();
         }
-        else if (functionCategory == FunctionCategory.Consent_2)
+        else if (functionCategory == FunctionCategory.SetUserStatus)
         {
-            Consent_2();
+            SetUserStatus();
         }
         else if (functionCategory == FunctionCategory.Consent_3)
         {
@@ -238,14 +238,14 @@ public class DemoGUI : MonoBehaviour
             functionCategory = FunctionCategory.Vendor_2;
         }
 
-        if (GUI.Button(GetLeftRect3(), "Consent-1"))
+        if (GUI.Button(GetLeftRect3(), "SetUser"))
         {
-            functionCategory = FunctionCategory.Consent_1;
+            functionCategory = FunctionCategory.SetUser;
         }
 
-        if (GUI.Button(GetMiddleRect3(), "Consent-2"))
+        if (GUI.Button(GetMiddleRect3(), "SetUserStatus"))
         {
-            functionCategory = FunctionCategory.Consent_2;
+            functionCategory = FunctionCategory.SetUserStatus;
         }
 
         if (GUI.Button(GetRightRect3(), "Consent-3"))
@@ -452,30 +452,29 @@ public class DemoGUI : MonoBehaviour
         }
     }
 
-    private void Consent_1()
+    private void SetUser()
     {
-        if (GUI.Button(GetFuncRect1(), "GetUserConsentStatusForPurpose"))
+        if (GUI.Button(GetFuncRect1(), "SetUser with id"))
         {
             message = string.Empty;
-            var purposeId = GetFirstRequiredPurposeId();
-            var retval = Didomi.GetInstance().GetUserConsentStatusForPurpose(purposeId);
-            message += "GetUserConsentStatusForPurpose" + MessageForObject(retval);
+            Didomi.GetInstance().SetUser("abcd");
+            message += "Calling SetUser with id";
         }
 
-        if (GUI.Button(GetFuncRect2(), "GetUserConsentStatusForVendor"))
+        if (GUI.Button(GetFuncRect2(), "SetUser with Hash"))
         {
             message = string.Empty;
-            var vendorId = GetFirstRequiredVendorId();
-            var retval = Didomi.GetInstance().GetUserConsentStatusForVendor(vendorId);
-            message += "GetUserConsentStatusForVendor" + MessageForObject(retval);
+            UserAuthParams parameters = new UserAuthWithHashParams("abcd", "algorithm", "secret", "digest", "salt", 3600000L);
+            Didomi.GetInstance().SetUser(parameters);
+            message += "Calling SetUser with Hash params";
         }
 
-        if (GUI.Button(GetFuncRect3(), $"GetUserConsentStatusForVendor{Environment.NewLine}AndRequiredPurposes"))
+        if (GUI.Button(GetFuncRect3(), "SetUser with encryption"))
         {
             message = string.Empty;
-            var vendorId = GetFirstRequiredVendorId();
-            var retval = Didomi.GetInstance().GetUserConsentStatusForVendorAndRequiredPurposes(vendorId);
-            message += "GetUserConsentStatusForVendorAndRequiredPurposes" + MessageForObject(retval);
+            UserAuthParams parameters = new UserAuthWithEncryptionParams("abcd", "algorithm", "secret", "vector");
+            Didomi.GetInstance().SetUser(parameters);
+            message += "Calling SetUser with Encryption params";
         }
     }
 
@@ -506,7 +505,7 @@ public class DemoGUI : MonoBehaviour
         }
     }
 
-    private void Consent_2()
+    private void SetUserStatus()
     {
         if (GUI.Button(GetFuncRect1(), "SetUserAgreeToAll"))
         {
@@ -741,13 +740,13 @@ public class DemoGUI : MonoBehaviour
               );
 
         Didomi.GetInstance().Initialize(
-            apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
+            apiKey: "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba",
             localConfigurationPath: null,
             remoteConfigurationURL: null,
             providerId: null,
-            disableDidomiRemoteConfig: true,
+            disableDidomiRemoteConfig: false,
             languageCode: null,
-            noticeId: null);
+            noticeId: "Ar7NPQ72");
     }
 
     void Events()
@@ -898,7 +897,8 @@ public class DemoGUI : MonoBehaviour
         eventListener.ShowNotice += EventListener_ShowNotice;
         eventListener.HidePreferences += EventListener_HidePreferences;
         eventListener.ShowPreferences += EventListener_ShowPreferences;
-
+        eventListener.SyncDone += EventListener_SyncDone;
+        eventListener.SyncError += EventListener_SyncError;
 
         Didomi.GetInstance().AddEventListener(eventListener);
     }
@@ -981,6 +981,16 @@ public class DemoGUI : MonoBehaviour
     private void EventListener_ShowPreferences(object sender, ShowPreferencesEvent e)
     {
         message += "EventListener_ShowPreferencesEvent Fired.";
+    }
+
+    private void EventListener_SyncDone(object sender, SyncDoneEvent e)
+    {
+        message += "EventListener_SyncDoneEvent Fired for " + e.getOrganizationUserId();
+    }
+
+    private void EventListener_SyncError(object sender, SyncErrorEvent e)
+    {
+        message += "EventListener_SyncErrorEvent Fired. Error: " + e.getErrorMessage();
     }
 
     private void EventListener_HidePreferences(object sender, HidePreferencesEvent e)

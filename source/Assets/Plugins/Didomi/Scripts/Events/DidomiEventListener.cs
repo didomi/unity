@@ -28,6 +28,8 @@ namespace IO.Didomi.SDK.Events
         public event EventHandler<PreferencesClickVendorAgreeEvent> PreferencesClickVendorAgree;
         public event EventHandler<PreferencesClickVendorDisagreeEvent> PreferencesClickVendorDisagree;
         public event EventHandler<PreferencesClickVendorSaveChoicesEvent> PreferencesClickVendorSaveChoices;
+        public event EventHandler<SyncDoneEvent> SyncDone;
+        public event EventHandler<SyncErrorEvent> SyncError;
 
         public DidomiEventListener() { }
 
@@ -149,6 +151,18 @@ namespace IO.Didomi.SDK.Events
         {
             PreferencesClickVendorSaveChoices?.Invoke(this, @event);
             // Click on save on the vendors view on preferences popup
+        }
+
+        public void OnSyncDone(SyncDoneEvent @event)
+        {
+            SyncDone?.Invoke(this, @event);
+            // The user consent was synchronized
+        }
+
+        public void OnSyncError(SyncErrorEvent @event)
+        {
+            SyncError?.Invoke(this, @event);
+            // There was an error while synchronizing user consent
         }
     }
 }

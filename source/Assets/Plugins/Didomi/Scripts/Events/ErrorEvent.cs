@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace IO.Didomi.SDK.Events
 {
+    /// <summary>
+    /// An error occurred within the SDK
+    /// </summary>
     public class ErrorEvent : Event
     { 
         /**
-         * ID of the purpose
+         * Description of the error
          */
         private string errorMessage;
 
         /**
          * Constructor
          *
-         * @param purposeId ID of the purpose
+         * @param errorMessage Description of the error
          */
         public ErrorEvent(
             string errorMessage

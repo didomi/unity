@@ -24,10 +24,14 @@ import os
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers @objcMembers public class UserAuthWithEncryptionParams : Didomi.UserAuthParams {
+  @objc convenience public init(id: Swift.String, algorithm: Swift.String, secretID: Swift.String, initializationVector: Swift.String)
+  @objc convenience public init(id: Swift.String, algorithm: Swift.String, secretID: Swift.String, initializationVector: Swift.String, legacyExpiration: Foundation.TimeInterval)
   @objc public var initializationVector: Swift.String
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers @objcMembers public class UserAuthWithHashParams : Didomi.UserAuthParams {
+  @objc convenience public init(id: Swift.String, algorithm: Swift.String, secretID: Swift.String, digest: Swift.String, salt: Swift.String? = nil)
+  @objc convenience public init(id: Swift.String, algorithm: Swift.String, secretID: Swift.String, digest: Swift.String, salt: Swift.String? = nil, legacyExpiration: Foundation.TimeInterval)
   @objc public var salt: Swift.String?
   @objc public var digest: Swift.String
   @objc deinit
