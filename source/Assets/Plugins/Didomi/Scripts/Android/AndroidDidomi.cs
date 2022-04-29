@@ -214,7 +214,7 @@ namespace IO.Didomi.SDK.Android
             args[1] = localConfigurationPath;
             args[2] = remoteConfigurationURL;
             args[3] = providerId;
-            args[4] = new AndroidJavaObject("java.lang.Boolean", disableDidomiRemoteConfig.ToString());
+            args[4] = disableDidomiRemoteConfig;
             args[5] = languageCode;
 
             CallVoidMethodForInitialize(
@@ -236,7 +236,7 @@ namespace IO.Didomi.SDK.Android
             args[1] = localConfigurationPath;
             args[2] = remoteConfigurationURL;
             args[3] = providerId;
-            args[4] = new AndroidJavaObject("java.lang.Boolean", disableDidomiRemoteConfig.ToString());
+            args[4] = disableDidomiRemoteConfig;
             args[5] = languageCode;
             args[6] = noticeId;
 
