@@ -805,11 +805,11 @@ namespace IO.Didomi.SDK.Tests
             syncDoneUserId = null;
 
             AddLogLine(logs, "Sync with User Id");
-            Didomi.GetInstance().SetUser("abcd");
+            Didomi.GetInstance().SetUser(testUserId);
 
             yield return new WaitForSeconds(1);
 
-            if (syncDoneUserId != "abcd")
+            if (syncDoneUserId != testUserId)
             {
                 TestFailed(logs, "SyncDone with simple user returned an incorrect UserId: " + syncDoneUserId);
                 success = false;
