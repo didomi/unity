@@ -343,5 +343,15 @@ namespace IO.Didomi.SDK.UnityEditor
         {
             throw new NotImplementedException();
         }
+
+        public void SetUserAndSetupUI(string organizationUserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetUserAndSetupUI(UserAuthParams userAuthParams)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

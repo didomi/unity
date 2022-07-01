@@ -454,10 +454,10 @@ public class DemoGUI : MonoBehaviour
 
     private void SetUser()
     {
-        if (GUI.Button(GetFuncRect1(), "SetUser with id"))
+        if (GUI.Button(GetFuncRect1(), "SetUser with id + setupUI"))
         {
             message = string.Empty;
-            Didomi.GetInstance().SetUser("abcd");
+            Didomi.GetInstance().SetUserAndSetupUI("vwxyz");
             message += "Calling SetUser with id";
         }
 
@@ -472,7 +472,7 @@ public class DemoGUI : MonoBehaviour
         if (GUI.Button(GetFuncRect3(), "SetUser with encryption"))
         {
             message = string.Empty;
-            UserAuthParams parameters = new UserAuthWithEncryptionParams("abcd", "algorithm", "secret", "vector");
+            UserAuthParams parameters = new UserAuthWithEncryptionParams("efgh", "algorithm", "secret", "vector");
             Didomi.GetInstance().SetUser(parameters);
             message += "Calling SetUser with Encryption params";
         }

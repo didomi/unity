@@ -86,5 +86,7 @@ namespace IO.Didomi.SDK.Interfaces
         void UpdateSelectedLanguage(string languageCode);
         void SetUser(string organizationUserId);
         void SetUser(UserAuthParams userAuthParams);
+        void SetUserAndSetupUI(string organizationUserId);
+        void SetUserAndSetupUI(UserAuthParams userAuthParams);
     }
 }

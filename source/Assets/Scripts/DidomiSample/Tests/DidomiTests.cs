@@ -785,7 +785,7 @@ namespace IO.Didomi.SDK.Tests
             syncError = false;
 
             AddLogLine(logs, "Sync with Encryption with expiration");
-            Didomi.GetInstance().SetUser(new UserAuthWithEncryptionParams(
+            Didomi.GetInstance().SetUserAndSetupUI(new UserAuthWithEncryptionParams(
                 id: testUserId,
                 algorithm: "hash-md5",
                 secretId: "testsdks-PEap2wBx",
