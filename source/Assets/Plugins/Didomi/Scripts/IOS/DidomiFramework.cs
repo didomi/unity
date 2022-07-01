@@ -721,6 +721,18 @@ namespace IO.Didomi.SDK.IOS
 
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern bool setUserAndSetupUI(string organizationUserId);
+#endif
+
+        public static void SetUserAndSetupUI(string organizationUserId)
+        {
+#if UNITY_IOS && !UNITY_EDITOR
+            setUserAndSetupUI(organizationUserId);
+#endif
+        }
+
+#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern bool setUserWithEncryptionParamsWithExpiration(string organizationUserId, string algorithm, string secretID, string initializationVector, long expiration);
 
         [DllImport("__Internal")]
@@ -740,6 +752,31 @@ namespace IO.Didomi.SDK.IOS
             {
 #if UNITY_IOS && !UNITY_EDITOR
                 setUserWithEncryptionParams(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector);
+#endif
+            }
+        }
+
+#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern bool setUserWithEncryptionParamsWithExpirationAndSetupUI(string organizationUserId, string algorithm, string secretID, string initializationVector, long expiration);
+
+        [DllImport("__Internal")]
+        private static extern bool setUserWithEncryptionParamsAndSetupUI(string organizationUserId, string algorithm, string secretID, string initializationVector);
+#endif
+
+        public static void SetUserWithEncryptionParamsAndSetupUI(UserAuthWithEncryptionParams parameters)
+        {
+            long? expiration = parameters.Expiration;
+            if (expiration.HasValue)
+            {
+#if UNITY_IOS && !UNITY_EDITOR
+                setUserWithEncryptionParamsWithExpirationAndSetupUI(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector, expiration.Value);
+#endif
+            }
+            else
+            {
+#if UNITY_IOS && !UNITY_EDITOR
+                setUserWithEncryptionParamsAndSetupUI(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector);
 #endif
             }
         }
@@ -768,6 +805,30 @@ namespace IO.Didomi.SDK.IOS
 #endif
             }
         }
+
+#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern bool setUserWithHashParamsWithExpirationAndSetupUI(string organizationUserId, string algorithm, string secretID, string digest, string salt, long expiration);
+
+        [DllImport("__Internal")]
+        private static extern bool setUserWithHashParamsAndSetupUI(string organizationUserId, string algorithm, string secretID, string digest, string salt);
+#endif
+
+        public static void SetUserWithHashParamsAndSetupUI(UserAuthWithHashParams parameters)
+        {
+            long? expiration = parameters.Expiration;
+            if (expiration.HasValue)
+            {
+#if UNITY_IOS && !UNITY_EDITOR
+                setUserWithHashParamsWithExpirationAndSetupUI(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt, expiration.Value);
+#endif
+            }
+            else
+            {
+#if UNITY_IOS && !UNITY_EDITOR
+                setUserWithHashParamsAndSetupUI(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt);
+#endif
+            }
+        }
     }
 }
-

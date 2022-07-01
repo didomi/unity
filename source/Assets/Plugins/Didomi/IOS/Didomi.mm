@@ -361,6 +361,12 @@ void setUser(char* organizationUserId)
     return [[Didomi shared] setUserWithId: CreateNSString(organizationUserId)];
 }
 
+void setUserAndSetupUI(char* organizationUserId)
+{
+    return [[Didomi shared] setUserWithId: CreateNSString(organizationUserId)
+        containerController: UnityGetGLViewController()];
+}
+
 void setUserWithEncryptionParams(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector)
 {
     UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc]
@@ -369,6 +375,17 @@ void setUserWithEncryptionParams(char* organizationUserId, char* algorithm, char
                                                         secretID: CreateNSString(secretID)
                                                         initializationVector: CreateNSString(initializationVector)];
     [[Didomi shared] setUserWithUserAuthParams:userAuthParameters];
+}
+
+void setUserWithEncryptionParamsAndSetupUI(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector)
+{
+    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc]
+                                                        initWithId: CreateNSString(organizationUserId)
+                                                        algorithm: CreateNSString(algorithm)
+                                                        secretID: CreateNSString(secretID)
+                                                        initializationVector: CreateNSString(initializationVector)];
+    [[Didomi shared] setUserWithUserAuthParams:userAuthParameters
+        containerController: UnityGetGLViewController()];
 }
 
 void setUserWithEncryptionParamsWithExpiration(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector, long expiration)
@@ -382,6 +399,18 @@ void setUserWithEncryptionParamsWithExpiration(char* organizationUserId, char* a
     [[Didomi shared] setUserWithUserAuthParams:userAuthParameters];
 }
 
+void setUserWithEncryptionParamsWithExpirationAndSetupUI(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector, long expiration)
+{
+    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc]
+                                                        initWithId: CreateNSString(organizationUserId)
+                                                        algorithm: CreateNSString(algorithm)
+                                                        secretID: CreateNSString(secretID)
+                                                        initializationVector: CreateNSString(initializationVector)
+                                                        legacyExpiration:(double)expiration];
+    [[Didomi shared] setUserWithUserAuthParams:userAuthParameters
+        containerController: UnityGetGLViewController()];
+}
+
 void setUserWithHashParams(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt)
 {
     UserAuthWithHashParams *userAuthParameters = [[UserAuthWithHashParams alloc]
@@ -391,6 +420,18 @@ void setUserWithHashParams(char* organizationUserId, char* algorithm, char* secr
                                                         digest: CreateNSString(digest)
                                                         salt: CreateNSStringNullable(salt)];
     [[Didomi shared] setUserWithUserAuthParams: userAuthParameters];
+}
+
+void setUserWithHashParamsAndSetupUI(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt)
+{
+    UserAuthWithHashParams *userAuthParameters = [[UserAuthWithHashParams alloc]
+                                                        initWithId:CreateNSString(organizationUserId)
+                                                        algorithm: CreateNSString(algorithm)
+                                                        secretID: CreateNSString(secretID)
+                                                        digest: CreateNSString(digest)
+                                                        salt: CreateNSStringNullable(salt)];
+    [[Didomi shared] setUserWithUserAuthParams: userAuthParameters
+        containerController: UnityGetGLViewController()];
 }
 
 void setUserWithHashParamsWithExpiration(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt, long expiration)
@@ -403,6 +444,19 @@ void setUserWithHashParamsWithExpiration(char* organizationUserId, char* algorit
                                                         salt: CreateNSStringNullable(salt)
                                                         legacyExpiration:(double)expiration];
     [[Didomi shared] setUserWithUserAuthParams: userAuthParameters];
+}
+
+void setUserWithHashParamsWithExpirationAndSetupUI(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt, long expiration)
+{
+    UserAuthWithHashParams *userAuthParameters = [[UserAuthWithHashParams alloc]
+                                                        initWithId: CreateNSString(organizationUserId)
+                                                        algorithm: CreateNSString(algorithm)
+                                                        secretID: CreateNSString(secretID)
+                                                        digest: CreateNSString(digest)
+                                                        salt: CreateNSStringNullable(salt)
+                                                        legacyExpiration:(double)expiration];
+    [[Didomi shared] setUserWithUserAuthParams: userAuthParameters
+        containerController: UnityGetGLViewController()];
 }
 
 void updateSelectedLanguage(char* languageCode)

@@ -339,18 +339,18 @@ namespace IO.Didomi.SDK.IOS
 
         public void SetUserAndSetupUI(string organizationUserId)
         {
-            DidomiFramework.SetUser(organizationUserId);
+            DidomiFramework.SetUserAndSetupUI(organizationUserId);
         }
 
         public void SetUserAndSetupUI(UserAuthParams userAuthParams)
         {
             if (userAuthParams is UserAuthWithEncryptionParams)
             {
-                DidomiFramework.SetUserWithEncryptionParams((UserAuthWithEncryptionParams)userAuthParams);
+                DidomiFramework.SetUserWithEncryptionParamsAndSetupUI((UserAuthWithEncryptionParams)userAuthParams);
             }
             else if (userAuthParams is UserAuthWithHashParams)
             {
-                DidomiFramework.SetUserWithHashParams((UserAuthWithHashParams)userAuthParams);
+                DidomiFramework.SetUserWithHashParamsAndSetupUI((UserAuthWithHashParams)userAuthParams);
             }
             else
             {
