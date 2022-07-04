@@ -357,5 +357,10 @@ namespace IO.Didomi.SDK.IOS
                 throw new NotImplementedException("Unsupported User Auth parameters type");
             }
         }
+
+        public void ClearUser()
+        {
+            DidomiFramework.ClearUser();
+        }
     }
 }

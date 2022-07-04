@@ -401,6 +401,11 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethodWithActivityLastArg("setUser", nativeParams);
         }
 
+        public void ClearUser()
+        {
+            CallVoidMethod("clearUser");
+        }
+
         private static bool CallReturningBoolMethod(string methodName, params object[] args)
         {
             return CallReturningMethodBase<bool>(methodName, args);

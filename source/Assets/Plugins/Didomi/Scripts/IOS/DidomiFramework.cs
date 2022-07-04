@@ -709,7 +709,7 @@ namespace IO.Didomi.SDK.IOS
 
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUser(string organizationUserId);
+        private static extern void setUser(string organizationUserId);
 #endif
 
         public static void SetUser(string organizationUserId)
@@ -721,7 +721,7 @@ namespace IO.Didomi.SDK.IOS
 
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserAndSetupUI(string organizationUserId);
+        private static extern void setUserAndSetupUI(string organizationUserId);
 #endif
 
         public static void SetUserAndSetupUI(string organizationUserId)
@@ -733,10 +733,10 @@ namespace IO.Didomi.SDK.IOS
 
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserWithEncryptionParamsWithExpiration(string organizationUserId, string algorithm, string secretID, string initializationVector, long expiration);
+        private static extern void setUserWithEncryptionParamsWithExpiration(string organizationUserId, string algorithm, string secretID, string initializationVector, long expiration);
 
         [DllImport("__Internal")]
-        private static extern bool setUserWithEncryptionParams(string organizationUserId, string algorithm, string secretID, string initializationVector);
+        private static extern void setUserWithEncryptionParams(string organizationUserId, string algorithm, string secretID, string initializationVector);
 #endif
 
         public static void SetUserWithEncryptionParams(UserAuthWithEncryptionParams parameters)
@@ -758,10 +758,10 @@ namespace IO.Didomi.SDK.IOS
 
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserWithEncryptionParamsWithExpirationAndSetupUI(string organizationUserId, string algorithm, string secretID, string initializationVector, long expiration);
+        private static extern void setUserWithEncryptionParamsWithExpirationAndSetupUI(string organizationUserId, string algorithm, string secretID, string initializationVector, long expiration);
 
         [DllImport("__Internal")]
-        private static extern bool setUserWithEncryptionParamsAndSetupUI(string organizationUserId, string algorithm, string secretID, string initializationVector);
+        private static extern void setUserWithEncryptionParamsAndSetupUI(string organizationUserId, string algorithm, string secretID, string initializationVector);
 #endif
 
         public static void SetUserWithEncryptionParamsAndSetupUI(UserAuthWithEncryptionParams parameters)
@@ -783,10 +783,10 @@ namespace IO.Didomi.SDK.IOS
 
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserWithHashParamsWithExpiration(string organizationUserId, string algorithm, string secretID, string digest, string salt, long expiration);
+        private static extern void setUserWithHashParamsWithExpiration(string organizationUserId, string algorithm, string secretID, string digest, string salt, long expiration);
 
         [DllImport("__Internal")]
-        private static extern bool setUserWithHashParams(string organizationUserId, string algorithm, string secretID, string digest, string salt);
+        private static extern void setUserWithHashParams(string organizationUserId, string algorithm, string secretID, string digest, string salt);
 #endif
 
         public static void SetUserWithHashParams(UserAuthWithHashParams parameters)
@@ -808,10 +808,10 @@ namespace IO.Didomi.SDK.IOS
 
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserWithHashParamsWithExpirationAndSetupUI(string organizationUserId, string algorithm, string secretID, string digest, string salt, long expiration);
+        private static extern void setUserWithHashParamsWithExpirationAndSetupUI(string organizationUserId, string algorithm, string secretID, string digest, string salt, long expiration);
 
         [DllImport("__Internal")]
-        private static extern bool setUserWithHashParamsAndSetupUI(string organizationUserId, string algorithm, string secretID, string digest, string salt);
+        private static extern void setUserWithHashParamsAndSetupUI(string organizationUserId, string algorithm, string secretID, string digest, string salt);
 #endif
 
         public static void SetUserWithHashParamsAndSetupUI(UserAuthWithHashParams parameters)
@@ -829,6 +829,18 @@ namespace IO.Didomi.SDK.IOS
                 setUserWithHashParamsAndSetupUI(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt);
 #endif
             }
+        }
+
+#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern void clearUser();
+#endif
+
+        public static void ClearUser()
+        {
+#if UNITY_IOS && !UNITY_EDITOR
+            clearUser();
+#endif
         }
     }
 }

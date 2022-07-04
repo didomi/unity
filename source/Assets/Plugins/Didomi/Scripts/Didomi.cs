@@ -654,5 +654,13 @@ namespace IO.Didomi.SDK
         {
             didomiForPlatform.SetUserAndSetupUI(userAuthParams);
         }
+
+        /// <summary>
+        /// Remove any custom user information from organization
+        /// </summary>
+        public void ClearUser()
+        {
+            didomiForPlatform.ClearUser();
+        }
     }
 }

@@ -459,6 +459,11 @@ void setUserWithHashParamsWithExpirationAndSetupUI(char* organizationUserId, cha
         containerController: UnityGetGLViewController()];
 }
 
+void clearUser()
+{
+    return [[Didomi shared] clearUser];
+}
+
 void updateSelectedLanguage(char* languageCode)
 {
 	return [[Didomi shared] updateSelectedLanguageWithLanguageCode: CreateNSString(languageCode)];

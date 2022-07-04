@@ -353,5 +353,10 @@ namespace IO.Didomi.SDK.UnityEditor
         {
             throw new NotImplementedException();
         }
+
+        public void ClearUser()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

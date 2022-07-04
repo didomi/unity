@@ -88,5 +88,6 @@ namespace IO.Didomi.SDK.Interfaces
         void SetUser(UserAuthParams userAuthParams);
         void SetUserAndSetupUI(string organizationUserId);
         void SetUserAndSetupUI(UserAuthParams userAuthParams);
+        void ClearUser();
     }
 }
