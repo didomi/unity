@@ -636,5 +636,31 @@ namespace IO.Didomi.SDK
         {
             didomiForPlatform.SetUser(userAuthParams);
         }
+
+        /// <summary>
+        /// Set custom user information from organization, and call setupUI after synchronization if sdk was initialized
+        /// </summary>
+        /// <param name="organizationUserId">Organization user id</param>
+        public void SetUserAndSetupUI(string organizationUserId)
+        {
+            didomiForPlatform.SetUserAndSetupUI(organizationUserId);
+        }
+
+        /// <summary>
+        /// Set custom user information from organization, and call setupUI after synchronization if sdk was initialized
+        /// </summary>
+        /// <param name="userAuthParams">Parameters to synchronize the user consent</param>
+        public void SetUserAndSetupUI(UserAuthParams userAuthParams)
+        {
+            didomiForPlatform.SetUserAndSetupUI(userAuthParams);
+        }
+
+        /// <summary>
+        /// Remove any custom user information from organization
+        /// </summary>
+        public void ClearUser()
+        {
+            didomiForPlatform.ClearUser();
+        }
     }
 }

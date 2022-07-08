@@ -336,5 +336,31 @@ namespace IO.Didomi.SDK.IOS
                 throw new NotImplementedException("Unsupported User Auth parameters type");
             }
         }
+
+        public void SetUserAndSetupUI(string organizationUserId)
+        {
+            DidomiFramework.SetUserAndSetupUI(organizationUserId);
+        }
+
+        public void SetUserAndSetupUI(UserAuthParams userAuthParams)
+        {
+            if (userAuthParams is UserAuthWithEncryptionParams)
+            {
+                DidomiFramework.SetUserWithEncryptionParamsAndSetupUI((UserAuthWithEncryptionParams)userAuthParams);
+            }
+            else if (userAuthParams is UserAuthWithHashParams)
+            {
+                DidomiFramework.SetUserWithHashParamsAndSetupUI((UserAuthWithHashParams)userAuthParams);
+            }
+            else
+            {
+                throw new NotImplementedException("Unsupported User Auth parameters type");
+            }
+        }
+
+        public void ClearUser()
+        {
+            DidomiFramework.ClearUser();
+        }
     }
 }

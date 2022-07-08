@@ -390,6 +390,22 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethod("setUser", nativeParams);
         }
 
+        public void SetUserAndSetupUI(string organizationUserId)
+        {
+            CallVoidMethodWithActivityLastArg("setUser", organizationUserId);
+        }
+
+        public void SetUserAndSetupUI(UserAuthParams userAuthParams)
+        {
+            AndroidJavaObject nativeParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
+            CallVoidMethodWithActivityLastArg("setUser", nativeParams);
+        }
+
+        public void ClearUser()
+        {
+            CallVoidMethod("clearUser");
+        }
+
         private static bool CallReturningBoolMethod(string methodName, params object[] args)
         {
             return CallReturningMethodBase<bool>(methodName, args);
@@ -430,6 +446,49 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
+        /**
+         * Calls 'method(args..., activity)'
+         */
+        private static void CallVoidMethodWithActivityLastArg(string methodName, params object[] args)
+        {
+            try
+            {
+                using (var playerClass = new AndroidJavaClass(UnityPlayerFullClassName))
+                {
+                    using (var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity"))
+                    {
+                        using (var _pluginClass = new AndroidJavaClass(PluginName))
+                        {
+                            var pluginInstance = _pluginClass.CallStatic<AndroidJavaObject>("getInstance");
+
+                            MapNullValuesToJava(args);
+
+                            var obj = new object[args.Length + 1];
+
+                            for (int i = 0; i < obj.Length-1; i++)
+                            {
+                                obj[i] = args[i];
+                            }
+
+                            obj[obj.Length-1] = activity;
+
+                            pluginInstance.Call(methodName, obj);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(string.Format("Exception:{0}", ex.ToString()));
+
+                throw ex;
+            }
+        }
+
+        /**
+         * Calls 'method(activity)'
+         */
         private static void CallReturningMethodWithActivityArg(string methodName)
         {
             try
@@ -455,6 +514,9 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
+        /**
+         * Calls 'method(application, args...)'
+         */
         private static void CallVoidMethodForInitialize(string methodName, object[] args)
         {
             try
