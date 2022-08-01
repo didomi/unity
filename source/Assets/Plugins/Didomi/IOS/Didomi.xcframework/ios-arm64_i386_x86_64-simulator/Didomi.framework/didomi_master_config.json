@@ -9917,89 +9917,53 @@
 	"purposesV2": [
 		{
 			"id": "cookies",
-			"iabId": "1",
-			"name": "purpose_1_name",
-			"description": "purpose_1_description",
-			"descriptionLegal": "purpose_1_description_legal"
+			"iabId": "1"
 		},
 		{
 			"id": "select_basic_ads",
-			"iabId": "2",
-			"name": "purpose_2_name",
-			"description": "purpose_2_description",
-			"descriptionLegal": "purpose_2_description_legal"
+			"iabId": "2"
 		},
 		{
 			"id": "create_ads_profile",
-			"iabId": "3",
-			"name": "purpose_3_name",
-			"description": "purpose_3_description",
-			"descriptionLegal": "purpose_3_description_legal"
+			"iabId": "3"
 		},
 		{
 			"id": "select_personalized_ads",
-			"iabId": "4",
-			"name": "purpose_4_name",
-			"description": "purpose_4_description",
-			"descriptionLegal": "purpose_4_description_legal"
+			"iabId": "4"
 		},
 		{
 			"id": "create_content_profile",
-			"iabId": "5",
-			"name": "purpose_5_name",
-			"description": "purpose_5_description",
-			"descriptionLegal": "purpose_5_description_legal"
+			"iabId": "5"
 		},
 		{
 			"id": "select_personalized_content",
-			"iabId": "6",
-			"name": "purpose_6_name",
-			"description": "purpose_6_description",
-			"descriptionLegal": "purpose_6_description_legal"
+			"iabId": "6"
 		},
 		{
 			"id": "measure_ad_performance",
-			"iabId": "7",
-			"name": "purpose_7_name",
-			"description": "purpose_7_description",
-			"descriptionLegal": "purpose_7_description_legal"
+			"iabId": "7"
 		},
 		{
 			"id": "measure_content_performance",
-			"iabId": "8",
-			"name": "purpose_8_name",
-			"description": "purpose_8_description",
-			"descriptionLegal": "purpose_8_description_legal"
+			"iabId": "8"
 		},
 		{
 			"id": "market_research",
-			"iabId": "9",
-			"name": "purpose_9_name",
-			"description": "purpose_9_description",
-			"descriptionLegal": "purpose_9_description_legal"
+			"iabId": "9"
 		},
 		{
 			"id": "improve_products",
-			"iabId": "10",
-			"name": "purpose_10_name",
-			"description": "purpose_10_description",
-			"descriptionLegal": "purpose_10_description_legal"
+			"iabId": "10"
 		}
 	],
 	"specialFeatures": [
 		{
 			"id": "geolocation_data",
-			"iabId": "1",
-			"name": "special_feature_1_name",
-			"description": "special_feature_1_description",
-			"descriptionLegal": "special_feature_1_description_legal"
+			"iabId": "1"
 		},
 		{
 			"id": "device_characteristics",
-			"iabId": "2",
-			"name": "special_feature_2_name",
-			"description": "special_feature_2_description",
-			"descriptionLegal": "special_feature_2_description_legal"
+			"iabId": "2"
 		}
 	],
 	"vendors": [
