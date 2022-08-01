@@ -36,6 +36,8 @@ namespace Assets.Plugins.Scripts.IOS
         DDMEventTypePreferencesClickVendorSaveChoices = 27,
         DDMEventTypeSyncDone = 28,
         DDMEventTypeSyncError = 29,
+        DDMEventTypeLanguageUpdated = 30,
+        DDMEventTypeLanguageUpdateFailed = 31,
         DDMEventTypeError = 1000,
     };
 }

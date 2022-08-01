@@ -899,6 +899,8 @@ public class DemoGUI : MonoBehaviour
         eventListener.ShowPreferences += EventListener_ShowPreferences;
         eventListener.SyncDone += EventListener_SyncDone;
         eventListener.SyncError += EventListener_SyncError;
+        eventListener.LanguageUpdated += EventListener_LanguageUpdated;
+        eventListener.LanguageUpdateFailed += EventListener_LanguageUpdateFailed;
 
         Didomi.GetInstance().AddEventListener(eventListener);
     }
@@ -1001,6 +1003,16 @@ public class DemoGUI : MonoBehaviour
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)
     {
         message += "EventListener_ConsentChangedEvent Fired.";
+    }
+
+    private void EventListener_LanguageUpdated(object sender, LanguageUpdatedEvent e)
+    {
+        message += "EventListener_LanguageUpdatedEvent Fired. Language code: " + e.getLanguageCode();
+    }
+
+    private void EventListener_LanguageUpdateFailed(object sender, LanguageUpdateFailedEvent e)
+    {
+        message += "EventListener_LanguageUpdateFailedEvent Fired. Reason: " + e.getReason();
     }
 
     private string GetFirstRequiredPurposeId()

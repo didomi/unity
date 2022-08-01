@@ -201,6 +201,19 @@ namespace IO.Didomi.SDK.Android
             _eventListener.OnSyncError(SyncErrorEvent);
         }
 
+        public void languageUpdated(AndroidJavaObject @event)
+        {
+            var LanguageUpdatedEvent = ConvertToLanguageUpdatedEvent(@event);
+
+            _eventListener.OnLanguageUpdated(LanguageUpdatedEvent);
+        }
+
+        public void languageUpdateFailed(AndroidJavaObject @event)
+        {
+            var LanguageUpdateFailedEvent = ConvertToLanguageUpdateFailedEvent(@event);
+
+            _eventListener.OnLanguageUpdateFailed(LanguageUpdateFailedEvent);
+        }
 
         private static ConsentChangedEvent ConvertToConsentChangedEvent(AndroidJavaObject @event)
         {
@@ -326,6 +339,20 @@ namespace IO.Didomi.SDK.Android
             return new SyncErrorEvent(error);
         }
 
+        private static LanguageUpdatedEvent ConvertToLanguageUpdatedEvent(AndroidJavaObject @event)
+        {
+            var languageCode = GetLanguageCode(@event);
+
+            return new LanguageUpdatedEvent(languageCode);
+        }
+
+        private static LanguageUpdateFailedEvent ConvertToLanguageUpdateFailedEvent(AndroidJavaObject @event)
+        {
+            var reason = GetReason(@event);
+
+            return new LanguageUpdateFailedEvent(reason);
+        }
+
         private static string GetPurposeId(AndroidJavaObject @event)
         {
            return AndroidObjectMapper.GetMethodStringValue(@event, "getPurposeId");
@@ -344,6 +371,16 @@ namespace IO.Didomi.SDK.Android
         private static string GetError(AndroidJavaObject @event)
         {
             return AndroidObjectMapper.GetMethodStringValue(@event, "getError");
+        }
+
+        private static string GetLanguageCode(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getLanguageCode");
+        }
+
+        private static string GetReason(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getReason");
         }
     }
 }

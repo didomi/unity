@@ -637,6 +637,18 @@ void addEventListener( void (*event_listener_handler) (int, char *))
         event_listener_handler(eventType, convertNSStringToCString(error));
 
     };
+    
+    eventListener.onLanguageUpdated = ^(DDMEventType eventType, NSString * _Nullable languageCode){
+
+        event_listener_handler(eventType, convertNSStringToCString(languageCode));
+
+    };
+    
+    eventListener.onLanguageUpdateFailed = ^(DDMEventType eventType, NSString * _Nullable reason){
+
+        event_listener_handler(eventType, convertNSStringToCString(reason));
+
+    };
 
    [[Didomi shared] addEventListenerWithListener:eventListener];
 

@@ -521,6 +521,12 @@ namespace IO.Didomi.SDK.IOS
                 case DDMEventType.DDMEventTypeSyncError:
                     eventListenerInner.OnSyncError(new SyncErrorEvent(argument));
                     break;
+                case DDMEventType.DDMEventTypeLanguageUpdated:
+                    eventListenerInner.OnLanguageUpdated(new LanguageUpdatedEvent(argument));
+                    break;
+                case DDMEventType.DDMEventTypeLanguageUpdateFailed:
+                    eventListenerInner.OnLanguageUpdateFailed(new LanguageUpdateFailedEvent(argument));
+                    break;
                 default:
                     break;
             }
