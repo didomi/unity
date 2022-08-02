@@ -644,13 +644,19 @@ namespace IO.Didomi.SDK.Tests
         {
             AddLogLine(logs, "GetUserStatus processing ...");
 
-            // Tested vendor: Adssets AB
-            string vendorId = "205";
+            // In case of failure, make sure the tested vendor has
+            // both consent and LI purposes associated in the latest GVL.
+            // GVL endpoint: https://sdk.privacy-center.org/tcf/v2/vendor-list.json
+            // Currently tested vendor: Magnite CTV, Inc.
+            string vendorId = "202";
+            // Tested purpose (IAB purpose 4)
             string purposeId = "select_personalized_ads";
 
             Didomi didomi = Didomi.GetInstance();
 
             bool success = true;
+
+            AddLogLine(logs, "- Enabling all purposes and vendors -");
 
             didomi.SetUserStatus(
                 purposesConsentStatus: true,
@@ -693,6 +699,8 @@ namespace IO.Didomi.SDK.Tests
             success &= AssertContains(logs, userStatus.GetPurposes().GetLegitimateInterest().GetEnabled(), purposeId, "Purpose should be in legitimateInterest.enabled");
             success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetLegitimateInterest().GetDisabled(), purposeId, "Purpose should not be in legitimateInterest.disabled");
 
+            AddLogLine(logs, "- Enabling only vendors -");
+
             didomi.SetUserStatus(
                 purposesConsentStatus: false,
                 purposesLIStatus: false,
@@ -725,6 +733,8 @@ namespace IO.Didomi.SDK.Tests
 
             success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetLegitimateInterest().GetEnabled(), purposeId, "Purpose should not be in legitimateInterest.enabled");
             success &= AssertContains(logs, userStatus.GetPurposes().GetLegitimateInterest().GetDisabled(), purposeId, "Purpose should be in legitimateInterest.disabled");
+
+            AddLogLine(logs, "- Enabling only consent purposes and vendors -");
 
             didomi.SetUserStatus(
                 purposesConsentStatus: true,
