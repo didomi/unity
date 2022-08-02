@@ -30,7 +30,7 @@ namespace IO.Didomi.SDK.Tests
         private string syncDoneUserId = null;
         private bool syncError = false;
         private string updatedLanguageCode = null;
-        private bool languageUpdateFailed = false;
+        private string languageUpdateFailureReason = null;
 
         public IEnumerator RunAll(MonoBehaviour mono, bool remoteNotice = false)
         {
@@ -794,12 +794,12 @@ namespace IO.Didomi.SDK.Tests
                 success = false;
             }
 
-            languageUpdateFailed = false;
+            languageUpdateFailureReason = null;
             Didomi.GetInstance().UpdateSelectedLanguage("!!-invalid-language-code-!!");
 
             yield return new WaitForSeconds(1);
 
-            if (!languageUpdateFailed)
+            if (languageUpdateFailureReason == null)
             {
                 TestFailed(logs, "Language update should fail");
                 success = false;
@@ -1319,7 +1319,7 @@ namespace IO.Didomi.SDK.Tests
 
         private void EventListener_LanguageUpdateFailed(object sender, LanguageUpdateFailedEvent e)
         {
-            languageUpdateFailed = true;
+            languageUpdateFailureReason = e.getReason();
         }
     }
 }
