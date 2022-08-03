@@ -30,6 +30,8 @@ namespace IO.Didomi.SDK.Events
         public event EventHandler<PreferencesClickVendorSaveChoicesEvent> PreferencesClickVendorSaveChoices;
         public event EventHandler<SyncDoneEvent> SyncDone;
         public event EventHandler<SyncErrorEvent> SyncError;
+        public event EventHandler<LanguageUpdatedEvent> LanguageUpdated;
+        public event EventHandler<LanguageUpdateFailedEvent> LanguageUpdateFailed;
 
         public DidomiEventListener() { }
 
@@ -163,6 +165,18 @@ namespace IO.Didomi.SDK.Events
         {
             SyncError?.Invoke(this, @event);
             // There was an error while synchronizing user consent
+        }
+
+        public void OnLanguageUpdated(LanguageUpdatedEvent @event)
+        {
+            LanguageUpdated?.Invoke(this, @event);
+            // Language update was complete
+        }
+
+        public void OnLanguageUpdateFailed(LanguageUpdateFailedEvent @event)
+        {
+            LanguageUpdateFailed?.Invoke(this, @event);
+            // Language update was not successful
         }
     }
 }

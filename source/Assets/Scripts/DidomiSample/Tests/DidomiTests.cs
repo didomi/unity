@@ -29,6 +29,8 @@ namespace IO.Didomi.SDK.Tests
         private bool consentChanged = false;
         private string syncDoneUserId = null;
         private bool syncError = false;
+        private string updatedLanguageCode = null;
+        private string languageUpdateFailureReason = null;
 
         public IEnumerator RunAll(MonoBehaviour mono, bool remoteNotice = false)
         {
@@ -71,7 +73,6 @@ namespace IO.Didomi.SDK.Tests
                     );
                 didomi.OnError(
                     () => {
-                        Debug.Log("!!!!!!!! STOPP");
                         _logs += $"{Environment.NewLine}Error initializing SDK.";
                         testsComplete = true;
                     }
@@ -151,8 +152,6 @@ namespace IO.Didomi.SDK.Tests
 
                 TestIsUserConsentStatusPartial(logsBuilder);
 
-                TestUpdateSelectedLanguage(logsBuilder);
-
                 TestGetUserStatus(logsBuilder, remoteNotice);
             }
             catch (Exception ex)
@@ -160,6 +159,8 @@ namespace IO.Didomi.SDK.Tests
                 AddLogLine(logsBuilder, $"Exception : {ex.Message }");
                 TestFailed(logsBuilder, description: $"Exception : {ex.StackTrace }");
             }
+
+            yield return TestUpdateSelectedLanguage(logsBuilder);
 
             // Sync should be enabled in the remote notice
             if (remoteNotice)
@@ -269,6 +270,8 @@ namespace IO.Didomi.SDK.Tests
             eventListener.ShowPreferences += EventListener_ShowPreferences;
             eventListener.SyncDone += EventListener_SyncDone;
             eventListener.SyncError += EventListener_SyncError;
+            eventListener.LanguageUpdated += EventListener_LanguageUpdated;
+            eventListener.LanguageUpdateFailed += EventListener_LanguageUpdateFailed;
 
             Didomi.GetInstance().AddEventListener(eventListener);
         }
@@ -637,28 +640,23 @@ namespace IO.Didomi.SDK.Tests
             }
         }
 
-        private void TestUpdateSelectedLanguage(StringBuilder logs)
-        {
-            AddLogLine(logs, "TestUpdateSelectedLanguage ...");
-
-            var languageCode = "fr";
-
-            Didomi.GetInstance().UpdateSelectedLanguage(languageCode);
-
-            TestSucceeded(logs);
-        }
-
         private void TestGetUserStatus(StringBuilder logs, bool tcfEnabled)
         {
-            AddLogLine(logs, "GetUserStatus processing...");
+            AddLogLine(logs, "GetUserStatus processing ...");
 
-            // Tested vendor: Adssets AB
-            string vendorId = "205";
+            // In case of failure, make sure the tested vendor has
+            // both consent and LI purposes associated in the latest GVL.
+            // GVL endpoint: https://sdk.privacy-center.org/tcf/v2/vendor-list.json
+            // Currently tested vendor: Magnite CTV, Inc.
+            string vendorId = "202";
+            // Tested purpose (IAB purpose 4)
             string purposeId = "select_personalized_ads";
 
             Didomi didomi = Didomi.GetInstance();
 
             bool success = true;
+
+            AddLogLine(logs, "- Enabling all purposes and vendors -");
 
             didomi.SetUserStatus(
                 purposesConsentStatus: true,
@@ -701,6 +699,8 @@ namespace IO.Didomi.SDK.Tests
             success &= AssertContains(logs, userStatus.GetPurposes().GetLegitimateInterest().GetEnabled(), purposeId, "Purpose should be in legitimateInterest.enabled");
             success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetLegitimateInterest().GetDisabled(), purposeId, "Purpose should not be in legitimateInterest.disabled");
 
+            AddLogLine(logs, "- Enabling only vendors -");
+
             didomi.SetUserStatus(
                 purposesConsentStatus: false,
                 purposesLIStatus: false,
@@ -734,6 +734,8 @@ namespace IO.Didomi.SDK.Tests
             success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetLegitimateInterest().GetEnabled(), purposeId, "Purpose should not be in legitimateInterest.enabled");
             success &= AssertContains(logs, userStatus.GetPurposes().GetLegitimateInterest().GetDisabled(), purposeId, "Purpose should be in legitimateInterest.disabled");
 
+            AddLogLine(logs, "- Enabling only consent purposes and vendors -");
+
             didomi.SetUserStatus(
                 purposesConsentStatus: true,
                 purposesLIStatus: false,
@@ -766,6 +768,42 @@ namespace IO.Didomi.SDK.Tests
 
             success &= AssertDoesNotContain(logs, userStatus.GetPurposes().GetLegitimateInterest().GetEnabled(), purposeId, "Purpose should not be in legitimateInterest.enabled");
             success &= AssertContains(logs, userStatus.GetPurposes().GetLegitimateInterest().GetDisabled(), purposeId, "Purpose should be in legitimateInterest.disabled");
+
+            if (success)
+            {
+                TestSucceeded(logs);
+            }
+        }
+
+        private IEnumerator TestUpdateSelectedLanguage(StringBuilder logs)
+        {
+            AddLogLine(logs, "TestUpdateSelectedLanguage ...");
+
+            bool success = true;
+
+            var languageCode = "fr";
+
+            updatedLanguageCode = null;
+            Didomi.GetInstance().UpdateSelectedLanguage(languageCode);
+
+            yield return new WaitForSeconds(1);
+
+            if (updatedLanguageCode != languageCode)
+            {
+                TestFailed(logs, "Language was not updated correctly, retrieved value = " + updatedLanguageCode);
+                success = false;
+            }
+
+            languageUpdateFailureReason = null;
+            Didomi.GetInstance().UpdateSelectedLanguage("!!-invalid-language-code-!!");
+
+            yield return new WaitForSeconds(1);
+
+            if (languageUpdateFailureReason == null)
+            {
+                TestFailed(logs, "Language update should fail");
+                success = false;
+            }
 
             if (success)
             {
@@ -1272,6 +1310,16 @@ namespace IO.Didomi.SDK.Tests
         private void EventListener_SyncError(object sender, SyncErrorEvent e)
         {
             syncError = true;
+        }
+
+        private void EventListener_LanguageUpdated(object sender, LanguageUpdatedEvent e)
+        {
+            updatedLanguageCode = e.getLanguageCode();
+        }
+
+        private void EventListener_LanguageUpdateFailed(object sender, LanguageUpdateFailedEvent e)
+        {
+            languageUpdateFailureReason = e.getReason();
         }
     }
 }
