@@ -114,6 +114,10 @@ extension Didomi.Vendor : Swift.Hashable {
 @objc public enum Regulation : Swift.Int, Swift.Codable {
   case gdpr
   case ccpa
+  case none
+  public var description: Swift.String {
+    get
+  }
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
   public init?(rawValue: Swift.Int)
@@ -247,6 +251,7 @@ extension Didomi.Didomi {
   @objc dynamic public func setUser(id: Swift.String, algorithm: Swift.String, secretId: Swift.String, salt: Swift.String?, digest: Swift.String)
   @objc dynamic public func clearUser()
   @objc dynamic public func getUserStatus() -> Didomi.UserStatus
+  public func setLocalProperty(key: Swift.String, value: Any?)
 }
 @_hasMissingDesignatedInitializers @objc(DDMUserStatus) @objcMembers public class UserStatus : ObjectiveC.NSObject, Swift.Codable {
   @objc final public let purposes: Didomi.UserStatus.Purposes
