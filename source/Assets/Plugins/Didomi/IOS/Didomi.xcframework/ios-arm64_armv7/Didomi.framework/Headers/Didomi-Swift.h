@@ -290,18 +290,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 /// returns:
 /// <em>true</em> if consent status has been updated, <em>false</em> otherwise.
 - (BOOL)setUserConsentStatusWithEnabledPurposeIds:(NSSet<NSString *> * _Nonnull)enabledPurposeIds disabledPurposeIds:(NSSet<NSString *> * _Nonnull)disabledPurposeIds enabledVendorIds:(NSSet<NSString *> * _Nonnull)enabledVendorIds disabledVendorIds:(NSSet<NSString *> * _Nonnull)disabledVendorIds SWIFT_WARN_UNUSED_RESULT;
-/// Determine if consent is required for the user. The rules are (OR):
-/// <ul>
-///   <li>
-///     The user country is in the EU.
-///   </li>
-///   <li>
-///     The company is from the EU.
-///   </li>
-///   <li>
-///     The user country is unknown and the app has chosen to collect consent when unknown.
-///   </li>
-/// </ul>
+/// Determine if the user is subject to a regulation that requires consent collection.
+/// This along with the choices that the user has or has not made
+/// will determine each time that the SDK is initialized if the notice should be displayed or not.
 ///
 /// returns:
 /// <em>true</em> if consent is required, <em>false</em> if it is not required.
@@ -760,7 +751,14 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
 typedef SWIFT_ENUM(NSInteger, Regulation, open) {
   RegulationGdpr = 0,
   RegulationCcpa = 1,
+  RegulationNone = 2,
 };
+
+
+
+
+
+
 
 
 
@@ -1183,18 +1181,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 /// returns:
 /// <em>true</em> if consent status has been updated, <em>false</em> otherwise.
 - (BOOL)setUserConsentStatusWithEnabledPurposeIds:(NSSet<NSString *> * _Nonnull)enabledPurposeIds disabledPurposeIds:(NSSet<NSString *> * _Nonnull)disabledPurposeIds enabledVendorIds:(NSSet<NSString *> * _Nonnull)enabledVendorIds disabledVendorIds:(NSSet<NSString *> * _Nonnull)disabledVendorIds SWIFT_WARN_UNUSED_RESULT;
-/// Determine if consent is required for the user. The rules are (OR):
-/// <ul>
-///   <li>
-///     The user country is in the EU.
-///   </li>
-///   <li>
-///     The company is from the EU.
-///   </li>
-///   <li>
-///     The user country is unknown and the app has chosen to collect consent when unknown.
-///   </li>
-/// </ul>
+/// Determine if the user is subject to a regulation that requires consent collection.
+/// This along with the choices that the user has or has not made
+/// will determine each time that the SDK is initialized if the notice should be displayed or not.
 ///
 /// returns:
 /// <em>true</em> if consent is required, <em>false</em> if it is not required.
@@ -1653,7 +1642,14 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
 typedef SWIFT_ENUM(NSInteger, Regulation, open) {
   RegulationGdpr = 0,
   RegulationCcpa = 1,
+  RegulationNone = 2,
 };
+
+
+
+
+
+
 
 
 
