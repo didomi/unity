@@ -771,6 +771,8 @@ typedef SWIFT_ENUM(NSInteger, Regulation, open) {
 
 
 
+
+
 /// Protocol for User Authentication
 /// declare the user id
 SWIFT_PROTOCOL("_TtP6Didomi8UserAuth_")
@@ -838,23 +840,6 @@ SWIFT_CLASS_NAMED("UserStatus")
 
 @class DDMUserStatusIDs;
 
-SWIFT_CLASS_NAMED("Vendors")
-@interface DDMUserStatusVendors : NSObject
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-@interface DDMUserStatus (SWIFT_EXTENSION(Didomi))
-@end
-
-
 SWIFT_CLASS_NAMED("Purposes")
 @interface DDMUserStatusPurposes : NSObject
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
@@ -875,6 +860,23 @@ SWIFT_CLASS_NAMED("IDs")
 @interface DDMUserStatusIDs : NSObject
 @property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull enabled;
 @property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull disabled;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface DDMUserStatus (SWIFT_EXTENSION(Didomi))
+@end
+
+
+SWIFT_CLASS_NAMED("Vendors")
+@interface DDMUserStatusVendors : NSObject
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -1660,6 +1662,8 @@ typedef SWIFT_ENUM(NSInteger, Regulation, open) {
 
 
 
+
+
 /// Protocol for User Authentication
 /// declare the user id
 SWIFT_PROTOCOL("_TtP6Didomi8UserAuth_")
@@ -1727,23 +1731,6 @@ SWIFT_CLASS_NAMED("UserStatus")
 
 @class DDMUserStatusIDs;
 
-SWIFT_CLASS_NAMED("Vendors")
-@interface DDMUserStatusVendors : NSObject
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-@interface DDMUserStatus (SWIFT_EXTENSION(Didomi))
-@end
-
-
 SWIFT_CLASS_NAMED("Purposes")
 @interface DDMUserStatusPurposes : NSObject
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
@@ -1764,6 +1751,23 @@ SWIFT_CLASS_NAMED("IDs")
 @interface DDMUserStatusIDs : NSObject
 @property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull enabled;
 @property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull disabled;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface DDMUserStatus (SWIFT_EXTENSION(Didomi))
+@end
+
+
+SWIFT_CLASS_NAMED("Vendors")
+@interface DDMUserStatusVendors : NSObject
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -2549,6 +2553,8 @@ typedef SWIFT_ENUM(NSInteger, Regulation, open) {
 
 
 
+
+
 /// Protocol for User Authentication
 /// declare the user id
 SWIFT_PROTOCOL("_TtP6Didomi8UserAuth_")
@@ -2616,23 +2622,6 @@ SWIFT_CLASS_NAMED("UserStatus")
 
 @class DDMUserStatusIDs;
 
-SWIFT_CLASS_NAMED("Vendors")
-@interface DDMUserStatusVendors : NSObject
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
-@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-@interface DDMUserStatus (SWIFT_EXTENSION(Didomi))
-@end
-
-
 SWIFT_CLASS_NAMED("Purposes")
 @interface DDMUserStatusPurposes : NSObject
 @property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
@@ -2653,6 +2642,23 @@ SWIFT_CLASS_NAMED("IDs")
 @interface DDMUserStatusIDs : NSObject
 @property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull enabled;
 @property (nonatomic, readonly, copy) NSSet<NSString *> * _Nonnull disabled;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface DDMUserStatus (SWIFT_EXTENSION(Didomi))
+@end
+
+
+SWIFT_CLASS_NAMED("Vendors")
+@interface DDMUserStatusVendors : NSObject
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull consent;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull legitimateInterest;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull global;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalConsent;
+@property (nonatomic, readonly, strong) DDMUserStatusIDs * _Nonnull globalLegitimateInterest;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");

@@ -746,7 +746,7 @@ public class DemoGUI : MonoBehaviour
             providerId: null,
             disableDidomiRemoteConfig: false,
             languageCode: null,
-            noticeId: "Ar7NPQ72");
+            noticeId: "TRJY7e7E");
     }
 
     void Events()
