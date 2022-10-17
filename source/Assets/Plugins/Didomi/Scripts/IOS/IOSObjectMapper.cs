@@ -80,6 +80,8 @@ namespace IO.Didomi.SDK.IOS
 
         public class JsonSetStringConverter : JsonConverter<ISet<string>>
         {
+            public JsonSetStringConverter() { }
+
             public override ISet<string> ReadJson(JsonReader reader, Type objectType, ISet<string> existingValue, bool hasExistingValue, JsonSerializer serializer)
             {
                 ISet<string> result = null;
