@@ -84,9 +84,9 @@ public struct Vendor : Swift.Codable {
   public var privacyPolicyUrl: Swift.String?
   public var namespace: Swift.String?
   public var namespaces: [Swift.String : Swift.String]?
-  public var purposeIds: Swift.Set<Swift.String>?
-  public var legIntPurposeIds: Swift.Set<Swift.String>?
-  public var iabId: Swift.String?
+  public var purposeIDs: Swift.Set<Swift.String>?
+  public var legIntPurposeIDs: Swift.Set<Swift.String>?
+  public var iabID: Swift.String?
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
