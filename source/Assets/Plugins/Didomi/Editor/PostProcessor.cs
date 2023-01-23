@@ -131,25 +131,8 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
         var unityPlayerFileAbsolutePath = Path.Combine(path, unityPlayerFile);
         var oldValue = "dependencies {";
         var newValue = @"dependencies {
-    ext.kotlin_version = '1.3.72'
-
-    api(""com.iab.gdpr_android:gdpr_android:1.0.1"")
-    api(""com.google.code.gson:gson:2.8.6"")
-
-    implementation(""androidx.appcompat:appcompat:1.2.0"")
-    implementation(""androidx.constraintlayout:constraintlayout:2.0.4"")
-    implementation(""androidx.lifecycle:lifecycle-extensions:2.2.0"")
-    implementation(""androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"")
-    implementation(""androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"")
-    implementation(""androidx.lifecycle:lifecycle-common-java8:2.2.0"")
-    implementation(""androidx.preference:preference-ktx:1.1.1"")
-    implementation(""com.google.android.material:material:1.3.0"")
-    implementation(""com.google.zxing:core:3.3.2"")
-    implementation(""org.apmem.tools:layouts:1.10"")
-    implementation(""org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"")
-    implementation(""org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.2"")
-    implementation(""androidx.databinding:viewbinding:7.1.2"")
-    implementation(""com.google.dagger:dagger:2.38.1"")";
+    implementation(""io.didomi.sdk:android:1.72.1"")
+    ";
         PostProcessor.ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
     }
 
