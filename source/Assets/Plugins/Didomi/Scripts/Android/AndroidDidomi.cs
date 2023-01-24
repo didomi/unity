@@ -636,7 +636,7 @@ namespace IO.Didomi.SDK.Android
         }
 
         /**
-         * Calls 'setupUI' (Must be called from UI thread)
+         * Calls 'setupUI' native method from current thread (must be called from UI thread)
          */
         private void SetupUIFromMainThread() {
             CallVoidMethodWithActivityArg("setupUI");
