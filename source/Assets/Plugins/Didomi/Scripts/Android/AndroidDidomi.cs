@@ -295,7 +295,7 @@ namespace IO.Didomi.SDK.Android
                 {
                     using (var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity"))
                     {
-                        activity.Call("runOnUiThread", new AndroidJavaRunnable(SetupUIFromMainThread));
+                        activity.Call("runOnUiThread", new AndroidJavaRunnable(NativeSetupUI));
                     }
                 }
             }
@@ -638,7 +638,7 @@ namespace IO.Didomi.SDK.Android
         /**
          * Calls 'setupUI' native method from current thread (must be called from UI thread)
          */
-        private void SetupUIFromMainThread() {
+        private void NativeSetupUI() {
             CallVoidMethodWithActivityArg("setupUI");
         }
     }
