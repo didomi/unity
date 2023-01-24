@@ -197,6 +197,18 @@ namespace IO.Didomi.SDK.UnityEditor
             _onReadyAction?.Invoke();
         }
 
+        public void Initialize(DidomiInitializeParameters parameters)
+        {
+            if (_isInitialized)
+            {
+                return;
+            }
+
+            _isInitialized = true;
+
+            _onReadyAction?.Invoke();
+        }
+
         public bool IsConsentRequired()
         {
             throw new NotImplementedException();

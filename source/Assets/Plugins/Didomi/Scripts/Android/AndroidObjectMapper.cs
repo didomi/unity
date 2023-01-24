@@ -204,6 +204,23 @@ namespace IO.Didomi.SDK.Android
             return null;
         }
 
+        public static DidomiInitializeParameters ConvertToDidomiInitializeParameters(AndroidJavaObject obj)
+        {
+            var initializeParameters = new DidomiInitializeParameters(
+                apiKey: obj.Call<string>("getApiKey"),
+                localConfigurationPath: obj.Call<string>("getLocalConfigurationPath"),
+                remoteConfigurationUrl: obj.Call<string>("getRemoteConfigurationUrl"),
+                providerId: obj.Call<string>("getProviderId"),
+                disableDidomiRemoteConfig: obj.Call<bool>("getDisableDidomiRemoteConfig"),
+                languageCode: obj.Call<string>("getLanguageCode"),
+                noticeId: obj.Call<string>("getNoticeId"),
+                tvNoticeId: obj.Call<string>("getTvNoticeId"),
+                androidTvEnabled: obj.Call<bool>("getAndroidTvEnabled")
+            );
+
+            return initializeParameters;
+        }
+
         public static UserStatus ConvertToUserStatus(AndroidJavaObject obj)
         {
             var userStatus = new UserStatus(
@@ -249,6 +266,21 @@ namespace IO.Didomi.SDK.Android
                 disabled: ConvertToSetString(obj.Call<AndroidJavaObject>("getDisabled"))
             );
             return ids;
+        }
+
+        public static AndroidJavaObject ConvertToJavaDidomiInitializeParameters(DidomiInitializeParameters parameters)
+        {
+                return new AndroidJavaObject(
+                    "io.didomi.sdk.DidomiInitializeParameters",
+                    parameters.apiKey,
+                    parameters.localConfigurationPath,
+                    parameters.remoteConfigurationUrl,
+                    parameters.providerId,
+                    parameters.disableDidomiRemoteConfig,
+                    parameters.languageCode,
+                    parameters.noticeId,
+                    parameters.tvNoticeId,
+                    parameters.androidTvEnabled);
         }
 
         public static AndroidJavaObject ConvertToJavaUserAuthParams(UserAuthParams parameters)

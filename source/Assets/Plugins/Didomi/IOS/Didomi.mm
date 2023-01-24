@@ -83,7 +83,7 @@ char* MapUserStatus(DDMUserStatus *userStatus) {
 extern "C" {
 
 void setupUI() {
-  [[Didomi shared]       setupUIWithContainerController:UnityGetGLViewController()];
+  [[Didomi shared] setupUIWithContainerController:UnityGetGLViewController()];
 }
 
 
@@ -104,24 +104,30 @@ NSString* _Nullable CreateNSStringNullable ( char* string)
 
 void setUserAgent(char* name, char* version)
 {
-    [[Didomi shared]      setUserAgentWithName: CreateNSString(name) version:CreateNSString(version)];
+    [[Didomi shared] setUserAgentWithName: CreateNSString(name) version:CreateNSString(version)];
 }
 
-void initialize( char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode)
+void initialize(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode)
 {
-    [[Didomi shared]      initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL:CreateNSStringNullable(remoteConfigurationURL)
+    [[Didomi shared] initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL:CreateNSStringNullable(remoteConfigurationURL)
         providerId:CreateNSStringNullable(providerId) disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSStringNullable(languageCode)];
 }
 
-void initializeWithNoticeId( char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId)
+void initializeWithNoticeId(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId)
 {
-    [[Didomi shared]      initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL:CreateNSStringNullable(remoteConfigurationURL)
+    [[Didomi shared] initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL:CreateNSStringNullable(remoteConfigurationURL)
         providerId:CreateNSStringNullable(providerId) disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSStringNullable(languageCode) noticeId: CreateNSStringNullable(noticeId)];
+}
+
+void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId)
+{
+    DidomiInitializeParameters *parameters = [[DidomiInitializeParameters alloc] initWithApiKey: CreateNSString(apiKey) localConfigurationPath: CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL: CreateNSStringNullable(remoteConfigurationURL) providerID: CreateNSStringNullable(providerId) disableDidomiRemoteConfig: disableDidomiRemoteConfig languageCode: CreateNSStringNullable(languageCode) noticeID: CreateNSStringNullable(noticeId)];
+    [[Didomi shared] initialize: parameters];
 }
 
 bool isReady()
 {
-	return [[Didomi shared]       isReady];
+	return [[Didomi shared] isReady];
 }
 
 char* getTranslatedText(char* key)

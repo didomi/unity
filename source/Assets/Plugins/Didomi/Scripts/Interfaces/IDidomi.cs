@@ -53,6 +53,7 @@ namespace IO.Didomi.SDK.Interfaces
           string languageCode,
           string noticeId
           );
+        void Initialize(DidomiInitializeParameters parameters);
         bool IsConsentRequired();
         bool IsUserConsentStatusPartial();
         bool IsNoticeVisible();
