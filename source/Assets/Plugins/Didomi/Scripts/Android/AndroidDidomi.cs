@@ -284,9 +284,27 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethod("onReady", didomiCallable);
         }
 
+        /**
+         * Call native `setupUI` function from UI thread
+         */
         public void SetupUI()
         {
-            CallVoidMethodWithActivityArg("setupUI");
+            try
+            {
+                using (var playerClass = new AndroidJavaClass(UnityPlayerFullClassName))
+                {
+                    using (var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity"))
+                    {
+                        activity.Call("runOnUiThread", new AndroidJavaRunnable(NativeSetupUI));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(string.Format("Exception:{0}", ex.ToString()));
+
+                throw ex;
+            }
         }
 
         public void ShowNotice()
@@ -615,6 +633,13 @@ namespace IO.Didomi.SDK.Android
                     args[i] = nullObject;
                 }
             }
+        }
+
+        /**
+         * Calls 'setupUI' native method from current thread (must be called from UI thread)
+         */
+        private void NativeSetupUI() {
+            CallVoidMethodWithActivityArg("setupUI");
         }
     }
 }
