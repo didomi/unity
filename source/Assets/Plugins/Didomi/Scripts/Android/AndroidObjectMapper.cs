@@ -204,23 +204,6 @@ namespace IO.Didomi.SDK.Android
             return null;
         }
 
-        public static DidomiInitializeParameters ConvertToDidomiInitializeParameters(AndroidJavaObject obj)
-        {
-            var initializeParameters = new DidomiInitializeParameters(
-                apiKey: obj.Call<string>("getApiKey"),
-                localConfigurationPath: obj.Call<string>("getLocalConfigurationPath"),
-                remoteConfigurationUrl: obj.Call<string>("getRemoteConfigurationUrl"),
-                providerId: obj.Call<string>("getProviderId"),
-                disableDidomiRemoteConfig: obj.Call<bool>("getDisableDidomiRemoteConfig"),
-                languageCode: obj.Call<string>("getLanguageCode"),
-                noticeId: obj.Call<string>("getNoticeId"),
-                tvNoticeId: obj.Call<string>("getTvNoticeId"),
-                androidTvEnabled: obj.Call<bool>("getAndroidTvEnabled")
-            );
-
-            return initializeParameters;
-        }
-
         public static UserStatus ConvertToUserStatus(AndroidJavaObject obj)
         {
             var userStatus = new UserStatus(
