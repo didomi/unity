@@ -60,6 +60,7 @@ public class DemoGUI : MonoBehaviour
         panel= GameObject.Find("Panel");
         SetResponsiveLayout();
         InitializeDidomi();
+        // InitializeDidomiTV(); Use this method on Android TV
         Didomi.GetInstance().SetupUI();
     }
 
@@ -726,6 +727,25 @@ public class DemoGUI : MonoBehaviour
             new DidomiInitializeParameters(
                 apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
                 disableDidomiRemoteConfig: true
+                )
+            );
+    }
+
+    private void InitializeDidomiTV()
+    {
+        message = string.Empty;
+
+        Didomi.GetInstance().OnReady(
+              () => { message = "Ready"; }
+              );
+
+        Didomi.GetInstance().Initialize(
+            new DidomiInitializeParameters(
+                apiKey: "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba",
+                disableDidomiRemoteConfig: false,
+                noticeId: "DirGCFKy",
+                tvNoticeId: "DirGCFKy",
+                androidTvEnabled: true
                 )
             );
     }
