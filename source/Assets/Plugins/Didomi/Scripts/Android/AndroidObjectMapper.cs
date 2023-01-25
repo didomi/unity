@@ -251,6 +251,21 @@ namespace IO.Didomi.SDK.Android
             return ids;
         }
 
+        public static AndroidJavaObject ConvertToJavaDidomiInitializeParameters(DidomiInitializeParameters parameters)
+        {
+                return new AndroidJavaObject(
+                    "io.didomi.sdk.DidomiInitializeParameters",
+                    parameters.apiKey,
+                    parameters.localConfigurationPath,
+                    parameters.remoteConfigurationUrl,
+                    parameters.providerId,
+                    parameters.disableDidomiRemoteConfig,
+                    parameters.languageCode,
+                    parameters.noticeId,
+                    parameters.tvNoticeId,
+                    parameters.androidTvEnabled);
+        }
+
         public static AndroidJavaObject ConvertToJavaUserAuthParams(UserAuthParams parameters)
         {
             AndroidJavaObject expiration = ConvertToJavaLong(parameters.Expiration);

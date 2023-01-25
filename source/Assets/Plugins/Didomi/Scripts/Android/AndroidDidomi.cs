@@ -217,9 +217,7 @@ namespace IO.Didomi.SDK.Android
             args[4] = disableDidomiRemoteConfig;
             args[5] = languageCode;
 
-            CallVoidMethodForInitialize(
-                "initialize",
-                args);
+            CallVoidMethodForInitialize("initialize", args);
         }
 
         public void Initialize(
@@ -240,9 +238,14 @@ namespace IO.Didomi.SDK.Android
             args[5] = languageCode;
             args[6] = noticeId;
 
-            CallVoidMethodForInitialize(
-                "initialize",
-                args);
+            CallVoidMethodForInitialize("initialize", args);
+        }
+
+        public void Initialize(DidomiInitializeParameters initializeParameters)
+        {
+            AndroidJavaObject nativeParams = AndroidObjectMapper.ConvertToJavaDidomiInitializeParameters(initializeParameters);
+
+            CallVoidMethodForInitialize("initialize", nativeParams);
         }
 
         public bool IsConsentRequired()
@@ -535,7 +538,7 @@ namespace IO.Didomi.SDK.Android
         /**
          * Calls 'method(application, args...)'
          */
-        private static void CallVoidMethodForInitialize(string methodName, object[] args)
+        private static void CallVoidMethodForInitialize(string methodName, params object[] args)
         {
             try
             {
