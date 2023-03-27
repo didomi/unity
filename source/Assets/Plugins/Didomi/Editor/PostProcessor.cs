@@ -214,7 +214,6 @@ public static class PostProcessor
             proj.AddBuildProperty(targetGuid, "DYLIB_INSTALL_NAME_BASE", "@rpath");
             proj.AddBuildProperty(targetGuid, "LD_DYLIB_INSTALL_NAME", "@executable_path/../Frameworks/$(EXECUTABLE_PATH)");
 
-            SetupDidomiFrameworkForTargetSDK(proj, targetGuid, buildPath);
             CopyDidomiConfigFileToIOSFolder(proj, targetGuid, buildPath);
             CopyPackageJsonToIOSFolder(proj, targetGuid, buildPath);
 
@@ -235,7 +234,9 @@ public static class PostProcessor
         string podfilePath = Path.Combine(buildPath, "Podfile");
         if (!File.Exists(podfilePath))
         {
-            File.WriteAllText(podfilePath, "platform :ios, '9.0'\ntarget 'Unity-iPhone' do\n pod 'Didomi-XCFramework', '" + didomiPodVersion + "'\nend");
+            string mainTarget = "target 'Unity-iPhone' do\n pod 'Didomi-XCFramework', '" + didomiPodVersion + "'\nend\n";
+            string unityFrameworkTarget = "target 'UnityFramework' do\n pod 'Didomi-XCFramework', '" + didomiPodVersion + "'\nend\n";
+            File.WriteAllText(podfilePath, $"platform :ios, '9.0'\n{mainTarget}{unityFrameworkTarget}");
         }
 
         // Execute the pod installation command
@@ -256,46 +257,6 @@ public static class PostProcessor
         // We need to leave enough time for the pod install command to run.
         process.WaitForExit(240000);
         UnityEngine.Debug.Log("*** output: " + output);
-    }
-
-    /// <summary>
-    /// For iOS platform, setups and configures didomi native libs for target SDK Device or Simulator.
-    /// </summary>
-    /// <param name="project"></param>
-    /// <param name="targetGuid"></param>
-    /// <param name="path"></param>
-    private static void SetupDidomiFrameworkForTargetSDK(PBXProject project, string targetGuid, string path)
-    {
-        var xcframeworkPath = $"{path}/Pods/Didomi-XCFramework/Didomi.xcframework";
-        var unusedSDKPath = string.Empty;
-        var simulatorPath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_i386_x86_64-simulator";
-        var devicePath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_armv7";
-
-        if (PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK)
-        {
-            unusedSDKPath = simulatorPath;
-        }
-        else
-        {
-            unusedSDKPath = devicePath;
-            var mmFile = $"{path}{PostProcessorSettings.FilePathSeperator}Libraries{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.mm";
-            var headerFileImportLineDevice = @"#import ""../../../Pods/Didomi-XCFramework/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h""";
-            var headerFileImportLineSimulator = @"#import ""../../../Pods/Didomi-XCFramework/Didomi.xcframework/ios-arm64_i386_x86_64-simulator/Didomi.framework/Headers/Didomi-Swift.h""";
-            ReplaceLineInFile(mmFile, headerFileImportLineDevice, headerFileImportLineSimulator);
-        }
-
-		if(Directory.Exists($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}"))
-		{
-			Directory.Delete($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}", true);
-			var frameworkPath = $@"{unusedSDKPath}{PostProcessorSettings.FilePathSeperator}Didomi.framework";
-			var guid = project.FindFileGuidByProjectPath(frameworkPath);
-			var unityFrameworkGuid = project.GetUnityFrameworkTargetGuid();
-
-			project.RemoveFileFromBuild(targetGuid, guid);
-			project.RemoveFileFromBuild(unityFrameworkGuid, guid);
-			project.RemoveFrameworkFromProject(targetGuid, frameworkPath);
-			project.RemoveFrameworkFromProject(unityFrameworkGuid, frameworkPath);
-		}
     }
 
     /// <summary>
