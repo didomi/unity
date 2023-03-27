@@ -191,6 +191,9 @@ public static class PostProcessor
         
         if (buildTarget == BuildTarget.iOS)
         {
+
+            RunPodInstall(buildPath);
+
             PostProcessorSettings.InitSettings();
             
             // PBXProject.GetPBXProjectPath returns the wrong path, we need to construct path by ourselves instead
@@ -208,7 +211,6 @@ public static class PostProcessor
             proj.AddBuildProperty(targetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
 
             proj.AddBuildProperty(targetGuid, "LD_RUNPATH_SEARCH_PATHS", "@executable_path/Frameworks");
-            proj.AddBuildProperty(targetGuid, "FRAMEWORK_SEARCH_PATHS", "$(inherited) $(PROJECT_DIR) $(PROJECT_DIR)/Frameworks");
             proj.AddBuildProperty(targetGuid, "DYLIB_INSTALL_NAME_BASE", "@rpath");
             proj.AddBuildProperty(targetGuid, "LD_DYLIB_INSTALL_NAME", "@executable_path/../Frameworks/$(EXECUTABLE_PATH)");
 
@@ -221,6 +223,42 @@ public static class PostProcessor
     }
 
     /// <summary>
+    /// Run `pod install` in the generated project path in order to install Didomi XCFramework.
+    /// </summary>
+    /// <param name="buildPath">Generated project path</param>
+    private static void RunPodInstall(string buildPath)
+    {
+
+        // Didomi Pod Version should be updated here.
+        string didomiPodVersion = "1.86.0";
+
+        string podfilePath = Path.Combine(buildPath, "Podfile");
+        if (!File.Exists(podfilePath))
+        {
+            File.WriteAllText(podfilePath, "platform :ios, '9.0'\ntarget 'Unity-iPhone' do\n pod 'Didomi-XCFramework', '" + didomiPodVersion + "'\nend");
+        }
+
+        // Execute the pod installation command
+        System.Diagnostics.Process process = new System.Diagnostics.Process();
+        
+        process.StartInfo.FileName = "/bin/bash";
+        process.StartInfo.Arguments = $"-c \"cd {buildPath} && /usr/local/bin/pod install --repo-update > output.txt\"";
+
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.RedirectStandardError = true;
+        process.StartInfo.EnvironmentVariables["LANG"] = "en_US.UTF-8"; // set LANG to en_US.UTF-8
+        process.Start();
+
+        // Wait for the process to finish and log the output
+        string output = process.StandardError.ReadToEnd();
+
+        // We need to leave enough time for the pod install command to run.
+        process.WaitForExit(240000);
+        UnityEngine.Debug.Log("*** output: " + output);
+    }
+
+    /// <summary>
     /// For iOS platform, setups and configures didomi native libs for target SDK Device or Simulator.
     /// </summary>
     /// <param name="project"></param>
@@ -228,7 +266,7 @@ public static class PostProcessor
     /// <param name="path"></param>
     private static void SetupDidomiFrameworkForTargetSDK(PBXProject project, string targetGuid, string path)
     {
-        var xcframeworkPath = $"Frameworks{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.xcframework";
+        var xcframeworkPath = $"{path}/Pods/Didomi-XCFramework/Didomi.xcframework";
         var unusedSDKPath = string.Empty;
         var simulatorPath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_i386_x86_64-simulator";
         var devicePath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_armv7";
@@ -241,8 +279,8 @@ public static class PostProcessor
         {
             unusedSDKPath = devicePath;
             var mmFile = $"{path}{PostProcessorSettings.FilePathSeperator}Libraries{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.mm";
-            var headerFileImportLineDevice = @"#import ""Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h""";
-            var headerFileImportLineSimulator = @"#import ""Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_i386_x86_64-simulator/Didomi.framework/Headers/Didomi-Swift.h""";
+            var headerFileImportLineDevice = @"#import ""../../../Pods/Didomi-XCFramework/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h""";
+            var headerFileImportLineSimulator = @"#import ""../../../Pods/Didomi-XCFramework/Didomi.xcframework/ios-arm64_i386_x86_64-simulator/Didomi.framework/Headers/Didomi-Swift.h""";
             ReplaceLineInFile(mmFile, headerFileImportLineDevice, headerFileImportLineSimulator);
         }
 
