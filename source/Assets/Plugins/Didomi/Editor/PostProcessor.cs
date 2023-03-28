@@ -251,12 +251,8 @@ public static class PostProcessor
         process.StartInfo.EnvironmentVariables["LANG"] = "en_US.UTF-8"; // set LANG to en_US.UTF-8
         process.Start();
 
-        // Wait for the process to finish and log the output
-        string output = process.StandardError.ReadToEnd();
-
         // We need to leave enough time for the pod install command to run.
         process.WaitForExit(240000);
-        UnityEngine.Debug.Log("*** output: " + output);
     }
 
     /// <summary>
