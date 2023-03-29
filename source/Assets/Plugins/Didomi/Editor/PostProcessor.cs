@@ -203,9 +203,11 @@ public static class PostProcessor
             proj.ReadFromFile(projPath);
 
             var targetGuid = proj.GetUnityMainTargetGuid();
+            var unityTargetGuid = proj.GetUnityFrameworkTargetGuid();
 
             //// Configure build settings
             proj.SetBuildProperty(targetGuid, "ENABLE_BITCODE", "NO");
+            proj.SetBuildProperty(unityTargetGuid, "ENABLE_BITCODE", "NO");
 
             proj.AddBuildProperty(targetGuid, "DEFINES_MODULE", "YES");
             proj.AddBuildProperty(targetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
@@ -220,7 +222,7 @@ public static class PostProcessor
             proj.WriteToFile(projPath);
         }
     }
-
+    
     /// <summary>
     /// Run `pod install` in the generated project path in order to install Didomi XCFramework.
     /// </summary>
@@ -234,16 +236,32 @@ public static class PostProcessor
         string podfilePath = Path.Combine(buildPath, "Podfile");
         if (!File.Exists(podfilePath))
         {
-            string mainTarget = "target 'Unity-iPhone' do\n pod 'Didomi-XCFramework', '" + didomiPodVersion + "'\nend\n";
-            string unityFrameworkTarget = "target 'UnityFramework' do\n pod 'Didomi-XCFramework', '" + didomiPodVersion + "'\nend\n";
-            File.WriteAllText(podfilePath, $"platform :ios, '9.0'\n{mainTarget}{unityFrameworkTarget}");
+            string podFileContent = $@"platform :ios, '9.0'
+
+            target 'Unity-iPhone' do
+              pod 'Didomi-XCFramework', '{didomiPodVersion}'
+            end
+
+            target 'UnityFramework' do
+              pod 'Didomi-XCFramework', '{didomiPodVersion}'
+            end
+
+            post_install do |installer|
+              installer.pods_project.targets.each do |target|
+                target.build_configurations.each do |config|
+                  config.build_settings['ENABLE_BITCODE'] = 'NO'
+                  config.build_settings['ARCHS'] = '$(ARCHS_STANDARD)'
+                end
+              end
+            end".Replace("            ", ""); // At the end we remove the spaces at the beginning of the lines to have a nicer format.
+            File.WriteAllText(podfilePath, $"{podFileContent}");
         }
 
         // Execute the pod installation command
         System.Diagnostics.Process process = new System.Diagnostics.Process();
         
         process.StartInfo.FileName = "/bin/bash";
-        process.StartInfo.Arguments = $"-c \"cd {buildPath} && /usr/local/bin/pod install --repo-update > output.txt\"";
+        process.StartInfo.Arguments = $"-c \"cd \"{buildPath}\" && /usr/local/bin/pod install --repo-update > output.txt\"";
 
         process.StartInfo.UseShellExecute = false;
         process.StartInfo.RedirectStandardOutput = true;
@@ -251,8 +269,12 @@ public static class PostProcessor
         process.StartInfo.EnvironmentVariables["LANG"] = "en_US.UTF-8"; // set LANG to en_US.UTF-8
         process.Start();
 
-        // We need to leave enough time for the pod install command to run.
+        // Wait for the process to finish and log the output
+        string output = process.StandardError.ReadToEnd();
+
+        // Large timeout to make sure pod install command has enough time to run
         process.WaitForExit(240000);
+        UnityEngine.Debug.Log("Didomi iOS Post Processor running `pod install`: " + output);
     }
 
     /// <summary>
