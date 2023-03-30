@@ -7,6 +7,10 @@ using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using UnityEditor.iOS.Xcode.Extensions;
 
+ using UnityEditor;
+ using UnityEditor.Build;
+ using UnityEditor.Build.Reporting;
+
 /// <summary>
 /// The PostProcessorGradleAndroidProject updates the generated project for Android.
 /// We post process generated projects to work with the Didomi SDKs (activity type, build settings, etc.).
@@ -191,6 +195,7 @@ public static class PostProcessor
         
         if (buildTarget == BuildTarget.iOS)
         {
+
             PostProcessorSettings.InitSettings();
             
             // PBXProject.GetPBXProjectPath returns the wrong path, we need to construct path by ourselves instead
@@ -217,8 +222,50 @@ public static class PostProcessor
             CopyPackageJsonToIOSFolder(proj, targetGuid, buildPath);
 
             proj.WriteToFile(projPath);
+
+            DownloadFramework(buildPath);
         }
     }
+
+    /// <summary>
+    /// Download the XCFramework.
+    /// </summary>
+    /// <param name="buildPath">Generated project path</param>
+    private static void DownloadFramework(string buildPath)
+    {
+        string frameworkVersion = "1.86.0";
+
+        System.Diagnostics.Process process = new System.Diagnostics.Process();
+        
+        string zipFileName = $"didomi-ios-sdk-{frameworkVersion}-xcframework.zip";
+        string url = $"https://sdk.didomi.io/ios/{zipFileName}";
+        string frameworkDirectory = "Frameworks/Plugins/Didomi/IOS";
+        string frameworkPath = $"{frameworkDirectory}/{zipFileName}";
+
+        string createFrameworkDirectory = $"mkdir -p {frameworkDirectory}";
+        string downloadFramework = $"curl -o ./{frameworkPath} {url}";
+        string unzipFramework = $"unzip {frameworkPath} -d {frameworkDirectory}";
+
+        string processFramework = $"{createFrameworkDirectory} && {downloadFramework} && {unzipFramework}";
+        // string deleteZippedFramework =
+
+        process.StartInfo.FileName = "/bin/bash";
+        process.StartInfo.Arguments = $"-c \"cd \"{buildPath}\" && {processFramework} > output.txt\"";
+
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.RedirectStandardError = true;
+        process.StartInfo.EnvironmentVariables["LANG"] = "en_US.UTF-8"; // set LANG to en_US.UTF-8
+        process.Start();
+
+        // Wait for the process to finish and log the output
+        string output = process.StandardError.ReadToEnd();
+
+        // Large timeout to make sure the process has enough time to run
+        process.WaitForExit(240000);
+        UnityEngine.Debug.Log($"Didomi iOS Post Processor downloading framework: {output}");
+    }
+    
 
     /// <summary>
     /// For iOS platform, setups and configures didomi native libs for target SDK Device or Simulator.
@@ -376,4 +423,3 @@ public static class PostProcessorSettings
         File.WriteAllText(path, text);
     }
 }
-
