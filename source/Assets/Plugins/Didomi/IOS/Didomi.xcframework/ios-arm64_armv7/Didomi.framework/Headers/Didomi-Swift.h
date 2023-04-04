@@ -469,7 +469,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 
 typedef SWIFT_ENUM(NSInteger, Views, open) {
   ViewsPurposes = 0,
-  ViewsVendors = 1,
+  ViewsSensitivePersonalInformation = 1,
+  ViewsVendors = 2,
 };
 
 @class UIViewController;
@@ -482,10 +483,12 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 /// Method used to provide a view controller that will be used to display the notice.
 /// \param position string that represents the position of the notice (e.g.: bottom, popup, etc.).
 ///
+/// \param skipped Whether notice display is skipped and Preferences are displayed directly
+///
 ///
 /// returns:
 /// the view controller associated to the notice.
-- (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
+- (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position noticeSkipped:(BOOL)noticeSkipped SWIFT_WARN_UNUSED_RESULT;
 /// Method used to provide a view controller that will be used to display the preferences/purposes view.
 ///
 /// returns:
@@ -495,7 +498,7 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 
 
 @interface Didomi (SWIFT_EXTENSION(Didomi)) <ViewProviderDelegate>
-- (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
+- (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position noticeSkipped:(BOOL)noticeSkipped SWIFT_WARN_UNUSED_RESULT;
 - (UIViewController * _Nonnull)getPreferencesViewController SWIFT_WARN_UNUSED_RESULT;
 @end
 
@@ -523,7 +526,7 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 /// Show the preferences screen when/if the SDK is ready. By default the purposes list will be displayed.
 /// \param controller view controller from where preferences will be presented.
 ///
-/// \param view a value from <code>Didomi.Views</code>. It can be <code>.purposes</code> or <code>.vendors</code> (<code>ViewsPurposes</code> or <code>ViewsVendors</code> in Objective-C)
+/// \param view a value from <code>Didomi.Views</code>. It can be <code>.purposes</code> or <code>.sensitivePersonalInformation</code> or <code>.vendors</code> (<code>ViewsPurposes</code> or <code>ViewsSensitivePersonalInformation</code> or <code>ViewsVendors</code> in Objective-C)
 ///
 - (void)showPreferencesWithController:(UIViewController * _Nullable)controller view:(enum Views)view;
 /// Hide the preferences popup for purposes
@@ -631,7 +634,7 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 /// \param digest Digest of the organization user ID and secret
 ///
 - (void)setUserWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretId:(NSString * _Nonnull)secretId salt:(NSString * _Nullable)salt digest:(NSString * _Nonnull)digest SWIFT_DEPRECATED_MSG("Use setUser(UserAuthParams) instead.");
-/// Remove organization user information
+/// Remove organization user information (should be called when the SDK is initialized).
 - (void)clearUser;
 - (DDMUserStatus * _Nonnull)getUserStatus SWIFT_WARN_UNUSED_RESULT;
 @end
@@ -653,6 +656,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMErrorEventType, "DidomiErrorEventType", o
   DDMErrorEventTypeNotReady = 1,
   DDMErrorEventTypeFailedAlready = 2,
   DDMErrorEventTypeConfigFileError = 3,
+  DDMErrorEventTypeInvalidApiKey = 4,
 };
 
 
@@ -664,49 +668,67 @@ SWIFT_CLASS("_TtC6Didomi26DidomiInitializeParameters")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
 enum DDMEventType : NSInteger;
 
 /// Class used as a listener for internal events occurred in the SDK.
 SWIFT_CLASS_NAMED("EventListener")
 @interface DDMEventListener : NSObject
 /// Closures used to execute code when the different events are triggered.
+/// Internal
 @property (nonatomic, copy) void (^ _Nonnull onConsentChanged)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onHideNotice)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onReady)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onError)(DDMErrorEvent * _Nonnull);
+/// Notice
+@property (nonatomic, copy) void (^ _Nonnull onHideNotice)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onShowNotice)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onShowPreferences)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onHidePreferences)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onNoticeClickAgree)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onNoticeClickDisagree)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onNoticeClickMoreInfo)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onNoticeClickViewVendors)(enum DDMEventType);
+@property (nonatomic, copy) void (^ _Nonnull onNoticeClickViewSPIPurposes)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onNoticeClickPrivacyPolicy)(enum DDMEventType);
+/// Preferences
+@property (nonatomic, copy) void (^ _Nonnull onHidePreferences)(enum DDMEventType);
+@property (nonatomic, copy) void (^ _Nonnull onShowPreferences)(enum DDMEventType);
+/// Preferences - Views
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickViewPurposes)(enum DDMEventType);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickViewVendors)(enum DDMEventType);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickViewSPIPurposes)(enum DDMEventType);
+/// Preferences - Purpose
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickAgreeToAll)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickDisagreeToAll)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickAgreeToAllPurposes)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickDisagreeToAllPurposes)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickResetAllPurposes)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickAgreeToAllVendors)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickDisagreeToAllVendors)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickPurposeAgree)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickPurposeDisagree)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickCategoryAgree)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickCategoryDisagree)(enum DDMEventType, NSString * _Nullable);
-@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickViewVendors)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickViewPurposes)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSaveChoices)(enum DDMEventType);
+/// Preferences - Vendor
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickAgreeToAllVendors)(enum DDMEventType);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickDisagreeToAllVendors)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickVendorAgree)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickVendorDisagree)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickVendorSaveChoices)(enum DDMEventType);
+/// Preferences - Sensitive Personal Information
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSPIPurposeAgree)(enum DDMEventType, NSString * _Nullable);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSPIPurposeDisagree)(enum DDMEventType, NSString * _Nullable);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSPICategoryAgree)(enum DDMEventType, NSString * _Nullable);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSPICategoryDisagree)(enum DDMEventType, NSString * _Nullable);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSPIPurposeSaveChoices)(enum DDMEventType);
+/// Sync
 @property (nonatomic, copy) void (^ _Nonnull onSyncDone)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onSyncError)(enum DDMEventType, NSString * _Nullable);
+/// Language
 @property (nonatomic, copy) void (^ _Nonnull onLanguageUpdated)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onLanguageUpdateFailed)(enum DDMEventType, NSString * _Nullable);
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// Enum used to define the different type of internal events that can be triggered from the SDK.
+/// Please keep the current order because of Unity bridge.
 typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
   DDMEventTypeConsentChanged = 0,
   DDMEventTypeHideNotice = 1,
@@ -736,10 +758,20 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
   DDMEventTypePreferencesClickVendorAgree = 25,
   DDMEventTypePreferencesClickVendorDisagree = 26,
   DDMEventTypePreferencesClickVendorSaveChoices = 27,
+/// Sync
   DDMEventTypeSyncDone = 28,
   DDMEventTypeSyncError = 29,
+/// Language
   DDMEventTypeLanguageUpdated = 30,
   DDMEventTypeLanguageUpdateFailed = 31,
+/// Preferences - Sensitive Personal Information
+  DDMEventTypeNoticeClickViewSPIPurposes = 32,
+  DDMEventTypePreferencesClickViewSPIPurposes = 33,
+  DDMEventTypePreferencesClickSPIPurposeAgree = 34,
+  DDMEventTypePreferencesClickSPIPurposeDisagree = 35,
+  DDMEventTypePreferencesClickSPICategoryAgree = 36,
+  DDMEventTypePreferencesClickSPICategoryDisagree = 37,
+  DDMEventTypePreferencesClickSPIPurposeSaveChoices = 38,
 };
 
 
@@ -750,9 +782,11 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
 
 /// Regulation for which Didomi SDK is currently configured. Only one regulation is active at each run.
 typedef SWIFT_ENUM(NSInteger, Regulation, open) {
-  RegulationGdpr = 0,
-  RegulationCcpa = 1,
-  RegulationNone = 2,
+  RegulationCcpa = 0,
+  RegulationCpra = 1,
+  RegulationGdpr = 2,
+  RegulationNone = 3,
+  RegulationVcdpa = 4,
 };
 
 
@@ -1361,7 +1395,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) Didomi * _Nonnull shar
 
 typedef SWIFT_ENUM(NSInteger, Views, open) {
   ViewsPurposes = 0,
-  ViewsVendors = 1,
+  ViewsSensitivePersonalInformation = 1,
+  ViewsVendors = 2,
 };
 
 @class UIViewController;
@@ -1374,10 +1409,12 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 /// Method used to provide a view controller that will be used to display the notice.
 /// \param position string that represents the position of the notice (e.g.: bottom, popup, etc.).
 ///
+/// \param skipped Whether notice display is skipped and Preferences are displayed directly
+///
 ///
 /// returns:
 /// the view controller associated to the notice.
-- (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
+- (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position noticeSkipped:(BOOL)noticeSkipped SWIFT_WARN_UNUSED_RESULT;
 /// Method used to provide a view controller that will be used to display the preferences/purposes view.
 ///
 /// returns:
@@ -1387,7 +1424,7 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 
 
 @interface Didomi (SWIFT_EXTENSION(Didomi)) <ViewProviderDelegate>
-- (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
+- (UIViewController * _Nonnull)getNoticeViewControllerWithPosition:(NSString * _Nonnull)position noticeSkipped:(BOOL)noticeSkipped SWIFT_WARN_UNUSED_RESULT;
 - (UIViewController * _Nonnull)getPreferencesViewController SWIFT_WARN_UNUSED_RESULT;
 @end
 
@@ -1415,7 +1452,7 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 /// Show the preferences screen when/if the SDK is ready. By default the purposes list will be displayed.
 /// \param controller view controller from where preferences will be presented.
 ///
-/// \param view a value from <code>Didomi.Views</code>. It can be <code>.purposes</code> or <code>.vendors</code> (<code>ViewsPurposes</code> or <code>ViewsVendors</code> in Objective-C)
+/// \param view a value from <code>Didomi.Views</code>. It can be <code>.purposes</code> or <code>.sensitivePersonalInformation</code> or <code>.vendors</code> (<code>ViewsPurposes</code> or <code>ViewsSensitivePersonalInformation</code> or <code>ViewsVendors</code> in Objective-C)
 ///
 - (void)showPreferencesWithController:(UIViewController * _Nullable)controller view:(enum Views)view;
 /// Hide the preferences popup for purposes
@@ -1523,7 +1560,7 @@ SWIFT_PROTOCOL("_TtP6Didomi20ViewProviderDelegate_")
 /// \param digest Digest of the organization user ID and secret
 ///
 - (void)setUserWithId:(NSString * _Nonnull)id algorithm:(NSString * _Nonnull)algorithm secretId:(NSString * _Nonnull)secretId salt:(NSString * _Nullable)salt digest:(NSString * _Nonnull)digest SWIFT_DEPRECATED_MSG("Use setUser(UserAuthParams) instead.");
-/// Remove organization user information
+/// Remove organization user information (should be called when the SDK is initialized).
 - (void)clearUser;
 - (DDMUserStatus * _Nonnull)getUserStatus SWIFT_WARN_UNUSED_RESULT;
 @end
@@ -1545,6 +1582,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMErrorEventType, "DidomiErrorEventType", o
   DDMErrorEventTypeNotReady = 1,
   DDMErrorEventTypeFailedAlready = 2,
   DDMErrorEventTypeConfigFileError = 3,
+  DDMErrorEventTypeInvalidApiKey = 4,
 };
 
 
@@ -1556,49 +1594,67 @@ SWIFT_CLASS("_TtC6Didomi26DidomiInitializeParameters")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
 enum DDMEventType : NSInteger;
 
 /// Class used as a listener for internal events occurred in the SDK.
 SWIFT_CLASS_NAMED("EventListener")
 @interface DDMEventListener : NSObject
 /// Closures used to execute code when the different events are triggered.
+/// Internal
 @property (nonatomic, copy) void (^ _Nonnull onConsentChanged)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onHideNotice)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onReady)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onError)(DDMErrorEvent * _Nonnull);
+/// Notice
+@property (nonatomic, copy) void (^ _Nonnull onHideNotice)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onShowNotice)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onShowPreferences)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onHidePreferences)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onNoticeClickAgree)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onNoticeClickDisagree)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onNoticeClickMoreInfo)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onNoticeClickViewVendors)(enum DDMEventType);
+@property (nonatomic, copy) void (^ _Nonnull onNoticeClickViewSPIPurposes)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onNoticeClickPrivacyPolicy)(enum DDMEventType);
+/// Preferences
+@property (nonatomic, copy) void (^ _Nonnull onHidePreferences)(enum DDMEventType);
+@property (nonatomic, copy) void (^ _Nonnull onShowPreferences)(enum DDMEventType);
+/// Preferences - Views
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickViewPurposes)(enum DDMEventType);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickViewVendors)(enum DDMEventType);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickViewSPIPurposes)(enum DDMEventType);
+/// Preferences - Purpose
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickAgreeToAll)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickDisagreeToAll)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickAgreeToAllPurposes)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickDisagreeToAllPurposes)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickResetAllPurposes)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickAgreeToAllVendors)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickDisagreeToAllVendors)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickPurposeAgree)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickPurposeDisagree)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickCategoryAgree)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickCategoryDisagree)(enum DDMEventType, NSString * _Nullable);
-@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickViewVendors)(enum DDMEventType);
-@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickViewPurposes)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSaveChoices)(enum DDMEventType);
+/// Preferences - Vendor
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickAgreeToAllVendors)(enum DDMEventType);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickDisagreeToAllVendors)(enum DDMEventType);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickVendorAgree)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickVendorDisagree)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onPreferencesClickVendorSaveChoices)(enum DDMEventType);
+/// Preferences - Sensitive Personal Information
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSPIPurposeAgree)(enum DDMEventType, NSString * _Nullable);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSPIPurposeDisagree)(enum DDMEventType, NSString * _Nullable);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSPICategoryAgree)(enum DDMEventType, NSString * _Nullable);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSPICategoryDisagree)(enum DDMEventType, NSString * _Nullable);
+@property (nonatomic, copy) void (^ _Nonnull onPreferencesClickSPIPurposeSaveChoices)(enum DDMEventType);
+/// Sync
 @property (nonatomic, copy) void (^ _Nonnull onSyncDone)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onSyncError)(enum DDMEventType, NSString * _Nullable);
+/// Language
 @property (nonatomic, copy) void (^ _Nonnull onLanguageUpdated)(enum DDMEventType, NSString * _Nullable);
 @property (nonatomic, copy) void (^ _Nonnull onLanguageUpdateFailed)(enum DDMEventType, NSString * _Nullable);
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// Enum used to define the different type of internal events that can be triggered from the SDK.
+/// Please keep the current order because of Unity bridge.
 typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
   DDMEventTypeConsentChanged = 0,
   DDMEventTypeHideNotice = 1,
@@ -1628,10 +1684,20 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
   DDMEventTypePreferencesClickVendorAgree = 25,
   DDMEventTypePreferencesClickVendorDisagree = 26,
   DDMEventTypePreferencesClickVendorSaveChoices = 27,
+/// Sync
   DDMEventTypeSyncDone = 28,
   DDMEventTypeSyncError = 29,
+/// Language
   DDMEventTypeLanguageUpdated = 30,
   DDMEventTypeLanguageUpdateFailed = 31,
+/// Preferences - Sensitive Personal Information
+  DDMEventTypeNoticeClickViewSPIPurposes = 32,
+  DDMEventTypePreferencesClickViewSPIPurposes = 33,
+  DDMEventTypePreferencesClickSPIPurposeAgree = 34,
+  DDMEventTypePreferencesClickSPIPurposeDisagree = 35,
+  DDMEventTypePreferencesClickSPICategoryAgree = 36,
+  DDMEventTypePreferencesClickSPICategoryDisagree = 37,
+  DDMEventTypePreferencesClickSPIPurposeSaveChoices = 38,
 };
 
 
@@ -1642,9 +1708,11 @@ typedef SWIFT_ENUM_NAMED(NSInteger, DDMEventType, "EventType", open) {
 
 /// Regulation for which Didomi SDK is currently configured. Only one regulation is active at each run.
 typedef SWIFT_ENUM(NSInteger, Regulation, open) {
-  RegulationGdpr = 0,
-  RegulationCcpa = 1,
-  RegulationNone = 2,
+  RegulationCcpa = 0,
+  RegulationCpra = 1,
+  RegulationGdpr = 2,
+  RegulationNone = 3,
+  RegulationVcdpa = 4,
 };
 
 

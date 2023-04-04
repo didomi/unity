@@ -68,6 +68,13 @@ import os
   case syncError
   case languageUpdated
   case languageUpdateFailed
+  case noticeClickViewSPIPurposes
+  case preferencesClickViewSPIPurposes
+  case preferencesClickSPIPurposeAgree
+  case preferencesClickSPIPurposeDisagree
+  case preferencesClickSPICategoryAgree
+  case preferencesClickSPICategoryDisagree
+  case preferencesClickSPIPurposeSaveChoices
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -75,7 +82,7 @@ import os
   }
 }
 @objc public protocol ViewProviderDelegate {
-  @objc func getNoticeViewController(position: Swift.String) -> UIKit.UIViewController
+  @objc func getNoticeViewController(position: Swift.String, noticeSkipped: Swift.Bool) -> UIKit.UIViewController
   @objc func getPreferencesViewController() -> UIKit.UIViewController
 }
 public struct Vendor : Swift.Codable {
@@ -104,6 +111,7 @@ extension Vendor : Swift.Hashable {
   case notReady
   case failedAlready
   case configFileError
+  case invalidApiKey
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -111,10 +119,18 @@ extension Vendor : Swift.Hashable {
   }
 }
 @objc public enum Regulation : Swift.Int, Swift.Codable {
-  case gdpr
   case ccpa
+  case cpra
+  case gdpr
   case none
+  case vcdpa
   public var description: Swift.String {
+    get
+  }
+  public var mixed: Swift.Bool {
+    get
+  }
+  public var tokenKey: Swift.String {
     get
   }
   public init(from decoder: Swift.Decoder) throws
@@ -150,7 +166,8 @@ extension Purpose : Swift.Equatable {
 @_inheritsConvenienceInitializers @objc public class Didomi : ObjectiveC.NSObject {
   @objc public enum Views : Swift.Int, Swift.RawRepresentable {
     case purposes = 0
-    case vendors
+    case sensitivePersonalInformation = 1
+    case vendors = 2
     public init?(rawValue: Swift.Int)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
@@ -226,7 +243,7 @@ extension Purpose : Swift.Equatable {
   @objc deinit
 }
 extension Didomi : ViewProviderDelegate {
-  @objc dynamic public func getNoticeViewController(position: Swift.String) -> UIKit.UIViewController
+  @objc dynamic public func getNoticeViewController(position: Swift.String, noticeSkipped: Swift.Bool = false) -> UIKit.UIViewController
   @objc dynamic public func getPreferencesViewController() -> UIKit.UIViewController
 }
 extension Didomi {
@@ -303,34 +320,41 @@ extension UserStatus {
 }
 @_inheritsConvenienceInitializers @objc(DDMEventListener) public class EventListener : ObjectiveC.NSObject {
   @objc public var onConsentChanged: (_ event: EventType) -> Swift.Void
-  @objc public var onHideNotice: (_ event: EventType) -> Swift.Void
   @objc public var onReady: (_ event: EventType) -> Swift.Void
   @objc public var onError: (_ error: DidomiErrorEvent) -> Swift.Void
+  @objc public var onHideNotice: (_ event: EventType) -> Swift.Void
   @objc public var onShowNotice: (_ event: EventType) -> Swift.Void
-  @objc public var onShowPreferences: (_ event: EventType) -> Swift.Void
-  @objc public var onHidePreferences: (_ event: EventType) -> Swift.Void
   @objc public var onNoticeClickAgree: (_ event: EventType) -> Swift.Void
   @objc public var onNoticeClickDisagree: (_ event: EventType) -> Swift.Void
   @objc public var onNoticeClickMoreInfo: (_ event: EventType) -> Swift.Void
   @objc public var onNoticeClickViewVendors: (_ event: EventType) -> Swift.Void
+  @objc public var onNoticeClickViewSPIPurposes: (_ event: EventType) -> Swift.Void
   @objc public var onNoticeClickPrivacyPolicy: (_ event: EventType) -> Swift.Void
+  @objc public var onHidePreferences: (_ event: EventType) -> Swift.Void
+  @objc public var onShowPreferences: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickViewPurposes: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickViewVendors: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickViewSPIPurposes: (_ event: EventType) -> Swift.Void
   @objc public var onPreferencesClickAgreeToAll: (_ event: EventType) -> Swift.Void
   @objc public var onPreferencesClickDisagreeToAll: (_ event: EventType) -> Swift.Void
   @objc public var onPreferencesClickAgreeToAllPurposes: (_ event: EventType) -> Swift.Void
   @objc public var onPreferencesClickDisagreeToAllPurposes: (_ event: EventType) -> Swift.Void
   @objc public var onPreferencesClickResetAllPurposes: (_ event: EventType) -> Swift.Void
-  @objc public var onPreferencesClickAgreeToAllVendors: (_ event: EventType) -> Swift.Void
-  @objc public var onPreferencesClickDisagreeToAllVendors: (_ event: EventType) -> Swift.Void
   @objc public var onPreferencesClickPurposeAgree: (_ event: EventType, _ purposeId: Swift.String?) -> Swift.Void
   @objc public var onPreferencesClickPurposeDisagree: (_ event: EventType, _ purposeId: Swift.String?) -> Swift.Void
-  @objc public var onPreferencesClickCategoryAgree: (_ event: EventType, _ purposeId: Swift.String?) -> Swift.Void
-  @objc public var onPreferencesClickCategoryDisagree: (_ event: EventType, _ purposeId: Swift.String?) -> Swift.Void
-  @objc public var onPreferencesClickViewVendors: (_ event: EventType) -> Swift.Void
-  @objc public var onPreferencesClickViewPurposes: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickCategoryAgree: (_ event: EventType, _ categoryId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickCategoryDisagree: (_ event: EventType, _ categoryId: Swift.String?) -> Swift.Void
   @objc public var onPreferencesClickSaveChoices: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickAgreeToAllVendors: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickDisagreeToAllVendors: (_ event: EventType) -> Swift.Void
   @objc public var onPreferencesClickVendorAgree: (_ event: EventType, _ vendorId: Swift.String?) -> Swift.Void
   @objc public var onPreferencesClickVendorDisagree: (_ event: EventType, _ vendorId: Swift.String?) -> Swift.Void
   @objc public var onPreferencesClickVendorSaveChoices: (_ event: EventType) -> Swift.Void
+  @objc public var onPreferencesClickSPIPurposeAgree: (_ event: EventType, _ purposeId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickSPIPurposeDisagree: (_ event: EventType, _ purposeId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickSPICategoryAgree: (_ event: EventType, _ categoryId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickSPICategoryDisagree: (_ event: EventType, _ categoryId: Swift.String?) -> Swift.Void
+  @objc public var onPreferencesClickSPIPurposeSaveChoices: (_ event: EventType) -> Swift.Void
   @objc public var onSyncDone: (_ event: EventType, _ organizationUserId: Swift.String?) -> Swift.Void
   @objc public var onSyncError: (_ event: EventType, _ error: Swift.String?) -> Swift.Void
   @objc public var onLanguageUpdated: (_ type: EventType, _ languageCode: Swift.String?) -> Swift.Void

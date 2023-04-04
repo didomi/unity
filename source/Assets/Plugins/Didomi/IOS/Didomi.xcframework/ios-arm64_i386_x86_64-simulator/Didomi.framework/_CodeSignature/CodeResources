@@ -6,11 +6,11 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		91ZCp6Qe4XyZnT/vq89GAHslcx8=
+		s6PUehkFEJTwU+JRz5xNlJJ0fn0=
 		</data>
 		<key>Headers/Didomi-Swift.h</key>
 		<data>
-		uWGsOo5PgEBtCJr6GD+No6IXoUc=
+		hOAPyz6qIK5a/DMF00pf3rphcbg=
 		</data>
 		<key>Headers/Didomi.h</key>
 		<data>
@@ -18,55 +18,51 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		xMMwl8l9O6sk/VFVTc4Y7u1EKfY=
+		GCEb+AdlLClLIBOnNQgLCp/s0XA=
 		</data>
 		<key>Modules/Didomi.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		uKjqkcLCtGF5QZp/brAquodaqHU=
+		DLkpb0FoTHLja+f82beErSW0Zh4=
 		</data>
 		<key>Modules/Didomi.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		Rzw8ANeblqm4Bm9CfhNSenK5168=
+		YP0QwK55WYhSoqs3sZRgCfk+Pn0=
 		</data>
 		<key>Modules/Didomi.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		Hgk7nNku0ljKpEtAkfM0203zScI=
+		Yj/jL0r5Fl/xKo3WtPOZVq8on3k=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
-		vEL7Evhz9ETP/L1urk6L8BC+6xA=
+		5FmtQr7JaHh0ZtN6vudgzU5POjU=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<data>
-		/vONX9Wmodpp5RQwVVfhpi5xn78=
+		P1wtxeU5ZAku++HqQKfmddg1HUU=
 		</data>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		V91Pu/dkRTGo+S5xT6jxHtkVj6U=
+		luLWWEaaIXE/1l9bFx9tovQPoC8=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		LvAsjivIaw2R6XQgcU/Tj93od30=
+		Pc2b8VZepGqCOb8LIGrBIfgUTWk=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		iA96NCvKkdDL15z9QmsWZjsc5S8=
+		LY/Q0ROOVXxZNx+LVES1a8sMeJM=
 		</data>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		5ByuEeHK6MkXfe4k2lv1GF/cmOE=
+		ntpR/tCInjm4sci+3FiZkgxBYxg=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		gxLvlu/eexvNxeVMIOr4NlyHnmc=
 		</data>
-		<key>didomi_iab_config.json</key>
-		<data>
-		w109vulXFTO6gS6RA9iqJPCzDWo=
-		</data>
 		<key>didomi_iab_config_v2.json</key>
 		<data>
-		OPAHU7YWwuJlqO0BdaL8ObSOcTs=
+		7ECUz0qvGPs2W60dFpP+Nw8zerk=
 		</data>
 		<key>didomi_iab_purposes_v2_ar.json</key>
 		<data>
@@ -78,7 +74,7 @@
 		</data>
 		<key>didomi_iab_purposes_v2_bg.json</key>
 		<data>
-		Mx9SwA4Bo9pXv8LueQU1z+8UOXQ=
+		KaUt2bdMQCD6mzTk7pHZXIWZ2IU=
 		</data>
 		<key>didomi_iab_purposes_v2_bn-IN.json</key>
 		<data>
@@ -86,35 +82,35 @@
 		</data>
 		<key>didomi_iab_purposes_v2_ca.json</key>
 		<data>
-		aRJZSvCshXPdeWixvJoyIUHDcTw=
+		yX/ZZWig9sgEq/QwZ+Y7slgMaoQ=
 		</data>
 		<key>didomi_iab_purposes_v2_cs.json</key>
 		<data>
-		IwZjn0AmJLiAQr0AaykNtNRXW6U=
+		cLLUt5wi+WruJcMzTHLHoAzvOxY=
 		</data>
 		<key>didomi_iab_purposes_v2_da.json</key>
 		<data>
-		AyJPYFDL5uX2KB/fRs2bERuRUvA=
+		APQzek9uwDjDUTC/BV6z8e6TvXk=
 		</data>
 		<key>didomi_iab_purposes_v2_de.json</key>
 		<data>
-		zA6b2zWI6StraoFjq3frGGRMQPI=
+		d3SEyvODHXxCfy/W4i9/7fs5uOk=
 		</data>
 		<key>didomi_iab_purposes_v2_el.json</key>
 		<data>
-		ECeLjzOHN3/Bv83e+0Vot2OZaI0=
+		1NuAqmKOds4sPVxWtX3UGwWzBBY=
 		</data>
 		<key>didomi_iab_purposes_v2_es.json</key>
 		<data>
-		gqigAJyJgky6sh4N4byDWW7zq1Y=
+		9VyQGFHsillqWeaZyoAeCDH4K7I=
 		</data>
 		<key>didomi_iab_purposes_v2_et.json</key>
 		<data>
-		ythyirzJNZnF5JJsMyW/vRm3m7I=
+		pbRcSIjEZ9PUwxWgdFVrUMH9dAU=
 		</data>
 		<key>didomi_iab_purposes_v2_fi.json</key>
 		<data>
-		TzxApMh4RrZXuc8/l/7AnJyzzoQ=
+		kYG/9rGvAQscnIk4sRsPUxLkVbs=
 		</data>
 		<key>didomi_iab_purposes_v2_fil.json</key>
 		<data>
@@ -122,7 +118,7 @@
 		</data>
 		<key>didomi_iab_purposes_v2_fr.json</key>
 		<data>
-		wFcDwgiihforNQnVSGgb5TP1Hdg=
+		fcYqwLppF3WrjzA9pByhksYI39k=
 		</data>
 		<key>didomi_iab_purposes_v2_he.json</key>
 		<data>
@@ -134,11 +130,11 @@
 		</data>
 		<key>didomi_iab_purposes_v2_hr.json</key>
 		<data>
-		K3jR1E9GqaB+tp+M+GTyOTsaqms=
+		esnl3AMuGTpI9U5FrjkJX8cqQHg=
 		</data>
 		<key>didomi_iab_purposes_v2_hu.json</key>
 		<data>
-		/fIcNrkEagsMPNPk9XzJ8ZR/H/k=
+		MVdYGpV2an9KL8sbvwQFkw1FOFw=
 		</data>
 		<key>didomi_iab_purposes_v2_id.json</key>
 		<data>
@@ -146,11 +142,11 @@
 		</data>
 		<key>didomi_iab_purposes_v2_it.json</key>
 		<data>
-		aOktdFUKrPb6PwN+Gcb6Vln0AuQ=
+		+nG3z8kpYZml0I96rt95lhSHhQY=
 		</data>
 		<key>didomi_iab_purposes_v2_ja.json</key>
 		<data>
-		JZF2Sw43I6mTEV6ksmZGS/h5RIU=
+		205uTb2z5rfXatw+llu/h8FXpAo=
 		</data>
 		<key>didomi_iab_purposes_v2_ko.json</key>
 		<data>
@@ -158,11 +154,11 @@
 		</data>
 		<key>didomi_iab_purposes_v2_lt.json</key>
 		<data>
-		eEji8hM4biVZvYZz83AIc5xO9+c=
+		K/+pO0U1Mzx3jke/pT5wB4qot9M=
 		</data>
 		<key>didomi_iab_purposes_v2_lv.json</key>
 		<data>
-		MYHBp5jhbgl5sc23jqrvUE+scjE=
+		QIpbvY6oxhylUjUQt6SdNwIkLwE=
 		</data>
 		<key>didomi_iab_purposes_v2_mk-MK.json</key>
 		<data>
@@ -174,15 +170,15 @@
 		</data>
 		<key>didomi_iab_purposes_v2_nl.json</key>
 		<data>
-		ADNwr2GWFwFVp2KepVuh8fIFMUA=
+		hO0jCM8o/sX1CXTwQoIivcC1gF0=
 		</data>
 		<key>didomi_iab_purposes_v2_no.json</key>
 		<data>
-		CZ8EQGb4WUgvwRrrPQoQZO+lut0=
+		RHnywG0BERR7BxWb/et2ny55P2c=
 		</data>
 		<key>didomi_iab_purposes_v2_pl.json</key>
 		<data>
-		pYNgMscKtUUcWr3IQiuYmWzno+E=
+		5bmmlc7863JfApcjSbIjvXl+szI=
 		</data>
 		<key>didomi_iab_purposes_v2_pt-BR.json</key>
 		<data>
@@ -190,31 +186,31 @@
 		</data>
 		<key>didomi_iab_purposes_v2_pt-PT.json</key>
 		<data>
-		+lPG4p+PbGy4AiMx0lYvdslH+Mg=
+		y+n006SWQjwUkCGtyZiKQjovHkI=
 		</data>
 		<key>didomi_iab_purposes_v2_ro.json</key>
 		<data>
-		lGQFXWjaJsLpEopfqFBEbfmKmC8=
+		cHZPxmQ5r7v4A4fYAeGISFeLzgc=
 		</data>
 		<key>didomi_iab_purposes_v2_ru.json</key>
 		<data>
-		EUbkVmfauJeXc+vy63HNxf82pAU=
+		z1uy6e5BTc09zsobK0qtWFt1MwM=
 		</data>
 		<key>didomi_iab_purposes_v2_sk.json</key>
 		<data>
-		gdbqCN1GPEX5QcQn+FxVqTTD3Ws=
+		Yv8CBIKbiE0MDUiVOnSyT+Cqpyg=
 		</data>
 		<key>didomi_iab_purposes_v2_sl.json</key>
 		<data>
-		sM46IxEPlvuVeEK2FlaSPIN+Li8=
+		YGN07YpeIPhpnty1L+GcNKb+DGA=
 		</data>
 		<key>didomi_iab_purposes_v2_sr.json</key>
 		<data>
-		8sdxQ2DJxbPz0HJdqDItGmKDyTY=
+		VZgA3kHKPWdizngzxK4rFp8GC9c=
 		</data>
 		<key>didomi_iab_purposes_v2_sv.json</key>
 		<data>
-		LXsamCrfQVcjayvVzyGu+Xd50FU=
+		5phYDYqGxZ13kEwfn2WhId4d5kI=
 		</data>
 		<key>didomi_iab_purposes_v2_sw.json</key>
 		<data>
@@ -226,7 +222,7 @@
 		</data>
 		<key>didomi_iab_purposes_v2_tr.json</key>
 		<data>
-		5alV0JOgUlNRify0c0jIxnX1ENY=
+		ToIsWm8Mtmm77WhrdldTPIArIwE=
 		</data>
 		<key>didomi_iab_purposes_v2_uk.json</key>
 		<data>
@@ -238,7 +234,7 @@
 		</data>
 		<key>didomi_iab_purposes_v2_zh-CN.json</key>
 		<data>
-		XMp6BVVSyUI68BeU1ETNhQtkmIQ=
+		41TB6WWfJPuv5RXIkF1Plvw2/1Y=
 		</data>
 		<key>didomi_iab_purposes_v2_zh-TW.json</key>
 		<data>
@@ -246,7 +242,7 @@
 		</data>
 		<key>didomi_master_config.json</key>
 		<data>
-		Se8q0jQ5spcP0baBvPeiWlRk4kA=
+		pYMqU75KpVyLILflIdjoQ5uSuPo=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -255,22 +251,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			91ZCp6Qe4XyZnT/vq89GAHslcx8=
+			s6PUehkFEJTwU+JRz5xNlJJ0fn0=
 			</data>
 			<key>hash2</key>
 			<data>
-			c111UGZNOP1y67ZJAXnTzNYXgVGzRpBJSbVcam81Ou8=
+			Xvk0iBpJM3xgLNoLgIOBj7BUSWN9dP4euIZimHE8QIc=
 			</data>
 		</dict>
 		<key>Headers/Didomi-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uWGsOo5PgEBtCJr6GD+No6IXoUc=
+			hOAPyz6qIK5a/DMF00pf3rphcbg=
 			</data>
 			<key>hash2</key>
 			<data>
-			3+0TD+dL7JxbsaNTkX4AVT6bkBGk/OwRQS7VvAfXbH0=
+			mERuAB8o47SY41NwKCCyWPR01gfilcXLLjXDrHUbI0Q=
 			</data>
 		</dict>
 		<key>Headers/Didomi.h</key>
@@ -288,99 +284,99 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			uKjqkcLCtGF5QZp/brAquodaqHU=
+			DLkpb0FoTHLja+f82beErSW0Zh4=
 			</data>
 			<key>hash2</key>
 			<data>
-			AfEO5DnxgEuBG+i0i5/s47CikdBYtCNCT14xUuTCELc=
+			2JolP5SFt0QpmFiQjfq8ljg/Mg3ZmLcQY5jC1JeHgPg=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Rzw8ANeblqm4Bm9CfhNSenK5168=
+			YP0QwK55WYhSoqs3sZRgCfk+Pn0=
 			</data>
 			<key>hash2</key>
 			<data>
-			4VfdO8cR+2bb67DbGPy7+mug2jcoL0g3lskTbwogXyY=
+			YGlio/m0O57O80IBw8kmfPSb0VEZgGExHPvlGFhC+6o=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Hgk7nNku0ljKpEtAkfM0203zScI=
+			Yj/jL0r5Fl/xKo3WtPOZVq8on3k=
 			</data>
 			<key>hash2</key>
 			<data>
-			GmYI9J8fRoPP/i5lGd4mqmigf7zlW86JDULutR5g1o0=
+			PEvCs6rAr56JepdQ9gzlMxVMdZZzM/1YvCMlbM7tU00=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vEL7Evhz9ETP/L1urk6L8BC+6xA=
+			5FmtQr7JaHh0ZtN6vudgzU5POjU=
 			</data>
 			<key>hash2</key>
 			<data>
-			vlVUWwdotkjPH4lVqfaj8kI4EBSKwRbAqyhsHTqPP9U=
+			fkgxTCzTLNbWKV/bb/MXO+OjMmvYsAXEEx/Gy/k4cfk=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/vONX9Wmodpp5RQwVVfhpi5xn78=
+			P1wtxeU5ZAku++HqQKfmddg1HUU=
 			</data>
 			<key>hash2</key>
 			<data>
-			YKl3hHCdRVlEcjWfMNSTSZm4OTgsTZ5wVbNK8GTHaWA=
+			7CX2hEQeReU/bxj4NDOc5YXVFUEO8v7BAcptvVf7/1A=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			V91Pu/dkRTGo+S5xT6jxHtkVj6U=
+			luLWWEaaIXE/1l9bFx9tovQPoC8=
 			</data>
 			<key>hash2</key>
 			<data>
-			IJBN1FCqQF3WkZtb1pdBrPymU2ZyRIiMhI6lYxVbZX4=
+			v8hFqU0xWn3XqLo1dF5xMehobgXDY55VkQ/C3zCGceM=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LvAsjivIaw2R6XQgcU/Tj93od30=
+			Pc2b8VZepGqCOb8LIGrBIfgUTWk=
 			</data>
 			<key>hash2</key>
 			<data>
-			LqGTtmoCFsIRvrr6abnpxxR1EXHV9kM0JsT1YvW3ZIo=
+			o9pyZuBctCzm7uKpzquVk4OvjOLXJd8lyu2F7RXAbU0=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			iA96NCvKkdDL15z9QmsWZjsc5S8=
+			LY/Q0ROOVXxZNx+LVES1a8sMeJM=
 			</data>
 			<key>hash2</key>
 			<data>
-			2/0F4HuxxSL9zFuEZWrd0DjExLnOkzUM6rsHBzDxz2U=
+			orQD5ctBSXNg+I5khzdvw/aw7AEM3rOvd7bA82GJCU4=
 			</data>
 		</dict>
 		<key>Modules/Didomi.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5ByuEeHK6MkXfe4k2lv1GF/cmOE=
+			ntpR/tCInjm4sci+3FiZkgxBYxg=
 			</data>
 			<key>hash2</key>
 			<data>
-			MZ0HqeK8Ijjfr6OI2TBmOyyuMLugyxsKaxRIJU0os1E=
+			YraVeZWGOjDC2CZHWGi7MUjLgAP1/rITKieyYY0mXjc=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -394,26 +390,15 @@
 			XeWznDTuTQj7n6VtuViZx2Ytp8mY7GiPKDyJnwhW9+U=
 			</data>
 		</dict>
-		<key>didomi_iab_config.json</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			w109vulXFTO6gS6RA9iqJPCzDWo=
-			</data>
-			<key>hash2</key>
-			<data>
-			tEYPHn4/snLJop/tDnxp6C0lkg+0QM0ZdGIm1ikeZ7Y=
-			</data>
-		</dict>
 		<key>didomi_iab_config_v2.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OPAHU7YWwuJlqO0BdaL8ObSOcTs=
+			7ECUz0qvGPs2W60dFpP+Nw8zerk=
 			</data>
 			<key>hash2</key>
 			<data>
-			hJcpnhPuKYj+J6JMAdkoirYrQIJnI0dlblSc7P6kfwc=
+			fmx2bKX0EhctakvcPl1RhGB3qyJcAL3jVieOTwguIiM=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_ar.json</key>
@@ -442,11 +427,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Mx9SwA4Bo9pXv8LueQU1z+8UOXQ=
+			KaUt2bdMQCD6mzTk7pHZXIWZ2IU=
 			</data>
 			<key>hash2</key>
 			<data>
-			1XilouoJlqU+1AFUXCfaxHKmdATAnSJTOT9DFVrtQj8=
+			5q2MRCdx4YoxPBLnQvvOLCsbwc/FDUvdlBpp8CXf/a8=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_bn-IN.json</key>
@@ -464,88 +449,88 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aRJZSvCshXPdeWixvJoyIUHDcTw=
+			yX/ZZWig9sgEq/QwZ+Y7slgMaoQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			RgzlOREUA0pX7psVgRMe+4cf6DkvckDbGPL6jfVpCtQ=
+			X6IOuCwyP9BPZ48tXYsorm1grtUshpEz2C85iU9yFnk=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_cs.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			IwZjn0AmJLiAQr0AaykNtNRXW6U=
+			cLLUt5wi+WruJcMzTHLHoAzvOxY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Jxl6BI01oUIrww0fH7lx8kY4dI0pU3JGrzu26Ea0qrk=
+			3r7Zvre9DpaWlHeLACm5FPoSaUu3zFtmh462x++Ipyw=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_da.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			AyJPYFDL5uX2KB/fRs2bERuRUvA=
+			APQzek9uwDjDUTC/BV6z8e6TvXk=
 			</data>
 			<key>hash2</key>
 			<data>
-			AzPNw4z4PYDTgSkVXgixGCV0DvptdRWTKkG7U9wnYLs=
+			EoPbIh3THPpbhoeenoAWJiWbYWNo6o+qvBCgwBa/Kgs=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_de.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zA6b2zWI6StraoFjq3frGGRMQPI=
+			d3SEyvODHXxCfy/W4i9/7fs5uOk=
 			</data>
 			<key>hash2</key>
 			<data>
-			5BJDXmMNn7tAbr25xixeS1zkHg0J/UcV11r20IYh6GE=
+			zyZcge6BsiJd3n/KdFpsGdJIb08PaP/eFtM8YwAnpKs=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_el.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ECeLjzOHN3/Bv83e+0Vot2OZaI0=
+			1NuAqmKOds4sPVxWtX3UGwWzBBY=
 			</data>
 			<key>hash2</key>
 			<data>
-			alJi0EHZna7rRASDg3p0M2fgIDSRn1wr2FjI8rupu74=
+			+1b1RKUb1Win3TJFKHePt6+w8Ebc4SWj61WOlRj7c7Y=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_es.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			gqigAJyJgky6sh4N4byDWW7zq1Y=
+			9VyQGFHsillqWeaZyoAeCDH4K7I=
 			</data>
 			<key>hash2</key>
 			<data>
-			UPe9i8cMnd4WlSNu0DgHw20pvQ4s5X0bQRGrE0n/nB4=
+			ZP40P2y+zLREjLIppBBakmkyCmpKqJVaVk5FCr6H6NA=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_et.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ythyirzJNZnF5JJsMyW/vRm3m7I=
+			pbRcSIjEZ9PUwxWgdFVrUMH9dAU=
 			</data>
 			<key>hash2</key>
 			<data>
-			sKX1EAodHl5xVJQXmyidIXyHrd4+tGkLkHG0mxZKITM=
+			l5GGZj2mgMng32Dr6Sg3cPfDtGzHGbI2OkOJgFeZQsE=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_fi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			TzxApMh4RrZXuc8/l/7AnJyzzoQ=
+			kYG/9rGvAQscnIk4sRsPUxLkVbs=
 			</data>
 			<key>hash2</key>
 			<data>
-			AawVspFSR4/Oz6En0YyzuZTxbuqewwGUkz/WMvbbhR8=
+			yET4VnuZeVPsyheqIGse0KY8SK85V9oA6G1/n9oVY+g=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_fil.json</key>
@@ -563,11 +548,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wFcDwgiihforNQnVSGgb5TP1Hdg=
+			fcYqwLppF3WrjzA9pByhksYI39k=
 			</data>
 			<key>hash2</key>
 			<data>
-			pE2lZa4vSvrIE9O2u/CWr9mmI2h9D60M/ajgSKPZweg=
+			tnGJOYBtGrtKqaXabdq+085KnUoI3ArgC/T+hBDD1QI=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_he.json</key>
@@ -596,22 +581,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			K3jR1E9GqaB+tp+M+GTyOTsaqms=
+			esnl3AMuGTpI9U5FrjkJX8cqQHg=
 			</data>
 			<key>hash2</key>
 			<data>
-			rQi5zf2DuTPlEnSUN+7/qfrZbjBaPlBsCP7j4RJyFRE=
+			lxNDrFqMIZw2lA+nnruH3Wb3ts9Bc0a8m5gqhpl6x7s=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_hu.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/fIcNrkEagsMPNPk9XzJ8ZR/H/k=
+			MVdYGpV2an9KL8sbvwQFkw1FOFw=
 			</data>
 			<key>hash2</key>
 			<data>
-			dusDRNFd5IWdAogfUO0llhWwyUSindkRuJA9BPWRmgU=
+			ct49sdznWjeWUTZWsKw+WDuuDOXpKNqnPYwrFuUvXIA=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_id.json</key>
@@ -629,22 +614,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aOktdFUKrPb6PwN+Gcb6Vln0AuQ=
+			+nG3z8kpYZml0I96rt95lhSHhQY=
 			</data>
 			<key>hash2</key>
 			<data>
-			IFj7N4kERyzdPW5H1TZTXasvqul4U+RbkNoNypc/fSs=
+			FpByxJP3rlmTmqYZv3FoTHRn6kEa+9ozXWevKoT1pDM=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_ja.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JZF2Sw43I6mTEV6ksmZGS/h5RIU=
+			205uTb2z5rfXatw+llu/h8FXpAo=
 			</data>
 			<key>hash2</key>
 			<data>
-			YdYqb242VdrivMaPRdZCGNp/MLdi4EiFe8e8Vb1vNNg=
+			i8FiyFwAodOgC7YUG/Aiqb9MwBoxfV3ASdFgv3gBHNE=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_ko.json</key>
@@ -662,22 +647,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			eEji8hM4biVZvYZz83AIc5xO9+c=
+			K/+pO0U1Mzx3jke/pT5wB4qot9M=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ow8+sLNlt6uKMGCSyMZBtmRr8GQ33GCpz4I/vsGRSlM=
+			f3cnl668ckn9UL4TLre5QEgiy4oFXU3N9BTZdzcpiqE=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_lv.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MYHBp5jhbgl5sc23jqrvUE+scjE=
+			QIpbvY6oxhylUjUQt6SdNwIkLwE=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZSjRamCOxjvDTS+MysL1cIN0yhD5B2tSCHDoILcWPqQ=
+			FyRUm9NeunbDspuROu4AohYdzaFEbHP9cPl1Nw0gmAA=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_mk-MK.json</key>
@@ -706,33 +691,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ADNwr2GWFwFVp2KepVuh8fIFMUA=
+			hO0jCM8o/sX1CXTwQoIivcC1gF0=
 			</data>
 			<key>hash2</key>
 			<data>
-			+WkAVJzvlJQyQXIQhSzCe731Tv/q+d/qEv+om7QZ88s=
+			0aF5Qa/h4JxRVlbQ3y90y1qVaCv9ZSBx05dh/N89KeA=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_no.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CZ8EQGb4WUgvwRrrPQoQZO+lut0=
+			RHnywG0BERR7BxWb/et2ny55P2c=
 			</data>
 			<key>hash2</key>
 			<data>
-			QV3CHEbWfRr47IAKhxi7qALqIz/PtH6JGLLht6H3uUA=
+			xvWXy6rAU4aiNYzAZA1SUNFhfjrL6/nhF/Sf/5uNYMY=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_pl.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pYNgMscKtUUcWr3IQiuYmWzno+E=
+			5bmmlc7863JfApcjSbIjvXl+szI=
 			</data>
 			<key>hash2</key>
 			<data>
-			GkvQ2h2meeTWGOoLpoFsjLqQFbyLG2FUXMDwAbACVdM=
+			mk23m40fEF7J0gzqCeapZsOK6hpMazrINHrjdMMQBe0=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_pt-BR.json</key>
@@ -750,77 +735,77 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+lPG4p+PbGy4AiMx0lYvdslH+Mg=
+			y+n006SWQjwUkCGtyZiKQjovHkI=
 			</data>
 			<key>hash2</key>
 			<data>
-			4oh6usRcJY0obytMfii7CiJuK6ymIN9vorq0ie3NVTI=
+			+zyGiwrQV/YuE19BRVHylClEbW0jEoIQ8dyQYnraKgk=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_ro.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			lGQFXWjaJsLpEopfqFBEbfmKmC8=
+			cHZPxmQ5r7v4A4fYAeGISFeLzgc=
 			</data>
 			<key>hash2</key>
 			<data>
-			rF7toZFJCzsdMb3aByxDbyQ8+t7YSBJle8aSoOoymKo=
+			RqkDyf2u+yyPyMn2PGHPJJgCI8jTXyDKgK6I6i2SwcU=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_ru.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			EUbkVmfauJeXc+vy63HNxf82pAU=
+			z1uy6e5BTc09zsobK0qtWFt1MwM=
 			</data>
 			<key>hash2</key>
 			<data>
-			9QPPGahnJQ+8jzNCj2oEqUg9+yn7kkObUST1xoCNTns=
+			u3++X4RiB0doSlyR42OjrZyzNxO+WK6SS2SZ6QWCW9w=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_sk.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			gdbqCN1GPEX5QcQn+FxVqTTD3Ws=
+			Yv8CBIKbiE0MDUiVOnSyT+Cqpyg=
 			</data>
 			<key>hash2</key>
 			<data>
-			rFlHY7f3KFFQJrk39dKFhft6m74hLAjX9KuC7+k8NRE=
+			qtp12EySnQL4Xxo2XZoF7Tk3qPvqhci4R6E+xL3hLCE=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_sl.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sM46IxEPlvuVeEK2FlaSPIN+Li8=
+			YGN07YpeIPhpnty1L+GcNKb+DGA=
 			</data>
 			<key>hash2</key>
 			<data>
-			uO6hbT1axzR+SDaxgnK3z9mh/OX++FqpycqT7YHY2yc=
+			1cLSwOmjS6+Y7mLhfqFRcds3Yi5J8+kcu+ETpe5WWNI=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_sr.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8sdxQ2DJxbPz0HJdqDItGmKDyTY=
+			VZgA3kHKPWdizngzxK4rFp8GC9c=
 			</data>
 			<key>hash2</key>
 			<data>
-			OxfRGOsPrF5jjlluVurR0nnhLLQm0Pz7k/cCAwZ8arg=
+			pQi4l41fpexDinxBzTrdr13OXo6WYBVyzwHNM88A0So=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_sv.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LXsamCrfQVcjayvVzyGu+Xd50FU=
+			5phYDYqGxZ13kEwfn2WhId4d5kI=
 			</data>
 			<key>hash2</key>
 			<data>
-			vRsGa3QONYlPT3p3GL70vYRywyvCMP/SRUNFf32Fd/Y=
+			XB2YBVTWAyappmgAnlVyU+PahZg+/NsZ5NH4GwxqDek=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_sw.json</key>
@@ -849,11 +834,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5alV0JOgUlNRify0c0jIxnX1ENY=
+			ToIsWm8Mtmm77WhrdldTPIArIwE=
 			</data>
 			<key>hash2</key>
 			<data>
-			LxU3FKA1RhPpvmZIuuW2stMvq/ArLNpt4mTMg5kiDwg=
+			wf0AZZmq/r7UCyJrniLyRj7AfSrs8SWQD3xqLbUBy00=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_uk.json</key>
@@ -882,11 +867,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			XMp6BVVSyUI68BeU1ETNhQtkmIQ=
+			41TB6WWfJPuv5RXIkF1Plvw2/1Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			P9Xnb7iUKaevvgxR4yTHhsRoniFYtcCLMRA+O8oq4tY=
+			E/CXC3HVjzOkr+PJAhYdWcG95Pld9/GXNXWJuA5mRPg=
 			</data>
 		</dict>
 		<key>didomi_iab_purposes_v2_zh-TW.json</key>
@@ -904,11 +889,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Se8q0jQ5spcP0baBvPeiWlRk4kA=
+			pYMqU75KpVyLILflIdjoQ5uSuPo=
 			</data>
 			<key>hash2</key>
 			<data>
-			cmYrMWIbiBT1lcLVK1W5nYmS9UjivTOjOuRl+e9BRdc=
+			oimYE5IPlGlWZvH6UItyh4YFWuXfvWIN7MkaMnAwg9I=
 			</data>
 		</dict>
 	</dict>
