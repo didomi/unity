@@ -19,12 +19,21 @@ namespace IO.Didomi.SDK.Events
         public event EventHandler<NoticeClickAgreeEvent> NoticeClickAgree;
         public event EventHandler<NoticeClickDisagreeEvent> NoticeClickDisagree;
         public event EventHandler<NoticeClickMoreInfoEvent> NoticeClickMoreInfo;
+        public event EventHandler<NoticeClickViewSPIPurposesEvent> NoticeClickViewSPIPurposes;
         public event EventHandler<PreferencesClickAgreeToAllEvent> PreferencesClickAgreeToAll;
         public event EventHandler<PreferencesClickDisagreeToAllEvent> PreferencesClickDisagreeToAll;
         public event EventHandler<PreferencesClickPurposeAgreeEvent> PreferencesClickPurposeAgree;
         public event EventHandler<PreferencesClickPurposeDisagreeEvent> PreferencesClickPurposeDisagree;
+        public event EventHandler<PreferencesClickCategoryAgreeEvent> PreferencesClickCategoryAgree;
+        public event EventHandler<PreferencesClickCategoryDisagreeEvent> PreferencesClickCategoryDisagree;
+        public event EventHandler<PreferencesClickViewSPIPurposesEvent> PreferencesClickViewSPIPurposes;
         public event EventHandler<PreferencesClickViewVendorsEvent> PreferencesClickViewVendors;
         public event EventHandler<PreferencesClickSaveChoicesEvent> PreferencesClickSaveChoices;
+        public event EventHandler<PreferencesClickSPIPurposeAgreeEvent> PreferencesClickSPIPurposeAgree;
+        public event EventHandler<PreferencesClickSPIPurposeDisagreeEvent> PreferencesClickSPIPurposeDisagree;
+        public event EventHandler<PreferencesClickSPICategoryAgreeEvent> PreferencesClickSPICategoryAgree;
+        public event EventHandler<PreferencesClickSPICategoryDisagreeEvent> PreferencesClickSPICategoryDisagree;
+        public event EventHandler<PreferencesClickSPIPurposeSaveChoicesEvent> PreferencesClickSPIPurposeSaveChoices;
         public event EventHandler<PreferencesClickVendorAgreeEvent> PreferencesClickVendorAgree;
         public event EventHandler<PreferencesClickVendorDisagreeEvent> PreferencesClickVendorDisagree;
         public event EventHandler<PreferencesClickVendorSaveChoicesEvent> PreferencesClickVendorSaveChoices;
@@ -89,6 +98,12 @@ namespace IO.Didomi.SDK.Events
             // Click on disagree on notice
         }
 
+        public void OnNoticeClickViewSPIPurposes(NoticeClickViewSPIPurposesEvent @event)
+        {
+            NoticeClickViewSPIPurposes?.Invoke(this, @event);
+            // Click on sensitive personal information on notice
+        }
+
         public void OnNoticeClickMoreInfo(NoticeClickMoreInfoEvent @event)
         {
             NoticeClickMoreInfo?.Invoke(this, @event);
@@ -100,7 +115,6 @@ namespace IO.Didomi.SDK.Events
             PreferencesClickAgreeToAll?.Invoke(this, @event);
             // Click on agree to all on preferences popup
         }
-
 
         public void OnPreferencesClickDisagreeToAll(PreferencesClickDisagreeToAllEvent @event)
         {
@@ -121,6 +135,23 @@ namespace IO.Didomi.SDK.Events
             // Click on disagree to a purpose on preferences popup
         }
 
+        public void OnPreferencesClickCategoryAgree(PreferencesClickCategoryAgreeEvent @event)
+        {
+            PreferencesClickCategoryAgree?.Invoke(this, @event);
+            // Click on agree to a category on preferences popup
+        }
+
+        public void OnPreferencesClickCategoryDisagree(PreferencesClickCategoryDisagreeEvent @event)
+        {
+            PreferencesClickCategoryDisagree?.Invoke(this, @event);
+            // Click on disagree to a category on preferences popup
+        }
+
+        public void OnPreferencesClickViewSPIPurposes(PreferencesClickViewSPIPurposesEvent @event)
+        {
+            PreferencesClickViewSPIPurposes?.Invoke(this, @event);
+            // Click view sensitive personal information on purposes view on preferences popup
+        }
 
         public void OnPreferencesClickViewVendors(PreferencesClickViewVendorsEvent @event)
         {
@@ -128,13 +159,41 @@ namespace IO.Didomi.SDK.Events
             // Click view vendors on purposes view on preferences popup
         }
 
-
         public void OnPreferencesClickSaveChoices(PreferencesClickSaveChoicesEvent @event)
         {
             PreferencesClickSaveChoices?.Invoke(this, @event);
             // Click on save on the purposes view on preferences popup
         }
 
+        public void OnPreferencesClickSPIPurposeAgree(PreferencesClickSPIPurposeAgreeEvent @event)
+        {
+            PreferencesClickSPIPurposeAgree?.Invoke(this, @event);
+            // Click on agree to a purpose on sensitive personal information screen
+        }
+
+        public void OnPreferencesClickSPIPurposeDisagree(PreferencesClickSPIPurposeDisagreeEvent @event)
+        {
+            PreferencesClickSPIPurposeDisagree?.Invoke(this, @event);
+            // Click on disagree to a purpose on sensitive personal information screen
+        }
+
+        public void OnPreferencesClickSPICategoryAgree(PreferencesClickSPICategoryAgreeEvent @event)
+        {
+            PreferencesClickSPICategoryAgree?.Invoke(this, @event);
+            // Click on agree to a category on sensitive personal information screen
+        }
+
+        public void OnPreferencesClickSPICategoryDisagree(PreferencesClickSPICategoryDisagreeEvent @event)
+        {
+            PreferencesClickSPICategoryDisagree?.Invoke(this, @event);
+            // Click on disagree to a category on sensitive personal information screen
+        }
+
+        public void OnPreferencesClickSPIPurposeSaveChoices(PreferencesClickSPIPurposeSaveChoicesEvent @event)
+        {
+            PreferencesClickSPIPurposeSaveChoices?.Invoke(this, @event);
+            // Click on save on sensitive personal information screen
+        }
 
         public void OnPreferencesClickVendorAgree(PreferencesClickVendorAgreeEvent @event)
         {
@@ -147,7 +206,6 @@ namespace IO.Didomi.SDK.Events
             PreferencesClickVendorDisagree?.Invoke(this, @event);
             // Click on disagree to a vendor on preferences popup
         }
-
 
         public void OnPreferencesClickVendorSaveChoices(PreferencesClickVendorSaveChoicesEvent @event)
         {
