@@ -38,6 +38,13 @@ namespace Assets.Plugins.Scripts.IOS
         DDMEventTypeSyncError = 29,
         DDMEventTypeLanguageUpdated = 30,
         DDMEventTypeLanguageUpdateFailed = 31,
+        DDMEventTypeNoticeClickViewSPIPurposes = 32,
+        DDMEventTypePreferencesClickViewSPIPurposes = 33,
+        DDMEventTypePreferencesClickSPIPurposeAgree = 34,
+        DDMEventTypePreferencesClickSPIPurposeDisagree = 35,
+        DDMEventTypePreferencesClickSPICategoryAgree = 36,
+        DDMEventTypePreferencesClickSPICategoryDisagree = 37,
+        DDMEventTypePreferencesClickSPIPurposeSaveChoices = 38,
         DDMEventTypeError = 1000,
     };
 }

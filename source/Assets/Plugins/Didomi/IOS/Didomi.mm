@@ -577,6 +577,12 @@ void addEventListener( void (*event_listener_handler) (int, char *))
         event_listener_handler(eventType, NULL);
 
     };
+    
+    eventListener.onNoticeClickViewSPIPurposes = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
 
 	eventListener.onPreferencesClickAgreeToAll = ^(enum DDMEventType eventType){
 
@@ -601,6 +607,18 @@ void addEventListener( void (*event_listener_handler) (int, char *))
         event_listener_handler(eventType, convertNSStringToCString(purposeId));
 
     };
+    
+    eventListener.onPreferencesClickCategoryAgree = ^(DDMEventType eventType, NSString * _Nullable categoryId){
+
+        event_listener_handler(eventType, convertNSStringToCString(categoryId));
+
+    };
+
+    eventListener.onPreferencesClickCategoryDisagree = ^(DDMEventType eventType, NSString * _Nullable categoryId){
+
+        event_listener_handler(eventType, convertNSStringToCString(categoryId));
+
+    };
 
 	eventListener.onPreferencesClickViewVendors = ^(DDMEventType eventType){
 
@@ -609,6 +627,36 @@ void addEventListener( void (*event_listener_handler) (int, char *))
     };
 
 	eventListener.onPreferencesClickSaveChoices = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
+    eventListener.onPreferencesClickSPIPurposeAgree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
+
+        event_listener_handler(eventType, convertNSStringToCString(purposeId));
+
+    };
+
+    eventListener.onPreferencesClickSPIPurposeDisagree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
+
+        event_listener_handler(eventType, convertNSStringToCString(purposeId));
+
+    };
+    
+    eventListener.onPreferencesClickSPICategoryAgree = ^(DDMEventType eventType, NSString * _Nullable categoryId){
+
+        event_listener_handler(eventType, convertNSStringToCString(categoryId));
+
+    };
+
+    eventListener.onPreferencesClickSPICategoryDisagree = ^(DDMEventType eventType, NSString * _Nullable categoryId){
+
+        event_listener_handler(eventType, convertNSStringToCString(categoryId));
+
+    };
+    
+    eventListener.onPreferencesClickSPIPurposeSaveChoices = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 

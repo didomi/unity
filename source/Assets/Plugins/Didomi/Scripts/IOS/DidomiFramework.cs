@@ -491,17 +491,11 @@ namespace IO.Didomi.SDK.IOS
                 case DDMEventType.DDMEventTypeConsentChanged:
                     eventListenerInner.OnConsentChanged(new ConsentChangedEvent());
                     break;
-                case DDMEventType.DDMEventTypeHideNotice:
-                    eventListenerInner.OnHideNotice(new HideNoticeEvent());
-                    break;
                 case DDMEventType.DDMEventTypeReady:
                     eventListenerInner.OnReady(new ReadyEvent());
                     break;
                 case DDMEventType.DDMEventTypeError:
                     eventListenerInner.OnError(new ErrorEvent(argument));
-                    break;
-                case DDMEventType.DDMEventTypeShowNotice:
-                    eventListenerInner.OnShowNotice(new ShowNoticeEvent());
                     break;
                 case DDMEventType.DDMEventTypeNoticeClickAgree:
                     eventListenerInner.OnNoticeClickAgree(new NoticeClickAgreeEvent());
@@ -510,7 +504,22 @@ namespace IO.Didomi.SDK.IOS
                     eventListenerInner.OnNoticeClickDisagree(new NoticeClickDisagreeEvent());
                     break;
                 case DDMEventType.DDMEventTypeNoticeClickMoreInfo:
-                    eventListenerInner.OnConsentChanged(new ConsentChangedEvent());
+                    eventListenerInner.OnNoticeClickMoreInfo(new NoticeClickMoreInfoEvent());
+                    break;
+                case DDMEventType.DDMEventTypeNoticeClickViewSPIPurposes:
+                    eventListenerInner.OnNoticeClickViewSPIPurposes(new NoticeClickViewSPIPurposesEvent());
+                    break;
+                case DDMEventType.DDMEventTypeShowNotice:
+                    eventListenerInner.OnShowNotice(new ShowNoticeEvent());
+                    break;
+                case DDMEventType.DDMEventTypeHideNotice:
+                    eventListenerInner.OnHideNotice(new HideNoticeEvent());
+                    break;
+                case DDMEventType.DDMEventTypeShowPreferences:
+                    eventListenerInner.OnShowPreferences(new ShowPreferencesEvent());
+                    break;
+                case DDMEventType.DDMEventTypeHidePreferences:
+                    eventListenerInner.OnHidePreferences(new HidePreferencesEvent());
                     break;
                 case DDMEventType.DDMEventTypePreferencesClickAgreeToAll:
                     eventListenerInner.OnPreferencesClickAgreeToAll(new PreferencesClickAgreeToAllEvent());
@@ -524,11 +533,35 @@ namespace IO.Didomi.SDK.IOS
                 case DDMEventType.DDMEventTypePreferencesClickPurposeDisagree:
                     eventListenerInner.OnPreferencesClickPurposeDisagree(new PreferencesClickPurposeDisagreeEvent(argument));
                     break;
+                case DDMEventType.DDMEventTypePreferencesClickCategoryAgree:
+                    eventListenerInner.OnPreferencesClickCategoryAgree(new PreferencesClickCategoryAgreeEvent(argument));
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickCategoryDisagree:
+                    eventListenerInner.OnPreferencesClickCategoryDisagree(new PreferencesClickCategoryDisagreeEvent(argument));
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickViewSPIPurposes:
+                    eventListenerInner.OnPreferencesClickViewSPIPurposes(new PreferencesClickViewSPIPurposesEvent());
+                    break;
                 case DDMEventType.DDMEventTypePreferencesClickViewVendors:
                     eventListenerInner.OnPreferencesClickViewVendors(new PreferencesClickViewVendorsEvent());
                     break;
                 case DDMEventType.DDMEventTypePreferencesClickSaveChoices:
                     eventListenerInner.OnPreferencesClickSaveChoices(new PreferencesClickSaveChoicesEvent());
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickSPIPurposeAgree:
+                    eventListenerInner.OnPreferencesClickSPIPurposeAgree(new PreferencesClickSPIPurposeAgreeEvent(argument));
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickSPIPurposeDisagree:
+                    eventListenerInner.OnPreferencesClickSPIPurposeDisagree(new PreferencesClickSPIPurposeDisagreeEvent(argument));
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickSPICategoryAgree:
+                    eventListenerInner.OnPreferencesClickSPICategoryAgree(new PreferencesClickSPICategoryAgreeEvent(argument));
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickSPICategoryDisagree:
+                    eventListenerInner.OnPreferencesClickSPICategoryDisagree(new PreferencesClickSPICategoryDisagreeEvent(argument));
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickSPIPurposeSaveChoices:
+                    eventListenerInner.OnPreferencesClickSPIPurposeSaveChoices(new PreferencesClickSPIPurposeSaveChoicesEvent());
                     break;
                 case DDMEventType.DDMEventTypePreferencesClickVendorAgree:
                     eventListenerInner.OnPreferencesClickVendorAgree(new PreferencesClickVendorAgreeEvent(argument));
@@ -538,12 +571,6 @@ namespace IO.Didomi.SDK.IOS
                     break;
                 case DDMEventType.DDMEventTypePreferencesClickVendorSaveChoices:
                     eventListenerInner.OnPreferencesClickVendorSaveChoices(new PreferencesClickVendorSaveChoicesEvent());
-                    break;
-                case DDMEventType.DDMEventTypeHidePreferences:
-                    eventListenerInner.OnHidePreferences(new HidePreferencesEvent());
-                    break;
-                case DDMEventType.DDMEventTypeShowPreferences:
-                    eventListenerInner.OnShowPreferences(new ShowPreferencesEvent());
                     break;
                 case DDMEventType.DDMEventTypeSyncDone:
                     eventListenerInner.OnSyncDone(new SyncDoneEvent(argument));
