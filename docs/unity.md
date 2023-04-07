@@ -1,9 +1,15 @@
 # Unity version
 
-We currently require Unity version 2019.3.12f1 or later. The plugin can be installed to Unity projects with version 2019.3.12f1 or later.
+We currently require Unity version 2020.3.46f1 or later. The plugin can be installed to Unity projects with version 2019.3.12f1 or later.
 
-But for developing the Unity Plugin, please use exact version  Unity 2019.3.12f1. If you try to open Unity plugin project with a different version, 
-Unity will want to upgrade/downgrade the project. To not have such a problem, use exact Unity 2019.3.12f1 version for development of the plugin.
+But for developing the Unity Plugin, please use exact version Unity 2020.3.46f1. If you try to open Unity plugin project with a different version, 
+Unity will want to upgrade/downgrade the project. To not have such a problem, use exact Unity 2020.3.46f1 version for development of the plugin.
+
+## 2020.3.46f1
+
+Version 2020.3.46f1 is required because we need to target Android SDK 31. Targetting SDK 31 before this version will lead to a build error: <https://forum.unity.com/threads/error-during-build-gradle-project.1151459/>
+
+There are workarounds, but they are tricky to put in place, and won't work on Unity Cloud Build (requires using an alternate version of the gradle wrapper).
 
 ## 2019.3.12f1
 

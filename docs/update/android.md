@@ -2,13 +2,13 @@
 
 To update the native Didomi Android SDK, two steps need to be followed:
 
-- Update the library shipped in the Unity plugin
+- Update the library in PostProcessor
 - Expose new or modified functions added to the updated version of the SDK
 
 ## Library
 
-To update the native `aar` library embedded in the plugin, copy the `aar` file from the published Didomi Android SDK into [`Plugins/Didomi/Android/libs`](../../source/Plugins/Didomi/Android/libs).
-The Android SDK release can be found on [`mavenCentral`](https://search.maven.org/search?q=didomi).
+To update the version of the library used in the plugin, modify the PostProcessor file at [`Assets/Plugins/Didomi/Editor/PostProcessor.cs`](../../source/Assets/Plugins/Didomi/Editor/PostProcessor.cs).
+In the method `UpdateUnityLibraryDependencies`, modify the version set in the line `implementation(""io.didomi.sdk:android:x.y.z"")`
 
 ## Functions
 
