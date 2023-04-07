@@ -155,6 +155,7 @@ In the next dialog, remove elements that are not needed for the plugin:
 - The example scene `Assets/Plugins/Scenes/SampleScene.unity` from the exported files list
 - The sample code in the folder `Assets/Scripts/DidomiSample/`
 - Custom gradle file used for the sample `Assets/Plugins/Android/launcherTemplate.gradle`
+- Sample configuration file: `Assets/DidomiConfig/didomi_config.json`
 
 Set "Didomi" as the name for the package.
 
