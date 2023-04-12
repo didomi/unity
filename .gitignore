@@ -1,6 +1,4 @@
 .DS_Store
-source/Assets/Plugins/Didomi/IOS/Didomi.xcframework.meta
-source/Assets/Plugins/Didomi/IOS/Didomi.xcframework
-source/Frameworks/Plugins/Didomi/IOS/Didomi.xcframework
 source/output.txt
-source/Frameworks/Plugins/Didomi/IOS/didomi-ios-sdk-*-xcframework.zip
+source/Assets/Frameworks/Plugins/Didomi/*
+source/Assets/Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/*
