@@ -194,7 +194,6 @@ public static class PostProcessor
         
         if (buildTarget == BuildTarget.iOS)
         {
-
             PostProcessorSettings.InitSettings();
             
             // PBXProject.GetPBXProjectPath returns the wrong path, we need to construct path by ourselves instead
@@ -234,8 +233,6 @@ public static class PostProcessor
             CopyPackageJsonToIOSFolder(proj, targetGuid, buildPath);
 
             proj.WriteToFile(projPath);
-
-      
         }
     }
 
@@ -296,7 +293,6 @@ public static class PostProcessor
         process.WaitForExit(240000);
         UnityEngine.Debug.Log($"Didomi iOS Post Processor downloading framework: {output}");
     }
-    
 
     /// <summary>
     /// For iOS platform, setups and configures didomi native libs for target SDK Device or Simulator.
