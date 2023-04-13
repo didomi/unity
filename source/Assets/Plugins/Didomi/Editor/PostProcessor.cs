@@ -193,7 +193,7 @@ public static class PostProcessor
         Debug.Log("Didomi OnPostProcessBuild invoked" + buildPath);
         
         if (buildTarget == BuildTarget.iOS)
-        {
+        {          
             PostProcessorSettings.InitSettings();
             
             // PBXProject.GetPBXProjectPath returns the wrong path, we need to construct path by ourselves instead
@@ -215,123 +215,13 @@ public static class PostProcessor
             proj.AddBuildProperty(targetGuid, "DYLIB_INSTALL_NAME_BASE", "@rpath");
             proj.AddBuildProperty(targetGuid, "LD_DYLIB_INSTALL_NAME", "@executable_path/../Frameworks/$(EXECUTABLE_PATH)");
 
-            string frameworkName = "Didomi.xcframework";
-            string frameworkVersion = "1.86.0";          
-            string zipFileName = $"didomi-ios-sdk-{frameworkVersion}-xcframework.zip";
-            string frameworkDirectory = $"{Application.dataPath}/Frameworks/Plugins/Didomi/IOS";
-            string frameworkPath = $"{frameworkDirectory}/{frameworkName}";
-            DownloadFramework(frameworkPath, frameworkDirectory, zipFileName);
-            UnityEngine.Debug.Log(" ** Application.dataPath: " + Application.dataPath);
-            UnityEngine.Debug.Log(" ** frameworkPath: " + frameworkPath);
+            XCFrameworkUtils.ImportXCFrameworkToProject(proj, targetGuid, buildPath);
 
-            var unityTargetGuid = proj.GetUnityFrameworkTargetGuid();
-            string fileGuid = proj.AddFile(frameworkPath, "Frameworks/" + Path.GetFileName(frameworkPath), PBXSourceTree.Source);
-            proj.AddFileToBuild(unityTargetGuid, fileGuid);
-
-            SetupDidomiFrameworkForTargetSDK(proj, targetGuid, buildPath);
             CopyDidomiConfigFileToIOSFolder(proj, targetGuid, buildPath);
             CopyPackageJsonToIOSFolder(proj, targetGuid, buildPath);
 
             proj.WriteToFile(projPath);
         }
-    }
-
-    /// <summary>
-    /// Download the XCFramework.
-    /// </summary>
-    /// <param name="buildPath">Generated project path</param>
-    private static void DownloadFramework(string frameworkPath, string frameworkDirectory, string zipFileName)
-    {
-        System.Diagnostics.Process process = new System.Diagnostics.Process();
-
-        UnityEngine.Debug.Log("*** frameworkPath: " + frameworkPath);
-
-        string url = $"https://sdk.didomi.io/ios/{zipFileName}";
-
-        string zipFilePath = $"{frameworkDirectory}/{zipFileName}";
-        string createFrameworkDirectory = $"mkdir -p {frameworkDirectory}";
-        string downloadFramework = $"echo \"downloading\" && curl -o {zipFilePath} {url}";
-        string unzipFramework = $"echo \"unzipping\" && unzip {zipFilePath} -d {frameworkDirectory}";
-
-        // Cleanup previous files
-        string deleteZippedFramework = $"rm -rf {zipFilePath} && rm -rf {zipFilePath}.meta";
-        string deleteFramework = $"rm -rf {frameworkPath} && rm -rf {frameworkPath}.meta";
-        string cleanup = $"{deleteZippedFramework} && {deleteFramework}";
-
-        // Cleanup binaries that are not used
-        string deleteDeviceFramework = $"rm -rf {frameworkPath}/ios-arm64_armv7";
-        string deleteSimulatorFramework = $"rm -rf {frameworkPath}/ios-arm64_i386_x86_64-simulator";
-        string deleteTVOSDeviceFramework = $"rm -rf {frameworkPath}/tvos-arm64";
-        string deleteTVOSSimulatorFramework = $"rm -rf {frameworkPath}/tvos-arm64_x86_64-simulator";
-        string deleteUnused = "";
-        if (PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK)
-        {
-            UnityEngine.Debug.Log(" ** Didomi SDK: Building for Device");
-            deleteUnused = $"{deleteSimulatorFramework} && {deleteTVOSDeviceFramework} && {deleteTVOSSimulatorFramework}";
-        }
-        else
-        {
-            UnityEngine.Debug.Log(" ** Didomi SDK: Building for Simulator");
-            deleteUnused = $"{deleteDeviceFramework} && {deleteTVOSDeviceFramework} && {deleteTVOSSimulatorFramework}";
-        }
-        
-        string processFramework = $"{cleanup} && {createFrameworkDirectory} && {downloadFramework} && {unzipFramework} && {deleteZippedFramework} && {deleteUnused}";
-
-        process.StartInfo.FileName = "/bin/bash";
-        process.StartInfo.Arguments = $"-c \"{processFramework} > output.txt\"";
-
-        process.StartInfo.UseShellExecute = false;
-        process.StartInfo.RedirectStandardOutput = true;
-        process.StartInfo.RedirectStandardError = true;
-        process.StartInfo.EnvironmentVariables["LANG"] = "en_US.UTF-8"; // set LANG to en_US.UTF-8
-        process.Start();
-
-        // Wait for the process to finish and log the output
-        string output = process.StandardError.ReadToEnd();
-
-        // Large timeout to make sure the process has enough time to run
-        process.WaitForExit(240000);
-        UnityEngine.Debug.Log($"Didomi iOS Post Processor downloading framework: {output}");
-    }
-
-    /// <summary>
-    /// For iOS platform, setups and configures didomi native libs for target SDK Device or Simulator.
-    /// </summary>
-    /// <param name="project"></param>
-    /// <param name="targetGuid"></param>
-    /// <param name="path"></param>
-    private static void SetupDidomiFrameworkForTargetSDK(PBXProject project, string targetGuid, string path)
-    {
-        var xcframeworkPath = $"Frameworks{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.xcframework";
-        var unusedSDKPath = string.Empty;
-        var simulatorPath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_i386_x86_64-simulator";
-        var devicePath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_armv7";
-
-        if (PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK)
-        {
-            unusedSDKPath = simulatorPath;
-        }
-        else
-        {
-            unusedSDKPath = devicePath;
-            var mmFile = $"{path}{PostProcessorSettings.FilePathSeperator}Libraries{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.mm";
-            var headerFileImportLineDevice = @"#import ""Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h""";
-            var headerFileImportLineSimulator = @"#import ""Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_i386_x86_64-simulator/Didomi.framework/Headers/Didomi-Swift.h""";
-            ReplaceLineInFile(mmFile, headerFileImportLineDevice, headerFileImportLineSimulator);
-        }
-
-		if(Directory.Exists($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}"))
-		{
-			Directory.Delete($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}", true);
-			var frameworkPath = $@"{unusedSDKPath}{PostProcessorSettings.FilePathSeperator}Didomi.framework";
-			var guid = project.FindFileGuidByProjectPath(frameworkPath);
-			var unityFrameworkGuid = project.GetUnityFrameworkTargetGuid();
-
-			project.RemoveFileFromBuild(targetGuid, guid);
-			project.RemoveFileFromBuild(unityFrameworkGuid, guid);
-			project.RemoveFrameworkFromProject(targetGuid, frameworkPath);
-			project.RemoveFrameworkFromProject(unityFrameworkGuid, frameworkPath);
-		}
     }
 
     /// <summary>
