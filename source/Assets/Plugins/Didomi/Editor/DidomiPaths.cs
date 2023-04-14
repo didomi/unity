@@ -5,7 +5,7 @@ using System.IO;
 /// </summary>
 public static class DidomiPaths
 {
-  public const string FRAMEWORK_VERSION = "1.86.0";
+  public const string FRAMEWORK_VERSION = "1.87.0";
   public static string ZIP_FILE_NAME = $"didomi-ios-sdk-{FRAMEWORK_VERSION}-xcframework.zip";
   public static string FRAMEWORK_URL = $"https://sdk.didomi.io/ios/{ZIP_FILE_NAME}";
 
