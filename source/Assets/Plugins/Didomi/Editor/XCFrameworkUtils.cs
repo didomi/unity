@@ -1,4 +1,5 @@
 using System.IO;
+using UnityEditor;
 using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
 using UnityEngine;
@@ -62,8 +63,22 @@ public class XCFrameworkUtils {
 
         // We need to manually copy the Info plist file of the XCFramework because Unity doesn't do it.
         string infoPlistPath = Path.Combine(frameworkPath, DidomiPaths.INFO_PLIST);
+        string iOSMaps = Path.Combine(frameworkPath, DidomiPaths.IOS_ARCH, DidomiPaths.BC_SYMBOLS_MAP);
+        string iOSDSyms = Path.Combine(frameworkPath, DidomiPaths.IOS_ARCH, DidomiPaths.DSYMS);
+        string tvOSMaps = Path.Combine(frameworkPath, DidomiPaths.TVOS_ARCH, DidomiPaths.BC_SYMBOLS_MAP);
+        string tvOSDSyms = Path.Combine(frameworkPath, DidomiPaths.TVOS_ARCH, DidomiPaths.DSYMS);
+
+        // We need to copy files and folders that are not copied as part of the import
+        FileUtils.DeleteImportedDirectory(iOSMaps);
+        FileUtils.DeleteImportedDirectory(iOSDSyms);
+        FileUtils.DeleteImportedDirectory(tvOSMaps);
+        FileUtils.DeleteImportedDirectory(tvOSDSyms);
 
         File.Copy(DidomiPaths.INFO_PLIST_PATH, infoPlistPath, true);
+        FileUtil.CopyFileOrDirectory(DidomiPaths.BC_SYMBOLS_MAP_IOS_PATH, iOSMaps);
+        FileUtil.CopyFileOrDirectory(DidomiPaths.DSYMS_IOS_PATH, iOSDSyms);
+        FileUtil.CopyFileOrDirectory(DidomiPaths.BC_SYMBOLS_MAP_TVOS_PATH, tvOSMaps);
+        FileUtil.CopyFileOrDirectory(DidomiPaths.DSYMS_TVOS_PATH, tvOSDSyms);
         FileUtils.DeleteImportedDirectory(DidomiPaths.FRAMEWORK_PATH_IN_SOURCE);
     }
 }
