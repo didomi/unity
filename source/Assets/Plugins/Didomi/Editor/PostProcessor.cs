@@ -134,7 +134,7 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
         var unityPlayerFileAbsolutePath = Path.Combine(path, unityPlayerFile);
         var oldValue = "dependencies {";
         var newValue = @"dependencies {
-    implementation(""io.didomi.sdk:android:1.72.1"")
+    implementation(""io.didomi.sdk:android:1.77.0"")
     ";
         PostProcessor.ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
     }

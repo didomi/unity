@@ -22,9 +22,7 @@ namespace IO.Didomi.SDK.Android
 
         public void consentChanged(AndroidJavaObject @event)
         {
-            var consentChangedEvent = ConvertToConsentChangedEvent(@event);
-
-            _eventListener.OnConsentChanged(consentChangedEvent);
+            _eventListener.OnConsentChanged(new ConsentChangedEvent());
             // The consent status of the user has changed
         }
 
@@ -38,66 +36,48 @@ namespace IO.Didomi.SDK.Android
 
         public void hideNotice(AndroidJavaObject @event)
         {
-            var hideNoticeEvent = ConvertToHideNoticeEvent(@event);
-
-            _eventListener.OnHideNotice(hideNoticeEvent);
-            
+            _eventListener.OnHideNotice(new HideNoticeEvent());
             // The notice is being hidden
         }
 
         public void ready(AndroidJavaObject @event)
         {
-            var readyEvent = ConvertToReadyEvent(@event);
-
-            _eventListener.OnReady(readyEvent);
-
+            _eventListener.OnReady(new ReadyEvent());
             // The notice is being hidden
         }
 
         public void showNotice(AndroidJavaObject @event)
         {
-            var showNoticeEvent = ConvertToShowNoticeEvent(@event);
-
-            _eventListener.OnShowNotice(showNoticeEvent);
+            _eventListener.OnShowNotice(new ShowNoticeEvent());
             // The notice is being shown
         }
 
         public void hidePreferences(AndroidJavaObject @event)
         {
-            var hidePreferencesEvent = ConvertToHidePreferencesEvent(@event);
-
-            _eventListener.OnHidePreferences(hidePreferencesEvent);
+            _eventListener.OnHidePreferences(new HidePreferencesEvent());
             // The preferences screen is being hidden
         }
 
         public void showPreferences(AndroidJavaObject @event)
         {
-            var showPreferencesEvent = ConvertToShowPreferencesEvent(@event);
-
-            _eventListener.OnShowPreferences(showPreferencesEvent);
+            _eventListener.OnShowPreferences(new ShowPreferencesEvent());
             // The preferences screen is being shown
         }
 
         public void noticeClickAgree(AndroidJavaObject @event)
         {
-            var noticeClickAgreeEvent = ConvertToNoticeClickAgreeEvent(@event);
-
-            _eventListener.OnNoticeClickAgree(noticeClickAgreeEvent);
+            _eventListener.OnNoticeClickAgree(new NoticeClickAgreeEvent());
             // Click on agree on notice
         }
         
         public void noticeClickDisagree(AndroidJavaObject @event)
         {
-            var noticeClickDisagreeEvent = ConvertToNoticeClickDisagreeEvent(@event);
-
-            _eventListener.OnNoticeClickDisagree(noticeClickDisagreeEvent);
+            _eventListener.OnNoticeClickDisagree(new NoticeClickDisagreeEvent());
             // Click on disagree on notice
         }
 
         public void noticeClickViewVendors(AndroidJavaObject @event) { }
         public void noticeClickPrivacyPolicy(AndroidJavaObject @event) { }
-        public void preferencesClickCategoryAgree(AndroidJavaObject @event) { }
-        public void preferencesClickCategoryDisagree(AndroidJavaObject @event) { }
         public void preferencesClickViewPurposes(AndroidJavaObject @event) { }
         public void preferencesClickAgreeToAllPurposes(AndroidJavaObject @event) { }
         public void preferencesClickDisagreeToAllPurposes(AndroidJavaObject @event) { }
@@ -107,25 +87,25 @@ namespace IO.Didomi.SDK.Android
 
         public void noticeClickMoreInfo(AndroidJavaObject @event)
         {
-            var noticeClickMoreInfoEvent = ConvertToNoticeClickMoreInfoEvent(@event);
-
-            _eventListener.OnNoticeClickMoreInfo(noticeClickMoreInfoEvent);
+            _eventListener.OnNoticeClickMoreInfo(new NoticeClickMoreInfoEvent());
             // Click on learn more on notice
         }
-      
+
+        public void noticeClickViewSPIPurposes(AndroidJavaObject @event)
+        {
+            _eventListener.OnNoticeClickViewSPIPurposes(new NoticeClickViewSPIPurposesEvent());
+            // Click on learn more on notice
+        }
+
         public void preferencesClickAgreeToAll(AndroidJavaObject @event)
         {
-            var preferencesClickAgreeToAllEvent = ConvertToPreferencesClickAgreeToAllEvent(@event);
-
-            _eventListener.OnPreferencesClickAgreeToAll(preferencesClickAgreeToAllEvent);
+            _eventListener.OnPreferencesClickAgreeToAll(new PreferencesClickAgreeToAllEvent());
             // Click on agree to all on preferences popup
         }
        
         public void preferencesClickDisagreeToAll(AndroidJavaObject @event)
         {
-            var preferencesClickDisagreeToAllEvent = ConvertToPreferencesClickDisagreeToAllEvent(@event);
-
-            _eventListener.OnPreferencesClickDisagreeToAll(preferencesClickDisagreeToAllEvent);
+            _eventListener.OnPreferencesClickDisagreeToAll(new PreferencesClickDisagreeToAllEvent());
             // Click on disagree to all on preferences popup
         }
        
@@ -142,25 +122,79 @@ namespace IO.Didomi.SDK.Android
             var preferencesClickPurposeDisagreeEvent = ConvertToPreferencesClickPurposeDisagreeEvent(@event);
 
             _eventListener.OnPreferencesClickPurposeDisagree(preferencesClickPurposeDisagreeEvent);
-
-            string vendorId = preferencesClickPurposeDisagreeEvent.getPurposeId();
             // Click on disagree to a purpose on preferences popup
         }
-        
+
+        public void preferencesClickCategoryAgree(AndroidJavaObject @event)
+        {
+            var preferencesClickCategoryAgreeEvent = ConvertToPreferencesClickCategoryAgreeEvent(@event);
+
+            _eventListener.OnPreferencesClickCategoryAgree(preferencesClickCategoryAgreeEvent);
+            // Click on disagree to a category on preferences popup
+        }
+
+        public void preferencesClickCategoryDisagree(AndroidJavaObject @event)
+        {
+            var preferencesClickCategoryDisagreeEvent = ConvertToPreferencesClickCategoryDisagreeEvent(@event);
+
+            _eventListener.OnPreferencesClickCategoryDisagree(preferencesClickCategoryDisagreeEvent);
+            // Click on disagree to a category on preferences popup
+        }
+
+        public void preferencesClickViewSPIPurposes(AndroidJavaObject @event)
+        {
+            _eventListener.OnPreferencesClickViewSPIPurposes(new PreferencesClickViewSPIPurposesEvent());
+            // Click view SPI on purposes view on preferences popup
+        }
+
         public void preferencesClickViewVendors(AndroidJavaObject @event)
         {
-            var preferencesClickViewVendorsEvent = ConvertToPreferencesClickViewVendorsEvent(@event);
-
-            _eventListener.OnPreferencesClickViewVendors(preferencesClickViewVendorsEvent);
+            _eventListener.OnPreferencesClickViewVendors(new PreferencesClickViewVendorsEvent());
             // Click view vendors on purposes view on preferences popup
         }
        
         public void preferencesClickSaveChoices(AndroidJavaObject @event)
         {
-            var preferencesClickSaveChoicesEvent = ConvertToPreferencesClickSaveChoicesEvent(@event);
-
-            _eventListener.OnPreferencesClickSaveChoices(preferencesClickSaveChoicesEvent);
+            _eventListener.OnPreferencesClickSaveChoices(new PreferencesClickSaveChoicesEvent());
             // Click on save on the purposes view on preferences popup
+        }
+
+        public void preferencesClickSPIPurposeAgree(AndroidJavaObject @event)
+        {
+            var preferencesClickSPIPurposeAgreeEvent = ConvertToPreferencesClickSPIPurposeAgreeEvent(@event);
+
+            _eventListener.OnPreferencesClickSPIPurposeAgree(preferencesClickSPIPurposeAgreeEvent);
+            // Click on agree to a purpose on sensitive personal information screen
+        }
+
+        public void preferencesClickSPIPurposeDisagree(AndroidJavaObject @event)
+        {
+            var preferencesClickSPIPurposeDisagreeEvent = ConvertToPreferencesClickSPIPurposeDisagreeEvent(@event);
+
+            _eventListener.OnPreferencesClickSPIPurposeDisagree(preferencesClickSPIPurposeDisagreeEvent);
+            // Click on disagree to a purpose on sensitive personal information screen
+        }
+
+        public void preferencesClickSPICategoryAgree(AndroidJavaObject @event)
+        {
+            var preferencesClickSPICategoryAgreeEvent = ConvertToPreferencesClickSPICategoryAgreeEvent(@event);
+
+            _eventListener.OnPreferencesClickSPICategoryAgree(preferencesClickSPICategoryAgreeEvent);
+            // Click on agree to a category on sensitive personal information screen
+        }
+
+        public void preferencesClickSPICategoryDisagree(AndroidJavaObject @event)
+        {
+            var preferencesClickSPICategoryDisagreeEvent = ConvertToPreferencesClickSPICategoryDisagreeEvent(@event);
+
+            _eventListener.OnPreferencesClickSPICategoryDisagree(preferencesClickSPICategoryDisagreeEvent);
+            // Click on disagree to a category on sensitive personal information screen
+        }
+
+        public void preferencesClickSPIPurposeSaveChoices(AndroidJavaObject @event)
+        {
+            _eventListener.OnPreferencesClickSPIPurposeSaveChoices(new PreferencesClickSPIPurposeSaveChoicesEvent());
+            // Click on save on the sensitive personal information screen
         }
 
         public void preferencesClickVendorAgree(AndroidJavaObject @event)
@@ -181,9 +215,7 @@ namespace IO.Didomi.SDK.Android
        
         public void preferencesClickVendorSaveChoices(AndroidJavaObject @event)
         {
-            var preferencesClickVendorSaveChoicesEvent = ConvertToPreferencesClickVendorSaveChoicesEvent(@event);
-
-            _eventListener.OnPreferencesClickVendorSaveChoices(preferencesClickVendorSaveChoicesEvent);
+            _eventListener.OnPreferencesClickVendorSaveChoices(new PreferencesClickVendorSaveChoicesEvent());
             // Click on save on the vendors view on preferences popup
         }
 
@@ -215,11 +247,6 @@ namespace IO.Didomi.SDK.Android
             _eventListener.OnLanguageUpdateFailed(LanguageUpdateFailedEvent);
         }
 
-        private static ConsentChangedEvent ConvertToConsentChangedEvent(AndroidJavaObject @event)
-        {
-            return new ConsentChangedEvent();
-        }
-
         private static ErrorEvent ConvertToErrorEvent(AndroidJavaObject @event)
         {
             var errorMessage = GetErrorMessage(@event);
@@ -230,56 +257,6 @@ namespace IO.Didomi.SDK.Android
         private static string GetErrorMessage(AndroidJavaObject @event)
         {
             return AndroidObjectMapper.GetMethodStringValue(@event, "getErrorMessage");
-        }
-
-        private static HideNoticeEvent ConvertToHideNoticeEvent(AndroidJavaObject @event)
-        {
-            return new HideNoticeEvent();
-        }
-
-        private static ReadyEvent ConvertToReadyEvent(AndroidJavaObject @event)
-        {
-            return new ReadyEvent();
-        }
-
-        private static ShowNoticeEvent ConvertToShowNoticeEvent(AndroidJavaObject @event)
-        {
-            return new ShowNoticeEvent();
-        }
-
-        private static HidePreferencesEvent ConvertToHidePreferencesEvent(AndroidJavaObject @event)
-        {
-            return new HidePreferencesEvent();
-        }
-
-        private static ShowPreferencesEvent ConvertToShowPreferencesEvent(AndroidJavaObject @event)
-        {
-            return new ShowPreferencesEvent();
-        }
-
-        private static NoticeClickAgreeEvent ConvertToNoticeClickAgreeEvent(AndroidJavaObject @event)
-        {
-            return new NoticeClickAgreeEvent();
-        }
-
-        private static NoticeClickDisagreeEvent ConvertToNoticeClickDisagreeEvent(AndroidJavaObject @event)
-        {
-            return new NoticeClickDisagreeEvent();
-        }
-
-        private static NoticeClickMoreInfoEvent ConvertToNoticeClickMoreInfoEvent(AndroidJavaObject @event)
-        {
-            return new NoticeClickMoreInfoEvent();
-        }
-
-        private static PreferencesClickAgreeToAllEvent ConvertToPreferencesClickAgreeToAllEvent(AndroidJavaObject @event)
-        {
-            return new PreferencesClickAgreeToAllEvent();
-        }
-
-        private static PreferencesClickDisagreeToAllEvent ConvertToPreferencesClickDisagreeToAllEvent(AndroidJavaObject @event)
-        {
-            return new PreferencesClickDisagreeToAllEvent();
         }
 
         private static PreferencesClickPurposeAgreeEvent ConvertToPreferencesClickPurposeAgreeEvent(AndroidJavaObject @event)
@@ -296,14 +273,46 @@ namespace IO.Didomi.SDK.Android
             return new PreferencesClickPurposeDisagreeEvent(purposeId);
         }
 
-        private static PreferencesClickViewVendorsEvent ConvertToPreferencesClickViewVendorsEvent(AndroidJavaObject @event)
+        private static PreferencesClickCategoryAgreeEvent ConvertToPreferencesClickCategoryAgreeEvent(AndroidJavaObject @event)
         {
-            return new PreferencesClickViewVendorsEvent();
+            var categoryId = GetCategoryId(@event);
+
+            return new PreferencesClickCategoryAgreeEvent(categoryId);
         }
 
-        private static PreferencesClickSaveChoicesEvent ConvertToPreferencesClickSaveChoicesEvent(AndroidJavaObject @event)
+        private static PreferencesClickCategoryDisagreeEvent ConvertToPreferencesClickCategoryDisagreeEvent(AndroidJavaObject @event)
         {
-            return new PreferencesClickSaveChoicesEvent();
+            var categoryId = GetCategoryId(@event);
+
+            return new PreferencesClickCategoryDisagreeEvent(categoryId);
+        }
+
+        private static PreferencesClickSPIPurposeAgreeEvent ConvertToPreferencesClickSPIPurposeAgreeEvent(AndroidJavaObject @event)
+        {
+            var purposeId = GetPurposeId(@event);
+
+            return new PreferencesClickSPIPurposeAgreeEvent(purposeId);
+        }
+
+        private static PreferencesClickSPIPurposeDisagreeEvent ConvertToPreferencesClickSPIPurposeDisagreeEvent(AndroidJavaObject @event)
+        {
+            var purposeId = GetPurposeId(@event);
+
+            return new PreferencesClickSPIPurposeDisagreeEvent(purposeId);
+        }
+
+        private static PreferencesClickSPICategoryAgreeEvent ConvertToPreferencesClickSPICategoryAgreeEvent(AndroidJavaObject @event)
+        {
+            var categoryId = GetCategoryId(@event);
+
+            return new PreferencesClickSPICategoryAgreeEvent(categoryId);
+        }
+
+        private static PreferencesClickSPICategoryDisagreeEvent ConvertToPreferencesClickSPICategoryDisagreeEvent(AndroidJavaObject @event)
+        {
+            var categoryId = GetCategoryId(@event);
+
+            return new PreferencesClickSPICategoryDisagreeEvent(categoryId);
         }
 
         private static PreferencesClickVendorAgreeEvent ConvertToPreferencesClickVendorAgreeEvent(AndroidJavaObject @event)
@@ -318,11 +327,6 @@ namespace IO.Didomi.SDK.Android
             var vendorId = GetVendorId(@event);
 
             return new PreferencesClickVendorDisagreeEvent(vendorId);
-        }
-
-        private static PreferencesClickVendorSaveChoicesEvent ConvertToPreferencesClickVendorSaveChoicesEvent(AndroidJavaObject @event)
-        {
-            return new PreferencesClickVendorSaveChoicesEvent();
         }
 
         private static SyncDoneEvent ConvertToSyncDoneEvent(AndroidJavaObject @event)
@@ -356,6 +360,11 @@ namespace IO.Didomi.SDK.Android
         private static string GetPurposeId(AndroidJavaObject @event)
         {
            return AndroidObjectMapper.GetMethodStringValue(@event, "getPurposeId");
+        }
+
+        private static string GetCategoryId(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getCategoryId");
         }
 
         private static string GetVendorId(AndroidJavaObject @event)

@@ -149,7 +149,15 @@ Create the package in the editor:
 
 ![Create Unity Package](img/create_plugin_package_unity.png)
 
-Go to the project menu in Unity and select "Export Package". In the next dialog, remove the example scene `Plugins/Scenes/SampleScene.unity` from the exported files list, and set "Didomi" as the name for the package.
+Go to the project menu in Unity and select "Export Package". 
+
+In the next dialog, remove elements that are not needed for the plugin:
+- The example scene `Assets/Plugins/Scenes/SampleScene.unity` from the exported files list
+- The sample code in the folder `Assets/Scripts/DidomiSample/`
+- Custom gradle file used for the sample `Assets/Plugins/Android/launcherTemplate.gradle`
+- Sample configuration file: `Assets/DidomiConfig/didomi_config.json`
+
+Set "Didomi" as the name for the package.
 
 The `Didomi.unitypackage` file will be created at the selected location.
 
@@ -171,7 +179,7 @@ The sample app allows testing every function manually. All functions exposed by 
 
 ## Unity version
 
-We currently require Unity version 2019.3.12f1 or later.
+We currently require Unity version 2020.3.46f1 or later.
 More details on the version requirement can be found in the [documentation](./unity.md).
 
 ## Unity plugin development
