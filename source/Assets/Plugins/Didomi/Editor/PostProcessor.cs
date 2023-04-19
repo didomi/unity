@@ -7,9 +7,6 @@ using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using UnityEditor.iOS.Xcode.Extensions;
 
- using UnityEditor.Build;
- using UnityEditor.Build.Reporting;
-
 /// <summary>
 /// The PostProcessorGradleAndroidProject updates the generated project for Android.
 /// We post process generated projects to work with the Didomi SDKs (activity type, build settings, etc.).
@@ -193,7 +190,7 @@ public static class PostProcessor
         Debug.Log("Didomi OnPostProcessBuild invoked" + buildPath);
         
         if (buildTarget == BuildTarget.iOS)
-        {          
+        {
             PostProcessorSettings.InitSettings();
             
             // PBXProject.GetPBXProjectPath returns the wrong path, we need to construct path by ourselves instead
@@ -204,7 +201,7 @@ public static class PostProcessor
 
             var targetGuid = proj.GetUnityMainTargetGuid();
 
-            // Configure build settings
+            //// Configure build settings
             proj.SetBuildProperty(targetGuid, "ENABLE_BITCODE", "NO");
 
             proj.AddBuildProperty(targetGuid, "DEFINES_MODULE", "YES");
