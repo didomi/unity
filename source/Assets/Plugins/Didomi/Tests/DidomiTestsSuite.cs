@@ -81,7 +81,9 @@ public class DidomiTestsSuite
         AssertPurposesAndVendorsCount(true, false, true);
     }
 
-
+    /**
+     * Wait until SDK is ready and Reset the consents
+     */
     public IEnumerator WaitForSdkReady()
     {
         Debug.Log("Tests: Waiting for sdk ready");
@@ -94,6 +96,12 @@ public class DidomiTestsSuite
         Didomi.GetInstance().Reset();
     }
 
+    /**
+     * Check state for purposes and vendors
+     * @param hasRequiredElements whether the required vendors and purposes list should be populated
+     * @param hasEnabledElements whether there should be enabled vendors and purposes
+     * @param hasDisabledElements whether there should be disabled vendors and purposes
+     */
     private void AssertPurposesAndVendorsCount(
         bool hasRequiredElements,
         bool hasEnabledElements,
@@ -109,6 +117,12 @@ public class DidomiTestsSuite
         AssertEmptiness(Didomi.GetInstance().GetDisabledVendorIds(), hasDisabledElements, "disabledVendorIds");
     }
 
+    /**
+     * Check content of a set
+     * @param element the tested set
+     * @param expectContent whether the set should have any element
+     * @param checkedElement name of the checked element, in case an error message is printed
+     */
     private void AssertEmptiness<T>(ISet<T> element, bool expectContent, string checkedElement)
     {
         Assert.NotNull(element, message: $"{checkedElement} is null");
