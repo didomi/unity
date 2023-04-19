@@ -60,7 +60,9 @@ public class DidomiTestsSuite
     {
         yield return WaitForSdkReady();
 
-        AssertPurposesAndVendorsCount(true, false, false);
+        AssertHasRequiredPurposesAndVendors(true);
+        AssertHasEnabledPurposesAndVendors(false);
+        AssertHasDisabledPurposesAndVendors(false);
     }
 
     [UnityTest]
@@ -69,7 +71,9 @@ public class DidomiTestsSuite
         yield return WaitForSdkReady();
         Didomi.GetInstance().SetUserAgreeToAll();
 
-        AssertPurposesAndVendorsCount(true, true, false);
+        AssertHasRequiredPurposesAndVendors(true);
+        AssertHasEnabledPurposesAndVendors(true);
+        AssertHasDisabledPurposesAndVendors(false);
     }
 
     [UnityTest]
@@ -78,7 +82,9 @@ public class DidomiTestsSuite
         yield return WaitForSdkReady();
         Didomi.GetInstance().SetUserDisagreeToAll();
 
-        AssertPurposesAndVendorsCount(true, false, true);
+        AssertHasRequiredPurposesAndVendors(true);
+        AssertHasEnabledPurposesAndVendors(false);
+        AssertHasDisabledPurposesAndVendors(true);
     }
 
     /**
@@ -97,22 +103,31 @@ public class DidomiTestsSuite
     }
 
     /**
-     * Check state for purposes and vendors
+     * Check required purposes and vendors
      * @param hasRequiredElements whether the required vendors and purposes list should be populated
-     * @param hasEnabledElements whether there should be enabled vendors and purposes
-     * @param hasDisabledElements whether there should be disabled vendors and purposes
      */
-    private void AssertPurposesAndVendorsCount(
-        bool hasRequiredElements,
-        bool hasEnabledElements,
-        bool hasDisabledElements)
+    private void AssertHasRequiredPurposesAndVendors(bool hasRequiredElements)
     {
         AssertEmptiness(Didomi.GetInstance().GetRequiredPurposeIds(), hasRequiredElements, "requiredPurposeIds");
         AssertEmptiness(Didomi.GetInstance().GetRequiredVendorIds(), hasRequiredElements, "requiredVendorIds");
+    }
 
+    /**
+     * Check enabled purposes and vendors
+     * @param hasEnabledElements whether the enabled vendors and purposes list should be populated
+     */
+    private void AssertHasEnabledPurposesAndVendors(bool hasEnabledElements)
+    {
         AssertEmptiness(Didomi.GetInstance().GetEnabledPurposeIds(), hasEnabledElements, "enabledPurposeIds");
         AssertEmptiness(Didomi.GetInstance().GetEnabledVendorIds(), hasEnabledElements, "enabledVendorIds");
+    }
 
+    /**
+     * Check enabled purposes and vendors
+     * @param hasDisabledElements whether the enabled vendors and purposes list should be populated
+     */
+    private void AssertHasDisabledPurposesAndVendors(bool hasDisabledElements)
+    {
         AssertEmptiness(Didomi.GetInstance().GetDisabledPurposeIds(), hasDisabledElements, "disabledPurposeIds");
         AssertEmptiness(Didomi.GetInstance().GetDisabledVendorIds(), hasDisabledElements, "disabledVendorIds");
     }
@@ -126,6 +141,6 @@ public class DidomiTestsSuite
     private void AssertEmptiness<T>(ISet<T> element, bool expectContent, string checkedElement)
     {
         Assert.NotNull(element, message: $"{checkedElement} is null");
-        Assert.AreEqual(element.Count > 0, expectContent, message: $"{checkedElement} count = {element.Count}, expected content? {expectContent}");
+        Assert.AreEqual(expectContent, element.Count > 0, message: $"{checkedElement} count = {element.Count}, expected content? {expectContent}");
     }
 }
