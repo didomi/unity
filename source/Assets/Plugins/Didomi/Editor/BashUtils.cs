@@ -25,6 +25,6 @@ public class BashUtils {
         process.WaitForExit();
         
         // Log the output of the process
-        UnityEngine.Debug.Log($"Didomi Post Processor processing framework: {output}");
+        UnityEngine.Debug.Log($"Didomi - Execute bash commands in a Process. Output: {output}");
     }
 }

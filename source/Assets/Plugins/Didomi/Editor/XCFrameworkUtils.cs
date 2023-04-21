@@ -30,11 +30,11 @@ public class XCFrameworkUtils {
         if (request.result == UnityWebRequest.Result.Success)
         {
             File.WriteAllBytes(DidomiPaths.IOS.ZIP_FILE_PATH, request.downloadHandler.data);
-            Debug.Log($"Download of Didomi framework succeeded from: {request.url}");
+            Debug.Log($"Didomi - Download of Didomi framework succeeded from: {request.url}");
         }
         else
         {
-            Debug.LogError($"Download failed: {request.error}");
+            Debug.LogError($"Didomi - Download of Didomi framework failed: {request.error}");
         }
         
         // Create an unzip command string to be executed by bash shell using the 'unzip' command, which extracts files from a ZIP archive 

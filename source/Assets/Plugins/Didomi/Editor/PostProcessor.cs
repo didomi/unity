@@ -187,7 +187,7 @@ public static class PostProcessor
     [PostProcessBuild]
     public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath)
     {
-        Debug.Log("Didomi OnPostProcessBuild invoked" + buildPath);
+        Debug.Log($"Didomi - OnPostProcessBuild invoked in PostProcessor: {buildPath}");
         
         if (buildTarget == BuildTarget.iOS)
         {

@@ -14,6 +14,7 @@ public class PackageJsonUtils {
 }
 
 // Class used to to load the package.json file. Initially used to read the iOS version number.
+// Note: property names need to match the JSON payload.
 public class PackageJson
 {
     public string name { get; set; }

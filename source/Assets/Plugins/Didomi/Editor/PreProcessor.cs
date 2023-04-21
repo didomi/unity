@@ -18,7 +18,8 @@ public class PreProcessor: IPreprocessBuildWithReport
           return;
         }
 
-        Debug.Log("Didomi Pre processor started.");
+        Debug.Log("Didomi - OnPreprocessBuild invoked in PreProcessor.");
+        Debug.Log("Didomi - IMPORTANT: some files will be temporarily copied into the main project. Once the build process is finished, these files will be removed.");
         
         XCFrameworkUtils.DownloadFramework(DidomiPaths.IOS.FRAMEWORK_NAME);
     }
