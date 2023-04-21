@@ -117,7 +117,7 @@ When running on the iOS platform, calls from the Unity App to the Didomi iOS SDK
 
 ### Update the native Didomi SDKs
 
-As Didomi releases new versions of their native SDKs, the Unity plugin needs to be updated to referencee them.
+As Didomi releases new versions of their native SDKs, the Unity plugin needs to be updated to reference them.
 
 Detailed documentation on how to update native SDKs in the plugin is available:
 
