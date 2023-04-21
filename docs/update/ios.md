@@ -9,7 +9,7 @@ To update the native Didomi iOS SDK, two steps need to be followed:
 
 In order to update the iOS native library linked to the plugin, you need to specify the version that you want to use in the `iosNativeVersion` property of the [`package.json`](https://github.com/didomi/unity/blob/master/source/Assets/Plugins/Didomi/Resources/package.json) file.
 
-This will include in the resulting XCode project the binaries for both simulator and device.
+This will include in the resulting Xcode project the binaries for both simulator and device.
 
 The latest version of the iOS native library can be found [`here`](https://developers.didomi.io/cmp/mobile-sdk/ios/versions).
 
