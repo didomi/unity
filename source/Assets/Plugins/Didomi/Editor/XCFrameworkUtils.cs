@@ -30,7 +30,7 @@ public class XCFrameworkUtils {
         if (request.result == UnityWebRequest.Result.Success)
         {
             File.WriteAllBytes(DidomiPaths.ZIP_FILE_PATH, request.downloadHandler.data);
-            Debug.Log("Download of Didomi framework succeeded");
+            Debug.Log($"Download of Didomi framework succeeded from: {request.url}");
         }
         else
         {
@@ -54,7 +54,6 @@ public class XCFrameworkUtils {
     {
         string frameworkDirectory = Path.Combine(buildPath, "Frameworks", DidomiPaths.PLUGINS_IOS);
         string frameworkPath = Path.Combine(frameworkDirectory, DidomiPaths.FRAMEWORK_NAME);
-        var unityTargetGuid = proj.GetUnityFrameworkTargetGuid();
         string fileGuid = proj.AddFile(frameworkPath, frameworkPath);
         proj.AddFileToEmbedFrameworks(targetGuid, fileGuid);
 
