@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 using System.Collections;
 
 /// <summary>
-/// Utility class used to handle operations related to the XCFramework.
+/// Utility class used to handle operations related to the Didomi XCFramework.
 /// </summary>
 public class XCFrameworkUtils {
     /// <summary>
@@ -47,7 +47,7 @@ public class XCFrameworkUtils {
     
 
     /// <summary>
-    /// Import downloaded XCFramework into Xcode project.
+    /// Import XCFramework into Xcode project.
     /// </summary>
     /// <param name="buildPath">Generated project path</param>
     public static void ImportXCFrameworkToProject(PBXProject proj, string targetGuid, string buildPath)
@@ -67,7 +67,7 @@ public class XCFrameworkUtils {
         CopyBcSymbolsMap(frameworkPath, DidomiPaths.IOS.TVOS_ARCH);
         CopyDSyms(frameworkPath, DidomiPaths.IOS.TVOS_ARCH);
 
-        // We delete all the framework directory after we are done.
+        // We delete the whole directory where the framework is placed after we are done.
         FileUtils.DeleteImportedDirectory(DidomiPaths.IOS.FRAMEWORK_PATH_IN_SOURCE);
     }
 
@@ -75,7 +75,7 @@ public class XCFrameworkUtils {
     /// Copy BCSymbolMaps folder
     /// </summary>
     /// <param name="frameworkPath">Path to framework</param>
-    /// <param name="arch">Architecture (ios-arm64_armv7, tvos-arm64)</param>
+    /// <param name="arch">Architecture (ios-arm64_armv7, ios-arm64_i386_x86_64-simulator, etc.)</param>
     private static void CopyBcSymbolsMap(string frameworkPath, string arch) {
         string targetPath = Path.Combine(frameworkPath, arch, DidomiPaths.IOS.BC_SYMBOLS_MAP);
         string sourcePath = Path.Combine(DidomiPaths.IOS.FRAMEWORK_PATH_IN_SOURCE, arch, DidomiPaths.IOS.BC_SYMBOLS_MAP);
@@ -87,7 +87,7 @@ public class XCFrameworkUtils {
     /// Copy dSYMs folder
     /// </summary>
     /// <param name="frameworkPath">Path to framework</param>
-    /// <param name="arch">Architecture (ios-arm64_armv7, tvos-arm64)</param>
+    /// <param name="arch">Architecture (ios-arm64_armv7, ios-arm64_i386_x86_64-simulator, etc.)</param>
     private static void CopyDSyms(string frameworkPath, string arch) {
         string targetPath = Path.Combine(frameworkPath, arch, DidomiPaths.IOS.DSYMS);
         string sourcePath = Path.Combine(DidomiPaths.IOS.FRAMEWORK_PATH_IN_SOURCE, arch, DidomiPaths.IOS.DSYMS);

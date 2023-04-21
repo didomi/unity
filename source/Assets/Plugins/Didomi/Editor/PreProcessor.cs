@@ -4,8 +4,9 @@ using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 /// <summary>
-/// This PreProcessor currently is used to download and import the Didomi XCFramework on the fly in order to avoid having it embedded in the Unity project.
-/// This can't be done as part of a post processor because it needs to be done early enough so the Xcode project includes the framework as part of the Unity build process.
+/// This class is currently used to download and import the Didomi XCFramework before the build is started.
+/// This is done to avoid having to embed the framework in the Unity plugin.
+/// This can't be done as part of a post processor because it needs to be done early enough so that the Xcode project imports the framework as part of the Unity build process.
 /// </summary>
 public class PreProcessor: IPreprocessBuildWithReport
 {
