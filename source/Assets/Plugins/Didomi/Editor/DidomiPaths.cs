@@ -1,11 +1,13 @@
 using System.IO;
+using UnityEngine;
 
 /// <summary>
 /// Properties and methods related to paths used to handle Didomi dependencies.
 /// </summary>
 public static class DidomiPaths
 {
-  public const string FRAMEWORK_VERSION = "1.87.0";
+  public static string PACKAGE_JSON_PATH = Path.Combine(Application.dataPath, "Plugins", "Didomi", "Resources", "package.json");
+  public static string FRAMEWORK_VERSION = PackageJsonUtils.Read().iosNativeVersion;
   public static string ZIP_FILE_NAME = $"didomi-ios-sdk-{FRAMEWORK_VERSION}-xcframework.zip";
   public static string FRAMEWORK_URL = $"https://sdk.didomi.io/ios/{ZIP_FILE_NAME}";
 

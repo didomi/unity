@@ -321,7 +321,7 @@ public static class PostProcessorSettings
         }
 
         DidomiConfigPath = Application.dataPath + $@"{FilePathSeperator}DidomiConfig";
-        PackageJsonPath = Application.dataPath + $@"{FilePathSeperator}Plugins{FilePathSeperator}Didomi{FilePathSeperator}Resources{FilePathSeperator}package.json";
+        PackageJsonPath = DidomiPaths.PACKAGE_JSON_PATH;
     }
 
     /// <summary>
