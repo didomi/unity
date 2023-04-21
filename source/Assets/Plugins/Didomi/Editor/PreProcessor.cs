@@ -20,6 +20,6 @@ public class PreProcessor: IPreprocessBuildWithReport
 
         Debug.Log("Didomi Pre processor started.");
         
-        XCFrameworkUtils.DownloadFramework(DidomiPaths.FRAMEWORK_NAME);
+        XCFrameworkUtils.DownloadFramework(DidomiPaths.IOS.FRAMEWORK_NAME);
     }
 }
