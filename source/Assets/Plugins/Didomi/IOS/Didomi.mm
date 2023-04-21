@@ -578,6 +578,18 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     };
     
+    eventListener.onNoticeClickViewVendors = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
+    eventListener.onNoticeClickPrivacyPolicy = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
     eventListener.onNoticeClickViewSPIPurposes = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
@@ -592,10 +604,34 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
 	eventListener.onPreferencesClickDisagreeToAll = ^(DDMEventType eventType){
 
-        event_listener_handler(DDMEventTypePreferencesClickDisagreeToAll, NULL);
+        event_listener_handler(eventType, NULL);
 
     };
 
+    eventListener.onPreferencesClickViewPurposes = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+
+    eventListener.onPreferencesClickAgreeToAllPurposes = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
+    eventListener.onPreferencesClickDisagreeToAllPurposes = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
+    eventListener.onPreferencesClickResetAllPurposes = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
 	eventListener.onPreferencesClickPurposeAgree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
 
         event_listener_handler(eventType, convertNSStringToCString(purposeId));
@@ -662,6 +698,18 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     };
 
+    eventListener.onPreferencesClickAgreeToAllVendors = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
+    eventListener.onPreferencesClickDisagreeToAllVendors = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
 	eventListener.onPreferencesClickVendorAgree = ^(DDMEventType eventType, NSString * _Nullable vendorId){
 
         event_listener_handler(eventType, convertNSStringToCString(vendorId));

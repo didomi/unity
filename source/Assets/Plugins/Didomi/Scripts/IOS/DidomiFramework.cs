@@ -506,6 +506,12 @@ namespace IO.Didomi.SDK.IOS
                 case DDMEventType.DDMEventTypeNoticeClickMoreInfo:
                     eventListenerInner.OnNoticeClickMoreInfo(new NoticeClickMoreInfoEvent());
                     break;
+                case DDMEventType.DDMEventTypeNoticeClickViewVendors:
+                    eventListenerInner.OnNoticeClickViewVendors(new NoticeClickViewVendorsEvent());
+                    break;
+                case DDMEventType.DDMEventTypeNoticeClickPrivacyPolicy:
+                    eventListenerInner.OnNoticeClickPrivacyPolicy(new NoticeClickPrivacyPolicyEvent());
+                    break;
                 case DDMEventType.DDMEventTypeNoticeClickViewSPIPurposes:
                     eventListenerInner.OnNoticeClickViewSPIPurposes(new NoticeClickViewSPIPurposesEvent());
                     break;
@@ -526,6 +532,18 @@ namespace IO.Didomi.SDK.IOS
                     break;
                 case DDMEventType.DDMEventTypePreferencesClickDisagreeToAll:
                     eventListenerInner.OnPreferencesClickDisagreeToAll(new PreferencesClickDisagreeToAllEvent());
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickViewPurposes:
+                    eventListenerInner.OnPreferencesClickViewPurposes(new PreferencesClickViewPurposesEvent());
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickAgreeToAllPurposes:
+                    eventListenerInner.OnPreferencesClickAgreeToAllPurposes(new PreferencesClickAgreeToAllPurposesEvent());
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickDisagreeToAllPurposes:
+                    eventListenerInner.OnPreferencesClickDisagreeToAllPurposes(new PreferencesClickDisagreeToAllPurposesEvent());
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickResetAllPurposes:
+                    eventListenerInner.OnPreferencesClickResetAllPurposes(new PreferencesClickResetAllPurposesEvent());
                     break;
                 case DDMEventType.DDMEventTypePreferencesClickPurposeAgree:
                     eventListenerInner.OnPreferencesClickPurposeAgree(new PreferencesClickPurposeAgreeEvent(argument));
@@ -562,6 +580,12 @@ namespace IO.Didomi.SDK.IOS
                     break;
                 case DDMEventType.DDMEventTypePreferencesClickSPIPurposeSaveChoices:
                     eventListenerInner.OnPreferencesClickSPIPurposeSaveChoices(new PreferencesClickSPIPurposeSaveChoicesEvent());
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickAgreeToAllVendors:
+                    eventListenerInner.OnPreferencesClickAgreeToAllVendors(new PreferencesClickAgreeToAllVendorsEvent());
+                    break;
+                case DDMEventType.DDMEventTypePreferencesClickDisagreeToAllVendors:
+                    eventListenerInner.OnPreferencesClickDisagreeToAllVendors(new PreferencesClickDisagreeToAllVendorsEvent());
                     break;
                 case DDMEventType.DDMEventTypePreferencesClickVendorAgree:
                     eventListenerInner.OnPreferencesClickVendorAgree(new PreferencesClickVendorAgreeEvent(argument));

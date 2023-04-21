@@ -1,7 +1,7 @@
 namespace IO.Didomi.SDK.Events
 {
     /// <summary>
-    ///  Click on disagree to a vendor on preferences popup
+    ///  Toggle to disagree to a vendor on preferences popup
     /// </summary>
     public class PreferencesClickVendorDisagreeEvent : Event
     {

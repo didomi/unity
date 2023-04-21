@@ -1,7 +1,7 @@
 namespace IO.Didomi.SDK.Events
 {
     /// <summary>
-    /// Click on disagree to a purpose on preferences popup
+    /// Toggle to disagree to a purpose on preferences popup
     /// </summary>
     public class PreferencesClickPurposeDisagreeEvent : Event
     {

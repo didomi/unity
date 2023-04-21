@@ -124,7 +124,7 @@ public class DidomiTestsSuite
 
     /**
      * Check enabled purposes and vendors
-     * @param hasDisabledElements whether the enabled vendors and purposes list should be populated
+     * @param hasDisabledElements whether the disabled vendors and purposes list should be populated
      */
     private void AssertHasDisabledPurposesAndVendors(bool hasDisabledElements)
     {

@@ -76,19 +76,22 @@ namespace IO.Didomi.SDK.Android
             // Click on disagree on notice
         }
 
-        public void noticeClickViewVendors(AndroidJavaObject @event) { }
-        public void noticeClickPrivacyPolicy(AndroidJavaObject @event) { }
-        public void preferencesClickViewPurposes(AndroidJavaObject @event) { }
-        public void preferencesClickAgreeToAllPurposes(AndroidJavaObject @event) { }
-        public void preferencesClickDisagreeToAllPurposes(AndroidJavaObject @event) { }
-        public void preferencesClickResetAllPurposes(AndroidJavaObject @event) { }
-        public void preferencesClickAgreeToAllVendors(AndroidJavaObject @event) { }
-        public void preferencesClickDisagreeToAllVendors(AndroidJavaObject @event) { }
-
         public void noticeClickMoreInfo(AndroidJavaObject @event)
         {
             _eventListener.OnNoticeClickMoreInfo(new NoticeClickMoreInfoEvent());
             // Click on learn more on notice
+        }
+
+        public void noticeClickViewVendors(AndroidJavaObject @event)
+        {
+            _eventListener.OnNoticeClickViewVendors(new NoticeClickViewVendorsEvent());
+            // Click on view vendors on notice
+        }
+
+        public void noticeClickPrivacyPolicy(AndroidJavaObject @event)
+        {
+            _eventListener.OnNoticeClickPrivacyPolicy(new NoticeClickPrivacyPolicyEvent());
+            // Click on privacy policy on notice
         }
 
         public void noticeClickViewSPIPurposes(AndroidJavaObject @event)
@@ -108,7 +111,31 @@ namespace IO.Didomi.SDK.Android
             _eventListener.OnPreferencesClickDisagreeToAll(new PreferencesClickDisagreeToAllEvent());
             // Click on disagree to all on preferences popup
         }
-       
+
+        public void preferencesClickViewPurposes(AndroidJavaObject @event)
+        {
+            _eventListener.OnPreferencesClickViewPurposes(new PreferencesClickViewPurposesEvent());
+            // Click on view purposes tab on preferences screen
+        }
+
+        public void preferencesClickAgreeToAllPurposes(AndroidJavaObject @event)
+        {
+            _eventListener.OnPreferencesClickAgreeToAllPurposes(new PreferencesClickAgreeToAllPurposesEvent());
+            // Click on agree to all purposes on preferences screen
+        }
+
+        public void preferencesClickDisagreeToAllPurposes(AndroidJavaObject @event)
+        {
+            _eventListener.OnPreferencesClickDisagreeToAllPurposes(new PreferencesClickDisagreeToAllPurposesEvent());
+            // Click on disagree to all purposes on preferences screen
+        }
+
+        public void preferencesClickResetAllPurposes(AndroidJavaObject @event)
+        {
+            _eventListener.OnPreferencesClickResetAllPurposes(new PreferencesClickResetAllPurposesEvent());
+            // Click on reset all purposes on preferences screen
+        }
+
         public void preferencesClickPurposeAgree(AndroidJavaObject @event)
         {
             var preferencesClickPurposeAgreeEvent = ConvertToPreferencesClickPurposeAgreeEvent(@event);
@@ -195,6 +222,18 @@ namespace IO.Didomi.SDK.Android
         {
             _eventListener.OnPreferencesClickSPIPurposeSaveChoices(new PreferencesClickSPIPurposeSaveChoicesEvent());
             // Click on save on the sensitive personal information screen
+        }
+
+        public void preferencesClickAgreeToAllVendors(AndroidJavaObject @event)
+        {
+            _eventListener.OnPreferencesClickAgreeToAllVendors(new PreferencesClickAgreeToAllVendorsEvent());
+            // Click on agree to all vendors on preferences screen
+        }
+
+        public void preferencesClickDisagreeToAllVendors(AndroidJavaObject @event)
+        {
+            _eventListener.OnPreferencesClickDisagreeToAllVendors(new PreferencesClickDisagreeToAllVendorsEvent());
+            // Click on disagree to all vendors on preferences screen
         }
 
         public void preferencesClickVendorAgree(AndroidJavaObject @event)
