@@ -54,7 +54,7 @@ public class XCFrameworkUtils {
     {
         string frameworkDirectory = Path.Combine(buildPath, "Frameworks", DidomiPaths.PLUGINS_IOS);
         string frameworkPath = Path.Combine(frameworkDirectory, DidomiPaths.FRAMEWORK_NAME);
-        string fileGuid = proj.AddFile(frameworkPath, frameworkPath);
+        string fileGuid = proj.AddFile(frameworkPath, DidomiPaths.FRAMEWORK_PATH_IN_XCODE);
         proj.AddFileToEmbedFrameworks(targetGuid, fileGuid);
 
         // We need to manually copy the Info plist file because Unity doesn't do it.
