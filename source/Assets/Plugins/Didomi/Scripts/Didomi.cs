@@ -37,7 +37,7 @@ namespace IO.Didomi.SDK
                         {
                             didomiForPlatform = new AndroidDidomi();
                         }
-                        else if (Application.platform == RuntimePlatform.IPhonePlayer)
+                        else if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.tvOS)
                         {
                             didomiForPlatform = new IOSDidomi();
                         }

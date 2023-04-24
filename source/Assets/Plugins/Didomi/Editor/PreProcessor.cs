@@ -14,7 +14,7 @@ public class PreProcessor: IPreprocessBuildWithReport
 
     public void OnPreprocessBuild(BuildReport report)
     {
-        if (report.summary.platform != BuildTarget.iOS)
+        if (report.summary.platform != BuildTarget.iOS && report.summary.platform != BuildTarget.tvOS)
         {
           return;
         }
