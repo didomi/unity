@@ -52,8 +52,6 @@ The names of those folders must remain the same so that Unity can correctly buil
 
 [`Plugins/Didomi/IOS`](../source/Assets/Plugins/Didomi/IOS) contains all the iOS-related files of the plugin.
 
-`Plugins/IOS/libs` is the folder where native iOS libraries are located. `Plugins/Didomi/IOS/Didomi.framework` is the iOS framework released by Didomi and included in the plugin.
-
 `Plugins/Didomi/IOS/Didomi.mm` contains the Objective-C++ code that maps to native functions of the Didomi iOS SDK.  
 The Unity C# DLL can invoke the functions declared in that file. When a new function is added to the Didomi iOS SDK, the corresponding function must be added to the `Plugins/Didomi/IOS/Didomi.mm` file.
 
@@ -117,7 +115,7 @@ When running on the iOS platform, calls from the Unity App to the Didomi iOS SDK
 
 ### Update the native Didomi SDKs
 
-As Didomi releases new versions of their native SDKs, the Unity plugin needs to be updated to referencee them.
+As Didomi releases new versions of their native SDKs, the Unity plugin needs to be updated to reference them.
 
 Detailed documentation on how to update native SDKs in the plugin is available:
 

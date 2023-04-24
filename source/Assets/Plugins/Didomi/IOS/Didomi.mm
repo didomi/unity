@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h"
+#import <Didomi/Didomi-Swift.h>
 
 #pragma mark - C interface
 

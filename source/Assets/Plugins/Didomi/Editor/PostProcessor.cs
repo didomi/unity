@@ -187,7 +187,7 @@ public static class PostProcessor
     [PostProcessBuild]
     public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath)
     {
-        Debug.Log("Didomi OnPostProcessBuild invoked" + buildPath);
+        Debug.Log($"Didomi - OnPostProcessBuild invoked in PostProcessor: {buildPath}");
         
         if (buildTarget == BuildTarget.iOS)
         {
@@ -212,52 +212,13 @@ public static class PostProcessor
             proj.AddBuildProperty(targetGuid, "DYLIB_INSTALL_NAME_BASE", "@rpath");
             proj.AddBuildProperty(targetGuid, "LD_DYLIB_INSTALL_NAME", "@executable_path/../Frameworks/$(EXECUTABLE_PATH)");
 
-            SetupDidomiFrameworkForTargetSDK(proj, targetGuid, buildPath);
+            XCFrameworkUtils.ImportXCFrameworkToProject(proj, targetGuid, buildPath);
+
             CopyDidomiConfigFileToIOSFolder(proj, targetGuid, buildPath);
             CopyPackageJsonToIOSFolder(proj, targetGuid, buildPath);
 
             proj.WriteToFile(projPath);
         }
-    }
-
-    /// <summary>
-    /// For iOS platform, setups and configures didomi native libs for target SDK Device or Simulator.
-    /// </summary>
-    /// <param name="project"></param>
-    /// <param name="targetGuid"></param>
-    /// <param name="path"></param>
-    private static void SetupDidomiFrameworkForTargetSDK(PBXProject project, string targetGuid, string path)
-    {
-        var xcframeworkPath = $"Frameworks{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.xcframework";
-        var unusedSDKPath = string.Empty;
-        var simulatorPath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_i386_x86_64-simulator";
-        var devicePath = $"{xcframeworkPath}{PostProcessorSettings.FilePathSeperator}ios-arm64_armv7";
-
-        if (PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK)
-        {
-            unusedSDKPath = simulatorPath;
-        }
-        else
-        {
-            unusedSDKPath = devicePath;
-            var mmFile = $"{path}{PostProcessorSettings.FilePathSeperator}Libraries{PostProcessorSettings.FilePathSeperator}Plugins{PostProcessorSettings.FilePathSeperator}Didomi{PostProcessorSettings.FilePathSeperator}IOS{PostProcessorSettings.FilePathSeperator}Didomi.mm";
-            var headerFileImportLineDevice = @"#import ""Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7/Didomi.framework/Headers/Didomi-Swift.h""";
-            var headerFileImportLineSimulator = @"#import ""Frameworks/Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_i386_x86_64-simulator/Didomi.framework/Headers/Didomi-Swift.h""";
-            ReplaceLineInFile(mmFile, headerFileImportLineDevice, headerFileImportLineSimulator);
-        }
-
-		if(Directory.Exists($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}"))
-		{
-			Directory.Delete($"{path}{PostProcessorSettings.FilePathSeperator}{unusedSDKPath}", true);
-			var frameworkPath = $@"{unusedSDKPath}{PostProcessorSettings.FilePathSeperator}Didomi.framework";
-			var guid = project.FindFileGuidByProjectPath(frameworkPath);
-			var unityFrameworkGuid = project.GetUnityFrameworkTargetGuid();
-
-			project.RemoveFileFromBuild(targetGuid, guid);
-			project.RemoveFileFromBuild(unityFrameworkGuid, guid);
-			project.RemoveFrameworkFromProject(targetGuid, frameworkPath);
-			project.RemoveFrameworkFromProject(unityFrameworkGuid, frameworkPath);
-		}
     }
 
     /// <summary>
@@ -360,7 +321,7 @@ public static class PostProcessorSettings
         }
 
         DidomiConfigPath = Application.dataPath + $@"{FilePathSeperator}DidomiConfig";
-        PackageJsonPath = Application.dataPath + $@"{FilePathSeperator}Plugins{FilePathSeperator}Didomi{FilePathSeperator}Resources{FilePathSeperator}package.json";
+        PackageJsonPath = DidomiPaths.PACKAGE_JSON_PATH;
     }
 
     /// <summary>
@@ -376,4 +337,3 @@ public static class PostProcessorSettings
         File.WriteAllText(path, text);
     }
 }
-

@@ -2,16 +2,16 @@
 
 To update the native Didomi iOS SDK, two steps need to be followed:
 
-- Update the library shipped in the Unity plugin
+- Update the library linked to the Unity plugin
 - Expose new or modified functions added to the updated version of the SDK
 
 ## Library
 
-To update the native iOS library embedded in the plugin, copy the `Didomi.framework` folders from the published Didomi iOS SDK `Didomi.xcframework/ios-arm64_armv7` and `Didomi.xcframework/ios-arm64_i386_x86_64-simulator` folders into [`Plugins/Didomi/IOS/Didomi.xcframework`](../../source/Plugins/Didomi/IOS), removing `BCSymbolMaps` and `dSYMs` folders if they are present. 
+In order to update the iOS native library linked to the plugin, you need to specify the version that you want to use in the `iosNativeVersion` property of the [`package.json`](https://github.com/didomi/unity/blob/master/source/Assets/Plugins/Didomi/Resources/package.json) file.
 
-Make sure the `.meta` files of `Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_armv7` and `Plugins/Didomi/IOS/Didomi.xcframework/ios-arm64_i386_x86_64-simulator` are not modified (discard these files using git if necessary).
+This will include in the resulting Xcode project the binaries for both simulator and device.
 
-The iOS SDK release can be found [`on our servers`](https://developers.didomi.io/cmp/mobile-sdk/ios/setup#manually).
+The latest version of the iOS native library can be found [`here`](https://developers.didomi.io/cmp/mobile-sdk/ios/versions).
 
 ## Functions
 
