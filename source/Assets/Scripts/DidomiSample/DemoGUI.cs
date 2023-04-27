@@ -723,12 +723,22 @@ public class DemoGUI : MonoBehaviour
               () => { message = "Ready"; }
               );
 
-        Didomi.GetInstance().Initialize(
-            new DidomiInitializeParameters(
-                apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
-                disableDidomiRemoteConfig: true
+        #if UNITY_IOS
+            Didomi.GetInstance().Initialize(
+                new DidomiInitializeParameters(
+                    apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
+                    disableDidomiRemoteConfig: true
                 )
             );
+        #elif UNITY_TVOS
+            Didomi.GetInstance().Initialize(
+                new DidomiInitializeParameters(
+                    apiKey: "<API KEY>",
+                    noticeId: "<NOTICE ID>",
+                    disableDidomiRemoteConfig: false
+                )
+            );
+        #endif
     }
 
     private void InitializeDidomiTV()

@@ -189,7 +189,7 @@ public static class PostProcessor
     {
         Debug.Log($"Didomi - OnPostProcessBuild invoked in PostProcessor: {buildPath}");
         
-        if (buildTarget == BuildTarget.iOS)
+        if (buildTarget == BuildTarget.iOS || buildTarget == BuildTarget.tvOS)
         {
             PostProcessorSettings.InitSettings();
             
