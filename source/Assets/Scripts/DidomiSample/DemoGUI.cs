@@ -913,6 +913,8 @@ public class DemoGUI : MonoBehaviour
         eventListener.ConsentChanged += EventListener_ConsentChanged;
         eventListener.NoticeClickAgree += EventListener_NoticeClickAgree;
         eventListener.NoticeClickMoreInfo += EventListener_NoticeClickMoreInfo;
+        eventListener.NoticeClickViewVendors += EventListener_NoticeClickViewVendors;
+        eventListener.NoticeClickPrivacyPolicy += EventListener_NoticeClickPrivacyPolicy;
         eventListener.NoticeClickViewSPIPurposes += EventListener_NoticeClickViewSPIPurposes;
         eventListener.ShowNotice += EventListener_ShowNotice;
         eventListener.HideNotice += EventListener_HideNotice;
@@ -920,6 +922,10 @@ public class DemoGUI : MonoBehaviour
         eventListener.ShowPreferences += EventListener_ShowPreferences;
         eventListener.PreferencesClickAgreeToAll += EventListener_PreferencesClickAgreeToAll;
         eventListener.PreferencesClickDisagreeToAll += EventListener_PreferencesClickDisagreeToAll;
+        eventListener.PreferencesClickViewPurposes += EventListener_PreferencesClickViewPurposes;
+        eventListener.PreferencesClickAgreeToAllPurposes += EventListener_PreferencesClickAgreeToAllPurposes;
+        eventListener.PreferencesClickDisagreeToAllPurposes += EventListener_PreferencesClickDisagreeToAllPurposes;
+        eventListener.PreferencesClickResetAllPurposes += EventListener_PreferencesClickResetAllPurposes;
         eventListener.PreferencesClickPurposeAgree += EventListener_PreferencesClickPurposeAgree;
         eventListener.PreferencesClickPurposeDisagree += EventListener_PreferencesClickPurposeDisagree;
         eventListener.PreferencesClickCategoryAgree += EventListener_PreferencesClickCategoryAgree;
@@ -932,6 +938,8 @@ public class DemoGUI : MonoBehaviour
         eventListener.PreferencesClickSPICategoryAgree += EventListener_PreferencesClickSPICategoryAgree;
         eventListener.PreferencesClickSPICategoryDisagree += EventListener_PreferencesClickSPICategoryDisagree;
         eventListener.PreferencesClickSPIPurposeSaveChoices += EventListener_PreferencesClickSPIPurposeSaveChoices;
+        eventListener.PreferencesClickDisagreeToAllVendors += EventListener_PreferencesClickDisagreeToAllVendors;
+        eventListener.PreferencesClickAgreeToAllVendors += EventListener_PreferencesClickAgreeToAllVendors;
         eventListener.PreferencesClickVendorAgree += EventListener_PreferencesClickVendorAgree;
         eventListener.PreferencesClickVendorDisagree += EventListener_PreferencesClickVendorDisagree;
         eventListener.PreferencesClickVendorSaveChoices += EventListener_PreferencesClickVendorSaveChoices;
@@ -945,157 +953,197 @@ public class DemoGUI : MonoBehaviour
 
     private void EventListener_Ready(object sender, ReadyEvent e)
     {
-        message += "\nEventListener_ReadyEvent Fired. ";
+        message += "\nEvent: Ready";
     }
 
     private void EventListener_Error(object sender, ErrorEvent e)
     {
-        message += "\nEventListener_Error Fired. Error:" + e.getErrorMessage();
+        message += "\nEvent: Error, Message=" + e.getErrorMessage();
     }
 
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)
     {
-        message += "\nEventListener_ConsentChangedEvent Fired.";
+        message += "\nEvent: ConsentChangedEvent";
     }
 
     private void EventListener_NoticeClickMoreInfo(object sender, NoticeClickMoreInfoEvent e)
     {
-        message += "\nEventListener_NoticeClickMoreInfoEvent Fired.";
+        message += "\nEvent: NoticeClickMoreInfo";
+    }
+
+    private void EventListener_NoticeClickViewVendors(object sender, NoticeClickViewVendorsEvent e)
+    {
+        message += "\nEvent: NoticeClickViewVendors";
+    }
+
+    private void EventListener_NoticeClickPrivacyPolicy(object sender, NoticeClickPrivacyPolicyEvent e)
+    {
+        message += "\nEvent: NoticeClickPrivacyPolicy";
     }
 
     private void EventListener_NoticeClickViewSPIPurposes(object sender, NoticeClickViewSPIPurposesEvent e)
     {
-        message += "\nEventListener_NoticeClickViewSPIPurposesEvent Fired.";
+        message += "\nEvent: NoticeClickViewSPIPurposes";
     }
 
     private void EventListener_NoticeClickAgree(object sender, NoticeClickAgreeEvent e)
     {
-        message += "\nEventListener_NoticeClickAgreeEvent Fired.";
+        message += "\nEvent: NoticeClickAgree";
     }
 
     private void EventListener_ShowNotice(object sender, ShowNoticeEvent e)
     {
-        message += "\nEventListener_ShowNoticeEvent Fired.";
+        message += "\nEvent: ShowNotice";
     }
 
     private void EventListener_HideNotice(object sender, HideNoticeEvent e)
     {
-        message += "\nEventListener_HideNoticeEvent Fired.";
+        message += "\nEvent: HideNotice";
     }
 
     private void EventListener_ShowPreferences(object sender, ShowPreferencesEvent e)
     {
-        message += "\nEventListener_ShowPreferencesEvent Fired.";
+        message += "\nEvent: ShowPreferences";
     }
 
     private void EventListener_HidePreferences(object sender, HidePreferencesEvent e)
     {
-        message += "\nEventListener_HidePreferencesEvent Fired.";
+        message += "\nEvent: HidePreferences";
+    }
+
+    private void EventListener_PreferencesClickViewPurposes(object sender, PreferencesClickViewPurposesEvent e)
+    {
+        message += "\nEvent: PreferencesClickViewPurposes";
+    }
+
+    private void EventListener_PreferencesClickDisagreeToAllPurposes(object sender, PreferencesClickDisagreeToAllPurposesEvent e)
+    {
+        message += "\nEvent: PreferencesClickDisagreeToAllPurposes";
+    }
+
+    private void EventListener_PreferencesClickAgreeToAllPurposes(object sender, PreferencesClickAgreeToAllPurposesEvent e)
+    {
+        message += "\nEvent: PreferencesClickAgreeToAllPurposes";
+    }
+
+    private void EventListener_PreferencesClickResetAllPurposes(object sender, PreferencesClickResetAllPurposesEvent e)
+    {
+        message += "\nEvent: PreferencesClickResetAllPurposes";
     }
 
     private void EventListener_PreferencesClickPurposeDisagree(object sender, PreferencesClickPurposeDisagreeEvent e)
     {
-        message += "\nEventListener_PreferencesClickPurposeDisagreeEvent Fired. Purpose: " + e.getPurposeId();
+        message += "\nEvent: PreferencesClickPurposeDisagree, Purpose=" + e.getPurposeId();
     }
 
     private void EventListener_PreferencesClickPurposeAgree(object sender, PreferencesClickPurposeAgreeEvent e)
     {
-        message += "\nEventListener_PreferencesClickPurposeAgreeEvent Fired. Purpose: " + e.getPurposeId();
+        message += "\nEvent: PreferencesClickPurposeAgree, Purpose=" + e.getPurposeId();
     }
 
     private void EventListener_PreferencesClickCategoryDisagree(object sender, PreferencesClickCategoryDisagreeEvent e)
     {
-        message += "\nEventListener_PreferencesClickCategoryDisagreeEvent Fired. Category: " + e.getCategoryId();
+        message += "\nEvent: PreferencesClickCategoryDisagree, Category=" + e.getCategoryId();
     }
 
     private void EventListener_PreferencesClickCategoryAgree(object sender, PreferencesClickCategoryAgreeEvent e)
     {
-        message += "\nEventListener_PreferencesClickCategoryAgreeEvent Fired. Category: " + e.getCategoryId();
+        message += "\nEvent PreferencesClickCategoryAgreeEvent, Category=" + e.getCategoryId();
     }
 
     private void EventListener_PreferencesClickViewSPIPurposes(object sender, PreferencesClickViewSPIPurposesEvent e)
     {
-        message += "\nEventListener_PreferencesClickViewSPIPurposesEvent Fired. ";
+        message += "\nEvent: PreferencesClickViewSPIPurposesEvent";
     }
 
     private void EventListener_PreferencesClickViewVendors(object sender, PreferencesClickViewVendorsEvent e)
     {
-        message += "\nEventListener_PreferencesClickViewVendorsEvent Fired.";
+        message += "\nEvent: PreferencesClickViewVendors";
     }
 
     private void EventListener_PreferencesClickSaveChoices(object sender, PreferencesClickSaveChoicesEvent e)
     {
-        message += "\nEventListener_PreferencesClickSaveChoicesEvent Fired.";
+        message += "\nEvent: PreferencesClickSaveChoicesEvent";
     }
 
     private void EventListener_PreferencesClickDisagreeToAll(object sender, PreferencesClickDisagreeToAllEvent e)
     {
-        message += "\nEventListener_PreferencesClickDisagreeToAllEvent Fired.";
+        message += "\nEvent: PreferencesClickDisagreeToAll";
     }
 
     private void EventListener_PreferencesClickAgreeToAll(object sender, PreferencesClickAgreeToAllEvent e)
     {
-        message += "\nEventListener_PreferencesClickAgreeToAllEvent Fired.";
+        message += "\nEvent: PreferencesClickAgreeToAll";
     }
 
     private void EventListener_PreferencesClickSPIPurposeDisagree(object sender, PreferencesClickSPIPurposeDisagreeEvent e)
     {
-        message += "\nEventListener_PreferencesClickSPIPurposeDisagreeEvent Fired. Purpose: " + e.getPurposeId();
+        message += "\nEvent: PreferencesClickSPIPurposeDisagree, Purpose=" + e.getPurposeId();
     }
 
     private void EventListener_PreferencesClickSPIPurposeAgree(object sender, PreferencesClickSPIPurposeAgreeEvent e)
     {
-        message += "\nEventListener_PreferencesClickSPIPurposeAgreeEvent Fired. Purpose: " + e.getPurposeId();
+        message += "\nEvent: PreferencesClickSPIPurposeAgree, Purpose=" + e.getPurposeId();
     }
 
     private void EventListener_PreferencesClickSPICategoryDisagree(object sender, PreferencesClickSPICategoryDisagreeEvent e)
     {
-        message += "\nEventListener_PreferencesClickSPICategoryDisagreeEvent Fired. Category: " + e.getCategoryId();
+        message += "\nEvent: PreferencesClickSPICategoryDisagree, Category=" + e.getCategoryId();
     }
 
     private void EventListener_PreferencesClickSPICategoryAgree(object sender, PreferencesClickSPICategoryAgreeEvent e)
     {
-        message += "\nEventListener_PreferencesClickSPICategoryAgreeEvent Fired. Category: " + e.getCategoryId();
+        message += "\nEvent: PreferencesClickSPICategoryAgreeEvent, Category=" + e.getCategoryId();
     }
 
     private void EventListener_PreferencesClickSPIPurposeSaveChoices(object sender, PreferencesClickSPIPurposeSaveChoicesEvent e)
     {
-        message += "\nEventListener_PreferencesClickSPIPurposeSaveChoicesEvent Fired.";
+        message += "\nEvent: PreferencesClickSPIPurposeSaveChoices";
+    }
+
+    private void EventListener_PreferencesClickDisagreeToAllVendors(object sender, PreferencesClickDisagreeToAllVendorsEvent e)
+    {
+        message += "\nEvent: PreferencesClickDisagreeToAllVendors";
+    }
+
+    private void EventListener_PreferencesClickAgreeToAllVendors(object sender, PreferencesClickAgreeToAllVendorsEvent e)
+    {
+        message += "\nEvent: PreferencesClickAgreeToAllVendors";
     }
 
     private void EventListener_PreferencesClickVendorDisagree(object sender, PreferencesClickVendorDisagreeEvent e)
     {
-        message += "\nEventListener_PreferencesClickVendorDisagreeEvent Fired. Vendor: " + e.getVendorId();
+        message += "\nEvent: PreferencesClickVendorDisagree, Vendor=" + e.getVendorId();
     }
 
     private void EventListener_PreferencesClickVendorAgree(object sender, PreferencesClickVendorAgreeEvent e)
     {
-        message += "\nEventListener_PreferencesClickVendorAgreeEvent Fired. Vendor: " + e.getVendorId();
+        message += "\nEvent: PreferencesClickVendorAgreeEvent, Vendor=" + e.getVendorId();
     }
 
     private void EventListener_PreferencesClickVendorSaveChoices(object sender, PreferencesClickVendorSaveChoicesEvent e)
     {
-        message += "\nEventListener_PreferencesClickVendorSaveChoicesEvent Fired.";
+        message += "\nEvent: PreferencesClickVendorSaveChoices";
     }
 
     private void EventListener_SyncDone(object sender, SyncDoneEvent e)
     {
-        message += "\nEventListener_SyncDoneEvent Fired for " + e.getOrganizationUserId();
+        message += "\nEvent: SyncDone, OrganizationUserId=" + e.getOrganizationUserId();
     }
 
     private void EventListener_SyncError(object sender, SyncErrorEvent e)
     {
-        message += "\nEventListener_SyncErrorEvent Fired. Error: " + e.getErrorMessage();
+        message += "\nEvent: SyncError, Message=" + e.getErrorMessage();
     }
 
     private void EventListener_LanguageUpdated(object sender, LanguageUpdatedEvent e)
     {
-        message += "\nEventListener_LanguageUpdatedEvent Fired. Language code: " + e.getLanguageCode();
+        message += "\nEvent: LanguageUpdated, LanguageCode=" + e.getLanguageCode();
     }
 
     private void EventListener_LanguageUpdateFailed(object sender, LanguageUpdateFailedEvent e)
     {
-        message += "\nEventListener_LanguageUpdateFailedEvent Fired. Reason: " + e.getReason();
+        message += "\nEvent: LanguageUpdateFailed, Reason=" + e.getReason();
     }
 
     private string GetFirstRequiredPurposeId()

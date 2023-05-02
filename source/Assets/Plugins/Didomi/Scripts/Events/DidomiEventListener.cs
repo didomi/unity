@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 namespace IO.Didomi.SDK.Events
 {
@@ -19,9 +18,15 @@ namespace IO.Didomi.SDK.Events
         public event EventHandler<NoticeClickAgreeEvent> NoticeClickAgree;
         public event EventHandler<NoticeClickDisagreeEvent> NoticeClickDisagree;
         public event EventHandler<NoticeClickMoreInfoEvent> NoticeClickMoreInfo;
+        public event EventHandler<NoticeClickViewVendorsEvent> NoticeClickViewVendors;
         public event EventHandler<NoticeClickViewSPIPurposesEvent> NoticeClickViewSPIPurposes;
+        public event EventHandler<NoticeClickPrivacyPolicyEvent> NoticeClickPrivacyPolicy;
         public event EventHandler<PreferencesClickAgreeToAllEvent> PreferencesClickAgreeToAll;
         public event EventHandler<PreferencesClickDisagreeToAllEvent> PreferencesClickDisagreeToAll;
+        public event EventHandler<PreferencesClickViewPurposesEvent> PreferencesClickViewPurposes;
+        public event EventHandler<PreferencesClickAgreeToAllPurposesEvent> PreferencesClickAgreeToAllPurposes;
+        public event EventHandler<PreferencesClickDisagreeToAllPurposesEvent> PreferencesClickDisagreeToAllPurposes;
+        public event EventHandler<PreferencesClickResetAllPurposesEvent> PreferencesClickResetAllPurposes;
         public event EventHandler<PreferencesClickPurposeAgreeEvent> PreferencesClickPurposeAgree;
         public event EventHandler<PreferencesClickPurposeDisagreeEvent> PreferencesClickPurposeDisagree;
         public event EventHandler<PreferencesClickCategoryAgreeEvent> PreferencesClickCategoryAgree;
@@ -34,6 +39,8 @@ namespace IO.Didomi.SDK.Events
         public event EventHandler<PreferencesClickSPICategoryAgreeEvent> PreferencesClickSPICategoryAgree;
         public event EventHandler<PreferencesClickSPICategoryDisagreeEvent> PreferencesClickSPICategoryDisagree;
         public event EventHandler<PreferencesClickSPIPurposeSaveChoicesEvent> PreferencesClickSPIPurposeSaveChoices;
+        public event EventHandler<PreferencesClickAgreeToAllVendorsEvent> PreferencesClickAgreeToAllVendors;
+        public event EventHandler<PreferencesClickDisagreeToAllVendorsEvent> PreferencesClickDisagreeToAllVendors;
         public event EventHandler<PreferencesClickVendorAgreeEvent> PreferencesClickVendorAgree;
         public event EventHandler<PreferencesClickVendorDisagreeEvent> PreferencesClickVendorDisagree;
         public event EventHandler<PreferencesClickVendorSaveChoicesEvent> PreferencesClickVendorSaveChoices;
@@ -109,7 +116,19 @@ namespace IO.Didomi.SDK.Events
             NoticeClickMoreInfo?.Invoke(this, @event);
             // Click on learn more on notice
         }
-       
+
+        public void OnNoticeClickViewVendors(NoticeClickViewVendorsEvent @event)
+        {
+            NoticeClickViewVendors?.Invoke(this, @event);
+            // Click on view vendors on notice
+        }
+
+        public void OnNoticeClickPrivacyPolicy(NoticeClickPrivacyPolicyEvent @event)
+        {
+            NoticeClickPrivacyPolicy?.Invoke(this, @event);
+            // Click on privacy policy on notice (TV)
+        }
+
         public void OnPreferencesClickAgreeToAll(PreferencesClickAgreeToAllEvent @event)
         {
             PreferencesClickAgreeToAll?.Invoke(this, @event);
@@ -122,17 +141,40 @@ namespace IO.Didomi.SDK.Events
             // Click on disagree to all on preferences popup
         }
 
+        public void OnPreferencesClickViewPurposes(PreferencesClickViewPurposesEvent @event)
+        {
+            PreferencesClickViewPurposes?.Invoke(this, @event);
+            // Select purposes tab on preferences screen (TV)
+        }
+
+        public void OnPreferencesClickAgreeToAllPurposes(PreferencesClickAgreeToAllPurposesEvent @event)
+        {
+            PreferencesClickAgreeToAllPurposes?.Invoke(this, @event);
+            // Toggle to agree to all purposes on preferences popup
+        }
+
+        public void OnPreferencesClickDisagreeToAllPurposes(PreferencesClickDisagreeToAllPurposesEvent @event)
+        {
+            PreferencesClickDisagreeToAllPurposes?.Invoke(this, @event);
+            // Toggle to disagree to all purposes on preferences popup
+        }
+
+        public void OnPreferencesClickResetAllPurposes(PreferencesClickResetAllPurposesEvent @event)
+        {
+            PreferencesClickResetAllPurposes?.Invoke(this, @event);
+            // Toggle to reset all purposes on preferences popup
+        }
 
         public void OnPreferencesClickPurposeAgree(PreferencesClickPurposeAgreeEvent @event)
         {
             PreferencesClickPurposeAgree?.Invoke(this, @event);
-            // Click on agree to a purpose on preferences popup
+            // Toggle to agree to a purpose on preferences popup
         }
 
         public void OnPreferencesClickPurposeDisagree(PreferencesClickPurposeDisagreeEvent @event)
         {
             PreferencesClickPurposeDisagree?.Invoke(this, @event);
-            // Click on disagree to a purpose on preferences popup
+            // Toggle to disagree to a purpose on preferences popup
         }
 
         public void OnPreferencesClickCategoryAgree(PreferencesClickCategoryAgreeEvent @event)
@@ -195,16 +237,28 @@ namespace IO.Didomi.SDK.Events
             // Click on save on sensitive personal information screen
         }
 
+        public void OnPreferencesClickAgreeToAllVendors(PreferencesClickAgreeToAllVendorsEvent @event)
+        {
+            PreferencesClickAgreeToAllVendors?.Invoke(this, @event);
+            // Toggle to agree to all vendors on preferences popup
+        }
+
+        public void OnPreferencesClickDisagreeToAllVendors(PreferencesClickDisagreeToAllVendorsEvent @event)
+        {
+            PreferencesClickDisagreeToAllVendors?.Invoke(this, @event);
+            // Toggle to disagree to all vendors on preferences popup
+        }
+
         public void OnPreferencesClickVendorAgree(PreferencesClickVendorAgreeEvent @event)
         {
             PreferencesClickVendorAgree?.Invoke(this, @event);
-            // Click on agree to a vendor on preferences popup
+            // Toggle to agree to a vendor on preferences popup
         }
 
         public void OnPreferencesClickVendorDisagree(PreferencesClickVendorDisagreeEvent @event)
         {
             PreferencesClickVendorDisagree?.Invoke(this, @event);
-            // Click on disagree to a vendor on preferences popup
+            // Toggle to disagree to a vendor on preferences popup
         }
 
         public void OnPreferencesClickVendorSaveChoices(PreferencesClickVendorSaveChoicesEvent @event)
