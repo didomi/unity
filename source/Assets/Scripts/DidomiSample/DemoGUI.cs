@@ -60,7 +60,6 @@ public class DemoGUI : MonoBehaviour
         panel= GameObject.Find("Panel");
         SetResponsiveLayout();
         InitializeDidomi();
-        // InitializeDidomiTV(); Use this method on Android TV
         Didomi.GetInstance().SetupUI();
     }
 
@@ -695,9 +694,9 @@ public class DemoGUI : MonoBehaviour
             InitializeDidomi();
         }
 
-        if (GUI.Button(GetFuncRect2(), "Initialize1"))
+        if (GUI.Button(GetFuncRect2(), "InitializeLocal"))
         {
-            Initialize1Didomi();
+            InitializeDidomiLocal();
         }
 
         if (GUI.Button(GetFuncRect3(), "IsReady"))
@@ -723,25 +722,27 @@ public class DemoGUI : MonoBehaviour
               () => { message = "Ready"; }
               );
 
-        #if UNITY_IOS
+        #if UNITY_TVOS
             Didomi.GetInstance().Initialize(
                 new DidomiInitializeParameters(
-                    apiKey: "c3cd5b46-bf36-4700-bbdc-4ee9176045aa",
-                    disableDidomiRemoteConfig: true
+                    apiKey: "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba",
+                    noticeId: "DirGCFKy",
+                    disableDidomiRemoteConfig: false
                 )
             );
-        #elif UNITY_TVOS
+        #else   // iPhone or Android phone / Android TV
             Didomi.GetInstance().Initialize(
                 new DidomiInitializeParameters(
-                    apiKey: "<API KEY>",
-                    noticeId: "<NOTICE ID>",
-                    disableDidomiRemoteConfig: false
+                    apiKey: "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba",
+                    noticeId: "Ar7NPQ72",
+                    tvNoticeId: "DirGCFKy",
+                    androidTvEnabled: true
                 )
             );
         #endif
     }
 
-    private void InitializeDidomiTV()
+    private void InitializeDidomiLocal()
     {
         message = string.Empty;
 
@@ -752,30 +753,9 @@ public class DemoGUI : MonoBehaviour
         Didomi.GetInstance().Initialize(
             new DidomiInitializeParameters(
                 apiKey: "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba",
-                disableDidomiRemoteConfig: false,
-                noticeId: "DirGCFKy",
-                tvNoticeId: "DirGCFKy",
-                androidTvEnabled: true
-                )
-            );
-    }
-
-    private void Initialize1Didomi()
-    {
-        message = string.Empty;
-
-        Didomi.GetInstance().OnReady(
-              () => { message = "Ready"; }
-              );
-
-        Didomi.GetInstance().Initialize(
-            apiKey: "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba",
-            localConfigurationPath: null,
-            remoteConfigurationURL: null,
-            providerId: null,
-            disableDidomiRemoteConfig: false,
-            languageCode: null,
-            noticeId: "TRJY7e7E");
+                disableDidomiRemoteConfig: true
+            )
+        );
     }
 
     void Events()

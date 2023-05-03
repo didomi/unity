@@ -113,12 +113,12 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     /// <param name="path"></param>
     private static void CopyPackageJsonFileToAssetFolder(string path)
     {
-        var fileName = Path.GetFileName(PostProcessorSettings.PackageJsonPath);
+        var fileName = Path.GetFileName(DidomiPaths.PACKAGE_JSON_PATH);
 
         var newCopyFile = $@"src{PostProcessorSettings.FilePathSeperator}main{PostProcessorSettings.FilePathSeperator}assets{PostProcessorSettings.FilePathSeperator}" + fileName;
         var newCopyFileAbsolutePath = Path.Combine(path, newCopyFile);
 
-        File.Copy(PostProcessorSettings.PackageJsonPath, newCopyFileAbsolutePath, true);
+        File.Copy(DidomiPaths.PACKAGE_JSON_PATH, newCopyFileAbsolutePath, true);
     }
 
     /// <summary>
@@ -129,9 +129,10 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     {
         var unityPlayerFile = $@"build.gradle";
         var unityPlayerFileAbsolutePath = Path.Combine(path, unityPlayerFile);
+        var androidSdkVersion = PackageJsonUtils.Read().androidNativeVersion;
         var oldValue = "dependencies {";
-        var newValue = @"dependencies {
-    implementation(""io.didomi.sdk:android:1.77.0"")
+        var newValue = $@"dependencies {{
+    implementation(""io.didomi.sdk:android:{androidSdkVersion}"")
     ";
         PostProcessor.ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
     }
@@ -258,11 +259,11 @@ public static class PostProcessor
     /// <param name="path"></param>
 	private static void CopyPackageJsonToIOSFolder(PBXProject project, string targetGuid, string path)
     {
-        var fileName = Path.GetFileName(PostProcessorSettings.PackageJsonPath);
+        var fileName = Path.GetFileName(DidomiPaths.PACKAGE_JSON_PATH);
         var newCopyFile = $@"Data{PostProcessorSettings.FilePathSeperator}Resources{PostProcessorSettings.FilePathSeperator}" + fileName;
         var newCopyFileAbsolutePath = Path.Combine(path, newCopyFile);
 
-        File.Copy(PostProcessorSettings.PackageJsonPath, newCopyFileAbsolutePath, true);
+        File.Copy(DidomiPaths.PACKAGE_JSON_PATH, newCopyFileAbsolutePath, true);
         var fileGuid = project.AddFile(newCopyFile, newCopyFile);
         project.AddFileToBuild(targetGuid, fileGuid);
     }
@@ -294,11 +295,6 @@ public static class PostProcessorSettings
     public static string DidomiConfigPath = string.Empty;
 
     /// <summary>
-    /// Path of the `package.json` file.
-    /// </summary>
-    public static string PackageJsonPath = string.Empty;
-
-    /// <summary>
     /// File path seperator for Editor OS
     /// </summary>
     public static string FilePathSeperator = string.Empty;
@@ -321,7 +317,6 @@ public static class PostProcessorSettings
         }
 
         DidomiConfigPath = Application.dataPath + $@"{FilePathSeperator}DidomiConfig";
-        PackageJsonPath = DidomiPaths.PACKAGE_JSON_PATH;
     }
 
     /// <summary>
