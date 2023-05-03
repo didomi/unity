@@ -730,7 +730,7 @@ public class DemoGUI : MonoBehaviour
                     disableDidomiRemoteConfig: false
                 )
             );
-        #else   // iPhone or Android
+        #else   // iPhone or Android phone / Android TV
             Didomi.GetInstance().Initialize(
                 new DidomiInitializeParameters(
                     apiKey: "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba",
