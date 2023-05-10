@@ -1,31 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 
 public class DidomiPackageExporter
-{
-    static void ListFiles()
-    {
-        string path = Application.dataPath;
-        ListFilesRecursively(path);
-    }
-
-    static void ListFilesRecursively(string path)
-    {
-        foreach (string filePath in Directory.GetFiles(path))
-        {
-            Debug.LogFormat("File: {0}", filePath);
-        }
-
-        foreach (string directoryPath in Directory.GetDirectories(path))
-        {
-            ListFilesRecursively(directoryPath);
-        }
-    }
-
-    
+{    
     public static void ExportStandardPackage()
     {
         string[] exported = GetPathsToExport(false).ToArray();
