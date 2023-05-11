@@ -1,20 +1,58 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 
 public class DidomiPackageExporter
-{    
-    public static void ExportStandardPackage()
+{
+    
+    /// <summary>
+    /// Export the unitypackage files for the plugin release
+    /// </summary>
+    [MenuItem("Didomi/Export Packages")]
+    static void ExportPackages()
     {
-        string[] exported = GetPathsToExport(false).ToArray();
-        AssetDatabase.ExportPackage(exported, "didomi.unitypackage", ExportPackageOptions.Recurse);
+        ExportStandardPackage();
+        ExportNoDllPackage();
     }
 
-    public static void ExportNoDllPackage()
+    /// <summary>
+    /// Export the Didomi.unitypackage file for the plugin release
+    /// </summary>
+    static void ExportStandardPackage()
     {
-        string[] exported = GetPathsToExport(true).ToArray();
-        AssetDatabase.ExportPackage(exported, "didomi-noDll.unitypackage", ExportPackageOptions.Recurse);
+        string[] exported = GetPathsToExport(noDll: false).ToArray();
+
+        try
+        {
+            AssetDatabase.ExportPackage(exported, "Didomi.unitypackage", ExportPackageOptions.Recurse);
+            Debug.Log("Standard package exported successfully");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogErrorFormat("Error while exporting standard package: {0}", ex.Message);
+            throw ex;
+        }
+    }
+
+    /// <summary>
+    /// Export the Didomi-noDll.unitypackage file for the plugin release
+    /// </summary>
+    static void ExportNoDllPackage()
+    {
+        string[] exported = GetPathsToExport(noDll: true).ToArray();
+
+        try
+        {
+            AssetDatabase.ExportPackage(exported, "Didomi-noDll.unitypackage", ExportPackageOptions.Recurse);
+            Debug.Log("noDll package exported successfully");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogErrorFormat("Error while exporting noDll package: {0}", ex.Message);
+            throw ex;
+        }
     }
 
     private static List<string> GetPathsToExport(bool noDll)
