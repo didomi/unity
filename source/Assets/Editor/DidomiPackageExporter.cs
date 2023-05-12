@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-public class DidomiPackageExporter
+public static class DidomiPackageExporter
 {
     
     /// <summary>
@@ -32,7 +33,7 @@ public class DidomiPackageExporter
         catch (Exception ex)
         {
             Debug.LogErrorFormat("Error while exporting standard package: {0}", ex.Message);
-            throw ex;
+            throw;
         }
     }
 
@@ -51,7 +52,7 @@ public class DidomiPackageExporter
         catch (Exception ex)
         {
             Debug.LogErrorFormat("Error while exporting noDll package: {0}", ex.Message);
-            throw ex;
+            throw;
         }
     }
 
@@ -64,7 +65,7 @@ public class DidomiPackageExporter
         string path = Path.Combine(Application.dataPath, "Plugins", "Didomi");
         Debug.LogFormat("Exporting package from {0}", path);
 
-        List<string> included = new List<string>();
+        var included = new List<string>();
 
         foreach (string directoryPath in Directory.GetDirectories(path))
         {
@@ -75,12 +76,10 @@ public class DidomiPackageExporter
             }
             else if (noDll && directoryName == "IOS")
             {
-                Debug.Log("Removing Dll from iOS folder");
                 included.AddRange(GetAllFilesPathsExcept(directoryPath, excludedFile: "Newtonsoft.Json.dll"));
             }
             else if (directoryName == "Resources")
             {
-                Debug.Log("Removing package-lock.json from resources");
                 included.AddRange(GetAllFilesPathsExcept(directoryPath, excludedFile: "package-lock.json"));
             }
             else
@@ -89,6 +88,7 @@ public class DidomiPackageExporter
                 included.Add("Assets/Plugins/Didomi/" + directoryName);
             }
         }
+
         return included;
     }
 
@@ -100,30 +100,14 @@ public class DidomiPackageExporter
     private static List<string> GetAllFilesPathsExcept(string directoryPath, string excludedFile)
     {
         string assetDirectory = "Assets/Plugins/Didomi/" + Path.GetFileName(directoryPath) + "/";
-        Debug.LogFormat("Getting files from {0}", directoryPath);
+        Debug.LogFormat("Adding all files from directory {0}, excluding {1}", Path.GetFileName(directoryPath), excludedFile);
 
-        List<string> included = new List<string>();
-
-        foreach (string subDirectoryPath in Directory.GetDirectories(directoryPath))
-        {
-            string subDirectoryName = Path.GetFileName(subDirectoryPath);
-            Debug.LogFormat("Adding directory {0}", subDirectoryName);
-            included.Add(assetDirectory + Path.GetFileName(subDirectoryName));
-        }
-
-        foreach (string filePath in Directory.GetFiles(directoryPath))
-        {
-            string fileName = Path.GetFileName(filePath);
-            if (fileName.StartsWith(excludedFile))
-            {
-                Debug.LogFormat("Excluding file {0}", filePath);
-            }
-            else
-            {
-                Debug.LogFormat("Adding file {0}", fileName);
-                included.Add(assetDirectory + fileName);
-            }
-        }
+        var included = Directory.GetDirectories(directoryPath)
+            .Select(subDirectoryPath => assetDirectory + Path.GetFileName(subDirectoryPath))
+            .Concat(Directory.GetFiles(directoryPath)
+                .Where(filePath => !Path.GetFileName(filePath).StartsWith(excludedFile))
+                .Select(filePath => assetDirectory + Path.GetFileName(filePath)))
+            .ToList();
 
         return included;
     }
