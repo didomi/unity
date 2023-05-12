@@ -73,7 +73,7 @@ git add Assets/Plugins/Didomi/Resources/package.json
 git commit -m "[Bot] Increment version from $oldVersion to $newVersion"
 git push || exit 1
 
-tagName="dev-v$newVersion"
+tagName="v$newVersion"
 # create / push tag
 git tag -a "$tagName" -m "Created tag for version $tagName"
 git push origin "$tagName"
