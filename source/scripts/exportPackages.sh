@@ -4,8 +4,10 @@
 # Export unitypackage files for the release
 #----------------------------------------------------------
 
-UNITY_PATH="/Applications/Unity/Hub/Editor/2021.3.20f1/Unity.app/Contents/MacOS/Unity"
-EXPORT_PATH="test-export.unitypackage"
+# Retrieve scripts directory
+wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+UNITY_PATH=$(awk -F= '/^editor/ {print $2}' $wd/unity.properties)
 
 $UNITY_PATH -batchmode -quit -projectPath "." -executeMethod DidomiPackageExporter.ExportPackages
 
