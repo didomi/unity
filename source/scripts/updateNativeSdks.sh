@@ -33,6 +33,7 @@ fi
 
 echo "iOS SDK last version is $iOSVersion"
 
+# Update package.json file with the new versions
 sed -i~ -e "s|\"androidNativeVersion\": \"[0-9]\{1,2\}.[0-9]\{1,2\}.[0-9]\{1,2\}\"|\"androidNativeVersion\": \"$androidVersion\"|g" ./Assets/Plugins/Didomi/Resources/package.json || exit 1
 sed -i~ -e "s|\"iosNativeVersion\": \"[0-9]\{1,2\}.[0-9]\{1,2\}.[0-9]\{1,2\}\"|\"iosNativeVersion\": \"$iOSVersion\"|g" ./Assets/Plugins/Didomi/Resources/package.json || exit 1
 
