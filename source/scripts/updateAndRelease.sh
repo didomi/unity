@@ -8,9 +8,9 @@
 #---------------------------------------------------------------------------------------------
 
 # Retrieve scripts directory
-wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+scriptsDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-sh $wd/update.sh || exit 1
+sh $scriptsDir/update.sh || exit 1
 
 echo "Preparing release"
-sh $wd/release.sh $1 || exit 1
+sh $scriptsDir/release.sh $1 || exit 1

@@ -55,9 +55,13 @@ public class DidomiPackageExporter
         }
     }
 
+    /// <summary>
+    /// Get the list of paths to export
+    /// <param name="noDll">If true, dll files are excluded from the package</param>
+    /// </summary>
     private static List<string> GetPathsToExport(bool noDll)
     {
-        string path = Path.Combine(Application.dataPath, "Plugins" + Path.DirectorySeparatorChar + "Didomi");
+        string path = Path.Combine(Application.dataPath, "Plugins", "Didomi");
         Debug.LogFormat("Exporting package from {0}", path);
 
         List<string> included = new List<string>();
@@ -88,28 +92,35 @@ public class DidomiPackageExporter
         return included;
     }
 
+    /// <summary>
+    /// Get the list of paths of all files in the directory, except the specified one
+    /// <param name="directoryPath">Inspected directory</param>
+    /// <param name="excludedFile">File to exclude from the build</param>
+    /// </summary>
     private static List<string> GetAllFilesPathsExcept(string directoryPath, string excludedFile)
     {
         string assetDirectory = "Assets/Plugins/Didomi/" + Path.GetFileName(directoryPath) + "/";
-        string path = Path.Combine(Application.dataPath, "Plugins" + Path.DirectorySeparatorChar + "Didomi");
         Debug.LogFormat("Getting files from {0}", directoryPath);
 
         List<string> included = new List<string>();
 
-        foreach (string subDirectoryPath in Directory.GetDirectories(path))
+        foreach (string subDirectoryPath in Directory.GetDirectories(directoryPath))
         {
-            included.Add(assetDirectory + Path.GetFileName(subDirectoryPath));
+            string subDirectoryName = Path.GetFileName(subDirectoryPath);
+            Debug.LogFormat("Adding directory {0}", subDirectoryName);
+            included.Add(assetDirectory + Path.GetFileName(subDirectoryName));
         }
 
         foreach (string filePath in Directory.GetFiles(directoryPath))
         {
             string fileName = Path.GetFileName(filePath);
-            if (fileName == excludedFile)
+            if (fileName.StartsWith(excludedFile))
             {
                 Debug.LogFormat("Excluding file {0}", filePath);
             }
             else
             {
+                Debug.LogFormat("Adding file {0}", fileName);
                 included.Add(assetDirectory + fileName);
             }
         }

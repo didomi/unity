@@ -5,9 +5,9 @@
 #----------------------------------------------------------
 
 # Retrieve scripts directory
-wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+scriptsDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-UNITY_PATH=$(awk -F= '/^editor/ {print $2}' $wd/unity.properties)
+UNITY_PATH=$(awk -F= '/^editor/ {print $2}' $scriptsDir/unity.properties)
 
 $UNITY_PATH -batchmode -quit -projectPath "." -executeMethod DidomiPackageExporter.ExportPackages
 

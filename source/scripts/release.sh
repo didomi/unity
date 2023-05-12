@@ -11,7 +11,7 @@
 #---------------------------------------------------------------------------------------------
 
 # Retrieve scripts directory
-wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+scriptsDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Update plugin version
 if [ "$1" != "" ]
@@ -54,7 +54,7 @@ increment_version() {
 }
 
 # Get Plugin version
-oldVersion=$(sh $wd/extractPluginVersion.sh)
+oldVersion=$(sh $scriptsDir/extractPluginVersion.sh)
 if [[ ! $oldVersion =~ ^[0-9]+.[0-9]+.[0-9]+$ ]]; then
   echo "Error while getting Plugin version"
   exit 1
@@ -79,6 +79,6 @@ git tag -a "$tagName" -m "Created tag for version $tagName"
 git push origin "$tagName"
 
 echo "Exporting packages"
-sh $wd/exportPackages.sh || exit 1
+sh $scriptsDir/exportPackages.sh || exit 1
 
 echo "Release $tagName is ready!"
