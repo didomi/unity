@@ -113,9 +113,43 @@ When running on the iOS platform, calls from the Unity App to the Didomi iOS SDK
 
 ## Maintenance operations
 
+### Scripts
+
+Most updates can be simply done using scripts in `source/scripts` directory.
+
+- `updateNativeSdks.sh` updates the native Android and iOS sdks to the latest available versions
+- `runAndroidTests.sh`, `runIOSTests.sh` and `runTests.sh` run the automated tests and put the logs and results in `artifacts` folder
+- `exportPackages.sh` automatically creates unitypackage files necessary for the release.
+- `update.sh` updates native Android and iOS sdks and run all the tests
+- `release.sh` increments the plugin version, pushes the changes, creates the corresponding tag, and generate the unitypackage files. It takes `major`|`minor`|`patch` as argument, to determine how the version is incremented (default: `patch`).
+- `updateAndRelease.sh` calls both update and release. It also takes `major`|`minor`|`patch` as argument (default: `patch`).
+By default, Unity commands are run using Unity 2021.3.20f1 (allows to run Android tests). This can be changed by editing `unity.properties`.
+
+To run a script, go to the `source` folder first.
+
+#### Automated update
+
+To update Android and iOS native versions, run the tests, and launch the release, you can call the script
+```shell
+sh scripts/updateAndRelease.sh (major|minor|patch)
+```
+from `source` folder. Then follow the step [Create a Github release](#create-a-github-release).
+
+For more detailed steps, read the next sections.
+
 ### Update the native Didomi SDKs
 
 As Didomi releases new versions of their native SDKs, the Unity plugin needs to be updated to reference them.
+
+#### Using script
+
+If the update does not require to change Unity code, it can be done automatically by calling 
+```shell
+sh scripts/updateNativeSdks.sh
+```
+from `source` folder.
+
+#### Manually
 
 Detailed documentation on how to update native SDKs in the plugin is available:
 
@@ -126,7 +160,17 @@ Detailed documentation on how to update native SDKs in the plugin is available:
 
 Releasing a new version of the plugin consists of creating a Unity package from the Unity editor and then creating a Github release associated with that package.
 
-#### Update the plugin version number
+#### Using script
+
+The release can be prepared manually by calling
+```shell
+sh scripts/release.sh  (major|minor|patch)
+```
+from `source` folder. This will update the plugin version, create the release tag and push the change, and create the unitypackage files.
+
+Once the script completes, follow the step [Create a Github release](#create-a-github-release).
+
+#### Update the plugin version number manually
 
 First, update the `package.json` file to increase the unity plugin version number. You need to also update the IOS Native SDK and Android Native SDK version numbers if they changed.
 `package.json` file is located at `Assets\Plugins\Didomi\Resources` folder. 
@@ -141,7 +185,7 @@ First, update the `package.json` file to increase the unity plugin version numbe
 }
 ```
 
-#### Create the package
+#### Create the package manually
 
 Create the package in the editor:
 
@@ -149,11 +193,9 @@ Create the package in the editor:
 
 Go to the project menu in Unity and select "Export Package". 
 
-In the next dialog, remove elements that are not needed for the plugin:
-- The example scene `Assets/Plugins/Scenes/SampleScene.unity` from the exported files list
-- The sample code in the folder `Assets/Scripts/DidomiSample/`
-- Custom gradle file used for the sample `Assets/Plugins/Android/launcherTemplate.gradle`
-- Sample configuration file: `Assets/DidomiConfig/didomi_config.json`
+In the next dialog, select only elements that are part of the plugin:
+- Select only files in the `Assets/Plugins/Android/Didomi` directory
+- Unselect file `Assets/Plugins/Android/Didomi/Resources/package-lock.json` (not needed for the plugin)
 
 Set "Didomi" as the name for the package.
 
@@ -169,11 +211,27 @@ Create a new Github release and attach the created  `Didomi.unitypackage` and `D
 
 ## Tests
 
+### Sample
+
 The sample app can be used for testing:
 
 ![DemoApp](img/demo_app_ui.png)
 
 The sample app allows testing every function manually. All functions exposed by the plugin are mapped to buttons. When clicking on the corresponding button for a given function, the result of the function call is displayed on the message pane.
+
+### Automated tests
+
+The automated tests are in `Assets/Plugins/Android/Didomi/Tests` directory. They can be run using the Unity Test Runner (`Window` > `General` > `Test Runner`). They must be run on Android or iOS platform.
+
+To run tests using scripts, call
+```shell
+sh scripts/runAndroidTests.sh # Android tests
+sh runIOSTests.sh # iOS tests
+sh runTests.sh # Android and iOS tests
+```
+from `source` folder.
+
+> :warning: Android tests are not run correctly on old Unity versions. The 1st tested version on which they were run successfully is Unity 2021.3.20f1.
 
 ## Unity version
 

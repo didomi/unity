@@ -2,13 +2,14 @@
 
 To update the native Didomi Android SDK, two steps need to be followed:
 
-- Update the library in PostProcessor
+- Update the library in `package.json`
 - Expose new or modified functions added to the updated version of the SDK
 
 ## Library
 
-To update the version of the library used in the plugin, modify the PostProcessor file at [`Assets/Plugins/Didomi/Editor/PostProcessor.cs`](../../source/Assets/Plugins/Didomi/Editor/PostProcessor.cs).
-In the method `UpdateUnityLibraryDependencies`, modify the version set in the line `implementation(""io.didomi.sdk:android:x.y.z"")`
+To update the version of the native Didomi Android SDK used in the plugin, modify the value of `androidNativeVersion` property in the package file at [`Assets/Plugins/Didomi/Resources/package.json`](../../source/Assets/Plugins/Didomi/Resources/package.json).
+
+The list of the Android library versions can be found [`here`](https://developers.didomi.io/cmp/mobile-sdk/android/versions). 
 
 ## Functions
 

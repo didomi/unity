@@ -1,16 +1,14 @@
 #!/bin/bash
 
-UNITY_PATH="/Applications/Unity/Hub/Editor/2019.4.36f1/Unity.app/Contents/MacOS/Unity"
-RESULTS_PATH="test-results.xml"
-LOG_PATH="testsRun.log"
+#---------------------------------------------------------------------
+# Run automated tests on all available plartforms for Didomi Plugin.
+#---------------------------------------------------------------------
 
-# Run the tests for Didomi Plugin on iOS
-# Note: Currently Unity does not correctly run tests on Android 
-$UNITY_PATH -batchmode -runTests -testResults $RESULTS_PATH -testPlatform iOS -logFile $LOG_PATH
+# Retrieve scripts directory
+scriptsDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if [ $? -eq 0 ]
-then
-    echo "Tests passed!"
-else
-    echo "Tests failed!"
-fi
+echo "Running iOS tests"
+sh $scriptsDir/runIOSTests.sh || exit 1
+
+echo "Running Android tests"
+sh $scriptsDir/runAndroidTests.sh || exit 1
