@@ -7,7 +7,9 @@ To update the native Didomi Android SDK, two steps need to be followed:
 
 ## Library
 
-To update the version of the library used in the plugin, modify the value of  package file at [`Assets/Plugins/Didomi/Resources/package.json`](../../source/Assets/Plugins/Didomi/Resources/package.json).
+To update the version of the native Didomi Android SDK used in the plugin, modify the value of `androidNativeVersion` property in the package file at [`Assets/Plugins/Didomi/Resources/package.json`](../../source/Assets/Plugins/Didomi/Resources/package.json).
+
+The list of the Android library versions can be found [`here`](https://developers.didomi.io/cmp/mobile-sdk/android/versions). 
 
 ## Functions
 

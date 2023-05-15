@@ -13,7 +13,7 @@ In order to update the XCFramework used by the plugin, you need to specify the v
 
 This will include in the resulting Xcode project the binaries for both simulator and device.
 
-The latest version of the XCFramework can be found [`here`](https://developers.didomi.io/cmp/mobile-sdk/ios/versions).
+The list of the iOS library versions can be found [`here`](https://developers.didomi.io/cmp/mobile-sdk/ios/versions).
 
 ## Update API only if required
 
