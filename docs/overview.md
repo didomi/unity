@@ -225,9 +225,9 @@ The automated tests are in `Assets/Plugins/Android/Didomi/Tests` directory. They
 
 To run tests using scripts, call
 ```shell
-sh scripts/runAndroidTests.sh	# Android tests
-sh runIOSTests.sh 				# iOS tests
-sh runTests.sh 					# Android and iOS tests
+sh scripts/runAndroidTests.sh # Android tests
+sh runIOSTests.sh # iOS tests
+sh runTests.sh # Android and iOS tests
 ```
 from `source` folder.
 
