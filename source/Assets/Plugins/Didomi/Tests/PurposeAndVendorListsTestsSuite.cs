@@ -9,10 +9,8 @@ using IO.Didomi.SDK;
 /// </summary>
 public class PurposeAndVendorListsTestsSuite: DidomiBaseTests
 {
-    private bool sdkReady = false;
-
     [UnitySetUp]
-    public IEnumerator setup()
+    public IEnumerator Setup()
     {
         yield return LoadSdk();
     }
