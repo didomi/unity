@@ -20,10 +20,7 @@ public class ShareConsentsTestSuite: DidomiBaseTests
     [Test]
     public void TestGetJavaScriptForWebView()
     {
-        var jsString = Didomi.GetInstance().GetJavaScriptForWebView();
-
-        Debug.Log("JS String = " + jsString);
-        
-        Assert.IsFalse(string.IsNullOrWhiteSpace(jsString));
+        var jsString = Didomi.GetInstance().GetJavaScriptForWebView();        
+        Assert.IsTrue(jsString != null && jsString.Contains("window.didomiOnReady"));
     }
 }
