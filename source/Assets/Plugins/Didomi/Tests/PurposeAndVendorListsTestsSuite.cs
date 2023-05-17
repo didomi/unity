@@ -1,74 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEngine;
 using UnityEngine.TestTools;
 using IO.Didomi.SDK;
-using System;
 
-public class DidomiTestsSuite
+/// <summary>
+/// Tests related to lists of purpose and vendor loaded into SDK
+/// </summary>
+public class PurposeAndVendorListsTestsSuite: DidomiBaseTests
 {
-    private bool sdkReady = false;
-
-    [SetUp]
-    public void setup()
+    [UnitySetUp]
+    public IEnumerator Setup()
     {
-        try
-        {
-            string apiKey = "c3cd5b46-bf36-4700-bbdc-4ee9176045aa";
-            string noticeId = null;
-            string localConfigurationPath = null;
-            string remoteConfigurationURL = null;
-            string providerId = null;
-            bool disableDidomiRemoteConfig = true;
-            string languageCode = null;
-
-            Debug.Log("Tests: Initializing sdk");
-
-            Didomi didomi = Didomi.GetInstance();
-
-            didomi.Initialize(
-                apiKey,
-                localConfigurationPath,
-                remoteConfigurationURL,
-                providerId,
-                disableDidomiRemoteConfig,
-                languageCode,
-                noticeId);
-
-            didomi.OnReady(
-                () =>
-                {
-                    sdkReady = true;
-                }
-                );
-            didomi.OnError(
-                () =>
-                {
-                    sdkReady = true;
-                }
-                );
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Exception : {ex.Message}");
-        }
+        yield return LoadSdk();
     }
 
-    [UnityTest]
-    public IEnumerator TestPurposesAndVendorsCountAfterReset()
+    [Test]
+    public void TestPurposesAndVendorsCountAfterReset()
     {
-        yield return WaitForSdkReady();
-
         AssertHasRequiredPurposesAndVendors(true);
         AssertHasEnabledPurposesAndVendors(false);
         AssertHasDisabledPurposesAndVendors(false);
     }
 
-    [UnityTest]
-    public IEnumerator TestPurposesAndVendorsCountAfterUserAgreeToAll()
+    [Test]
+    public void TestPurposesAndVendorsCountAfterUserAgreeToAll()
     {
-        yield return WaitForSdkReady();
         Didomi.GetInstance().SetUserAgreeToAll();
 
         AssertHasRequiredPurposesAndVendors(true);
@@ -76,30 +33,14 @@ public class DidomiTestsSuite
         AssertHasDisabledPurposesAndVendors(false);
     }
 
-    [UnityTest]
-    public IEnumerator TestPurposesAndVendorsCountAfterUserDisagreeToAll()
+    [Test]
+    public void TestPurposesAndVendorsCountAfterUserDisagreeToAll()
     {
-        yield return WaitForSdkReady();
         Didomi.GetInstance().SetUserDisagreeToAll();
 
         AssertHasRequiredPurposesAndVendors(true);
         AssertHasEnabledPurposesAndVendors(false);
         AssertHasDisabledPurposesAndVendors(true);
-    }
-
-    /**
-     * Wait until SDK is ready and Reset the consents
-     */
-    public IEnumerator WaitForSdkReady()
-    {
-        Debug.Log("Tests: Waiting for sdk ready");
-
-        yield return new WaitUntil(() => sdkReady);
-
-        Assert.True(Didomi.GetInstance().IsReady());
-        Debug.Log("Tests: sdk is ready!");
-
-        Didomi.GetInstance().Reset();
     }
 
     /**
