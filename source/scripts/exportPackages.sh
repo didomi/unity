@@ -16,4 +16,5 @@ then
     echo "Export successful"
 else
     echo "Error while exporting"
+    exit 1
 fi
