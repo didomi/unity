@@ -7,7 +7,7 @@ using IO.Didomi.SDK;
 /// <summary>
 /// Tests related to sharing consent with Webview / Web SDK
 /// </summary>
-public class ShareConsentsTestSuite: DidomiBaseTests
+public class ShareConsentsTestsSuite: DidomiBaseTests
 {
     [UnitySetUp]
     public IEnumerator Setup()

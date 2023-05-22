@@ -1,28 +1,18 @@
 using System.Collections;
 using NUnit.Framework;
-using UnityEngine;
 using UnityEngine.TestTools;
 using IO.Didomi.SDK;
-using IO.Didomi.SDK.Events;
 
 /// <summary>
 /// Tests related to sharing consent with Webview / Web SDK
 /// </summary>
-public class SyncUserTestSuite : DidomiBaseTests
+public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
 {
-    private const string testUserId = "d13e49f6255c8729cbb201310f49d70d65f365415a67f034b567b7eac962b944eda131376594ef5e23b025fada4e4259e953ceb45ea57a2ced7872c567e6d1fae8dcc3a9772ead783d8513032e77d3fd";
-
-    private bool syncError = false;
-    private string syncedUserId = null;
 
     [OneTimeSetUp]
-    public void SetUpSuite()
+    public new void SetUpSuite()
     {
-        Debug.Log("Initialize...");
-        var listener = new DidomiEventListener();
-        listener.SyncDone += EventListener_SyncDone;
-        listener.SyncError += EventListener_SyncError;
-        Didomi.GetInstance().AddEventListener(listener);
+        base.SetUpSuite();
     }
 
     [UnitySetUp]
@@ -35,11 +25,9 @@ public class SyncUserTestSuite : DidomiBaseTests
     }
 
     [TearDown]
-    public void TearDown()
+    public new void TearDown()
     {
-        ResetResults();
-        Didomi.GetInstance().ClearUser();
-        Didomi.GetInstance().Reset();
+        base.TearDown();
     }
 
     [UnityTest]
@@ -133,53 +121,5 @@ public class SyncUserTestSuite : DidomiBaseTests
             expiration: 3_600
         ));
         yield return ExpectSyncSuccess("Set user with Encryption params and setup UI");
-    }
-
-    private void EventListener_SyncDone(object sender, SyncDoneEvent e)
-    {
-        Debug.Log("Sync Done!");
-        syncedUserId = e.getOrganizationUserId();
-    }
-
-    private void EventListener_SyncError(object sender, SyncErrorEvent e)
-    {
-        Debug.LogFormat("Sync Error, message: {0}", e.getErrorMessage());
-        syncError = true;
-    }
-
-    private void ResetResults()
-    {
-        syncError = false;
-        syncedUserId = null;
-    }
-
-    /**
-     * Check that user is synchronized successfully
-     */
-    private IEnumerator ExpectSyncSuccess(string message)
-    {
-        yield return WaitForCallback();
-
-        Assert.AreEqual(testUserId, syncedUserId, message);
-        Assert.IsFalse(syncError, message);
-    }
-
-    /**
-     * Check that we get a sync error
-     */
-    private IEnumerator ExpectSyncError()
-    {
-        yield return WaitForCallback();
-
-        Assert.IsNull(syncedUserId);
-        Assert.IsTrue(syncError);
-    }
-
-    /**
-     * Wait for SyncDone or SyncError callback
-     */
-    private IEnumerator WaitForCallback()
-    {
-        yield return new WaitUntil(() => syncedUserId != null || syncError);
     }
 }

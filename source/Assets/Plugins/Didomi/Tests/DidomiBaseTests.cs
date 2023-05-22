@@ -7,7 +7,7 @@ using System;
 /// <summary>
 /// Provide base methods that can be used in all tests
 /// </summary>
-public class DidomiBaseTests
+public abstract class DidomiBaseTests
 {
     private bool sdkReady = false;
 
