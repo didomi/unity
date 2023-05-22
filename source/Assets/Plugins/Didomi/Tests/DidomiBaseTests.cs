@@ -7,7 +7,7 @@ using System;
 /// <summary>
 /// Provide base methods that can be used in all tests
 /// </summary>
-public class DidomiBaseTests
+public abstract class DidomiBaseTests
 {
     private bool sdkReady = false;
 
@@ -19,13 +19,14 @@ public class DidomiBaseTests
     {
         try
         {
-            string apiKey = "c3cd5b46-bf36-4700-bbdc-4ee9176045aa";
+            string apiKey = "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba";
+            string noticeId = "Ar7NPQ72";
 
             Debug.Log("Tests: Initializing sdk");
 
             Didomi didomi = Didomi.GetInstance();
 
-            didomi.Initialize(new DidomiInitializeParameters(apiKey, disableDidomiRemoteConfig: true));
+            didomi.Initialize(new DidomiInitializeParameters(apiKey, noticeId: noticeId));
 
             didomi.OnReady(
                 () =>
