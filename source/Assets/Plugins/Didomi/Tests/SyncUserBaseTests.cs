@@ -1,7 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 using IO.Didomi.SDK;
 using IO.Didomi.SDK.Events;
 
