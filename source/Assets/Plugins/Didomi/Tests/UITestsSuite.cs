@@ -54,7 +54,7 @@ public class UITestsSuite: DidomiBaseTests
 
         yield return new WaitForSeconds(1);
         Assert.True(Didomi.GetInstance().IsNoticeVisible(), "Notice should be visible");
-        CheckEvents("Called SetupUI", expectNoticeDisplayed: true);
+        AssertEvents("Called SetupUI", expectNoticeDisplayed: true);
     }
 
     [UnityTest]
@@ -66,14 +66,14 @@ public class UITestsSuite: DidomiBaseTests
         Didomi.GetInstance().ShowNotice();
         yield return new WaitForSeconds(1);
         Assert.True(Didomi.GetInstance().IsNoticeVisible(), "Notice should be visible");
-        CheckEvents("Called ShowNotice", expectNoticeDisplayed: true);
+        AssertEvents("Called ShowNotice", expectNoticeDisplayed: true);
 
         ResetEvents();
 
         Didomi.GetInstance().HideNotice();
         yield return new WaitForSeconds(1);
         Assert.False(Didomi.GetInstance().IsNoticeVisible(), "Notice should not be visible anymore");
-        CheckEvents("Called HideNotice", expectNoticeHidden: true);
+        AssertEvents("Called HideNotice", expectNoticeHidden: true);
     }
 
     [UnityTest]
@@ -83,7 +83,7 @@ public class UITestsSuite: DidomiBaseTests
         yield return new WaitForSeconds(1);
         Assert.False(Didomi.GetInstance().IsNoticeVisible(), "Notice should not be visible");
         Assert.True(Didomi.GetInstance().IsPreferencesVisible(), "Preferences screen should be visible");
-        CheckEvents("Called ShowPreferences", expectPreferencesDisplayed: true);
+        AssertEvents("Called ShowPreferences", expectPreferencesDisplayed: true);
 
         ResetEvents();
 
@@ -91,7 +91,7 @@ public class UITestsSuite: DidomiBaseTests
         yield return new WaitForSeconds(1);
         Assert.False(Didomi.GetInstance().IsNoticeVisible(), "Notice should still not be visible");
         Assert.False(Didomi.GetInstance().IsPreferencesVisible(), "Preferences screen should not be visible anymore");
-        CheckEvents("Called HidePreferences", expectPreferencesHidden: true);
+        AssertEvents("Called HidePreferences", expectPreferencesHidden: true);
     }
 
     private void EventListener_ShowNotice(object sender, ShowNoticeEvent e)
@@ -132,7 +132,10 @@ public class UITestsSuite: DidomiBaseTests
         ResetEvents();
     }
 
-    private void CheckEvents(
+    /**
+     * Checks if events were called as expected
+     */ 
+    private void AssertEvents(
         string message,
         bool expectNoticeDisplayed = false,
         bool expectNoticeHidden = false,
@@ -144,5 +147,4 @@ public class UITestsSuite: DidomiBaseTests
         Assert.AreEqual(expectPreferencesDisplayed, preferencesDisplayedEvent, $"{message} - Issue with ShowPreferences event");
         Assert.AreEqual(expectPreferencesHidden, preferencesHiddenEvent, $"{message} - Issue with HidePreferences event");
     }
-
 }
