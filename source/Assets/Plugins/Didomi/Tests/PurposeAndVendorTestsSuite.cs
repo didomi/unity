@@ -21,7 +21,7 @@ public class PurposeAndVendorTestsSuite: DidomiBaseTests
         if (Application.platform == RuntimePlatform.Android)
         {
             var purposeId = GetFirstRequiredPurposeId();
-            Assert.False(string.IsNullOrEmpty(purposeId));
+            Assert.False(string.IsNullOrEmpty(purposeId), "Invalid 1st purpose");
 
             var purpose = Didomi.GetInstance().GetPurpose(purposeId);
             Assert.AreEqual(purposeId, purpose?.GetId());
@@ -39,7 +39,7 @@ public class PurposeAndVendorTestsSuite: DidomiBaseTests
         if (Application.platform == RuntimePlatform.Android)
         {
             var vendorId = GetFirstRequiredVendorId();
-            Assert.False(string.IsNullOrEmpty(vendorId));
+            Assert.False(string.IsNullOrEmpty(vendorId), "Invalid 1st vendor");
             
             var vendor = Didomi.GetInstance().GetVendor(vendorId);
             Assert.AreEqual(vendorId, vendor?.GetId());

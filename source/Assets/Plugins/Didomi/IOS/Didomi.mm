@@ -201,7 +201,7 @@ bool isNoticeVisible()
 
 void showPreferences()
 {
-	[[Didomi shared] showPreferencesWithController:(nil) view:(ViewsPurposes)];
+	[[Didomi shared] showPreferencesWithController:(UnityGetGLViewController()) view:(ViewsPurposes)];
 }
 
 bool isUserConsentStatusPartial()
