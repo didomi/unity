@@ -3,16 +3,34 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 using IO.Didomi.SDK;
+using UnityEngine;
+using IO.Didomi.SDK.Events;
 
 /// <summary>
 /// Tests related to lists of purpose and vendor loaded into SDK
 /// </summary>
 public class PurposeAndVendorListsTestsSuite: DidomiBaseTests
 {
+    private bool consentChanged = false;
+
+    [OneTimeSetUp]
+    protected void SetUpSuite()
+    {
+        var listener = new DidomiEventListener();
+        listener.ConsentChanged += EventListener_ConsentChanged;
+        Didomi.GetInstance().AddEventListener(listener);
+    }
+
     [UnitySetUp]
     public IEnumerator Setup()
     {
         yield return LoadSdk();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        consentChanged = false;
     }
 
     [Test]
@@ -23,20 +41,22 @@ public class PurposeAndVendorListsTestsSuite: DidomiBaseTests
         AssertHasDisabledPurposesAndVendors(false);
     }
 
-    [Test]
-    public void TestPurposesAndVendorsCountAfterUserAgreeToAll()
+    [UnityTest]
+    public IEnumerator TestPurposesAndVendorsCountAfterUserAgreeToAll()
     {
         Didomi.GetInstance().SetUserAgreeToAll();
+        yield return new WaitUntil(() => consentChanged);
 
         AssertHasRequiredPurposesAndVendors(true);
         AssertHasEnabledPurposesAndVendors(true);
         AssertHasDisabledPurposesAndVendors(false);
     }
 
-    [Test]
-    public void TestPurposesAndVendorsCountAfterUserDisagreeToAll()
+    [UnityTest]
+    public IEnumerator TestPurposesAndVendorsCountAfterUserDisagreeToAll()
     {
         Didomi.GetInstance().SetUserDisagreeToAll();
+        yield return new WaitUntil(() => consentChanged);
 
         AssertHasRequiredPurposesAndVendors(true);
         AssertHasEnabledPurposesAndVendors(false);
@@ -83,5 +103,10 @@ public class PurposeAndVendorListsTestsSuite: DidomiBaseTests
     {
         Assert.NotNull(element, message: $"{checkedElement} is null");
         Assert.AreEqual(expectContent, element.Count > 0, message: $"{checkedElement} count = {element.Count}, expected content? {expectContent}");
+    }
+
+    private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)
+    {
+        consentChanged = true;
     }
 }
