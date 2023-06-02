@@ -15,7 +15,7 @@ public abstract class DidomiBaseTests
     /// Load SDK and wait until initialization is ready
     /// </summary>
     /// <returns></returns>
-    public IEnumerator LoadSdk()
+    public IEnumerator LoadSdk(string languageCode = null)
     {
         try
         {
@@ -26,7 +26,7 @@ public abstract class DidomiBaseTests
 
             Didomi didomi = Didomi.GetInstance();
 
-            didomi.Initialize(new DidomiInitializeParameters(apiKey, noticeId: noticeId));
+            didomi.Initialize(new DidomiInitializeParameters(apiKey, languageCode: languageCode, noticeId: noticeId));
 
             didomi.OnReady(
                 () =>
