@@ -8,7 +8,7 @@ using IO.Didomi.SDK.Events;
 /// <summary>
 /// Tests related to SDK texts
 /// </summary>
-public class TextsTestsSuite: DidomiBaseTests
+public class TranslationsTestsSuite: DidomiBaseTests
 {
     private bool languageUpdated = false;
 
@@ -33,7 +33,7 @@ public class TextsTestsSuite: DidomiBaseTests
     }
 
     [Test]
-    public void TestGetText()
+    public void TestGetTexts()
     {
         var key = "notice.content.notice";
         var dict = Didomi.GetInstance().GetText(key);
