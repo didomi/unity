@@ -19,6 +19,7 @@ public abstract class DidomiBaseTests
     {
         try
         {
+            sdkReady = false;
             string apiKey = "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba";
             string noticeId = "Ar7NPQ72";
 

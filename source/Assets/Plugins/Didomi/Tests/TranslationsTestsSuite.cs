@@ -20,21 +20,17 @@ public class TranslationsTestsSuite: DidomiBaseTests
         Didomi.GetInstance().AddEventListener(listener);
     }
 
-    [UnitySetUp]
-    public IEnumerator Setup()
-    {
-        yield return LoadSdk(languageCode: "en");
-    }
-
     [TearDown]
     public void TearDown()
     {
         languageUpdated = false;
     }
 
-    [Test]
-    public void TestGetTexts()
+    [UnityTest]
+    public IEnumerator TestGetTexts()
     {
+        yield return LoadSdk();
+
         var key = "notice.content.notice";
         var dict = Didomi.GetInstance().GetText(key);
 
@@ -43,9 +39,11 @@ public class TranslationsTestsSuite: DidomiBaseTests
         Assert.IsTrue(dict["fr"].StartsWith("Avec votre consentement"), $"Wrong french language caption: {dict["fr"]}");
     }
 
-    [Test]
-    public void TestGetTranslatedText()
+    [UnityTest]
+    public IEnumerator TestGetTranslatedTextEnglish()
     {
+        yield return LoadSdk(languageCode: "en");
+
         var key = "notice.content.notice";
         var textEn = Didomi.GetInstance().GetTranslatedText(key);
 
@@ -53,8 +51,21 @@ public class TranslationsTestsSuite: DidomiBaseTests
     }
 
     [UnityTest]
+    public IEnumerator TestGetTranslatedTextFrench()
+    {
+        yield return LoadSdk(languageCode: "fr");
+
+        var key = "notice.content.notice";
+        var textFr = Didomi.GetInstance().GetTranslatedText(key);
+
+        Assert.IsTrue(textFr.StartsWith("Avec votre consentement"), $"Wrong caption: {textFr}");
+    }
+
+    [UnityTest]
     public IEnumerator TestUpdateSelectedLanguage()
     {
+        yield return LoadSdk(languageCode: "en");
+
         Didomi.GetInstance().UpdateSelectedLanguage("fr");
         yield return new WaitUntil(() => languageUpdated);
 
