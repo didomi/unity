@@ -26,13 +26,13 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool isReady();
+        private static extern int isReady();
 #endif
 
         public static bool CallIsReadyMethod()
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return isReady();
+            return isReady() == 1;
 #else
             return false;
 #endif
@@ -40,15 +40,13 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setupUI();
+        private static extern void setupUI();
 #endif
 
-        public static bool SetupUI()
+        public static void SetupUI()
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return setupUI();
-#else
-            return false;
+            setupUI();
 #endif
         }
 
@@ -88,7 +86,7 @@ namespace IO.Didomi.SDK.IOS
             string noticeId);
 #endif
 
-        public static bool Initialize(
+        public static void Initialize(
           string apiKey,
           string localConfigurationPath,
           string remoteConfigurationPath,
@@ -100,8 +98,6 @@ namespace IO.Didomi.SDK.IOS
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
             initializeWithNoticeId(apiKey, localConfigurationPath, remoteConfigurationPath, providerId, disableDidomiRemoteConfig, languageCode, noticeId);
 #endif
-
-            return false;
         }
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
@@ -117,7 +113,7 @@ namespace IO.Didomi.SDK.IOS
         );
 #endif
 
-        public static bool Initialize(DidomiInitializeParameters initializeParameters)
+        public static void Initialize(DidomiInitializeParameters initializeParameters)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
             initializeWithParameters(
@@ -130,8 +126,6 @@ namespace IO.Didomi.SDK.IOS
                 initializeParameters.noticeId
                 );
 #endif
-
-            return false;
         }
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
@@ -274,13 +268,13 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool isConsentRequired();
+        private static extern int isConsentRequired();
 #endif
 
         public static bool IsConsentRequired()
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return isConsentRequired();
+            return isConsentRequired() == 1;
 #else
             return false;
 #endif
@@ -288,13 +282,13 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool isNoticeVisible();
+        private static extern int isNoticeVisible();
 #endif
 
         public static bool IsNoticeVisible()
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return isNoticeVisible();
+            return isNoticeVisible() == 1;
 #else
             return false;
 #endif
@@ -302,13 +296,13 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool isPreferencesVisible();
+        private static extern int isPreferencesVisible();
 #endif
 
         public static bool IsPreferencesVisible()
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return isPreferencesVisible();
+            return isPreferencesVisible() == 1;
 #else
             return false;
 #endif
@@ -329,13 +323,13 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool isUserConsentStatusPartial();
+        private static extern int isUserConsentStatusPartial();
 #endif
 
         public static bool IsUserConsentStatusPartial()
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return isUserConsentStatusPartial();
+            return isUserConsentStatusPartial() == 1;
 #else
             return false;
 #endif
@@ -355,13 +349,13 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserAgreeToAll();
+        private static extern int setUserAgreeToAll();
 #endif
 
         public static bool SetUserAgreeToAll()
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return setUserAgreeToAll();
+            return setUserAgreeToAll() == 1;
 #else
             return false;
 #endif
@@ -369,13 +363,13 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserDisagreeToAll();
+        private static extern int setUserDisagreeToAll();
 #endif
 
         public static bool SetUserDisagreeToAll()
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return setUserDisagreeToAll();
+            return setUserDisagreeToAll() == 1;
 #else
             return false;
 #endif
@@ -383,13 +377,13 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool shouldConsentBeCollected();
+        private static extern int shouldConsentBeCollected();
 #endif
 
         public static bool ShouldConsentBeCollected()
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return shouldConsentBeCollected();
+            return shouldConsentBeCollected() == 1;
 #else
             return false;
 #endif
@@ -730,13 +724,14 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserConsentStatus(string enabledPurposeIds, string disabledPurposeIds, string enabledVendorIds, string disabledVendorIds);
+        private static extern int setUserConsentStatus(string enabledPurposeIds, string disabledPurposeIds, string enabledVendorIds, string disabledVendorIds);
 #endif
 
         public static bool SetUserConsentStatus(string enabledPurposeIds, string disabledPurposeIds, string enabledVendorIds, string disabledVendorIds)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return setUserConsentStatus(enabledPurposeIds, disabledPurposeIds, enabledVendorIds, disabledVendorIds);
+            var result = setUserConsentStatus(enabledPurposeIds, disabledPurposeIds, enabledVendorIds, disabledVendorIds);
+            return result == 1;
 #else
             return false;
 #endif
@@ -744,7 +739,7 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserStatus(string enabledConsentPurposeIds,
+        private static extern int setUserStatus(string enabledConsentPurposeIds,
             string disabledConsentPurposeIds,
             string enabledLIPurposeIds,
             string disabledLIPurposeIds,
@@ -765,7 +760,7 @@ namespace IO.Didomi.SDK.IOS
             string disabledLIVendorIds)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return setUserStatus(
+            var result = setUserStatus(
                 enabledConsentPurposeIds,
                 disabledConsentPurposeIds,
                 enabledLIPurposeIds,
@@ -774,6 +769,7 @@ namespace IO.Didomi.SDK.IOS
                 disabledConsentVendorIds,
                 enabledLIVendorIds,
                 disabledLIVendorIds);
+            return result == 1;
 #else
             return false;
 #endif
@@ -782,13 +778,14 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setUserStatus1(bool purposesConsentStatus, bool purposesLIStatus, bool vendorsConsentStatus, bool vendorsLIStatus);
+        private static extern int setUserStatus1(bool purposesConsentStatus, bool purposesLIStatus, bool vendorsConsentStatus, bool vendorsLIStatus);
 #endif
 
         public static bool SetUserStatus(bool purposesConsentStatus, bool purposesLIStatus, bool vendorsConsentStatus, bool vendorsLIStatus)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return setUserStatus1(purposesConsentStatus, purposesLIStatus, vendorsConsentStatus, vendorsLIStatus);
+            var result = setUserStatus1(purposesConsentStatus, purposesLIStatus, vendorsConsentStatus, vendorsLIStatus);
+            return result == 1;
 #else
             return false;
 #endif
