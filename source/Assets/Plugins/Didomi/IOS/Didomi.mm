@@ -125,9 +125,14 @@ void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* 
     [[Didomi shared] initialize: parameters];
 }
 
-bool isReady()
+int convertBoolToInt(bool value)
 {
-	return [[Didomi shared] isReady];
+    return value ? 1 : 0;
+}
+
+int isReady()
+{
+    return convertBoolToInt([[Didomi shared] isReady]);
 }
 
 char* getTranslatedText(char* key)
@@ -184,29 +189,29 @@ void hidePreferences()
 	[[Didomi shared] hidePreferences];
 }
 
-bool isConsentRequired()
+int isConsentRequired()
 {
-	return [[Didomi shared] isConsentRequired];
+    return convertBoolToInt([[Didomi shared] isConsentRequired]);
 }
 
-bool isPreferencesVisible()
+int isPreferencesVisible()
 {
-	return [[Didomi shared] isPreferencesVisible];
+    return convertBoolToInt([[Didomi shared] isPreferencesVisible]);
 }
 
-bool isNoticeVisible()
+int isNoticeVisible()
 {
-    return [[Didomi shared] isNoticeVisible];
+    return convertBoolToInt([[Didomi shared] isNoticeVisible]);
 }
 
 void showPreferences()
 {
-	[[Didomi shared] showPreferencesWithController:(UnityGetGLViewController()) view:(ViewsPurposes)];
+    [[Didomi shared] showPreferencesWithController:(UnityGetGLViewController()) view:(ViewsPurposes)];
 }
 
-bool isUserConsentStatusPartial()
+int isUserConsentStatusPartial()
 {
-	return [[Didomi shared] isUserConsentStatusPartial];
+    return convertBoolToInt([[Didomi shared] isUserConsentStatusPartial]);
 }
 
 void reset()
@@ -214,19 +219,19 @@ void reset()
     [[Didomi shared] reset];
 }
 
-bool setUserAgreeToAll()
+int setUserAgreeToAll()
 {
-	return [[Didomi shared] setUserAgreeToAll];
+    return convertBoolToInt([[Didomi shared] setUserAgreeToAll]);
 }
 
-bool setUserDisagreeToAll()
+int setUserDisagreeToAll()
 {
-	return [[Didomi shared] setUserDisagreeToAll];
+    return convertBoolToInt([[Didomi shared] setUserDisagreeToAll]);
 }
 
-bool shouldConsentBeCollected()
+int shouldConsentBeCollected()
 {
-	return [[Didomi shared] shouldConsentBeCollected];
+    return convertBoolToInt([[Didomi shared] shouldConsentBeCollected]);
 }
 
 void showNotice()
@@ -234,46 +239,45 @@ void showNotice()
     [[Didomi shared] showNotice];
 }
 
- char* ConvertSetToJsonText( NSSet<NSString *> * dataSet)
- {
-	NSArray<NSString *> * dataArray= [dataSet allObjects ];
+char* convertSetToJsonText(NSSet<NSString *> * dataSet)
+{
+   NSArray<NSString *> * dataArray= [dataSet allObjects ];
 
-	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataArray options:NSJSONWritingPrettyPrinted error:nil];
+   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataArray options:NSJSONWritingPrettyPrinted error:nil];
 
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+   NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
-	NSLog(@"jsonData as string:\n%@", jsonString);
+   NSLog(@"jsonData as string:\n%@", jsonString);
 
-	return cStringCopy([jsonString UTF8String]);
- }
-
+   return cStringCopy([jsonString UTF8String]);
+}
 
 char* getDisabledPurposeIds()
 {
     NSSet<NSString *> * dataSet=[[Didomi shared] getDisabledPurposeIds];
-	
-	return ConvertSetToJsonText(dataSet);    
+    
+    return convertSetToJsonText(dataSet);
 }
 
 char* getDisabledVendorIds()
 {
     NSSet<NSString *> * dataSet=[[Didomi shared] getDisabledVendorIds];
-	
-	return ConvertSetToJsonText(dataSet);    
+    
+    return convertSetToJsonText(dataSet);
 }
 
 char* getEnabledPurposeIds()
 {
     NSSet<NSString *> * dataSet=[[Didomi shared] getEnabledPurposeIds];
-	
-	return ConvertSetToJsonText(dataSet);    
+    
+    return convertSetToJsonText(dataSet);
 }
 
 char* getEnabledVendorIds()
 {
     NSSet<NSString *> * dataSet=[[Didomi shared] getEnabledVendorIds];
-	
-	return ConvertSetToJsonText(dataSet);    
+    
+    return convertSetToJsonText(dataSet);
 }
 
 char* getJavaScriptForWebView()
@@ -286,27 +290,27 @@ char* getJavaScriptForWebView()
 char* getRequiredPurposeIds()
 {
     NSSet<NSString *> * dataSet=[[Didomi shared] getRequiredPurposeIds];
-	
-	return ConvertSetToJsonText(dataSet);    
+    
+    return convertSetToJsonText(dataSet);
 }
 
 char* getRequiredVendorIds()
 {
     NSSet<NSString *> * dataSet=[[Didomi shared] getRequiredVendorIds];
-	
-	return ConvertSetToJsonText(dataSet);    
+    
+    return convertSetToJsonText(dataSet);
 }
  
- char* ConvertDictinaryToJsonText( NSDictionary<NSString *, NSString *> * dataDict)
- {
-	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil];
-	
+char* convertDictionaryToJsonText( NSDictionary<NSString *, NSString *> * dataDict)
+{
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil];
+    
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
-	NSLog(@"jsonData dictionary as string:\n%@", jsonString);
+    NSLog(@"jsonData dictionary as string:\n%@", jsonString);
 
-	return cStringCopy([jsonString UTF8String]);
- }
+    return cStringCopy([jsonString UTF8String]);
+}
 
 char* getText(char* key)
 {
@@ -317,7 +321,7 @@ char* getText(char* key)
 		return cStringCopy([@"" UTF8String]);
 	}
 
-	return ConvertDictinaryToJsonText(dataDict);
+    return convertDictionaryToJsonText(dataDict);
 }
 
 NSSet<NSString *> * ConvertJsonToSet(char* jsonText)
@@ -333,17 +337,18 @@ NSSet<NSString *> * ConvertJsonToSet(char* jsonText)
 	return retval;
  }
 
-bool setUserConsentStatus(char* enabledPurposeIds, char* disabledPurposeIds, char* enabledVendorIds, char* disabledVendorIds)
+int setUserConsentStatus(char* enabledPurposeIds, char* disabledPurposeIds, char* enabledVendorIds, char* disabledVendorIds)
 {
 	NSSet<NSString *> * enabledPurposeIdsSet=ConvertJsonToSet(enabledPurposeIds);
 	NSSet<NSString *> * disabledPurposeIdsSet=ConvertJsonToSet(disabledPurposeIds);
 	NSSet<NSString *> * enabledVendorIdsSet=ConvertJsonToSet(enabledVendorIds);
 	NSSet<NSString *> * disabledVendorIdsSet=ConvertJsonToSet(disabledVendorIds);
 
-    return [[Didomi shared] setUserConsentStatusWithEnabledPurposeIds:enabledPurposeIdsSet disabledPurposeIds:disabledPurposeIdsSet enabledVendorIds:enabledVendorIdsSet disabledVendorIds:disabledVendorIdsSet];
+    bool result = [[Didomi shared] setUserConsentStatusWithEnabledPurposeIds:enabledPurposeIdsSet disabledPurposeIds:disabledPurposeIdsSet enabledVendorIds:enabledVendorIdsSet disabledVendorIds:disabledVendorIdsSet];
+    return convertBoolToInt(result);
 }
 
-bool setUserStatus(char* enabledConsentPurposeIds, char* disabledConsentPurposeIds, char* enabledLIPurposeIds, char* disabledLIPurposeIds, char* enabledConsentVendorIds, char* disabledConsentVendorIds, char* enabledLIVendorIds, char* disabledLIVendorIds)
+int setUserStatus(char* enabledConsentPurposeIds, char* disabledConsentPurposeIds, char* enabledLIPurposeIds, char* disabledLIPurposeIds, char* enabledConsentVendorIds, char* disabledConsentVendorIds, char* enabledLIVendorIds, char* disabledLIVendorIds)
 {
 	NSSet<NSString *> * enabledConsentPurposeIdsSet=ConvertJsonToSet(enabledConsentPurposeIds);
 	NSSet<NSString *> * disabledConsentPurposeIdsSet=ConvertJsonToSet(disabledConsentPurposeIds);
@@ -354,12 +359,14 @@ bool setUserStatus(char* enabledConsentPurposeIds, char* disabledConsentPurposeI
 	NSSet<NSString *> * enabledLIVendorIdsSet=ConvertJsonToSet(enabledLIVendorIds);
 	NSSet<NSString *> * disabledLIVendorIdsSet=ConvertJsonToSet(disabledLIVendorIds);
 
-    return [[Didomi shared] setUserStatusWithEnabledConsentPurposeIds:enabledConsentPurposeIdsSet disabledConsentPurposeIds:disabledConsentPurposeIdsSet enabledLIPurposeIds:enabledLIPurposeIdsSet disabledLIPurposeIds:disabledLIPurposeIdsSet enabledConsentVendorIds:enabledConsentVendorIdsSet disabledConsentVendorIds:disabledConsentVendorIdsSet enabledLIVendorIds:enabledLIVendorIdsSet disabledLIVendorIds:disabledLIVendorIdsSet];
+    bool result = [[Didomi shared] setUserStatusWithEnabledConsentPurposeIds:enabledConsentPurposeIdsSet disabledConsentPurposeIds:disabledConsentPurposeIdsSet enabledLIPurposeIds:enabledLIPurposeIdsSet disabledLIPurposeIds:disabledLIPurposeIdsSet enabledConsentVendorIds:enabledConsentVendorIdsSet disabledConsentVendorIds:disabledConsentVendorIdsSet enabledLIVendorIds:enabledLIVendorIdsSet disabledLIVendorIds:disabledLIVendorIdsSet];
+    return convertBoolToInt(result);
 }
 
-bool setUserStatus1(BOOL purposesConsentStatus, BOOL purposesLIStatus, BOOL vendorsConsentStatus, BOOL vendorsLIStatus)
+int setUserStatus1(BOOL purposesConsentStatus, BOOL purposesLIStatus, BOOL vendorsConsentStatus, BOOL vendorsLIStatus)
 {
-    return [[Didomi shared] setUserStatusWithPurposesConsentStatus:purposesConsentStatus purposesLIStatus:purposesLIStatus vendorsConsentStatus:vendorsConsentStatus vendorsLIStatus:vendorsLIStatus];
+    bool result = [[Didomi shared] setUserStatusWithPurposesConsentStatus:purposesConsentStatus purposesLIStatus:purposesLIStatus vendorsConsentStatus:vendorsConsentStatus vendorsLIStatus:vendorsLIStatus];
+    return convertBoolToInt(result);
 }
 
 void setUser(char* organizationUserId)
