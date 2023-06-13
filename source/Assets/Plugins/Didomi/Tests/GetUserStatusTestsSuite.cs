@@ -222,13 +222,13 @@ public class GetUserStatusTestsSuite: DidomiBaseTests
     /// <param name="msgId">Type of element, for the failure message</param>
     /// <param name="msgChoiceIds">Type of choices, for the failure message</param>
     private void AssertStatusInList(string id, UserStatus.Ids choiceIds, bool expectEnabled, string msgId, string msgChoiceIds) {
-        bool enabled = choiceIds.GetEnabled().Contains(id);
-        bool disabled = choiceIds.GetDisabled().Contains(id);
+        bool isEnabled = choiceIds.GetEnabled().Contains(id);
+        bool isDisabled = choiceIds.GetDisabled().Contains(id);
 
-        // We check whether the element is present in the enabled list as expected
-        Assert.AreEqual(expectEnabled, enabled, $"{msgId} should {(!enabled ? "not " : "")}be in {msgChoiceIds}.enabled.");
-        // We check whether the element is present in the disabled list as expected
-        Assert.AreNotEqual(expectEnabled, disabled, $"{msgId} should {(enabled ? "not " : "")}be in {msgChoiceIds}.disabled.");
+        // If expectedEnabled is true, the element should be present in the enabled list, otherwise it should not be present
+        Assert.AreEqual(expectEnabled, isEnabled, $"{msgId} should {(!enabled ? "not " : "")}be in {msgChoiceIds}.enabled.");
+        // If expectedEnabled is true, the element should not be present in the disabled list, otherwise it should be present
+        Assert.AreNotEqual(expectEnabled, isDisabled, $"{msgId} should {(enabled ? "not " : "")}be in {msgChoiceIds}.disabled.");
     }
 
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)
