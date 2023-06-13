@@ -1,6 +1,5 @@
 ﻿using IO.Didomi.SDK;
 using IO.Didomi.SDK.Events;
-using IO.Didomi.SDK.Tests;
 using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -31,8 +30,7 @@ public enum FunctionCategory
     Language,
     Initialization,
     Events,
-    GetUserStatus,
-    Tests
+    GetUserStatus
 };
 
 public class DemoGUI : MonoBehaviour
@@ -195,10 +193,6 @@ public class DemoGUI : MonoBehaviour
         {
             GetUserStatus();
         }
-        else if (functionCategory == FunctionCategory.Tests)
-        {
-            Tests();
-        }
     }
 
     private void ShowGroupButtons()
@@ -276,11 +270,6 @@ public class DemoGUI : MonoBehaviour
         if (GUI.Button(GetMiddleRect5(), "GetUserStatus"))
         {
             functionCategory = FunctionCategory.GetUserStatus;
-        }
-
-        if (GUI.Button(GetRightRect5(), "Tests"))
-        {
-            functionCategory = FunctionCategory.Tests;
         }
     }
 
@@ -823,35 +812,6 @@ public class DemoGUI : MonoBehaviour
             var userStatus = Didomi.GetInstance().GetUserStatus();
             message += "ConsentString = " + userStatus.GetConsentString();
         }
-    }
-
-    void Tests()
-    {
-        if (GUI.Button(GetFuncRect1(), "Run local config tests"))
-        {
-            StartCoroutine(LaunchTests());
-        }
-
-        if (GUI.Button(GetFuncRect2(), "Run remote config tests"))
-        {
-            StartCoroutine(LaunchTests(true));
-        }
-    }
-
-    IEnumerator LaunchTests(bool remoteNotice = false)
-    {
-        message = "Tests started...";
-        var tests = new DidomiTests();
-        yield return tests.RunAll(this, remoteNotice);
-        if (tests.DidTestsFail())
-        {
-            message = "Tests: Failed !";
-        } else
-        {
-            message = "Tests: Passed.";
-        }
-        Debug.Log(message);
-        message += tests.GetResults();
     }
 
     private void ShowBasicFunctions()

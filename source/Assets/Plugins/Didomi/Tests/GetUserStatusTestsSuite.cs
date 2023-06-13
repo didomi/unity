@@ -108,7 +108,7 @@ public class GetUserStatusTestsSuite: DidomiBaseTests
         );
     }
 
-        [UnityTest]
+    [UnityTest]
     public IEnumerator TestUserStatusAfterOnlyConsentEnabled()
     {
         Didomi.GetInstance().SetUserStatus(
