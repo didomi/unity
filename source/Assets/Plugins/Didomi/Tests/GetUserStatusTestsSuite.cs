@@ -134,6 +134,9 @@ public class GetUserStatusTestsSuite: DidomiBaseTests
         );
     }
     
+    /// <summary>
+    /// Check that User Status has the expected enabled / disabled vendors and purposes
+    /// </summary>
     private void AssertStatus(
         UserStatus userStatus,
         bool vendorGlobalEnabled,
@@ -210,11 +213,21 @@ public class GetUserStatusTestsSuite: DidomiBaseTests
         );
     }
 
+    /// <summary>
+    /// Check that User Status enabled / disabled elements has the expected enabled / disabled vendors and purposes
+    /// </summary>
+    /// <param name="id">Id of element to look after</param>
+    /// <param name="choiceIds">List of status</param>
+    /// <param name="expectEnabled">Whether the element should be present in the enabled list, otherwise it should be present in the disabled list</param>
+    /// <param name="msgId">Type of element, for the failure message</param>
+    /// <param name="msgChoiceIds">Type of choices, for the failure message</param>
     private void AssertStatusInList(string id, UserStatus.Ids choiceIds, bool expectEnabled, string msgId, string msgChoiceIds) {
         bool enabled = choiceIds.GetEnabled().Contains(id);
         bool disabled = choiceIds.GetDisabled().Contains(id);
 
+        // We check whether the element is present in the enabled list as expected
         Assert.AreEqual(expectEnabled, enabled, $"{msgId} should {(!enabled ? "not " : "")}be in {msgChoiceIds}.enabled.");
+        // We check whether the element is present in the disabled list as expected
         Assert.AreNotEqual(expectEnabled, disabled, $"{msgId} should {(enabled ? "not " : "")}be in {msgChoiceIds}.disabled.");
     }
 
