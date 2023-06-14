@@ -226,9 +226,9 @@ public class GetUserStatusTestsSuite: DidomiBaseTests
         bool isDisabled = choiceIds.GetDisabled().Contains(id);
 
         // If expectedEnabled is true, the element should be present in the enabled list, otherwise it should not be present
-        Assert.AreEqual(expectEnabled, isEnabled, $"{msgId} should {(!enabled ? "not " : "")}be in {msgChoiceIds}.enabled.");
+        Assert.AreEqual(expectEnabled, isEnabled, $"{msgId} should {(!expectEnabled ? "not " : "")}be in {msgChoiceIds}.enabled.");
         // If expectedEnabled is true, the element should not be present in the disabled list, otherwise it should be present
-        Assert.AreNotEqual(expectEnabled, isDisabled, $"{msgId} should {(enabled ? "not " : "")}be in {msgChoiceIds}.disabled.");
+        Assert.AreNotEqual(expectEnabled, isDisabled, $"{msgId} should {(expectEnabled ? "not " : "")}be in {msgChoiceIds}.disabled.");
     }
 
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)
