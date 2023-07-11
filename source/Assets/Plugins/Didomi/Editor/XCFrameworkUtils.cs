@@ -61,25 +61,11 @@ public class XCFrameworkUtils {
         File.Copy(DidomiPaths.IOS.INFO_PLIST_PATH, infoPlistPath, true);
 
         // We need to manually copy files that are used to symbolicate crash reports because Unity doesn't do it.
-        CopyBcSymbolsMap(frameworkPath, DidomiPaths.IOS.IOS_ARCH);
         CopyDSyms(frameworkPath, DidomiPaths.IOS.IOS_ARCH);
-        CopyBcSymbolsMap(frameworkPath, DidomiPaths.IOS.TVOS_ARCH);
         CopyDSyms(frameworkPath, DidomiPaths.IOS.TVOS_ARCH);
 
         // We delete the whole directory where the framework is placed after we are done.
         FileUtils.DeleteImportedDirectory(DidomiPaths.IOS.FRAMEWORK_PATH_IN_SOURCE);
-    }
-
-    /// <summary>
-    /// Copy BCSymbolMaps folder
-    /// </summary>
-    /// <param name="frameworkPath">Path to framework</param>
-    /// <param name="arch">Architecture (ios-arm64_armv7, ios-arm64_i386_x86_64-simulator, etc.)</param>
-    private static void CopyBcSymbolsMap(string frameworkPath, string arch) {
-        string targetPath = Path.Combine(frameworkPath, arch, DidomiPaths.IOS.BC_SYMBOLS_MAP);
-        string sourcePath = Path.Combine(DidomiPaths.IOS.FRAMEWORK_PATH_IN_SOURCE, arch, DidomiPaths.IOS.BC_SYMBOLS_MAP);
-        FileUtils.DeleteImportedDirectory(targetPath);
-        FileUtil.CopyFileOrDirectory(sourcePath, targetPath);
     }
 
     /// <summary>
