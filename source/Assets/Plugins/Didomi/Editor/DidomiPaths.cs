@@ -15,7 +15,7 @@ public static class DidomiPaths
         public const string PLUGINS_IOS = "Plugins/Didomi/IOS";
         public const string INFO_PLIST = "Info.plist";
         public const string DSYMS = "dSYMs";
-        public const string IOS_ARCH = "ios-arm64_armv7";
+        public const string IOS_ARCH = "ios-arm64";
         public const string TVOS_ARCH = "tvos-arm64";
 
         // Since we are reading the Didomi XCFramework version from the package.json there's no need to set it manually.
