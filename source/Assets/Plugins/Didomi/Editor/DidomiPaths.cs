@@ -14,7 +14,6 @@ public static class DidomiPaths
         public const string FRAMEWORK_NAME = "Didomi.xcframework";
         public const string PLUGINS_IOS = "Plugins/Didomi/IOS";
         public const string INFO_PLIST = "Info.plist";
-        public const string BC_SYMBOLS_MAP = "BCSymbolMaps";
         public const string DSYMS = "dSYMs";
         public const string IOS_ARCH = "ios-arm64_armv7";
         public const string TVOS_ARCH = "tvos-arm64";
