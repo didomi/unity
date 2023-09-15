@@ -46,6 +46,8 @@ char* MapUserStatus(DDMUserStatus *userStatus) {
     NSString *updated = [userStatus updated];
     NSString *consentString = [userStatus consentString];
     NSString *additionalConsent = [userStatus additionalConsent];
+    // Enum becomes integer in Objective-C
+    NSInteger regulation = [userStatus regulation];
     
     DDMUserStatusPurposes *purposeStatus = [userStatus purposes];
     DDMUserStatusVendors *vendorsStatus = [userStatus vendors];
@@ -56,6 +58,7 @@ char* MapUserStatus(DDMUserStatus *userStatus) {
         @"updated": updated,
         @"consent_string": consentString,
         @"addtl_consent": additionalConsent,
+        @"regulation": [NSNumber numberWithLong: regulation],
         @"purposes": @{
             @"consent": CreateDictionaryFromStatusIDs([purposeStatus consent]),
             @"legitimate_interest": CreateDictionaryFromStatusIDs([purposeStatus legitimateInterest]),
