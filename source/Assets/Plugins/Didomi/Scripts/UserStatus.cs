@@ -51,7 +51,7 @@ namespace IO.Didomi.SDK
         private string additionalConsent;
 
         /// <summary>
-        /// Current regulation
+        /// Current regulation, such as "gdpr", "cpra"... or "none"
         /// </summary>
         [JsonProperty("regulation")]
         [JsonConverter(typeof(JsonRegulationConverter))]
