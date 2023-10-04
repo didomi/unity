@@ -54,6 +54,7 @@ public class GetUserStatusTestsSuite: DidomiBaseTests
         Assert.False(string.IsNullOrEmpty(userStatus.GetUserId()), "No user id");
         Assert.False(string.IsNullOrEmpty(userStatus.GetCreated()), "No created date");
         Assert.False(string.IsNullOrEmpty(userStatus.GetUpdated()), "No updated date");
+        Assert.AreEqual("gdpr", userStatus.GetRegulation(), $"Incorrect regulation: {userStatus.GetRegulation()}");
     }
 
     [UnityTest]

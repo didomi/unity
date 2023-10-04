@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Assets.Plugins.Scripts.IOS;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -100,6 +101,29 @@ namespace IO.Didomi.SDK.IOS
             }
 
             public override void WriteJson(JsonWriter writer, ISet<string> value, JsonSerializer serializer)
+            {
+                // Not used
+                throw new NotImplementedException();
+            }
+        }
+
+        public class JsonRegulationConverter : JsonConverter<string>
+        {
+            public override string ReadJson(JsonReader reader, Type objectType, string existingValue, bool hasExistingValue, JsonSerializer serializer)
+            {
+                if (reader.TokenType == JsonToken.Integer)
+                {
+                    int intValue = Convert.ToInt32(reader.Value);
+                    if (Enum.IsDefined(typeof(DDMRegulation), intValue))
+                    {
+                        return Enum.GetName(typeof(DDMRegulation), intValue);
+                    }
+                }
+
+                return Enum.GetName(typeof(DDMRegulation), DDMRegulation.none);
+            }
+
+            public override void WriteJson(JsonWriter writer, string value, JsonSerializer serializer)
             {
                 // Not used
                 throw new NotImplementedException();

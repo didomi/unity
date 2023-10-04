@@ -206,6 +206,7 @@ namespace IO.Didomi.SDK.Android
 
         public static UserStatus ConvertToUserStatus(AndroidJavaObject obj)
         {
+            var regulation = obj.Call<AndroidJavaObject>("getRegulation");
             var userStatus = new UserStatus(
                 purposes: ConvertToUserStatusPurposes(obj.Call<AndroidJavaObject>("getPurposes")),
                 vendors: ConvertToUserStatusVendors(obj.Call<AndroidJavaObject>("getVendors")),
@@ -213,7 +214,8 @@ namespace IO.Didomi.SDK.Android
                 created: obj.Call<string>("getCreated"),
                 updated: obj.Call<string>("getUpdated"),
                 consentString: obj.Call<string>("getConsentString"),
-                additionalConsent: obj.Call<string>("getAdditionalConsent")
+                additionalConsent: obj.Call<string>("getAdditionalConsent"),
+                regulation: regulation.Call<string>("getValue")
             );
 
             return userStatus;
