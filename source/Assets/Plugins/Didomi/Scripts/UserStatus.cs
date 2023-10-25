@@ -57,8 +57,14 @@ namespace IO.Didomi.SDK
         [JsonConverter(typeof(JsonRegulationConverter))]
         private string regulation;
 
+        /// <summary>
+        /// Didomi Consent String
+        /// </summary>
+        [JsonProperty("didomi_dcs")]
+        private string didomiDcs;
+
         // Empty constructor for Json deserialization
-        public UserStatus(): this(null, null, null, null, null, null, null, null)
+        public UserStatus(): this(null, null, null, null, null, null, null, null, null)
         {
         }
 
@@ -70,7 +76,8 @@ namespace IO.Didomi.SDK
             string updated,
             string consentString,
             string additionalConsent,
-            string regulation
+            string regulation,
+            string didomiDcs
         ) {
             this.purposes = purposes;
             this.vendors = vendors;
@@ -80,6 +87,7 @@ namespace IO.Didomi.SDK
             this.consentString = consentString;
             this.additionalConsent = additionalConsent;
             this.regulation = regulation;
+            this.didomiDcs = didomiDcs;
         }
 
         public Purposes GetPurposes()
@@ -152,6 +160,15 @@ namespace IO.Didomi.SDK
                 regulation = "";
             }
             return regulation;
+        }
+
+        public string GetDidomiDcs()
+        {
+            if (didomiDcs == null)
+            {
+                didomiDcs = "";
+            }
+            return didomiDcs;
         }
 
         /// <summary>
