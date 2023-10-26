@@ -54,9 +54,9 @@ public class GetUserStatusTestsSuite: DidomiBaseTests
         Assert.False(string.IsNullOrEmpty(userStatus.GetUserId()), "No user id");
         Assert.False(string.IsNullOrEmpty(userStatus.GetCreated()), "No created date");
         Assert.False(string.IsNullOrEmpty(userStatus.GetUpdated()), "No updated date");
+        Assert.False(string.IsNullOrEmpty(userStatus.GetAdditionalConsent()), "No additional consent");
         Assert.AreEqual("gdpr", userStatus.GetRegulation(), $"Incorrect regulation: {userStatus.GetRegulation()}");
-        // Assert.False(string.IsNullOrEmpty(userStatus.GetAdditionalConsent()), "No additional consent");
-        // Assert.False(string.IsNullOrEmpty(userStatus.GetDidomiDcs()), "No didomi DCS");
+        Assert.True(string.IsNullOrEmpty(userStatus.GetDidomiDcs()), "didomiDCS Should not be present");
     }
 
     [UnityTest]
