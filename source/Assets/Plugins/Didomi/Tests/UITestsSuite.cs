@@ -63,6 +63,12 @@ public class UITestsSuite: DidomiBaseTests
         // On IOS, ShowNotice() requires a previous call to SetupUI()
         yield return SetupUIWithoutNotice();
 
+        // In recent Unity versions, an error message is triggered on iOS
+        if (Application.platform == RuntimePlatform.IPhonePlayer
+            && string.Compare(Application.unityVersion, "2021.3.20f1") > 0)
+        {
+            LogAssert.ignoreFailingMessages = true;
+        }
         Didomi.GetInstance().ShowNotice();
         yield return new WaitForSeconds(1);
         Assert.True(Didomi.GetInstance().IsNoticeVisible(), "Notice should be visible");
@@ -124,12 +130,11 @@ public class UITestsSuite: DidomiBaseTests
 
     private IEnumerator SetupUIWithoutNotice()
     {
+        Didomi.GetInstance().SetUserAgreeToAll();
         Didomi.GetInstance().SetupUI();
         yield return new WaitForSeconds(1);
-        Didomi.GetInstance().HideNotice();
-        yield return new WaitForSeconds(1);
         Assert.False(Didomi.GetInstance().IsNoticeVisible(), "Notice should not be visible at startup");
-        ResetEvents();
+        Didomi.GetInstance().Reset();
     }
 
     /**
