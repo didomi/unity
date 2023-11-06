@@ -63,7 +63,7 @@ public class UITestsSuite: DidomiBaseTests
         // On IOS, ShowNotice() requires a previous call to SetupUI()
         yield return SetupUIWithoutNotice();
 
-        // In recent Unity versions, an error message is triggered on iOS, we need to ignore it:
+        // In Unity versions after 2021.3.20f1, an error message is triggered on iOS, we need to ignore it:
         // '[Error] An abnormal situation has occurred: the PlayerLoop internal function has been called recursively. Please contact Customer Support with a sample project so that we can reproduce the problem and troubleshoot it.'
         bool skipErrorMessage = Application.platform == RuntimePlatform.IPhonePlayer
             && string.Compare(Application.unityVersion, "2021.3.20f1") > 0;
