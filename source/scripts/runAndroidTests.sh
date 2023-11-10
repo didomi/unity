@@ -16,10 +16,11 @@ LOG_PATH="artifacts/androidTestsRun.log"
 # Run the tests
 $UNITY_PATH -batchmode -buildTarget Android -runTests -testResults $RESULTS_PATH -testPlatform Android -logFile $LOG_PATH
 
-if [ $? -eq 0 ]
+result=$?
+if [ $result -eq 0 ]
 then
     echo "Android tests passed!"
 else
-    echo "Android tests failed!"
+    echo "Android tests failed with exit code $result"
     exit 1
 fi

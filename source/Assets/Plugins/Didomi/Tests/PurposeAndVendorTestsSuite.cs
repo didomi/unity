@@ -28,7 +28,7 @@ public class PurposeAndVendorTestsSuite: DidomiBaseTests
         }
         else
         {
-            Assert.Inconclusive("Test only valid for Android platform");
+            Assert.Pass("Test only valid for Android platform");
         }
     }
 
@@ -46,7 +46,7 @@ public class PurposeAndVendorTestsSuite: DidomiBaseTests
         }
         else
         {
-            Assert.Inconclusive("Test only valid for Android platform");
+            Assert.Pass("Test only valid for Android platform");
         }
     }
 
