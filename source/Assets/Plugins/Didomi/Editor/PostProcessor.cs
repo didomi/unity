@@ -3,9 +3,11 @@ using System.Text;
 using UnityEditor;
 using UnityEditor.Android;
 using UnityEditor.Callbacks;
-using UnityEditor.iOS.Xcode;
 using UnityEngine;
+#if UNITY_IOS || UNITY_TVOS
+using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
+#endif
 
 /// <summary>
 /// The PostProcessorGradleAndroidProject updates the generated project for Android.
@@ -189,7 +191,8 @@ public static class PostProcessor
     public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath)
     {
         Debug.Log($"Didomi - OnPostProcessBuild invoked in PostProcessor: {buildPath}");
-        
+
+        #if UNITY_IOS || UNITY_TVOS
         if (buildTarget == BuildTarget.iOS || buildTarget == BuildTarget.tvOS)
         {
             PostProcessorSettings.InitSettings();
@@ -220,8 +223,10 @@ public static class PostProcessor
 
             proj.WriteToFile(projPath);
         }
+        #endif
     }
 
+    #if UNITY_IOS || UNITY_TVOS
     /// <summary>
     /// For iOS, copy the local `didomi_config.json` file to `Data/Resources/`.
     /// It also gets added to the build to be available in the final app.
@@ -267,6 +272,7 @@ public static class PostProcessor
         var fileGuid = project.AddFile(newCopyFile, newCopyFile);
         project.AddFileToBuild(targetGuid, fileGuid);
     }
+    #endif
 
     /// <summary>
     /// Replace arguments in path
