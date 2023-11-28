@@ -1,10 +1,12 @@
 using System.IO;
 using UnityEditor;
-using UnityEditor.iOS.Xcode;
-using UnityEditor.iOS.Xcode.Extensions;
 using UnityEngine;
 using UnityEngine.Networking;
+#if UNITY_IOS || UNITY_TVOS
 using System.Collections;
+using UnityEditor.iOS.Xcode;
+using UnityEditor.iOS.Xcode.Extensions;
+#endif
 
 /// <summary>
 /// Utility class used to handle operations related to the Didomi XCFramework.
@@ -44,7 +46,8 @@ public class XCFrameworkUtils {
         // Delete zip file since it's not needed after the framework has been unzipped.
         FileUtils.DeleteImportedFile(DidomiPaths.IOS.ZIP_FILE_PATH);
     }
-    
+
+    #if UNITY_IOS || UNITY_TVOS
     /// <summary>
     /// Import XCFramework into Xcode project.
     /// </summary>
@@ -67,6 +70,7 @@ public class XCFrameworkUtils {
         // We delete the whole directory where the framework is placed after we are done.
         FileUtils.DeleteImportedDirectory(DidomiPaths.IOS.FRAMEWORK_PATH_IN_SOURCE);
     }
+    #endif
 
     /// <summary>
     /// Copy dSYMs folder
