@@ -15,11 +15,11 @@ public class GetUserStatusTestsSuite: DidomiBaseTests
 
     // In case of failure, make sure the tested vendor has
     // both consent and LI purposes associated in the latest GVL.
-    // GVL endpoint: https://sdk.privacy-center.org/tcf/v2/vendor-list.json
-    // Tested vendor: Magnite CTV, Inc.
-    string vendorId = "202";
-    // Tested purpose: IAB purpose 4
-    string purposeId = "select_personalized_ads";
+    // GVL endpoint: https://sdk.privacy-center.org/tcf/v3/vendor-list.json
+    // Tested vendor: 2KDirect, Inc. (dba iPromote).
+    string vendorId = "217";
+    // Tested purpose: IAB purpose 2
+    string purposeId = "select_basic_ads";
 
     [OneTimeSetUp]
     protected void SetUpSuite()
