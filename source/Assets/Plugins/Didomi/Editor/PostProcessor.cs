@@ -246,7 +246,16 @@ public static class PostProcessor
         foreach (var filePath in files)
         {
             var fileName = Path.GetFileName(filePath);
-            var newCopyFile = $@"Data{PostProcessorSettings.FilePathSeperator}Resources{PostProcessorSettings.FilePathSeperator}" + fileName;
+
+            var destinationFolderPath = $@"Data{PostProcessorSettings.FilePathSeperator}Resources";
+            var destinationFoldeAbsolutePath = Path.Combine(path, destinationFolderPath);
+            // Check if the destination folder exists, and create it if not
+            if (!Directory.Exists(destinationFoldeAbsolutePath))
+            {
+                Directory.CreateDirectory(destinationFoldeAbsolutePath);
+            }
+
+            var newCopyFile = destinationFolderPath + PostProcessorSettings.FilePathSeperator + fileName;
             var newCopyFileAbsolutePath = Path.Combine(path, newCopyFile);
 
             File.Copy(filePath, newCopyFileAbsolutePath, true);
