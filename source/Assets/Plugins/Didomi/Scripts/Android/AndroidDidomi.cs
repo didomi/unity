@@ -395,6 +395,11 @@ namespace IO.Didomi.SDK.Android
             return CallReturningBoolMethod("shouldConsentBeCollected");
         }
 
+        public bool shouldUserStatusBeCollected()
+        {
+            return CallReturningBoolMethod("shouldUserStatusBeCollected");
+        }
+
         public void UpdateSelectedLanguage(string languageCode)
         {
             CallVoidMethod("updateSelectedLanguage", languageCode);

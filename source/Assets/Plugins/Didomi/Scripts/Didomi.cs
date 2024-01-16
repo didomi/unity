@@ -613,6 +613,7 @@ namespace IO.Didomi.SDK
                 vendorsLIStatus);
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use shouldUserStatusBeCollected instead.")]
         /// <summary>
         /// Check if the consent should be collected depending on if we have any consents or 
         /// if we have some consents but the number of days before displaying the notice again has not expired yet
@@ -621,6 +622,19 @@ namespace IO.Didomi.SDK
         public bool ShouldConsentBeCollected()
         {
             return didomiForPlatform.ShouldConsentBeCollected();
+        }
+
+        /// <summary>
+        /// Determine if the User Status (consent) should be collected or not. User Status should be collected if:
+        /// - Regulation is different from NONE and
+        /// - User status is partial and
+        /// - The number of days before displaying the notice again has exceeded the limit specified on the Console or no User Status has been saved
+        /// if we have some consents but the number of days before displaying the notice again has not expired yet
+        /// </summary>
+        /// <returns></returns>
+        public bool shouldUserStatusBeCollected()
+        {
+            return didomiForPlatform.shouldUserStatusBeCollected();
         }
 
         /// <summary>

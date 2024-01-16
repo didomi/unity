@@ -84,6 +84,7 @@ namespace IO.Didomi.SDK.Interfaces
             bool vendorsConsentStatus,
             bool vendorsLIStatus);
         bool ShouldConsentBeCollected();
+        bool shouldUserStatusBeCollected();
         void UpdateSelectedLanguage(string languageCode);
         void SetUser(string organizationUserId);
         void SetUser(UserAuthParams userAuthParams);

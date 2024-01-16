@@ -313,6 +313,11 @@ namespace IO.Didomi.SDK.IOS
             return DidomiFramework.ShouldConsentBeCollected();
         }
 
+        public bool shouldUserStatusBeCollected()
+        {
+            return DidomiFramework.shouldUserStatusBeCollected();
+        }
+
         public void ShowNotice()
         {
             DidomiFramework.ShowNotice();
