@@ -571,11 +571,11 @@ public class DemoGUI : MonoBehaviour
             message += "IsUserConsentStatusPartial" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect3(), "ShouldConsentBeCollected"))
+        if (GUI.Button(GetFuncRect3(), "ShouldUserStatusBeCollected"))
         {
             message = string.Empty;
-            var retval = Didomi.GetInstance().ShouldConsentBeCollected();
-            message += "ShouldConsentBeCollected" + MessageForObject(retval);
+            var retval = Didomi.GetInstance().ShouldUserStatusBeCollected();
+            message += "ShouldUserStatusBeCollected" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect4(), "GetJavaScriptForWebView"))

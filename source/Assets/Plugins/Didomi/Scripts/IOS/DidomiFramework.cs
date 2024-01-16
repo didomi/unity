@@ -391,6 +391,20 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern int shouldUserStatusBeCollected();
+#endif
+
+        public static bool ShouldUserStatusBeCollected()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return shouldUserStatusBeCollected() == 1;
+#else
+            return false;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern void showNotice();
 #endif
 

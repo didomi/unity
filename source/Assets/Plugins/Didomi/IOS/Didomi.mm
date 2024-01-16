@@ -239,6 +239,11 @@ int shouldConsentBeCollected()
     return convertBoolToInt([[Didomi shared] shouldConsentBeCollected]);
 }
 
+int shouldUserStatusBeCollected()
+{
+    return convertBoolToInt([[Didomi shared] shouldUserStatusBeCollected]);
+}
+
 void showNotice()
 {
     [[Didomi shared] showNotice];

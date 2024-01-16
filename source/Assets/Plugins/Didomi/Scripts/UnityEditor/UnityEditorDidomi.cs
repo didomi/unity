@@ -315,6 +315,11 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
+        public bool ShouldUserStatusBeCollected()
+        {
+            throw new NotImplementedException();
+        }
+
         public void ShowNotice()
         {
             if (_disableMockUI)
