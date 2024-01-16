@@ -337,6 +337,34 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern int isUserLegitimateInterestStatusPartial();
+#endif
+
+        public static bool IsUserLegitimateInterestStatusPartial()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return isUserLegitimateInterestStatusPartial() == 1;
+#else
+            return false;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern int isUserStatusPartial();
+#endif
+
+        public static bool IsUserStatusPartial()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return isUserStatusPartial() == 1;
+#else
+            return false;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern void reset();
 #endif
 

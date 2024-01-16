@@ -258,6 +258,16 @@ namespace IO.Didomi.SDK.Android
             return CallReturningBoolMethod("isUserConsentStatusPartial");
         }
 
+        public bool IsUserLegitimateInterestStatusPartial()
+        {
+            return CallReturningBoolMethod("isUserLegitimateInterestStatusPartial");
+        }
+
+        public bool IsUserStatusPartial()
+        {
+            return CallReturningBoolMethod("isUserStatusPartial");
+        }
+
         public bool IsNoticeVisible()
         {
             return CallReturningBoolMethod("isNoticeVisible");

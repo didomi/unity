@@ -564,11 +564,11 @@ public class DemoGUI : MonoBehaviour
             message += "IsConsentRequired" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect2(), "IsUserConsentStatusPartial"))
+        if (GUI.Button(GetFuncRect2(), "IsUserStatusPartial"))
         {
             message = string.Empty;
-            var retval = Didomi.GetInstance().IsUserConsentStatusPartial();
-            message += "IsUserConsentStatusPartial" + MessageForObject(retval);
+            var retval = Didomi.GetInstance().IsUserStatusPartial();
+            message += "IsUserStatusPartial" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect3(), "ShouldUserStatusBeCollected"))
