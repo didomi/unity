@@ -219,6 +219,11 @@ int isUserConsentStatusPartial()
     return convertBoolToInt([[Didomi shared] isUserConsentStatusPartial]);
 }
 
+int isUserLegitimateInterestStatusPartial()
+{
+    return convertBoolToInt([[Didomi shared] isUserLegitimateInterestStatusPartial]);
+}
+
 void reset()
 {
     [[Didomi shared] reset];

@@ -442,6 +442,15 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Determine if legitimate interest information is available for all purposes and vendors that are required
+        /// </summary>
+        /// <returns></returns>
+        public bool IsUserLegitimateInterestStatusPartial()
+        {
+            return didomiForPlatform.IsUserLegitimateInterestStatusPartial();
+        }
+
+        /// <summary>
         /// Check if the consent notice is currently displayed
         /// </summary>
         /// <returns></returns>

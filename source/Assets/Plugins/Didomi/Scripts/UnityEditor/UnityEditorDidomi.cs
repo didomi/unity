@@ -269,6 +269,11 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
+        public bool IsUserLegitimateInterestStatusPartial()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Reset()
         {
         }

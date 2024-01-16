@@ -70,6 +70,20 @@ public class SDKStatusTestsSuite: DidomiBaseTests
         Assert.IsFalse(Didomi.GetInstance().IsUserConsentStatusPartial(), "Consent was already given");
     }
 
+    [UnityTest]
+    public IEnumerator TestIsUserLegitimateInterestStatusPartial()
+    {
+        Didomi.GetInstance().Reset();
+
+        Assert.IsTrue(Didomi.GetInstance().IsUserLegitimateInterestStatusPartial(), "LI Consent was not given yet");
+
+        consentChanged = false;
+        Didomi.GetInstance().SetUserAgreeToAll();
+        yield return new WaitUntil(() => consentChanged);
+
+        Assert.IsFalse(Didomi.GetInstance().IsUserLegitimateInterestStatusPartial(), "LI Consent was already given");
+    }
+
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)
     {
         consentChanged = true;

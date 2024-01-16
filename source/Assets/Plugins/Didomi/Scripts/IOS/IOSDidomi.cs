@@ -249,6 +249,11 @@ namespace IO.Didomi.SDK.IOS
             return DidomiFramework.IsUserConsentStatusPartial();
         }
 
+        public bool IsUserLegitimateInterestStatusPartial()
+        {
+            return DidomiFramework.IsUserLegitimateInterestStatusPartial();
+        }
+
         public void Reset()
         {
             DidomiFramework.Reset();

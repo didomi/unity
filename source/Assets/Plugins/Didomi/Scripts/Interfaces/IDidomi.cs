@@ -56,6 +56,7 @@ namespace IO.Didomi.SDK.Interfaces
         void Initialize(DidomiInitializeParameters parameters);
         bool IsConsentRequired();
         bool IsUserConsentStatusPartial();
+        bool IsUserLegitimateInterestStatusPartial();
         bool IsNoticeVisible();
         bool IsPreferencesVisible();
         bool IsReady();
