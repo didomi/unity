@@ -6,7 +6,7 @@ using UnityEngine;
 using IO.Didomi.SDK.Events;
 
 /// <summary>
-/// Tests related to lists of purpose and vendor loaded into SDK
+/// Tests related to User status (consent)
 /// </summary>
 public class SDKStatusTestsSuite: DidomiBaseTests
 {
@@ -42,6 +42,18 @@ public class SDKStatusTestsSuite: DidomiBaseTests
     public void TestIsConsentRequired()
     {
         Assert.IsTrue(Didomi.GetInstance().IsConsentRequired(), "Consent is required for this regulation");
+    }
+
+    [Test]
+    public void TestShouldConsentBeCollected()
+    {
+        Assert.IsTrue(Didomi.GetInstance().ShouldConsentBeCollected(), "Consent should be collected for this regulation");
+    }
+
+    [Test]
+    public void TestShouldUserStatusBeCollected()
+    {
+        Assert.IsTrue(Didomi.GetInstance().ShouldUserStatusBeCollected(), "User status should be collected for this regulation");
     }
 
     [UnityTest]
