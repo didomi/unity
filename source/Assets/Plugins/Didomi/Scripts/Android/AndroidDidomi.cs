@@ -395,7 +395,7 @@ namespace IO.Didomi.SDK.Android
             return CallReturningBoolMethod("shouldConsentBeCollected");
         }
 
-        public bool shouldUserStatusBeCollected()
+        public bool ShouldUserStatusBeCollected()
         {
             return CallReturningBoolMethod("shouldUserStatusBeCollected");
         }

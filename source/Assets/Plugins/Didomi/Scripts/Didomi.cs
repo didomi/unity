@@ -613,7 +613,7 @@ namespace IO.Didomi.SDK
                 vendorsLIStatus);
         }
 
-        [ObsoleteAttribute("This method is deprecated. Use shouldUserStatusBeCollected instead.")]
+        [ObsoleteAttribute("This method is deprecated. Use ShouldUserStatusBeCollected instead.")]
         /// <summary>
         /// Check if the consent should be collected depending on if we have any consents or 
         /// if we have some consents but the number of days before displaying the notice again has not expired yet
@@ -632,9 +632,9 @@ namespace IO.Didomi.SDK
         /// if we have some consents but the number of days before displaying the notice again has not expired yet
         /// </summary>
         /// <returns></returns>
-        public bool shouldUserStatusBeCollected()
+        public bool ShouldUserStatusBeCollected()
         {
-            return didomiForPlatform.shouldUserStatusBeCollected();
+            return didomiForPlatform.ShouldUserStatusBeCollected();
         }
 
         /// <summary>

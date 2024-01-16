@@ -315,7 +315,7 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
-        public bool shouldUserStatusBeCollected()
+        public bool ShouldUserStatusBeCollected()
         {
             throw new NotImplementedException();
         }

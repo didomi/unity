@@ -313,9 +313,9 @@ namespace IO.Didomi.SDK.IOS
             return DidomiFramework.ShouldConsentBeCollected();
         }
 
-        public bool shouldUserStatusBeCollected()
+        public bool ShouldUserStatusBeCollected()
         {
-            return DidomiFramework.shouldUserStatusBeCollected();
+            return DidomiFramework.ShouldUserStatusBeCollected();
         }
 
         public void ShowNotice()
