@@ -435,7 +435,7 @@ namespace IO.Didomi.SDK
         /// <summary>
         /// Determine if consent information is available for all purposes and vendors that are required
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if some required consent are missing</returns>
         public bool IsUserConsentStatusPartial()
         {
             return didomiForPlatform.IsUserConsentStatusPartial();
@@ -444,7 +444,7 @@ namespace IO.Didomi.SDK
         /// <summary>
         /// Determine if legitimate interest information is available for all purposes and vendors that are required
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if some required consent are missing with legitimate interest information</returns>
         public bool IsUserLegitimateInterestStatusPartial()
         {
             return didomiForPlatform.IsUserLegitimateInterestStatusPartial();
@@ -453,7 +453,7 @@ namespace IO.Didomi.SDK
         /// <summary>
         /// Determine if user status is partial
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if consent or legitimate interest is partial</returns>
         public bool IsUserStatusPartial()
         {
             return didomiForPlatform.IsUserStatusPartial();
@@ -636,7 +636,7 @@ namespace IO.Didomi.SDK
         /// Check if the consent should be collected depending on if we have any consents or 
         /// if we have some consents but the number of days before displaying the notice again has not expired yet
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the consent should be collected</returns>
         public bool ShouldConsentBeCollected()
         {
             return didomiForPlatform.ShouldConsentBeCollected();
@@ -649,7 +649,7 @@ namespace IO.Didomi.SDK
         /// - The number of days before displaying the notice again has exceeded the limit specified on the Console or no User Status has been saved
         /// if we have some consents but the number of days before displaying the notice again has not expired yet
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the User Status (consent) should be collected</returns>
         public bool ShouldUserStatusBeCollected()
         {
             return didomiForPlatform.ShouldUserStatusBeCollected();
