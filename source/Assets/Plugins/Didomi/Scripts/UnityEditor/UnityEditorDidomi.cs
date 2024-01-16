@@ -274,6 +274,11 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
+        public bool IsUserStatusPartial()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Reset()
         {
         }

@@ -451,6 +451,15 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Determine if user status is partial
+        /// </summary>
+        /// <returns></returns>
+        public bool IsUserStatusPartial()
+        {
+            return didomiForPlatform.IsUserStatusPartial();
+        }
+
+        /// <summary>
         /// Check if the consent notice is currently displayed
         /// </summary>
         /// <returns></returns>
