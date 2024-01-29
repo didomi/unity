@@ -306,6 +306,15 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Get the current user consent status as a CurrentUserStatus object.
+        /// </summary>
+        /// <returns>An instance of CurrentUserStatus</returns>
+        public CurrentUserStatus GetCurrentUserStatus()
+        {
+            return didomiForPlatform.GetCurrentUserStatus();
+        }
+
+        /// <summary>
         /// Get the user consent status as a UserStatus object.
         /// </summary>
         /// <returns></returns>

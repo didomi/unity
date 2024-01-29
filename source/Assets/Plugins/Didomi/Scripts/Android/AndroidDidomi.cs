@@ -177,6 +177,13 @@ namespace IO.Didomi.SDK.Android
             return CallReturningBoolMethod("getUserLegitimateInterestStatusForVendorAndRequiredPurposes", vendorId);
         }
 
+        public CurrentUserStatus GetCurrentUserStatus()
+        {
+            var currentUserStatusObject = CallReturningJavaObjectMethod("getCurrentUserStatus");
+
+            return AndroidObjectMapper.ConvertToCurrentUserStatus(currentUserStatusObject);
+        }
+
         public UserStatus GetUserStatus()
         {
             var userStatusObject = CallReturningJavaObjectMethod("getUserStatus");

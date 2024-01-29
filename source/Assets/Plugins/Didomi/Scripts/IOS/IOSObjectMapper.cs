@@ -60,6 +60,25 @@ namespace IO.Didomi.SDK.IOS
             return "[]";
         }
 
+        public static CurrentUserStatus ConvertToCurrentUserStatus(string jsonText)
+        {
+            CurrentUserStatus result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject<CurrentUserStatus>(jsonText);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
         public static UserStatus ConvertToUserStatus(string jsonText)
         {
             UserStatus result = null;

@@ -37,6 +37,38 @@ char* ConvertComplexDictionaryToString(NSDictionary * dataDict)
 }
 
 /**
+ Method used to map current user status from DDMCurrentUserStatus to a JSON string.
+ */
+char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
+    // String properties
+    NSString *userID = [currentUserStatus userID];
+    NSString *created = [currentUserStatus created];
+    NSString *updated = [currentUserStatus updated];
+    NSString *consentString = [currentUserStatus consentString];
+    NSString *additionalConsent = [currentUserStatus additionalConsent];
+    // Enum becomes integer in Objective-C
+    NSInteger regulation = [currentUserStatus regulation];
+    NSString *didomiDCS = [currentUserStatus didomiDCS];
+    
+    NSDictionary<NSString *, DDMCurrentUserStatusPurpose *> *purposeStatus = [currentUserStatus purposes];
+    NSDictionary<NSString *, DDMCurrentUserStatusVendor *> *vendorsStatus = [currentUserStatus vendors];
+    
+    NSDictionary *dictionary = @{
+        @"user_id": userID,
+        @"created" : created,
+        @"updated": updated,
+        @"consent_string": consentString,
+        @"addtl_consent": additionalConsent,
+        @"regulation": [NSNumber numberWithLong: regulation],
+        @"didomi_dcs": didomiDCS,
+        @"purposes": purposeStatus,
+        @"vendors": vendorsStatus
+    };
+    
+    return ConvertComplexDictionaryToString(dictionary);
+}
+
+/**
  Method used to map user status from DDMUserStatus to a JSON string.
  */
 char* MapUserStatus(DDMUserStatus *userStatus) {
@@ -175,6 +207,13 @@ int getUserLegitimateInterestStatusForVendor(char* vendorId)
 int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(char* vendorId)
 {
     return [[Didomi shared] getUserLegitimateInterestStatusForVendorAndRequiredPurposesWithVendorId: CreateNSString(vendorId)];
+}
+
+char* getCurrentUserStatus()
+{
+    Didomi *didomi = [Didomi shared];
+    DDMCurrentUserStatus *currentUserStatus = [didomi getCurrentUserStatus];
+    return MapCurrentUserStatus(currentUserStatus);
 }
 
 char* getUserStatus()

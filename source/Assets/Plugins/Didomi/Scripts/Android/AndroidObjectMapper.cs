@@ -204,6 +204,70 @@ namespace IO.Didomi.SDK.Android
             return null;
         }
 
+        public static Dictionary<string, CurrentUserStatus.PurposeStatus> ConvertToPurposeStatusDictionary(AndroidJavaObject obj)
+        {
+            if (obj != null)
+            {
+                var retval = new Dictionary<string, CurrentUserStatus.PurposeStatus>();
+
+                var setJavaObject = obj.Call<AndroidJavaObject>("keySet");
+
+                var iteratorJavaObject = setJavaObject.Call<AndroidJavaObject>("iterator");
+
+                while (iteratorJavaObject.Call<bool>("hasNext"))
+                {
+                    var key = iteratorJavaObject.Call<string>("next");
+                    var val = obj.Call<CurrentUserStatus.PurposeStatus>("get", key);
+                    retval.Add(key, val);
+                }
+
+                return retval;
+            }
+
+            return null;
+        }
+
+        public static Dictionary<string, CurrentUserStatus.VendorStatus> ConvertToVendorStatusDictionary(AndroidJavaObject obj)
+        {
+            if (obj != null)
+            {
+                var retval = new Dictionary<string, CurrentUserStatus.VendorStatus>();
+
+                var setJavaObject = obj.Call<AndroidJavaObject>("keySet");
+
+                var iteratorJavaObject = setJavaObject.Call<AndroidJavaObject>("iterator");
+
+                while (iteratorJavaObject.Call<bool>("hasNext"))
+                {
+                    var key = iteratorJavaObject.Call<string>("next");
+                    var val = obj.Call<CurrentUserStatus.VendorStatus>("get", key);
+                    retval.Add(key, val);
+                }
+
+                return retval;
+            }
+
+            return null;
+        }
+
+        public static CurrentUserStatus ConvertToCurrentUserStatus(AndroidJavaObject obj)
+        {
+            var regulation = obj.Call<AndroidJavaObject>("Regulation");
+            var currentUserStatus = new CurrentUserStatus(
+                purposes: ConvertToPurposeStatusDictionary(obj.Call<AndroidJavaObject>("Purposes")),
+                vendors: ConvertToVendorStatusDictionary(obj.Call<AndroidJavaObject>("Vendors")),
+                userId: obj.Call<string>("UserId"),
+                created: obj.Call<string>("Created"),
+                updated: obj.Call<string>("Updated"),
+                consentString: obj.Call<string>("ConsentString"),
+                additionalConsent: obj.Call<string>("AdditionalConsent"),
+                regulation: regulation.Call<string>("Value"),
+                didomiDcs: obj.Call<string>("DidomiDcs")
+            );
+
+            return currentUserStatus;
+        }
+
         public static UserStatus ConvertToUserStatus(AndroidJavaObject obj)
         {
             var regulation = obj.Call<AndroidJavaObject>("getRegulation");
