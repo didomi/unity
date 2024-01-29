@@ -70,6 +70,15 @@ namespace IO.Didomi.SDK
 
             [JsonProperty("enabled")]
             public bool Enabled { get; set; } = false;
+
+            public PurposeStatus(
+                string id,
+                bool enabled
+            )
+            {
+                Id = id;
+                Enabled = enabled;
+            }
         }
 
         [Serializable]
@@ -80,6 +89,15 @@ namespace IO.Didomi.SDK
 
             [JsonProperty("enabled")]
             public bool Enabled { get; set; } = false;
+
+            public VendorStatus(
+                string id,
+                bool enabled
+            )
+            {
+                Id = id;
+                Enabled = enabled;
+            }
         }
     }
 }
