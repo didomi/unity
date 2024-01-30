@@ -25,6 +25,11 @@ NSDictionary<NSString *, NSArray<NSString *> *> * CreateDictionaryFromStatusIDs(
     };
 }
 
+int convertBoolToInt(bool value)
+{
+    return value ? 1 : 0;
+}
+
 /**
  Method used to create a string from a dictionary that doesn't have the form <NSString *, NSString *>.
  */
@@ -50,8 +55,27 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
     NSInteger regulation = [currentUserStatus regulation];
     NSString *didomiDCS = [currentUserStatus didomiDCS];
     
-    NSDictionary<NSString *, DDMCurrentUserStatusPurpose *> *purposeStatus = [currentUserStatus purposes];
-    NSDictionary<NSString *, DDMCurrentUserStatusVendor *> *vendorsStatus = [currentUserStatus vendors];
+    /// TODO We convert purposes and vendors status to dictionary here, because we can not use DDMUserStatusPurpose / DDMUserStatusVendor. Modify when these classes are available from Objective-C.
+
+    NSMutableDictionary *purposesStatus = [NSMutableDictionary dictionary];
+    for (NSString *key in [[currentUserStatus purposes] allKeys]) {
+        bool enabled = [[currentUserStatus purposes][key] enabled];
+        NSDictionary *purpose = @{
+            @"id": [[currentUserStatus purposes][key] id],
+            @"enabled": [NSNumber numberWithInt: convertBoolToInt(enabled)]
+        };
+        purposesStatus[key] = purpose;
+    }
+    
+    NSMutableDictionary *vendorsStatus = [NSMutableDictionary dictionary];
+    for (NSString *key in [[currentUserStatus vendors] allKeys]) {
+        bool enabled = [[currentUserStatus vendors][key] enabled];
+        NSDictionary *vendor = @{
+            @"id": [[currentUserStatus vendors][key] id],
+            @"enabled": [NSNumber numberWithInt: convertBoolToInt(enabled)]
+        };
+        vendorsStatus[key] = vendor;
+    }
     
     NSDictionary *dictionary = @{
         @"user_id": userID,
@@ -61,7 +85,7 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
         @"addtl_consent": additionalConsent,
         @"regulation": [NSNumber numberWithLong: regulation],
         @"didomi_dcs": didomiDCS,
-        @"purposes": purposeStatus,
+        @"purposes": purposesStatus,
         @"vendors": vendorsStatus
     };
     
