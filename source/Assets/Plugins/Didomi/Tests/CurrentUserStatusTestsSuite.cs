@@ -10,7 +10,6 @@ using IO.Didomi.SDK.Events;
 /// </summary>
 public class CurrentUserStatusTestsSuite: DidomiBaseTests
 {
-    
     private bool consentChanged = false;
 
     // Tested vendor: 2KDirect, Inc. (dba iPromote).
@@ -56,14 +55,9 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
     }
 
     [UnityTest]
-    public IEnumerator TestCurrentUserStatusAfterAllEnabled()
+    public IEnumerator TestCurrentUserStatusAfterAllEnabledThenDisabled()
     {
-        Didomi.GetInstance().SetUserStatus(
-            purposesConsentStatus: true,
-            purposesLIStatus: true,
-            vendorsConsentStatus: true,
-            vendorsLIStatus: true
-        );
+        Didomi.GetInstance().SetUserAgreeToAll();
         yield return new WaitUntil(() => consentChanged);
 
         var userStatus = Didomi.GetInstance().GetCurrentUserStatus();
@@ -75,21 +69,45 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
         var purposeStatus = userStatus.Purposes[purposeId];
         Assert.AreEqual(purposeId, purposeStatus.Id, $"Wrong id for purpose: {purposeStatus.Id}");
         Assert.IsTrue(purposeStatus.Enabled, "Purpose should be enabled");
+
+        // Modify user status
+        foreach (CurrentUserStatus.PurposeStatus purpose in userStatus.Purposes.Values)
+        {
+            purpose.Enabled = false;
+        }
+        foreach (CurrentUserStatus.VendorStatus vendor in userStatus.Vendors.Values)
+        {
+            vendor.Enabled = false;
+        }
+        var result = Didomi.GetInstance().SetCurrentUserStatus(userStatus);
+        Assert.IsTrue(result, "Consent not changed");
+        yield return new WaitUntil(() => consentChanged);
+
+        var newUserStatus = Didomi.GetInstance().GetCurrentUserStatus();
+
+        var newVendorStatus = newUserStatus.Vendors[vendorId];
+        Assert.AreEqual(vendorId, newVendorStatus.Id, $"Wrong id for vendor: {vendorStatus.Id}");
+        Assert.IsFalse(newVendorStatus.Enabled, "Vendor should be disabled");
+
+        var newPurposeStatus = newUserStatus.Purposes[purposeId];
+        Assert.AreEqual(purposeId, newPurposeStatus.Id, $"Wrong id for purpose: {purposeStatus.Id}");
+        Assert.IsFalse(newPurposeStatus.Enabled, "Purpose should be disabled");
+
     }
 
     [UnityTest]
     public IEnumerator TestCurrentUserStatusAfterPurposeDisabled()
     {
-        Didomi.GetInstance().SetUserStatus(
-            purposesConsentStatus: false,
-            purposesLIStatus: false,
-            vendorsConsentStatus: true,
-            vendorsLIStatus: true
-        );
+        Didomi.GetInstance().SetUserAgreeToAll();
+        var oldUserStatus = Didomi.GetInstance().GetCurrentUserStatus();
+
+        // Disable the purpose
+        oldUserStatus.Purposes[purposeId].Enabled = false;
+        var result = Didomi.GetInstance().SetCurrentUserStatus(oldUserStatus);
+        Assert.IsTrue(result, "Consent not changed");
         yield return new WaitUntil(() => consentChanged);
 
         var userStatus = Didomi.GetInstance().GetCurrentUserStatus();
-
 
         var vendorStatus = userStatus.Vendors[vendorId];
         Assert.AreEqual(vendorId, vendorStatus.Id, $"Wrong id for vendor: {vendorStatus.Id}");
@@ -103,16 +121,16 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
     [UnityTest]
     public IEnumerator TestCurrentUserStatusAfterVendorDisabled()
     {
-        Didomi.GetInstance().SetUserStatus(
-            purposesConsentStatus: true,
-            purposesLIStatus: true,
-            vendorsConsentStatus: false,
-            vendorsLIStatus: false
-        );
+        Didomi.GetInstance().SetUserAgreeToAll();
+        var oldUserStatus = Didomi.GetInstance().GetCurrentUserStatus();
+
+        // Disable the vendor
+        oldUserStatus.Purposes[purposeId].Enabled = false;
+        var result = Didomi.GetInstance().SetCurrentUserStatus(oldUserStatus);
+        Assert.IsTrue(result, "Consent not changed");
         yield return new WaitUntil(() => consentChanged);
 
         var userStatus = Didomi.GetInstance().GetCurrentUserStatus();
-
 
         var vendorStatus = userStatus.Vendors[vendorId];
         Assert.AreEqual(vendorId, vendorStatus.Id, $"Wrong id for vendor: {vendorStatus.Id}");

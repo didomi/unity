@@ -164,6 +164,12 @@ namespace IO.Didomi.SDK.IOS
             return IOSObjectMapper.ConvertToCurrentUserStatus(jsonText);
         }
 
+        public bool SetCurrentUserStatus(CurrentUserStatus status)
+        {
+            // Not implemented
+            return false;
+        }
+
         public UserStatus GetUserStatus()
         {
             var jsonText = DidomiFramework.GetUserStatus();

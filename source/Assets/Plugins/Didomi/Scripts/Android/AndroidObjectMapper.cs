@@ -375,6 +375,46 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
+        public static AndroidJavaObject ConvertToJavaCurrentUserStatus(CurrentUserStatus status)
+        {
+            AndroidJavaObject purposesMap = new AndroidJavaObject("java.util.HashMap");
+            foreach (var id in status.Purposes.Keys)
+            {
+                var purpose = status.Purposes[id];
+                AndroidJavaObject javaPurpose = new AndroidJavaObject("io.didomi.sdk.models.CurrentUserStatus$PurposeStatus",
+                    purpose.Id,
+                    purpose.Enabled
+                );
+
+                purposesMap.Call("put", id, javaPurpose);
+            }
+
+            AndroidJavaObject vendorsMap = new AndroidJavaObject("java.util.HashMap");
+            foreach (var id in status.Purposes.Keys)
+            {
+                var vendor = status.Vendors[id];
+                AndroidJavaObject javaVendor = new AndroidJavaObject("io.didomi.sdk.models.CurrentUserStatus$VendorStatus",
+                    vendor.Id,
+                    vendor.Enabled
+                );
+
+                vendorsMap.Call("put", id, javaVendor);
+            }
+
+            return new AndroidJavaObject(
+                "io.didomi.sdk.models.CurrentUserStatus",
+                purposesMap,
+                vendorsMap,
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            );
+        }
+
         public static AndroidJavaObject ConvertToJavaLong(long? longValue)
         {
             if (longValue == null)
