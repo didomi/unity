@@ -92,7 +92,6 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
         var newPurposeStatus = newUserStatus.Purposes[purposeId];
         Assert.AreEqual(purposeId, newPurposeStatus.Id, $"Wrong id for purpose: {purposeStatus.Id}");
         Assert.IsFalse(newPurposeStatus.Enabled, "Purpose should be disabled");
-
     }
 
     [UnityTest]
@@ -125,7 +124,7 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
         var oldUserStatus = Didomi.GetInstance().GetCurrentUserStatus();
 
         // Disable the vendor
-        oldUserStatus.Purposes[purposeId].Enabled = false;
+        oldUserStatus.Vendors[vendorId].Enabled = false;
         var result = Didomi.GetInstance().SetCurrentUserStatus(oldUserStatus);
         Assert.IsTrue(result, "Consent not changed");
         yield return new WaitUntil(() => consentChanged);
@@ -138,7 +137,7 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
 
         var purposeStatus = userStatus.Purposes[purposeId];
         Assert.AreEqual(purposeId, purposeStatus.Id, $"Wrong id for purpose: {purposeStatus.Id}");
-        Assert.IsTrue(purposeStatus.Enabled, "Purpose should be enabled");
+        Assert.IsTrue(purposeStatus.Enabled, "Purpose should still be enabled");
     }
 
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)

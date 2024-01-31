@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace IO.Didomi.SDK.Android
@@ -140,7 +137,6 @@ namespace IO.Didomi.SDK.Android
 
                     AndroidJNI.CallBooleanMethod(hashSetJavaObject.GetRawObject(), methodPut, AndroidJNIHelper.CreateJNIArgArray(args));
                 }
-
 
                 return hashSetJavaObject;
             }
@@ -386,11 +382,11 @@ namespace IO.Didomi.SDK.Android
                     purpose.Enabled
                 );
 
-                purposesMap.Call("put", id, javaPurpose);
+                purposesMap.Call<AndroidJavaObject>("put", id, javaPurpose);
             }
 
             AndroidJavaObject vendorsMap = new AndroidJavaObject("java.util.HashMap");
-            foreach (var id in status.Purposes.Keys)
+            foreach (var id in status.Vendors.Keys)
             {
                 var vendor = status.Vendors[id];
                 AndroidJavaObject javaVendor = new AndroidJavaObject("io.didomi.sdk.models.CurrentUserStatus$VendorStatus",
@@ -398,7 +394,7 @@ namespace IO.Didomi.SDK.Android
                     vendor.Enabled
                 );
 
-                vendorsMap.Call("put", id, javaVendor);
+                vendorsMap.Call<AndroidJavaObject>("put", id, javaVendor);
             }
 
             return new AndroidJavaObject(
