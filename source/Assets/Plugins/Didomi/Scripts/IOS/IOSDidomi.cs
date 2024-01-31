@@ -166,8 +166,9 @@ namespace IO.Didomi.SDK.IOS
 
         public bool SetCurrentUserStatus(CurrentUserStatus status)
         {
-            // Not implemented
-            return false;
+            var purposes = IOSObjectMapper.ConvertFromPurposeStatusDictionaryToJson(status.Purposes);
+            var vendors = IOSObjectMapper.ConvertFromVendorsStatusDictionaryToJson(status.Vendors);
+            return DidomiFramework.SetCurrentUserStatus(purposes, "");
         }
 
         public UserStatus GetUserStatus()

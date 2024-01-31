@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static IO.Didomi.SDK.CurrentUserStatus;
 
 namespace IO.Didomi.SDK.IOS
 {
@@ -55,6 +56,26 @@ namespace IO.Didomi.SDK.IOS
             if (objSet != null)
             {
                 return JsonConvert.SerializeObject(objSet.ToArray());
+            }
+
+            return "[]";
+        }
+
+        public static string ConvertFromPurposeStatusDictionaryToJson(Dictionary<string, PurposeStatus> purposes)
+        {
+            if (purposes != null)
+            {
+                return JsonConvert.SerializeObject(purposes);
+            }
+
+            return "[]";
+        }
+
+        public static string ConvertFromVendorsStatusDictionaryToJson(Dictionary<string, VendorStatus> vendors)
+        {
+            if (vendors != null)
+            {
+                return JsonConvert.SerializeObject(vendors);
             }
 
             return "[]";

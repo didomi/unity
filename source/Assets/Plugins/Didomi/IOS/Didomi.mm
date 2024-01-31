@@ -186,11 +186,6 @@ void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* 
     [[Didomi shared] initialize: parameters];
 }
 
-int convertBoolToInt(bool value)
-{
-    return value ? 1 : 0;
-}
-
 int isReady()
 {
     return convertBoolToInt([[Didomi shared] isReady]);
@@ -254,7 +249,7 @@ void hideNotice()
 
 void hidePreferences()
 {
-	[[Didomi shared] hidePreferences];
+    [[Didomi shared] hidePreferences];
 }
 
 int isConsentRequired()
@@ -409,16 +404,58 @@ char* getText(char* key)
 
 NSSet<NSString *> * ConvertJsonToSet(char* jsonText)
 {
-	NSString *jsonString=CreateNSString(jsonText);
+    NSString *jsonString=CreateNSString(jsonText);
 
-	NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
-	NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
 
-	NSSet<NSString *> * retval= [[NSSet alloc] initWithArray:jsonArray];
+    NSSet<NSString *> * retval= [[NSSet alloc] initWithArray:jsonArray];
 
-	return retval;
- }
+    return retval;
+}
+
+BOOL GetBoolField(NSDictionary *data, NSString *key)
+{
+    NSNumber *fieldValue = data[key];
+    return [fieldValue boolValue];
+}
+
+NSDictionary<NSString *, DDMCurrentUserStatusPurpose *> * ConvertJsonToCurrentUserStatusPurposes(char* jsonText)
+{
+    NSString *jsonString=CreateNSString(jsonText);
+
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+
+    NSMutableDictionary *convertedDictionary = [NSMutableDictionary dictionary];
+    for (NSString *key in jsonDictionary) {
+        NSDictionary *jsonPurpose = jsonDictionary[key];
+        DDMCurrentUserStatusPurpose *purpose = [[DDMCurrentUserStatusPurpose alloc] initWithId:jsonPurpose[@"id"] enabled:GetBoolField(jsonPurpose, @"enabled")];
+        [convertedDictionary setObject:purpose forKey:key];
+    }
+
+    return convertedDictionary;
+}
+
+NSDictionary<NSString *, DDMCurrentUserStatusVendor *> * ConvertJsonToCurrentUserStatusVendors(char* jsonText)
+{
+    NSString *jsonString=CreateNSString(jsonText);
+
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+
+    NSMutableDictionary *convertedDictionary = [NSMutableDictionary dictionary];
+    for (NSString *key in jsonDictionary) {
+        NSDictionary *jsonVendor = jsonDictionary[key];
+        DDMCurrentUserStatusVendor *vendor = [[DDMCurrentUserStatusVendor alloc] initWithId:jsonVendor[@"id"] enabled:GetBoolField(jsonVendor, @"enabled")];
+        [convertedDictionary setObject:vendor forKey:key];
+    }
+
+    return convertedDictionary;
+}
 
 int setUserConsentStatus(char* enabledPurposeIds, char* disabledPurposeIds, char* enabledVendorIds, char* disabledVendorIds)
 {
@@ -450,6 +487,13 @@ int setUserStatus1(BOOL purposesConsentStatus, BOOL purposesLIStatus, BOOL vendo
 {
     bool result = [[Didomi shared] setUserStatusWithPurposesConsentStatus:purposesConsentStatus purposesLIStatus:purposesLIStatus vendorsConsentStatus:vendorsConsentStatus vendorsLIStatus:vendorsLIStatus];
     return convertBoolToInt(result);
+}
+
+int setCurrentUserStatus(char* purposesStatus, char* vendorsStatus)
+{
+    DDMCurrentUserStatus *status = [[DDMCurrentUserStatus alloc ] initWithPurposes:ConvertJsonToCurrentUserStatusPurposes(purposesStatus) vendors:ConvertJsonToCurrentUserStatusVendors(vendorsStatus)];
+    Didomi *didomi = [Didomi shared];
+    return [didomi setCurrentUserStatusWithCurrentUserStatus:status];
 }
 
 void setUser(char* organizationUserId)
@@ -582,7 +626,6 @@ void onError(callback_error_function errorFunc)
           errorFunc();
       }];
 }
-
 
 static DDMEventListener *eventListener = [[DDMEventListener alloc]init];
 
