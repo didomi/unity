@@ -95,6 +95,46 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
     }
 
     [UnityTest]
+    public IEnumerator TestCurrentUserStatusAfterAllDisabledThenEnabled()
+    {
+        Didomi.GetInstance().SetUserDisagreeToAll();
+        yield return new WaitUntil(() => consentChanged);
+
+        var userStatus = Didomi.GetInstance().GetCurrentUserStatus();
+
+        var vendorStatus = userStatus.Vendors[vendorId];
+        Assert.AreEqual(vendorId, vendorStatus.Id, $"Wrong id for vendor: {vendorStatus.Id}");
+        Assert.IsFalse(vendorStatus.Enabled, "Vendor should be disabled");
+
+        var purposeStatus = userStatus.Purposes[purposeId];
+        Assert.AreEqual(purposeId, purposeStatus.Id, $"Wrong id for purpose: {purposeStatus.Id}");
+        Assert.IsFalse(purposeStatus.Enabled, "Purpose should be disabled");
+
+        // Modify user status
+        foreach (CurrentUserStatus.PurposeStatus purpose in userStatus.Purposes.Values)
+        {
+            purpose.Enabled = true;
+        }
+        foreach (CurrentUserStatus.VendorStatus vendor in userStatus.Vendors.Values)
+        {
+            vendor.Enabled = true;
+        }
+        var result = Didomi.GetInstance().SetCurrentUserStatus(userStatus);
+        Assert.IsTrue(result, "Consent not changed");
+        yield return new WaitUntil(() => consentChanged);
+
+        var newUserStatus = Didomi.GetInstance().GetCurrentUserStatus();
+
+        var newVendorStatus = newUserStatus.Vendors[vendorId];
+        Assert.AreEqual(vendorId, newVendorStatus.Id, $"Wrong id for vendor: {vendorStatus.Id}");
+        Assert.IsTrue(newVendorStatus.Enabled, "Vendor should be enabled");
+
+        var newPurposeStatus = newUserStatus.Purposes[purposeId];
+        Assert.AreEqual(purposeId, newPurposeStatus.Id, $"Wrong id for purpose: {purposeStatus.Id}");
+        Assert.IsTrue(newPurposeStatus.Enabled, "Purpose should be enabled");
+    }
+
+    [UnityTest]
     public IEnumerator TestCurrentUserStatusAfterPurposeDisabled()
     {
         Didomi.GetInstance().SetUserAgreeToAll();
@@ -138,6 +178,17 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
         var purposeStatus = userStatus.Purposes[purposeId];
         Assert.AreEqual(purposeId, purposeStatus.Id, $"Wrong id for purpose: {purposeStatus.Id}");
         Assert.IsTrue(purposeStatus.Enabled, "Purpose should still be enabled");
+    }
+
+    [UnityTest]
+    public IEnumerator TestSetCurrentUserStatusReturnsFalseWhenStatusNotChanged()
+    {
+        Didomi.GetInstance().SetUserAgreeToAll();
+        yield return new WaitUntil(() => consentChanged);
+
+        var userStatus = Didomi.GetInstance().GetCurrentUserStatus();
+        var result = Didomi.GetInstance().SetCurrentUserStatus(userStatus);
+        Assert.IsFalse(result, "Consent not changed");
     }
 
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)

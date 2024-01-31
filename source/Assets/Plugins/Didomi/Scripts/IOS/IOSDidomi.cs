@@ -168,7 +168,7 @@ namespace IO.Didomi.SDK.IOS
         {
             var purposes = IOSObjectMapper.ConvertFromPurposeStatusDictionaryToJson(status.Purposes);
             var vendors = IOSObjectMapper.ConvertFromVendorsStatusDictionaryToJson(status.Vendors);
-            return DidomiFramework.SetCurrentUserStatus(purposes, "");
+            return DidomiFramework.SetCurrentUserStatus(purposes, vendors);
         }
 
         public UserStatus GetUserStatus()
