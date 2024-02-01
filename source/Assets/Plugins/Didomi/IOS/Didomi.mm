@@ -59,7 +59,6 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
     NSDictionary<NSString *, DDMCurrentUserStatusVendor *> *vendorsStatus = [currentUserStatus vendors];
     for (NSString *key in [vendorsStatus allKeys]) {
         DDMCurrentUserStatusVendor *vendorStatus = vendorsStatus[key];
-        bool enabled = [[currentUserStatus purposes][key] enabled];
         vendorsStatusJson[key] = @{
             @"id": [vendorStatus id],
             @"enabled": [NSNumber numberWithInt: convertBoolToInt([vendorStatus enabled])]
@@ -70,7 +69,6 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
     NSDictionary<NSString *, DDMCurrentUserStatusPurpose *> *purposesStatus = [currentUserStatus purposes];
     for (NSString *key in [purposesStatus allKeys]) {
         DDMCurrentUserStatusPurpose *purposeStatus = purposesStatus[key];
-        bool enabled = [[currentUserStatus purposes][key] enabled];
         purposesStatusJson[key] = @{
             @"id": [purposeStatus id],
             @"enabled": [NSNumber numberWithInt: convertBoolToInt([purposeStatus enabled])]
