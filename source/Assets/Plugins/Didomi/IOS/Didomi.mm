@@ -55,26 +55,26 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
     NSInteger regulation = [currentUserStatus regulation];
     NSString *didomiDCS = [currentUserStatus didomiDCS];
     
-    /// TODO We convert purposes and vendors status to dictionary here, because we can not use DDMUserStatusPurpose / DDMUserStatusVendor. Modify when these classes are available from Objective-C.
-
-    NSMutableDictionary *purposesStatus = [NSMutableDictionary dictionary];
-    for (NSString *key in [[currentUserStatus purposes] allKeys]) {
+    NSMutableDictionary *vendorsStatusJson = [NSMutableDictionary dictionary];
+    NSDictionary<NSString *, DDMCurrentUserStatusVendor *> *vendorsStatus = [currentUserStatus vendors];
+    for (NSString *key in [vendorsStatus allKeys]) {
+        DDMCurrentUserStatusVendor *vendorStatus = vendorsStatus[key];
         bool enabled = [[currentUserStatus purposes][key] enabled];
-        NSDictionary *purpose = @{
-            @"id": [[currentUserStatus purposes][key] id],
-            @"enabled": [NSNumber numberWithInt: convertBoolToInt(enabled)]
+        vendorsStatusJson[key] = @{
+            @"id": [vendorStatus id],
+            @"enabled": [NSNumber numberWithInt: convertBoolToInt([vendorStatus enabled])]
         };
-        purposesStatus[key] = purpose;
     }
     
-    NSMutableDictionary *vendorsStatus = [NSMutableDictionary dictionary];
-    for (NSString *key in [[currentUserStatus vendors] allKeys]) {
-        bool enabled = [[currentUserStatus vendors][key] enabled];
-        NSDictionary *vendor = @{
-            @"id": [[currentUserStatus vendors][key] id],
-            @"enabled": [NSNumber numberWithInt: convertBoolToInt(enabled)]
+    NSMutableDictionary *purposesStatusJson = [NSMutableDictionary dictionary];
+    NSDictionary<NSString *, DDMCurrentUserStatusPurpose *> *purposesStatus = [currentUserStatus purposes];
+    for (NSString *key in [purposesStatus allKeys]) {
+        DDMCurrentUserStatusPurpose *purposeStatus = purposesStatus[key];
+        bool enabled = [[currentUserStatus purposes][key] enabled];
+        purposesStatusJson[key] = @{
+            @"id": [purposeStatus id],
+            @"enabled": [NSNumber numberWithInt: convertBoolToInt([purposeStatus enabled])]
         };
-        vendorsStatus[key] = vendor;
     }
     
     NSDictionary *dictionary = @{
@@ -85,8 +85,8 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
         @"addtl_consent": additionalConsent,
         @"regulation": [NSNumber numberWithLong: regulation],
         @"didomi_dcs": didomiDCS,
-        @"purposes": purposesStatus,
-        @"vendors": vendorsStatus
+        @"purposes": purposesStatusJson,
+        @"vendors": vendorsStatusJson
     };
     
     return ConvertComplexDictionaryToString(dictionary);
