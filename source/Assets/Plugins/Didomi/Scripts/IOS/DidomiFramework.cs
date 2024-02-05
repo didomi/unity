@@ -228,6 +228,40 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern string getCurrentUserStatus();
+#endif
+
+        public static string GetCurrentUserStatus()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getCurrentUserStatus();
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern bool setCurrentUserStatus(
+            string purposesStatus,
+            string vendorsStatus
+        );
+#endif
+
+        public static bool SetCurrentUserStatus(
+            string purposesStatus,
+            string vendorsStatus
+        )
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return setCurrentUserStatus(purposesStatus, vendorsStatus);
+#else
+            return false;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern string getUserStatus();
 #endif
 

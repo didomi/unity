@@ -157,6 +157,20 @@ namespace IO.Didomi.SDK.IOS
             return result == 0;
         }
 
+        public CurrentUserStatus GetCurrentUserStatus()
+        {
+            var jsonText = DidomiFramework.GetCurrentUserStatus();
+
+            return IOSObjectMapper.ConvertToCurrentUserStatus(jsonText);
+        }
+
+        public bool SetCurrentUserStatus(CurrentUserStatus status)
+        {
+            var purposes = IOSObjectMapper.ConvertFromPurposeStatusDictionaryToJson(status.Purposes);
+            var vendors = IOSObjectMapper.ConvertFromVendorsStatusDictionaryToJson(status.Vendors);
+            return DidomiFramework.SetCurrentUserStatus(purposes, vendors);
+        }
+
         public UserStatus GetUserStatus()
         {
             var jsonText = DidomiFramework.GetUserStatus();

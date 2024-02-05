@@ -138,6 +138,16 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
+        public CurrentUserStatus GetCurrentUserStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SetCurrentUserStatus(CurrentUserStatus status)
+        {
+            throw new NotImplementedException();
+        }
+
         public UserStatus GetUserStatus()
         {
             throw new NotImplementedException();

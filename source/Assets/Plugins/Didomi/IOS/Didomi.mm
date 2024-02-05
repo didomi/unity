@@ -25,6 +25,11 @@ NSDictionary<NSString *, NSArray<NSString *> *> * CreateDictionaryFromStatusIDs(
     };
 }
 
+int convertBoolToInt(bool value)
+{
+    return value ? 1 : 0;
+}
+
 /**
  Method used to create a string from a dictionary that doesn't have the form <NSString *, NSString *>.
  */
@@ -34,6 +39,55 @@ char* ConvertComplexDictionaryToString(NSDictionary * dataDict)
    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
    NSLog(@"jsonData dictionary as string:\n%@", jsonString);
    return cStringCopy([jsonString UTF8String]);
+}
+
+/**
+ Method used to map current user status from DDMCurrentUserStatus to a JSON string.
+ */
+char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
+    // String properties
+    NSString *userID = [currentUserStatus userID];
+    NSString *created = [currentUserStatus created];
+    NSString *updated = [currentUserStatus updated];
+    NSString *consentString = [currentUserStatus consentString];
+    NSString *additionalConsent = [currentUserStatus additionalConsent];
+    // Enum becomes integer in Objective-C
+    NSInteger regulation = [currentUserStatus regulation];
+    NSString *didomiDCS = [currentUserStatus didomiDCS];
+    
+    NSMutableDictionary *vendorsStatusJson = [NSMutableDictionary dictionary];
+    NSDictionary<NSString *, DDMCurrentUserStatusVendor *> *vendorsStatus = [currentUserStatus vendors];
+    for (NSString *key in [vendorsStatus allKeys]) {
+        DDMCurrentUserStatusVendor *vendorStatus = vendorsStatus[key];
+        vendorsStatusJson[key] = @{
+            @"id": [vendorStatus id],
+            @"enabled": [NSNumber numberWithInt: convertBoolToInt([vendorStatus enabled])]
+        };
+    }
+    
+    NSMutableDictionary *purposesStatusJson = [NSMutableDictionary dictionary];
+    NSDictionary<NSString *, DDMCurrentUserStatusPurpose *> *purposesStatus = [currentUserStatus purposes];
+    for (NSString *key in [purposesStatus allKeys]) {
+        DDMCurrentUserStatusPurpose *purposeStatus = purposesStatus[key];
+        purposesStatusJson[key] = @{
+            @"id": [purposeStatus id],
+            @"enabled": [NSNumber numberWithInt: convertBoolToInt([purposeStatus enabled])]
+        };
+    }
+    
+    NSDictionary *dictionary = @{
+        @"user_id": userID,
+        @"created" : created,
+        @"updated": updated,
+        @"consent_string": consentString,
+        @"addtl_consent": additionalConsent,
+        @"regulation": [NSNumber numberWithLong: regulation],
+        @"didomi_dcs": didomiDCS,
+        @"purposes": purposesStatusJson,
+        @"vendors": vendorsStatusJson
+    };
+    
+    return ConvertComplexDictionaryToString(dictionary);
 }
 
 /**
@@ -130,11 +184,6 @@ void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* 
     [[Didomi shared] initialize: parameters];
 }
 
-int convertBoolToInt(bool value)
-{
-    return value ? 1 : 0;
-}
-
 int isReady()
 {
     return convertBoolToInt([[Didomi shared] isReady]);
@@ -177,6 +226,13 @@ int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(char* vendorId)
     return [[Didomi shared] getUserLegitimateInterestStatusForVendorAndRequiredPurposesWithVendorId: CreateNSString(vendorId)];
 }
 
+char* getCurrentUserStatus()
+{
+    Didomi *didomi = [Didomi shared];
+    DDMCurrentUserStatus *currentUserStatus = [didomi getCurrentUserStatus];
+    return MapCurrentUserStatus(currentUserStatus);
+}
+
 char* getUserStatus()
 {
     Didomi *didomi = [Didomi shared];
@@ -191,7 +247,7 @@ void hideNotice()
 
 void hidePreferences()
 {
-	[[Didomi shared] hidePreferences];
+    [[Didomi shared] hidePreferences];
 }
 
 int isConsentRequired()
@@ -346,16 +402,58 @@ char* getText(char* key)
 
 NSSet<NSString *> * ConvertJsonToSet(char* jsonText)
 {
-	NSString *jsonString=CreateNSString(jsonText);
+    NSString *jsonString=CreateNSString(jsonText);
 
-	NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
-	NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
 
-	NSSet<NSString *> * retval= [[NSSet alloc] initWithArray:jsonArray];
+    NSSet<NSString *> * retval= [[NSSet alloc] initWithArray:jsonArray];
 
-	return retval;
- }
+    return retval;
+}
+
+BOOL GetBoolField(NSDictionary *data, NSString *key)
+{
+    NSNumber *fieldValue = data[key];
+    return [fieldValue boolValue];
+}
+
+NSDictionary<NSString *, DDMCurrentUserStatusPurpose *> * ConvertJsonToCurrentUserStatusPurposes(char* jsonText)
+{
+    NSString *jsonString=CreateNSString(jsonText);
+
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+
+    NSMutableDictionary *convertedDictionary = [NSMutableDictionary dictionary];
+    for (NSString *key in jsonDictionary) {
+        NSDictionary *jsonPurpose = jsonDictionary[key];
+        DDMCurrentUserStatusPurpose *purpose = [[DDMCurrentUserStatusPurpose alloc] initWithId:jsonPurpose[@"id"] enabled:GetBoolField(jsonPurpose, @"enabled")];
+        [convertedDictionary setObject:purpose forKey:key];
+    }
+
+    return convertedDictionary;
+}
+
+NSDictionary<NSString *, DDMCurrentUserStatusVendor *> * ConvertJsonToCurrentUserStatusVendors(char* jsonText)
+{
+    NSString *jsonString=CreateNSString(jsonText);
+
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+
+    NSMutableDictionary *convertedDictionary = [NSMutableDictionary dictionary];
+    for (NSString *key in jsonDictionary) {
+        NSDictionary *jsonVendor = jsonDictionary[key];
+        DDMCurrentUserStatusVendor *vendor = [[DDMCurrentUserStatusVendor alloc] initWithId:jsonVendor[@"id"] enabled:GetBoolField(jsonVendor, @"enabled")];
+        [convertedDictionary setObject:vendor forKey:key];
+    }
+
+    return convertedDictionary;
+}
 
 int setUserConsentStatus(char* enabledPurposeIds, char* disabledPurposeIds, char* enabledVendorIds, char* disabledVendorIds)
 {
@@ -387,6 +485,13 @@ int setUserStatus1(BOOL purposesConsentStatus, BOOL purposesLIStatus, BOOL vendo
 {
     bool result = [[Didomi shared] setUserStatusWithPurposesConsentStatus:purposesConsentStatus purposesLIStatus:purposesLIStatus vendorsConsentStatus:vendorsConsentStatus vendorsLIStatus:vendorsLIStatus];
     return convertBoolToInt(result);
+}
+
+int setCurrentUserStatus(char* purposesStatus, char* vendorsStatus)
+{
+    DDMCurrentUserStatus *status = [[DDMCurrentUserStatus alloc ] initWithPurposes:ConvertJsonToCurrentUserStatusPurposes(purposesStatus) vendors:ConvertJsonToCurrentUserStatusVendors(vendorsStatus)];
+    Didomi *didomi = [Didomi shared];
+    return [didomi setCurrentUserStatusWithCurrentUserStatus:status];
 }
 
 void setUser(char* organizationUserId)
@@ -519,7 +624,6 @@ void onError(callback_error_function errorFunc)
           errorFunc();
       }];
 }
-
 
 static DDMEventListener *eventListener = [[DDMEventListener alloc]init];
 

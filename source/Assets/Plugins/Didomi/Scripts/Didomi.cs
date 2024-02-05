@@ -306,6 +306,25 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Get the current user consent status as a CurrentUserStatus object.
+        /// </summary>
+        /// <returns>An instance of CurrentUserStatus</returns>
+        public CurrentUserStatus GetCurrentUserStatus()
+        {
+            return didomiForPlatform.GetCurrentUserStatus();
+        }
+
+        /// <summary>
+        /// Set the current user consent status from a CurrentUserStatus object.
+        /// </summary>
+        /// <param name="status">The requested status</param>
+        /// <returns>True if user consent has changed, false otherwise</returns>
+        public bool SetCurrentUserStatus(CurrentUserStatus status)
+        {
+            return didomiForPlatform.SetCurrentUserStatus(status);
+        }
+
+        /// <summary>
         /// Get the user consent status as a UserStatus object.
         /// </summary>
         /// <returns></returns>

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace IO.Didomi.SDK.Android
@@ -141,7 +138,6 @@ namespace IO.Didomi.SDK.Android
                     AndroidJNI.CallBooleanMethod(hashSetJavaObject.GetRawObject(), methodPut, AndroidJNIHelper.CreateJNIArgArray(args));
                 }
 
-
                 return hashSetJavaObject;
             }
 
@@ -202,6 +198,86 @@ namespace IO.Didomi.SDK.Android
             }
 
             return null;
+        }
+
+        public static Dictionary<string, CurrentUserStatus.PurposeStatus> ConvertToPurposeStatusDictionary(AndroidJavaObject obj)
+        {
+            if (obj != null)
+            {
+                var retval = new Dictionary<string, CurrentUserStatus.PurposeStatus>();
+
+                var setJavaObject = obj.Call<AndroidJavaObject>("keySet");
+
+                var iteratorJavaObject = setJavaObject.Call<AndroidJavaObject>("iterator");
+
+                while (iteratorJavaObject.Call<bool>("hasNext"))
+                {
+                    var key = iteratorJavaObject.Call<string>("next");
+                    var javaObjectVal = obj.Call<AndroidJavaObject>("get", key);
+                    var val = ConvertToCurrentUserStatusPurpose(javaObjectVal);
+                    retval.Add(key, val);
+                }
+
+                return retval;
+            }
+
+            return null;
+        }
+
+        public static Dictionary<string, CurrentUserStatus.VendorStatus> ConvertToVendorStatusDictionary(AndroidJavaObject obj)
+        {
+            if (obj != null)
+            {
+                var retval = new Dictionary<string, CurrentUserStatus.VendorStatus>();
+
+                var setJavaObject = obj.Call<AndroidJavaObject>("keySet");
+
+                var iteratorJavaObject = setJavaObject.Call<AndroidJavaObject>("iterator");
+
+                while (iteratorJavaObject.Call<bool>("hasNext"))
+                {
+                    var key = iteratorJavaObject.Call<string>("next");
+                    var javaObjectVal = obj.Call<AndroidJavaObject>("get", key);
+                    var val = ConvertToCurrentUserStatusVendor(javaObjectVal);
+                    retval.Add(key, val);
+                }
+
+                return retval;
+            }
+
+            return null;
+        }
+
+        public static CurrentUserStatus ConvertToCurrentUserStatus(AndroidJavaObject obj)
+        {
+            var regulation = obj.Call<AndroidJavaObject>("getRegulation");
+            var currentUserStatus = new CurrentUserStatus(
+                purposes: ConvertToPurposeStatusDictionary(obj.Call<AndroidJavaObject>("getPurposes")),
+                vendors: ConvertToVendorStatusDictionary(obj.Call<AndroidJavaObject>("getVendors")),
+                userId: obj.Call<string>("getUserId"),
+                created: obj.Call<string>("getCreated"),
+                updated: obj.Call<string>("getUpdated"),
+                consentString: obj.Call<string>("getConsentString"),
+                additionalConsent: obj.Call<string>("getAdditionalConsent"),
+                regulation: regulation.Call<string>("getValue"),
+                didomiDcs: obj.Call<string>("getDidomiDcs")
+            );
+
+            return currentUserStatus;
+        }
+
+        public static CurrentUserStatus.VendorStatus ConvertToCurrentUserStatusVendor(AndroidJavaObject obj)
+        {
+            var id = obj.Call<string>("getId");
+            var enabled = obj.Call<bool>("getEnabled");
+            return new CurrentUserStatus.VendorStatus(id, enabled);
+        }
+
+        public static CurrentUserStatus.PurposeStatus ConvertToCurrentUserStatusPurpose(AndroidJavaObject obj)
+        {
+            var id = obj.Call<string>("getId");
+            var enabled = obj.Call<bool>("getEnabled");
+            return new CurrentUserStatus.PurposeStatus(id, enabled);
         }
 
         public static UserStatus ConvertToUserStatus(AndroidJavaObject obj)
@@ -293,6 +369,46 @@ namespace IO.Didomi.SDK.Android
                     hashParameters.Salt,
                     expiration);
             }
+        }
+
+        public static AndroidJavaObject ConvertToJavaCurrentUserStatus(CurrentUserStatus status)
+        {
+            AndroidJavaObject purposesMap = new AndroidJavaObject("java.util.HashMap");
+            foreach (var id in status.Purposes.Keys)
+            {
+                var purpose = status.Purposes[id];
+                AndroidJavaObject javaPurpose = new AndroidJavaObject("io.didomi.sdk.models.CurrentUserStatus$PurposeStatus",
+                    purpose.Id,
+                    purpose.Enabled
+                );
+
+                purposesMap.Call<AndroidJavaObject>("put", id, javaPurpose);
+            }
+
+            AndroidJavaObject vendorsMap = new AndroidJavaObject("java.util.HashMap");
+            foreach (var id in status.Vendors.Keys)
+            {
+                var vendor = status.Vendors[id];
+                AndroidJavaObject javaVendor = new AndroidJavaObject("io.didomi.sdk.models.CurrentUserStatus$VendorStatus",
+                    vendor.Id,
+                    vendor.Enabled
+                );
+
+                vendorsMap.Call<AndroidJavaObject>("put", id, javaVendor);
+            }
+
+            return new AndroidJavaObject(
+                "io.didomi.sdk.models.CurrentUserStatus",
+                purposesMap,
+                vendorsMap,
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            );
         }
 
         public static AndroidJavaObject ConvertToJavaLong(long? longValue)
