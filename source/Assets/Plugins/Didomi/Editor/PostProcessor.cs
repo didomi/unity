@@ -282,7 +282,7 @@ public static class PostProcessor
         var fileGuid = project.AddFile(newCopyFile, newCopyFile);
         project.AddFileToBuild(targetGuid, fileGuid);
     }
-    #endif
+
     /// <summary>
     /// For iOS, appends the required list of framework search paths.
     /// </summary>
@@ -295,6 +295,8 @@ public static class PostProcessor
             project.AddBuildProperty(targetGuid, "FRAMEWORK_SEARCH_PATHS", searchPath);
         }
     }
+    #endif
+
     /// <summary>
     /// Replace arguments in path
     /// </summary>
