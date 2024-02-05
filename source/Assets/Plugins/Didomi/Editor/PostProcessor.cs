@@ -210,9 +210,10 @@ public static class PostProcessor
 
             proj.AddBuildProperty(targetGuid, "DEFINES_MODULE", "YES");
             proj.AddBuildProperty(targetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
-
             proj.AddBuildProperty(targetGuid, "LD_RUNPATH_SEARCH_PATHS", "@executable_path/Frameworks");
-            proj.AddBuildProperty(targetGuid, "FRAMEWORK_SEARCH_PATHS", "$(inherited) $(PROJECT_DIR) $(PROJECT_DIR)/Frameworks");
+            
+            AppendRequiredFrameworkSearchPaths(proj, targetGuid);
+            
             proj.AddBuildProperty(targetGuid, "DYLIB_INSTALL_NAME_BASE", "@rpath");
             proj.AddBuildProperty(targetGuid, "LD_DYLIB_INSTALL_NAME", "@executable_path/../Frameworks/$(EXECUTABLE_PATH)");
 
@@ -282,7 +283,18 @@ public static class PostProcessor
         project.AddFileToBuild(targetGuid, fileGuid);
     }
     #endif
-
+    /// <summary>
+    /// For iOS, appends the required list of framework search paths.
+    /// </summary>
+    /// <param name="project"></param>
+    /// <param name="targetGuid"></param>
+    private static void AppendRequiredFrameworkSearchPaths(PBXProject project, string targetGuid)
+    {
+        foreach (string searchPath in PostProcessorSettings.DidomiFrameworkSearchPaths)
+        {
+            project.AddBuildProperty(targetGuid, "FRAMEWORK_SEARCH_PATHS", searchPath);
+        }
+    }
     /// <summary>
     /// Replace arguments in path
     /// </summary>
@@ -313,7 +325,17 @@ public static class PostProcessorSettings
     /// File path seperator for Editor OS
     /// </summary>
     public static string FilePathSeperator = string.Empty;
-
+    
+    /// <summary>
+    /// Required list of framework search paths
+    /// </summary>
+    public static readonly string[] DidomiFrameworkSearchPaths = 
+    {
+        "$(inherited)",
+        "$(PROJECT_DIR)",
+        "$(PROJECT_DIR)/Frameworks"
+    };
+    
     /// <summary>
     /// Initialize Environment Settings
     /// </summary>
