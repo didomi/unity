@@ -73,12 +73,11 @@ git add Assets/Plugins/Didomi/Resources/package.json
 git commit -m "[Bot] Increment version from $oldVersion to $newVersion"
 git push || exit 1
 
-tagName="v$newVersion"
 # create / push tag
-git tag -a "$tagName" -m "Created tag for version $tagName"
-git push origin "$tagName"
+git tag -a "$newVersion" -m "Created tag for version $newVersion"
+git push origin "$newVersion"
 
 echo "Exporting packages"
 sh $scriptsDir/exportPackages.sh || exit 1
 
-echo "Release $tagName is ready!"
+echo "Release $newVersion is ready!"
