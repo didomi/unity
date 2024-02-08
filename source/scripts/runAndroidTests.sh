@@ -48,7 +48,7 @@ if [ -z "$connected_devices" ]; then
     # Kill the emulator from the background
     adb -s emulator-5554 emu kill
     # Wait for the emulator to close
-    until [ -z "$(adb devices | grep "emulator")" ]; do
+    while adb devices | grep -q "emulator"; do
         echo "Waiting for $DEVICE to close..."
         sleep 1
     done
