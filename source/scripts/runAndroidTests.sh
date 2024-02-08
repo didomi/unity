@@ -13,18 +13,23 @@ UNITY_PATH=$(awk -F= '/^editor/ {print $2}' $scriptsDir/unity.properties)
 RESULTS_PATH="artifacts/android-test-results.xml"
 LOG_PATH="artifacts/androidTestsRun.log"
 
+# Set the path to adb and emulator
+ADB=~/Library/Android/sdk/platform-tools/adb
+EMULATOR=~/Library/Android/sdk/emulator/emulator
+
 # Check for any Android emulator / device
-connected_devices=$(adb devices | grep -v "List" | grep "device$")
+connected_devices=$("$ADB" devices | grep -v "List" | grep "device$")
 if [ -z "$connected_devices" ]; then
     echo "No Android device connected."
     
     # Search for device name
-    DEVICE=$(emulator -list-avds | head -n 1)
+    DEVICE=$("$EMULATOR" -list-avds | head -n 1)
 
+    # Start the emulator in the background
     echo "Launching $DEVICE, please wait a few seconds..."
-    ~/Library/Android/sdk/emulator/emulator "@$DEVICE" &
+    "$EMULATOR" -avd "$DEVICE" -no-window &
 
-    # Wait for the Android device to be detected
+    # Wait for the emulator to be detected
     adb wait-for-device
 
     echo "Device detected. Waiting for device to fully boot..."
@@ -43,10 +48,21 @@ fi
 # Run the tests
 $UNITY_PATH -batchmode -buildTarget Android -runTests -testResults $RESULTS_PATH -testPlatform Android -logFile $LOG_PATH
 
+if [ -z "$connected_devices" ]; then
+    # Kill the emulator from the background
+    "$ADB" -s emulator-5554 emu kill
+    # Wait for the emulator to close
+    until [ -z "$("$ADB" devices | grep "emulator")" ]; do
+        echo "Waiting for $DEVICE to close..."
+        sleep 1
+    done
+fi
+
 result=$?
 if [ $result -eq 0 ]
 then
     echo "Android tests passed!"
+    exit 0
 else
     echo "Android tests failed with exit code $result"
     exit 1
