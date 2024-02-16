@@ -20,11 +20,21 @@ public class PurposeAndVendorTestsSuite: DidomiBaseTests
         // Purpose model not available on iOS
         if (Application.platform == RuntimePlatform.Android)
         {
-            var purposeId = GetFirstRequiredPurposeId();
+            var requiredPurposeSet = Didomi.GetInstance().GetRequiredPurposes();
+            Assert.False(requiredPurposeSet.Count == 0, "No required purpose found");
+
+            var requiredPurposeIdSet = Didomi.GetInstance().GetRequiredPurposeIds();
+            Assert.AreEqual(requiredPurposeIdSet.Count, requiredPurposeSet.Count, "Mismatch between required purpose and required purpose IDs");
+
+            var purposeId = requiredPurposeIdSet.FirstOrDefault();
             Assert.False(string.IsNullOrEmpty(purposeId), "Invalid 1st purpose");
 
             var purpose = Didomi.GetInstance().GetPurpose(purposeId);
-            Assert.AreEqual(purposeId, purpose?.GetId());
+            Assert.NotNull(purpose, "Can't find Purpose with ID: " + purposeId);
+
+            Assert.AreEqual(purposeId, purpose?.Id, "Mismatch between purpose ID and purpose");
+
+            Assert.NotNull(requiredPurposeSet.FirstOrDefault(obj => obj.Id == purposeId), "Purpose not found in required purposes list with id: " + purposeId);
         }
         else
         {
