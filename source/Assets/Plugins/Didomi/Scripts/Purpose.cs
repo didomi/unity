@@ -15,7 +15,7 @@ namespace IO.Didomi.SDK
         [JsonProperty("name")]
         public string Name { get; set; } = "";
 
-        [JsonProperty("description")]
+        [JsonProperty("descriptionText")]
         public string DescriptionText { get; set; } = "";
 
         [Obsolete("Use DescriptionText instead")]
