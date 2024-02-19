@@ -63,10 +63,6 @@ In Unity we have UnityGetGLViewController to take view controller. We used Unity
 
 ### 9- Problem & Solution
 
-getDisabledPurposes
-getDisabledVendors
-getEnabledPurposes
-getEnabledVendors
 getPurpose
 getRequiredPurposes
 getRequiredVendors

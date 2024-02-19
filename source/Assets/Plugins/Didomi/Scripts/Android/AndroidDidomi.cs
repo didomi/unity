@@ -29,62 +29,6 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethod("addEventListener", eventListenerProxy);
         }
 
-        public ISet<Purpose> GetDisabledPurposes()
-        {
-            var obj = CallReturningJavaObjectMethod("getDisabledPurposes");
-
-            return AndroidObjectMapper.ConvertToSetPurpose(obj);
-        }
-
-        public ISet<string> GetDisabledPurposeIds()
-        {
-            var obj = CallReturningJavaObjectMethod("getDisabledPurposeIds");
-
-            return AndroidObjectMapper.ConvertToSetString(obj);
-        }
-
-        public ISet<Vendor> GetDisabledVendors()
-        {
-            var obj = CallReturningJavaObjectMethod("getDisabledVendors");
-
-            return AndroidObjectMapper.ConvertToSetVendor(obj);
-        }
-
-        public ISet<string> GetDisabledVendorIds()
-        {
-            var obj = CallReturningJavaObjectMethod("getDisabledVendorIds");
-
-            return AndroidObjectMapper.ConvertToSetString(obj);
-        }
-
-        public ISet<Purpose> GetEnabledPurposes()
-        {
-            var obj = CallReturningJavaObjectMethod("getEnabledPurposes");
-
-            return AndroidObjectMapper.ConvertToSetPurpose(obj);
-        }
-
-        public ISet<string> GetEnabledPurposeIds()
-        {
-            var obj = CallReturningJavaObjectMethod("getEnabledPurposeIds");
-
-            return AndroidObjectMapper.ConvertToSetString(obj);
-        }
-
-        public ISet<Vendor> GetEnabledVendors()
-        {
-            var obj = CallReturningJavaObjectMethod("getEnabledVendors");
-
-            return AndroidObjectMapper.ConvertToSetVendor(obj);
-        }
-
-        public ISet<string> GetEnabledVendorIds()
-        {
-            var obj = CallReturningJavaObjectMethod("getEnabledVendorIds");
-
-            return AndroidObjectMapper.ConvertToSetString(obj);
-        }
-
         public string GetJavaScriptForWebView()
         {
             return CallReturningStringMethod("getJavaScriptForWebView");
@@ -137,46 +81,6 @@ namespace IO.Didomi.SDK.Android
             return CallReturningStringMethod("getTranslatedText", key);
         }
 
-        public bool GetUserConsentStatusForPurpose(string purposeId)
-        {
-            var boolObject = CallReturningJavaObjectMethod("getUserConsentStatusForPurpose", purposeId);
-
-            return AndroidObjectMapper.ConvertToBoolean(boolObject);
-        }
-
-        public bool GetUserConsentStatusForVendor(string vendorId)
-        {
-            var boolObject = CallReturningJavaObjectMethod("getUserConsentStatusForVendor", vendorId);
-
-            return AndroidObjectMapper.ConvertToBoolean(boolObject);
-        }
-
-        public bool GetUserConsentStatusForVendorAndRequiredPurposes(string vendorId)
-        {
-            var boolObject = CallReturningJavaObjectMethod("getUserConsentStatusForVendorAndRequiredPurposes", vendorId);
-
-            return AndroidObjectMapper.ConvertToBoolean(boolObject);
-        }
-
-        public bool GetUserLegitimateInterestStatusForPurpose(string purposeId)
-        {
-            var boolObject = CallReturningJavaObjectMethod("getUserLegitimateInterestStatusForPurpose", purposeId);
-
-            return AndroidObjectMapper.ConvertToBoolean(boolObject);
-        }
-
-        public bool GetUserLegitimateInterestStatusForVendor(string vendorId)
-        {
-            var boolObject = CallReturningJavaObjectMethod("getUserLegitimateInterestStatusForVendor", vendorId);
-
-            return AndroidObjectMapper.ConvertToBoolean(boolObject);
-        }
-
-        public bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
-        {
-            return CallReturningBoolMethod("getUserLegitimateInterestStatusForVendorAndRequiredPurposes", vendorId);
-        }
-
         public CurrentUserStatus GetCurrentUserStatus()
         {
             var currentUserStatusObject = CallReturningJavaObjectMethod("getCurrentUserStatus");
@@ -213,46 +117,6 @@ namespace IO.Didomi.SDK.Android
         public void HidePreferences()
         {
             CallVoidMethod("hidePreferences");
-        }
-
-        public void Initialize(
-            string apiKey,
-            string localConfigurationPath,
-            string remoteConfigurationURL,
-            string providerId,
-            bool disableDidomiRemoteConfig,
-            string languageCode)
-        {
-            object[] args = new object[6];
-            args[0] = apiKey;
-            args[1] = localConfigurationPath;
-            args[2] = remoteConfigurationURL;
-            args[3] = providerId;
-            args[4] = disableDidomiRemoteConfig;
-            args[5] = languageCode;
-
-            CallVoidMethodForInitialize("initialize", args);
-        }
-
-        public void Initialize(
-            string apiKey,
-            string localConfigurationPath,
-            string remoteConfigurationURL,
-            string providerId,
-            bool disableDidomiRemoteConfig,
-            string languageCode,
-            string noticeId)
-        {
-            object[] args = new object[7];
-            args[0] = apiKey;
-            args[1] = localConfigurationPath;
-            args[2] = remoteConfigurationURL;
-            args[3] = providerId;
-            args[4] = disableDidomiRemoteConfig;
-            args[5] = languageCode;
-            args[6] = noticeId;
-
-            CallVoidMethodForInitialize("initialize", args);
         }
 
         public void Initialize(DidomiInitializeParameters initializeParameters)
@@ -353,25 +217,6 @@ namespace IO.Didomi.SDK.Android
         {
             return CallReturningBoolMethod("setUserAgreeToAll");
         }
-
-        [ObsoleteAttribute("This method is deprecated. Use SetUserStatus instead.")]
-        public bool SetUserConsentStatus(
-            ISet<string> enabledPurposeIds,
-            ISet<string> disabledPurposeIds,
-            ISet<string> enabledVendorIds,
-            ISet<string> disabledVendorIds)
-        {
-            return CallReturningBoolMethod(
-                "setUserConsentStatus",
-                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(enabledPurposeIds),
-                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(disabledPurposeIds),
-				AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(new HashSet<string>()),
-                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(new HashSet<string>()),
-                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(enabledVendorIds),
-                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(disabledVendorIds),
-				AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(new HashSet<string>()),
-                AndroidObjectMapper.ConvertFromHashSetStringToSetAndroidJavaObject(new HashSet<string>()));
-        }
    
         public bool SetUserStatus(
             ISet<string> enabledConsentPurposeIds,
@@ -414,6 +259,7 @@ namespace IO.Didomi.SDK.Android
             return CallReturningBoolMethod("setUserDisagreeToAll");
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use shouldUserStatusBeCollected instead")]
         public bool ShouldConsentBeCollected()
         {
             return CallReturningBoolMethod("shouldConsentBeCollected");

@@ -28,46 +28,6 @@ namespace IO.Didomi.SDK.UnityEditor
             _disableMockUI = disable;
         }
 
-        public ISet<string> GetDisabledPurposeIds()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ISet<Purpose> GetDisabledPurposes()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ISet<string> GetDisabledVendorIds()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ISet<Vendor> GetDisabledVendors()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ISet<string> GetEnabledPurposeIds()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ISet<Purpose> GetEnabledPurposes()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ISet<string> GetEnabledVendorIds()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ISet<Vendor> GetEnabledVendors()
-        {
-            throw new NotImplementedException();
-        }
-
         public string GetJavaScriptForWebView()
         {
             throw new NotImplementedException();
@@ -108,36 +68,6 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
-        public bool GetUserConsentStatusForPurpose(string purposeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool GetUserConsentStatusForVendor(string vendorId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool GetUserConsentStatusForVendorAndRequiredPurposes(string vendorId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool GetUserLegitimateInterestStatusForPurpose(string purposeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool GetUserLegitimateInterestStatusForVendor(string vendorId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
-        {
-            throw new NotImplementedException();
-        }
-
         public CurrentUserStatus GetCurrentUserStatus()
         {
             throw new NotImplementedException();
@@ -166,45 +96,6 @@ namespace IO.Didomi.SDK.UnityEditor
         public void HidePreferences()
         {
             throw new NotImplementedException();
-        }
-
-        public void Initialize(
-          string apiKey,
-          string localConfigurationPath,
-          string remoteConfigurationPath,
-          string providerId,
-          bool disableDidomiRemoteConfig,
-          string languageCode
-          )
-        {
-            if (_isInitialized)
-            {
-                return;
-            }
-
-            _isInitialized = true;
-
-            _onReadyAction?.Invoke();
-        }
-
-        public void Initialize(
-          string apiKey,
-          string localConfigurationPath,
-          string remoteConfigurationPath,
-          string providerId,
-          bool disableDidomiRemoteConfig,
-          string languageCode,
-          string noticeId
-          )
-        {
-            if (_isInitialized)
-            {
-                return;
-            }
-
-            _isInitialized = true;
-
-            _onReadyAction?.Invoke();
         }
 
         public void Initialize(DidomiInitializeParameters parameters)
@@ -294,11 +185,6 @@ namespace IO.Didomi.SDK.UnityEditor
         }
 
         public bool SetUserAgreeToAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool SetUserConsentStatus(ISet<string> enabledPurposeIds, ISet<string> disabledPurposeIds, ISet<string> enabledVendorIds, ISet<string> disabledVendorIds)
         {
             throw new NotImplementedException();
         }

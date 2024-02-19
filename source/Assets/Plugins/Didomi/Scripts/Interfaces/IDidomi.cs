@@ -10,14 +10,6 @@ namespace IO.Didomi.SDK.Interfaces
     public interface IDidomi
     {
         void AddEventListener(DidomiEventListener eventListener);
-        ISet<string> GetDisabledPurposeIds();
-        ISet<Purpose> GetDisabledPurposes();
-        ISet<string> GetDisabledVendorIds();
-        ISet<Vendor> GetDisabledVendors();
-        ISet<string> GetEnabledPurposeIds();
-        ISet<Purpose> GetEnabledPurposes();
-        ISet<string> GetEnabledVendorIds();
-        ISet<Vendor> GetEnabledVendors();
         string GetJavaScriptForWebView();
         Purpose GetPurpose(string purposeId);
         ISet<string> GetRequiredPurposeIds();
@@ -26,35 +18,12 @@ namespace IO.Didomi.SDK.Interfaces
         ISet<Vendor> GetRequiredVendors();
         IDictionary<string, string> GetText(string key);
         string GetTranslatedText(string key);
-        bool GetUserConsentStatusForPurpose(string purposeId);
-        bool GetUserConsentStatusForVendor(string vendorId);
-        bool GetUserConsentStatusForVendorAndRequiredPurposes(string vendorId);
-        bool GetUserLegitimateInterestStatusForPurpose(string purposeId);
-        bool GetUserLegitimateInterestStatusForVendor(string vendorId);
-        bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId);
         CurrentUserStatus GetCurrentUserStatus();
         bool SetCurrentUserStatus(CurrentUserStatus status);
         UserStatus GetUserStatus();
         Vendor GetVendor(string vendorId);
         void HideNotice();
         void HidePreferences();
-        void Initialize(
-          string apiKey,
-          string localConfigurationPath,
-          string remoteConfigurationURL,
-          string providerId,
-          bool disableDidomiRemoteConfig,
-          string languageCode
-          );
-        void Initialize(
-          string apiKey,
-          string localConfigurationPath,
-          string remoteConfigurationURL,
-          string providerId,
-          bool disableDidomiRemoteConfig,
-          string languageCode,
-          string noticeId
-          );
         void Initialize(DidomiInitializeParameters parameters);
         bool IsConsentRequired();
         bool IsUserConsentStatusPartial();
@@ -70,8 +39,6 @@ namespace IO.Didomi.SDK.Interfaces
         void ShowPreferences();
         void Reset();
         bool SetUserAgreeToAll();
-        [ObsoleteAttribute("This method is deprecated. Use SetUserStatus instead.")]
-        bool SetUserConsentStatus(ISet<string> enabledPurposeIds, ISet<string> disabledPurposeIds, ISet<string> enabledVendorIds, ISet<string> disabledVendorIds);
         bool SetUserDisagreeToAll();
         bool SetUserStatus(
             ISet<string> enabledConsentPurposeIds,
