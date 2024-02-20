@@ -75,7 +75,7 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     /// <param name="path"></param>
     private static void UpdateStylesThemeToAppCompat(string path)
     {
-        var unityPlayerFile = $@"src{PostProcessorSettings.FilePathSeperator}main{PostProcessorSettings.FilePathSeperator}res{PostProcessorSettings.FilePathSeperator}values{PostProcessorSettings.FilePathSeperator}styles.xml";
+        var unityPlayerFile = Path.Combine("src", "main", "res", "values", "styles.xml");
         var unityPlayerFileAbsolutePath = Path.Combine(path, unityPlayerFile);
         var fileContent = File.ReadAllText(unityPlayerFileAbsolutePath);
 
