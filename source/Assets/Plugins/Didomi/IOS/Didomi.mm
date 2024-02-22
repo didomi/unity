@@ -166,18 +166,6 @@ void setUserAgent(char* name, char* version)
     [[Didomi shared] setUserAgentWithName: CreateNSString(name) version:CreateNSString(version)];
 }
 
-void initialize(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode)
-{
-    [[Didomi shared] initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL:CreateNSStringNullable(remoteConfigurationURL)
-        providerId:CreateNSStringNullable(providerId) disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSStringNullable(languageCode)];
-}
-
-void initializeWithNoticeId(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId)
-{
-    [[Didomi shared] initializeWithApiKey: CreateNSString(apiKey) localConfigurationPath:CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL:CreateNSStringNullable(remoteConfigurationURL)
-        providerId:CreateNSStringNullable(providerId) disableDidomiRemoteConfig:disableDidomiRemoteConfig languageCode: CreateNSStringNullable(languageCode) noticeId: CreateNSStringNullable(noticeId)];
-}
-
 void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId)
 {
     DidomiInitializeParameters *parameters = [[DidomiInitializeParameters alloc] initWithApiKey: CreateNSString(apiKey) localConfigurationPath: CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL: CreateNSStringNullable(remoteConfigurationURL) providerID: CreateNSStringNullable(providerId) disableDidomiRemoteConfig: disableDidomiRemoteConfig languageCode: CreateNSStringNullable(languageCode) noticeID: CreateNSStringNullable(noticeId)];
@@ -194,36 +182,6 @@ char* getTranslatedText(char* key)
     NSString *returnString = [[Didomi shared] getTranslatedTextWithKey: CreateNSString(key)];
 
     return cStringCopy([returnString UTF8String]);
-}
-
-bool getUserConsentStatusForPurpose(char* purposeId)
-{
-     return [[Didomi shared] getUserConsentStatusForPurposeWithPurposeId: CreateNSString(purposeId)];
-}
-
-bool getUserConsentStatusForVendor(char* vendorId)
-{
-    return [[Didomi shared] getUserConsentStatusForVendorWithVendorId: CreateNSString(vendorId)];
-}
-
-bool getUserConsentStatusForVendorAndRequiredPurposes(char* vendorId)
-{
-	return [[Didomi shared] getUserConsentStatusForVendorAndRequiredPurposesWithVendorId: CreateNSString(vendorId)];
-}
-
-int getUserLegitimateInterestStatusForPurpose(char* purposeId)
-{
-    return [[Didomi shared] getUserLegitimateInterestStatusForPurposeWithPurposeId: CreateNSString(purposeId)];
-}
-	
-int getUserLegitimateInterestStatusForVendor(char* vendorId)
-{
-	return [[Didomi shared] getUserLegitimateInterestStatusForVendorWithVendorId: CreateNSString(vendorId)];
-}
-
-int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(char* vendorId)
-{
-    return [[Didomi shared] getUserLegitimateInterestStatusForVendorAndRequiredPurposesWithVendorId: CreateNSString(vendorId)];
 }
 
 char* getCurrentUserStatus()
@@ -328,34 +286,6 @@ char* convertSetToJsonText(NSSet<NSString *> * dataSet)
    return cStringCopy([jsonString UTF8String]);
 }
 
-char* getDisabledPurposeIds()
-{
-    NSSet<NSString *> * dataSet=[[Didomi shared] getDisabledPurposeIds];
-    
-    return convertSetToJsonText(dataSet);
-}
-
-char* getDisabledVendorIds()
-{
-    NSSet<NSString *> * dataSet=[[Didomi shared] getDisabledVendorIds];
-    
-    return convertSetToJsonText(dataSet);
-}
-
-char* getEnabledPurposeIds()
-{
-    NSSet<NSString *> * dataSet=[[Didomi shared] getEnabledPurposeIds];
-    
-    return convertSetToJsonText(dataSet);
-}
-
-char* getEnabledVendorIds()
-{
-    NSSet<NSString *> * dataSet=[[Didomi shared] getEnabledVendorIds];
-    
-    return convertSetToJsonText(dataSet);
-}
-
 char* getJavaScriptForWebView()
 {
     NSString *returnString = [[Didomi shared] getJavaScriptForWebViewWithExtra:@""];
@@ -453,17 +383,6 @@ NSDictionary<NSString *, DDMCurrentUserStatusVendor *> * ConvertJsonToCurrentUse
     }
 
     return convertedDictionary;
-}
-
-int setUserConsentStatus(char* enabledPurposeIds, char* disabledPurposeIds, char* enabledVendorIds, char* disabledVendorIds)
-{
-	NSSet<NSString *> * enabledPurposeIdsSet=ConvertJsonToSet(enabledPurposeIds);
-	NSSet<NSString *> * disabledPurposeIdsSet=ConvertJsonToSet(disabledPurposeIds);
-	NSSet<NSString *> * enabledVendorIdsSet=ConvertJsonToSet(enabledVendorIds);
-	NSSet<NSString *> * disabledVendorIdsSet=ConvertJsonToSet(disabledVendorIds);
-
-    bool result = [[Didomi shared] setUserConsentStatusWithEnabledPurposeIds:enabledPurposeIdsSet disabledPurposeIds:disabledPurposeIdsSet enabledVendorIds:enabledVendorIdsSet disabledVendorIds:disabledVendorIdsSet];
-    return convertBoolToInt(result);
 }
 
 int setUserStatus(char* enabledConsentPurposeIds, char* disabledConsentPurposeIds, char* enabledLIPurposeIds, char* disabledLIPurposeIds, char* enabledConsentVendorIds, char* disabledConsentVendorIds, char* enabledLIVendorIds, char* disabledLIVendorIds)
