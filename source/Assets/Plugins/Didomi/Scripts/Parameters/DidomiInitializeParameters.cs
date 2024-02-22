@@ -1,3 +1,5 @@
+using System;
+
 namespace IO.Didomi.SDK
 {
     /**
