@@ -33,6 +33,8 @@ public class PurposeAndVendorTestsSuite: DidomiBaseTests
             Assert.NotNull(purpose, "Can't find Purpose with ID: " + purposeId);
 
             Assert.AreEqual(purposeId, purpose?.Id, "Mismatch between purpose ID and purpose");
+            Assert.NotNull(purpose?.Name, "Purpose name is null");
+            Assert.NotNull(purpose?.DescriptionText, "Purpose descriptionText is null");
 
             Assert.NotNull(requiredPurposeSet.FirstOrDefault(obj => obj.Id == purposeId), "Purpose not found in required purposes list with id: " + purposeId);
         }
