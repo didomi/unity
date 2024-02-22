@@ -222,13 +222,10 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
-        /// The initial configuration of the SDK. This should be called from an Application onCreate method. (Method with disableDidomiRemoteConfig)
+        /// Initialize the Didomi SDK and load its configuration.
+        /// This method should be called from your Application onCreate method.
         /// </summary>
-        /// <param name="initializeParameters">the new DidomiInitializeParameters</param>
-        /// By default, the consent UI is displayed in the language configured in the device settings,
-        /// if langauge is availabe and enabled by your configuration. 
-        /// This property allows you to override the default setting and specify a language to display the UI in.
-        /// String containing the language code e.g.: "es", "fr", etc.</param>
+        /// <param name="initializeParameters"> the object specifying parameters to initialize the SDK.</param>
         public void Initialize(DidomiInitializeParameters initializeParameters)
         {
             didomiForPlatform.Initialize(initializeParameters);
