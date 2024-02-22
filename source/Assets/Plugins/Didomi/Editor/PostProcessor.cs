@@ -75,14 +75,21 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     /// <param name="path"></param>
     private static void UpdateStylesThemeToAppCompat(string path)
     {
-        var unityPlayerFile = $@"src{PostProcessorSettings.FilePathSeperator}main{PostProcessorSettings.FilePathSeperator}res{PostProcessorSettings.FilePathSeperator}values{PostProcessorSettings.FilePathSeperator}styles.xml";
+        var unityPlayerFile = Path.Combine("src", "main", "res", "values", "styles.xml");
         var unityPlayerFileAbsolutePath = Path.Combine(path, unityPlayerFile);
-        var oldValue = @"</resources>";
-        var newValue = @"<style name=""DidomiTheme"" parent =""Theme.AppCompat.Light.DarkActionBar"" />
+        var fileContent = File.ReadAllText(unityPlayerFileAbsolutePath);
 
-</resources>";
+        // Define the style to check and the new value to add if it's not found
+        var styleCheck = @"<style name=""DidomiTheme""";
+        var newValue = @"<style name=""DidomiTheme"" parent =""Theme.AppCompat.Light.DarkActionBar"" />";
 
-        PostProcessor.ReplaceLineInFile(unityPlayerFileAbsolutePath, oldValue, newValue);
+        // Check if the style is already defined in the file
+        if (!fileContent.Contains(styleCheck))
+        {
+            var oldValue = @"</resources>";
+            var newContent = fileContent.Replace(oldValue, newValue + "\n\n" + oldValue);
+            File.WriteAllText(unityPlayerFileAbsolutePath, newContent);
+        }
     }
 
     /// <summary>
