@@ -1147,15 +1147,13 @@ public class DemoGUI : MonoBehaviour
 
     private string ToMessage(Purpose purpose)
     {
-        var id = purpose.GetId() ?? string.Empty;
-        var iabId = purpose.GetIabId() ?? string.Empty;
-        var name = purpose.GetName() ?? string.Empty;
-        var description = purpose.GetDescription() ?? string.Empty;
-        var isCustom = purpose.IsCustom();
+        var id = purpose.Id ?? string.Empty;
+        var name = purpose.Name ?? string.Empty;
+        var descriptionText = purpose.DescriptionText ?? string.Empty;
 
         var nl = Environment.NewLine;
 
-        return $"Purpose {nl} id: {id + nl} iabId: {iabId + nl} name: {name + nl} description: {description + nl} isCustom: {isCustom + nl}";
+        return $"Purpose {nl} id: {id + nl} name: {name + nl} descriptionText: {descriptionText + nl}";
     }
 
     private string ToMessage(Vendor vendor)

@@ -50,9 +50,9 @@ namespace IO.Didomi.SDK.Android
         {
             var purpose = new Purpose(
                 GetMethodStringValue(obj, "getId"),
-                GetMethodStringValue(obj, "getIabId"),
                 GetMethodStringValue(obj, "getName"),
-                GetMethodStringValue(obj, "getDescription"));
+                GetMethodStringValue(obj, "getDescriptionText")
+            );
 
             return purpose;
         }
