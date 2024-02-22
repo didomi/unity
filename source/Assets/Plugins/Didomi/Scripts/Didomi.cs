@@ -225,6 +225,56 @@ namespace IO.Didomi.SDK
         /// Initialize the Didomi SDK and load its configuration.
         /// This method should be called from your Application onCreate method.
         /// </summary>
+        [ObsoleteAttribute("This method is deprecated. Use Initialize with DidomiInitializeParameters instead.")]
+        public void Initialize(
+            string apiKey,
+            string localConfigurationPath,
+            string remoteConfigurationURL,
+            string providerId,
+            bool disableDidomiRemoteConfig,
+            string languageCode)
+        {
+            Initialize(new DidomiInitializeParameters
+            {
+                ApiKey = apiKey,
+                LocalConfigurationPath = localConfigurationPath,
+                RemoteConfigurationURL = remoteConfigurationURL,
+                ProviderId = providerId,
+                DisableDidomiRemoteConfig = disableDidomiRemoteConfig,
+                LanguageCode = languageCode
+            });
+        }
+
+        /// <summary>
+        /// Initialize the Didomi SDK and load its configuration.
+        /// This method should be called from your Application onCreate method.
+        /// </summary>
+        [ObsoleteAttribute("This method is deprecated. Use Initialize with DidomiInitializeParameters instead.")]
+        public void Initialize(
+            string apiKey,
+            string localConfigurationPath,
+            string remoteConfigurationURL,
+            string providerId,
+            bool disableDidomiRemoteConfig,
+            string languageCode,
+            string noticeId)
+        {
+            Initialize(new DidomiInitializeParameters
+            {
+                ApiKey = apiKey,
+                LocalConfigurationPath = localConfigurationPath,
+                RemoteConfigurationURL = remoteConfigurationURL,
+                ProviderId = providerId,
+                DisableDidomiRemoteConfig = disableDidomiRemoteConfig,
+                LanguageCode = languageCode,
+                NoticeId = noticeId
+            });
+        }
+
+        /// <summary>
+        /// Initialize the Didomi SDK and load its configuration.
+        /// This method should be called from your Application onCreate method.
+        /// </summary>
         /// <param name="initializeParameters"> the object specifying parameters to initialize the SDK.</param>
         public void Initialize(DidomiInitializeParameters initializeParameters)
         {
