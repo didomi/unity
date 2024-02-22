@@ -234,15 +234,16 @@ namespace IO.Didomi.SDK
             bool disableDidomiRemoteConfig,
             string languageCode)
         {
-            Initialize(new DidomiInitializeParameters
-            {
-                ApiKey = apiKey,
-                LocalConfigurationPath = localConfigurationPath,
-                RemoteConfigurationURL = remoteConfigurationURL,
-                ProviderId = providerId,
-                DisableDidomiRemoteConfig = disableDidomiRemoteConfig,
-                LanguageCode = languageCode
-            });
+            Initialize(
+                new DidomiInitializeParameters(
+                    apiKey,
+                    localConfigurationPath,
+                    remoteConfigurationURL,
+                    providerId,
+                    disableDidomiRemoteConfig,
+                    languageCode
+                )
+            );
         }
 
         /// <summary>
@@ -259,16 +260,17 @@ namespace IO.Didomi.SDK
             string languageCode,
             string noticeId)
         {
-            Initialize(new DidomiInitializeParameters
-            {
-                ApiKey = apiKey,
-                LocalConfigurationPath = localConfigurationPath,
-                RemoteConfigurationURL = remoteConfigurationURL,
-                ProviderId = providerId,
-                DisableDidomiRemoteConfig = disableDidomiRemoteConfig,
-                LanguageCode = languageCode,
-                NoticeId = noticeId
-            });
+            Initialize(
+                new DidomiInitializeParameters(
+                    apiKey,
+                    localConfigurationPath,
+                    remoteConfigurationURL,
+                    providerId,
+                    disableDidomiRemoteConfig,
+                    languageCode,
+                    noticeId
+                )
+            );
         }
 
         /// <summary>
