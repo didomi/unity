@@ -83,11 +83,16 @@ namespace IO.Didomi.SDK.Android
             var vendor = new Vendor(
                GetMethodStringValue(obj, "getId"),
                GetMethodStringValue(obj, "getName"),
-               GetMethodStringValue(obj, "getPrivacyPolicyUrl"),
-               GetMethodStringValue(obj, "getNamespace"),
+               GetMethodNamespacesValue(obj, "getNamespaces"),
+               GetMethodStringValue(obj, "getPolicyUrl"),
                GetMethodListString(obj, "getPurposeIds"),
                GetMethodListString(obj, "getLegIntPurposeIds"),
-               GetMethodStringValue(obj, "getIabId"));
+               GetMethodListString(obj, "getFeatureIds"),
+               GetMethodListString(obj, "getFlexiblePurposeIds"),
+               GetMethodListString(obj, "getSpecialFeatureIds"),
+               GetMethodListString(obj, "getSpecialPurposeIds"),
+               GetMethodListUrl(obj, "getUrls")
+            );
 
             return vendor;
         }
@@ -198,6 +203,60 @@ namespace IO.Didomi.SDK.Android
             }
 
             return null;
+        }
+        
+        public static Vendor.Namespaces GetMethodNamespacesValue(AndroidJavaObject obj, string methodName)
+        {
+            if (obj != null)
+            {
+                var androidJavaListObject = obj.Call<AndroidJavaObject>(methodName);
+                if (androidJavaListObject != null)
+                {
+                    return ConvertToVendorNamespaces(androidJavaListObject);
+                }
+            }
+
+            return null;
+        }
+
+        public static Vendor.Namespaces ConvertToVendorNamespaces(AndroidJavaObject obj)
+        {
+            var iab2 = obj.Call<string>("getIab2");
+            var num = obj.Call<int>("getNum");
+            return new Vendor.Namespaces(iab2, num);
+        }
+
+        public static IList<Vendor.Url> GetMethodListUrl(AndroidJavaObject obj, string methodName)
+        {
+            if (obj != null)
+            {
+                var androidJavaListObject = obj.Call<AndroidJavaObject>(methodName);
+                if (androidJavaListObject != null)
+                {
+                    var retval = new List<Vendor.Url>();
+
+                    var size=androidJavaListObject.Call<int>("size");
+
+                    for (int i = 0; i < size; i++)
+                    {
+                        var javaObjectVal = androidJavaListObject.Call<AndroidJavaObject>("get", i);
+                        retval.Add(ConvertToVendorUrl(javaObjectVal));
+                    }
+
+                    return retval;
+                }
+            }
+
+            return null;
+        }
+
+        public static Vendor.Url ConvertToVendorUrl(AndroidJavaObject obj)
+        {
+            var langId = obj.Call<string>("getLangId");
+            var privacy = obj.Call<string>("getPrivacy");
+            var legIntClaim = obj.Call<string>("getLegIntClaim");
+            return new Vendor.Url(langId, privacy, legIntClaim);
+            // return new Vendor.Url("gg", "toto", "toto");
         }
 
         public static Dictionary<string, CurrentUserStatus.PurposeStatus> ConvertToPurposeStatusDictionary(AndroidJavaObject obj)
