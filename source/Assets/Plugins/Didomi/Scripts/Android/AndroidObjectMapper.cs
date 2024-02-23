@@ -256,7 +256,6 @@ namespace IO.Didomi.SDK.Android
             var privacy = obj.Call<string>("getPrivacy");
             var legIntClaim = obj.Call<string>("getLegIntClaim");
             return new Vendor.Url(langId, privacy, legIntClaim);
-            // return new Vendor.Url("gg", "toto", "toto");
         }
 
         public static Dictionary<string, CurrentUserStatus.PurposeStatus> ConvertToPurposeStatusDictionary(AndroidJavaObject obj)
