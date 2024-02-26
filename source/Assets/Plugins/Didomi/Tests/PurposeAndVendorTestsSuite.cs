@@ -50,41 +50,26 @@ public class PurposeAndVendorTestsSuite: DidomiBaseTests
         // Vendor model not available on iOS
         if (Application.platform == RuntimePlatform.Android)
         {
-            var vendorId = GetFirstRequiredVendorId();
+            var requiredVendorSet = Didomi.GetInstance().GetRequiredVendors();
+            Assert.False(requiredVendorSet.Count == 0, "No required vendors found");
+
+            var requiredVendorIdSet = Didomi.GetInstance().GetRequiredVendorIds();
+            Assert.AreEqual(requiredVendorIdSet.Count, requiredVendorSet.Count, "Mismatch between required vendors and required vendor IDs");
+
+            var vendorId = requiredVendorIdSet.FirstOrDefault();
             Assert.False(string.IsNullOrEmpty(vendorId), "Invalid 1st vendor");
-            
+
             var vendor = Didomi.GetInstance().GetVendor(vendorId);
-            Assert.AreEqual(vendorId, vendor?.GetId());
+            Assert.NotNull(vendor, "Can't find Vendor with ID: " + vendorId);
+
+            var vendorName = vendor?.Name;
+            Assert.False(string.IsNullOrEmpty(vendorName), "Invalid vendor name");
+
+            Assert.NotNull(requiredVendorSet.FirstOrDefault(obj => obj.Name == vendorName), "Vendor not found in required vendors list with name: " + vendorName);
         }
         else
         {
             Assert.Pass("Test only valid for Android platform: method not supported on iOS");
         }
-    }
-
-    private string GetFirstRequiredPurposeId()
-    {
-        var requiredPurposeIdSet = Didomi.GetInstance().GetRequiredPurposeIds();
-
-        var purposeId = string.Empty;
-        if (requiredPurposeIdSet.Count > 0)
-        {
-            purposeId = requiredPurposeIdSet.FirstOrDefault();
-        }
-
-        return purposeId;
-    }
-
-    private string GetFirstRequiredVendorId()
-    {
-        var requiredVendorIdSet = Didomi.GetInstance().GetRequiredVendorIds();
-
-        var vendorId = string.Empty;
-        if (requiredVendorIdSet.Count > 0)
-        {
-            vendorId = requiredVendorIdSet.FirstOrDefault();
-        }
-
-        return vendorId;
     }
 }
