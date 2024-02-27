@@ -29,7 +29,9 @@ namespace IO.Didomi.SDK.IOS
 
         public Purpose GetPurpose(string purposeId)
         {
-            throw new NotImplementedException(NotCallableForObjectiveC);
+            var jsonText = DidomiFramework.GetPurpose(purposeId);
+
+            return IOSObjectMapper.ConvertToPurpose(jsonText);
         }
 
         public Vendor GetVendor(string vendorId)

@@ -134,6 +134,23 @@ char* MapUserStatus(DDMUserStatus *userStatus) {
 }
 
 /**
+ Method used to map purpose from DDMPurpose to a JSON string.
+ */
+char* MapPurpose(DDMPurpose *purpose) {
+    NSString *id = [purpose id];
+    NSString *name = [purpose name];
+    NSString *descriptionText = [purpose descriptionText];
+    
+    NSDictionary *dictionary = @{
+        @"id": id,
+        @"name" : name,
+        @"descriptionText": descriptionText
+    };
+
+    return ConvertComplexDictionaryToString(dictionary);
+}
+
+/**
  * Objective-C++ code that exposes the SDK interface to Unity C#
  * When adding a new function from the SDK, update this file to also
  * reference that new function
@@ -298,6 +315,12 @@ char* getRequiredPurposeIds()
     NSSet<NSString *> * dataSet=[[Didomi shared] getRequiredPurposeIds];
     
     return convertSetToJsonText(dataSet);
+}
+
+char* getPurpose(char* purposeId)
+{
+    DDMPurpose *purpose = [[Didomi shared] getPurposeWithPurposeId:CreateNSString(purposeId)];
+    return MapPurpose(purpose);
 }
 
 char* getRequiredVendorIds()

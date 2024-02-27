@@ -268,17 +268,10 @@ public class DemoGUI : MonoBehaviour
 
         if (GUI.Button(GetFuncRect3(), "GetPurpose"))
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var purposeId = GetFirstRequiredPurposeId();
-                var retval = Didomi.GetInstance().GetPurpose(purposeId);
-                message += "GetPurpose" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
+            message = string.Empty;
+            var purposeId = GetFirstRequiredPurposeId();
+            var retval = Didomi.GetInstance().GetPurpose(purposeId);
+            message += "GetPurpose" + MessageForObject(retval);
         }
     }
 

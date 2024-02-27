@@ -566,6 +566,20 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern string getPurpose(string purposeId);
+#endif
+
+        public static string GetPurpose(string purposeId)
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getPurpose(purposeId);
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern string getRequiredVendorIds();
 #endif
 

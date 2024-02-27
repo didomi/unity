@@ -119,6 +119,25 @@ namespace IO.Didomi.SDK.IOS
             return result;
         }
 
+        public static Purpose ConvertToPurpose(string jsonText)
+        {
+            Purpose result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject<Purpose>(jsonText);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
         public class JsonSetStringConverter : JsonConverter<ISet<string>>
         {
             public JsonSetStringConverter() { }
