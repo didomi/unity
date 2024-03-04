@@ -30,6 +30,30 @@ int convertBoolToInt(bool value)
     return value ? 1 : 0;
 }
 
+char* ConvertSetToJsonText(NSSet<NSString *> * dataSet)
+{
+   NSArray<NSString *> * dataArray= [dataSet allObjects ];
+
+   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataArray options:NSJSONWritingPrettyPrinted error:nil];
+
+   NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+
+   NSLog(@"jsonData as string:\n%@", jsonString);
+
+   return cStringCopy([jsonString UTF8String]);
+}
+
+char* ConvertPurposeArrayToJsonText(NSArray<DDMPurpose *> * dataArray)
+{
+   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataArray options:NSJSONWritingPrettyPrinted error:nil];
+
+   NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+
+   NSLog(@"jsonData as string:\n%@", jsonString);
+
+   return cStringCopy([jsonString UTF8String]);
+}
+
 /**
  Method used to create a string from a dictionary that doesn't have the form <NSString *, NSString *>.
  */
@@ -145,6 +169,56 @@ char* MapPurpose(DDMPurpose *purpose) {
         @"id": id,
         @"name" : name,
         @"descriptionText": descriptionText
+    };
+
+    return ConvertComplexDictionaryToString(dictionary);
+}
+
+/**
+ Method used to map vendor from DDMVendor to a JSON string.
+ */
+char* MapVendor(DDMVendor *vendor) {
+    NSString *id = [vendor id];
+    NSString *name = [vendor name];
+    DDMVendorNamespaces *namespaces = [vendor namespaces];
+    NSString *policyUrl = [vendor policyUrl];
+
+    NSSet<NSString *> * purposeIDs=[vendor purposeIDs];
+    NSSet<NSString *> * legIntPurposeIDs=[vendor legIntPurposeIDs];
+    NSSet<NSString *> * featureIDs=[vendor featureIDs];
+    NSSet<NSString *> * flexiblePurposeIDs=[vendor flexiblePurposeIDs];
+    NSSet<NSString *> * specialPurposeIDs=[vendor specialPurposeIDs];
+    NSSet<NSString *> * specialFeatureIDs=[vendor specialFeatureIDs];
+    // NSMutableDictionary *purposeIDs = ConvertSetToJsonText(dataSet);
+    // NSMutableDictionary *legIntPurposeIDs = ConvertSetToJsonText([vendor legIntPurposeIDs]);
+    // NSMutableDictionary *featureIDs = ConvertSetToJsonText([vendor featureIDs]);
+    // NSMutableDictionary *flexiblePurposeIDs = ConvertSetToJsonText([vendor flexiblePurposeIDs]);
+    // NSMutableDictionary *specialPurposeIDs = ConvertSetToJsonText([vendor specialPurposeIDs]);
+    // NSMutableDictionary *specialFeatureIDs = ConvertSetToJsonText([vendor specialFeatureIDs]);
+    
+    NSMutableDictionary *vendorUrlsJson = [NSMutableDictionary dictionary];
+    // NSDictionary<NSString *, DDMVendorURL *> *vendorUrls = [vendor urls];
+    NSArray<DDMVendorURL *> *vendorUrls = [vendor urls];
+    for (DDMVendorURL *vendorUrl in vendorUrls) {
+        vendorUrlsJson[vendorUrl.langID] = @{
+            @"langId": vendorUrl.langID,
+            @"privacy": vendorUrl.privacy,
+            @"legIntClaim": vendorUrl.legIntClaim
+        };
+    }
+    
+    NSDictionary *dictionary = @{
+        @"id": id,
+        @"name" : name,
+        @"namespaces" : namespaces,
+        @"policyUrl": policyUrl,
+        @"purposeIds": purposeIDs,
+        @"legIntPurposeIds": legIntPurposeIDs,
+        @"featureIds": featureIDs,
+        @"flexiblePurposeIds": flexiblePurposeIDs,
+        @"specialPurposeIds": specialPurposeIDs,
+        @"specialFeatureIds": specialFeatureIDs,
+        @"urls": vendorUrlsJson
     };
 
     return ConvertComplexDictionaryToString(dictionary);
@@ -290,19 +364,6 @@ void showNotice()
     [[Didomi shared] showNotice];
 }
 
-char* convertSetToJsonText(NSSet<NSString *> * dataSet)
-{
-   NSArray<NSString *> * dataArray= [dataSet allObjects ];
-
-   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataArray options:NSJSONWritingPrettyPrinted error:nil];
-
-   NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-
-   NSLog(@"jsonData as string:\n%@", jsonString);
-
-   return cStringCopy([jsonString UTF8String]);
-}
-
 char* getJavaScriptForWebView()
 {
     NSString *returnString = [[Didomi shared] getJavaScriptForWebViewWithExtra:@""];
@@ -314,7 +375,14 @@ char* getRequiredPurposeIds()
 {
     NSSet<NSString *> * dataSet=[[Didomi shared] getRequiredPurposeIds];
     
-    return convertSetToJsonText(dataSet);
+    return ConvertSetToJsonText(dataSet);
+}
+
+char* getRequiredPurposes()
+{
+    NSArray<DDMPurpose *> * dataSet=[[Didomi shared] getRequiredPurposes];
+    
+    return ConvertPurposeArrayToJsonText(dataSet);
 }
 
 char* getPurpose(char* purposeId)
@@ -327,7 +395,13 @@ char* getRequiredVendorIds()
 {
     NSSet<NSString *> * dataSet=[[Didomi shared] getRequiredVendorIds];
     
-    return convertSetToJsonText(dataSet);
+    return ConvertSetToJsonText(dataSet);
+}
+
+char* getVendor(char* vendorId)
+{
+    DDMVendor *vendor = [[Didomi shared] getVendorWithVendorId:CreateNSString(vendorId)];
+    return MapVendor(vendor);
 }
  
 char* convertDictionaryToJsonText( NSDictionary<NSString *, NSString *> * dataDict)

@@ -138,6 +138,63 @@ namespace IO.Didomi.SDK.IOS
             return result;
         }
 
+        public static ISet<Purpose> ConvertToPurposeSet(string jsonText)
+        {
+            ISet<Purpose> result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject<ISet<Purpose>>(jsonText);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
+        public static Vendor ConvertToVendor(string jsonText)
+        {
+            Vendor result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject<Vendor>(jsonText);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
+        public static ISet<Vendor> ConvertToVendorSet(string jsonText)
+        {
+            ISet<Vendor> result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject<ISet<Vendor>>(jsonText);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
         public class JsonSetStringConverter : JsonConverter<ISet<string>>
         {
             public JsonSetStringConverter() { }

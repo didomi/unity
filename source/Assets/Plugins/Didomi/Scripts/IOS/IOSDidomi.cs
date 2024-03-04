@@ -10,7 +10,6 @@ namespace IO.Didomi.SDK.IOS
     /// </summary>
     class IOSDidomi : IDidomi
     {
-        private const string NotCallableForObjectiveC = "The function is not available on iOS. Please check the plugin documentation for more information.";
 
 		public IOSDidomi()
         {
@@ -19,12 +18,16 @@ namespace IO.Didomi.SDK.IOS
 
         public ISet<Purpose> GetRequiredPurposes()
         {
-            throw new NotImplementedException(NotCallableForObjectiveC);
+            var jsonText = DidomiFramework.GetRequiredPurposes();
+
+            return IOSObjectMapper.ConvertToPurposeSet(jsonText);
         }
 
         public ISet<Vendor> GetRequiredVendors()
         {
-            throw new NotImplementedException(NotCallableForObjectiveC);
+            var jsonText = DidomiFramework.GetRequiredVendors();
+
+            return IOSObjectMapper.ConvertToVendorSet(jsonText);
         }
 
         public Purpose GetPurpose(string purposeId)
@@ -36,7 +39,9 @@ namespace IO.Didomi.SDK.IOS
 
         public Vendor GetVendor(string vendorId)
         {
-            throw new NotImplementedException(NotCallableForObjectiveC);
+            var jsonText = DidomiFramework.GetVendor(vendorId);
+
+            return IOSObjectMapper.ConvertToVendor(jsonText);
         }
 
         public void AddEventListener(DidomiEventListener eventListener)
