@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using static IO.Didomi.SDK.IOS.IOSObjectMapper;
 
 namespace IO.Didomi.SDK
 {
@@ -15,47 +16,54 @@ namespace IO.Didomi.SDK
         public string Name { get; set; } = "";
 
         [JsonProperty("namespaces")]
-        public Vendor.Namespaces namespaces;
+        public Vendor.Namespaces? namespaces;
 
         [JsonProperty("policyUrl")]
-        public string PolicyUrl { get; set; }
+        public string? PolicyUrl { get; set; }
 
         [JsonProperty("purposeIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> PurposeIds { get; set; } = new List<string>();
 
         [JsonProperty("legIntPurposeIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> LegIntPurposeIds { get; set; } = new List<string>();
 
         [JsonProperty("featureIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> FeatureIds { get; set; } = new List<string>();
 
         [JsonProperty("flexiblePurposeIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> FlexiblePurposeIds { get; set; } = new List<string>();
 
         [JsonProperty("specialFeatureIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> SpecialFeatureIds { get; set; } = new List<string>();
 
         [JsonProperty("specialPurposeIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> SpecialPurposeIds { get; set; } = new List<string>();
 
         [JsonProperty("urls")]
-        public IList<Vendor.Url> Urls { get; set; }
+        [JsonConverter(typeof(JsonSetVendorUrlConverter))]
+        public ISet<Vendor.Url>? Urls { get; set; }
 
         [Obsolete("Use PolicyUrl instead")]
-        public string PrivacyPolicyUrl => PolicyUrl;
+        public string? PrivacyPolicyUrl => PolicyUrl;
 
         public Vendor(
             string id,
             string name,
-            Namespaces namespaces,
-            string policyUrl,
+            Namespaces? namespaces,
+            string? policyUrl,
             IList<string> purposeIds,
             IList<string> legIntPurposeIds,
             IList<string> featureIds,
             IList<string> flexiblePurposeIds,
             IList<string> specialFeatureIds,
             IList<string> specialPurposeIds,
-            IList<Url> urls
+            ISet<Url>? urls
         ) {
             this.Id = id;
             this.Name = name;
@@ -70,12 +78,12 @@ namespace IO.Didomi.SDK
             this.Urls = urls;
         }
 
-        public Namespaces GetNamespaces()
+        public Namespaces? GetNamespaces()
         {
             return namespaces;
         }
 
-        public void setNamespaces(Namespaces namespaces)
+        public void setNamespaces(Namespaces? namespaces)
         {
             this.namespaces = namespaces;
         }
@@ -84,12 +92,12 @@ namespace IO.Didomi.SDK
         public class Namespaces : Numerable
         {
             [JsonProperty("iab2")]
-            public string Iab2 { get; set; }
+            public string? Iab2 { get; set; }
 
             [JsonProperty("num")]
             public int? Num { get; set; }
 
-            public Namespaces(string iab2, int? num)
+            public Namespaces(string? iab2, int? num)
             {
                 this.Iab2 = iab2;
                 this.Num = num;
@@ -100,15 +108,15 @@ namespace IO.Didomi.SDK
         public class Url
         {
             [JsonProperty("langId")]
-            public string LangId { get; set; }
+            public string? LangId { get; set; }
 
             [JsonProperty("privacy")]
-            public string Privacy { get; set; }
+            public string? Privacy { get; set; }
 
             [JsonProperty("legIntClaim")]
-            public string LegIntClaim { get; set; }
+            public string? LegIntClaim { get; set; }
 
-            public Url(string langId, string privacy, string legIntClaim)
+            public Url(string? langId, string? privacy, string? legIntClaim)
             {
                 this.LangId = langId;
                 this.Privacy = privacy;

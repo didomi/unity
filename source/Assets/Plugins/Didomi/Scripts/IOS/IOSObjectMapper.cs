@@ -223,6 +223,60 @@ namespace IO.Didomi.SDK.IOS
             }
         }
 
+        public class JsonListStringConverter : JsonConverter<IList<string>>
+        {
+            public JsonListStringConverter() { }
+
+            public override IList<string> ReadJson(JsonReader reader, Type objectType, IList<string> existingValue, bool hasExistingValue, JsonSerializer serializer)
+            {
+                IList<string> result = null;
+                JArray array = JArray.Load(reader);
+                if (array == null)
+                {
+                    result = new List<string>();
+                }
+                else
+                {
+                    result = array.ToObject<List<string>>();
+                }
+                return result;
+            }
+
+            public override void WriteJson(JsonWriter writer, IList<string> value, JsonSerializer serializer)
+            {
+                // Not used
+                throw new NotImplementedException();
+            }
+        }
+
+        public class JsonSetVendorUrlConverter : JsonConverter<ISet<Vendor.Url>>
+        {
+            public JsonSetVendorUrlConverter() { }
+
+            public override ISet<Vendor.Url> ReadJson(JsonReader reader, Type objectType, ISet<Vendor.Url> existingValue, bool hasExistingValue, JsonSerializer serializer)
+            {
+                ISet<Vendor.Url> result = null;
+                JArray array = JArray.Load(reader);
+                if (array == null)
+                {
+                    result = new HashSet<Vendor.Url>();
+                }
+                else
+                {
+                    // We have to convert it to list first, as direct conversion to HashSet fails on iOS
+                    List<Vendor.Url> resultAsList = array.ToObject<List<Vendor.Url>>();
+                    result = new HashSet<Vendor.Url>(resultAsList);
+                }
+                return result;
+            }
+
+            public override void WriteJson(JsonWriter writer, ISet<Vendor.Url> value, JsonSerializer serializer)
+            {
+                // Not used
+                throw new NotImplementedException();
+            }
+        }
+
         public class JsonRegulationConverter : JsonConverter<string>
         {
             public override string ReadJson(JsonReader reader, Type objectType, string existingValue, bool hasExistingValue, JsonSerializer serializer)

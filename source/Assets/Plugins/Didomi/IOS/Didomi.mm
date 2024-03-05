@@ -174,51 +174,56 @@ char* MapPurpose(DDMPurpose *purpose) {
     return ConvertComplexDictionaryToString(dictionary);
 }
 
+
+id ObjectOrNull(id object) {
+  return object ?: [NSNull null];
+}
+
 /**
  Method used to map vendor from DDMVendor to a JSON string.
  */
 char* MapVendor(DDMVendor *vendor) {
     NSString *id = [vendor id];
     NSString *name = [vendor name];
-    DDMVendorNamespaces *namespaces = [vendor namespaces];
     NSString *policyUrl = [vendor policyUrl];
 
-    NSSet<NSString *> * purposeIDs=[vendor purposeIDs];
-    NSSet<NSString *> * legIntPurposeIDs=[vendor legIntPurposeIDs];
-    NSSet<NSString *> * featureIDs=[vendor featureIDs];
-    NSSet<NSString *> * flexiblePurposeIDs=[vendor flexiblePurposeIDs];
-    NSSet<NSString *> * specialPurposeIDs=[vendor specialPurposeIDs];
-    NSSet<NSString *> * specialFeatureIDs=[vendor specialFeatureIDs];
-    // NSMutableDictionary *purposeIDs = ConvertSetToJsonText(dataSet);
-    // NSMutableDictionary *legIntPurposeIDs = ConvertSetToJsonText([vendor legIntPurposeIDs]);
-    // NSMutableDictionary *featureIDs = ConvertSetToJsonText([vendor featureIDs]);
-    // NSMutableDictionary *flexiblePurposeIDs = ConvertSetToJsonText([vendor flexiblePurposeIDs]);
-    // NSMutableDictionary *specialPurposeIDs = ConvertSetToJsonText([vendor specialPurposeIDs]);
-    // NSMutableDictionary *specialFeatureIDs = ConvertSetToJsonText([vendor specialFeatureIDs]);
-    
-    NSMutableDictionary *vendorUrlsJson = [NSMutableDictionary dictionary];
-    // NSDictionary<NSString *, DDMVendorURL *> *vendorUrls = [vendor urls];
+    NSArray<NSString *> * purposeIDs = [[vendor purposeIDs] allObjects];
+    NSArray<NSString *> * legIntPurposeIDs = [[vendor legIntPurposeIDs] allObjects];
+    NSArray<NSString *> * featureIDs = [[vendor featureIDs] allObjects];
+    NSArray<NSString *> * flexiblePurposeIDs = [[vendor flexiblePurposeIDs] allObjects];
+    NSArray<NSString *> * specialPurposeIDs = [[vendor specialPurposeIDs] allObjects];
+    NSArray<NSString *> * specialFeatureIDs = [[vendor specialFeatureIDs] allObjects];
+
+    NSDictionary *vendorNamespacesJson = nil;
+    DDMVendorNamespaces *namespaces = [vendor namespaces];
+    if (namespaces) {
+        vendorNamespacesJson = @{
+            @"iab2": ObjectOrNull(namespaces.iab2),
+        };
+    }
+
+    NSMutableArray<NSDictionary *> *vendorUrlsJson = [NSMutableArray array];
     NSArray<DDMVendorURL *> *vendorUrls = [vendor urls];
     for (DDMVendorURL *vendorUrl in vendorUrls) {
-        vendorUrlsJson[vendorUrl.langID] = @{
-            @"langId": vendorUrl.langID,
-            @"privacy": vendorUrl.privacy,
-            @"legIntClaim": vendorUrl.legIntClaim
-        };
+        [vendorUrlsJson addObject: @{
+            @"langId": ObjectOrNull([vendorUrl langID]),
+            @"privacy": ObjectOrNull([vendorUrl privacy]),
+            @"legIntClaim": ObjectOrNull([vendorUrl legIntClaim])
+        }];
     }
     
     NSDictionary *dictionary = @{
         @"id": id,
         @"name" : name,
-        @"namespaces" : namespaces,
-        @"policyUrl": policyUrl,
+        @"namespaces" : ObjectOrNull(vendorNamespacesJson),
+        @"policyUrl": ObjectOrNull(policyUrl),
         @"purposeIds": purposeIDs,
         @"legIntPurposeIds": legIntPurposeIDs,
         @"featureIds": featureIDs,
         @"flexiblePurposeIds": flexiblePurposeIDs,
         @"specialPurposeIds": specialPurposeIDs,
         @"specialFeatureIds": specialFeatureIDs,
-        @"urls": vendorUrlsJson
+        @"urls": ObjectOrNull(vendorUrlsJson)
     };
 
     return ConvertComplexDictionaryToString(dictionary);
