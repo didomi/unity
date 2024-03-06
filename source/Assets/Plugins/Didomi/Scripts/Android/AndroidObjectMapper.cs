@@ -91,7 +91,7 @@ namespace IO.Didomi.SDK.Android
                GetMethodListString(obj, "getFlexiblePurposeIds"),
                GetMethodListString(obj, "getSpecialFeatureIds"),
                GetMethodListString(obj, "getSpecialPurposeIds"),
-               GetMethodListUrl(obj, "getUrls")
+               GetMethodSetUrl(obj, "getUrls")
             );
 
             return vendor;
@@ -226,14 +226,14 @@ namespace IO.Didomi.SDK.Android
             return new Vendor.Namespaces(iab2, num);
         }
 
-        public static IList<Vendor.Url> GetMethodListUrl(AndroidJavaObject obj, string methodName)
+        public static ISet<Vendor.Url> GetMethodSetUrl(AndroidJavaObject obj, string methodName)
         {
             if (obj != null)
             {
                 var androidJavaListObject = obj.Call<AndroidJavaObject>(methodName);
                 if (androidJavaListObject != null)
                 {
-                    var retval = new List<Vendor.Url>();
+                    var retval = new HashSet<Vendor.Url>();
 
                     var size=androidJavaListObject.Call<int>("size");
 

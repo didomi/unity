@@ -32,7 +32,6 @@ public enum FunctionCategory
 
 public class DemoGUI : MonoBehaviour
 {
-    private const string NotCallableForObjectiveC= "The function is not callable for IOS platform. Check IOS-SDK doc. Since Unity creates Objective-C, It is not callable.";
     private const string NullText = "null";
     
     GameObject labelResult;
@@ -247,16 +246,9 @@ public class DemoGUI : MonoBehaviour
     {
         if (GUI.Button(GetFuncRect1(), "GetRequiredPurposes"))
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetRequiredPurposes();
-                message = "GetRequiredPurposes" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
+            message = string.Empty;
+            var retval = Didomi.GetInstance().GetRequiredPurposes();
+            message = "GetRequiredPurposes" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect2(), "GetRequiredPurposeIds"))
@@ -268,17 +260,10 @@ public class DemoGUI : MonoBehaviour
 
         if (GUI.Button(GetFuncRect3(), "GetPurpose"))
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var purposeId = GetFirstRequiredPurposeId();
-                var retval = Didomi.GetInstance().GetPurpose(purposeId);
-                message += "GetPurpose" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
+            message = string.Empty;
+            var purposeId = GetFirstRequiredPurposeId();
+            var retval = Didomi.GetInstance().GetPurpose(purposeId);
+            message += "GetPurpose" + MessageForObject(retval);
         }
     }
 
@@ -286,16 +271,9 @@ public class DemoGUI : MonoBehaviour
     {
         if (GUI.Button(GetFuncRect1(), "GetRequiredVendors"))
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetRequiredVendors();
-                message = "GetRequiredVendors" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
+            message = string.Empty;
+            var retval = Didomi.GetInstance().GetRequiredVendors();
+            message = "GetRequiredVendors" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect2(), "GetRequiredVendorIds"))
@@ -307,17 +285,10 @@ public class DemoGUI : MonoBehaviour
 
         if (GUI.Button(GetFuncRect3(), "GetVendor"))
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var vendorId = GetFirstRequiredVendorId();
-                var retval = Didomi.GetInstance().GetVendor(vendorId);
-                message += "GetVendor" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
+            message = string.Empty;
+            var vendorId = GetFirstRequiredVendorId();
+            var retval = Didomi.GetInstance().GetVendor(vendorId);
+            message += "GetVendor" + MessageForObject(retval);
         }
     }
 

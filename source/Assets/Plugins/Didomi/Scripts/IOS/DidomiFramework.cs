@@ -566,6 +566,34 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern string getRequiredPurposes();
+#endif
+
+        public static string GetRequiredPurposes()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getRequiredPurposes();
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern string getPurpose(string purposeId);
+#endif
+
+        public static string GetPurpose(string purposeId)
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getPurpose(purposeId);
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern string getRequiredVendorIds();
 #endif
 
@@ -573,6 +601,34 @@ namespace IO.Didomi.SDK.IOS
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
             return getRequiredVendorIds();
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern string getRequiredVendors();
+#endif
+
+        public static string GetRequiredVendors()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getRequiredVendors();
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern string getVendor(string vendorId);
+#endif
+
+        public static string GetVendor(string vendorId)
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getVendor(vendorId);
 #else
             return String.Empty;
 #endif
