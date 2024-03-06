@@ -9,42 +9,75 @@ namespace IO.Didomi.SDK
     [Serializable]
     public class Vendor
     {
+        /// <summary>
+        /// Unique id of the vendor provided by Didomi. This id does not include prefixes. Example: "vendor-1".
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = "";
 
+        /// <summary>
+        /// Name of the vendor.
+        /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = "";
 
+        /// <summary>
+        /// Namespaces of the vendor (IAB, num) and their corresponding ids.
+        /// </summary>
         [JsonProperty("namespaces")]
         public Vendor.Namespaces? namespaces;
 
+        /// <summary>
+        /// Privacy policy URL(replaced by urls in IAB TCF v2.2)
+        /// </summary>
         [JsonProperty("policyUrl")]
         public string? PolicyUrl { get; set; }
 
+        /// <summary>
+        /// Purposes with legal basis "consent"
+        /// </summary>
         [JsonProperty("purposeIds")]
         [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> PurposeIds { get; set; } = new List<string>();
 
+        /// <summary>
+        /// Purposes with legal basis "legitimate interest"
+        /// </summary>
         [JsonProperty("legIntPurposeIds")]
         [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> LegIntPurposeIds { get; set; } = new List<string>();
 
+        /// <summary>
+        /// List with IDs that represent features.
+        /// </summary>
         [JsonProperty("featureIds")]
         [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> FeatureIds { get; set; } = new List<string>();
 
+        /// <summary>
+        /// Set with IDs that represent flexible purposes.
+        /// </summary>
         [JsonProperty("flexiblePurposeIds")]
         [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> FlexiblePurposeIds { get; set; } = new List<string>();
 
+        /// <summary>
+        /// Set with IDs that represent Special Features.
+        /// </summary>
         [JsonProperty("specialFeatureIds")]
         [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> SpecialFeatureIds { get; set; } = new List<string>();
 
+        /// <summary>
+        /// Set with IDs that represent Special Purposes.
+        /// </summary>
         [JsonProperty("specialPurposeIds")]
         [JsonConverter(typeof(JsonListStringConverter))]
         public IList<string> SpecialPurposeIds { get; set; } = new List<string>();
 
+        /// <summary>
+        /// Privacy policy and LI disclaimer urls. Introduced in IAB TCF v2.2.
+        /// </summary>
         [JsonProperty("urls")]
         [JsonConverter(typeof(JsonSetVendorUrlConverter))]
         public ISet<Vendor.Url>? Urls { get; set; }
@@ -94,6 +127,9 @@ namespace IO.Didomi.SDK
             [JsonProperty("iab2")]
             public string? Iab2 { get; set; }
 
+            /// <summary>
+            /// Always null on iOS
+            /// </summary>
             [JsonProperty("num")]
             public int? Num { get; set; }
 

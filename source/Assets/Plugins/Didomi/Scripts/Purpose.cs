@@ -8,13 +8,21 @@ namespace IO.Didomi.SDK
     [Serializable]
     public class Purpose
     {
-       
+        /// <summary>
+        /// Purpose id used by Didomi SDK.
+        /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
 
+        /// <summary>
+        /// Purpose human-readable name, translated in selected language.
+        /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = "";
 
+        /// <summary>
+        /// Purpose description, translated in selected language.
+        /// </summary>
         [JsonProperty("descriptionText")]
         public string DescriptionText { get; set; } = "";
 
