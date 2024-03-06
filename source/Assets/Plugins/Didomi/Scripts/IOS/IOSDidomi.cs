@@ -10,84 +10,43 @@ namespace IO.Didomi.SDK.IOS
     /// </summary>
     class IOSDidomi : IDidomi
     {
-        private const string NotCallableForObjectiveC = "The function is not available on iOS. Please check the plugin documentation for more information.";
 
 		public IOSDidomi()
         {
             DidomiFramework.SetUserAgent();
         }
-		
-        public ISet<Purpose> GetDisabledPurposes()
-        {
-            throw new NotImplementedException(NotCallableForObjectiveC);
-        }
-
-        public ISet<Vendor> GetDisabledVendors()
-        {
-            throw new NotImplementedException(NotCallableForObjectiveC);
-        }
-
-        public ISet<Purpose> GetEnabledPurposes()
-        {
-            throw new NotImplementedException(NotCallableForObjectiveC);
-        }
-
-        public ISet<Vendor> GetEnabledVendors()
-        {
-            throw new NotImplementedException(NotCallableForObjectiveC);
-        }
 
         public ISet<Purpose> GetRequiredPurposes()
         {
-            throw new NotImplementedException(NotCallableForObjectiveC);
+            var jsonText = DidomiFramework.GetRequiredPurposes();
+
+            return IOSObjectMapper.ConvertToPurposeSet(jsonText);
         }
 
         public ISet<Vendor> GetRequiredVendors()
         {
-            throw new NotImplementedException(NotCallableForObjectiveC);
+            var jsonText = DidomiFramework.GetRequiredVendors();
+
+            return IOSObjectMapper.ConvertToVendorSet(jsonText);
         }
 
         public Purpose GetPurpose(string purposeId)
         {
-            throw new NotImplementedException(NotCallableForObjectiveC);
+            var jsonText = DidomiFramework.GetPurpose(purposeId);
+
+            return IOSObjectMapper.ConvertToPurpose(jsonText);
         }
 
         public Vendor GetVendor(string vendorId)
         {
-            throw new NotImplementedException(NotCallableForObjectiveC);
+            var jsonText = DidomiFramework.GetVendor(vendorId);
+
+            return IOSObjectMapper.ConvertToVendor(jsonText);
         }
 
         public void AddEventListener(DidomiEventListener eventListener)
         {
             DidomiFramework.AddEventListener(eventListener);
-        }
-
-        public ISet<string> GetDisabledPurposeIds()
-        {
-            var jsonText = DidomiFramework.GetDisabledPurposeIds();
-
-            return IOSObjectMapper.ConvertToSetString(jsonText);
-        }
-
-        public ISet<string> GetDisabledVendorIds()
-        {
-            var jsonText = DidomiFramework.GetDisabledVendorIds();
-
-            return IOSObjectMapper.ConvertToSetString(jsonText);
-        }
-
-        public ISet<string> GetEnabledPurposeIds()
-        {
-            var jsonText = DidomiFramework.GetEnabledPurposeIds();
-
-            return IOSObjectMapper.ConvertToSetString(jsonText);
-        }
-
-        public ISet<string> GetEnabledVendorIds()
-        {
-            var jsonText = DidomiFramework.GetEnabledVendorIds();
-
-            return IOSObjectMapper.ConvertToSetString(jsonText);
         }
 
         public string GetJavaScriptForWebView()
@@ -121,42 +80,6 @@ namespace IO.Didomi.SDK.IOS
             return DidomiFramework.GetTranslatedText(key);
         }
 
-        public bool GetUserConsentStatusForPurpose(string purposeId)
-        {
-            return DidomiFramework.GetUserConsentStatusForPurpose(purposeId);
-        }
-
-        public bool GetUserConsentStatusForVendor(string vendorId)
-        {
-            return DidomiFramework.GetUserConsentStatusForVendor(vendorId);
-        }
-
-        public bool GetUserConsentStatusForVendorAndRequiredPurposes(string vendorId)
-        {
-            return DidomiFramework.GetUserConsentStatusForVendorAndRequiredPurposes(vendorId);
-        }
-
-        //public enum ConsenStatus { Enable = 0, Disable = 1, Unknown = 2 }
-        public bool GetUserLegitimateInterestStatusForPurpose(string purposeId)
-        {
-            var result = DidomiFramework.GetUserLegitimateInterestStatusForPurpose(purposeId);
-
-            return result == 0;
-        }
-
-        public bool GetUserLegitimateInterestStatusForVendor(string vendorId)
-        {
-            var result = DidomiFramework.GetUserLegitimateInterestStatusForVendor(vendorId);
-
-            return result == 0;
-        }
-
-        public bool GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
-        {
-            var result = DidomiFramework.GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(vendorId);
-            return result == 0;
-        }
-
         public CurrentUserStatus GetCurrentUserStatus()
         {
             var jsonText = DidomiFramework.GetCurrentUserStatus();
@@ -186,31 +109,6 @@ namespace IO.Didomi.SDK.IOS
         public void HidePreferences()
         {
             DidomiFramework.HidePreferences();
-        }
-
-        public void Initialize(
-          string apiKey,
-          string localConfigurationPath,
-          string remoteConfigurationPath,
-          string providerId,
-          bool disableDidomiRemoteConfig,
-          string languageCode
-          )
-        {
-            DidomiFramework.Initialize(apiKey, localConfigurationPath, remoteConfigurationPath, providerId, disableDidomiRemoteConfig, languageCode);
-        }
-
-        public void Initialize(
-          string apiKey,
-          string localConfigurationPath,
-          string remoteConfigurationPath,
-          string providerId,
-          bool disableDidomiRemoteConfig,
-          string languageCode,
-          string noticeId
-          )
-        {
-            DidomiFramework.Initialize(apiKey, localConfigurationPath, remoteConfigurationPath, providerId, disableDidomiRemoteConfig, languageCode, noticeId);
         }
 
         public void Initialize(DidomiInitializeParameters initializeParameters)
@@ -283,16 +181,6 @@ namespace IO.Didomi.SDK.IOS
             return DidomiFramework.SetUserAgreeToAll();
         }
 
-        [ObsoleteAttribute("This method is deprecated. Use SetUserStatus instead.")]
-        public bool SetUserConsentStatus(ISet<string> enabledPurposeIds, ISet<string> disabledPurposeIds, ISet<string> enabledVendorIds, ISet<string> disabledVendorIds)
-        {
-            return DidomiFramework.SetUserConsentStatus(
-              IOSObjectMapper.ConvertFromHashSetStringToJson(enabledPurposeIds),
-              IOSObjectMapper.ConvertFromHashSetStringToJson(disabledPurposeIds),
-              IOSObjectMapper.ConvertFromHashSetStringToJson(enabledVendorIds),
-              IOSObjectMapper.ConvertFromHashSetStringToJson(disabledVendorIds));
-        }
-
         public bool SetUserDisagreeToAll()
         {
             return DidomiFramework.SetUserDisagreeToAll();
@@ -332,6 +220,7 @@ namespace IO.Didomi.SDK.IOS
                 vendorsLIStatus);
         }
 
+        [ObsoleteAttribute("This method is deprecated. Use shouldUserStatusBeCollected instead.")]
         public bool ShouldConsentBeCollected()
         {
             return DidomiFramework.ShouldConsentBeCollected();

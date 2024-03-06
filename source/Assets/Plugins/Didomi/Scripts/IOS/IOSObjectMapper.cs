@@ -119,6 +119,86 @@ namespace IO.Didomi.SDK.IOS
             return result;
         }
 
+        public static Purpose ConvertToPurpose(string jsonText)
+        {
+            Purpose result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject<Purpose>(jsonText);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
+        public static ISet<Purpose> ConvertToPurposeSet(string jsonText)
+        {
+            ISet<Purpose> result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    // We have to convert it to list first, as direct conversion to HashSet fails on iOS
+                    List<Purpose> resultAsList = JsonConvert.DeserializeObject<List<Purpose>>(jsonText);
+                    result = new HashSet<Purpose>(resultAsList);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
+        public static Vendor ConvertToVendor(string jsonText)
+        {
+            Vendor result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject<Vendor>(jsonText);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
+        public static ISet<Vendor> ConvertToVendorSet(string jsonText)
+        {
+            ISet<Vendor> result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    // We have to convert it to list first, as direct conversion to HashSet fails on iOS
+                    List<Vendor> resultAsList = JsonConvert.DeserializeObject<List<Vendor>>(jsonText);
+                    result = new HashSet<Vendor>(resultAsList);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
         public class JsonSetStringConverter : JsonConverter<ISet<string>>
         {
             public JsonSetStringConverter() { }
@@ -141,6 +221,60 @@ namespace IO.Didomi.SDK.IOS
             }
 
             public override void WriteJson(JsonWriter writer, ISet<string> value, JsonSerializer serializer)
+            {
+                // Not used
+                throw new NotImplementedException();
+            }
+        }
+
+        public class JsonListStringConverter : JsonConverter<IList<string>>
+        {
+            public JsonListStringConverter() { }
+
+            public override IList<string> ReadJson(JsonReader reader, Type objectType, IList<string> existingValue, bool hasExistingValue, JsonSerializer serializer)
+            {
+                IList<string> result = null;
+                JArray array = JArray.Load(reader);
+                if (array == null)
+                {
+                    result = new List<string>();
+                }
+                else
+                {
+                    result = array.ToObject<List<string>>();
+                }
+                return result;
+            }
+
+            public override void WriteJson(JsonWriter writer, IList<string> value, JsonSerializer serializer)
+            {
+                // Not used
+                throw new NotImplementedException();
+            }
+        }
+
+        public class JsonSetVendorUrlConverter : JsonConverter<ISet<Vendor.Url>>
+        {
+            public JsonSetVendorUrlConverter() { }
+
+            public override ISet<Vendor.Url> ReadJson(JsonReader reader, Type objectType, ISet<Vendor.Url> existingValue, bool hasExistingValue, JsonSerializer serializer)
+            {
+                ISet<Vendor.Url> result = null;
+                JArray array = JArray.Load(reader);
+                if (array == null)
+                {
+                    result = new HashSet<Vendor.Url>();
+                }
+                else
+                {
+                    // We have to convert it to list first, as direct conversion to HashSet fails on iOS
+                    List<Vendor.Url> resultAsList = array.ToObject<List<Vendor.Url>>();
+                    result = new HashSet<Vendor.Url>(resultAsList);
+                }
+                return result;
+            }
+
+            public override void WriteJson(JsonWriter writer, ISet<Vendor.Url> value, JsonSerializer serializer)
             {
                 // Not used
                 throw new NotImplementedException();

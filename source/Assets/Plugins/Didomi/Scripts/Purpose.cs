@@ -1,93 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace IO.Didomi.SDK
 {
     [Serializable]
     public class Purpose
     {
-        private string id;
-
-        private string iabId;
-
-        private string name;
-
-        private string description;
-
-        [IgnoreDataMemberAttribute]
-        private  bool custom = false;
-
-        [IgnoreDataMemberAttribute]
-        private  bool essential = false;
-
-        [IgnoreDataMemberAttribute]
-        private  PurposeCategory category;
-
-        public Purpose(string id, string iabId, string name, string description) : this(id, iabId, name, description, false)
-        {
-        }
-
-        public Purpose(string id, string iabId, string name, string description, bool custom)
-        {
-            this.id = id;
-            this.iabId = iabId;
-            this.name = name;
-            this.description = description;
-            this.custom = custom;
-        }
-
-        public string GetId()
-        {
-            return id;
-        }
-
-        public string GetIabId()
-        {
-            return iabId;
-        }
-
-        public string GetName()
-        {
-            return name;
-        }
-
-        public string GetDescription()
-        {
-            return description;
-        }
-
-        public bool IsCustom()
-        {
-            return custom;
-        }
-
-        public bool IsEssential()
-        {
-            return essential;
-        }
-
-        public void SetEssential(bool essential)
-        {
-            this.essential = essential;
-        }
+        /// <summary>
+        /// Purpose id used by Didomi SDK.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
         /// <summary>
-        /// Getter method for category.
+        /// Purpose human-readable name, translated in selected language.
         /// </summary>
-        /// <returns></returns>
-        public PurposeCategory GetCategory()
-        {
-            return category;
-        }
-  
+        [JsonProperty("name")]
+        public string Name { get; set; } = "";
+
         /// <summary>
-        /// Setter method for category.
+        /// Purpose description, translated in selected language.
         /// </summary>
-        /// <param name="category"></param>
-        public void SetCategory(PurposeCategory category)
+        [JsonProperty("descriptionText")]
+        public string DescriptionText { get; set; } = "";
+
+        [Obsolete("Use DescriptionText instead")]
+        public string Description => DescriptionText;
+
+        public Purpose(string id, string name, string descriptionText)
         {
-            this.category = category;
+            this.Id = id;
+            this.Name = name;
+            this.DescriptionText = descriptionText;
         }
 
         /// <summary>
@@ -101,7 +47,7 @@ namespace IO.Didomi.SDK
 
             foreach (Purpose purpose in purposes)
             {
-                purposeIds.Add(purpose.GetId());
+                purposeIds.Add(purpose.Id);
             }
 
             return purposeIds;
@@ -118,18 +64,18 @@ namespace IO.Didomi.SDK
                 return false;
             }
 
-            return ((Purpose)obj).GetId().Equals(this.GetId());
+            return ((Purpose)obj).Id.Equals(this.Id);
         }
 
         public override int GetHashCode()
         {
-            if (id == null)
+            if (Id == null)
             {
                 return base.GetHashCode();
             }
             else
             {
-                return id.GetHashCode();
+                return Id.GetHashCode();
             }
         }
     }

@@ -52,56 +52,6 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void initialize(string apiKey,
-            string localConfigurationPath,
-            string remoteConfigurationPath,
-            string providerId,
-            bool disableDidomiRemoteConfig,
-            string languageCode);
-#endif
-
-        public static bool Initialize(
-          string apiKey,
-          string localConfigurationPath,
-          string remoteConfigurationPath,
-          string providerId,
-          bool disableDidomiRemoteConfig,
-          string languageCode)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            initialize(apiKey, localConfigurationPath, remoteConfigurationPath, providerId, disableDidomiRemoteConfig, languageCode);
-#endif
-
-            return false;
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern void initializeWithNoticeId(string apiKey,
-            string localConfigurationPath,
-            string remoteConfigurationPath,
-            string providerId,
-            bool disableDidomiRemoteConfig,
-            string languageCode,
-            string noticeId);
-#endif
-
-        public static void Initialize(
-          string apiKey,
-          string localConfigurationPath,
-          string remoteConfigurationPath,
-          string providerId,
-          bool disableDidomiRemoteConfig,
-          string languageCode,
-          string noticeId)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            initializeWithNoticeId(apiKey, localConfigurationPath, remoteConfigurationPath, providerId, disableDidomiRemoteConfig, languageCode, noticeId);
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
         private static extern void initializeWithParameters(
                 string apiKey,
                 string localConfigurationPath,
@@ -139,90 +89,6 @@ namespace IO.Didomi.SDK.IOS
             return getTranslatedText(key);
 #else
             return String.Empty;
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern bool getUserConsentStatusForPurpose(string purposeId);
-#endif
-
-        public static bool GetUserConsentStatusForPurpose(string purposeId)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getUserConsentStatusForPurpose(purposeId);
-#else
-            return false;
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern bool getUserConsentStatusForVendor(string vendorId);
-#endif
-
-        public static bool GetUserConsentStatusForVendor(string vendorId)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getUserConsentStatusForVendor(vendorId);
-#else
-            return false;
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern bool getUserConsentStatusForVendorAndRequiredPurposes(string vendorId);
-#endif
-
-        public static bool GetUserConsentStatusForVendorAndRequiredPurposes(string vendorId)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getUserConsentStatusForVendorAndRequiredPurposes(vendorId);
-#else
-            return false;
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern int getUserLegitimateInterestStatusForPurpose(string purposeId);
-#endif
-
-        public static int GetUserLegitimateInterestStatusForPurpose(string purposeId)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getUserLegitimateInterestStatusForPurpose(purposeId);
-#else
-            return 0;
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern int getUserLegitimateInterestStatusForVendor(string vendorId);
-#endif
-
-        public static int GetUserLegitimateInterestStatusForVendor(string vendorId)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getUserLegitimateInterestStatusForVendor(vendorId);
-#else
-            return 0;
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern int getUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId);
-#endif
-
-        public static int GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(string vendorId)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getUserLegitimateInterestStatusForVendorAndRequiredPurposes(vendorId);
-#else
-            return 0;
 #endif
         }
 
@@ -686,64 +552,6 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern string getDisabledPurposeIds();
-#endif
-
-        public static string GetDisabledPurposeIds()
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getDisabledPurposeIds();
-#else
-            return String.Empty;
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern string getDisabledVendorIds();
-#endif
-
-        public static string GetDisabledVendorIds()
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getDisabledVendorIds();
-#else
-            return String.Empty;
-#endif
-        }
-
-
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern string getEnabledPurposeIds();
-#endif
-
-        public static string GetEnabledPurposeIds()
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getEnabledPurposeIds();
-#else
-            return String.Empty;
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern string getEnabledVendorIds();
-#endif
-
-        public static string GetEnabledVendorIds()
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getEnabledVendorIds();
-#else
-            return String.Empty;
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
         private static extern string getRequiredPurposeIds();
 #endif
 
@@ -758,6 +566,34 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern string getRequiredPurposes();
+#endif
+
+        public static string GetRequiredPurposes()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getRequiredPurposes();
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern string getPurpose(string purposeId);
+#endif
+
+        public static string GetPurpose(string purposeId)
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getPurpose(purposeId);
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern string getRequiredVendorIds();
 #endif
 
@@ -765,6 +601,34 @@ namespace IO.Didomi.SDK.IOS
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
             return getRequiredVendorIds();
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern string getRequiredVendors();
+#endif
+
+        public static string GetRequiredVendors()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getRequiredVendors();
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern string getVendor(string vendorId);
+#endif
+
+        public static string GetVendor(string vendorId)
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getVendor(vendorId);
 #else
             return String.Empty;
 #endif
@@ -795,21 +659,6 @@ namespace IO.Didomi.SDK.IOS
             return getText(key);
 #else
             return String.Empty;
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern int setUserConsentStatus(string enabledPurposeIds, string disabledPurposeIds, string enabledVendorIds, string disabledVendorIds);
-#endif
-
-        public static bool SetUserConsentStatus(string enabledPurposeIds, string disabledPurposeIds, string enabledVendorIds, string disabledVendorIds)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            var result = setUserConsentStatus(enabledPurposeIds, disabledPurposeIds, enabledVendorIds, disabledVendorIds);
-            return result == 1;
-#else
-            return false;
 #endif
         }
 

@@ -1,116 +1,163 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using static IO.Didomi.SDK.IOS.IOSObjectMapper;
 
 namespace IO.Didomi.SDK
 {
     [Serializable]
     public class Vendor
     {
-        private string id;
-
-        private string name;
-
-        private string privacyPolicyUrl;
+        /// <summary>
+        /// Unique id of the vendor provided by Didomi. This id does not include prefixes. Example: "vendor-1".
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; } = "";
 
         /// <summary>
-        /// Vendor namespace (iab, didomi or custom)
+        /// Name of the vendor.
         /// </summary>
-        private string @namespace;
+        [JsonProperty("name")]
+        public string Name { get; set; } = "";
+
+        /// <summary>
+        /// Namespaces of the vendor (IAB, num) and their corresponding ids.
+        /// </summary>
+        [JsonProperty("namespaces")]
+        public Vendor.Namespaces? namespaces;
+
+        /// <summary>
+        /// Privacy policy URL(replaced by urls in IAB TCF v2.2)
+        /// </summary>
+        [JsonProperty("policyUrl")]
+        public string? PolicyUrl { get; set; }
 
         /// <summary>
         /// Purposes with legal basis "consent"
         /// </summary>
-        private IList<string> purposeIds;
+        [JsonProperty("purposeIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
+        public IList<string> PurposeIds { get; set; } = new List<string>();
 
         /// <summary>
         /// Purposes with legal basis "legitimate interest"
         /// </summary>
-        private IList<string> legIntPurposeIds;
+        [JsonProperty("legIntPurposeIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
+        public IList<string> LegIntPurposeIds { get; set; } = new List<string>();
 
         /// <summary>
-        /// For custom or Didomi vendors, we allow mapping back to IAB IDs to override IAB vendors definition
+        /// List with IDs that represent features.
         /// </summary>
-        private string iabId;
+        [JsonProperty("featureIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
+        public IList<string> FeatureIds { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Set with IDs that represent flexible purposes.
+        /// </summary>
+        [JsonProperty("flexiblePurposeIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
+        public IList<string> FlexiblePurposeIds { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Set with IDs that represent Special Features.
+        /// </summary>
+        [JsonProperty("specialFeatureIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
+        public IList<string> SpecialFeatureIds { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Set with IDs that represent Special Purposes.
+        /// </summary>
+        [JsonProperty("specialPurposeIds")]
+        [JsonConverter(typeof(JsonListStringConverter))]
+        public IList<string> SpecialPurposeIds { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Privacy policy and LI disclaimer urls. Introduced in IAB TCF v2.2.
+        /// </summary>
+        [JsonProperty("urls")]
+        [JsonConverter(typeof(JsonSetVendorUrlConverter))]
+        public ISet<Vendor.Url>? Urls { get; set; }
+
+        [Obsolete("Use PolicyUrl instead")]
+        public string? PrivacyPolicyUrl => PolicyUrl;
 
         public Vendor(
             string id,
             string name,
-            string privacyPolicyUrl,
-            string @namespace,
-                IList<string> purposeIds,
-                IList<string> legIntPurposeIds,
-                string iabId
-            )
-        {
-            this.id = id;
-            this.name = name;
-            this.privacyPolicyUrl = privacyPolicyUrl;
-            this.@namespace = @namespace;
-            this.purposeIds = purposeIds;
-            this.legIntPurposeIds = legIntPurposeIds;
-            this.iabId = iabId;
+            Namespaces? namespaces,
+            string? policyUrl,
+            IList<string> purposeIds,
+            IList<string> legIntPurposeIds,
+            IList<string> featureIds,
+            IList<string> flexiblePurposeIds,
+            IList<string> specialFeatureIds,
+            IList<string> specialPurposeIds,
+            ISet<Url>? urls
+        ) {
+            this.Id = id;
+            this.Name = name;
+            this.namespaces = namespaces;
+            this.PolicyUrl = policyUrl;
+            this.PurposeIds = purposeIds;
+            this.LegIntPurposeIds = legIntPurposeIds;
+            this.FeatureIds = featureIds;
+            this.FlexiblePurposeIds = flexiblePurposeIds;
+            this.SpecialFeatureIds = specialFeatureIds;
+            this.SpecialPurposeIds = specialPurposeIds;
+            this.Urls = urls;
         }
 
-        public string GetId()
+        public Namespaces? GetNamespaces()
         {
-            return id;
+            return namespaces;
         }
 
-        public void SetId(string id)
+        public void setNamespaces(Namespaces? namespaces)
         {
-            this.id = id;
+            this.namespaces = namespaces;
         }
 
-        public string GetName()
+        [Serializable]
+        public class Namespaces : Numerable
         {
-            return name;
-        }
+            [JsonProperty("iab2")]
+            public string? Iab2 { get; set; }
 
-        public string GetPrivacyPolicyUrl()
-        {
-            return privacyPolicyUrl;
-        }
+            /// <summary>
+            /// Always null on iOS
+            /// </summary>
+            [JsonProperty("num")]
+            public int? Num { get; set; }
 
-        public string GetNamespace() { return @namespace; }
-
-        public IList<string> GetPurposeIds()
-        {
-            if (purposeIds == null)
+            public Namespaces(string? iab2, int? num)
             {
-                purposeIds = new List<string>();
+                this.Iab2 = iab2;
+                this.Num = num;
             }
-
-            return purposeIds;
         }
 
-        public IList<string> GetLegIntPurposeIds()
+        [Serializable]
+        public class Url
         {
-            if (legIntPurposeIds == null)
+            [JsonProperty("langId")]
+            public string? LangId { get; set; }
+
+            [JsonProperty("privacy")]
+            public string? Privacy { get; set; }
+
+            [JsonProperty("legIntClaim")]
+            public string? LegIntClaim { get; set; }
+
+            public Url(string? langId, string? privacy, string? legIntClaim)
             {
-                legIntPurposeIds = new List<string>();
+                this.LangId = langId;
+                this.Privacy = privacy;
+                this.LegIntClaim = legIntClaim;
             }
-
-            return legIntPurposeIds;
-        }
-
-        public void SetPurposeIds(List<string> purposeIds)
-        {
-            this.purposeIds = purposeIds;
-        }
-
-        public void SetLegIntPurposeIds(List<string> legIntPurposeIds)
-        {
-            this.legIntPurposeIds = legIntPurposeIds;
-        }
-
-        public void SetNamespace(string @namespace)
-        {
-            this.@namespace = @namespace;
-        }
-
-        public string GetIabId()
-        {
-            return iabId;
         }
 
         /// <summary>
@@ -124,10 +171,15 @@ namespace IO.Didomi.SDK
 
             foreach (Vendor vendor in vendors)
             {
-                vendorIds.Add(vendor.GetId());
+                vendorIds.Add(vendor.Id);
             }
 
             return vendorIds;
         }
     }
+}
+
+public interface Numerable
+{
+    int? Num { get; set; }
 }

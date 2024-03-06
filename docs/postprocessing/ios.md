@@ -63,21 +63,6 @@ In Unity we have UnityGetGLViewController to take view controller. We used Unity
 
 ### 9- Problem & Solution
 
-getDisabledPurposes
-getDisabledVendors
-getEnabledPurposes
-getEnabledVendors
-getPurpose
-getRequiredPurposes
-getRequiredVendors
-getVendor
-
-above functions have struct type as return type. For that reason @objc cannot be placed before function declaration.
-The functions are not usable at objective-c. Since Unity generates Objective-C, So they are not usable at UNITY, when you are building for IOS.
-
-
-### 10- Problem & Solution
-
 IL2CPP doesnot allow marshalling instance methods.
 
 In order to give function as pointer to cpp, we have to give it as static method.

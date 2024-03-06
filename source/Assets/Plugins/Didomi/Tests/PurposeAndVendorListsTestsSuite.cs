@@ -37,8 +37,6 @@ public class PurposeAndVendorListsTestsSuite: DidomiBaseTests
     public void TestPurposesAndVendorsCountAfterReset()
     {
         AssertHasRequiredPurposesAndVendors(true);
-        AssertHasEnabledPurposesAndVendors(false);
-        AssertHasDisabledPurposesAndVendors(false);
     }
 
     [UnityTest]
@@ -48,8 +46,6 @@ public class PurposeAndVendorListsTestsSuite: DidomiBaseTests
         yield return new WaitUntil(() => consentChanged);
 
         AssertHasRequiredPurposesAndVendors(true);
-        AssertHasEnabledPurposesAndVendors(true);
-        AssertHasDisabledPurposesAndVendors(false);
     }
 
     [UnityTest]
@@ -59,8 +55,6 @@ public class PurposeAndVendorListsTestsSuite: DidomiBaseTests
         yield return new WaitUntil(() => consentChanged);
 
         AssertHasRequiredPurposesAndVendors(true);
-        AssertHasEnabledPurposesAndVendors(false);
-        AssertHasDisabledPurposesAndVendors(true);
     }
 
     /**
@@ -71,26 +65,6 @@ public class PurposeAndVendorListsTestsSuite: DidomiBaseTests
     {
         AssertEmptiness(Didomi.GetInstance().GetRequiredPurposeIds(), hasRequiredElements, "requiredPurposeIds");
         AssertEmptiness(Didomi.GetInstance().GetRequiredVendorIds(), hasRequiredElements, "requiredVendorIds");
-    }
-
-    /**
-     * Check enabled purposes and vendors
-     * @param hasEnabledElements whether the enabled vendors and purposes list should be populated
-     */
-    private void AssertHasEnabledPurposesAndVendors(bool hasEnabledElements)
-    {
-        AssertEmptiness(Didomi.GetInstance().GetEnabledPurposeIds(), hasEnabledElements, "enabledPurposeIds");
-        AssertEmptiness(Didomi.GetInstance().GetEnabledVendorIds(), hasEnabledElements, "enabledVendorIds");
-    }
-
-    /**
-     * Check disabled purposes and vendors
-     * @param hasDisabledElements whether the disabled vendors and purposes list should be populated
-     */
-    private void AssertHasDisabledPurposesAndVendors(bool hasDisabledElements)
-    {
-        AssertEmptiness(Didomi.GetInstance().GetDisabledPurposeIds(), hasDisabledElements, "disabledPurposeIds");
-        AssertEmptiness(Didomi.GetInstance().GetDisabledVendorIds(), hasDisabledElements, "disabledVendorIds");
     }
 
     /**

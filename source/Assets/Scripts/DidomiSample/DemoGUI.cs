@@ -17,14 +17,11 @@ public enum ViewKind
 public enum FunctionCategory
 {
     None,
-    Purpose_1,
-    Purpose_2,
-    Vendor_1,
-    Vendor_2,
+    Purpose,
+    Vendor,
     SetUser,
     SetUserStatus,
     Consent_3,
-    Legitimate,
     Notice,
     Preferences,
     Language,
@@ -35,7 +32,6 @@ public enum FunctionCategory
 
 public class DemoGUI : MonoBehaviour
 {
-    private const string NotCallableForObjectiveC= "The function is not callable for IOS platform. Check IOS-SDK doc. Since Unity creates Objective-C, It is not callable.";
     private const string NullText = "null";
     
     GameObject labelResult;
@@ -137,21 +133,13 @@ public class DemoGUI : MonoBehaviour
 
     void ShowFunctionButtons()
     {
-        if (functionCategory == FunctionCategory.Purpose_1)
+         if (functionCategory == FunctionCategory.Purpose)
         {
-            Purpose_1();
+            Purpose();
         }
-        else if (functionCategory == FunctionCategory.Purpose_2)
+        else if (functionCategory == FunctionCategory.Vendor)
         {
-            Purpose_2();
-        }
-        else if (functionCategory == FunctionCategory.Vendor_1)
-        {
-            Vendor_1();
-        }
-        else if (functionCategory == FunctionCategory.Vendor_2)
-        {
-            Vendor_2();
+            Vendor();
         }
         else if (functionCategory == FunctionCategory.SetUser)
         {
@@ -164,10 +152,6 @@ public class DemoGUI : MonoBehaviour
         else if (functionCategory == FunctionCategory.Consent_3)
         {
             Consent_3();
-        }
-        else if (functionCategory == FunctionCategory.Legitimate)
-        {
-            Legitimate();
         }
         else if (functionCategory == FunctionCategory.Notice)
         {
@@ -212,24 +196,14 @@ public class DemoGUI : MonoBehaviour
             functionCategory = FunctionCategory.Preferences;
         }
 
-        if (GUI.Button(GetRightRect1(), "Purpose-1"))
+        if (GUI.Button(GetLeftRect2(), "Purpose"))
         {
-            functionCategory = FunctionCategory.Purpose_1;
+            functionCategory= FunctionCategory.Purpose;
         }
 
-        if (GUI.Button(GetLeftRect2(), "Purpose-2"))
+        if (GUI.Button(GetRightRect2(), "Vendor"))
         {
-            functionCategory= FunctionCategory.Purpose_2;
-        }
-
-        if (GUI.Button(GetMiddleRect2(), "Vendor-1"))
-        {
-            functionCategory = FunctionCategory.Vendor_1;
-        }
-
-        if (GUI.Button(GetRightRect2(), "Vendor-2"))
-        {
-            functionCategory = FunctionCategory.Vendor_2;
+            functionCategory = FunctionCategory.Vendor;
         }
 
         if (GUI.Button(GetLeftRect3(), "SetUser"))
@@ -262,76 +236,19 @@ public class DemoGUI : MonoBehaviour
             functionCategory = FunctionCategory.Events;
         }
 
-        if (GUI.Button(GetLeftRect5(), "Legitimate"))
-        {
-            functionCategory = FunctionCategory.Legitimate;
-        }
-
         if (GUI.Button(GetMiddleRect5(), "GetUserStatus"))
         {
             functionCategory = FunctionCategory.GetUserStatus;
         }
     }
 
-    private void Purpose_1()
-    {
-        if (GUI.Button(GetFuncRect1(), "GetEnabledPurposes"))
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetEnabledPurposes();
-                message += "GetEnabledPurposes" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
-        }
-
-        if (GUI.Button(GetFuncRect2(), "GetEnabledPurposeIds"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().GetEnabledPurposeIds();
-            message += "GetEnabledPurposeIds" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect3(), "GetDisabledPurposes"))
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetDisabledPurposes();
-                message += "GetDisabledPurposes" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
-        }
-
-        if (GUI.Button(GetFuncRect4(), "GetDisabledPurposeIds"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().GetDisabledPurposeIds();
-            message += "GetDisabledPurposeIds" + MessageForObject(retval);
-        }
-    }
-
-    private void Purpose_2()
+    private void Purpose()
     {
         if (GUI.Button(GetFuncRect1(), "GetRequiredPurposes"))
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetRequiredPurposes();
-                message = "GetRequiredPurposes" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
+            message = string.Empty;
+            var retval = Didomi.GetInstance().GetRequiredPurposes();
+            message = "GetRequiredPurposes" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect2(), "GetRequiredPurposeIds"))
@@ -343,79 +260,20 @@ public class DemoGUI : MonoBehaviour
 
         if (GUI.Button(GetFuncRect3(), "GetPurpose"))
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var purposeId = GetFirstRequiredPurposeId();
-                var retval = Didomi.GetInstance().GetPurpose(purposeId);
-                message += "GetPurpose" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
+            message = string.Empty;
+            var purposeId = GetFirstRequiredPurposeId();
+            var retval = Didomi.GetInstance().GetPurpose(purposeId);
+            message += "GetPurpose" + MessageForObject(retval);
         }
     }
 
-    private void Vendor_1()
-    {
-        if (GUI.Button(GetFuncRect1(), "GetEnabledVendors"))
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetEnabledVendors();
-                message += "GetEnabledVendors" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
-        }
-
-        if (GUI.Button(GetFuncRect2(), "GetEnabledVendorIds"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().GetEnabledVendorIds();
-            message += "GetEnabledVendorIds" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect3(), "GetDisabledVendors"))
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetDisabledVendors();
-                message += "GetDisabledVendors" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
-        }
-
-        if (GUI.Button(GetFuncRect4(), "GetDisabledVendorIds"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().GetDisabledVendorIds();
-            message += "GetDisabledVendorIds" + MessageForObject(retval);
-        }
-    }
-
-    private void Vendor_2()
+    private void Vendor()
     {
         if (GUI.Button(GetFuncRect1(), "GetRequiredVendors"))
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var retval = Didomi.GetInstance().GetRequiredVendors();
-                message = "GetRequiredVendors" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
+            message = string.Empty;
+            var retval = Didomi.GetInstance().GetRequiredVendors();
+            message = "GetRequiredVendors" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect2(), "GetRequiredVendorIds"))
@@ -427,17 +285,10 @@ public class DemoGUI : MonoBehaviour
 
         if (GUI.Button(GetFuncRect3(), "GetVendor"))
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                message = string.Empty;
-                var vendorId = GetFirstRequiredVendorId();
-                var retval = Didomi.GetInstance().GetVendor(vendorId);
-                message += "GetVendor" + MessageForObject(retval);
-            }
-            else
-            {
-                message = NotCallableForObjectiveC;
-            }
+            message = string.Empty;
+            var vendorId = GetFirstRequiredVendorId();
+            var retval = Didomi.GetInstance().GetVendor(vendorId);
+            message += "GetVendor" + MessageForObject(retval);
         }
     }
 
@@ -464,33 +315,6 @@ public class DemoGUI : MonoBehaviour
             UserAuthParams parameters = new UserAuthWithEncryptionParams("efgh", "algorithm", "secret", "vector");
             Didomi.GetInstance().SetUser(parameters);
             message += "Calling SetUser with Encryption params";
-        }
-    }
-
-    private void Legitimate()
-    {
-        if (GUI.Button(GetFuncRect1(), $"GetUserLegitimate{Environment.NewLine}InterestStatusForPurpose"))
-        {
-            message = string.Empty;
-            var purposeId = GetFirstRequiredPurposeId();
-            var retval = Didomi.GetInstance().GetUserLegitimateInterestStatusForPurpose(purposeId);
-            message += "GetUserLegitimateInterestStatusForPurpose" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect2(), $"GetUserLegitimate{Environment.NewLine}InterestStatusForVendor"))
-        {
-            message = string.Empty;
-            var vendorId = GetFirstRequiredVendorId();
-            var retval = Didomi.GetInstance().GetUserLegitimateInterestStatusForVendor(vendorId);
-            message += "GetUserLegitimateInterestStatusForVendor" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect3(), $"GetUserLegitimateInterestStatus{Environment.NewLine}ForVendorAndRequiredPurposes"))
-        {
-            message = string.Empty;
-            var vendorId = GetFirstRequiredVendorId();
-            var retval = Didomi.GetInstance().GetUserLegitimateInterestStatusForVendorAndRequiredPurposes(vendorId);
-            message += "GetUserLegitimateInterestStatusForVendorAndRequiredPurposes" + MessageForObject(retval);
         }
     }
 
@@ -1147,45 +971,70 @@ public class DemoGUI : MonoBehaviour
 
     private string ToMessage(Purpose purpose)
     {
-        var id = purpose.GetId() ?? string.Empty;
-        var iabId = purpose.GetIabId() ?? string.Empty;
-        var name = purpose.GetName() ?? string.Empty;
-        var description = purpose.GetDescription() ?? string.Empty;
-        var isCustom = purpose.IsCustom();
+        var id = purpose.Id ?? string.Empty;
+        var name = purpose.Name ?? string.Empty;
+        var descriptionText = purpose.DescriptionText ?? string.Empty;
 
         var nl = Environment.NewLine;
 
-        return $"Purpose {nl} id: {id + nl} iabId: {iabId + nl} name: {name + nl} description: {description + nl} isCustom: {isCustom + nl}";
+        return $"Purpose {nl} id: {id + nl} name: {name + nl} descriptionText: {descriptionText + nl}";
     }
 
     private string ToMessage(Vendor vendor)
     {
 
-        var id = vendor.GetId() ?? NullText;
-        var name = vendor.GetName() ?? NullText;
-        var privacyPolicyUrl = vendor.GetPrivacyPolicyUrl() ?? NullText;
-        var @namespace = vendor.GetNamespace() ?? NullText;
+        var id = vendor.Id ?? NullText;
+        var name = vendor.Name ?? NullText;
+        var policyUrl = vendor.PolicyUrl ?? NullText;
+        var namespaces = vendor.GetNamespaces()?.ToString() ?? NullText;
 
         var purposeIds = NullText;
-        var purposeIdList = vendor.GetPurposeIds();
+        var purposeIdList = vendor.PurposeIds;
         if (purposeIdList != null)
         {
             purposeIds = ToMessage(purposeIdList);
         }
 
         var legIntPurposeIds = NullText;
-        var legIntPurposeIdList = vendor.GetLegIntPurposeIds();
+        var legIntPurposeIdList = vendor.LegIntPurposeIds;
         if (legIntPurposeIdList != null)
         {
             legIntPurposeIds = ToMessage(legIntPurposeIdList);
         }
 
+        var featureIds = NullText;
+        var featureIdList = vendor.FeatureIds;
+        if (featureIdList != null)
+        {
+            featureIds = ToMessage(featureIdList);
+        }
 
-        var iabId = vendor.GetIabId() ?? NullText;
+        var flexiblePurposeIds = NullText;
+        var flexiblePurposeIdList = vendor.FlexiblePurposeIds;
+        if (flexiblePurposeIdList != null)
+        {
+            flexiblePurposeIds = ToMessage(flexiblePurposeIdList);
+        }
+
+        var specialFeatureIds = NullText;
+        var specialFeatureIdList = vendor.SpecialFeatureIds;
+        if (specialFeatureIdList != null)
+        {
+            specialFeatureIds = ToMessage(specialFeatureIdList);
+        }
+
+        var specialPurposeIds = NullText;
+        var specialPurposeIdList = vendor.SpecialFeatureIds;
+        if (specialPurposeIdList != null)
+        {
+            specialPurposeIds = ToMessage(specialPurposeIdList);
+        }
+
+        var urls = vendor.Urls?.ToString() ?? NullText;
 
         var nl = Environment.NewLine;
 
-        return $"Purpose {nl} id: {id + nl} name: {name + nl} privacyPolicyUrl: {privacyPolicyUrl + nl} @namespace: {@namespace + nl} purposeIds: {purposeIds + nl} legIntPurposeIds: {legIntPurposeIds + nl} iabId: {iabId + nl}";
+        return $"Vendor {nl} id: {id + nl} name: {name + nl} policyUrl: {policyUrl + nl} namespaces: {namespaces + nl} purposeIds: {purposeIds + nl} legIntPurposeIds: {legIntPurposeIds + nl} featureIds: {featureIds + nl} flexiblePurposeIds: {flexiblePurposeIds + nl} specialFeatureIds: {specialFeatureIds + nl} specialPurposeIds: {specialPurposeIds + nl} urls: {urls + nl}";
     }
 
     private string ToMessage(IDictionary<string, string> dict)
