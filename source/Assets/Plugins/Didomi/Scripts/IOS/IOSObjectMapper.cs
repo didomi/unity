@@ -146,7 +146,9 @@ namespace IO.Didomi.SDK.IOS
             {
                 try
                 {
-                    result = JsonConvert.DeserializeObject<ISet<Purpose>>(jsonText);
+                    // We have to convert it to list first, as direct conversion to HashSet fails on iOS
+                    List<Purpose> resultAsList = JsonConvert.DeserializeObject<List<Purpose>>(jsonText);
+                    result = new HashSet<Purpose>(resultAsList);
                 }
                 catch (Exception ex)
                 {
@@ -184,7 +186,9 @@ namespace IO.Didomi.SDK.IOS
             {
                 try
                 {
-                    result = JsonConvert.DeserializeObject<ISet<Vendor>>(jsonText);
+                    // We have to convert it to list first, as direct conversion to HashSet fails on iOS
+                    List<Vendor> resultAsList = JsonConvert.DeserializeObject<List<Vendor>>(jsonText);
+                    result = new HashSet<Vendor>(resultAsList);
                 }
                 catch (Exception ex)
                 {

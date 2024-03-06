@@ -39,21 +39,22 @@ public class PurposeAndVendorTestsSuite: DidomiBaseTests
     [Test]
     public void TestGetVendor()
     {
-        // var requiredVendorSet = Didomi.GetInstance().GetRequiredVendors();
-        // Assert.False(requiredVendorSet.Count == 0, "No required vendors found");
+        var requiredVendorSet = Didomi.GetInstance().GetRequiredVendors();
+        Assert.False(requiredVendorSet.Count == 0, "No required vendors found");
 
         var requiredVendorIdSet = Didomi.GetInstance().GetRequiredVendorIds();
-        // Assert.AreEqual(requiredVendorIdSet.Count, requiredVendorSet.Count, "Mismatch between required vendors and required vendor IDs");
+        Assert.AreEqual(requiredVendorIdSet.Count, requiredVendorSet.Count, "Mismatch between required vendors and required vendor IDs");
 
         var vendorId = requiredVendorIdSet.FirstOrDefault();
         Assert.False(string.IsNullOrEmpty(vendorId), "Invalid 1st vendor");
-
         var vendor = Didomi.GetInstance().GetVendor(vendorId);
         Assert.NotNull(vendor, "Can't find Vendor with ID: " + vendorId);
 
         var vendorName = vendor?.Name;
         Assert.False(string.IsNullOrEmpty(vendorName), "Invalid vendor name");
+        Assert.IsNotEmpty(vendor.Urls);
+        Assert.IsNotNull(vendor.Urls.First().LangId);
 
-        // Assert.NotNull(requiredVendorSet.FirstOrDefault(obj => obj.Name == vendorName), "Vendor not found in required vendors list with name: " + vendorName);
+        Assert.NotNull(requiredVendorSet.FirstOrDefault(obj => obj.Name == vendorName), "Vendor not found in required vendors list with name: " + vendorName);
     }
 }
