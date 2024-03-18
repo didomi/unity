@@ -11,6 +11,7 @@ using IO.Didomi.SDK.Events;
 public class CurrentUserStatusTestsSuite: DidomiBaseTests
 {
     private bool consentChanged = false;
+    private CurrentUserStatus.VendorStatus updatedVendorStatus = null;
 
     // Tested vendor: 2KDirect, Inc. (dba iPromote).
     string vendorId = "ipromote";
@@ -191,8 +192,35 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
         Assert.IsFalse(result, "Consent not changed");
     }
 
+    [UnityTest]
+    public IEnumerator TestVendorStatusListener()
+    {
+        DidomiVendorStatusListener vendorStatusListener = new DidomiVendorStatusListener();
+        vendorStatusListener.VendorStatusChanged += VendorStatusListener_VendorStatusChanged;
+        Didomi.GetInstance().AddVendorStatusListener(vendorId, vendorStatusListener);
+
+        Didomi.GetInstance().SetUserAgreeToAll();
+        yield return new WaitUntil(() => consentChanged);
+
+        Assert.IsNotNull(updatedVendorStatus);
+        Assert.AreEqual(vendorId, updatedVendorStatus.Id);
+        Assert.IsTrue(updatedVendorStatus.Enabled);
+
+        Didomi.GetInstance().SetUserDisagreeToAll();
+        yield return new WaitUntil(() => consentChanged);
+
+        Assert.IsNotNull(updatedVendorStatus);
+        Assert.AreEqual(vendorId, updatedVendorStatus.Id);
+        Assert.IsFalse(updatedVendorStatus.Enabled);
+    }
+
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)
     {
         consentChanged = true;
+    }
+
+    private void VendorStatusListener_VendorStatusChanged(object sender, CurrentUserStatus.VendorStatus status)
+    {
+        updatedVendorStatus = status;
     }
 }
