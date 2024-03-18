@@ -100,6 +100,25 @@ namespace IO.Didomi.SDK.IOS
             return result;
         }
 
+        public static VendorStatus ConvertToVendorStatus(string jsonText)
+        {
+            VendorStatus result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject<VendorStatus>(jsonText);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
         public static UserStatus ConvertToUserStatus(string jsonText)
         {
             UserStatus result = null;

@@ -11,6 +11,7 @@ namespace IO.Didomi.SDK.Interfaces
     {
         void AddEventListener(DidomiEventListener eventListener);
         void AddVendorStatusListener(string vendorId, DidomiVendorStatusListener vendorStatusListener);
+        void RemoveVendorStatusListener(string vendorId);
         string GetJavaScriptForWebView();
         Purpose GetPurpose(string purposeId);
         ISet<string> GetRequiredPurposeIds();

@@ -36,6 +36,11 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethod("addVendorStatusListener", vendorId, vendorStatusListenerProxy);
         }
 
+        public void RemoveVendorStatusListener(string vendorId)
+        {
+            CallVoidMethod("removeVendorStatusListener", vendorId);
+        }
+
         public string GetJavaScriptForWebView()
         {
             return CallReturningStringMethod("getJavaScriptForWebView");

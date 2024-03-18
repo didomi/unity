@@ -1,7 +1,9 @@
 ﻿using Assets.Plugins.Scripts.IOS;
 using IO.Didomi.SDK.Events;
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEngine;
 
 namespace IO.Didomi.SDK.IOS
 {
@@ -548,6 +550,47 @@ namespace IO.Didomi.SDK.IOS
                     break;
             }
 
+        }
+
+        public delegate void OnVendorStatusListenerDelegate(string vendorStatus);
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern void addVendorStatusListener(string vendorId, OnVendorStatusListenerDelegate vendorStatusListenerDelegate);
+#endif
+
+        public static void AddVendorStatusListener(string vendorId, DidomiVendorStatusListener vendorStatusListener)
+        {
+            vendorStatusListenersInner.Add(vendorId, vendorStatusListener);
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            addVendorStatusListener(vendorId, CallOnVendorStatusListenerDelegate);
+#endif
+        }
+
+        static Dictionary<string, DidomiVendorStatusListener> vendorStatusListenersInner = new Dictionary<string, DidomiVendorStatusListener>();
+
+        [AOT.MonoPInvokeCallback(typeof(OnVendorStatusListenerDelegate))]
+        static void CallOnVendorStatusListenerDelegate(string vendorStatusJson)
+        {
+            CurrentUserStatus.VendorStatus vendorStatus = IOSObjectMapper.ConvertToVendorStatus(vendorStatusJson);
+            var vendorStatusListener = vendorStatusListenersInner[vendorStatus.Id];
+            if (vendorStatusListener != null)
+            {
+                vendorStatusListener.OnVendorStatusChanged(vendorStatus);
+            }
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern void removeVendorStatusListener(string vendorId);
+#endif
+
+        public static void RemoveVendorStatusListener(string vendorId)
+        {
+            vendorStatusListenersInner.Remove(vendorId);
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            removeVendorStatusListener(vendorId);
+#endif
         }
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR

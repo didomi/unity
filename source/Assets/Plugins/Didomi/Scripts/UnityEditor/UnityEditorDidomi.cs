@@ -25,6 +25,11 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
+        public void RemoveVendorStatusListener(string vendorId)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Disables showing mock UIs If platform is Unity Editor.
         /// </summary>

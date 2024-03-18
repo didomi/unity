@@ -202,16 +202,24 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
         Didomi.GetInstance().SetUserAgreeToAll();
         yield return new WaitUntil(() => consentChanged);
 
-        Assert.IsNotNull(updatedVendorStatus);
-        Assert.AreEqual(vendorId, updatedVendorStatus.Id);
-        Assert.IsTrue(updatedVendorStatus.Enabled);
+        Assert.IsNotNull(updatedVendorStatus, "Vendor status should be updated after SetUserAgreeToAll");
+        Assert.AreEqual(vendorId, updatedVendorStatus.Id, "Check vendor id after SetUserAgreeToAll");
+        Assert.IsTrue(updatedVendorStatus.Enabled, "Vendor status should be enabled after SetUserAgreeToAll");
 
         Didomi.GetInstance().SetUserDisagreeToAll();
         yield return new WaitUntil(() => consentChanged);
 
-        Assert.IsNotNull(updatedVendorStatus);
-        Assert.AreEqual(vendorId, updatedVendorStatus.Id);
-        Assert.IsFalse(updatedVendorStatus.Enabled);
+        Assert.IsNotNull(updatedVendorStatus, "Vendor status should be updated after SetUserDisagreeToAll");
+        Assert.AreEqual(vendorId, updatedVendorStatus.Id, "Check vendor id after SetUserDisagreeToAll");
+        Assert.IsFalse(updatedVendorStatus.Enabled, "Vendor status should be disabled after SetUserDisagreeToAll");
+
+        updatedVendorStatus = null;
+        Didomi.GetInstance().RemoveVendorStatusListener(vendorId);
+
+        Didomi.GetInstance().SetUserAgreeToAll();
+        yield return new WaitUntil(() => consentChanged);
+
+        Assert.IsNull(updatedVendorStatus, "Vendor status should be updated as listener was removed");
     }
 
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)

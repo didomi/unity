@@ -51,7 +51,12 @@ namespace IO.Didomi.SDK.IOS
 
         public void AddVendorStatusListener(string vendorId, DidomiVendorStatusListener vendorStatusListener)
         {
-            // Not implemented
+            DidomiFramework.AddVendorStatusListener(vendorId, vendorStatusListener);
+        }
+
+        public void RemoveVendorStatusListener(string vendorId)
+        {
+            DidomiFramework.RemoveVendorStatusListener(vendorId);
         }
 
         public string GetJavaScriptForWebView()
