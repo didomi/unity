@@ -72,6 +72,25 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Add a vendor status listener
+        /// </summary>
+        /// <param name="vendorId">Id of the requested vendor</param>
+        /// <param name="vendorStatusListener"></param>
+        public void AddVendorStatusListener(string vendorId, DidomiVendorStatusListener vendorStatusListener)
+        {
+            didomiForPlatform.AddVendorStatusListener(vendorId, vendorStatusListener);
+        }
+
+        /// <summary>
+        /// Remove vendor status listeners for a specific vendor
+        /// </summary>
+        /// <param name="vendorId">Id of the requested vendor</param>
+        public void RemoveVendorStatusListener(string vendorId)
+        {
+            didomiForPlatform.RemoveVendorStatusListener(vendorId);
+        }
+
+        /// <summary>
         /// Disables or enables showing mock UIs If platform is Unity Editor.
         /// </summary>
         /// <param name="disable">True disables, otherwise false.</param>

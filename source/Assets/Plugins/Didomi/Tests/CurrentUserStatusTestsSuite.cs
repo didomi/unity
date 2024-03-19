@@ -11,6 +11,7 @@ using IO.Didomi.SDK.Events;
 public class CurrentUserStatusTestsSuite: DidomiBaseTests
 {
     private bool consentChanged = false;
+    private CurrentUserStatus.VendorStatus updatedVendorStatus = null;
 
     // Tested vendor: 2KDirect, Inc. (dba iPromote).
     string vendorId = "ipromote";
@@ -191,8 +192,43 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
         Assert.IsFalse(result, "Consent not changed");
     }
 
+    [UnityTest]
+    public IEnumerator TestVendorStatusListener()
+    {
+        DidomiVendorStatusListener vendorStatusListener = new DidomiVendorStatusListener();
+        vendorStatusListener.VendorStatusChanged += VendorStatusListener_VendorStatusChanged;
+        Didomi.GetInstance().AddVendorStatusListener(vendorId, vendorStatusListener);
+
+        Didomi.GetInstance().SetUserAgreeToAll();
+        yield return new WaitUntil(() => consentChanged);
+
+        Assert.IsNotNull(updatedVendorStatus, "Vendor status should be updated after SetUserAgreeToAll");
+        Assert.AreEqual(vendorId, updatedVendorStatus.Id, "Check vendor id after SetUserAgreeToAll");
+        Assert.IsTrue(updatedVendorStatus.Enabled, "Vendor status should be enabled after SetUserAgreeToAll");
+
+        Didomi.GetInstance().SetUserDisagreeToAll();
+        yield return new WaitUntil(() => consentChanged);
+
+        Assert.IsNotNull(updatedVendorStatus, "Vendor status should be updated after SetUserDisagreeToAll");
+        Assert.AreEqual(vendorId, updatedVendorStatus.Id, "Check vendor id after SetUserDisagreeToAll");
+        Assert.IsFalse(updatedVendorStatus.Enabled, "Vendor status should be disabled after SetUserDisagreeToAll");
+
+        updatedVendorStatus = null;
+        Didomi.GetInstance().RemoveVendorStatusListener(vendorId);
+
+        Didomi.GetInstance().SetUserAgreeToAll();
+        yield return new WaitUntil(() => consentChanged);
+
+        Assert.IsNull(updatedVendorStatus, "Vendor status should be updated as listener was removed");
+    }
+
     private void EventListener_ConsentChanged(object sender, ConsentChangedEvent e)
     {
         consentChanged = true;
+    }
+
+    private void VendorStatusListener_VendorStatusChanged(object sender, CurrentUserStatus.VendorStatus status)
+    {
+        updatedVendorStatus = status;
     }
 }

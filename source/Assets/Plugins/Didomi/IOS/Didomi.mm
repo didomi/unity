@@ -115,6 +115,17 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
 }
 
 /**
+ Map vendor status from DDMCurrentUserStatusVendor to a JSON string.
+ */
+char* MapCurrentUserStatusVendor(DDMCurrentUserStatusVendor *vendorStatus) {
+    NSDictionary *vendorStatusJson = @{
+        @"id": [vendorStatus id],
+        @"enabled": [NSNumber numberWithInt: convertBoolToInt([vendorStatus enabled])]
+    };
+    return ConvertComplexDictionaryToString(vendorStatusJson);
+}
+
+/**
  Method used to map user status from DDMUserStatus to a JSON string.
  */
 char* MapUserStatus(DDMUserStatus *userStatus) {
@@ -943,6 +954,19 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
    [[Didomi shared] addEventListenerWithListener:eventListener];
 
+}
+
+void addVendorStatusListener( char* vendorId, void (*vendor_status_listener_handler) (char *))
+{
+    [[Didomi shared] addVendorStatusListenerWithId: CreateNSString(vendorId) :^(DDMCurrentUserStatusVendor * _Nonnull vendorStatus){
+        char *vendorStatusJson = MapCurrentUserStatusVendor(vendorStatus);
+        vendor_status_listener_handler(vendorStatusJson);
+    }];
+}
+
+void removeVendorStatusListener( char* vendorId)
+{
+    [[Didomi shared] removeVendorStatusListenerWithId: CreateNSString(vendorId)];
 }
 
 }
