@@ -111,7 +111,12 @@ namespace IO.Didomi.SDK.IOS
              ISet<string> disabledPurposes
         )
         {
-            throw new NotImplementedException();
+            return DidomiFramework.CommitCurrentUserStatusTransaction(
+                IOSObjectMapper.ConvertFromHashSetStringToJson(enabledVendors),
+                IOSObjectMapper.ConvertFromHashSetStringToJson(disabledVendors),
+                IOSObjectMapper.ConvertFromHashSetStringToJson(enabledPurposes),
+                IOSObjectMapper.ConvertFromHashSetStringToJson(disabledPurposes)
+            );
         }
 
         public UserStatus GetUserStatus()
