@@ -22,6 +22,12 @@ namespace IO.Didomi.SDK.Interfaces
         string GetTranslatedText(string key);
         CurrentUserStatus GetCurrentUserStatus();
         bool SetCurrentUserStatus(CurrentUserStatus status);
+        bool CommitCurrentUserStatusTransaction(
+             ISet<string> enabledVendors,
+             ISet<string> disabledVendors,
+             ISet<string> enabledPurposes,
+             ISet<string> disabledPurposes
+        );
         UserStatus GetUserStatus();
         Vendor GetVendor(string vendorId);
         void HideNotice();

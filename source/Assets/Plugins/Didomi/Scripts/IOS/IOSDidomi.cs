@@ -104,6 +104,16 @@ namespace IO.Didomi.SDK.IOS
             return DidomiFramework.SetCurrentUserStatus(purposes, vendors);
         }
 
+        public bool CommitCurrentUserStatusTransaction(
+             ISet<string> enabledVendors,
+             ISet<string> disabledVendors,
+             ISet<string> enabledPurposes,
+             ISet<string> disabledPurposes
+        )
+        {
+            throw new NotImplementedException();
+        }
+
         public UserStatus GetUserStatus()
         {
             var jsonText = DidomiFramework.GetUserStatus();
