@@ -88,6 +88,16 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
+        public bool CommitCurrentUserStatusTransaction(
+             ISet<string> enabledVendors,
+             ISet<string> disabledVendors,
+             ISet<string> enabledPurposes,
+             ISet<string> disabledPurposes
+        )
+        {
+            throw new NotImplementedException();
+        }
+
         public UserStatus GetUserStatus()
         {
             throw new NotImplementedException();

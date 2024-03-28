@@ -110,7 +110,7 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern bool setCurrentUserStatus(
+        private static extern int setCurrentUserStatus(
             string purposesStatus,
             string vendorsStatus
         );
@@ -122,7 +122,36 @@ namespace IO.Didomi.SDK.IOS
         )
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return setCurrentUserStatus(purposesStatus, vendorsStatus);
+            return setCurrentUserStatus(purposesStatus, vendorsStatus) == 1;
+#else
+            return false;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern int commitCurrentUserStatusTransaction(
+            string enabledVendorIds,
+            string disabledVendorIds,
+            string enabledPurposeIds,
+            string disabledPurposeIds
+        );
+#endif
+
+        public static bool CommitCurrentUserStatusTransaction(
+            string enabledVendorIds,
+            string disabledVendorIds,
+            string enabledPurposeIds,
+            string disabledPurposeIds
+        )
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return commitCurrentUserStatusTransaction(
+                enabledVendorIds,
+                disabledVendorIds,
+                enabledPurposeIds,
+                disabledPurposeIds
+            ) == 1;
 #else
             return false;
 #endif

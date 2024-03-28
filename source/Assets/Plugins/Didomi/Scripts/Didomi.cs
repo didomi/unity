@@ -205,6 +205,21 @@ namespace IO.Didomi.SDK
             return didomiForPlatform.SetCurrentUserStatus(status);
         }
 
+        public CurrentUserStatusTransaction OpenCurrentUserStatusTransaction()
+        {
+            return new CurrentUserStatusTransaction(CommitCurrentUserStatusTransaction);
+        }
+
+        private bool CommitCurrentUserStatusTransaction(
+             ISet<string> enabledVendors,
+             ISet<string> disabledVendors,
+             ISet<string> enabledPurposes,
+             ISet<string> disabledPurposes
+        )
+        {
+            return didomiForPlatform.CommitCurrentUserStatusTransaction(enabledVendors, disabledVendors, enabledPurposes, disabledPurposes);
+        }
+
         /// <summary>
         /// Get the user consent status as a UserStatus object.
         /// </summary>

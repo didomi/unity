@@ -48,6 +48,10 @@ namespace IO.Didomi.SDK.Android
 
         public static Purpose ConvertToPurpose(AndroidJavaObject obj)
         {
+            if (obj == null)
+            {
+                return null;
+            }
             var purpose = new Purpose(
                 GetMethodStringValue(obj, "getId"),
                 GetMethodStringValue(obj, "getName"),
@@ -80,6 +84,10 @@ namespace IO.Didomi.SDK.Android
 
         public static Vendor ConvertToVendor(AndroidJavaObject obj)
         {
+            if (obj == null)
+            {
+                return null;
+            }
             var vendor = new Vendor(
                GetMethodStringValue(obj, "getId"),
                GetMethodStringValue(obj, "getName"),

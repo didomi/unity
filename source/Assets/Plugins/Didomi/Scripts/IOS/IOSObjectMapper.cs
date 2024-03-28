@@ -252,7 +252,7 @@ namespace IO.Didomi.SDK.IOS
 
             public override IList<string> ReadJson(JsonReader reader, Type objectType, IList<string> existingValue, bool hasExistingValue, JsonSerializer serializer)
             {
-                IList<string> result = null;
+                IList<string> result;
                 JArray array = JArray.Load(reader);
                 if (array == null)
                 {
