@@ -493,6 +493,17 @@ NSSet<NSString *> * ConvertJsonToSet(char* jsonText)
     return retval;
 }
 
+NSArray<NSString *> * ConvertJsonToArray(char* jsonText)
+{
+    NSString *jsonString=CreateNSString(jsonText);
+
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSArray<NSString *> *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+
+    return jsonArray;
+}
+
 BOOL GetBoolField(NSDictionary *data, NSString *key)
 {
     NSNumber *fieldValue = data[key];
@@ -560,7 +571,30 @@ int setCurrentUserStatus(char* purposesStatus, char* vendorsStatus)
 {
     DDMCurrentUserStatus *status = [[DDMCurrentUserStatus alloc ] initWithPurposes:ConvertJsonToCurrentUserStatusPurposes(purposesStatus) vendors:ConvertJsonToCurrentUserStatusVendors(vendorsStatus)];
     Didomi *didomi = [Didomi shared];
-    return [didomi setCurrentUserStatusWithCurrentUserStatus:status];
+    bool result = [didomi setCurrentUserStatusWithCurrentUserStatus:status];
+    return convertBoolToInt(result);
+}
+
+int commitCurrentUserStatusTransaction(
+    char* enabledVendorIds,
+    char* disabledVendorIds,
+    char* enabledPurposeIds,
+    char* disabledPurposeIds
+)
+{
+    NSArray<NSString *> * enabledVendorIdsArray = ConvertJsonToArray(enabledVendorIds);
+    NSArray<NSString *> * disabledVendorIdsArray = ConvertJsonToArray(disabledVendorIds);
+    NSArray<NSString *> * enabledPurposeIdsArray = ConvertJsonToArray(enabledPurposeIds);
+    NSArray<NSString *> * disabledPurposeIdsArray = ConvertJsonToArray(disabledPurposeIds);
+
+    CurrentUserStatusTransaction* transaction = [[Didomi shared] openCurrentUserStatusTransaction];
+    [transaction enableVendors: enabledVendorIdsArray];
+    [transaction disableVendors: disabledVendorIdsArray];
+    [transaction enablePurposes: enabledPurposeIdsArray];
+    [transaction disablePurposes: disabledPurposeIdsArray];
+
+    bool result = [transaction commit];
+    return convertBoolToInt(result);
 }
 
 void setUser(char* organizationUserId)

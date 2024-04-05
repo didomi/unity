@@ -107,6 +107,29 @@ namespace IO.Didomi.SDK.Android
             );
         }
 
+        public bool CommitCurrentUserStatusTransaction(
+             ISet<string> enabledVendors,
+             ISet<string> disabledVendors,
+             ISet<string> enabledPurposes,
+             ISet<string> disabledPurposes
+        )
+        {
+            var transactionObject = CallReturningJavaObjectMethod("openCurrentUserStatusTransaction");
+            SetCurrentUserStatusTransactionItems(transactionObject, enabledVendors, "enableVendor");
+            SetCurrentUserStatusTransactionItems(transactionObject, disabledVendors, "disableVendor");
+            SetCurrentUserStatusTransactionItems(transactionObject, enabledPurposes, "enablePurpose");
+            SetCurrentUserStatusTransactionItems(transactionObject, disabledPurposes, "disablePurpose");
+            return transactionObject.Call<bool>("commit");
+        }
+
+        private void SetCurrentUserStatusTransactionItems(AndroidJavaObject transactionObject, ISet<string> items, string javaMethod)
+        {
+            foreach (string item in items)
+            {
+                transactionObject.Call<AndroidJavaObject>(javaMethod, item);
+            }
+        }
+
         public UserStatus GetUserStatus()
         {
             var userStatusObject = CallReturningJavaObjectMethod("getUserStatus");
