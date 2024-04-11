@@ -17,6 +17,8 @@ public abstract class DidomiBaseTests
     /// <returns></returns>
     public IEnumerator LoadSdk(string languageCode = null)
     {
+        Didomi didomi = Didomi.GetInstance();
+
         try
         {
             sdkReady = false;
@@ -25,27 +27,28 @@ public abstract class DidomiBaseTests
 
             Debug.Log("Tests: Initializing sdk");
 
-            Didomi didomi = Didomi.GetInstance();
-
             didomi.Initialize(new DidomiInitializeParameters(apiKey, languageCode: languageCode, noticeId: noticeId));
-
-            didomi.OnReady(
-                () =>
-                {
-                    sdkReady = true;
-                }
-                );
-            didomi.OnError(
-                () =>
-                {
-                    sdkReady = true;
-                }
-                );
         }
         catch (Exception ex)
         {
             Debug.LogError($"Exception : {ex.Message}");
         }
+
+        // Make sure instance from previous test is not present
+        yield return new WaitForSeconds(1);
+
+        didomi.OnReady(
+            () =>
+            {
+                sdkReady = true;
+            }
+        );
+        didomi.OnError(
+            () =>
+            {
+                sdkReady = true;
+            }
+        );
 
         yield return WaitForSdkReady();
     }
