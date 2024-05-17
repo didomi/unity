@@ -44,7 +44,9 @@ namespace IO.Didomi.SDK.Events
         public event EventHandler<PreferencesClickVendorAgreeEvent> PreferencesClickVendorAgree;
         public event EventHandler<PreferencesClickVendorDisagreeEvent> PreferencesClickVendorDisagree;
         public event EventHandler<PreferencesClickVendorSaveChoicesEvent> PreferencesClickVendorSaveChoices;
+        [ObsoleteAttribute("This event is deprecated. Use SyncReady instead.")]
         public event EventHandler<SyncDoneEvent> SyncDone;
+        public event EventHandler<SyncReadyEvent> SyncReady;
         public event EventHandler<SyncErrorEvent> SyncError;
         public event EventHandler<LanguageUpdatedEvent> LanguageUpdated;
         public event EventHandler<LanguageUpdateFailedEvent> LanguageUpdateFailed;
@@ -270,6 +272,12 @@ namespace IO.Didomi.SDK.Events
         public void OnSyncDone(SyncDoneEvent @event)
         {
             SyncDone?.Invoke(this, @event);
+            // The user consent was synchronized
+        }
+
+        public void OnSyncReady(SyncReadyEvent @event)
+        {
+            SyncReady?.Invoke(this, @event);
             // The user consent was synchronized
         }
 

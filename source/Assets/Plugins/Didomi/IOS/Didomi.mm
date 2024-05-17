@@ -743,7 +743,17 @@ char* convertNSStringToCString(NSString * _Nullable nsString)
     return cString;
 }
 
-void addEventListener( void (*event_listener_handler) (int, char *))
+// Define a function pointer type for the callback
+typedef void (*NativeSyncReadyCallback)(int);
+
+NativeSyncReadyCallback GetSyncReadyCallback(SyncReadyEvent event) {
+    // This is a simplified example; you can create your own lambda or function here
+    return [](int value) -> int {
+        return [event syncAcknowldeged]() ? 1 : 0;
+    };
+}
+
+void addEventListener( void (*event_listener_handler) (int, char *), void (*sync_ready_event_listener_handler) (int, int, NativeSyncReadyCallback))
 {
 
     if(eventListener==nil)
@@ -967,6 +977,12 @@ void addEventListener( void (*event_listener_handler) (int, char *))
         event_listener_handler(eventType, convertNSStringToCString(organizationUserId));
 
     };
+    
+    eventListener.onSyncReady = ^(DDMEventType eventType, SyncReadyEvent * event){
+        
+        sync_ready_event_listener_handler(eventType, [event statusApplied], GetSyncReadyCallback(event));
+        
+    }
     
     eventListener.onSyncError = ^(DDMEventType eventType, NSString * _Nullable error){
 
