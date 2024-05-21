@@ -25,6 +25,6 @@ public class SyncUserBeforeInitTestsSuite : SyncUserBaseTests
     {
         Didomi.GetInstance().SetUser(testUserId);
         yield return LoadSdk();
-        yield return ExpectSyncSuccess("Set user before initialization");
+        yield return ExpectSyncSuccess("Set user before initialization", true);
     }
 }

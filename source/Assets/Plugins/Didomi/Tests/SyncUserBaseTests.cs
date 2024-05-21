@@ -3,6 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using IO.Didomi.SDK;
 using IO.Didomi.SDK.Events;
+using System;
 
 /// <summary>
 /// Base for tests related to sharing consent with Webview / Web SDK
@@ -13,11 +14,15 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
 
     private bool syncError = false;
     private string syncedUserId = null;
+    private Boolean? statusApplied = null;
+    private Boolean? syncAcknowledged = null;
+    private Boolean? syncAcknowledged2 = null;
 
     protected void SetUpSuite()
     {
         var listener = new DidomiEventListener();
         listener.SyncDone += EventListener_SyncDone;
+        listener.SyncReady += EventListener_SyncReady;
         listener.SyncError += EventListener_SyncError;
         Didomi.GetInstance().AddEventListener(listener);
     }
@@ -35,6 +40,16 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
         syncedUserId = e.getOrganizationUserId();
     }
 
+    private void EventListener_SyncReady(object sender, SyncReadyEvent e)
+    {
+        Debug.Log("Sync Ready!");
+        statusApplied = e.IsStatusApplied();
+        Debug.Log("Will call acknowledge");
+        syncAcknowledged = e.SyncAcknowledged();
+        Debug.Log("Call Done");
+        syncAcknowledged2 = e.SyncAcknowledged();
+    }
+
     private void EventListener_SyncError(object sender, SyncErrorEvent e)
     {
         Debug.LogFormat("Sync Error, message: {0}", e.getErrorMessage());
@@ -48,17 +63,23 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     {
         syncError = false;
         syncedUserId = null;
+        statusApplied = null;
+        syncAcknowledged = null;
+        syncAcknowledged2 = null;
     }
 
     /**
      * Check that user is synchronized successfully
      */
-    protected IEnumerator ExpectSyncSuccess(string message)
+    protected IEnumerator ExpectSyncSuccess(string message, bool expectApplied)
     {
         yield return WaitForCallback();
 
         Assert.AreEqual(testUserId, syncedUserId, message);
-        Assert.IsFalse(syncError, message);
+        Assert.IsFalse(syncError, "Sync error - " + message);
+        Assert.AreEqual(expectApplied, statusApplied, "Status applied - " + message);
+        Assert.AreEqual(expectApplied, syncAcknowledged, "Sync acknowledged - " + message);
+        Assert.IsFalse(syncAcknowledged2, "Sync acknowledged should always fail at the 2nd call - " + message);
     }
 
     /**
@@ -70,6 +91,7 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
 
         Assert.IsNull(syncedUserId);
         Assert.IsTrue(syncError);
+        Assert.IsNull(statusApplied);
     }
 
     /**
@@ -77,6 +99,6 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
      */
     private IEnumerator WaitForCallback()
     {
-        yield return new WaitUntil(() => syncedUserId != null || syncError);
+        yield return new WaitUntil(() => (syncedUserId != null && syncAcknowledged != null) || syncError);
     }
 }

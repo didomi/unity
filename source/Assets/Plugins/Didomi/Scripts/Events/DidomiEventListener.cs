@@ -275,10 +275,12 @@ namespace IO.Didomi.SDK.Events
             // The user consent was synchronized
         }
 
-        public void OnSyncReady(SyncReadyEvent @event)
+        public bool OnSyncReady(SyncReadyEvent @event)
         {
+            // TODO Remove callback if SyncReady is null?
             SyncReady?.Invoke(this, @event);
             // The user consent was synchronized
+            return SyncReady != null;
         }
 
         public void OnSyncError(SyncErrorEvent @event)
