@@ -96,7 +96,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             salt: "test-salt",
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params with salt and expiration", false);
+        yield return ExpectSyncSuccess("Set user with Hash params with salt and expiration", false);
 
         ResetResults();
 
@@ -108,7 +108,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             salt: null,
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params with expiration and without salt", false);
+        yield return ExpectSyncSuccess("Set user with Hash params with expiration and without salt", false);
 
         ResetResults();
 
@@ -120,6 +120,6 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             salt: "test-salt",
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params and setup UI", false);
+        yield return ExpectSyncSuccess("Set user with Hash params with salt and expiration and setup UI", false);
     }
 }

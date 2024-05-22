@@ -99,6 +99,6 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
      */
     private IEnumerator WaitForCallback()
     {
-        yield return new WaitUntil(() => (syncedUserId != null && syncAcknowledged != null) || syncError);
+        yield return new WaitUntil(() => (syncedUserId != null && syncAcknowledged != null && syncAcknowledged2 != null) || syncError);
     }
 }
