@@ -600,7 +600,6 @@ namespace IO.Didomi.SDK.IOS
                     var eventTriggered = eventListenerInner.OnSyncReady(new SyncReadyEvent(
                         statusApplied > 0,
                         () => {
-                            Debug.Log("Calling Sync Acknowledged, index: " + syncAcknowledgedCallbackIndex);
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
                             return syncAcknowledgedCallback(syncAcknowledgedCallbackIndex) > 0;
 #else

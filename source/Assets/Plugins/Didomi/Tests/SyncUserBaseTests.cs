@@ -44,9 +44,7 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     {
         Debug.Log("Sync Ready!");
         statusApplied = e.IsStatusApplied();
-        Debug.Log("Will call acknowledge");
         syncAcknowledged = e.SyncAcknowledged();
-        Debug.Log("Call Done");
         syncAcknowledged2 = e.SyncAcknowledged();
     }
 

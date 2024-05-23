@@ -988,7 +988,6 @@ void addEventListener( void (*event_listener_handler) (int, char *), void (*sync
     };
     
     eventListener.onSyncReady = ^(DDMSyncReadyEvent * event){
-        // TODO Register event in callbacks
         int eventIndex = syncAcknowledgedCallbackIndex++;
         syncAcknowledgedCallbacks[@(eventIndex)] = event;
         
