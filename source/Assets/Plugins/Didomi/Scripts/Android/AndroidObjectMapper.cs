@@ -190,6 +190,16 @@ namespace IO.Didomi.SDK.Android
             return null;
         }
 
+        public static bool GetMethodBoolValue(AndroidJavaObject obj, string methodName)
+        {
+            if (obj != null)
+            {
+                return obj.Call<bool>(methodName);
+            }
+
+            return false;
+        }
+
         public static IList<string> GetMethodListString(AndroidJavaObject obj, string methodName)
         {
             if (obj != null)

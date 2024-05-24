@@ -48,12 +48,12 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     public IEnumerator TestSyncUser()
     {
         Didomi.GetInstance().SetUser(testUserId);
-        yield return ExpectSyncSuccess("Set user with id");
+        yield return ExpectSyncSuccess("Set user with id", true);
 
         ResetResults();
 
         Didomi.GetInstance().SetUserAndSetupUI(testUserId);
-        yield return ExpectSyncSuccess("Set user with id and setup UI");
+        yield return ExpectSyncSuccess("Set user with id and setup UI", false);
 
         ResetResults();
 
@@ -64,7 +64,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             initializationVector: "3ff223854400259e5592cbb992be93cf",
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params with expiration");
+        yield return ExpectSyncSuccess("Set user with Encryption params with expiration", false);
 
         ResetResults();
 
@@ -74,7 +74,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             secretId: "testsdks-PEap2wBx",
             initializationVector: "3ff223854400259e5592cbb992be93cf"
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params without expiration");
+        yield return ExpectSyncSuccess("Set user with Encryption params without expiration", false);
 
         ResetResults();
 
@@ -84,7 +84,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             secretId: "testsdks-PEap2wBx",
             initializationVector: "3ff223854400259e5592cbb992be93cf"
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params and setup UI");
+        yield return ExpectSyncSuccess("Set user with Encryption params and setup UI", false);
 
         ResetResults();
 
@@ -96,7 +96,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             salt: "test-salt",
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params with salt and expiration");
+        yield return ExpectSyncSuccess("Set user with Hash params with salt and expiration", false);
 
         ResetResults();
 
@@ -108,7 +108,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             salt: null,
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params with expiration and without salt");
+        yield return ExpectSyncSuccess("Set user with Hash params with expiration and without salt", false);
 
         ResetResults();
 
@@ -120,6 +120,6 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             salt: "test-salt",
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params and setup UI");
+        yield return ExpectSyncSuccess("Set user with Hash params with salt and expiration and setup UI", false);
     }
 }

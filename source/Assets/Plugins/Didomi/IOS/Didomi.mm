@@ -307,7 +307,7 @@ void setUserAgent(char* name, char* version)
 
 void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId)
 {
-    DidomiInitializeParameters *parameters = [[DidomiInitializeParameters alloc] initWithApiKey: CreateNSString(apiKey) localConfigurationPath: CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL: CreateNSStringNullable(remoteConfigurationURL) providerID: CreateNSStringNullable(providerId) disableDidomiRemoteConfig: disableDidomiRemoteConfig languageCode: CreateNSStringNullable(languageCode) noticeID: CreateNSStringNullable(noticeId)];
+    DidomiInitializeParameters *parameters = [[DidomiInitializeParameters alloc] initWithApiKey: CreateNSString(apiKey) localConfigurationPath: CreateNSStringNullable(localConfigurationPath) remoteConfigurationURL: CreateNSStringNullable(remoteConfigurationURL) providerID: CreateNSStringNullable(providerId) disableDidomiRemoteConfig: disableDidomiRemoteConfig languageCode: CreateNSStringNullable(languageCode) noticeID: CreateNSStringNullable(noticeId) countryCode: nil regionCode: nil];
     [[Didomi shared] initialize: parameters];
 }
 
@@ -471,11 +471,11 @@ char* convertDictionaryToJsonText( NSDictionary<NSString *, NSString *> * dataDi
 char* getText(char* key)
 {
     NSDictionary<NSString *, NSString *> * dataDict=[[Didomi shared] getTextWithKey:CreateNSString(key)];
-	
-	if(dataDict == nil)
-	{
-		return cStringCopy([@"" UTF8String]);
-	}
+    
+    if(dataDict == nil)
+    {
+        return cStringCopy([@"" UTF8String]);
+    }
 
     return convertDictionaryToJsonText(dataDict);
 }
@@ -548,14 +548,14 @@ NSDictionary<NSString *, DDMCurrentUserStatusVendor *> * ConvertJsonToCurrentUse
 
 int setUserStatus(char* enabledConsentPurposeIds, char* disabledConsentPurposeIds, char* enabledLIPurposeIds, char* disabledLIPurposeIds, char* enabledConsentVendorIds, char* disabledConsentVendorIds, char* enabledLIVendorIds, char* disabledLIVendorIds)
 {
-	NSSet<NSString *> * enabledConsentPurposeIdsSet=ConvertJsonToSet(enabledConsentPurposeIds);
-	NSSet<NSString *> * disabledConsentPurposeIdsSet=ConvertJsonToSet(disabledConsentPurposeIds);
-	NSSet<NSString *> * enabledLIPurposeIdsSet=ConvertJsonToSet(enabledLIPurposeIds);
-	NSSet<NSString *> * disabledLIPurposeIdsSet=ConvertJsonToSet(disabledLIPurposeIds);
-	NSSet<NSString *> * enabledConsentVendorIdsSet=ConvertJsonToSet(enabledConsentVendorIds);
-	NSSet<NSString *> * disabledConsentVendorIdsSet=ConvertJsonToSet(disabledConsentVendorIds);
-	NSSet<NSString *> * enabledLIVendorIdsSet=ConvertJsonToSet(enabledLIVendorIds);
-	NSSet<NSString *> * disabledLIVendorIdsSet=ConvertJsonToSet(disabledLIVendorIds);
+    NSSet<NSString *> * enabledConsentPurposeIdsSet=ConvertJsonToSet(enabledConsentPurposeIds);
+    NSSet<NSString *> * disabledConsentPurposeIdsSet=ConvertJsonToSet(disabledConsentPurposeIds);
+    NSSet<NSString *> * enabledLIPurposeIdsSet=ConvertJsonToSet(enabledLIPurposeIds);
+    NSSet<NSString *> * disabledLIPurposeIdsSet=ConvertJsonToSet(disabledLIPurposeIds);
+    NSSet<NSString *> * enabledConsentVendorIdsSet=ConvertJsonToSet(enabledConsentVendorIds);
+    NSSet<NSString *> * disabledConsentVendorIdsSet=ConvertJsonToSet(disabledConsentVendorIds);
+    NSSet<NSString *> * enabledLIVendorIdsSet=ConvertJsonToSet(enabledLIVendorIds);
+    NSSet<NSString *> * disabledLIVendorIdsSet=ConvertJsonToSet(disabledLIVendorIds);
 
     bool result = [[Didomi shared] setUserStatusWithEnabledConsentPurposeIds:enabledConsentPurposeIdsSet disabledConsentPurposeIds:disabledConsentPurposeIdsSet enabledLIPurposeIds:enabledLIPurposeIdsSet disabledLIPurposeIds:disabledLIPurposeIdsSet enabledConsentVendorIds:enabledConsentVendorIdsSet disabledConsentVendorIds:disabledConsentVendorIdsSet enabledLIVendorIds:enabledLIVendorIdsSet disabledLIVendorIds:disabledLIVendorIdsSet];
     return convertBoolToInt(result);
@@ -707,7 +707,7 @@ void clearUser()
 
 void updateSelectedLanguage(char* languageCode)
 {
-	return [[Didomi shared] updateSelectedLanguageWithLanguageCode: CreateNSString(languageCode)];
+    return [[Didomi shared] updateSelectedLanguageWithLanguageCode: CreateNSString(languageCode)];
 }
 
 typedef void  (*callback_function)(void);
@@ -743,12 +743,31 @@ char* convertNSStringToCString(NSString * _Nullable nsString)
     return cString;
 }
 
-void addEventListener( void (*event_listener_handler) (int, char *))
+int syncAcknowledgedCallbackIndex = 0;
+NSMutableDictionary<NSNumber*, DDMSyncReadyEvent*> *syncAcknowledgedCallbacks = [[NSMutableDictionary alloc] init];
+
+// Implement a function that matches the function pointer type
+int syncAcknowledgedCallback(int eventIndex) {
+    NSNumber *key = @(eventIndex);
+    DDMSyncReadyEvent *event = [syncAcknowledgedCallbacks objectForKey:key];
+    syncAcknowledgedCallbacks[key] = nil;
+    if (!event) {
+        NSLog(@"Error: Event callback not found");
+        return -1;
+    }
+    return event.syncAcknowledged() ? 1 : 0;
+}
+
+void removeSyncAcknowledgedCallback(int eventIndex) {
+    syncAcknowledgedCallbacks[@(eventIndex)] = nil;
+}
+
+void addEventListener( void (*event_listener_handler) (int, char *), void (*sync_ready_event_listener_handler) (int, int, int))
 {
 
     if(eventListener==nil)
-	{
-		eventListener = [[DDMEventListener alloc]init];
+    {
+        eventListener = [[DDMEventListener alloc]init];
     }
 
     eventListener.onConsentChanged = ^(DDMEventType eventType){
@@ -757,26 +776,26 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     };
 
-	eventListener.onHideNotice = ^(DDMEventType eventType){
+    eventListener.onHideNotice = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
     };
 
-	eventListener.onReady = ^(DDMEventType eventType){
+    eventListener.onReady = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
     };
 
-	eventListener.onError = ^(DDMErrorEvent * errorEvent){
+    eventListener.onError = ^(DDMErrorEvent * errorEvent){
 
         int errorEventEnumValue = 1000;
         event_listener_handler(errorEventEnumValue , convertNSStringToCString(errorEvent.descriptionText));
 
     };
 
-	eventListener.onShowNotice = ^(DDMEventType eventType){
+    eventListener.onShowNotice = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
@@ -794,7 +813,7 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     };
 
-	eventListener.onNoticeClickAgree = ^(DDMEventType eventType){
+    eventListener.onNoticeClickAgree = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
@@ -806,7 +825,7 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     };
 
-	eventListener.onNoticeClickMoreInfo = ^(DDMEventType eventType){
+    eventListener.onNoticeClickMoreInfo = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
@@ -830,13 +849,13 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     };
 
-	eventListener.onPreferencesClickAgreeToAll = ^(enum DDMEventType eventType){
+    eventListener.onPreferencesClickAgreeToAll = ^(enum DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
     };
 
-	eventListener.onPreferencesClickDisagreeToAll = ^(DDMEventType eventType){
+    eventListener.onPreferencesClickDisagreeToAll = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
@@ -866,13 +885,13 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     };
     
-	eventListener.onPreferencesClickPurposeAgree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
+    eventListener.onPreferencesClickPurposeAgree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
 
         event_listener_handler(eventType, convertNSStringToCString(purposeId));
 
     };
 
-	eventListener.onPreferencesClickPurposeDisagree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
+    eventListener.onPreferencesClickPurposeDisagree = ^(DDMEventType eventType, NSString * _Nullable purposeId){
 
         event_listener_handler(eventType, convertNSStringToCString(purposeId));
 
@@ -890,13 +909,13 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     };
 
-	eventListener.onPreferencesClickViewVendors = ^(DDMEventType eventType){
+    eventListener.onPreferencesClickViewVendors = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
     };
 
-	eventListener.onPreferencesClickSaveChoices = ^(DDMEventType eventType){
+    eventListener.onPreferencesClickSaveChoices = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
@@ -944,19 +963,19 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
     };
     
-	eventListener.onPreferencesClickVendorAgree = ^(DDMEventType eventType, NSString * _Nullable vendorId){
+    eventListener.onPreferencesClickVendorAgree = ^(DDMEventType eventType, NSString * _Nullable vendorId){
 
         event_listener_handler(eventType, convertNSStringToCString(vendorId));
 
     };
 
-	eventListener.onPreferencesClickVendorDisagree = ^(DDMEventType eventType, NSString * _Nullable vendorId){
+    eventListener.onPreferencesClickVendorDisagree = ^(DDMEventType eventType, NSString * _Nullable vendorId){
 
         event_listener_handler(eventType, convertNSStringToCString(vendorId));
 
     };
 
-	eventListener.onPreferencesClickVendorSaveChoices = ^(DDMEventType eventType){
+    eventListener.onPreferencesClickVendorSaveChoices = ^(DDMEventType eventType){
 
         event_listener_handler(eventType, NULL);
 
@@ -966,6 +985,14 @@ void addEventListener( void (*event_listener_handler) (int, char *))
 
         event_listener_handler(eventType, convertNSStringToCString(organizationUserId));
 
+    };
+    
+    eventListener.onSyncReady = ^(DDMSyncReadyEvent * event){
+        int eventIndex = syncAcknowledgedCallbackIndex++;
+        syncAcknowledgedCallbacks[@(eventIndex)] = event;
+        
+        sync_ready_event_listener_handler(DDMEventTypeSyncReady, [event statusApplied], eventIndex);
+        
     };
     
     eventListener.onSyncError = ^(DDMEventType eventType, NSString * _Nullable error){

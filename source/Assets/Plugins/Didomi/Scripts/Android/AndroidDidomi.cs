@@ -329,7 +329,7 @@ namespace IO.Didomi.SDK.Android
         public void SetUserAndSetupUI(UserAuthParams userAuthParams)
         {
             AndroidJavaObject nativeParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
-            CallVoidMethodWithActivityLastArg("setUser", nativeParams);
+            CallVoidMethodWithActivityLastArg("setUser", nativeParams, null);
         }
 
         public void ClearUser()

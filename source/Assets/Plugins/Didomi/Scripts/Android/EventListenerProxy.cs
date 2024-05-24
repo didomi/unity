@@ -263,6 +263,15 @@ namespace IO.Didomi.SDK.Android
             var SyncDoneEvent = ConvertToSyncDoneEvent(@event);
 
             _eventListener.OnSyncDone(SyncDoneEvent);
+            // User synchronization process is over (deprecated)
+        }
+
+        public void syncReady(AndroidJavaObject @event)
+        {
+            var SyncReadyEvent = ConvertToSyncReadyEvent(@event);
+
+            _eventListener.OnSyncReady(SyncReadyEvent);
+            // User synchronization process is over
         }
 
         public void syncError(AndroidJavaObject @event)
@@ -270,6 +279,7 @@ namespace IO.Didomi.SDK.Android
             var SyncErrorEvent = ConvertToSyncErrorEvent(@event);
 
             _eventListener.OnSyncError(SyncErrorEvent);
+            // An error occurred during user synchronization process
         }
 
         public void languageUpdated(AndroidJavaObject @event)
@@ -277,6 +287,7 @@ namespace IO.Didomi.SDK.Android
             var LanguageUpdatedEvent = ConvertToLanguageUpdatedEvent(@event);
 
             _eventListener.OnLanguageUpdated(LanguageUpdatedEvent);
+            // Translations files are ready after language update
         }
 
         public void languageUpdateFailed(AndroidJavaObject @event)
@@ -284,6 +295,7 @@ namespace IO.Didomi.SDK.Android
             var LanguageUpdateFailedEvent = ConvertToLanguageUpdateFailedEvent(@event);
 
             _eventListener.OnLanguageUpdateFailed(LanguageUpdateFailedEvent);
+            // An error occurred during language update process
         }
 
         private static ErrorEvent ConvertToErrorEvent(AndroidJavaObject @event)
@@ -375,6 +387,19 @@ namespace IO.Didomi.SDK.Android
             return new SyncDoneEvent(organizationUserId);
         }
 
+        private static SyncReadyEvent ConvertToSyncReadyEvent(AndroidJavaObject @event)
+        {
+            var statusApplied = GetStatusApplied(@event);
+
+            return new SyncReadyEvent(
+               statusApplied,
+               () =>
+               {
+                   return GetSyncAcknowledgedCallback(@event);
+               }
+            );
+        }
+
         private static SyncErrorEvent ConvertToSyncErrorEvent(AndroidJavaObject @event)
         {
             var error = GetError(@event);
@@ -414,6 +439,26 @@ namespace IO.Didomi.SDK.Android
         private static string GetOrganizationUserId(AndroidJavaObject @event)
         {
             return AndroidObjectMapper.GetMethodStringValue(@event, "getOrganizationUserId");
+        }
+
+        private static bool GetStatusApplied(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodBoolValue(@event, "getStatusApplied");
+        }
+
+        private static bool GetSyncAcknowledgedCallback(AndroidJavaObject @event)
+        {
+            if (@event != null)
+            {
+                var callback = @event.Call<AndroidJavaObject>("getSyncAcknowledged");
+
+                if (callback != null)
+                {
+                    var boolObject = callback.Call<AndroidJavaObject>("invoke");
+                    return AndroidObjectMapper.GetMethodBoolValue(boolObject, "booleanValue");
+                }
+            }
+            return false;
         }
 
         private static string GetError(AndroidJavaObject @event)

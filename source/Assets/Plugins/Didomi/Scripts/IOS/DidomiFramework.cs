@@ -432,18 +432,28 @@ namespace IO.Didomi.SDK.IOS
             onReadyActionInner?.Invoke();
         }
 
+        public delegate int NativeSyncAcknowledged();
+
         public delegate void OnEventListenerDelegate(int eventType, string argument);
+
+        public delegate void OnSyncReadyEventListenerDelegate(int eventType, int statusApplied, int syncAcknowledgedCallbackIndex);
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate);
+        private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate, OnSyncReadyEventListenerDelegate syncReadyEventListenerDelegate);
+
+        [DllImport("__Internal")]
+        private static extern int syncAcknowledgedCallback(int callbackIndex);
+
+        [DllImport("__Internal")]
+        private static extern void removeSyncAcknowledgedCallback(int callbackIndex);
 #endif
 
         public static void AddEventListener(DidomiEventListener eventListener)
         {
             eventListenerInner = eventListener;
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            addEventListener(CallOnEventListenerDelegate);
+            addEventListener(CallOnEventListenerDelegate, CallOnSyncReadyEventListenerDelegate);
 #endif
         }
 
@@ -578,7 +588,32 @@ namespace IO.Didomi.SDK.IOS
                 default:
                     break;
             }
+        }
 
+        [AOT.MonoPInvokeCallback(typeof(OnSyncReadyEventListenerDelegate))]
+        static void CallOnSyncReadyEventListenerDelegate(int eventType, int statusApplied, int syncAcknowledgedCallbackIndex)
+        {
+            DDMEventType eventTypeEnum = (DDMEventType)eventType;
+            switch (eventTypeEnum)
+            {
+                case DDMEventType.DDMEventTypeSyncReady:
+                    var eventTriggered = eventListenerInner.OnSyncReady(new SyncReadyEvent(
+                        statusApplied > 0,
+                        () => {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                            return syncAcknowledgedCallback(syncAcknowledgedCallbackIndex) > 0;
+#else
+                            return false;
+#endif
+                        }));
+                    if (!eventTriggered)
+                    {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                        removeSyncAcknowledgedCallback(syncAcknowledgedCallbackIndex);
+#endif
+                    }
+                    break;
+            }
         }
 
         public delegate void OnVendorStatusListenerDelegate(string vendorStatus);

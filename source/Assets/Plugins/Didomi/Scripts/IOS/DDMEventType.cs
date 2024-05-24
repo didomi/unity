@@ -3,6 +3,7 @@ namespace Assets.Plugins.Scripts.IOS
 {
     /// <summary>
     /// List of event types mapping to event types from the iOS SDK.
+    /// Note: The events must be in the same order as EventTypes.swift in the iOS project.
     /// </summary>
     public enum DDMEventType
     {
@@ -35,16 +36,17 @@ namespace Assets.Plugins.Scripts.IOS
         DDMEventTypePreferencesClickVendorDisagree = 26,
         DDMEventTypePreferencesClickVendorSaveChoices = 27,
         DDMEventTypeSyncDone = 28,
-        DDMEventTypeSyncError = 29,
-        DDMEventTypeLanguageUpdated = 30,
-        DDMEventTypeLanguageUpdateFailed = 31,
-        DDMEventTypeNoticeClickViewSPIPurposes = 32,
-        DDMEventTypePreferencesClickViewSPIPurposes = 33,
-        DDMEventTypePreferencesClickSPIPurposeAgree = 34,
-        DDMEventTypePreferencesClickSPIPurposeDisagree = 35,
-        DDMEventTypePreferencesClickSPICategoryAgree = 36,
-        DDMEventTypePreferencesClickSPICategoryDisagree = 37,
-        DDMEventTypePreferencesClickSPIPurposeSaveChoices = 38,
+        DDMEventTypeSyncReady = 29,
+        DDMEventTypeSyncError = 30,
+        DDMEventTypeLanguageUpdated = 31,
+        DDMEventTypeLanguageUpdateFailed = 32,
+        DDMEventTypeNoticeClickViewSPIPurposes = 33,
+        DDMEventTypePreferencesClickViewSPIPurposes = 34,
+        DDMEventTypePreferencesClickSPIPurposeAgree = 35,
+        DDMEventTypePreferencesClickSPIPurposeDisagree = 36,
+        DDMEventTypePreferencesClickSPICategoryAgree = 37,
+        DDMEventTypePreferencesClickSPICategoryDisagree = 38,
+        DDMEventTypePreferencesClickSPIPurposeSaveChoices = 39,
         DDMEventTypeError = 1000,
     };
 }
