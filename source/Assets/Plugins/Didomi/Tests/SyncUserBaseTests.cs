@@ -30,6 +30,11 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     protected void TearDown()
     {
         ResetResults();
+        ResetStatus();
+    }
+
+    protected void ResetStatus()
+    {
         Didomi.GetInstance().ClearUser();
         Didomi.GetInstance().Reset();
     }
@@ -71,12 +76,17 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
      */
     protected IEnumerator ExpectSyncSuccess(string message, bool expectApplied)
     {
+        yield return ExpectSyncSuccess(message, expectApplied, expectApplied);
+    }
+
+    protected IEnumerator ExpectSyncSuccess(string message, bool expectApplied, bool expectAcknowledged)
+    {
         yield return WaitForCallback();
 
         Assert.AreEqual(testUserId, syncedUserId, message);
         Assert.IsFalse(syncError, "Sync error - " + message);
         Assert.AreEqual(expectApplied, statusApplied, "Status applied - " + message);
-        Assert.AreEqual(expectApplied, syncAcknowledged, "Sync acknowledged - " + message);
+        Assert.AreEqual(expectAcknowledged, syncAcknowledged, "Sync acknowledged - " + message);
         Assert.IsFalse(syncAcknowledged2, "Sync acknowledged should always fail at the 2nd call - " + message);
     }
 
