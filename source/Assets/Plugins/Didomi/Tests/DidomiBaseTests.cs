@@ -15,7 +15,12 @@ public abstract class DidomiBaseTests
     /// Load SDK and wait until initialization is ready
     /// </summary>
     /// <returns></returns>
-    public IEnumerator LoadSdk(string languageCode = null)
+    public IEnumerator LoadSdk(
+        string languageCode = null,
+        string noticeId = "Ar7NPQ72",
+        string countryCode = null,
+        string regionCode = null
+    )
     {
         Didomi didomi = Didomi.GetInstance();
 
@@ -23,11 +28,16 @@ public abstract class DidomiBaseTests
         {
             sdkReady = false;
             string apiKey = "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba";
-            string noticeId = "Ar7NPQ72";
 
             Debug.Log("Tests: Initializing sdk");
 
-            didomi.Initialize(new DidomiInitializeParameters(apiKey, languageCode: languageCode, noticeId: noticeId));
+            didomi.Initialize(new DidomiInitializeParameters(
+                apiKey,
+                languageCode: languageCode,
+                noticeId: noticeId,
+                countryCode: countryCode,
+                regionCode: regionCode
+            ));
         }
         catch (Exception ex)
         {

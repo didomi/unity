@@ -418,7 +418,9 @@ namespace IO.Didomi.SDK.Android
                     parameters.languageCode,
                     parameters.noticeId,
                     parameters.tvNoticeId,
-                    parameters.androidTvEnabled);
+                    parameters.androidTvEnabled,
+                    parameters.countryCode,
+                    parameters.regionCode);
         }
 
         public static AndroidJavaObject ConvertToJavaUserAuthParams(UserAuthParams parameters)

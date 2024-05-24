@@ -77,6 +77,19 @@ namespace IO.Didomi.SDK
          */
         public bool androidTvEnabled { get; }
 
+        /// <summary>
+        /// Override user country code when determining the privacy regulation to apply.
+        /// Keep null to let the Didomi SDK determine the user country.
+        /// </summary>
+        public string countryCode { get; }
+
+        /// <summary>
+        /// Override user region code when determining the privacy regulation to apply.
+        /// Keep null to let the Didomi SDK determine the user region.
+        /// Ignored if countryCode is not set.
+        /// </summary>
+        public string regionCode { get; }
+
         public DidomiInitializeParameters(
             string apiKey,
             string localConfigurationPath = null,
@@ -86,7 +99,9 @@ namespace IO.Didomi.SDK
             string languageCode = null,
             string noticeId = null,
             string tvNoticeId = null,
-            bool androidTvEnabled = false
+            bool androidTvEnabled = false,
+            string countryCode = null,
+            string regionCode = null
         ) {
             this.apiKey = apiKey;
             this.localConfigurationPath = localConfigurationPath;
@@ -97,6 +112,8 @@ namespace IO.Didomi.SDK
             this.noticeId = noticeId;
             this.tvNoticeId = tvNoticeId;
             this.androidTvEnabled = androidTvEnabled;
+            this.countryCode = countryCode;
+            this.regionCode = regionCode;
         }
     }
 }
