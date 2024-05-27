@@ -22,6 +22,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
         {
             yield return LoadSdk();
         }
+        ResetStatus();
     }
 
     [TearDown]

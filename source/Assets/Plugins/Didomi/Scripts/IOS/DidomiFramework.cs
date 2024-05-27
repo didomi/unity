@@ -61,7 +61,9 @@ namespace IO.Didomi.SDK.IOS
                 string providerId,
                 bool disableDidomiRemoteConfig,
                 string languageCode,
-                string noticeId
+                string noticeId,
+                string countryCode,
+                string regionCode
         );
 #endif
 
@@ -75,7 +77,9 @@ namespace IO.Didomi.SDK.IOS
                 initializeParameters.providerId,
                 initializeParameters.disableDidomiRemoteConfig,
                 initializeParameters.languageCode,
-                initializeParameters.noticeId
+                initializeParameters.noticeId,
+                initializeParameters.countryCode,
+                initializeParameters.regionCode
                 );
 #endif
         }
