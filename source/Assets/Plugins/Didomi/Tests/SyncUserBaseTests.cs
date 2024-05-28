@@ -12,6 +12,8 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
 {
     protected const string testUserId = "d13e49f6255c8729cbb201310f49d70d65f365415a67f034b567b7eac962b944eda131376594ef5e23b025fada4e4259e953ceb45ea57a2ced7872c567e6d1fae8dcc3a9772ead783d8513032e77d3fd";
 
+    private DidomiEventListener eventListener = new DidomiEventListener();
+
     private bool syncError = false;
     private string syncedUserId = null;
     private Boolean? statusApplied = null;
@@ -20,17 +22,23 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
 
     protected void SetUpSuite()
     {
-        var listener = new DidomiEventListener();
-        listener.SyncDone += EventListener_SyncDone;
-        listener.SyncReady += EventListener_SyncReady;
-        listener.SyncError += EventListener_SyncError;
-        Didomi.GetInstance().AddEventListener(listener);
+        eventListener.SyncDone += EventListener_SyncDone;
+        eventListener.SyncReady += EventListener_SyncReady;
+        eventListener.SyncError += EventListener_SyncError;
+        Didomi.GetInstance().AddEventListener(eventListener);
     }
 
     protected void TearDown()
     {
         ResetResults();
         ResetStatus();
+    }
+
+    protected void TearDownSuite()
+    {
+        eventListener.SyncDone -= EventListener_SyncDone;
+        eventListener.SyncReady -= EventListener_SyncReady;
+        eventListener.SyncError -= EventListener_SyncError;
     }
 
     protected void ResetStatus()
