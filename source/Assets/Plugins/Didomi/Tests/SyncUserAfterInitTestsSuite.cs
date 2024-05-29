@@ -18,17 +18,24 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     [UnitySetUp]
     public IEnumerator Setup()
     {
+        Didomi.GetInstance().ClearUser();
         if (!Didomi.GetInstance().IsReady())
         {
             yield return LoadSdk();
         }
-        ResetStatus();
+        Didomi.GetInstance().Reset();
     }
 
     [TearDown]
     public new void TearDown()
     {
         base.TearDown();
+    }
+
+    [OneTimeTearDown]
+    public new void TearDownSuite()
+    {
+        base.TearDownSuite();
     }
 
     [UnityTest]

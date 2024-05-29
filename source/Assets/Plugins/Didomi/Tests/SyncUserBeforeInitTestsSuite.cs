@@ -20,6 +20,12 @@ public class SyncUserBeforeInitTestsSuite : SyncUserBaseTests
         base.TearDown();
     }
 
+    [OneTimeTearDown]
+    public new void TearDownSuite()
+    {
+        base.TearDownSuite();
+    }
+
     [UnityTest]
     public IEnumerator TestSyncBeforeInit()
     {
