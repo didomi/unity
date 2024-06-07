@@ -274,8 +274,9 @@ namespace IO.Didomi.SDK.IOS
 
         public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
         {
-            string parametersJson = JsonConvert.SerializeObject(userAuthParams);
-            DidomiFramework.SetUserWithAuthParams(parametersJson);
+            string userAuthParamsJson = JsonConvert.SerializeObject(userAuthParams);
+            string synchronizedUsersJson = IOSObjectMapper.ConvertFromUserAuthParamsListToJson(synchronizedUsers);
+            DidomiFramework.SetUserWithAuthParams(userAuthParamsJson, synchronizedUsersJson);
         }
 
         public void SetUserAndSetupUI(string organizationUserId)
@@ -285,8 +286,9 @@ namespace IO.Didomi.SDK.IOS
 
         public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
         {
-            string parametersJson = JsonConvert.SerializeObject(userAuthParams);
-            DidomiFramework.SetUserWithAuthParamsAndSetupUI(parametersJson);
+            string userAuthParamsJson = JsonConvert.SerializeObject(userAuthParams);
+            string synchronizedUsersJson = IOSObjectMapper.ConvertFromUserAuthParamsListToJson(synchronizedUsers);
+            DidomiFramework.SetUserWithAuthParamsAndSetupUI(userAuthParamsJson, synchronizedUsersJson);
         }
 
         public void ClearUser()

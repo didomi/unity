@@ -853,25 +853,25 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void setUserWithAuthParams(string parametersJson);
+        private static extern void setUserWithAuthParams(string userAuthParamsJson, string synchronizedUsersJson);
 #endif
 
-        public static void SetUserWithAuthParams(string parametersJson)
+        public static void SetUserWithAuthParams(string userAuthParamsJson, string synchronizedUsersJson)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            setUserWithAuthParams(parametersJson);
+            setUserWithAuthParams(userAuthParamsJson, synchronizedUsersJson);
 #endif
         }
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void setUserWithAuthParamsAndSetupUI(string parametersJson);
+        private static extern void setUserWithAuthParamsAndSetupUI(string userAuthParamsJson, string synchronizedUsersJson);
 #endif
 
-        public static void SetUserWithAuthParamsAndSetupUI(string parametersJson)
+        public static void SetUserWithAuthParamsAndSetupUI(string userAuthParamsJson, string synchronizedUsersJson)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            setUserWithAuthParamsAndSetupUI(parametersJson);
+            setUserWithAuthParamsAndSetupUI(userAuthParamsJson, synchronizedUsersJson);
 #endif
         }
 
