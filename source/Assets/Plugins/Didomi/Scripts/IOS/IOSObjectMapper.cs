@@ -71,6 +71,16 @@ namespace IO.Didomi.SDK.IOS
             return "[]";
         }
 
+        public static string ConvertFromUserAuthParamsListToJson(IList<UserAuthParams> userAuthParams)
+        {
+            if (userAuthParams != null)
+            {
+                return JsonConvert.SerializeObject(userAuthParams.ToArray());
+            }
+
+            return null;
+        }
+
         public static string ConvertFromVendorsStatusDictionaryToJson(Dictionary<string, VendorStatus> vendors)
         {
             if (vendors != null)

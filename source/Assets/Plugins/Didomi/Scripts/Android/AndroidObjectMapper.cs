@@ -449,6 +449,42 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
+        public static AndroidJavaObject ConvertToJavaUserAuthList(IList<UserAuthParams> userAuthParams)
+        {
+            if (userAuthParams != null)
+            {
+                var arrayListJavaObject = new AndroidJavaObject("java.util.ArrayList");
+
+                //IntPtr methodPut = AndroidJNIHelper.GetMethodID(
+                //    hashSetJavaObject.GetRawClass(),
+                //    "add",
+                //    "(Ljava/lang/String)Ljava/lang/Boolean;");
+
+                //IntPtr methodPut = AndroidJNIHelper.GetMethodID(
+                //   arrayListJavaObject.GetRawClass(),
+                //   "add",
+                //    "(Ljava/lang/String)Ljava/lang/Boolean;");
+                //   "(Lio/didomi/sdk/UserAuthParams)Ljava/lang/Boolean;");
+
+                foreach (var item in userAuthParams)
+                {
+
+                    var itemJavaObject = ConvertToJavaUserAuthParams(item);
+
+                    //var args = new object[1];
+                    //args[0] = itemJavaObject;
+
+                    arrayListJavaObject.Call<bool>("add", itemJavaObject);
+
+                    //AndroidJNI.CallObjectMethod(arrayListJavaObject.GetRawObject(), methodPut, AndroidJNIHelper.CreateJNIArgArray(args));
+                }
+
+                return arrayListJavaObject;
+            }
+
+            return null;
+        }
+
         public static AndroidJavaObject ConvertToJavaCurrentUserStatus(CurrentUserStatus status)
         {
             AndroidJavaObject purposesMap = new AndroidJavaObject("java.util.HashMap");

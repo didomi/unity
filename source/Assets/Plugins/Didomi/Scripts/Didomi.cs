@@ -552,9 +552,9 @@ namespace IO.Didomi.SDK
         /// Set custom user information from organization
         /// </summary>
         /// <param name="userAuthParams">Parameters to synchronize the user consent</param>
-        public void SetUser(UserAuthParams userAuthParams)
+        public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers = null)
         {
-            didomiForPlatform.SetUser(userAuthParams);
+            didomiForPlatform.SetUser(userAuthParams, synchronizedUsers);
         }
 
         /// <summary>
@@ -570,9 +570,9 @@ namespace IO.Didomi.SDK
         /// Set custom user information from organization, and call setupUI after synchronization if sdk was initialized
         /// </summary>
         /// <param name="userAuthParams">Parameters to synchronize the user consent</param>
-        public void SetUserAndSetupUI(UserAuthParams userAuthParams)
+        public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers = null)
         {
-            didomiForPlatform.SetUserAndSetupUI(userAuthParams);
+            didomiForPlatform.SetUserAndSetupUI(userAuthParams, synchronizedUsers);
         }
 
         /// <summary>

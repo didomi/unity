@@ -538,6 +538,58 @@ NSDictionary<NSString *, DDMCurrentUserStatusPurpose *> * ConvertJsonToCurrentUs
     return convertedDictionary;
 }
 
+UserAuthParams * ConvertJsonToUserAuthParams(char* jsonText)
+{
+    NSString *jsonString=CreateNSString(jsonText);
+
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+
+    id _Nullable initializationVector = jsonObject[@"iv"];
+    
+    id expiration = jsonObject[@"expiration"];
+    if ([expiration respondsToSelector:@selector(doubleValue)]) {
+        double expirationValue = [expiration doubleValue];
+        
+        if (initializationVector != NULL) {
+            return [[UserAuthWithHashParams alloc]
+                    initWithId: jsonObject[@"id"]
+                    algorithm: jsonObject[@"algorithm"]
+                    secretID: jsonObject[@"secretId"]
+                    digest: jsonObject[@"digest"]
+                    salt: jsonObject[@"salt"]
+                    legacyExpiration: expirationValue
+            ];
+        } else {
+            return [[UserAuthWithEncryptionParams alloc]
+                    initWithId: jsonObject[@"id"]
+                    algorithm: jsonObject[@"algorithm"]
+                    secretID: jsonObject[@"secretId"]
+                    initializationVector: initializationVector
+                    legacyExpiration: expirationValue
+            ];
+        }
+    } else {
+        if (initializationVector != NULL) {
+            return [[UserAuthWithHashParams alloc]
+                    initWithId: jsonObject[@"id"]
+                    algorithm: jsonObject[@"algorithm"]
+                    secretID: jsonObject[@"secretId"]
+                    digest: jsonObject[@"digest"]
+                    salt: jsonObject[@"salt"]
+            ];
+        } else {
+            return [[UserAuthWithEncryptionParams alloc]
+                    initWithId: jsonObject[@"id"]
+                    algorithm: jsonObject[@"algorithm"]
+                    secretID: jsonObject[@"secretId"]
+                    initializationVector: initializationVector
+            ];
+        }
+    }
+}
+
 NSDictionary<NSString *, DDMCurrentUserStatusVendor *> * ConvertJsonToCurrentUserStatusVendors(char* jsonText)
 {
     NSString *jsonString=CreateNSString(jsonText);
@@ -618,95 +670,16 @@ void setUserAndSetupUI(char* organizationUserId)
         containerController: UnityGetGLViewController()];
 }
 
-void setUserWithEncryptionParams(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector)
+void setUserWithAuthParams(char* parametersJson)
 {
-    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc]
-                                                        initWithId: CreateNSString(organizationUserId)
-                                                        algorithm: CreateNSString(algorithm)
-                                                        secretID: CreateNSString(secretID)
-                                                        initializationVector: CreateNSString(initializationVector)];
+    UserAuthParams *userAuthParameters = ConvertJsonToUserAuthParams(parametersJson);
     [[Didomi shared] setUserWithUserAuthParams:userAuthParameters];
 }
 
-void setUserWithEncryptionParamsAndSetupUI(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector)
+void setUserWithAuthParamsAndSetupUI(char* parametersJson)
 {
-    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc]
-                                                        initWithId: CreateNSString(organizationUserId)
-                                                        algorithm: CreateNSString(algorithm)
-                                                        secretID: CreateNSString(secretID)
-                                                        initializationVector: CreateNSString(initializationVector)];
+    UserAuthParams *userAuthParameters = ConvertJsonToUserAuthParams(parametersJson);
     [[Didomi shared] setUserWithUserAuthParams:userAuthParameters
-        containerController: UnityGetGLViewController()];
-}
-
-void setUserWithEncryptionParamsWithExpiration(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector, long expiration)
-{
-    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc]
-                                                        initWithId: CreateNSString(organizationUserId)
-                                                        algorithm: CreateNSString(algorithm)
-                                                        secretID: CreateNSString(secretID)
-                                                        initializationVector: CreateNSString(initializationVector)
-                                                        legacyExpiration:(double)expiration];
-    [[Didomi shared] setUserWithUserAuthParams:userAuthParameters];
-}
-
-void setUserWithEncryptionParamsWithExpirationAndSetupUI(char* organizationUserId, char* algorithm, char* secretID, char* initializationVector, long expiration)
-{
-    UserAuthWithEncryptionParams *userAuthParameters = [[UserAuthWithEncryptionParams alloc]
-                                                        initWithId: CreateNSString(organizationUserId)
-                                                        algorithm: CreateNSString(algorithm)
-                                                        secretID: CreateNSString(secretID)
-                                                        initializationVector: CreateNSString(initializationVector)
-                                                        legacyExpiration:(double)expiration];
-    [[Didomi shared] setUserWithUserAuthParams:userAuthParameters
-        containerController: UnityGetGLViewController()];
-}
-
-void setUserWithHashParams(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt)
-{
-    UserAuthWithHashParams *userAuthParameters = [[UserAuthWithHashParams alloc]
-                                                        initWithId:CreateNSString(organizationUserId)
-                                                        algorithm: CreateNSString(algorithm)
-                                                        secretID: CreateNSString(secretID)
-                                                        digest: CreateNSString(digest)
-                                                        salt: CreateNSStringNullable(salt)];
-    [[Didomi shared] setUserWithUserAuthParams: userAuthParameters];
-}
-
-void setUserWithHashParamsAndSetupUI(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt)
-{
-    UserAuthWithHashParams *userAuthParameters = [[UserAuthWithHashParams alloc]
-                                                        initWithId:CreateNSString(organizationUserId)
-                                                        algorithm: CreateNSString(algorithm)
-                                                        secretID: CreateNSString(secretID)
-                                                        digest: CreateNSString(digest)
-                                                        salt: CreateNSStringNullable(salt)];
-    [[Didomi shared] setUserWithUserAuthParams: userAuthParameters
-        containerController: UnityGetGLViewController()];
-}
-
-void setUserWithHashParamsWithExpiration(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt, long expiration)
-{
-    UserAuthWithHashParams *userAuthParameters = [[UserAuthWithHashParams alloc]
-                                                        initWithId: CreateNSString(organizationUserId)
-                                                        algorithm: CreateNSString(algorithm)
-                                                        secretID: CreateNSString(secretID)
-                                                        digest: CreateNSString(digest)
-                                                        salt: CreateNSStringNullable(salt)
-                                                        legacyExpiration:(double)expiration];
-    [[Didomi shared] setUserWithUserAuthParams: userAuthParameters];
-}
-
-void setUserWithHashParamsWithExpirationAndSetupUI(char* organizationUserId, char* algorithm, char* secretID, char* digest, char* salt, long expiration)
-{
-    UserAuthWithHashParams *userAuthParameters = [[UserAuthWithHashParams alloc]
-                                                        initWithId: CreateNSString(organizationUserId)
-                                                        algorithm: CreateNSString(algorithm)
-                                                        secretID: CreateNSString(secretID)
-                                                        digest: CreateNSString(digest)
-                                                        salt: CreateNSStringNullable(salt)
-                                                        legacyExpiration:(double)expiration];
-    [[Didomi shared] setUserWithUserAuthParams: userAuthParameters
         containerController: UnityGetGLViewController()];
 }
 

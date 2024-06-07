@@ -282,7 +282,7 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
-        public void SetUser(UserAuthParams userAuthParams)
+        public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
         {
             throw new NotImplementedException();
         }
@@ -292,7 +292,7 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
-        public void SetUserAndSetupUI(UserAuthParams userAuthParams)
+        public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
         {
             throw new NotImplementedException();
         }

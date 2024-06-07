@@ -1,5 +1,6 @@
 ﻿using IO.Didomi.SDK.Events;
 using IO.Didomi.SDK.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -271,18 +272,10 @@ namespace IO.Didomi.SDK.IOS
             DidomiFramework.SetUser(organizationUserId);
         }
 
-        public void SetUser(UserAuthParams userAuthParams)
+        public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
         {
-            if (userAuthParams is UserAuthWithEncryptionParams)
-            {
-                DidomiFramework.SetUserWithEncryptionParams((UserAuthWithEncryptionParams)userAuthParams);
-            } else if (userAuthParams is UserAuthWithHashParams)
-            {
-                DidomiFramework.SetUserWithHashParams((UserAuthWithHashParams)userAuthParams);
-            } else
-            {
-                throw new NotImplementedException("Unsupported User Auth parameters type");
-            }
+            string parametersJson = JsonConvert.SerializeObject(userAuthParams);
+            DidomiFramework.SetUserWithAuthParams(parametersJson);
         }
 
         public void SetUserAndSetupUI(string organizationUserId)
@@ -290,20 +283,10 @@ namespace IO.Didomi.SDK.IOS
             DidomiFramework.SetUserAndSetupUI(organizationUserId);
         }
 
-        public void SetUserAndSetupUI(UserAuthParams userAuthParams)
+        public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
         {
-            if (userAuthParams is UserAuthWithEncryptionParams)
-            {
-                DidomiFramework.SetUserWithEncryptionParamsAndSetupUI((UserAuthWithEncryptionParams)userAuthParams);
-            }
-            else if (userAuthParams is UserAuthWithHashParams)
-            {
-                DidomiFramework.SetUserWithHashParamsAndSetupUI((UserAuthWithHashParams)userAuthParams);
-            }
-            else
-            {
-                throw new NotImplementedException("Unsupported User Auth parameters type");
-            }
+            string parametersJson = JsonConvert.SerializeObject(userAuthParams);
+            DidomiFramework.SetUserWithAuthParamsAndSetupUI(parametersJson);
         }
 
         public void ClearUser()
