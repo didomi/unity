@@ -128,6 +128,18 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
 
         ResetResults();
 
+        Didomi.GetInstance().SetUser(new UserAuthWithHashParams(
+            id: testUserId,
+            algorithm: "hash-md5",
+            secretId: secretId,
+            digest: digest,
+            salt: null
+        ));
+        yield return ExpectSyncSuccess("Set user with Hash params without expiration and without salt", false);
+
+
+        ResetResults();
+
         Didomi.GetInstance().SetUserAndSetupUI(new UserAuthWithHashParams(
             id: testUserId,
             algorithm: "hash-md5",

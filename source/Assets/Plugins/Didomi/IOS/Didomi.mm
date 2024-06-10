@@ -618,14 +618,7 @@ void setUserAndSetupUI(char* organizationUserId)
         containerController: UnityGetGLViewController()];
 }
 
-UserAuthParams * ConvertJsonToUserAuthParams(char* jsonText)
-{
-    NSString *jsonString=CreateNSString(jsonText);
-
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
-
+UserAuthParams * ConvertJsonObjectToUserAuthParams(NSDictionary* jsonObject) {
     id _Nullable initializationVector = jsonObject[@"iv"];
     
     id expiration = jsonObject[@"expiration"];
@@ -670,6 +663,15 @@ UserAuthParams * ConvertJsonToUserAuthParams(char* jsonText)
     }
 }
 
+UserAuthParams * ConvertJsonToUserAuthParams(NSString* jsonString)
+{
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+    
+    return ConvertJsonObjectToUserAuthParams(jsonObject);
+}
+
 NSArray<UserAuthParams *> * ConvertJsonToUserAuthParamsArray(char* jsonText)
 {
     NSString *jsonString=CreateNSString(jsonText);
@@ -682,9 +684,8 @@ NSArray<UserAuthParams *> * ConvertJsonToUserAuthParamsArray(char* jsonText)
 
     NSLog(@"Will convert array");
     
-    for (NSString *jsonParams in jsonArray) {
-        NSLog(@"Converting param:\n%@", jsonParams);
-        UserAuthParams *params = ConvertJsonToUserAuthParams(jsonParams);
+    for (NSDictionary *jsonObject in jsonArray) {
+        UserAuthParams *params = ConvertJsonObjectToUserAuthParams(jsonObject);
         [paramsArray addObject:params];
     }
     
