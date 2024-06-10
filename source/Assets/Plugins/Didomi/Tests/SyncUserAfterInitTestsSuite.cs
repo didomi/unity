@@ -137,7 +137,6 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
         ));
         yield return ExpectSyncSuccess("Set user with Hash params without expiration and without salt", false);
 
-
         ResetResults();
 
         Didomi.GetInstance().SetUserAndSetupUI(new UserAuthWithHashParams(

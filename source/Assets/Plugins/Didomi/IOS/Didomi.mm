@@ -38,8 +38,6 @@ char* ConvertSetToJsonText(NSSet<NSString *> * dataSet)
 
    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
-   NSLog(@"jsonData as string:\n%@", jsonString);
-
    return cStringCopy([jsonString UTF8String]);
 }
 
@@ -48,8 +46,6 @@ char* ConvertComplexDictionaryArrayToJsonText(NSArray<NSDictionary *> * dataArra
    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataArray options:NSJSONWritingPrettyPrinted error:nil];
 
    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-
-   NSLog(@"jsonData as string:\n%@", jsonString);
 
    return cStringCopy([jsonString UTF8String]);
 }
@@ -61,7 +57,6 @@ char* ConvertComplexDictionaryToString(NSDictionary * dataDict)
 {
    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataDict options:NSJSONWritingPrettyPrinted error:nil];
    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-   NSLog(@"jsonData dictionary as string:\n%@", jsonString);
    return cStringCopy([jsonString UTF8String]);
 }
 
@@ -473,8 +468,6 @@ char* convertDictionaryToJsonText( NSDictionary<NSString *, NSString *> * dataDi
     
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
-    NSLog(@"jsonData dictionary as string:\n%@", jsonString);
-
     return cStringCopy([jsonString UTF8String]);
 }
 
@@ -681,16 +674,10 @@ NSArray<UserAuthParams *> * ConvertJsonToUserAuthParamsArray(char* jsonText)
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
 
     NSMutableArray *paramsArray = [NSMutableArray array];
-
-    NSLog(@"Will convert array");
     
     for (NSDictionary *jsonObject in jsonArray) {
         UserAuthParams *params = ConvertJsonObjectToUserAuthParams(jsonObject);
         [paramsArray addObject:params];
-    }
-    
-    for (UserAuthParams *parameter in paramsArray) {
-        NSLog(@"Param id: %@", [parameter id]);
     }
 
     return paramsArray;
@@ -701,9 +688,7 @@ void setUserWithAuthParams(char* userAuthParamsJson, char* synchronizedUsersJson
 {
     UserAuthParams *userAuthParameters = ConvertJsonToUserAuthParams(CreateNSString(userAuthParamsJson));
     if (synchronizedUsersJson != NULL) {
-        NSLog(@"GO sync");
         NSArray<UserAuthParams *> * synchronizedUsers = ConvertJsonToUserAuthParamsArray(synchronizedUsersJson);
-        NSLog(@"Converted...");
         [[Didomi shared] setUserWithUserAuthParams:userAuthParameters
             synchronizedUsers: synchronizedUsers];
     } else {
@@ -716,9 +701,7 @@ void setUserWithAuthParamsAndSetupUI(char* userAuthParamsJson, char* synchronize
     UserAuthParams *userAuthParameters = ConvertJsonToUserAuthParams(CreateNSString(userAuthParamsJson));
     
     if (synchronizedUsersJson != NULL) {
-        NSLog(@"GO sync (UI)");
         NSArray<UserAuthParams *> * synchronizedUsers = ConvertJsonToUserAuthParamsArray(synchronizedUsersJson);
-        NSLog(@"Converted... (UI)");
         [[Didomi shared] setUserWithUserAuthParams:userAuthParameters
             synchronizedUsers: synchronizedUsers
             containerController: UnityGetGLViewController()];
