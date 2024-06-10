@@ -28,7 +28,7 @@ namespace IO.Didomi.SDK
         [JsonProperty("iv")]
         public string InitializationVector { get; }
 
-        [JsonProperty("expiration")]
+        [JsonProperty("expiration", NullValueHandling = NullValueHandling.Ignore)]
         public long? Expiration { get; }
 
         public UserAuthWithEncryptionParams(string id, string algorithm, string secretId, string initializationVector, long? expiration = null)
@@ -55,10 +55,10 @@ namespace IO.Didomi.SDK
         [JsonProperty("digest")]
         public string Digest { get; }
 
-        [JsonProperty("salt")]
+        [JsonProperty("salt", NullValueHandling = NullValueHandling.Ignore)]
         public string Salt { get; }
 
-        [JsonProperty("expiration")]
+        [JsonProperty("expiration", NullValueHandling = NullValueHandling.Ignore)]
         public long? Expiration { get; }
 
         public UserAuthWithHashParams(string id, string algorithm, string secretId, string digest, string salt, long? expiration = null)

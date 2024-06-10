@@ -618,7 +618,8 @@ UserAuthParams * ConvertJsonObjectToUserAuthParams(NSDictionary* jsonObject) {
     if ([expiration respondsToSelector:@selector(doubleValue)]) {
         double expirationValue = [expiration doubleValue];
         
-        if (initializationVector != NULL) {
+        if (initializationVector == NULL) {
+            // iv not present, Auth uses Hash
             return [[UserAuthWithHashParams alloc]
                     initWithId: jsonObject[@"id"]
                     algorithm: jsonObject[@"algorithm"]
@@ -628,6 +629,7 @@ UserAuthParams * ConvertJsonObjectToUserAuthParams(NSDictionary* jsonObject) {
                     legacyExpiration: expirationValue
             ];
         } else {
+            // iv is present, Auth uses Encryption
             return [[UserAuthWithEncryptionParams alloc]
                     initWithId: jsonObject[@"id"]
                     algorithm: jsonObject[@"algorithm"]
@@ -637,7 +639,8 @@ UserAuthParams * ConvertJsonObjectToUserAuthParams(NSDictionary* jsonObject) {
             ];
         }
     } else {
-        if (initializationVector != NULL) {
+        if (initializationVector == NULL) {
+            // iv not present, Auth uses Hash
             return [[UserAuthWithHashParams alloc]
                     initWithId: jsonObject[@"id"]
                     algorithm: jsonObject[@"algorithm"]
@@ -646,6 +649,7 @@ UserAuthParams * ConvertJsonObjectToUserAuthParams(NSDictionary* jsonObject) {
                     salt: jsonObject[@"salt"]
             ];
         } else {
+            // iv is present, Auth uses Encryption
             return [[UserAuthWithEncryptionParams alloc]
                     initWithId: jsonObject[@"id"]
                     algorithm: jsonObject[@"algorithm"]
