@@ -8,47 +8,168 @@ namespace IO.Didomi.SDK.Events
     /// </summary>
     public class DidomiEventListener
     {
+        /// <summary>
+        /// Consent status has changed
+        /// </summary>
         public event EventHandler<ConsentChangedEvent> ConsentChanged;
+        /// <summary>
+        /// An error occurred within the SDK
+        /// </summary>
         public event EventHandler<ErrorEvent> Error;
+        /// <summary>
+        /// Notice has been hidden
+        /// </summary>
         public event EventHandler<HideNoticeEvent> HideNotice;
+        /// <summary>
+        /// The SDK is initialized and ready
+        /// Warning: This only gets fired once. Use the `Didomi.onReady` function to make sure your callback always gets executed.
+        /// </summary>
         public event EventHandler<ReadyEvent> Ready;
+        /// <summary>
+        /// The notice is being shown (or needs to be shown)
+        /// </summary>
         public event EventHandler<ShowNoticeEvent> ShowNotice;
+        /// <summary>
+        /// The preferences screen is being hidden
+        /// </summary>
         public event EventHandler<HidePreferencesEvent> HidePreferences;
+        /// <summary>
+        /// The preferences screen is being shown
+        /// </summary>
         public event EventHandler<ShowPreferencesEvent> ShowPreferences;
+        /// <summary>
+        /// Click on agree on notice
+        /// </summary>
         public event EventHandler<NoticeClickAgreeEvent> NoticeClickAgree;
+        /// <summary>
+        /// Click on disagree on notice
+        /// </summary>
         public event EventHandler<NoticeClickDisagreeEvent> NoticeClickDisagree;
+        /// <summary>
+        /// Click on learn more on notice
+        /// </summary> 
         public event EventHandler<NoticeClickMoreInfoEvent> NoticeClickMoreInfo;
+        /// <summary>
+        /// Click on vendors link or button
+        /// </summary>
         public event EventHandler<NoticeClickViewVendorsEvent> NoticeClickViewVendors;
+        /// <summary>
+        /// Click on "Limit the use of my Sensitive Personal Information" on notice
+        /// </summary>
         public event EventHandler<NoticeClickViewSPIPurposesEvent> NoticeClickViewSPIPurposes;
+        /// <summary>
+        /// Click on privacy policy button (TV only)
+        /// </summary>
         public event EventHandler<NoticeClickPrivacyPolicyEvent> NoticeClickPrivacyPolicy;
+        /// <summary>
+        /// Click on agree to all on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickAgreeToAllEvent> PreferencesClickAgreeToAll;
+        /// <summary>
+        /// Click on disagree to all on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickDisagreeToAllEvent> PreferencesClickDisagreeToAll;
+        /// <summary>
+        /// Click on Purposes tab in preferences screen (TV only)
+        /// </summary>
         public event EventHandler<PreferencesClickViewPurposesEvent> PreferencesClickViewPurposes;
+        /// <summary>
+        /// Toggle to Agree to all Purposes on preferences screen
+        /// </summary>
         public event EventHandler<PreferencesClickAgreeToAllPurposesEvent> PreferencesClickAgreeToAllPurposes;
+        /// <summary>
+        /// Toggle to Disagree to all Purposes on preferences screen
+        /// </summary>
         public event EventHandler<PreferencesClickDisagreeToAllPurposesEvent> PreferencesClickDisagreeToAllPurposes;
+        /// <summary>
+        /// Toggle to Reset all Purposes on preferences screen
+        /// </summary>
         public event EventHandler<PreferencesClickResetAllPurposesEvent> PreferencesClickResetAllPurposes;
+        /// <summary>
+        /// Toggle to agree to a purpose on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickPurposeAgreeEvent> PreferencesClickPurposeAgree;
+        /// <summary>
+        /// Toggle to disagree to a purpose on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickPurposeDisagreeEvent> PreferencesClickPurposeDisagree;
+        /// <summary>
+        /// Click on agree to a category on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickCategoryAgreeEvent> PreferencesClickCategoryAgree;
+        /// <summary>
+        /// Click on disagree to a category on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickCategoryDisagreeEvent> PreferencesClickCategoryDisagree;
+        /// <summary>
+        /// Click on "Limit the use of my Sensitive Personal Information" on preferences screen
+        /// </summary>
         public event EventHandler<PreferencesClickViewSPIPurposesEvent> PreferencesClickViewSPIPurposes;
+        /// <summary>
+        /// Click view vendors on purposes view on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickViewVendorsEvent> PreferencesClickViewVendors;
+        /// <summary>
+        /// Click on save on the purposes view on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickSaveChoicesEvent> PreferencesClickSaveChoices;
+        /// <summary>
+        /// Click on agree to a purpose on sensitive personal information screen
+        /// </summary>
         public event EventHandler<PreferencesClickSPIPurposeAgreeEvent> PreferencesClickSPIPurposeAgree;
+        /// <summary>
+        /// Click on disagree to a purpose on sensitive personal information screen
+        /// </summary>
         public event EventHandler<PreferencesClickSPIPurposeDisagreeEvent> PreferencesClickSPIPurposeDisagree;
+        /// <summary>
+        /// Click on agree to a category on sensitive personal information screen
+        /// </summary>
         public event EventHandler<PreferencesClickSPICategoryAgreeEvent> PreferencesClickSPICategoryAgree;
+        /// <summary>
+        /// Click on disagree to a category on sensitive personal information screen
+        /// </summary>
         public event EventHandler<PreferencesClickSPICategoryDisagreeEvent> PreferencesClickSPICategoryDisagree;
+        /// <summary>
+        /// Click on save on the sensitive personal information screen
+        /// </summary>
         public event EventHandler<PreferencesClickSPIPurposeSaveChoicesEvent> PreferencesClickSPIPurposeSaveChoices;
+        /// <summary>
+        /// Toggle to Agree to all Vendors on preferences screen
+        /// </summary>
         public event EventHandler<PreferencesClickAgreeToAllVendorsEvent> PreferencesClickAgreeToAllVendors;
+        /// <summary>
+        /// Toggle to Disagree to all Vendors on preferences screen
+        /// </summary>
         public event EventHandler<PreferencesClickDisagreeToAllVendorsEvent> PreferencesClickDisagreeToAllVendors;
+        /// <summary>
+        /// Toggle to agree to a vendor on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickVendorAgreeEvent> PreferencesClickVendorAgree;
+        /// <summary>
+        ///  Toggle to disagree to a vendor on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickVendorDisagreeEvent> PreferencesClickVendorDisagree;
+        /// <summary>
+        /// Click on save on the vendors view on preferences popup
+        /// </summary>
         public event EventHandler<PreferencesClickVendorSaveChoicesEvent> PreferencesClickVendorSaveChoices;
         [ObsoleteAttribute("This event is deprecated. Use SyncReady instead.")]
         public event EventHandler<SyncDoneEvent> SyncDone;
+        /// <summary>
+        /// Synchronization was done successfully
+        /// </summary>
         public event EventHandler<SyncReadyEvent> SyncReady;
+        /// <summary>
+        /// An error occurred while trying to synchronize
+        /// </summary>
         public event EventHandler<SyncErrorEvent> SyncError;
+        /// <summary>
+        /// The language update is complete
+        /// </summary>
         public event EventHandler<LanguageUpdatedEvent> LanguageUpdated;
+        /// <summary>
+        /// The language update was not completed
+        /// </summary>
         public event EventHandler<LanguageUpdateFailedEvent> LanguageUpdateFailed;
 
         public DidomiEventListener() { }

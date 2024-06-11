@@ -2,6 +2,10 @@ using System.Collections.Generic;
 
 namespace IO.Didomi.SDK
 {
+    /// <summary>
+    /// Asynchronously enable and disable purposes and vendors through different methods.
+    /// These changes will not be reflected on the user status until the `commit` method is called.
+    /// </summary>
     public class CurrentUserStatusTransaction
     {
         private Dictionary<string, CurrentUserStatus.VendorStatus> vendorsStatus = new Dictionary<string, CurrentUserStatus.VendorStatus>();
@@ -19,13 +23,23 @@ namespace IO.Didomi.SDK
         {
             this.CommitAction = commitAction;
         }
-      
+
+        /// <summary>
+        /// Enable the provided purpose
+        /// </summary>
+        /// <param name="vendorId">The vendor id to enable</param>
+        /// <returns>Self for chain calls</returns>
         public CurrentUserStatusTransaction EnableVendor(string vendorId)
         {
             vendorsStatus.Add(vendorId, new CurrentUserStatus.VendorStatus(vendorId, true));
             return this;
         }
 
+        /// <summary>
+        /// Enable the provided vendors
+        /// </summary>
+        /// <param name="vendorIds">The list of vendor ids to enable</param>
+        /// <returns>Self for chain calls</returns>
         public CurrentUserStatusTransaction EnableVendors(params string[] vendorIds)
         {
             foreach (string vendorId in vendorIds)
@@ -35,12 +49,22 @@ namespace IO.Didomi.SDK
             return this;
         }
 
+        /// <summary>
+        /// Disable the provided vendor
+        /// </summary>
+        /// <param name="vendorId">The vendor id to disable</param>
+        /// <returns>Self for chain calls</returns>
         public CurrentUserStatusTransaction DisableVendor(string vendorId)
         {
             vendorsStatus.Add(vendorId, new CurrentUserStatus.VendorStatus(vendorId, false));
             return this;
         }
 
+        /// <summary>
+        /// Disable the provided vendors
+        /// </summary>
+        /// <param name="vendorIds">The list of vendor ids to disable</param>
+        /// <returns>Self for chain calls</returns>
         public CurrentUserStatusTransaction DisableVendors(params string[] vendorIds)
         {
             foreach (string vendorId in vendorIds)
@@ -50,12 +74,22 @@ namespace IO.Didomi.SDK
             return this;
         }
 
+        /// <summary>
+        /// Enable the provided purpose
+        /// </summary>
+        /// <param name="purposeId">The purpose id to enable</param>
+        /// <returns>Self for chain calls</returns>
         public CurrentUserStatusTransaction EnablePurpose(string purposeId)
         {
             purposesStatus.Add(purposeId, new CurrentUserStatus.PurposeStatus(purposeId, true));
             return this;
         }
 
+        /// <summary>
+        /// Enable the provided purposes
+        /// </summary>
+        /// <param name="purposeIds">The list of purpose ids to enable</param>
+        /// <returns>Self for chain calls</returns>
         public CurrentUserStatusTransaction EnablePurposes(params string[] purposeIds)
         {
             foreach (string purposeId in purposeIds)
@@ -65,12 +99,22 @@ namespace IO.Didomi.SDK
             return this;
         }
 
+        /// <summary>
+        /// Disable the provided purpose
+        /// </summary>
+        /// <param name="purposeId">The purpose id to disable</param>
+        /// <returns>Self for chain calls</returns>
         public CurrentUserStatusTransaction DisablePurpose(string purposeId)
         {
             purposesStatus.Add(purposeId, new CurrentUserStatus.PurposeStatus(purposeId, false));
             return this;
         }
 
+        /// <summary>
+        /// Disable the provided purposes
+        /// </summary>
+        /// <param name="purposeIds">The list of purpose ids to disable</param>
+        /// <returns>Self for chain calls</returns>
         public CurrentUserStatusTransaction DisablePurposes(params string[] purposeIds)
         {
             foreach (string purposeId in purposeIds)
@@ -80,6 +124,10 @@ namespace IO.Didomi.SDK
             return this;
         }
 
+        /// <summary>
+        /// Update the user status with the registered changes. If a value was not modified in the transaction, its value will still the same.
+        /// </summary>
+        /// <returns>True if user status was updated, false otherwise</returns>
         public bool Commit()
         {
             ISet<string> enabledVendors = new HashSet<string>();

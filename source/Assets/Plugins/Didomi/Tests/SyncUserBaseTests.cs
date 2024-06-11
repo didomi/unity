@@ -67,9 +67,9 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
         syncError = true;
     }
 
-    /**
-     * Reset the results so it can be checked again later
-     */ 
+    /// <summary>
+    /// Reset the results so it can be checked again later
+    /// </summary>
     protected void ResetResults()
     {
         syncError = false;
@@ -79,9 +79,9 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
         syncAcknowledged2 = null;
     }
 
-    /**
-     * Check that user is synchronized successfully
-     */
+    /// <summary>
+    /// Check that user is synchronized successfully
+    /// </summary>
     protected IEnumerator ExpectSyncSuccess(string message, bool expectApplied)
     {
         yield return ExpectSyncSuccess(message, expectApplied, expectApplied);
@@ -98,9 +98,9 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
         Assert.IsFalse(syncAcknowledged2, "Sync acknowledged should always fail at the 2nd call - " + message);
     }
 
-    /**
-     * Check that we get a sync error
-     */
+    /// <summary>
+    /// Check that we get a sync error
+    /// </summary>
     protected IEnumerator ExpectSyncError()
     {
         yield return WaitForCallback();
@@ -110,9 +110,9 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
         Assert.IsNull(statusApplied);
     }
 
-    /**
-     * Wait for SyncDone or SyncError callback
-     */
+    /// <summary>
+    /// Wait for SyncDone or SyncError callback
+    /// </summary>
     private IEnumerator WaitForCallback()
     {
         yield return new WaitUntil(() => (syncedUserId != null && syncAcknowledged != null && syncAcknowledged2 != null) || syncError);

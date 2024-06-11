@@ -63,9 +63,9 @@ public abstract class DidomiBaseTests
         yield return WaitForSdkReady();
     }
 
-    /**
-     * Wait until SDK is ready and Reset the consents
-     */
+    /// <summary>
+    /// Wait until SDK is ready and Reset the consents
+    /// </summary>
     public IEnumerator WaitForSdkReady()
     {
         Debug.Log("Tests: Waiting for sdk ready");

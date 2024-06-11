@@ -5,17 +5,8 @@ namespace IO.Didomi.SDK.Events
     /// </summary>
     public class PreferencesClickVendorDisagreeEvent : Event
     {
-
-        /**
-         * ID of the vendor
-         */
         private string vendorId;
 
-        /**
-         * Constructor
-         *
-         * @param vendorId ID of the vendor
-         */
         public PreferencesClickVendorDisagreeEvent(
             string vendorId
         )
@@ -23,6 +14,10 @@ namespace IO.Didomi.SDK.Events
             this.vendorId = vendorId;
         }
 
+        /// <summary>
+        /// ID of the vendor
+        /// </summary>
+        /// <returns></returns>
         public string getVendorId()
         {
             return vendorId;

@@ -57,22 +57,22 @@ public class PurposeAndVendorListsTestsSuite: DidomiBaseTests
         AssertHasRequiredPurposesAndVendors(true);
     }
 
-    /**
-     * Check required purposes and vendors
-     * @param hasRequiredElements whether the required vendors and purposes list should be populated
-     */
+    /// <summary>
+    /// Check required purposes and vendors
+    /// </summary>
+    /// <param name="hasRequiredElements">Whether the required vendors and purposes list should be populated</param>
     private void AssertHasRequiredPurposesAndVendors(bool hasRequiredElements)
     {
         AssertEmptiness(Didomi.GetInstance().GetRequiredPurposeIds(), hasRequiredElements, "requiredPurposeIds");
         AssertEmptiness(Didomi.GetInstance().GetRequiredVendorIds(), hasRequiredElements, "requiredVendorIds");
     }
 
-    /**
-     * Check content of a set
-     * @param element the tested set
-     * @param expectContent whether the set should have any element
-     * @param checkedElement name of the checked element, in case an error message is printed
-     */
+    /// <summary>
+    /// Check content of a set
+    /// </summary>
+    /// <param name="element">The tested set</param>
+    /// <param name="expectContent">Whether the set should have any element</param>
+    /// <param name="checkedElement">Name of the checked element, in case an error message is printed</param>
     private void AssertEmptiness<T>(ISet<T> element, bool expectContent, string checkedElement)
     {
         Assert.NotNull(element, message: $"{checkedElement} is null");

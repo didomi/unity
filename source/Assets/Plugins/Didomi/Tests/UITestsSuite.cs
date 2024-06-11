@@ -143,9 +143,9 @@ public class UITestsSuite: DidomiBaseTests
         Didomi.GetInstance().Reset();
     }
 
-    /**
-     * Checks if events were called as expected
-     */ 
+    /// <summary>
+    /// Checks if events were called as expected
+    /// </summary>
     private void AssertEvents(
         string message,
         bool expectNoticeDisplayed = false,
