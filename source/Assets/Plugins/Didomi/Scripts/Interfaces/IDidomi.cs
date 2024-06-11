@@ -66,9 +66,9 @@ namespace IO.Didomi.SDK.Interfaces
         bool ShouldUserStatusBeCollected();
         void UpdateSelectedLanguage(string languageCode);
         void SetUser(string organizationUserId);
-        void SetUser(UserAuthParams userAuthParams);
+        void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers);
         void SetUserAndSetupUI(string organizationUserId);
-        void SetUserAndSetupUI(UserAuthParams userAuthParams);
+        void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers);
         void ClearUser();
     }
 }

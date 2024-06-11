@@ -853,102 +853,26 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void setUserWithEncryptionParamsWithExpiration(string organizationUserId, string algorithm, string secretID, string initializationVector, long expiration);
-
-        [DllImport("__Internal")]
-        private static extern void setUserWithEncryptionParams(string organizationUserId, string algorithm, string secretID, string initializationVector);
+        private static extern void setUserWithAuthParams(string userAuthParamsJson, string synchronizedUsersJson);
 #endif
 
-        public static void SetUserWithEncryptionParams(UserAuthWithEncryptionParams parameters)
+        public static void SetUserWithAuthParams(string userAuthParamsJson, string synchronizedUsersJson)
         {
-            long? expiration = parameters.Expiration;
-            if (expiration.HasValue)
-            {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-                setUserWithEncryptionParamsWithExpiration(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector, expiration.Value);
+            setUserWithAuthParams(userAuthParamsJson, synchronizedUsersJson);
 #endif
-            }
-            else
-            {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-                setUserWithEncryptionParams(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector);
-#endif
-            }
         }
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void setUserWithEncryptionParamsWithExpirationAndSetupUI(string organizationUserId, string algorithm, string secretID, string initializationVector, long expiration);
-
-        [DllImport("__Internal")]
-        private static extern void setUserWithEncryptionParamsAndSetupUI(string organizationUserId, string algorithm, string secretID, string initializationVector);
+        private static extern void setUserWithAuthParamsAndSetupUI(string userAuthParamsJson, string synchronizedUsersJson);
 #endif
 
-        public static void SetUserWithEncryptionParamsAndSetupUI(UserAuthWithEncryptionParams parameters)
+        public static void SetUserWithAuthParamsAndSetupUI(string userAuthParamsJson, string synchronizedUsersJson)
         {
-            long? expiration = parameters.Expiration;
-            if (expiration.HasValue)
-            {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-                setUserWithEncryptionParamsWithExpirationAndSetupUI(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector, expiration.Value);
+            setUserWithAuthParamsAndSetupUI(userAuthParamsJson, synchronizedUsersJson);
 #endif
-            }
-            else
-            {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-                setUserWithEncryptionParamsAndSetupUI(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.InitializationVector);
-#endif
-            }
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern void setUserWithHashParamsWithExpiration(string organizationUserId, string algorithm, string secretID, string digest, string salt, long expiration);
-
-        [DllImport("__Internal")]
-        private static extern void setUserWithHashParams(string organizationUserId, string algorithm, string secretID, string digest, string salt);
-#endif
-
-        public static void SetUserWithHashParams(UserAuthWithHashParams parameters)
-        {
-            long? expiration = parameters.Expiration;
-            if (expiration.HasValue)
-            {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-                setUserWithHashParamsWithExpiration(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt, expiration.Value);
-#endif
-            }
-            else
-            {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-                setUserWithHashParams(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt);
-#endif
-            }
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern void setUserWithHashParamsWithExpirationAndSetupUI(string organizationUserId, string algorithm, string secretID, string digest, string salt, long expiration);
-
-        [DllImport("__Internal")]
-        private static extern void setUserWithHashParamsAndSetupUI(string organizationUserId, string algorithm, string secretID, string digest, string salt);
-#endif
-
-        public static void SetUserWithHashParamsAndSetupUI(UserAuthWithHashParams parameters)
-        {
-            long? expiration = parameters.Expiration;
-            if (expiration.HasValue)
-            {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-                setUserWithHashParamsWithExpirationAndSetupUI(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt, expiration.Value);
-#endif
-            }
-            else
-            {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-                setUserWithHashParamsAndSetupUI(parameters.Id, parameters.Algorithm, parameters.SecretId, parameters.Digest, parameters.Salt);
-#endif
-            }
         }
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR

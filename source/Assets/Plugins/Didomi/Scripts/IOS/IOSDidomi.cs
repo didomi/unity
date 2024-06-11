@@ -1,5 +1,6 @@
 ﻿using IO.Didomi.SDK.Events;
 using IO.Didomi.SDK.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -271,18 +272,11 @@ namespace IO.Didomi.SDK.IOS
             DidomiFramework.SetUser(organizationUserId);
         }
 
-        public void SetUser(UserAuthParams userAuthParams)
+        public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
         {
-            if (userAuthParams is UserAuthWithEncryptionParams)
-            {
-                DidomiFramework.SetUserWithEncryptionParams((UserAuthWithEncryptionParams)userAuthParams);
-            } else if (userAuthParams is UserAuthWithHashParams)
-            {
-                DidomiFramework.SetUserWithHashParams((UserAuthWithHashParams)userAuthParams);
-            } else
-            {
-                throw new NotImplementedException("Unsupported User Auth parameters type");
-            }
+            string userAuthParamsJson = JsonConvert.SerializeObject(userAuthParams);
+            string synchronizedUsersJson = IOSObjectMapper.ConvertFromUserAuthParamsListToJson(synchronizedUsers);
+            DidomiFramework.SetUserWithAuthParams(userAuthParamsJson, synchronizedUsersJson);
         }
 
         public void SetUserAndSetupUI(string organizationUserId)
@@ -290,20 +284,11 @@ namespace IO.Didomi.SDK.IOS
             DidomiFramework.SetUserAndSetupUI(organizationUserId);
         }
 
-        public void SetUserAndSetupUI(UserAuthParams userAuthParams)
+        public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
         {
-            if (userAuthParams is UserAuthWithEncryptionParams)
-            {
-                DidomiFramework.SetUserWithEncryptionParamsAndSetupUI((UserAuthWithEncryptionParams)userAuthParams);
-            }
-            else if (userAuthParams is UserAuthWithHashParams)
-            {
-                DidomiFramework.SetUserWithHashParamsAndSetupUI((UserAuthWithHashParams)userAuthParams);
-            }
-            else
-            {
-                throw new NotImplementedException("Unsupported User Auth parameters type");
-            }
+            string userAuthParamsJson = JsonConvert.SerializeObject(userAuthParams);
+            string synchronizedUsersJson = IOSObjectMapper.ConvertFromUserAuthParamsListToJson(synchronizedUsers);
+            DidomiFramework.SetUserWithAuthParamsAndSetupUI(userAuthParamsJson, synchronizedUsersJson);
         }
 
         public void ClearUser()

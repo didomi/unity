@@ -449,6 +449,26 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
+        public static AndroidJavaObject ConvertToJavaUserAuthList(IList<UserAuthParams> userAuthParams)
+        {
+            if (userAuthParams != null)
+            {
+                var arrayListJavaObject = new AndroidJavaObject("java.util.ArrayList");
+
+                foreach (var item in userAuthParams)
+                {
+
+                    var itemJavaObject = ConvertToJavaUserAuthParams(item);
+
+                    arrayListJavaObject.Call<bool>("add", itemJavaObject);
+                }
+
+                return arrayListJavaObject;
+            }
+
+            return null;
+        }
+
         public static AndroidJavaObject ConvertToJavaCurrentUserStatus(CurrentUserStatus status)
         {
             AndroidJavaObject purposesMap = new AndroidJavaObject("java.util.HashMap");

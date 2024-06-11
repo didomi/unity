@@ -315,10 +315,11 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethod("setUser", organizationUserId);
         }
 
-        public void SetUser(UserAuthParams userAuthParams)
+        public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
         {
-            AndroidJavaObject nativeParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
-            CallVoidMethod("setUser", nativeParams);
+            AndroidJavaObject nativeUserAuthParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
+            AndroidJavaObject nativeSynchronizedUsersParams = AndroidObjectMapper.ConvertToJavaUserAuthList(synchronizedUsers);
+            CallVoidMethod("setUser", nativeUserAuthParams, nativeSynchronizedUsersParams);
         }
 
         public void SetUserAndSetupUI(string organizationUserId)
@@ -326,10 +327,11 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethodWithActivityLastArg("setUser", organizationUserId);
         }
 
-        public void SetUserAndSetupUI(UserAuthParams userAuthParams)
+        public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
         {
-            AndroidJavaObject nativeParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
-            CallVoidMethodWithActivityLastArg("setUser", nativeParams, null);
+            AndroidJavaObject nativeUserAuthParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
+            AndroidJavaObject nativeSynchronizedUsersParams = AndroidObjectMapper.ConvertToJavaUserAuthList(synchronizedUsers);
+            CallVoidMethodWithActivityLastArg("setUser", nativeUserAuthParams, nativeSynchronizedUsersParams);
         }
 
         public void ClearUser()
