@@ -470,6 +470,7 @@ namespace IO.Didomi.SDK
         /// <param name="enabledLIVendorIds"></param>
         /// <param name="disabledLIVendorIds"></param>
         /// <returns></returns>
+        [ObsoleteAttribute("This method is deprecated. Use SetCurrentUserStatus instead.")]
         public bool SetUserStatus(
             ISet<string> enabledConsentPurposeIds,
             ISet<string> disabledConsentPurposeIds,
