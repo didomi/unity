@@ -49,7 +49,7 @@ namespace IO.Didomi.SDK
 
         /// <summary>
         /// ID of the notice configuration to load on TV devices if you are not using app ID targeting.
-        /// If [androidTvEnabled] is true and SDK is launched on a TV device, this parameter will be used instead of [noticeId]
+        /// If <c>androidTvEnabled</c> is true and SDK is launched on a TV device, this parameter will be used instead of <c>noticeId</c>
         /// to get configuration from console.
         /// </summary>
         public string tvNoticeId { get; }
