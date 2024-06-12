@@ -5,17 +5,8 @@ namespace IO.Didomi.SDK.Events
     /// </summary>
     public class PreferencesClickSPIPurposeDisagreeEvent : Event
     {
-
-        /**
-         * ID of the purpose
-         */
         private string purposeId;
 
-        /**
-         * Constructor
-         *
-         * @param purposeId ID of the purpose
-         */
         public PreferencesClickSPIPurposeDisagreeEvent(
             string purposeId
         )
@@ -23,6 +14,10 @@ namespace IO.Didomi.SDK.Events
             this.purposeId = purposeId;
         }
 
+        /// <summary>
+        /// ID of the purpose
+        /// </summary>
+        /// <returns></returns>
         public string getPurposeId()
         {
             return purposeId;

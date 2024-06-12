@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace IO.Didomi.SDK.Android
 {
     /// <summary>
@@ -210,9 +209,9 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethod("onReady", didomiCallable);
         }
 
-        /**
-         * Call native `setupUI` function from UI thread
-         */
+        /// <summary>
+        /// Call native `setupUI` function from UI thread
+        /// </summary>
         public void SetupUI()
         {
             try
@@ -379,9 +378,9 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
-        /**
-         * Calls 'method(args..., activity)'
-         */
+        /// <summary>
+        /// Calls 'method(args..., activity)'
+        /// </summary>
         private static void CallVoidMethodWithActivityLastArg(string methodName, params object[] args)
         {
             try
@@ -419,9 +418,9 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
-        /**
-         * Calls 'method(activity)'
-         */
+        /// <summary>
+        /// Calls 'method(activity)'
+        /// </summary>
         private static void CallReturningMethodWithActivityArg(string methodName)
         {
             try
@@ -447,9 +446,9 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
-        /**
-         * Calls 'method(application, args...)'
-         */
+        /// <summary>
+        /// Calls 'method(application, args...)'
+        /// </summary>
         private static void CallVoidMethodForInitialize(string methodName, params object[] args)
         {
             try
@@ -550,9 +549,9 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
-        /**
-         * Calls 'setupUI' native method from current thread (must be called from UI thread)
-         */
+        /// <summary>
+        /// Calls 'setupUI' native method from current thread (must be called from UI thread)
+        /// </summary>
         private void NativeSetupUI() {
             CallVoidMethodWithActivityArg("setupUI");
         }

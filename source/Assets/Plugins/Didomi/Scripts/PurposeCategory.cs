@@ -3,9 +3,9 @@
 namespace IO.Didomi.SDK
 {
 
-    /**
-     * Purpose category
-     */
+    /// <summary>
+    /// Purpose category
+    /// </summary>
     [Serializable]
     public class PurposeCategory
     {

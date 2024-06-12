@@ -136,6 +136,7 @@ namespace IO.Didomi.SDK
         /// Get the configured purpose IDs
         /// </summary>
         /// <returns></returns>
+        [ObsoleteAttribute("This method is deprecated. Use GetRequiredPurposes instead.")]
         public ISet<string> GetRequiredPurposeIds()
         {
             return didomiForPlatform.GetRequiredPurposeIds();
@@ -154,6 +155,7 @@ namespace IO.Didomi.SDK
         /// Get the configured vendor IDs
         /// </summary>
         /// <returns></returns>
+        [ObsoleteAttribute("This method is deprecated. Use GetRequiredVendors instead.")]
         public ISet<string> GetRequiredVendorIds()
         {
             return didomiForPlatform.GetRequiredVendorIds();
@@ -224,6 +226,7 @@ namespace IO.Didomi.SDK
         /// Get the user consent status as a UserStatus object.
         /// </summary>
         /// <returns></returns>
+        [ObsoleteAttribute("This method is deprecated. Use GetCurrentUserStatus instead.")]
         public UserStatus GetUserStatus()
         {
             return didomiForPlatform.GetUserStatus();
@@ -324,6 +327,7 @@ namespace IO.Didomi.SDK
         /// - The user country is unknown and the app has chosen to collect consent when unknown
         /// </summary>
         /// <returns>True if consent is required, false if it is not required.</returns>
+        [ObsoleteAttribute("This method is deprecated. Use ShouldUserStatusBeCollected instead.")]
         public bool IsConsentRequired()
         {
             return didomiForPlatform.IsConsentRequired();
@@ -333,6 +337,7 @@ namespace IO.Didomi.SDK
         /// Determine if consent information is available for all purposes and vendors that are required
         /// </summary>
         /// <returns>True if some required consent are missing</returns>
+        [ObsoleteAttribute("This method is deprecated. Use IsUserStatusPartial instead.")]
         public bool IsUserConsentStatusPartial()
         {
             return didomiForPlatform.IsUserConsentStatusPartial();
@@ -342,6 +347,7 @@ namespace IO.Didomi.SDK
         /// Determine if legitimate interest information is available for all purposes and vendors that are required
         /// </summary>
         /// <returns>True if some required consent are missing with legitimate interest information</returns>
+        [ObsoleteAttribute("This method is deprecated. Use IsUserStatusPartial instead.")]
         public bool IsUserLegitimateInterestStatusPartial()
         {
             return didomiForPlatform.IsUserLegitimateInterestStatusPartial();
@@ -366,7 +372,7 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
-        /// 
+        /// Check if the preferences screen is currently displayed
         /// </summary>
         /// <returns></returns>
         public bool IsPreferencesVisible()
@@ -464,6 +470,7 @@ namespace IO.Didomi.SDK
         /// <param name="enabledLIVendorIds"></param>
         /// <param name="disabledLIVendorIds"></param>
         /// <returns></returns>
+        [ObsoleteAttribute("This method is deprecated. Use SetCurrentUserStatus instead.")]
         public bool SetUserStatus(
             ISet<string> enabledConsentPurposeIds,
             ISet<string> disabledConsentPurposeIds,
@@ -506,12 +513,12 @@ namespace IO.Didomi.SDK
                 vendorsLIStatus);
         }
 
-        [ObsoleteAttribute("This method is deprecated. Use ShouldUserStatusBeCollected instead.")]
         /// <summary>
         /// Check if the consent should be collected depending on if we have any consents or 
         /// if we have some consents but the number of days before displaying the notice again has not expired yet
         /// </summary>
         /// <returns>True if the consent should be collected</returns>
+        [ObsoleteAttribute("This method is deprecated. Use ShouldUserStatusBeCollected instead.")]
         public bool ShouldConsentBeCollected()
         {
             return didomiForPlatform.ShouldConsentBeCollected();
@@ -552,7 +559,7 @@ namespace IO.Didomi.SDK
         /// Set custom user information from organization
         /// </summary>
         /// <param name="userAuthParams">Parameters to synchronize the user consent</param>
-        /// <param name="synchronizedUsers">Additional users to synchronize, should be [null] in most cases</param>
+        /// <param name="synchronizedUsers">Additional users to synchronize, should be <c>null</c> in most cases</param>
         public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers = null)
         {
             didomiForPlatform.SetUser(userAuthParams, synchronizedUsers);
@@ -571,7 +578,7 @@ namespace IO.Didomi.SDK
         /// Set custom user information from organization, and call setupUI after synchronization if sdk was initialized
         /// </summary>
         /// <param name="userAuthParams">Parameters to synchronize the user consent</param>
-        /// <param name="synchronizedUsers">Additional users to synchronize, should be [null] in most cases</param>
+        /// <param name="synchronizedUsers">Additional users to synchronize, should be <c>null</c> in most cases</param>
         public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers = null)
         {
             didomiForPlatform.SetUserAndSetupUI(userAuthParams, synchronizedUsers);

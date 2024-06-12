@@ -6,16 +6,8 @@ namespace IO.Didomi.SDK.Events
     /// </summary>
     public class SyncErrorEvent : Event
     {
-        /**
-         * description of the error
-         */
         private string errorMessage;
 
-        /**
-         * Constructor
-         *
-         * @param errorMessage description of the error
-         */
         public SyncErrorEvent(
             string errorMessage
         )
@@ -23,6 +15,10 @@ namespace IO.Didomi.SDK.Events
             this.errorMessage = errorMessage;
         }
 
+        /// <summary>
+        /// Description of the error
+        /// </summary>
+        /// <returns></returns>
         public string getErrorMessage()
         {
             return errorMessage;

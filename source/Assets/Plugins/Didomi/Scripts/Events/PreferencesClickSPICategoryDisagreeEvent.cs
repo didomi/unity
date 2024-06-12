@@ -5,17 +5,8 @@ namespace IO.Didomi.SDK.Events
     /// </summary>
     public class PreferencesClickSPICategoryDisagreeEvent : Event
     {
-
-        /**
-         * ID of the category
-         */
         private string categoryId;
 
-        /**
-         * Constructor
-         *
-         * @param categoryId ID of the category
-         */
         public PreferencesClickSPICategoryDisagreeEvent(
             string categoryId
         )
@@ -23,6 +14,10 @@ namespace IO.Didomi.SDK.Events
             this.categoryId = categoryId;
         }
 
+        /// <summary>
+        /// ID of the category
+        /// </summary>
+        /// <returns></returns>
         public string getCategoryId()
         {
             return categoryId;

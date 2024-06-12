@@ -5,16 +5,8 @@ namespace IO.Didomi.SDK.Events
     /// </summary>
     public class SyncDoneEvent : Event
     {
-        /**
-         * Organization User ID that was synced
-         */
         private string organizationUserId;
 
-        /**
-         * Constructor
-         *
-         * @param organizationUserId Organization User ID that was synced
-         */
         public SyncDoneEvent(
             string organizationUserId
         )
@@ -22,6 +14,10 @@ namespace IO.Didomi.SDK.Events
             this.organizationUserId = organizationUserId;
         }
 
+        /// <summary>
+        /// Organization User ID that was synced
+        /// </summary>
+        /// <returns></returns>
         public string getOrganizationUserId()
         {
             return organizationUserId;

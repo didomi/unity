@@ -5,17 +5,8 @@ namespace IO.Didomi.SDK.Events
     /// </summary>
     public class PreferencesClickVendorAgreeEvent : Event
     {
-
-        /// <summary>
-        /// ID of the vendor
-        /// </summary>
         private string vendorId;
 
-        /**
-         * Constructor
-         *
-         * @param vendorId ID of the vendor
-         */
         public PreferencesClickVendorAgreeEvent(
             string vendorId
         )
@@ -23,6 +14,9 @@ namespace IO.Didomi.SDK.Events
             this.vendorId = vendorId;
         }
 
+        /// <summary>
+        /// ID of the vendor
+        /// </summary>
         public string getVendorId()
         {
             return vendorId;

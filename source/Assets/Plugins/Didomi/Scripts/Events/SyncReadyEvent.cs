@@ -9,14 +9,7 @@ namespace IO.Didomi.SDK.Events
     {
         public delegate bool SyncAcknowledgedCallback();
 
-        /**
-         * Whether the user status was applied
-         */
         private bool statusApplied;
-
-        /**
-         * Callback that triggers a sync.acknowledged API event if needed. It returns true if the API event was sent successfully.
-         */
         private SyncAcknowledgedCallback syncAcknowledgedCallback;
 
         public SyncReadyEvent(
@@ -28,18 +21,19 @@ namespace IO.Didomi.SDK.Events
             this.syncAcknowledgedCallback = syncAcknowledgedCallback;
         }
 
-        /**
-         * Whether the user status was applied
-         */
+        /// <summary>
+        /// Whether the user status was applied
+        /// </summary>
+        /// <returns></returns>
         public bool IsStatusApplied()
         {
             return statusApplied;
         }
 
-        /**
-         * Callback that triggers a sync.acknowledged API event if needed. 
-         * It returns true if the API event was sent successfully.
-         */
+        /// <summary>
+        /// Callback that triggers a sync.acknowledged API event if needed. 
+        /// </summary>
+        /// <returns><c>true</c> if the API event was sent successfully.</returns>
         public bool SyncAcknowledged()
         {
             return syncAcknowledgedCallback();

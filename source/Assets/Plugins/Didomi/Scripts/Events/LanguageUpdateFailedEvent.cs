@@ -5,16 +5,8 @@ namespace IO.Didomi.SDK.Events
     /// </summary>
     public class LanguageUpdateFailedEvent : Event
     {
-        /**
-         * Reason of the failure
-         */
         private string reason;
 
-        /**
-         * Constructor
-         *
-         * @param languageCode Reason of the failure
-         */
         public LanguageUpdateFailedEvent(
             string reason
         )
@@ -22,6 +14,10 @@ namespace IO.Didomi.SDK.Events
             this.reason = reason;
         }
 
+        /// <summary>
+        /// Reason of the failure
+        /// </summary>
+        /// <returns></returns>
         public string getReason()
         {
             return reason;

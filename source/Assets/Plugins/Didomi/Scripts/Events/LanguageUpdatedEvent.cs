@@ -5,16 +5,8 @@ namespace IO.Didomi.SDK.Events
     /// </summary>
     public class LanguageUpdatedEvent : Event
     {
-        /**
-         * Selected language code after the update
-         */
         private string languageCode;
 
-        /**
-         * Constructor
-         *
-         * @param languageCode Selected language code
-         */
         public LanguageUpdatedEvent(
             string languageCode
         )
@@ -22,6 +14,10 @@ namespace IO.Didomi.SDK.Events
             this.languageCode = languageCode;
         }
 
+        /// <summary>
+        /// Selected language code
+        /// </summary>
+        /// <returns></returns>
         public string getLanguageCode()
         {
             return languageCode;

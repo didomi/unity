@@ -7,6 +7,9 @@ namespace IO.Didomi.SDK.Events
     /// </summary>
     public class DidomiVendorStatusListener
     {
+        /// <summary>
+        /// The vendor status has changed
+        /// </summary>
         public event EventHandler<CurrentUserStatus.VendorStatus> VendorStatusChanged;
 
         public DidomiVendorStatusListener() { }
@@ -14,7 +17,6 @@ namespace IO.Didomi.SDK.Events
         public void OnVendorStatusChanged(CurrentUserStatus.VendorStatus @vendorStatus)
         {
             VendorStatusChanged?.Invoke(this, vendorStatus);
-            // The vendor status has changed
         }
     }
 }
