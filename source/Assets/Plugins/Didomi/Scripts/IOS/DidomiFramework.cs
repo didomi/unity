@@ -886,5 +886,20 @@ namespace IO.Didomi.SDK.IOS
             clearUser();
 #endif
         }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern void resetDidomi();
+#endif
+
+        /// <summary>
+        /// For tests only
+        /// </summary>
+        public static void ResetDidomi()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            resetDidomi();
+#endif
+        }
     }
 }

@@ -1045,4 +1045,9 @@ void removeVendorStatusListener( char* vendorId)
     [[Didomi shared] removeVendorStatusListenerWithId: CreateNSString(vendorId)];
 }
 
+void resetDidomi()
+{
+    Didomi.shared = [[Didomi alloc] init];
+}
+
 }

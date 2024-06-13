@@ -5,7 +5,7 @@ using IO.Didomi.SDK;
 using System.Collections.Generic;
 
 /// <summary>
-/// Tests related to sharing consent with Webview / Web SDK
+/// Tests related to user status synchronization between platforms after SDK was initialized
 /// </summary>
 public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
 {
@@ -26,12 +26,9 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     [UnitySetUp]
     public IEnumerator Setup()
     {
-        if (!Didomi.GetInstance().IsReady())
-        {
-            yield return LoadSdk();
-        }
-        Didomi.GetInstance().ClearUser();
-        Didomi.GetInstance().Reset();
+        yield return LoadSdk();
+        ResetStatus();
+        ResetResults();
     }
 
     [TearDown]
