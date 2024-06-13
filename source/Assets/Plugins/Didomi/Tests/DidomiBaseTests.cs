@@ -45,7 +45,7 @@ public abstract class DidomiBaseTests
         }
 
         // Make sure instance from previous test is not present
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
 
         didomi.OnReady(
             () =>

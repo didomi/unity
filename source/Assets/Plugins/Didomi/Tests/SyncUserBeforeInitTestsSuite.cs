@@ -4,7 +4,7 @@ using UnityEngine.TestTools;
 using IO.Didomi.SDK;
 
 /// <summary>
-/// Tests related to sharing consent with Webview / Web SDK set before SDK is initialized
+/// Tests related to user status synchronization between platforms before SDK was initialized
 /// </summary>
 public class SyncUserBeforeInitTestsSuite : SyncUserBaseTests
 {
@@ -12,6 +12,16 @@ public class SyncUserBeforeInitTestsSuite : SyncUserBaseTests
     public new void SetUpSuite()
     {
         base.SetUpSuite();
+    }
+
+    [SetUp]
+    public void Setup()
+    {
+        if (Didomi.GetInstance().IsReady())
+        {
+            ResetStatus();
+            ResetResults();
+        }
     }
 
     [TearDown]
@@ -31,6 +41,6 @@ public class SyncUserBeforeInitTestsSuite : SyncUserBaseTests
     {
         Didomi.GetInstance().SetUser(testUserId);
         yield return LoadSdk();
-        yield return ExpectSyncSuccess("Set user before initialization", true, false);
+        yield return ExpectSyncSuccess("Set user before initialization", true, true);
     }
 }

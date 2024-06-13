@@ -6,7 +6,7 @@ using IO.Didomi.SDK.Events;
 using System;
 
 /// <summary>
-/// Base for tests related to sharing consent with Webview / Web SDK
+/// Base for tests related to user status synchronization between platforms
 /// </summary>
 public abstract class SyncUserBaseTests : DidomiBaseTests
 {
@@ -22,6 +22,11 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
 
     protected void SetUpSuite()
     {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        // For iOS, we need to fully reset the SDK between each test suite
+        IO.Didomi.SDK.IOS.DidomiFramework.ResetDidomi();
+#endif
+
         eventListener.SyncDone += EventListener_SyncDone;
         eventListener.SyncReady += EventListener_SyncReady;
         eventListener.SyncError += EventListener_SyncError;
@@ -30,8 +35,8 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
 
     protected void TearDown()
     {
-        ResetResults();
         ResetStatus();
+        ResetResults();
     }
 
     protected void TearDownSuite()
