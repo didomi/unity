@@ -76,7 +76,7 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     }
 
     /// <summary>
-    /// Update gradle dependencies in the Android project. 
+    /// Update gradle dependencies in the Android project.
     /// </summary>
     /// <param name="path"></param>
     private static void UpdateUnityLibraryDependencies(string path)
@@ -92,7 +92,7 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
     }
 
     /// <summary>
-    /// Update gradle properties in the Android project. 
+    /// Update gradle properties in the Android project.
     /// </summary>
     /// <param name="path"></param>
     private static void UpdateGradleProperties(string path)
@@ -148,7 +148,7 @@ public static class PostProcessor
         if (buildTarget == BuildTarget.iOS || buildTarget == BuildTarget.tvOS)
         {
             PostProcessorSettings.InitSettings();
-            
+
             // PBXProject.GetPBXProjectPath returns the wrong path, we need to construct path by ourselves instead
             // var projPath = PBXProject.GetPBXProjectPath(buildPath);
             var projPath = buildPath + $"{PostProcessorSettings.FilePathSeperator}Unity-iPhone.xcodeproj{PostProcessorSettings.FilePathSeperator}project.pbxproj";
@@ -163,9 +163,9 @@ public static class PostProcessor
             proj.AddBuildProperty(targetGuid, "DEFINES_MODULE", "YES");
             proj.AddBuildProperty(targetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
             proj.AddBuildProperty(targetGuid, "LD_RUNPATH_SEARCH_PATHS", "@executable_path/Frameworks");
-            
+
             AppendRequiredFrameworkSearchPaths(proj, targetGuid);
-            
+
             proj.AddBuildProperty(targetGuid, "DYLIB_INSTALL_NAME_BASE", "@rpath");
             proj.AddBuildProperty(targetGuid, "LD_DYLIB_INSTALL_NAME", "@executable_path/../Frameworks/$(EXECUTABLE_PATH)");
 
@@ -216,7 +216,7 @@ public static class PostProcessor
             project.AddFileToBuild(targetGuid, fileGuid);
         }
     }
-	
+
 	/// <summary>
     /// For iOS, copy the `package.json` file to `Data/Resources/`.
     /// It also gets added to the build to be available in the final app.
@@ -279,34 +279,23 @@ public static class PostProcessorSettings
     /// File path seperator for Editor OS
     /// </summary>
     public static string FilePathSeperator = string.Empty;
-    
+
     /// <summary>
     /// Required list of framework search paths
     /// </summary>
-    public static readonly string[] DidomiFrameworkSearchPaths = 
+    public static readonly string[] DidomiFrameworkSearchPaths =
     {
         "$(inherited)",
         "$(PROJECT_DIR)",
         "$(PROJECT_DIR)/Frameworks"
     };
-    
+
     /// <summary>
     /// Initialize Environment Settings
     /// </summary>
     public static void InitSettings()
     {
-        bool isWinEditor = Application.platform == RuntimePlatform.WindowsEditor;
-        bool isOSXEditor = Application.platform == RuntimePlatform.OSXEditor;
-
-        if (isOSXEditor)
-        {
-            FilePathSeperator = "/";
-        }
-        else
-        {
-            FilePathSeperator = @"\";
-        }
-
+        FilePathSeperator = Path.DirectorySeparatorChar.ToString();
         DidomiConfigPath = Application.dataPath + $@"{FilePathSeperator}DidomiConfig";
     }
 
