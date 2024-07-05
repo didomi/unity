@@ -295,18 +295,7 @@ public static class PostProcessorSettings
     /// </summary>
     public static void InitSettings()
     {
-        bool isWinEditor = Application.platform == RuntimePlatform.WindowsEditor;
-        bool isOSXEditor = Application.platform == RuntimePlatform.OSXEditor;
-
-        if (isOSXEditor)
-        {
-            FilePathSeperator = "/";
-        }
-        else
-        {
-            FilePathSeperator = @"\";
-        }
-
+        FilePathSeperator = Path.DirectorySeparatorChar.ToString();
         DidomiConfigPath = Application.dataPath + $@"{FilePathSeperator}DidomiConfig";
     }
 
