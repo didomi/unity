@@ -11,8 +11,16 @@ namespace Assets.Plugins.Scripts.IOS
         cpa = 2,
         cpra = 3,
         ctdpa = 4,
-        ucpa = 5,
-        vcdpa = 6,
+        dpdpa = 5,
+        fdbr = 6,
+        idpl = 7,
+        mcdpa = 8,
+        nhpa = 9,
+        njdpa = 10,
+        ocpa = 11,
+        tdpsa = 12,
+        ucpa = 13,
+        vcdpa = 14,
         none = 10000
     };
 }
