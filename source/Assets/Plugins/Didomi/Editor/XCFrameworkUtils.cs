@@ -40,7 +40,8 @@ public class XCFrameworkUtils {
         }
         
         // Create an unzip command string to be executed by bash shell using the 'unzip' command, which extracts files from a ZIP archive 
-        string unzipFramework = $"echo \"unzipping\" && unzip {DidomiPaths.IOS.ZIP_FILE_PATH} -d {DidomiPaths.IOS.FRAMEWORK_DIRECTORY_IN_SOURCE}";
+        // it allows the unzipping log any error that might happen into a new file and allows the script to keep running
+        string unzipFramework = $"echo \"unzipping\" && unzip {DidomiPaths.IOS.ZIP_FILE_PATH} -d {DidomiPaths.IOS.FRAMEWORK_DIRECTORY_IN_SOURCE} > unzip_log.txt 2>&1";
         BashUtils.Execute(unzipFramework);
 
         // Delete zip file since it's not needed after the framework has been unzipped.
