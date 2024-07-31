@@ -312,6 +312,7 @@ void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* 
         noticeID: CreateNSStringNullable(noticeId)
         countryCode: CreateNSStringNullable(countryCode)
         regionCode: CreateNSStringNullable(regionCode)
+        isUnderage: false
     ];
     [[Didomi shared] initialize: parameters];
 }
