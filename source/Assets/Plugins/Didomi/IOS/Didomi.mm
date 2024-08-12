@@ -462,6 +462,21 @@ char* getVendor(char* vendorId)
     DDMVendor *vendor = [[Didomi shared] getVendorWithVendorId:CreateNSString(vendorId)];
     return MapVendorToJsonText(vendor);
 }
+
+int getTotalVendorCount()
+{
+    return [[Didomi shared] getTotalVendorCount];
+}
+
+int getIABVendorCount()
+{
+    return [[Didomi shared] getIABVendorCount];
+}
+
+int getNonIABVendorCount()
+{
+    return [[Didomi shared] getNonIABVendorCount];
+}
  
 char* convertDictionaryToJsonText( NSDictionary<NSString *, NSString *> * dataDict)
 {

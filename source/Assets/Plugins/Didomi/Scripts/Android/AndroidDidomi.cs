@@ -143,6 +143,21 @@ namespace IO.Didomi.SDK.Android
             return AndroidObjectMapper.ConvertToVendor(obj);
         }
 
+        public int GetTotalVendorCount()
+        {
+            return CallReturningIntMethod("getTotalVendorCount");
+        }
+
+        public int GetIABVendorCount()
+        {
+            return CallReturningIntMethod("getIabVendorCount");
+        }
+
+        public int GetNonIABVendorCount()
+        {
+            return CallReturningIntMethod("getNonIabVendorCount");
+        }
+
         public void HideNotice()
         {
             CallVoidMethod("hideNotice");
@@ -341,6 +356,11 @@ namespace IO.Didomi.SDK.Android
         private static bool CallReturningBoolMethod(string methodName, params object[] args)
         {
             return CallReturningMethodBase<bool>(methodName, args);
+        }
+
+        private static int CallReturningIntMethod(string methodName, params object[] args)
+        {
+            return CallReturningMethodBase<int>(methodName, args);
         }
 
         private static string CallReturningStringMethod(string methodName, params object[] args)

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Linq;
 using IO.Didomi.SDK;
 using NUnit.Framework;
-using UnityEngine;
 using UnityEngine.TestTools;
 
 public class PurposeAndVendorTestsSuite: DidomiBaseTests
@@ -56,5 +55,17 @@ public class PurposeAndVendorTestsSuite: DidomiBaseTests
         Assert.IsNotNull(vendor.Urls.First().LangId);
 
         Assert.NotNull(requiredVendorSet.FirstOrDefault(obj => obj.Name == vendorName), "Vendor not found in required vendors list with name: " + vendorName);
+    }
+
+    [Test]
+    public void TestVendorCount()
+    {
+        var totalCount = Didomi.GetInstance().GetTotalVendorCount();
+        var iabCount = Didomi.GetInstance().GetIABVendorCount();
+        var nonIABCount = Didomi.GetInstance().GetNonIABVendorCount();
+
+        Assert.AreEqual(3, totalCount, "Incorrect total vendor count");
+        Assert.AreEqual(3, iabCount, "Incorrect IAB vendor count");
+        Assert.AreEqual(0, nonIABCount, "Incorrect non-IAB vendor count");
     }
 }

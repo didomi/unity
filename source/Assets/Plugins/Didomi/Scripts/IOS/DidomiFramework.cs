@@ -747,6 +747,48 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern int getTotalVendorCount();
+#endif
+
+        internal static int GetTotalVendorCount()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getTotalVendorCount();
+#else
+            return -1;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern int getIABVendorCount();
+#endif
+
+        internal static int GetIABVendorCount()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getIABVendorCount();
+#else
+            return -1;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern int getNonIABVendorCount();
+#endif
+
+        internal static int GetNonIABVendorCount()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getNonIABVendorCount();
+#else
+            return -1;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern string getJavaScriptForWebView();
 #endif
 
