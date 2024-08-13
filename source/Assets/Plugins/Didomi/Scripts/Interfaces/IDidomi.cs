@@ -30,6 +30,9 @@ namespace IO.Didomi.SDK.Interfaces
         );
         UserStatus GetUserStatus();
         Vendor GetVendor(string vendorId);
+        int GetTotalVendorCount();
+        int GetIABVendorCount();
+        int GetNonIABVendorCount();
         void HideNotice();
         void HidePreferences();
         void Initialize(DidomiInitializeParameters parameters);

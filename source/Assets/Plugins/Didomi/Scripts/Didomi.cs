@@ -243,6 +243,33 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Get total vendor count
+        /// </summary>
+        /// <returns></returns>
+        public int GetTotalVendorCount()
+        {
+            return didomiForPlatform.GetTotalVendorCount();
+        }
+
+        /// <summary>
+        /// Get IAB vendor count
+        /// </summary>
+        /// <returns></returns>
+        public int GetIABVendorCount()
+        {
+            return didomiForPlatform.GetIABVendorCount();
+        }
+
+        /// <summary>
+        /// Get non-IAB vendor count
+        /// </summary>
+        /// <returns></returns>
+        public int GetNonIABVendorCount()
+        {
+            return didomiForPlatform.GetNonIABVendorCount();
+        }
+
+        /// <summary>
         /// Hide the notice if it is currently displayed
         /// </summary>
         public void HideNotice()

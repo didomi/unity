@@ -108,6 +108,21 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
+        public int GetTotalVendorCount()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetIABVendorCount()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetNonIABVendorCount()
+        {
+            throw new NotImplementedException();
+        }
+
         public void HideNotice()
         {
             throw new NotImplementedException();

@@ -45,6 +45,21 @@ namespace IO.Didomi.SDK.IOS
             return IOSObjectMapper.ConvertToVendor(jsonText);
         }
 
+        public int GetTotalVendorCount()
+        {
+            return DidomiFramework.GetTotalVendorCount();
+        }
+
+        public int GetIABVendorCount()
+        {
+            return DidomiFramework.GetIABVendorCount();
+        }
+
+        public int GetNonIABVendorCount()
+        {
+            return DidomiFramework.GetNonIABVendorCount();
+        }
+
         public void AddEventListener(DidomiEventListener eventListener)
         {
             DidomiFramework.AddEventListener(eventListener);
