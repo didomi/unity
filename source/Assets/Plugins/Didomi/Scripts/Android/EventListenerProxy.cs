@@ -389,14 +389,16 @@ namespace IO.Didomi.SDK.Android
 
         private static SyncReadyEvent ConvertToSyncReadyEvent(AndroidJavaObject @event)
         {
+            var organizationUserId = GetOrganizationUserId(@event);
             var statusApplied = GetStatusApplied(@event);
 
             return new SyncReadyEvent(
-               statusApplied,
-               () =>
-               {
-                   return GetSyncAcknowledgedCallback(@event);
-               }
+                organizationUserId,
+                statusApplied,
+                () =>
+                {
+                    return GetSyncAcknowledgedCallback(@event);
+                }
             );
         }
 

@@ -9,17 +9,29 @@ namespace IO.Didomi.SDK.Events
     {
         public delegate bool SyncAcknowledgedCallback();
 
+        private string organizationUserId;
         private bool statusApplied;
         private SyncAcknowledgedCallback syncAcknowledgedCallback;
 
         public SyncReadyEvent(
+            string organizationUserId,
             bool statusApplied,
             SyncAcknowledgedCallback syncAcknowledgedCallback
         )
         {
+            this.organizationUserId = organizationUserId;
             this.statusApplied = statusApplied;
             this.syncAcknowledgedCallback = syncAcknowledgedCallback;
         }
+
+        /// <summary>
+        /// Organization User Id that was synced
+        /// </summary>
+        /// <returns></returns>
+        public string GetOrganizationUserId()
+        {
+            return organizationUserId;
+        } 
 
         /// <summary>
         /// Whether the user status was applied

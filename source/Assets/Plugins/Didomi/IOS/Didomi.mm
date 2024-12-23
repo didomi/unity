@@ -793,7 +793,7 @@ void removeSyncAcknowledgedCallback(int eventIndex) {
     syncAcknowledgedCallbacks[@(eventIndex)] = nil;
 }
 
-void addEventListener( void (*event_listener_handler) (int, char *), void (*sync_ready_event_listener_handler) (int, int, int))
+void addEventListener( void (*event_listener_handler) (int, char *), void (*sync_ready_event_listener_handler) (int, char *, int, int))
 {
 
     if(eventListener==nil)
@@ -1022,7 +1022,8 @@ void addEventListener( void (*event_listener_handler) (int, char *), void (*sync
         int eventIndex = syncAcknowledgedCallbackIndex++;
         syncAcknowledgedCallbacks[@(eventIndex)] = event;
         
-        sync_ready_event_listener_handler(DDMEventTypeSyncReady, [event statusApplied], eventIndex);
+        char * organizationUserId = convertNSStringToCString([event organizationUserId]);
+        sync_ready_event_listener_handler(DDMEventTypeSyncReady, organizationUserId, [event statusApplied], eventIndex);
         
     };
     
@@ -1063,7 +1064,7 @@ void removeVendorStatusListener( char* vendorId)
 
 void resetDidomi()
 {
-    Didomi.shared = [[Didomi alloc] init];
+    [[Didomi shared] clearUser];
 }
 
 }

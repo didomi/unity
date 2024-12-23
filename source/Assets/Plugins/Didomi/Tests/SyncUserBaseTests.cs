@@ -15,7 +15,8 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     private DidomiEventListener eventListener = new DidomiEventListener();
 
     private bool syncError = false;
-    private string syncedUserId = null;
+    private string syncDoneUserId = null;
+    private string syncReadyUserId = null;
     private Boolean? statusApplied = null;
     private Boolean? syncAcknowledged = null;
     private Boolean? syncAcknowledged2 = null;
@@ -55,12 +56,13 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     private void EventListener_SyncDone(object sender, SyncDoneEvent e)
     {
         Debug.Log("Sync Done!");
-        syncedUserId = e.getOrganizationUserId();
+        syncDoneUserId = e.getOrganizationUserId();
     }
 
     private void EventListener_SyncReady(object sender, SyncReadyEvent e)
     {
         Debug.Log("Sync Ready!");
+        syncReadyUserId = e.GetOrganizationUserId();
         statusApplied = e.IsStatusApplied();
         syncAcknowledged = e.SyncAcknowledged();
         syncAcknowledged2 = e.SyncAcknowledged();
@@ -78,7 +80,8 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     protected void ResetResults()
     {
         syncError = false;
-        syncedUserId = null;
+        syncDoneUserId = null;
+        syncReadyUserId = null;
         statusApplied = null;
         syncAcknowledged = null;
         syncAcknowledged2 = null;
@@ -96,7 +99,8 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     {
         yield return WaitForCallback();
 
-        Assert.AreEqual(testUserId, syncedUserId, message);
+        Assert.AreEqual(testUserId, syncDoneUserId, message);
+        Assert.AreEqual(testUserId, syncReadyUserId, message);
         Assert.IsFalse(syncError, "Sync error - " + message);
         Assert.AreEqual(expectApplied, statusApplied, "Status applied - " + message);
         Assert.AreEqual(expectAcknowledged, syncAcknowledged, "Sync acknowledged - " + message);
@@ -106,13 +110,14 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     /// <summary>
     /// Check that we get a sync error
     /// </summary>
-    protected IEnumerator ExpectSyncError()
+    protected IEnumerator ExpectSyncError(string message)
     {
         yield return WaitForCallback();
 
-        Assert.IsNull(syncedUserId);
-        Assert.IsTrue(syncError);
-        Assert.IsNull(statusApplied);
+        Assert.IsNull(syncDoneUserId, message);
+        Assert.IsNull(syncReadyUserId, message);
+        Assert.IsTrue(syncError, message);
+        Assert.IsNull(statusApplied, message);
     }
 
     /// <summary>
@@ -120,6 +125,6 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     /// </summary>
     private IEnumerator WaitForCallback()
     {
-        yield return new WaitUntil(() => (syncedUserId != null && syncAcknowledged != null && syncAcknowledged2 != null) || syncError);
+        yield return new WaitUntil(() => (syncReadyUserId != null && syncAcknowledged != null && syncAcknowledged2 != null) || syncError);
     }
 }
