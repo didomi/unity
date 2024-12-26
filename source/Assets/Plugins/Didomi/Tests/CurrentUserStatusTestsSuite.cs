@@ -21,22 +21,28 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
     [OneTimeSetUp]
     protected void SetUpSuite()
     {
-        var listener = new DidomiEventListener();
-        listener.ConsentChanged += EventListener_ConsentChanged;
-        Didomi.GetInstance().AddEventListener(listener);
+        eventListener.ConsentChanged += EventListener_ConsentChanged;
     }
 
     [UnitySetUp]
-    public IEnumerator Setup()
+    public new IEnumerator Setup()
     {
+        base.Setup();
         yield return LoadSdk();
         consentChanged = false;
     }
 
     [TearDown]
-    public void TearDown()
+    public new void TearDown()
     {
+        base.TearDown();
         Didomi.GetInstance().Reset();
+    }
+
+    [OneTimeTearDown]
+    protected void TearDownSuite()
+    {
+        eventListener.ConsentChanged -= EventListener_ConsentChanged;
     }
 
     [UnityTest]

@@ -8,9 +8,16 @@ public class PurposeAndVendorTestsSuite: DidomiBaseTests
 {
 
     [UnitySetUp]
-    public IEnumerator Setup()
+    public new IEnumerator Setup()
     {
+        base.Setup();
         yield return LoadSdk();
+    }
+
+    [TearDown]
+    public new void TearDown()
+    {
+        base.TearDown();
     }
 
     [Test]

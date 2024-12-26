@@ -9,9 +9,16 @@ using IO.Didomi.SDK;
 public class ShareConsentsTestsSuite: DidomiBaseTests
 {
     [UnitySetUp]
-    public IEnumerator Setup()
+    public new IEnumerator Setup()
     {
+        base.Setup();
         yield return LoadSdk();
+    }
+
+    [TearDown]
+    public new void TearDown()
+    {
+        base.TearDown();
     }
 
     [Test]

@@ -15,8 +15,9 @@ public class SyncUserBeforeInitTestsSuite : SyncUserBaseTests
     }
 
     [SetUp]
-    public void Setup()
+    public new void Setup()
     {
+        base.Setup();
         if (Didomi.GetInstance().IsReady())
         {
             ResetStatus();

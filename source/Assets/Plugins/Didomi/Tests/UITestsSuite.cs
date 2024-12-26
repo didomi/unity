@@ -18,17 +18,16 @@ public class UITestsSuite: DidomiBaseTests
     [OneTimeSetUp]
     protected void SetUpSuite()
     {
-        var listener = new DidomiEventListener();
-        listener.ShowNotice += EventListener_ShowNotice;
-        listener.HideNotice += EventListener_HideNotice;
-        listener.ShowPreferences += EventListener_ShowPreferences;
-        listener.HidePreferences += EventListener_HidePreferences;
-        Didomi.GetInstance().AddEventListener(listener);
+        eventListener.ShowNotice += EventListener_ShowNotice;
+        eventListener.HideNotice += EventListener_HideNotice;
+        eventListener.ShowPreferences += EventListener_ShowPreferences;
+        eventListener.HidePreferences += EventListener_HidePreferences;
     }
 
     [UnitySetUp]
-    public IEnumerator Setup()
+    public new IEnumerator Setup()
     {
+        base.Setup();
         yield return LoadSdk();
         Didomi.GetInstance().OnReady(
             () =>
@@ -38,9 +37,20 @@ public class UITestsSuite: DidomiBaseTests
         );
     }
 
-    [UnityTearDown]
-    public IEnumerator TearDown()
+    [OneTimeTearDown]
+    protected void TearDownSuite()
     {
+        eventListener.ShowNotice -= EventListener_ShowNotice;
+        eventListener.HideNotice -= EventListener_HideNotice;
+        eventListener.ShowPreferences -= EventListener_ShowPreferences;
+        eventListener.HidePreferences -= EventListener_HidePreferences;
+
+    }
+
+    [UnityTearDown]
+    public new IEnumerator TearDown()
+    {
+        base.TearDown();
         Didomi.GetInstance().HidePreferences();
         Didomi.GetInstance().HideNotice();
         yield return new WaitForSeconds(1);

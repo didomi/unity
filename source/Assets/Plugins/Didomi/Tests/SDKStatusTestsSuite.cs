@@ -15,21 +15,27 @@ public class SDKStatusTestsSuite: DidomiBaseTests
     [OneTimeSetUp]
     protected void SetUpSuite()
     {
-        var listener = new DidomiEventListener();
-        listener.ConsentChanged += EventListener_ConsentChanged;
-        Didomi.GetInstance().AddEventListener(listener);
+        eventListener.ConsentChanged += EventListener_ConsentChanged;
     }
 
     [UnitySetUp]
-    public IEnumerator Setup()
+    public new IEnumerator Setup()
     {
+        base.Setup();
         yield return LoadSdk();
     }
 
     [TearDown]
-    public void TearDown()
+    public new void TearDown()
     {
+        base.TearDown();
         consentChanged = false;
+    }
+
+    [OneTimeTearDown]
+    protected void TearDownSuite()
+    {
+        eventListener.ConsentChanged -= EventListener_ConsentChanged;
     }
 
     [Test]

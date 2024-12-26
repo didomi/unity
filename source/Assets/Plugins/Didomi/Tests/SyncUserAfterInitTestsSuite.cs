@@ -24,8 +24,9 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     }
 
     [UnitySetUp]
-    public IEnumerator Setup()
+    public new IEnumerator Setup()
     {
+        base.Setup();
         yield return LoadSdk();
         ResetStatus();
         ResetResults();
