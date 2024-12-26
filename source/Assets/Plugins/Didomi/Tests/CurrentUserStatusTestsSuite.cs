@@ -201,6 +201,7 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
 
         Didomi.GetInstance().SetUserAgreeToAll();
         yield return new WaitUntil(() => consentChanged);
+        consentChanged = false;
 
         Assert.IsNotNull(updatedVendorStatus, "Vendor status should be updated after SetUserAgreeToAll");
         Assert.AreEqual(vendorId, updatedVendorStatus.Id, "Check vendor id after SetUserAgreeToAll");
@@ -208,6 +209,7 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
 
         Didomi.GetInstance().SetUserDisagreeToAll();
         yield return new WaitUntil(() => consentChanged);
+        consentChanged = false;
 
         Assert.IsNotNull(updatedVendorStatus, "Vendor status should be updated after SetUserDisagreeToAll");
         Assert.AreEqual(vendorId, updatedVendorStatus.Id, "Check vendor id after SetUserDisagreeToAll");

@@ -430,7 +430,7 @@ namespace IO.Didomi.SDK.Android
             {
                 UserAuthWithEncryptionParams encryptionParameters = (UserAuthWithEncryptionParams)parameters;
                 return new AndroidJavaObject(
-                    "io.didomi.sdk.user.UserAuthWithEncryptionParams",
+                    "io.didomi.sdk.user.model.UserAuthWithEncryptionParams",
                     encryptionParameters.Id,
                     encryptionParameters.Algorithm,
                     encryptionParameters.SecretId,
@@ -439,7 +439,7 @@ namespace IO.Didomi.SDK.Android
             } else {
                 UserAuthWithHashParams hashParameters = (UserAuthWithHashParams)parameters;
                 return new AndroidJavaObject(
-                    "io.didomi.sdk.user.UserAuthWithHashParams",
+                    "io.didomi.sdk.user.model.UserAuthWithHashParams",
                     hashParameters.Id,
                     hashParameters.Algorithm,
                     hashParameters.SecretId,

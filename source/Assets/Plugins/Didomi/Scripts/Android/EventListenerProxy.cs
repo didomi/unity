@@ -282,6 +282,11 @@ namespace IO.Didomi.SDK.Android
             // An error occurred during user synchronization process
         }
 
+        public void syncUserChanged(AndroidJavaObject @event)
+        {
+            // The organization user was changed (no event in Unity SDK yet)
+        }
+
         public void languageUpdated(AndroidJavaObject @event)
         {
             var LanguageUpdatedEvent = ConvertToLanguageUpdatedEvent(@event);
