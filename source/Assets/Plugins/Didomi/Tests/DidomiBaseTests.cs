@@ -12,6 +12,7 @@ public abstract class DidomiBaseTests
 {
     private bool sdkReadyCallback = false;
     private bool sdkReadyEvent = false;
+    private bool sdkError = false;
     protected static DidomiEventListener eventListener = null;
 
     public DidomiBaseTests()
@@ -45,12 +46,11 @@ public abstract class DidomiBaseTests
     )
     {
         Didomi didomi = Didomi.GetInstance();
-        didomi.AddEventListener(eventListener);
-
         try
         {
             sdkReadyCallback = false;
             sdkReadyEvent = false;
+            sdkError = false;
             string apiKey = "9bf8a7e4-db9a-4ff2-a45c-ab7d2b6eadba";
 
             Debug.Log("Tests: Initializing sdk");
@@ -83,8 +83,7 @@ public abstract class DidomiBaseTests
             () =>
             {
                 Debug.Log("Initialization error");
-                sdkReadyCallback = true;
-                sdkReadyEvent = true;
+                sdkError = true;
             }
         );
 
@@ -104,9 +103,11 @@ public abstract class DidomiBaseTests
     {
         Debug.Log("Tests: Waiting for sdk ready");
 
-        yield return new WaitUntil(() => sdkReadyCallback && sdkReadyEvent);
+        yield return new WaitUntil(() => (sdkReadyCallback && sdkReadyEvent) || sdkError);
 
-        Assert.True(Didomi.GetInstance().IsReady());
+        //Assert.False(sdkError, "SDK Error");  TODO Enable this when iOS does not trigger errors incorrectly
+        yield return new WaitForSeconds(0.1f);
+        Assert.True(Didomi.GetInstance().IsReady(), "SDK Ready");
         Debug.Log("Tests: sdk is ready!");
 
         Didomi.GetInstance().Reset();

@@ -24,6 +24,7 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         // For iOS, we need to fully reset the SDK between each test suite
         IO.Didomi.SDK.IOS.DidomiFramework.ResetDidomi();
+        Didomi.GetInstance().AddEventListener(eventListener);
 #endif
 
         eventListener.SyncDone += EventListener_SyncDone;
@@ -97,8 +98,8 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     {
         yield return WaitForCallback();
 
-        Assert.AreEqual(testUserId, syncDoneUserId, message);
-        Assert.AreEqual(testUserId, syncReadyUserId, message);
+        Assert.AreEqual(testUserId, syncDoneUserId, "Sync done User Id - " + message);
+        Assert.AreEqual(testUserId, syncReadyUserId, "Sync ready User Id - " + message);
         Assert.IsFalse(syncError, "Sync error - " + message);
         Assert.AreEqual(expectApplied, statusApplied, "Status applied - " + message);
         Assert.AreEqual(expectAcknowledged, syncAcknowledged, "Sync acknowledged - " + message);

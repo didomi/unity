@@ -1064,6 +1064,16 @@ void removeVendorStatusListener( char* vendorId)
 
 void resetDidomi()
 {
+    Didomi * didomi = [Didomi shared];
+    if ([didomi isReady]) {
+        [didomi reset];
+        [didomi clearUser];
+    }
+    if (eventListener != nil) {
+        [didomi removeEventListenerWithListener:eventListener];
+        eventListener = nil;
+    }
+    
     // Clear all values in NSUserDefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *dictionary = [defaults dictionaryRepresentation];
