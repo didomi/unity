@@ -440,7 +440,7 @@ namespace IO.Didomi.SDK.IOS
 
         public delegate void OnEventListenerDelegate(int eventType, string argument);
 
-        public delegate void OnSyncReadyEventListenerDelegate(int eventType, int statusApplied, int syncAcknowledgedCallbackIndex);
+        public delegate void OnSyncReadyEventListenerDelegate(int eventType, string organizationUserId, int statusApplied, int syncAcknowledgedCallbackIndex);
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
@@ -595,13 +595,14 @@ namespace IO.Didomi.SDK.IOS
         }
 
         [AOT.MonoPInvokeCallback(typeof(OnSyncReadyEventListenerDelegate))]
-        static void CallOnSyncReadyEventListenerDelegate(int eventType, int statusApplied, int syncAcknowledgedCallbackIndex)
+        static void CallOnSyncReadyEventListenerDelegate(int eventType, string organizationUserId, int statusApplied, int syncAcknowledgedCallbackIndex)
         {
             DDMEventType eventTypeEnum = (DDMEventType)eventType;
             switch (eventTypeEnum)
             {
                 case DDMEventType.DDMEventTypeSyncReady:
                     var eventTriggered = eventListenerInner.OnSyncReady(new SyncReadyEvent(
+                        organizationUserId,
                         statusApplied > 0,
                         () => {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR

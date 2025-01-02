@@ -24,8 +24,9 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     }
 
     [UnitySetUp]
-    public IEnumerator Setup()
+    public new IEnumerator Setup()
     {
+        base.Setup();
         yield return LoadSdk();
         ResetStatus();
         ResetResults();
@@ -54,7 +55,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             expiration: 3_600
         ));
 
-        yield return ExpectSyncError();
+        yield return ExpectSyncError("Incorrect parameters");
     }
 
     [UnityTest]
@@ -77,7 +78,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             initializationVector: initializationVector,
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params with expiration", false);
+        yield return ExpectSyncError("Set user with Encryption params with expiration");
 
         ResetResults();
 
@@ -87,7 +88,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             secretId: secretId,
             initializationVector: initializationVector
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params without expiration", false);
+        yield return ExpectSyncError("Set user with Encryption params without expiration");
 
         ResetResults();
 
@@ -97,7 +98,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             secretId: secretId,
             initializationVector: initializationVector
         ));
-        yield return ExpectSyncSuccess("Set user with Encryption params and setup UI", false);
+        yield return ExpectSyncError("Set user with Encryption params and setup UI");
 
         ResetResults();
 
@@ -109,7 +110,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             salt: salt,
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Hash params with salt and expiration", false);
+        yield return ExpectSyncError("Set user with Hash params with salt and expiration");
 
         ResetResults();
 
@@ -121,7 +122,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             salt: null,
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Hash params with expiration and without salt", false);
+        yield return ExpectSyncError("Set user with Hash params with expiration and without salt");
 
         ResetResults();
 
@@ -132,7 +133,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             digest: digest,
             salt: null
         ));
-        yield return ExpectSyncSuccess("Set user with Hash params without expiration and without salt", false);
+        yield return ExpectSyncError("Set user with Hash params without expiration and without salt");
 
         ResetResults();
 
@@ -144,7 +145,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             salt: salt,
             expiration: 3_600
         ));
-        yield return ExpectSyncSuccess("Set user with Hash params with salt and expiration and setup UI", false);
+        yield return ExpectSyncError("Set user with Hash params with salt and expiration and setup UI");
     }
 
     [UnityTest]
@@ -177,7 +178,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             ),
             synchronizedUsers
         );
-        yield return ExpectSyncError();
+        yield return ExpectSyncError("Synchronized users with encryption");
 
         ResetResults();
 
@@ -192,7 +193,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             ),
             synchronizedUsers
         );
-        yield return ExpectSyncError();
+        yield return ExpectSyncError("Synchronized users with hash");
 
         ResetResults();
 
@@ -206,6 +207,6 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
                 expiration: 3_600
             ),
             synchronizedUsers);
-        yield return ExpectSyncError();
+        yield return ExpectSyncError("Synchronized users with SetupUI");
     }
 }

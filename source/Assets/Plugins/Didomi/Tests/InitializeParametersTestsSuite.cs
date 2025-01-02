@@ -11,9 +11,16 @@ public class InitializeParametersTestsSuite: DidomiBaseTests
     
     private string noticeId = "XWhEXzb9";
 
-    [TearDown]
-    public void TearDown()
+    [SetUp]
+    public new void Setup()
     {
+        base.Setup();
+    }
+
+    [TearDown]
+    public new void TearDown()
+    {
+        base.TearDown();
         Didomi.GetInstance().Reset();
     }
 

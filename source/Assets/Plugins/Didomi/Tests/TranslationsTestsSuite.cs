@@ -15,15 +15,26 @@ public class TranslationsTestsSuite: DidomiBaseTests
     [OneTimeSetUp]
     protected void SetUpSuite()
     {
-        var listener = new DidomiEventListener();
-        listener.LanguageUpdated += EventListener_LanguageUpdated;
-        Didomi.GetInstance().AddEventListener(listener);
+        eventListener.LanguageUpdated += EventListener_LanguageUpdated;
+    }
+
+    [SetUp]
+    public new void Setup()
+    {
+        base.Setup();
     }
 
     [TearDown]
-    public void TearDown()
+    public new void TearDown()
     {
+        base.TearDown();
         languageUpdated = false;
+    }
+
+    [OneTimeTearDown]
+    protected void TearDownSuite()
+    {
+        eventListener.LanguageUpdated -= EventListener_LanguageUpdated;
     }
 
     [UnityTest]

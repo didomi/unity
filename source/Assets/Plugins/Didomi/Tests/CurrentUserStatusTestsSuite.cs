@@ -21,22 +21,28 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
     [OneTimeSetUp]
     protected void SetUpSuite()
     {
-        var listener = new DidomiEventListener();
-        listener.ConsentChanged += EventListener_ConsentChanged;
-        Didomi.GetInstance().AddEventListener(listener);
+        eventListener.ConsentChanged += EventListener_ConsentChanged;
     }
 
     [UnitySetUp]
-    public IEnumerator Setup()
+    public new IEnumerator Setup()
     {
+        base.Setup();
         yield return LoadSdk();
         consentChanged = false;
     }
 
     [TearDown]
-    public void TearDown()
+    public new void TearDown()
     {
+        base.TearDown();
         Didomi.GetInstance().Reset();
+    }
+
+    [OneTimeTearDown]
+    protected void TearDownSuite()
+    {
+        eventListener.ConsentChanged -= EventListener_ConsentChanged;
     }
 
     [UnityTest]
@@ -201,6 +207,7 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
 
         Didomi.GetInstance().SetUserAgreeToAll();
         yield return new WaitUntil(() => consentChanged);
+        consentChanged = false;
 
         Assert.IsNotNull(updatedVendorStatus, "Vendor status should be updated after SetUserAgreeToAll");
         Assert.AreEqual(vendorId, updatedVendorStatus.Id, "Check vendor id after SetUserAgreeToAll");
@@ -208,6 +215,7 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
 
         Didomi.GetInstance().SetUserDisagreeToAll();
         yield return new WaitUntil(() => consentChanged);
+        consentChanged = false;
 
         Assert.IsNotNull(updatedVendorStatus, "Vendor status should be updated after SetUserDisagreeToAll");
         Assert.AreEqual(vendorId, updatedVendorStatus.Id, "Check vendor id after SetUserDisagreeToAll");

@@ -12,10 +12,9 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
 {
     protected const string testUserId = "d13e49f6255c8729cbb201310f49d70d65f365415a67f034b567b7eac962b944eda131376594ef5e23b025fada4e4259e953ceb45ea57a2ced7872c567e6d1fae8dcc3a9772ead783d8513032e77d3fd";
 
-    private DidomiEventListener eventListener = new DidomiEventListener();
-
     private bool syncError = false;
-    private string syncedUserId = null;
+    private string syncDoneUserId = null;
+    private string syncReadyUserId = null;
     private Boolean? statusApplied = null;
     private Boolean? syncAcknowledged = null;
     private Boolean? syncAcknowledged2 = null;
@@ -25,16 +24,17 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         // For iOS, we need to fully reset the SDK between each test suite
         IO.Didomi.SDK.IOS.DidomiFramework.ResetDidomi();
+        Didomi.GetInstance().AddEventListener(eventListener);
 #endif
 
         eventListener.SyncDone += EventListener_SyncDone;
         eventListener.SyncReady += EventListener_SyncReady;
         eventListener.SyncError += EventListener_SyncError;
-        Didomi.GetInstance().AddEventListener(eventListener);
     }
 
-    protected void TearDown()
+    protected new void TearDown()
     {
+        base.TearDown();
         ResetStatus();
         ResetResults();
     }
@@ -55,12 +55,13 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     private void EventListener_SyncDone(object sender, SyncDoneEvent e)
     {
         Debug.Log("Sync Done!");
-        syncedUserId = e.getOrganizationUserId();
+        syncDoneUserId = e.getOrganizationUserId();
     }
 
     private void EventListener_SyncReady(object sender, SyncReadyEvent e)
     {
         Debug.Log("Sync Ready!");
+        syncReadyUserId = e.GetOrganizationUserId();
         statusApplied = e.IsStatusApplied();
         syncAcknowledged = e.SyncAcknowledged();
         syncAcknowledged2 = e.SyncAcknowledged();
@@ -78,7 +79,8 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     protected void ResetResults()
     {
         syncError = false;
-        syncedUserId = null;
+        syncDoneUserId = null;
+        syncReadyUserId = null;
         statusApplied = null;
         syncAcknowledged = null;
         syncAcknowledged2 = null;
@@ -92,27 +94,33 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
         yield return ExpectSyncSuccess(message, expectApplied, expectApplied);
     }
 
-    protected IEnumerator ExpectSyncSuccess(string message, bool expectApplied, bool expectAcknowledged)
+    protected IEnumerator ExpectSyncSuccess(string message, bool expectApplied, bool expectAcknowledged, bool completeCheck = true)
     {
         yield return WaitForCallback();
 
-        Assert.AreEqual(testUserId, syncedUserId, message);
+        Assert.AreEqual(testUserId, syncDoneUserId, "Sync done User Id - " + message);
+        Assert.AreEqual(testUserId, syncReadyUserId, "Sync ready User Id - " + message);
         Assert.IsFalse(syncError, "Sync error - " + message);
-        Assert.AreEqual(expectApplied, statusApplied, "Status applied - " + message);
-        Assert.AreEqual(expectAcknowledged, syncAcknowledged, "Sync acknowledged - " + message);
-        Assert.IsFalse(syncAcknowledged2, "Sync acknowledged should always fail at the 2nd call - " + message);
+        if (completeCheck)
+        {
+            // Some tests do not require to check all parameters.
+            Assert.AreEqual(expectApplied, statusApplied, "Status applied - " + message);
+            Assert.AreEqual(expectAcknowledged, syncAcknowledged, "Sync acknowledged - " + message);
+            Assert.IsFalse(syncAcknowledged2, "Sync acknowledged should always fail at the 2nd call - " + message);
+        }
     }
 
     /// <summary>
     /// Check that we get a sync error
     /// </summary>
-    protected IEnumerator ExpectSyncError()
+    protected IEnumerator ExpectSyncError(string message)
     {
         yield return WaitForCallback();
 
-        Assert.IsNull(syncedUserId);
-        Assert.IsTrue(syncError);
-        Assert.IsNull(statusApplied);
+        Assert.IsNull(syncDoneUserId, message);
+        Assert.IsNull(syncReadyUserId, message);
+        Assert.IsTrue(syncError, message);
+        Assert.IsNull(statusApplied, message);
     }
 
     /// <summary>
@@ -120,6 +128,6 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     /// </summary>
     private IEnumerator WaitForCallback()
     {
-        yield return new WaitUntil(() => (syncedUserId != null && syncAcknowledged != null && syncAcknowledged2 != null) || syncError);
+        yield return new WaitUntil(() => (syncDoneUserId != null && syncAcknowledged != null && syncAcknowledged2 != null) || syncError);
     }
 }
