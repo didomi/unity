@@ -5,7 +5,7 @@ using IO.Didomi.SDK;
 
 /// <summary>
 /// Tests checking behavior before SDK is initialized.
-/// Note: Test is named so it is 1st in alphabetical order, in order to run before any other test initializes the SDK.
+/// Note: Test Suite is named so it is 1st in alphabetical order, in order to run before any other test initializes the SDK.
 /// </summary>
 public class BeforeSDKInitTestsSuite : SyncUserBaseTests
 {
