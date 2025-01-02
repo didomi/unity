@@ -94,16 +94,20 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
         yield return ExpectSyncSuccess(message, expectApplied, expectApplied);
     }
 
-    protected IEnumerator ExpectSyncSuccess(string message, bool expectApplied, bool expectAcknowledged)
+    protected IEnumerator ExpectSyncSuccess(string message, bool expectApplied, bool expectAcknowledged, bool completeCheck = true)
     {
         yield return WaitForCallback();
 
         Assert.AreEqual(testUserId, syncDoneUserId, "Sync done User Id - " + message);
         Assert.AreEqual(testUserId, syncReadyUserId, "Sync ready User Id - " + message);
         Assert.IsFalse(syncError, "Sync error - " + message);
-        Assert.AreEqual(expectApplied, statusApplied, "Status applied - " + message);
-        Assert.AreEqual(expectAcknowledged, syncAcknowledged, "Sync acknowledged - " + message);
-        Assert.IsFalse(syncAcknowledged2, "Sync acknowledged should always fail at the 2nd call - " + message);
+        if (completeCheck)
+        {
+            // Some tests do not require to check all parameters.
+            Assert.AreEqual(expectApplied, statusApplied, "Status applied - " + message);
+            Assert.AreEqual(expectAcknowledged, syncAcknowledged, "Sync acknowledged - " + message);
+            Assert.IsFalse(syncAcknowledged2, "Sync acknowledged should always fail at the 2nd call - " + message);
+        }
     }
 
     /// <summary>

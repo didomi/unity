@@ -4,10 +4,13 @@ using UnityEngine.TestTools;
 using IO.Didomi.SDK;
 
 /// <summary>
-/// Tests related to user status synchronization between platforms before SDK was initialized
+/// Tests checking behavior before SDK is initialized.
+/// Note: Test is named so it is 1st in alphabetical order, in order to run before any other test initializes the SDK.
 /// </summary>
-public class SyncUserBeforeInitTestsSuite : SyncUserBaseTests
+public class BeforeSDKInitTestsSuite : SyncUserBaseTests
 {
+    private bool sdkWasReady;
+
     [OneTimeSetUp]
     public new void SetUpSuite()
     {
@@ -17,12 +20,14 @@ public class SyncUserBeforeInitTestsSuite : SyncUserBaseTests
     [SetUp]
     public new void Setup()
     {
-        base.Setup();
-        if (Didomi.GetInstance().IsReady())
+        // Complete results are flaky when SDK is ready before test begins
+        sdkWasReady = Didomi.GetInstance().IsReady();
+        if (sdkWasReady)
         {
             ResetStatus();
             ResetResults();
         }
+        base.Setup();
     }
 
     [TearDown]
@@ -38,10 +43,11 @@ public class SyncUserBeforeInitTestsSuite : SyncUserBaseTests
     }
 
     [UnityTest]
+    /// Tests related to user status synchronization between platforms before SDK was initialized
     public IEnumerator TestSyncBeforeInit()
     {
         Didomi.GetInstance().SetUser(testUserId);
         yield return LoadSdk();
-        yield return ExpectSyncSuccess("Set user before initialization", true, true);
+        yield return ExpectSyncSuccess("Set user before initialization", true, true, !sdkWasReady);
     }
 }
