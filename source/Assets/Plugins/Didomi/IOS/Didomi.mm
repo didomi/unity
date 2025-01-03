@@ -368,9 +368,9 @@ int isNoticeVisible()
     return convertBoolToInt([[Didomi shared] isNoticeVisible]);
 }
 
-void showPreferences()
+void showPreferences(int intView)
 {
-    [[Didomi shared] showPreferencesWithController:(UnityGetGLViewController()) view:(ViewsPurposes)];
+    [[Didomi shared] showPreferencesWithController:(UnityGetGLViewController()) view:(Views)intView];
 }
 
 int isUserConsentStatusPartial()

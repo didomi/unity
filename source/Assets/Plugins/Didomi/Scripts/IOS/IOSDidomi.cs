@@ -192,9 +192,9 @@ namespace IO.Didomi.SDK.IOS
             DidomiFramework.SetupUI();
         }
 
-        public void ShowPreferences()
+        public void ShowPreferences(Didomi.Views view)
         {
-             DidomiFramework.ShowPreferences();
+             DidomiFramework.ShowPreferences(view);
         }
 
         public bool IsUserConsentStatusPartial()

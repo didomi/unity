@@ -252,9 +252,45 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethodWithActivityArg("showNotice");
         }
 
-        public void ShowPreferences()
+        public void ShowPreferences(Didomi.Views view)
         {
-            CallVoidMethodWithActivityArg("showPreferences");
+            try
+            {
+                using (var playerClass = new AndroidJavaClass(UnityPlayerFullClassName))
+                {
+                    using (var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity"))
+                    {
+                        using (var _pluginClass = new AndroidJavaClass(PluginName))
+                        {
+                            string viewParam;
+
+                            if (view == Didomi.Views.Vendors)
+                            {
+                                viewParam = _pluginClass.GetStatic<string>("VIEW_VENDORS");
+                            }
+                            else
+                            {
+                                viewParam = _pluginClass.GetStatic<string>("VIEW_PURPOSES");
+                            }
+
+                            var pluginInstance = _pluginClass.CallStatic<AndroidJavaObject>("getInstance");
+
+                            var obj = new object[2];
+
+                            obj[0] = activity;
+                            obj[1] = viewParam;
+
+                            pluginInstance.Call("showPreferences", obj);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(string.Format("Exception:{0}", ex.ToString()));
+
+                throw ex;
+            }
         }
 
         public void Reset()
