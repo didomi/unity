@@ -190,7 +190,7 @@ namespace IO.Didomi.SDK.UnityEditor
             ShowNoticeMockUI();
         }
 
-        public void ShowPreferences()
+        public void ShowPreferences(Didomi.Views view)
         {
             if (_disableMockUI)
             {

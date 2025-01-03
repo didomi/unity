@@ -116,6 +116,24 @@ public class UITestsSuite: DidomiBaseTests
         AssertEvents("Called HidePreferences", expectPreferencesHidden: true);
     }
 
+    [UnityTest]
+    public IEnumerator TestPreferencesVendorsVisibility()
+    {
+        Didomi.GetInstance().ShowPreferences(Didomi.Views.Vendors);
+        yield return new WaitForSeconds(1);
+        Assert.False(Didomi.GetInstance().IsNoticeVisible(), "Notice should not be visible");
+        Assert.True(Didomi.GetInstance().IsPreferencesVisible(), "Preferences screen should be visible");
+        AssertEvents("Called ShowPreferences", expectPreferencesDisplayed: true);
+
+        ResetEvents();
+
+        Didomi.GetInstance().HidePreferences();
+        yield return new WaitForSeconds(2); // Allow longer time to hide both Vendors and Preferences screens
+        Assert.False(Didomi.GetInstance().IsNoticeVisible(), "Notice should still not be visible");
+        Assert.False(Didomi.GetInstance().IsPreferencesVisible(), "Preferences screen should not be visible anymore");
+        AssertEvents("Called HidePreferences", expectPreferencesHidden: true);
+    }
+
     private void EventListener_ShowNotice(object sender, ShowNoticeEvent e)
     {
         noticeDisplayedEvent = true;

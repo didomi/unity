@@ -47,7 +47,7 @@ namespace IO.Didomi.SDK.Interfaces
         void OnReady(Action didomiCallable);
         void SetupUI();
         void ShowNotice();
-        void ShowPreferences();
+        void ShowPreferences(Didomi.Views view);
         void Reset();
         bool SetUserAgreeToAll();
         bool SetUserDisagreeToAll();

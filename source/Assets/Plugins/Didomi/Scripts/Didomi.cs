@@ -17,6 +17,16 @@ namespace IO.Didomi.SDK
     /// </summary>
     public class Didomi
     {
+        /// <summary>
+        /// Possible views to open in Preferences screen
+        /// </summary>
+        public enum Views
+        {
+            Purposes = 0,
+            // Mapping to Objective-C: Value 1 is SPI (deprecated)
+            Vendors = 2
+        }
+
         private static Didomi didomiInstance;
         private static readonly object instanceLock = new object();
         private static IDidomi didomiForPlatform = null;
@@ -454,9 +464,10 @@ namespace IO.Didomi.SDK
         /// <summary>
         /// Show the preferences popup for purposes
         /// </summary>
-        public void ShowPreferences()
+        /// <param name="view">Optional: Specify which view to open</param>
+        public void ShowPreferences(Views view = Views.Purposes)
         {
-            didomiForPlatform.ShowPreferences();
+            didomiForPlatform.ShowPreferences(view);
         }
 
         /// <summary>

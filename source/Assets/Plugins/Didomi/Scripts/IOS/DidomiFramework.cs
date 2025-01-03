@@ -246,13 +246,13 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void showPreferences();
+        private static extern void showPreferences(int intView);
 #endif
 
-        public static void ShowPreferences()
+        public static void ShowPreferences(Didomi.Views view)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            showPreferences();
+            showPreferences((int)view);
 #endif
         }
 
