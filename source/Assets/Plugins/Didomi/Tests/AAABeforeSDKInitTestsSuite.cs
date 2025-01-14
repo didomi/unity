@@ -7,7 +7,7 @@ using IO.Didomi.SDK;
 /// Tests checking behavior before SDK is initialized.
 /// Note: Test Suite is named so it is 1st in alphabetical order, in order to run before any other test initializes the SDK.
 /// </summary>
-public class BeforeSDKInitTestsSuite : SyncUserBaseTests
+public class AAABeforeSDKInitTestsSuite : SyncUserBaseTests
 {
     private bool sdkWasReady;
 
