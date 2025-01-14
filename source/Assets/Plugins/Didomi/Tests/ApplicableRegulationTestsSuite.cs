@@ -2,11 +2,9 @@ using System.Collections;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 using IO.Didomi.SDK;
-using UnityEngine;
-using IO.Didomi.SDK.Events;
 
 /// <summary>
-/// Tests related to current user status getter and setter
+/// Tests related to regulation
 /// </summary>
 public class ApplicableRegulationTestsSuite: DidomiBaseTests
 {
