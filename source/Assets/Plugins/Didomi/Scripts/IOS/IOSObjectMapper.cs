@@ -317,10 +317,7 @@ namespace IO.Didomi.SDK.IOS
                 if (reader.TokenType == JsonToken.Integer)
                 {
                     int intValue = Convert.ToInt32(reader.Value);
-                    if (Enum.IsDefined(typeof(DDMRegulation), intValue))
-                    {
-                        return Enum.GetName(typeof(DDMRegulation), intValue);
-                    }
+                    return IOSObjectMapper.ConvertFromRegulationEnumToString(intValue);
                 }
 
                 return Enum.GetName(typeof(DDMRegulation), DDMRegulation.none);
@@ -332,6 +329,17 @@ namespace IO.Didomi.SDK.IOS
                 throw new NotImplementedException();
             }
         }
+
+        public static string ConvertFromRegulationEnumToString(int enumValue)
+        {
+            if (Enum.IsDefined(typeof(DDMRegulation), enumValue))
+            {
+                return Enum.GetName(typeof(DDMRegulation), enumValue);
+            }
+            else
+            {
+                return Enum.GetName(typeof(DDMRegulation), DDMRegulation.none);
+            }
+        }
     }
 }
-

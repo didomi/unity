@@ -103,6 +103,11 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
+        public string GetApplicableRegulation()
+        {
+            throw new NotImplementedException();
+        }
+
         public Vendor GetVendor(string vendorId)
         {
             throw new NotImplementedException();

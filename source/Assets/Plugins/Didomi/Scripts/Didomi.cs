@@ -243,6 +243,18 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Determine the regulation applicable for the user.
+        /// </summary>
+        /// <returns>
+        /// Regulation as string such as "gdpr", "cpra"...
+        /// If no regulation is applicable, will return "none".
+        /// </returns>
+        public string GetApplicableRegulation()
+        {
+            return didomiForPlatform.GetApplicableRegulation();
+        }
+
+        /// <summary>
         /// Get a vendor from its ID
         /// </summary>
         /// <param name="vendorId"></param>

@@ -136,6 +136,13 @@ namespace IO.Didomi.SDK.Android
             return AndroidObjectMapper.ConvertToUserStatus(userStatusObject);
         }
 
+        public string GetApplicableRegulation()
+        {
+            var obj = CallReturningJavaObjectMethod("getApplicableRegulation");
+
+            return obj.Call<string>("getValue");
+        }
+
         public Vendor GetVendor(string vendorId)
         {
             var obj = CallReturningJavaObjectMethod("getVendor", vendorId);

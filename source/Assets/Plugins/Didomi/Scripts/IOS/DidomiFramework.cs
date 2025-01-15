@@ -175,6 +175,19 @@ namespace IO.Didomi.SDK.IOS
 #endif
         }
 
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern int getApplicableRegulation();
+#endif
+
+        internal static int GetApplicableRegulation()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getApplicableRegulation();
+#else
+            return -1;
+#endif
+        }
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]

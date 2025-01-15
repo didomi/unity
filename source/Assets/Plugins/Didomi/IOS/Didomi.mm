@@ -343,6 +343,13 @@ char* getUserStatus()
     return MapUserStatus(userStatus);
 }
 
+int getApplicableRegulation()
+{
+    Didomi *didomi = [Didomi shared];
+    // Enum becomes integer in Objective-C
+    return [didomi applicableRegulation];
+}
+
 void hideNotice()
 {
     [[Didomi shared] hideNotice];

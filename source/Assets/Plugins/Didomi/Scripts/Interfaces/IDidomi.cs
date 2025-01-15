@@ -29,6 +29,7 @@ namespace IO.Didomi.SDK.Interfaces
              ISet<string> disabledPurposes
         );
         UserStatus GetUserStatus();
+        string GetApplicableRegulation();
         Vendor GetVendor(string vendorId);
         int GetTotalVendorCount();
         int GetIABVendorCount();

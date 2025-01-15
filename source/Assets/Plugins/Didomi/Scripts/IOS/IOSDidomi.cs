@@ -142,6 +142,13 @@ namespace IO.Didomi.SDK.IOS
             return IOSObjectMapper.ConvertToUserStatus(jsonText);
         }
 
+        public string GetApplicableRegulation()
+        {
+            var regulationEnum = DidomiFramework.GetApplicableRegulation();
+
+            return IOSObjectMapper.ConvertFromRegulationEnumToString(regulationEnum);
+        }
+
         public void HideNotice()
         {
             DidomiFramework.HideNotice();
