@@ -56,6 +56,7 @@ namespace IO.Didomi.SDK.Events
         /// <summary>
         /// Click on "Limit the use of my Sensitive Personal Information" on notice
         /// </summary>
+        [ObsoleteAttribute("SPI purposes are now displayed in preferences screen. Use NoticeClickMoreInfo instead.")]
         public event EventHandler<NoticeClickViewSPIPurposesEvent> NoticeClickViewSPIPurposes;
         /// <summary>
         /// Click on privacy policy button (TV only)
@@ -104,6 +105,7 @@ namespace IO.Didomi.SDK.Events
         /// <summary>
         /// Click on "Limit the use of my Sensitive Personal Information" on preferences screen
         /// </summary>
+        [ObsoleteAttribute("SPI purposes are now displayed in preferences screen.")]
         public event EventHandler<PreferencesClickViewSPIPurposesEvent> PreferencesClickViewSPIPurposes;
         /// <summary>
         /// Click view vendors on purposes view on preferences popup
@@ -116,22 +118,27 @@ namespace IO.Didomi.SDK.Events
         /// <summary>
         /// Click on agree to a purpose on sensitive personal information screen
         /// </summary>
+        [ObsoleteAttribute("SPI purposes are now treated as other purposes.Use PreferencesClickPurposeAgree instead.")]
         public event EventHandler<PreferencesClickSPIPurposeAgreeEvent> PreferencesClickSPIPurposeAgree;
         /// <summary>
         /// Click on disagree to a purpose on sensitive personal information screen
         /// </summary>
+        [ObsoleteAttribute("SPI purposes are now treated as other purposes.Use PreferencesClickPurposeDisagree instead.")]
         public event EventHandler<PreferencesClickSPIPurposeDisagreeEvent> PreferencesClickSPIPurposeDisagree;
         /// <summary>
         /// Click on agree to a category on sensitive personal information screen
         /// </summary>
+        [ObsoleteAttribute("SPI purposes are now treated as other purposes.Use PreferencesClickCategoryAgree instead.")]
         public event EventHandler<PreferencesClickSPICategoryAgreeEvent> PreferencesClickSPICategoryAgree;
         /// <summary>
         /// Click on disagree to a category on sensitive personal information screen
         /// </summary>
+        [ObsoleteAttribute("SPI purposes are now treated as other purposes.Use PreferencesClickCategoryDisagree instead.")]
         public event EventHandler<PreferencesClickSPICategoryDisagreeEvent> PreferencesClickSPICategoryDisagree;
         /// <summary>
         /// Click on save on the sensitive personal information screen
         /// </summary>
+        [ObsoleteAttribute("SPI purposes are now displayed in preferences screen. Use PreferencesClickSaveChoices instead.")]
         public event EventHandler<PreferencesClickSPIPurposeSaveChoicesEvent> PreferencesClickSPIPurposeSaveChoices;
         /// <summary>
         /// Toggle to Agree to all Vendors on preferences screen
