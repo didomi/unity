@@ -215,12 +215,14 @@ NSDictionary* MapVendorToDictionary(DDMVendor *vendor) {
 
     NSMutableArray<NSDictionary *> *vendorUrlsJson = [NSMutableArray array];
     NSArray<DDMVendorURL *> *vendorUrls = [vendor urls];
-    for (DDMVendorURL *vendorUrl in vendorUrls) {
-        [vendorUrlsJson addObject: @{
-            @"langId": ObjectOrNull([vendorUrl langID]),
-            @"privacy": ObjectOrNull([vendorUrl privacy]),
-            @"legIntClaim": ObjectOrNull([vendorUrl legIntClaim])
-        }];
+    if (vendorUrls) {
+        for (DDMVendorURL *vendorUrl in vendorUrls) {
+            [vendorUrlsJson addObject: @{
+                @"langId": ObjectOrNull([vendorUrl langID]),
+                @"privacy": ObjectOrNull([vendorUrl privacy]),
+                @"legIntClaim": ObjectOrNull([vendorUrl legIntClaim])
+            }];
+        }
     }
     
     return @{
