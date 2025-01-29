@@ -260,18 +260,11 @@ public class DemoGUI : MonoBehaviour
             message = "GetRequiredPurposes" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect2(), "GetRequiredPurposeIds"))
-        {
-            message = string.Empty;
-            var retval = Didomi.GetInstance().GetRequiredPurposeIds();
-            message += "GetRequiredPurposeIds" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect3(), "GetPurpose"))
+        if (GUI.Button(GetFuncRect2(), "GetPurpose"))
         {
             message = string.Empty;
             var purposeId = GetFirstRequiredPurposeId();
-            var retval = Didomi.GetInstance().GetPurpose(purposeId);
+            var retval = Didomi.GetInstance().GetPurpose(purposeId+" 00");
             message += "GetPurpose" + MessageForObject(retval);
         }
     }
@@ -899,12 +892,12 @@ public class DemoGUI : MonoBehaviour
 
     private string GetFirstRequiredPurposeId()
     {
-        var requiredPurposes = Didomi.GetInstance().GetRequiredPurposes();
+        var requiredPurposeIds = Didomi.GetInstance().GetRequiredPurposeIds();
 
         var purposeId = string.Empty;
-        if (requiredPurposes.Count > 0)
+        if (requiredPurposeIds.Count > 0)
         {
-            purposeId = requiredPurposes.FirstOrDefault().Id;
+            purposeId = requiredPurposeIds.FirstOrDefault();
         }
 
         return purposeId;
@@ -912,12 +905,12 @@ public class DemoGUI : MonoBehaviour
 
     private string GetFirstRequiredVendorId()
     {
-        var requiredVendors = Didomi.GetInstance().GetRequiredVendors();
+        var requiredVendorIds = Didomi.GetInstance().GetRequiredVendorIds();
 
         var vendorId = string.Empty;
-        if (requiredVendors.Count > 0)
+        if (requiredVendorIds.Count > 0)
         {
-            vendorId = requiredVendors.FirstOrDefault().Id;
+            vendorId = requiredVendorIds.FirstOrDefault();
         }
 
         return vendorId;
