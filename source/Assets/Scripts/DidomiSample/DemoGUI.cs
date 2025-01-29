@@ -27,6 +27,7 @@ public enum FunctionCategory
     Language,
     Initialization,
     Events,
+    Events_2,
     GetCurrentUserStatus
 };
 
@@ -177,6 +178,10 @@ public class DemoGUI : MonoBehaviour
         {
             Events();
         }
+        else if (functionCategory == FunctionCategory.Events_2)
+        {
+            Events2();
+        }
         else if (functionCategory == FunctionCategory.GetCurrentUserStatus)
         {
             GetCurrentUserStatus();
@@ -189,13 +194,18 @@ public class DemoGUI : MonoBehaviour
         {
             uiStyle = ViewKind.Basic;
         }
+
+        if (GUI.Button(GetLeftRect1(), "Initialization"))
+        {
+            functionCategory = FunctionCategory.Initialization;
+        }
       
-        if (GUI.Button(GetLeftRect1(), "Notice"))
+        if (GUI.Button(GetMiddleRect1(), "Notice"))
         {
             functionCategory = FunctionCategory.Notice;
         }
 
-        if (GUI.Button(GetMiddleRect1(), "Preferences"))
+        if (GUI.Button(GetRightRect1(), "Preferences"))
         {
             functionCategory = FunctionCategory.Preferences;
         }
@@ -208,6 +218,11 @@ public class DemoGUI : MonoBehaviour
         if (GUI.Button(GetMiddleRect2(), "Vendor"))
         {
             functionCategory = FunctionCategory.Vendor;
+        }
+
+        if (GUI.Button(GetRightRect2(), "Consent"))
+        {
+            functionCategory = FunctionCategory.Consent_3;
         }
 
         if (GUI.Button(GetLeftRect3(), "SetUser"))
@@ -225,9 +240,9 @@ public class DemoGUI : MonoBehaviour
             functionCategory = FunctionCategory.CurrentUserStatusTransaction;
         }
 
-        if (GUI.Button(GetLeftRect4(), "Consent"))
+        if (GUI.Button(GetLeftRect4(), "GetCurrentUserStatus"))
         {
-            functionCategory = FunctionCategory.Consent_3;
+            functionCategory = FunctionCategory.GetCurrentUserStatus;
         }
 
         if (GUI.Button(GetMiddleRect4(), "Language"))
@@ -235,19 +250,14 @@ public class DemoGUI : MonoBehaviour
             functionCategory = FunctionCategory.Language;
         }
 
-        if (GUI.Button(GetRightRect4(), "Initialization"))
-        {
-            functionCategory = FunctionCategory.Initialization;
-        }
-
         if (GUI.Button(GetLeftRect5(), "Events"))
         {
             functionCategory = FunctionCategory.Events;
         }
 
-        if (GUI.Button(GetMiddleRect5(), "GetCurrentUserStatus"))
+        if (GUI.Button(GetMiddleRect5(), "Events 2"))
         {
-            functionCategory = FunctionCategory.GetCurrentUserStatus;
+            functionCategory = FunctionCategory.Events_2;
         }
     }
 
@@ -330,14 +340,14 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
             var retval = Didomi.GetInstance().SetUserAgreeToAll();
-            message += "SetUserAgreeToAll" + MessageForObject(retval);
+            message += "\nSetUserAgreeToAll" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect2(), "SetUserDisagreeToAll"))
         {
             message = string.Empty;
             var retval = Didomi.GetInstance().SetUserDisagreeToAll();
-            message += "SetUserDisagreeToAll" + MessageForObject(retval);
+            message += "\nSetUserDisagreeToAll" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect3(), "SetUserStatus"))
@@ -355,7 +365,7 @@ public class DemoGUI : MonoBehaviour
                 vendorsConsentStatus,
                 vendorsLIStatus);
 
-            message += "SetUserStatus " + MessageForObject(retval);
+            message += "\nSetUserStatus " + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect4(), "SetCurrentUserStatus"))
@@ -377,7 +387,7 @@ public class DemoGUI : MonoBehaviour
 
             var retval = Didomi.GetInstance().SetCurrentUserStatus(userStatus);
 
-            message += "SetCurrentUserStatus " + MessageForObject(retval);
+            message += "\nSetCurrentUserStatus " + MessageForObject(retval);
         }
     }
 
@@ -393,7 +403,7 @@ public class DemoGUI : MonoBehaviour
             var retval = transaction.EnablePurpose(purposeId)
                 .DisableVendor(vendorId)
                 .Commit();
-            message += "Commit CurrentUserStatusTransaction" + MessageForObject(retval);
+            message += "\nCommit CurrentUserStatusTransaction" + MessageForObject(retval);
         }
     }
 
@@ -435,7 +445,7 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
             Didomi.GetInstance().Reset();
             Didomi.GetInstance().SetupUI();
-            message += "SetupUI";
+            message += "\nSetupUI";
         }
 
         if (GUI.Button(GetFuncRect2(), "ShowNotice"))
@@ -443,14 +453,14 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
             Didomi.GetInstance().Reset();
             Didomi.GetInstance().ShowNotice();
-            message += "ShowNotice";
+            message += "\nShowNotice";
         }
 
         if (GUI.Button(GetFuncRect3(), "HideNotice"))
         {
             message = string.Empty;
             Didomi.GetInstance().HideNotice();
-            message += "HideNotice";
+            message += "\nHideNotice";
         }
 
         if (GUI.Button(GetFuncRect4(), "IsNoticeVisible"))
@@ -467,21 +477,21 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
             Didomi.GetInstance().ShowPreferences();
-            message += "showPreferences";
+            message += "\nshowPreferences";
         }
 
         if (GUI.Button(GetFuncRect2(), "ShowPreferences (vendors)"))
         {
             message = string.Empty;
             Didomi.GetInstance().ShowPreferences(Didomi.Views.Vendors);
-            message += "showPreferences (vendors)";
+            message += "\nshowPreferences (vendors)";
         }
 
         if (GUI.Button(GetFuncRect3(), "HidePreferences"))
         {
             message = string.Empty;
             Didomi.GetInstance().HidePreferences();
-            message += "HidePreferences";
+            message += "\nHidePreferences";
         }
 
         if (GUI.Button(GetFuncRect4(), "IsPreferencesVisible"))
@@ -520,7 +530,7 @@ public class DemoGUI : MonoBehaviour
 
             Didomi.GetInstance().UpdateSelectedLanguage(languageCode);
 
-            message += "UpdateSelectedLanguage";
+            message += "\nUpdateSelectedLanguage";
         }
     }
 
@@ -547,7 +557,7 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
             Didomi.GetInstance().Reset();
-            message += "Reset called";
+            message += "\nReset called";
         }
     }
 
@@ -601,7 +611,7 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
             RegisterEventHandlers();
-            message += "AddEventListener";
+            message += "\nAddEventListener";
         }
 
         if (GUI.Button(GetFuncRect2(), "OnError"))
@@ -609,7 +619,7 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
 
             Didomi.GetInstance().OnError(
-                   () => { message = "OnError Event Fired."; }
+                   () => { message = "\nOnError Event Fired."; }
                    );
         }
 
@@ -618,8 +628,45 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
 
             Didomi.GetInstance().OnReady(
-                   () => { message = "OnReady Event Fired."; }
+                   () => { message = "\nOnReady Event Fired."; }
                    );
+        }
+    }
+
+        void Events2()
+    {
+        if (GUI.Button(GetFuncRect1(), "AddVendorStatusListener"))
+        {
+            message = string.Empty;
+            var vendors = Didomi.GetInstance().GetRequiredVendors();
+            if (vendors.Count > 0)
+            {
+                var vendorId = vendors.FirstOrDefault().Id;
+                DidomiVendorStatusListener vendorStatusListener = new DidomiVendorStatusListener();
+                vendorStatusListener.VendorStatusChanged += VendorStatusListener_VendorStatusChanged;
+                Didomi.GetInstance().AddVendorStatusListener(vendorId, vendorStatusListener);
+                message += "\nVendorStatusListener added for vendorId=" + vendorId;
+            }
+            else 
+            {
+                message += "\nNo vendor found";
+            }
+        }
+
+        if (GUI.Button(GetFuncRect2(), "RemoveVendorStatusListener"))
+        {
+            message = string.Empty;
+            var vendors = Didomi.GetInstance().GetRequiredVendors();
+            if (vendors.Count > 0) 
+            {
+                var vendorId = vendors.FirstOrDefault().Id;
+                Didomi.GetInstance().RemoveVendorStatusListener(vendorId);
+                message += "\nVendorStatusListener removed for vendorId=" + vendorId;
+            }
+            else
+            {
+                message += "\nNo vendor found";
+            }
         }
     }
 
@@ -665,7 +712,7 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
             Didomi.GetInstance().Reset();
             Didomi.GetInstance().ShowNotice();
-            message += "ShowNotice";
+            message += "\nShowNotice";
         }
 
         if (GUI.Button(GetMiddleRect2(), "ShowPreferences"))
@@ -673,14 +720,14 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
             Didomi.GetInstance().Reset();
             Didomi.GetInstance().ShowPreferences();
-            message += "showPreferences";
+            message += "\nshowPreferences";
         }
 
         if (GUI.Button(GetMiddleRect3(), "Reset"))
         {
             message = string.Empty;
             Didomi.GetInstance().Reset();
-            message += "Reset called";
+            message += "\nReset called";
         }
 
         if (GUI.Button(GetMiddleRect4(), "More Functions"))
@@ -888,6 +935,11 @@ public class DemoGUI : MonoBehaviour
     private void EventListener_LanguageUpdateFailed(object sender, LanguageUpdateFailedEvent e)
     {
         message += "\nEvent: LanguageUpdateFailed, Reason=" + e.getReason();
+    }
+
+    private void VendorStatusListener_VendorStatusChanged(object sender, CurrentUserStatus.VendorStatus status)
+    {
+        message += "\nEvent: VendorStatusChanged, VendorId=" + status.Id + ", Enabled=" + status.Enabled;
     }
 
     private string GetFirstRequiredPurposeId()
