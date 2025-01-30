@@ -215,12 +215,14 @@ NSDictionary* MapVendorToDictionary(DDMVendor *vendor) {
 
     NSMutableArray<NSDictionary *> *vendorUrlsJson = [NSMutableArray array];
     NSArray<DDMVendorURL *> *vendorUrls = [vendor urls];
-    for (DDMVendorURL *vendorUrl in vendorUrls) {
-        [vendorUrlsJson addObject: @{
-            @"langId": ObjectOrNull([vendorUrl langID]),
-            @"privacy": ObjectOrNull([vendorUrl privacy]),
-            @"legIntClaim": ObjectOrNull([vendorUrl legIntClaim])
-        }];
+    if (vendorUrls) {
+        for (DDMVendorURL *vendorUrl in vendorUrls) {
+            [vendorUrlsJson addObject: @{
+                @"langId": ObjectOrNull([vendorUrl langID]),
+                @"privacy": ObjectOrNull([vendorUrl privacy]),
+                @"legIntClaim": ObjectOrNull([vendorUrl legIntClaim])
+            }];
+        }
     }
     
     return @{
@@ -448,7 +450,10 @@ char* getRequiredPurposes()
 char* getPurpose(char* purposeId)
 {
     DDMPurpose *purpose = [[Didomi shared] getPurposeWithPurposeId:CreateNSString(purposeId)];
-    return MapPurposeToJsonText(purpose);
+    if (purpose) {
+        return MapPurposeToJsonText(purpose);
+    }
+    return nil;
 }
 
 char* getRequiredVendorIds()
@@ -467,7 +472,10 @@ char* getRequiredVendors()
 char* getVendor(char* vendorId)
 {
     DDMVendor *vendor = [[Didomi shared] getVendorWithVendorId:CreateNSString(vendorId)];
-    return MapVendorToJsonText(vendor);
+    if (vendor) {
+        return MapVendorToJsonText(vendor);
+    }
+    return nil;
 }
 
 int getTotalVendorCount()

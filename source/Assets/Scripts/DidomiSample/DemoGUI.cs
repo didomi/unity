@@ -2,7 +2,6 @@
 using IO.Didomi.SDK.Events;
 using System;
 using System.Collections.Generic;
-using System.Collections;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -21,13 +20,15 @@ public enum FunctionCategory
     Vendor,
     SetUser,
     SetUserStatus,
-    Consent_3,
+    CurrentUserStatusTransaction,
+    Status,
     Notice,
     Preferences,
     Language,
     Initialization,
     Events,
-    GetUserStatus
+    Events_2,
+    GetCurrentUserStatus
 };
 
 public class DemoGUI : MonoBehaviour
@@ -149,9 +150,13 @@ public class DemoGUI : MonoBehaviour
         {
             SetUserStatus();
         }
-        else if (functionCategory == FunctionCategory.Consent_3)
+        else if (functionCategory == FunctionCategory.CurrentUserStatusTransaction)
         {
-            Consent_3();
+            CurrentUserStatusTransaction();
+        }
+        else if (functionCategory == FunctionCategory.Status)
+        {
+            Status();
         }
         else if (functionCategory == FunctionCategory.Notice)
         {
@@ -173,9 +178,13 @@ public class DemoGUI : MonoBehaviour
         {
             Events();
         }
-        else if (functionCategory == FunctionCategory.GetUserStatus)
+        else if (functionCategory == FunctionCategory.Events_2)
         {
-            GetUserStatus();
+            Events2();
+        }
+        else if (functionCategory == FunctionCategory.GetCurrentUserStatus)
+        {
+            GetCurrentUserStatus();
         }
     }
 
@@ -185,13 +194,18 @@ public class DemoGUI : MonoBehaviour
         {
             uiStyle = ViewKind.Basic;
         }
+
+        if (GUI.Button(GetLeftRect1(), "Initialization"))
+        {
+            functionCategory = FunctionCategory.Initialization;
+        }
       
-        if (GUI.Button(GetLeftRect1(), "Notice"))
+        if (GUI.Button(GetMiddleRect1(), "Notice"))
         {
             functionCategory = FunctionCategory.Notice;
         }
 
-        if (GUI.Button(GetMiddleRect1(), "Preferences"))
+        if (GUI.Button(GetRightRect1(), "Preferences"))
         {
             functionCategory = FunctionCategory.Preferences;
         }
@@ -201,9 +215,14 @@ public class DemoGUI : MonoBehaviour
             functionCategory= FunctionCategory.Purpose;
         }
 
-        if (GUI.Button(GetRightRect2(), "Vendor"))
+        if (GUI.Button(GetMiddleRect2(), "Vendor"))
         {
             functionCategory = FunctionCategory.Vendor;
+        }
+
+        if (GUI.Button(GetRightRect2(), "Status"))
+        {
+            functionCategory = FunctionCategory.Status;
         }
 
         if (GUI.Button(GetLeftRect3(), "SetUser"))
@@ -216,29 +235,29 @@ public class DemoGUI : MonoBehaviour
             functionCategory = FunctionCategory.SetUserStatus;
         }
 
-        if (GUI.Button(GetRightRect3(), "Consent-3"))
+        if (GUI.Button(GetRightRect3(), "UserStatusTransaction"))
         {
-            functionCategory = FunctionCategory.Consent_3;
+            functionCategory = FunctionCategory.CurrentUserStatusTransaction;
         }
 
-        if (GUI.Button(GetLeftRect4(), "Language"))
+        if (GUI.Button(GetLeftRect4(), "GetCurrentUserStatus"))
+        {
+            functionCategory = FunctionCategory.GetCurrentUserStatus;
+        }
+
+        if (GUI.Button(GetMiddleRect4(), "Language"))
         {
             functionCategory = FunctionCategory.Language;
         }
 
-        if (GUI.Button(GetMiddleRect4(), "Initialization"))
-        {
-            functionCategory = FunctionCategory.Initialization;
-        }
-
-        if (GUI.Button(GetRightRect4(), "Events"))
+        if (GUI.Button(GetLeftRect5(), "Events"))
         {
             functionCategory = FunctionCategory.Events;
         }
 
-        if (GUI.Button(GetMiddleRect5(), "GetUserStatus"))
+        if (GUI.Button(GetMiddleRect5(), "Events 2"))
         {
-            functionCategory = FunctionCategory.GetUserStatus;
+            functionCategory = FunctionCategory.Events_2;
         }
     }
 
@@ -251,17 +270,10 @@ public class DemoGUI : MonoBehaviour
             message = "GetRequiredPurposes" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect2(), "GetRequiredPurposeIds"))
+        if (GUI.Button(GetFuncRect2(), "GetPurpose"))
         {
             message = string.Empty;
-            var retval = Didomi.GetInstance().GetRequiredPurposeIds();
-            message += "GetRequiredPurposeIds" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect3(), "GetPurpose"))
-        {
-            message = string.Empty;
-            var purposeId = GetFirstRequiredPurposeId();
+            var purposeId = GetFirstRequiredPurposeLegacyId();
             var retval = Didomi.GetInstance().GetPurpose(purposeId);
             message += "GetPurpose" + MessageForObject(retval);
         }
@@ -276,19 +288,23 @@ public class DemoGUI : MonoBehaviour
             message = "GetRequiredVendors" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect2(), "GetRequiredVendorIds"))
+        if (GUI.Button(GetFuncRect2(), "GetVendor"))
         {
             message = string.Empty;
-            var retval = Didomi.GetInstance().GetRequiredVendorIds();
-            message += "GetRequiredVendorIds" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect3(), "GetVendor"))
-        {
-            message = string.Empty;
-            var vendorId = GetFirstRequiredVendorId();
+            var vendorId = GetFirstRequiredVendorLegacyId();
             var retval = Didomi.GetInstance().GetVendor(vendorId);
             message += "GetVendor" + MessageForObject(retval);
+        }
+
+        if (GUI.Button(GetFuncRect3(), "Vendors count"))
+        {
+            message = string.Empty;
+            var total = Didomi.GetInstance().GetTotalVendorCount();
+            var iab = Didomi.GetInstance().GetIABVendorCount();
+            var nonIab = Didomi.GetInstance().GetNonIABVendorCount();
+            message += "Vendors count : Total " + MessageForObject(total) + ", " +
+                "IAB " + MessageForObject(iab) + ", " +
+                "Non-IAB " + MessageForObject(nonIab);
         }
     }
 
@@ -324,43 +340,17 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
             var retval = Didomi.GetInstance().SetUserAgreeToAll();
-            message += "SetUserAgreeToAll" + MessageForObject(retval);
+            message += "\nSetUserAgreeToAll" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect2(), "SetUserDisagreeToAll"))
         {
             message = string.Empty;
             var retval = Didomi.GetInstance().SetUserDisagreeToAll();
-            message += "SetUserDisagreeToAll" + MessageForObject(retval);
+            message += "\nSetUserDisagreeToAll" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect3(), "SetUserStatus 1"))
-        {
-            message = string.Empty;
-
-            ISet<string> enabledConsentPurposeIds = Didomi.GetInstance().GetRequiredPurposeIds();
-            ISet<string> disabledConsentPurposeIds = new HashSet<string>();
-            ISet<string> enabledLIPurposeIds = new HashSet<string>();
-            ISet<string> disabledLIPurposeIds = new HashSet<string>();
-            ISet<string> enabledConsentVendorIds = new HashSet<string>();
-            ISet<string> disabledConsentVendorIds = new HashSet<string>();
-            ISet<string> enabledLIVendorIds = new HashSet<string>();
-            ISet<string> disabledLIVendorIds = new HashSet<string>();
-
-            var retval = Didomi.GetInstance().SetUserStatus(
-                enabledConsentPurposeIds,
-                disabledConsentPurposeIds,
-                enabledLIPurposeIds,
-                disabledLIPurposeIds,
-                enabledConsentVendorIds,
-                disabledConsentVendorIds,
-                enabledLIVendorIds,
-                disabledLIVendorIds);
-
-            message += "SetUserStatus 1" + MessageForObject(retval);
-        }
-
-        if (GUI.Button(GetFuncRect4(), "SetUserStatus 2"))
+        if (GUI.Button(GetFuncRect3(), "SetUserStatus"))
         {
             message = string.Empty;
 
@@ -375,16 +365,54 @@ public class DemoGUI : MonoBehaviour
                 vendorsConsentStatus,
                 vendorsLIStatus);
 
-            message += "SetUserStatus 2" + MessageForObject(retval);
+            message += "\nSetUserStatus " + MessageForObject(retval);
+        }
+
+        if (GUI.Button(GetFuncRect4(), "SetCurrentUserStatus"))
+        {
+            message = string.Empty;
+
+            var userStatus = Didomi.GetInstance().GetCurrentUserStatus();
+            var purposeId = GetFirstRequiredPurposeId();
+            var vendorId = GetFirstRequiredVendorId();
+
+            // Enable all purposes except purposeId
+            foreach(CurrentUserStatus.PurposeStatus purposeStatus in userStatus.Purposes.Values) {
+                purposeStatus.Enabled = purposeStatus.Id != purposeId;
+            }
+            // Enable all vendors except vendorId
+            foreach(CurrentUserStatus.VendorStatus vendorStatus in userStatus.Vendors.Values) {
+                vendorStatus.Enabled = vendorStatus.Id != vendorId;
+            }
+
+            var retval = Didomi.GetInstance().SetCurrentUserStatus(userStatus);
+
+            message += "\nSetCurrentUserStatus " + MessageForObject(retval);
         }
     }
 
-    private void Consent_3()
+    private void CurrentUserStatusTransaction()
     {
-        if (GUI.Button(GetFuncRect1(), "IsConsentRequired"))
+        if (GUI.Button(GetFuncRect1(), "Commit Transaction"))
+        {
+            var purposeId = GetFirstRequiredPurposeId();
+            var vendorId = GetFirstRequiredVendorId();
+
+            message = string.Empty;
+            var transaction = Didomi.GetInstance().OpenCurrentUserStatusTransaction();
+            var retval = transaction.EnablePurpose(purposeId)
+                .DisableVendor(vendorId)
+                .Commit();
+            message += "\nCommit CurrentUserStatusTransaction" + MessageForObject(retval);
+        }
+    }
+
+    private void Status()
+    {
+        if (GUI.Button(GetFuncRect1(), "ShouldUserStatusBeCollected"))
         {
             message = string.Empty;
-            var retval = Didomi.GetInstance().IsConsentRequired();
+            var retval = Didomi.GetInstance().ShouldUserStatusBeCollected();
             message += "IsConsentRequired" + MessageForObject(retval);
         }
 
@@ -395,11 +423,11 @@ public class DemoGUI : MonoBehaviour
             message += "IsUserStatusPartial" + MessageForObject(retval);
         }
 
-        if (GUI.Button(GetFuncRect3(), "ShouldUserStatusBeCollected"))
+        if (GUI.Button(GetFuncRect3(), "GetApplicableRegulation"))
         {
             message = string.Empty;
-            var retval = Didomi.GetInstance().ShouldUserStatusBeCollected();
-            message += "ShouldUserStatusBeCollected" + MessageForObject(retval);
+            var retval = Didomi.GetInstance().GetApplicableRegulation();
+            message += "GetApplicableRegulation" + MessageForObject(retval);
         }
 
         if (GUI.Button(GetFuncRect4(), "GetJavaScriptForWebView"))
@@ -417,7 +445,7 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
             Didomi.GetInstance().Reset();
             Didomi.GetInstance().SetupUI();
-            message += "SetupUI";
+            message += "\nSetupUI";
         }
 
         if (GUI.Button(GetFuncRect2(), "ShowNotice"))
@@ -425,14 +453,14 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
             Didomi.GetInstance().Reset();
             Didomi.GetInstance().ShowNotice();
-            message += "ShowNotice";
+            message += "\nShowNotice";
         }
 
         if (GUI.Button(GetFuncRect3(), "HideNotice"))
         {
             message = string.Empty;
             Didomi.GetInstance().HideNotice();
-            message += "HideNotice";
+            message += "\nHideNotice";
         }
 
         if (GUI.Button(GetFuncRect4(), "IsNoticeVisible"))
@@ -448,19 +476,25 @@ public class DemoGUI : MonoBehaviour
         if (GUI.Button(GetFuncRect1(), "ShowPreferences"))
         {
             message = string.Empty;
-            Didomi.GetInstance().Reset();
             Didomi.GetInstance().ShowPreferences();
-            message += "showPreferences";
+            message += "\nshowPreferences";
         }
 
-        if (GUI.Button(GetFuncRect2(), "HidePreferences"))
+        if (GUI.Button(GetFuncRect2(), "ShowPreferences (vendors)"))
+        {
+            message = string.Empty;
+            Didomi.GetInstance().ShowPreferences(Didomi.Views.Vendors);
+            message += "\nshowPreferences (vendors)";
+        }
+
+        if (GUI.Button(GetFuncRect3(), "HidePreferences"))
         {
             message = string.Empty;
             Didomi.GetInstance().HidePreferences();
-            message += "HidePreferences";
+            message += "\nHidePreferences";
         }
 
-        if (GUI.Button(GetFuncRect3(), "IsPreferencesVisible"))
+        if (GUI.Button(GetFuncRect4(), "IsPreferencesVisible"))
         {
             message = string.Empty;
             var retval = Didomi.GetInstance().IsPreferencesVisible();
@@ -496,7 +530,7 @@ public class DemoGUI : MonoBehaviour
 
             Didomi.GetInstance().UpdateSelectedLanguage(languageCode);
 
-            message += "UpdateSelectedLanguage";
+            message += "\nUpdateSelectedLanguage";
         }
     }
 
@@ -523,7 +557,7 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
             Didomi.GetInstance().Reset();
-            message += "Reset called";
+            message += "\nReset called";
         }
     }
 
@@ -577,7 +611,7 @@ public class DemoGUI : MonoBehaviour
         {
             message = string.Empty;
             RegisterEventHandlers();
-            message += "AddEventListener";
+            message += "\nAddEventListener";
         }
 
         if (GUI.Button(GetFuncRect2(), "OnError"))
@@ -585,7 +619,7 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
 
             Didomi.GetInstance().OnError(
-                   () => { message = "OnError Event Fired."; }
+                   () => { message = "\nOnError Event Fired."; }
                    );
         }
 
@@ -594,47 +628,80 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
 
             Didomi.GetInstance().OnReady(
-                   () => { message = "OnReady Event Fired."; }
+                   () => { message = "\nOnReady Event Fired."; }
                    );
         }
     }
 
-    void GetUserStatus()
+        void Events2()
+    {
+        if (GUI.Button(GetFuncRect1(), "AddVendorStatusListener"))
+        {
+            message = string.Empty;
+            var vendors = Didomi.GetInstance().GetRequiredVendors();
+            if (vendors.Count > 0)
+            {
+                var vendorId = vendors.FirstOrDefault().Id;
+                DidomiVendorStatusListener vendorStatusListener = new DidomiVendorStatusListener();
+                vendorStatusListener.VendorStatusChanged += VendorStatusListener_VendorStatusChanged;
+                Didomi.GetInstance().AddVendorStatusListener(vendorId, vendorStatusListener);
+                message += "\nVendorStatusListener added for vendorId=" + vendorId;
+            }
+            else 
+            {
+                message += "\nNo vendor found";
+            }
+        }
+
+        if (GUI.Button(GetFuncRect2(), "RemoveVendorStatusListener"))
+        {
+            message = string.Empty;
+            var vendors = Didomi.GetInstance().GetRequiredVendors();
+            if (vendors.Count > 0) 
+            {
+                var vendorId = vendors.FirstOrDefault().Id;
+                Didomi.GetInstance().RemoveVendorStatusListener(vendorId);
+                message += "\nVendorStatusListener removed for vendorId=" + vendorId;
+            }
+            else
+            {
+                message += "\nNo vendor found";
+            }
+        }
+    }
+
+    void GetCurrentUserStatus()
     {
         if (GUI.Button(GetFuncRect1(), "Purposes"))
         {
             message = string.Empty;
-            var userStatus = Didomi.GetInstance().GetUserStatus();
-            message += "Purposes: global - " +
-                userStatus.GetPurposes().GetGlobal().GetEnabled().Count + " enabled, " +
-                userStatus.GetPurposes().GetGlobal().GetDisabled().Count + " disabled ; " +
-                userStatus.GetPurposes().GetEssential().Count + " essential";
+            var userStatus = Didomi.GetInstance().GetCurrentUserStatus();
+            message += "Purposes: " +
+                userStatus.Purposes.Where(entry => entry.Value.Enabled).Count() + " enabled, " +
+                userStatus.Purposes.Where(entry => !entry.Value.Enabled).Count() + "disabled";
         }
 
         if (GUI.Button(GetFuncRect2(), "Vendors"))
         {
             message = string.Empty;
-            var userStatus = Didomi.GetInstance().GetUserStatus();
-            message += "Vendors: global - " +
-                userStatus.GetVendors().GetGlobal().GetEnabled().Count + " enabled, " +
-                userStatus.GetVendors().GetGlobal().GetDisabled().Count + " disabled ; " +
-                " consent - " +
-                userStatus.GetVendors().GetConsent().GetEnabled().Count + " enabled, " +
-                userStatus.GetVendors().GetConsent().GetDisabled().Count + " disabled";
+            var userStatus = Didomi.GetInstance().GetCurrentUserStatus();
+            message += "Vendors: " +
+                userStatus.Vendors.Where(entry => entry.Value.Enabled).Count() + " enabled, " +
+                userStatus.Vendors.Where(entry => !entry.Value.Enabled).Count() + "disabled";
         }
 
         if (GUI.Button(GetFuncRect3(), "UserId"))
         {
             message = string.Empty;
-            var userStatus = Didomi.GetInstance().GetUserStatus();
-            message += "User id = " + userStatus.GetUserId();
+            var userStatus = Didomi.GetInstance().GetCurrentUserStatus();
+            message += "User id = " + userStatus.UserId;
         }
 
         if (GUI.Button(GetFuncRect4(), "ConsentString"))
         {
             message = string.Empty;
-            var userStatus = Didomi.GetInstance().GetUserStatus();
-            message += "ConsentString = " + userStatus.GetConsentString();
+            var userStatus = Didomi.GetInstance().GetCurrentUserStatus();
+            message += "ConsentString = " + userStatus.ConsentString;
         }
     }
 
@@ -645,7 +712,7 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
             Didomi.GetInstance().Reset();
             Didomi.GetInstance().ShowNotice();
-            message += "ShowNotice";
+            message += "\nShowNotice";
         }
 
         if (GUI.Button(GetMiddleRect2(), "ShowPreferences"))
@@ -653,14 +720,14 @@ public class DemoGUI : MonoBehaviour
             message = string.Empty;
             Didomi.GetInstance().Reset();
             Didomi.GetInstance().ShowPreferences();
-            message += "showPreferences";
+            message += "\nshowPreferences";
         }
 
         if (GUI.Button(GetMiddleRect3(), "Reset"))
         {
             message = string.Empty;
             Didomi.GetInstance().Reset();
-            message += "Reset called";
+            message += "\nReset called";
         }
 
         if (GUI.Button(GetMiddleRect4(), "More Functions"))
@@ -679,7 +746,6 @@ public class DemoGUI : MonoBehaviour
         eventListener.NoticeClickMoreInfo += EventListener_NoticeClickMoreInfo;
         eventListener.NoticeClickViewVendors += EventListener_NoticeClickViewVendors;
         eventListener.NoticeClickPrivacyPolicy += EventListener_NoticeClickPrivacyPolicy;
-        eventListener.NoticeClickViewSPIPurposes += EventListener_NoticeClickViewSPIPurposes;
         eventListener.ShowNotice += EventListener_ShowNotice;
         eventListener.HideNotice += EventListener_HideNotice;
         eventListener.HidePreferences += EventListener_HidePreferences;
@@ -694,20 +760,14 @@ public class DemoGUI : MonoBehaviour
         eventListener.PreferencesClickPurposeDisagree += EventListener_PreferencesClickPurposeDisagree;
         eventListener.PreferencesClickCategoryAgree += EventListener_PreferencesClickCategoryAgree;
         eventListener.PreferencesClickCategoryDisagree += EventListener_PreferencesClickCategoryDisagree;
-        eventListener.PreferencesClickViewSPIPurposes += EventListener_PreferencesClickViewSPIPurposes;
         eventListener.PreferencesClickViewVendors += EventListener_PreferencesClickViewVendors;
         eventListener.PreferencesClickSaveChoices += EventListener_PreferencesClickSaveChoices;
-        eventListener.PreferencesClickSPIPurposeAgree += EventListener_PreferencesClickSPIPurposeAgree;
-        eventListener.PreferencesClickSPIPurposeDisagree += EventListener_PreferencesClickSPIPurposeDisagree;
-        eventListener.PreferencesClickSPICategoryAgree += EventListener_PreferencesClickSPICategoryAgree;
-        eventListener.PreferencesClickSPICategoryDisagree += EventListener_PreferencesClickSPICategoryDisagree;
-        eventListener.PreferencesClickSPIPurposeSaveChoices += EventListener_PreferencesClickSPIPurposeSaveChoices;
         eventListener.PreferencesClickDisagreeToAllVendors += EventListener_PreferencesClickDisagreeToAllVendors;
         eventListener.PreferencesClickAgreeToAllVendors += EventListener_PreferencesClickAgreeToAllVendors;
         eventListener.PreferencesClickVendorAgree += EventListener_PreferencesClickVendorAgree;
         eventListener.PreferencesClickVendorDisagree += EventListener_PreferencesClickVendorDisagree;
         eventListener.PreferencesClickVendorSaveChoices += EventListener_PreferencesClickVendorSaveChoices;
-        eventListener.SyncDone += EventListener_SyncDone;
+        eventListener.SyncReady += EventListener_SyncReady;
         eventListener.SyncError += EventListener_SyncError;
         eventListener.LanguageUpdated += EventListener_LanguageUpdated;
         eventListener.LanguageUpdateFailed += EventListener_LanguageUpdateFailed;
@@ -743,11 +803,6 @@ public class DemoGUI : MonoBehaviour
     private void EventListener_NoticeClickPrivacyPolicy(object sender, NoticeClickPrivacyPolicyEvent e)
     {
         message += "\nEvent: NoticeClickPrivacyPolicy";
-    }
-
-    private void EventListener_NoticeClickViewSPIPurposes(object sender, NoticeClickViewSPIPurposesEvent e)
-    {
-        message += "\nEvent: NoticeClickViewSPIPurposes";
     }
 
     private void EventListener_NoticeClickAgree(object sender, NoticeClickAgreeEvent e)
@@ -815,11 +870,6 @@ public class DemoGUI : MonoBehaviour
         message += "\nEvent PreferencesClickCategoryAgreeEvent, Category=" + e.getCategoryId();
     }
 
-    private void EventListener_PreferencesClickViewSPIPurposes(object sender, PreferencesClickViewSPIPurposesEvent e)
-    {
-        message += "\nEvent: PreferencesClickViewSPIPurposesEvent";
-    }
-
     private void EventListener_PreferencesClickViewVendors(object sender, PreferencesClickViewVendorsEvent e)
     {
         message += "\nEvent: PreferencesClickViewVendors";
@@ -838,31 +888,6 @@ public class DemoGUI : MonoBehaviour
     private void EventListener_PreferencesClickAgreeToAll(object sender, PreferencesClickAgreeToAllEvent e)
     {
         message += "\nEvent: PreferencesClickAgreeToAll";
-    }
-
-    private void EventListener_PreferencesClickSPIPurposeDisagree(object sender, PreferencesClickSPIPurposeDisagreeEvent e)
-    {
-        message += "\nEvent: PreferencesClickSPIPurposeDisagree, Purpose=" + e.getPurposeId();
-    }
-
-    private void EventListener_PreferencesClickSPIPurposeAgree(object sender, PreferencesClickSPIPurposeAgreeEvent e)
-    {
-        message += "\nEvent: PreferencesClickSPIPurposeAgree, Purpose=" + e.getPurposeId();
-    }
-
-    private void EventListener_PreferencesClickSPICategoryDisagree(object sender, PreferencesClickSPICategoryDisagreeEvent e)
-    {
-        message += "\nEvent: PreferencesClickSPICategoryDisagree, Category=" + e.getCategoryId();
-    }
-
-    private void EventListener_PreferencesClickSPICategoryAgree(object sender, PreferencesClickSPICategoryAgreeEvent e)
-    {
-        message += "\nEvent: PreferencesClickSPICategoryAgreeEvent, Category=" + e.getCategoryId();
-    }
-
-    private void EventListener_PreferencesClickSPIPurposeSaveChoices(object sender, PreferencesClickSPIPurposeSaveChoicesEvent e)
-    {
-        message += "\nEvent: PreferencesClickSPIPurposeSaveChoices";
     }
 
     private void EventListener_PreferencesClickDisagreeToAllVendors(object sender, PreferencesClickDisagreeToAllVendorsEvent e)
@@ -890,9 +915,11 @@ public class DemoGUI : MonoBehaviour
         message += "\nEvent: PreferencesClickVendorSaveChoices";
     }
 
-    private void EventListener_SyncDone(object sender, SyncDoneEvent e)
+    private void EventListener_SyncReady(object sender, SyncReadyEvent e)
     {
-        message += "\nEvent: SyncDone, OrganizationUserId=" + e.getOrganizationUserId();
+        message += "\nEvent: SyncDone, OrganizationUserId=" + e.GetOrganizationUserId() + ", " +
+            "Status applied ? " + e.IsStatusApplied() + ", " +
+            "Acknowledged ? " + e.SyncAcknowledged();
     }
 
     private void EventListener_SyncError(object sender, SyncErrorEvent e)
@@ -910,27 +937,58 @@ public class DemoGUI : MonoBehaviour
         message += "\nEvent: LanguageUpdateFailed, Reason=" + e.getReason();
     }
 
-    private string GetFirstRequiredPurposeId()
+    private void VendorStatusListener_VendorStatusChanged(object sender, CurrentUserStatus.VendorStatus status)
     {
-        var requiredPurposeIdSet = Didomi.GetInstance().GetRequiredPurposeIds();
+        message += "\nEvent: VendorStatusChanged, VendorId=" + status.Id + ", Enabled=" + status.Enabled;
+    }
+
+    private string GetFirstRequiredPurposeLegacyId()
+    {
+        var requiredPurposeIds = Didomi.GetInstance().GetRequiredPurposeIds();
 
         var purposeId = string.Empty;
-        if (requiredPurposeIdSet.Count > 0)
+        if (requiredPurposeIds.Count > 0)
         {
-            purposeId = requiredPurposeIdSet.FirstOrDefault();
+            purposeId = requiredPurposeIds.FirstOrDefault();
         }
 
         return purposeId;
     }
 
-    private string GetFirstRequiredVendorId()
+        private string GetFirstRequiredPurposeId()
     {
-        var requiredVendorIdSet = Didomi.GetInstance().GetRequiredVendorIds();
+        var requiredPurposes = Didomi.GetInstance().GetRequiredPurposes();
+
+        var purposeId = string.Empty;
+        if (requiredPurposes.Count > 0)
+        {
+            purposeId = requiredPurposes.FirstOrDefault().Id;
+        }
+
+        return purposeId;
+    }
+
+    private string GetFirstRequiredVendorLegacyId()
+    {
+        var requiredVendorIds = Didomi.GetInstance().GetRequiredVendorIds();
 
         var vendorId = string.Empty;
-        if (requiredVendorIdSet.Count > 0)
+        if (requiredVendorIds.Count > 0)
         {
-            vendorId = requiredVendorIdSet.FirstOrDefault();
+            vendorId = requiredVendorIds.FirstOrDefault();
+        }
+
+        return vendorId;
+    }
+
+    private string GetFirstRequiredVendorId()
+    {
+        var requiredVendors = Didomi.GetInstance().GetRequiredVendors();
+
+        var vendorId = string.Empty;
+        if (requiredVendors.Count > 0)
+        {
+            vendorId = requiredVendors.FirstOrDefault().Id;
         }
 
         return vendorId;
