@@ -21,7 +21,7 @@ public enum FunctionCategory
     SetUser,
     SetUserStatus,
     CurrentUserStatusTransaction,
-    Consent_3,
+    Status,
     Notice,
     Preferences,
     Language,
@@ -154,9 +154,9 @@ public class DemoGUI : MonoBehaviour
         {
             CurrentUserStatusTransaction();
         }
-        else if (functionCategory == FunctionCategory.Consent_3)
+        else if (functionCategory == FunctionCategory.Status)
         {
-            Consent_3();
+            Status();
         }
         else if (functionCategory == FunctionCategory.Notice)
         {
@@ -220,9 +220,9 @@ public class DemoGUI : MonoBehaviour
             functionCategory = FunctionCategory.Vendor;
         }
 
-        if (GUI.Button(GetRightRect2(), "Consent"))
+        if (GUI.Button(GetRightRect2(), "Status"))
         {
-            functionCategory = FunctionCategory.Consent_3;
+            functionCategory = FunctionCategory.Status;
         }
 
         if (GUI.Button(GetLeftRect3(), "SetUser"))
@@ -235,7 +235,7 @@ public class DemoGUI : MonoBehaviour
             functionCategory = FunctionCategory.SetUserStatus;
         }
 
-        if (GUI.Button(GetRightRect3(), "User Status Transaction"))
+        if (GUI.Button(GetRightRect3(), "UserStatusTransaction"))
         {
             functionCategory = FunctionCategory.CurrentUserStatusTransaction;
         }
@@ -273,8 +273,8 @@ public class DemoGUI : MonoBehaviour
         if (GUI.Button(GetFuncRect2(), "GetPurpose"))
         {
             message = string.Empty;
-            var purposeId = GetFirstRequiredPurposeId();
-            var retval = Didomi.GetInstance().GetPurpose(purposeId+" 00");
+            var purposeId = GetFirstRequiredPurposeLegacyId();
+            var retval = Didomi.GetInstance().GetPurpose(purposeId);
             message += "GetPurpose" + MessageForObject(retval);
         }
     }
@@ -291,7 +291,7 @@ public class DemoGUI : MonoBehaviour
         if (GUI.Button(GetFuncRect2(), "GetVendor"))
         {
             message = string.Empty;
-            var vendorId = GetFirstRequiredVendorId();
+            var vendorId = GetFirstRequiredVendorLegacyId();
             var retval = Didomi.GetInstance().GetVendor(vendorId);
             message += "GetVendor" + MessageForObject(retval);
         }
@@ -407,7 +407,7 @@ public class DemoGUI : MonoBehaviour
         }
     }
 
-    private void Consent_3()
+    private void Status()
     {
         if (GUI.Button(GetFuncRect1(), "ShouldUserStatusBeCollected"))
         {
@@ -942,7 +942,7 @@ public class DemoGUI : MonoBehaviour
         message += "\nEvent: VendorStatusChanged, VendorId=" + status.Id + ", Enabled=" + status.Enabled;
     }
 
-    private string GetFirstRequiredPurposeId()
+    private string GetFirstRequiredPurposeLegacyId()
     {
         var requiredPurposeIds = Didomi.GetInstance().GetRequiredPurposeIds();
 
@@ -955,7 +955,20 @@ public class DemoGUI : MonoBehaviour
         return purposeId;
     }
 
-    private string GetFirstRequiredVendorId()
+        private string GetFirstRequiredPurposeId()
+    {
+        var requiredPurposes = Didomi.GetInstance().GetRequiredPurposes();
+
+        var purposeId = string.Empty;
+        if (requiredPurposes.Count > 0)
+        {
+            purposeId = requiredPurposes.FirstOrDefault().Id;
+        }
+
+        return purposeId;
+    }
+
+    private string GetFirstRequiredVendorLegacyId()
     {
         var requiredVendorIds = Didomi.GetInstance().GetRequiredVendorIds();
 
@@ -963,6 +976,19 @@ public class DemoGUI : MonoBehaviour
         if (requiredVendorIds.Count > 0)
         {
             vendorId = requiredVendorIds.FirstOrDefault();
+        }
+
+        return vendorId;
+    }
+
+    private string GetFirstRequiredVendorId()
+    {
+        var requiredVendors = Didomi.GetInstance().GetRequiredVendors();
+
+        var vendorId = string.Empty;
+        if (requiredVendors.Count > 0)
+        {
+            vendorId = requiredVendors.FirstOrDefault().Id;
         }
 
         return vendorId;
