@@ -79,7 +79,8 @@ namespace IO.Didomi.SDK.IOS
                 initializeParameters.languageCode,
                 initializeParameters.noticeId,
                 initializeParameters.countryCode,
-                initializeParameters.regionCode
+                initializeParameters.regionCode,
+                initializeParameters.isUnderage
                 );
 #endif
         }
@@ -753,7 +754,11 @@ namespace IO.Didomi.SDK.IOS
         public static string GetVendor(string vendorId)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            return getVendor(vendorId);
+                Debug.Log("!!!!! Call Swift");
+            var vendor = getVendor(vendorId);
+        Debug.Log("!!!!! Vendor Done... ");
+        Debug.Log("!!!!! Vendor : " + vendor);
+            return vendor;
 #else
             return String.Empty;
 #endif
