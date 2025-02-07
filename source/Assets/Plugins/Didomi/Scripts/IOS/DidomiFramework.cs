@@ -890,25 +890,27 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void setUser(string organizationUserId);
+        private static extern void setUser(string userParametersJson);
 #endif
 
-        public static void SetUser(string organizationUserId)
+        public static void SetUser(string userParametersJson)
         {
+                Debug.Log("!!!! User : "+userParametersJson);
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            setUser(organizationUserId);
+            setUser(userParametersJson);
 #endif
         }
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void setUserAndSetupUI(string organizationUserId);
+        private static extern void setUserAndSetupUI(string userParametersJson);
 #endif
 
-        public static void SetUserAndSetupUI(string organizationUserId)
+        public static void SetUserAndSetupUI(string userParametersJson)
         {
+                Debug.Log("!!!! User : "+userParametersJson);
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            setUserAndSetupUI(organizationUserId);
+            setUserAndSetupUI(userParametersJson);
 #endif
         }
 

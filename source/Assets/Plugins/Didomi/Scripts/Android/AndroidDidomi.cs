@@ -367,9 +367,9 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethod("updateSelectedLanguage", languageCode);
         }
 
-        public void SetUser(string organizationUserId)
+        public void SetUser(DidomiUserParameters userParameters)
         {
-            CallVoidMethod("setUser", organizationUserId);
+            CallVoidMethod("setUser", userParameters);
         }
 
         public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
@@ -377,6 +377,11 @@ namespace IO.Didomi.SDK.Android
             AndroidJavaObject nativeUserAuthParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
             AndroidJavaObject nativeSynchronizedUsersParams = AndroidObjectMapper.ConvertToJavaUserAuthList(synchronizedUsers);
             CallVoidMethod("setUser", nativeUserAuthParams, nativeSynchronizedUsersParams);
+        }
+
+        public void SetUserAndSetupUI(DidomiUserParameters userParameters)
+        {
+            CallVoidMethodWithActivityLastArg("setUser", userParameters);
         }
 
         public void SetUserAndSetupUI(string organizationUserId)

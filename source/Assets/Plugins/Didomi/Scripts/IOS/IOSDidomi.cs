@@ -3,6 +3,7 @@ using IO.Didomi.SDK.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace IO.Didomi.SDK.IOS
 {
@@ -40,7 +41,9 @@ namespace IO.Didomi.SDK.IOS
 
         public Vendor GetVendor(string vendorId)
         {
+            Debug.Log("!!!! => GetVendor: " + vendorId);
             var jsonText = DidomiFramework.GetVendor(vendorId);
+            Debug.Log("!!!! => Vendor OK: " + jsonText);
 
             return IOSObjectMapper.ConvertToVendor(jsonText);
         }
@@ -289,9 +292,10 @@ namespace IO.Didomi.SDK.IOS
             DidomiFramework.UpdateSelectedLanguage(languageCode);
         }
 
-        public void SetUser(string organizationUserId)
+        public void SetUser(DidomiUserParameters userParameters)
         {
-            DidomiFramework.SetUser(organizationUserId);
+            string userParametersJson = JsonConvert.SerializeObject(userParameters);
+            DidomiFramework.SetUser(userParametersJson);
         }
 
         public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
@@ -301,9 +305,10 @@ namespace IO.Didomi.SDK.IOS
             DidomiFramework.SetUserWithAuthParams(userAuthParamsJson, synchronizedUsersJson);
         }
 
-        public void SetUserAndSetupUI(string organizationUserId)
+        public void SetUserAndSetupUI(DidomiUserParameters userParameters)
         {
-            DidomiFramework.SetUserAndSetupUI(organizationUserId);
+            string userParametersJson = JsonConvert.SerializeObject(userParameters);
+            DidomiFramework.SetUserAndSetupUI(userParametersJson);
         }
 
         public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)

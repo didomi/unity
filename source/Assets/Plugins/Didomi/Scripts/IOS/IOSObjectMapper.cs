@@ -317,7 +317,7 @@ namespace IO.Didomi.SDK.IOS
                 if (reader.TokenType == JsonToken.Integer)
                 {
                     int intValue = Convert.ToInt32(reader.Value);
-                    return IOSObjectMapper.ConvertFromRegulationEnumToString(intValue);
+                    return ConvertFromRegulationEnumToString(intValue);
                 }
 
                 return Enum.GetName(typeof(DDMRegulation), DDMRegulation.none);
@@ -339,6 +339,19 @@ namespace IO.Didomi.SDK.IOS
             else
             {
                 return Enum.GetName(typeof(DDMRegulation), DDMRegulation.none);
+            }
+        }
+
+        public class JsonUserAuthParamsListConverter : JsonConverter<IList<UserAuthParams>>
+        {
+            public override IList<UserAuthParams> ReadJson(JsonReader reader, Type objectType, IList<UserAuthParams> existingValue, bool hasExistingValue, JsonSerializer serializer)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override void WriteJson(JsonWriter writer, IList<UserAuthParams> value, JsonSerializer serializer)
+            {
+                writer.WriteValue(ConvertFromUserAuthParamsListToJson(value));
             }
         }
     }

@@ -3,10 +3,13 @@ using Newtonsoft.Json;
 
 namespace IO.Didomi.SDK
 {
-    public interface UserAuthParams
+    public interface UserAuth 
     {
         string Id { get; }
+    }
 
+    public interface UserAuthParams: UserAuth
+    {
         string Algorithm { get; }
 
         string SecretId { get; }
@@ -69,6 +72,17 @@ namespace IO.Didomi.SDK
             this.Digest = digest;
             this.Salt = salt;
             this.Expiration = expiration;
+        }
+    }
+
+    public class UserAuthWithoutParams : UserAuth
+    {
+        [JsonProperty("id")]
+        public string Id { get; }
+
+        public UserAuthWithoutParams(string id)
+        {
+            this.Id = id;
         }
     }
 }
