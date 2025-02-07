@@ -63,7 +63,8 @@ namespace IO.Didomi.SDK.IOS
                 string languageCode,
                 string noticeId,
                 string countryCode,
-                string regionCode
+                string regionCode,
+                bool isUnderage
         );
 #endif
 
@@ -754,11 +755,7 @@ namespace IO.Didomi.SDK.IOS
         public static string GetVendor(string vendorId)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-                Debug.Log("!!!!! Call Swift");
-            var vendor = getVendor(vendorId);
-        Debug.Log("!!!!! Vendor Done... ");
-        Debug.Log("!!!!! Vendor : " + vendor);
-            return vendor;
+            return getVendor(vendorId);
 #else
             return String.Empty;
 #endif
@@ -895,7 +892,7 @@ namespace IO.Didomi.SDK.IOS
 
         public static void SetUser(string userParametersJson)
         {
-                Debug.Log("!!!! User : "+userParametersJson);
+            Debug.Log("!!!! User : "+userParametersJson);
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
             setUser(userParametersJson);
 #endif
@@ -911,30 +908,6 @@ namespace IO.Didomi.SDK.IOS
                 Debug.Log("!!!! User : "+userParametersJson);
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
             setUserAndSetupUI(userParametersJson);
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern void setUserWithAuthParams(string userAuthParamsJson, string synchronizedUsersJson);
-#endif
-
-        public static void SetUserWithAuthParams(string userAuthParamsJson, string synchronizedUsersJson)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            setUserWithAuthParams(userAuthParamsJson, synchronizedUsersJson);
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern void setUserWithAuthParamsAndSetupUI(string userAuthParamsJson, string synchronizedUsersJson);
-#endif
-
-        public static void SetUserWithAuthParamsAndSetupUI(string userAuthParamsJson, string synchronizedUsersJson)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            setUserWithAuthParamsAndSetupUI(userAuthParamsJson, synchronizedUsersJson);
 #endif
         }
 

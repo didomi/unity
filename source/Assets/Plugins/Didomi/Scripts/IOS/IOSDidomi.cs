@@ -298,24 +298,10 @@ namespace IO.Didomi.SDK.IOS
             DidomiFramework.SetUser(userParametersJson);
         }
 
-        public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
-        {
-            string userAuthParamsJson = JsonConvert.SerializeObject(userAuthParams);
-            string synchronizedUsersJson = IOSObjectMapper.ConvertFromUserAuthParamsListToJson(synchronizedUsers);
-            DidomiFramework.SetUserWithAuthParams(userAuthParamsJson, synchronizedUsersJson);
-        }
-
         public void SetUserAndSetupUI(DidomiUserParameters userParameters)
         {
             string userParametersJson = JsonConvert.SerializeObject(userParameters);
             DidomiFramework.SetUserAndSetupUI(userParametersJson);
-        }
-
-        public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
-        {
-            string userAuthParamsJson = JsonConvert.SerializeObject(userAuthParams);
-            string synchronizedUsersJson = IOSObjectMapper.ConvertFromUserAuthParamsListToJson(synchronizedUsers);
-            DidomiFramework.SetUserWithAuthParamsAndSetupUI(userAuthParamsJson, synchronizedUsersJson);
         }
 
         public void ClearUser()
