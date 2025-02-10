@@ -633,7 +633,7 @@ int commitCurrentUserStatusTransaction(
 
 UserAuthParams * ConvertJsonObjectToUserAuthParams(NSDictionary* jsonObject) {
     if (jsonObject == NULL) {
-        return NULL;
+        return nil;
     }
     id _Nullable initializationVector = jsonObject[@"iv"];
     
@@ -710,13 +710,11 @@ id<UserAuth> ConvertJsonToUserAuth(NSDictionary* jsonObject) {
     }
 }
 
-NSArray<UserAuthParams *> * ConvertJsonToUserAuthParamsArray(char* jsonText)
+NSArray<UserAuthParams *> * ConvertJsonArrayToUserAuthParamsArray(NSArray* jsonArray)
 {
-    NSString *jsonString=CreateNSString(jsonText);
-
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+    if (jsonArray == NULL) {
+        return nil;
+    }
 
     NSMutableArray *paramsArray = [NSMutableArray array];
     
@@ -730,19 +728,40 @@ NSArray<UserAuthParams *> * ConvertJsonToUserAuthParamsArray(char* jsonText)
 
 DidomiUserParameters * ConvertJsonObjectToDidomiUserParameters(NSDictionary* jsonObject, UIViewController* _Nullable containerController) {
     id isUnderage = jsonObject[@"isUnderage"];
+    NSArray* synchronizedUsers = jsonObject[@"synchronizedUsers"];
+    BOOL hasMultiUsers = (synchronizedUsers != nil);
     if ([isUnderage isKindOfClass:[NSNumber class]]) {
-        return [[DidomiUserParameters alloc]
-                initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
-                dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
-                containerController: containerController
-                isUnderage: isUnderage
-        ];
+        if (hasMultiUsers) {
+            return [[DidomiMultiUserParameters alloc]
+                    initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
+                    dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
+                    synchronizedUsers: ConvertJsonArrayToUserAuthParamsArray(synchronizedUsers)
+                    containerController: containerController
+                    isUnderage: isUnderage
+            ];
+        } else {
+            return [[DidomiUserParameters alloc]
+                    initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
+                    dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
+                    containerController: containerController
+                    isUnderage: isUnderage
+            ];
+        }
     } else if ([isUnderage isKindOfClass:[NSNull class]] || isUnderage == nil) {
-        return [[DidomiUserParameters alloc]
-                initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
-                dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
-                containerController: containerController
-        ];
+        if (hasMultiUsers) {
+            return [[DidomiMultiUserParameters alloc]
+                    initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
+                    dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
+                    synchronizedUsers: ConvertJsonArrayToUserAuthParamsArray(synchronizedUsers)
+                    containerController: containerController
+            ];
+        } else {
+            return [[DidomiUserParameters alloc]
+                    initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
+                    dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
+                    containerController: containerController
+            ];
+        }
     }
     return nil;
 }
@@ -750,9 +769,8 @@ DidomiUserParameters * ConvertJsonObjectToDidomiUserParameters(NSDictionary* jso
 DidomiUserParameters * ConvertJsonToDidomiUserParameters(NSString* jsonString, UIViewController* _Nullable containerController)
 {
     NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    
     NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
-    
+
     return ConvertJsonObjectToDidomiUserParameters(jsonObject, containerController);
 }
 

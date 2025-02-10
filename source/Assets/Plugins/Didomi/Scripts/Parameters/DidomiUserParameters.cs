@@ -27,7 +27,7 @@ namespace IO.Didomi.SDK
         public UserAuth userAuth { get; }
 
         /// <summary>
-        /// User authentication for Didomi Consent String
+        /// User authentication for Didomi Consent String (optional)
         /// <list type="bullet">
         /// <item>
         /// <description><c>UserAuthWithEncryptionParams</c> (encryption)</description>
@@ -37,13 +37,13 @@ namespace IO.Didomi.SDK
         /// </item>
         /// </list>
         /// </summary>
-        [JsonProperty("dcsUserAuth")]
+        [JsonProperty("dcsUserAuth", NullValueHandling = NullValueHandling.Ignore)]
         public UserAuthParams dcsUserAuth { get; }
 
         /// <summary>
         /// If the user is underage (<c>null</c> will keep the setting from initialization or from a previous call to <c>setUser</c>) 
         /// </summary>
-        [JsonProperty("isUnderage")]
+        [JsonProperty("isUnderage", NullValueHandling = NullValueHandling.Ignore)]
         public bool? isUnderage { get; }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace IO.Didomi.SDK
         /// </list>
         /// </param>
         /// <param name="dcsUserAuth">
-        /// User authentication for Didomi Consent String
+        /// User authentication for Didomi Consent String (optional)
         /// <list type="bullet">
         /// <item>
         /// <description><c>UserAuthWithEncryptionParams</c> (encryption)</description>
@@ -92,7 +92,7 @@ namespace IO.Didomi.SDK
     public class DidomiMultiUserParameters : DidomiUserParameters
     {
         /// <summary>
-        /// List of synchronized users
+        /// List of synchronized users (optional)
         /// <list type="bullet">
         /// <item>
         /// <description><c>UserAuthWithEncryptionParams</c> (encryption)</description>
@@ -102,7 +102,7 @@ namespace IO.Didomi.SDK
         /// </item>
         /// </list>
         /// </summary>
-        [JsonProperty("synchronizedUsers")]
+        [JsonProperty("synchronizedUsers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<UserAuthParams> synchronizedUsers { get; }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace IO.Didomi.SDK
         /// </list>
         /// </param>
         /// <param name="dcsUserAuth">
-        /// User authentication for Didomi Consent String
+        /// User authentication for Didomi Consent String (optional)
         /// <list type="bullet">
         /// <item>
         /// <description><c>UserAuthWithEncryptionParams</c> (encryption)</description>
@@ -134,7 +134,7 @@ namespace IO.Didomi.SDK
         /// </list>
         /// </param>
         /// <param name="synchronizedUsers">
-        /// List of synchronized users
+        /// List of synchronized users (optional)
         /// <list type="bullet">
         /// <item>
         /// <description><c>UserAuthWithEncryptionParams</c> (encryption)</description>

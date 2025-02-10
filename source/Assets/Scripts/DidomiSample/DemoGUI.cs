@@ -313,14 +313,17 @@ public class DemoGUI : MonoBehaviour
         if (GUI.Button(GetFuncRect1(), "SetUser with id + setupUI"))
         {
             message = string.Empty;
-            Didomi.GetInstance().SetUserAndSetupUI("vwxyz");
+            DidomiUserParameters parameters = new DidomiUserParameters(new UserAuthWithoutParams("abcd"));
+            Didomi.GetInstance().SetUserAndSetupUI(parameters);
             message += "Calling SetUser with id";
         }
 
         if (GUI.Button(GetFuncRect2(), "SetUser with Hash"))
         {
             message = string.Empty;
-            UserAuthParams parameters = new UserAuthWithHashParams("abcd", "algorithm", "secret", "digest", "salt", 3600000L);
+            DidomiUserParameters parameters = new DidomiUserParameters(
+                userAuth: new UserAuthWithHashParams("abcd", "algorithm", "secret", "digest", "salt", 3600000L)
+            );
             Didomi.GetInstance().SetUser(parameters);
             message += "Calling SetUser with Hash params";
         }
@@ -328,9 +331,27 @@ public class DemoGUI : MonoBehaviour
         if (GUI.Button(GetFuncRect3(), "SetUser with encryption"))
         {
             message = string.Empty;
-            UserAuthParams parameters = new UserAuthWithEncryptionParams("efgh", "algorithm", "secret", "vector");
+            DidomiUserParameters parameters = new DidomiUserParameters(
+                userAuth: new UserAuthWithEncryptionParams("efgh", "algorithm", "secret", "vector"),
+                isUnderage: true
+            );
             Didomi.GetInstance().SetUser(parameters);
             message += "Calling SetUser with Encryption params";
+        }
+
+        if (GUI.Button(GetFuncRect4(), "SetUser - All params"))
+        {
+            message = string.Empty;
+            DidomiUserParameters parameters = new DidomiMultiUserParameters(
+                userAuth: new UserAuthWithEncryptionParams("efgh", "algorithm", "secret", "vector"),
+                dcsUserAuth: new UserAuthWithEncryptionParams("ijkl", "algorithm", "secret", "vector"),
+                synchronizedUsers: new List<UserAuthParams> {
+                    new UserAuthWithEncryptionParams("mnop", "algorithm", "secret", "vector")
+                },
+                isUnderage: false
+            );
+            Didomi.GetInstance().SetUser(parameters);
+            message += "Calling SetUser with All params";
         }
     }
 

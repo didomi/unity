@@ -3,7 +3,6 @@ using IO.Didomi.SDK.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace IO.Didomi.SDK.IOS
 {
@@ -41,9 +40,7 @@ namespace IO.Didomi.SDK.IOS
 
         public Vendor GetVendor(string vendorId)
         {
-            Debug.Log("!!!! => GetVendor: " + vendorId);
             var jsonText = DidomiFramework.GetVendor(vendorId);
-            Debug.Log("!!!! => Vendor OK: " + jsonText);
 
             return IOSObjectMapper.ConvertToVendor(jsonText);
         }
