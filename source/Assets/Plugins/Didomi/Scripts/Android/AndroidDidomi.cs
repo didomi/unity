@@ -369,31 +369,38 @@ namespace IO.Didomi.SDK.Android
 
         public void SetUser(DidomiUserParameters userParameters)
         {
-            CallVoidMethod("setUser", userParameters);
-        }
-
-        public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
-        {
-            AndroidJavaObject nativeUserAuthParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
-            AndroidJavaObject nativeSynchronizedUsersParams = AndroidObjectMapper.ConvertToJavaUserAuthList(synchronizedUsers);
-            CallVoidMethod("setUser", nativeUserAuthParams, nativeSynchronizedUsersParams);
+            CallSetUser(userParameters, null);
         }
 
         public void SetUserAndSetupUI(DidomiUserParameters userParameters)
         {
-            CallVoidMethodWithActivityLastArg("setUser", userParameters);
+            using (var playerClass = new AndroidJavaClass(UnityPlayerFullClassName))
+            {
+                using (var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity"))
+                {
+                    CallSetUser(userParameters, activity);
+                }
+            }
         }
 
-        public void SetUserAndSetupUI(string organizationUserId)
+        private void CallSetUser(DidomiUserParameters userParameters, AndroidJavaObject activity)
         {
-            CallVoidMethodWithActivityLastArg("setUser", organizationUserId);
-        }
+            if (userParameters is DidomiMultiUserParameters)
+            {
+                // TODO: Can be removed when Android object constructor with List is available
+                DidomiMultiUserParameters multiUserParameters = (DidomiMultiUserParameters)userParameters;
+                AndroidJavaObject userAuth = AndroidObjectMapper.ConvertToJavaUserAuth(multiUserParameters.UserAuth);
+                AndroidJavaObject dcsUserAuth = AndroidObjectMapper.ConvertToJavaUserAuthParams(multiUserParameters.DcsUserAuth);
+                AndroidJavaObject synchronizedUsers = AndroidObjectMapper.ConvertToJavaUserAuthList(multiUserParameters.SynchronizedUsers);
+                var isUnderage = AndroidObjectMapper.ConvertToBooleanAndroidJavaObject(multiUserParameters.IsUnderage);
 
-        public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
-        {
-            AndroidJavaObject nativeUserAuthParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
-            AndroidJavaObject nativeSynchronizedUsersParams = AndroidObjectMapper.ConvertToJavaUserAuthList(synchronizedUsers);
-            CallVoidMethodWithActivityLastArg("setUser", nativeUserAuthParams, nativeSynchronizedUsersParams);
+                CallVoidMethod("setUser", userAuth, synchronizedUsers, activity, isUnderage, dcsUserAuth);
+            }
+            else 
+            {
+                AndroidJavaObject parameters = AndroidObjectMapper.ConvertToJavaDidomiUserParameters(userParameters, activity);
+                CallVoidMethod("setUser", parameters);
+            }
         }
 
         public void ClearUser()

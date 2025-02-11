@@ -892,7 +892,6 @@ namespace IO.Didomi.SDK.IOS
 
         public static void SetUser(string userParametersJson)
         {
-            Debug.Log("!!!! User : "+userParametersJson);
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
             setUser(userParametersJson);
 #endif
@@ -905,7 +904,6 @@ namespace IO.Didomi.SDK.IOS
 
         public static void SetUserAndSetupUI(string userParametersJson)
         {
-                Debug.Log("!!!! User : "+userParametersJson);
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
             setUserAndSetupUI(userParametersJson);
 #endif

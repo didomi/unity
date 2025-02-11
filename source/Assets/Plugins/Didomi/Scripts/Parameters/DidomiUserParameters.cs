@@ -24,7 +24,7 @@ namespace IO.Didomi.SDK
         /// </list>
         /// </summary>
         [JsonProperty("userAuth")]
-        public UserAuth userAuth { get; }
+        public UserAuth UserAuth { get; }
 
         /// <summary>
         /// User authentication for Didomi Consent String (optional)
@@ -38,13 +38,13 @@ namespace IO.Didomi.SDK
         /// </list>
         /// </summary>
         [JsonProperty("dcsUserAuth", NullValueHandling = NullValueHandling.Ignore)]
-        public UserAuthParams dcsUserAuth { get; }
+        public UserAuthParams DcsUserAuth { get; }
 
         /// <summary>
         /// If the user is underage (<c>null</c> will keep the setting from initialization or from a previous call to <c>setUser</c>) 
         /// </summary>
         [JsonProperty("isUnderage", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? isUnderage { get; }
+        public bool? IsUnderage { get; }
 
         /// <summary>
         /// User parameters for Didomi SDK
@@ -80,9 +80,9 @@ namespace IO.Didomi.SDK
             UserAuthParams dcsUserAuth = null,
             bool? isUnderage = null
         ) {
-            this.userAuth = userAuth;
-            this.dcsUserAuth = dcsUserAuth;
-            this.isUnderage = isUnderage;
+            this.UserAuth = userAuth;
+            this.DcsUserAuth = dcsUserAuth;
+            this.IsUnderage = isUnderage;
         }
     }
 
@@ -103,7 +103,7 @@ namespace IO.Didomi.SDK
         /// </list>
         /// </summary>
         [JsonProperty("synchronizedUsers", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<UserAuthParams> synchronizedUsers { get; }
+        public IList<UserAuthParams> SynchronizedUsers { get; }
 
         /// <summary>
         /// Multi-User parameters for Didomi SDK
@@ -151,7 +151,7 @@ namespace IO.Didomi.SDK
             IList<UserAuthParams> synchronizedUsers = null,
             bool? isUnderage = null
         ) : base(userAuth, dcsUserAuth, isUnderage) {
-            this.synchronizedUsers = synchronizedUsers;
+            this.SynchronizedUsers = synchronizedUsers;
         }
     }
 }
