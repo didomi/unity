@@ -683,25 +683,7 @@ UserAuthParams * ConvertJsonObjectToUserAuthParams(NSDictionary* jsonObject) {
     }
 }
 
-UserAuthParams * ConvertJsonToUserAuthParams(NSString* jsonString)
-{
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
-    
-    return ConvertJsonObjectToUserAuthParams(jsonObject);
-}
-
 id<UserAuth> ConvertJsonObjectToUserAuth(NSDictionary* jsonObject) {
-    id _Nullable algorithm = jsonObject[@"algorithm"];
-    if (algorithm == NULL) {
-        return [[UserAuthWithoutParams alloc] initWithId: jsonObject[@"id"]];
-    } else {
-        return ConvertJsonObjectToUserAuthParams(jsonObject);
-    }
-}
-
-id<UserAuth> ConvertJsonToUserAuth(NSDictionary* jsonObject) {
     id _Nullable algorithm = jsonObject[@"algorithm"];
     if (algorithm == NULL) {
         return [[UserAuthWithoutParams alloc] initWithId: jsonObject[@"id"]];
