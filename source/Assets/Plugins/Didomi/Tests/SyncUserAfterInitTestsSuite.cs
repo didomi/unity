@@ -3,7 +3,6 @@ using NUnit.Framework;
 using UnityEngine.TestTools;
 using IO.Didomi.SDK;
 using System.Collections.Generic;
-using NUnit.Framework.Constraints;
 using System;
 
 /// <summary>

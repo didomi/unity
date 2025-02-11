@@ -374,33 +374,15 @@ namespace IO.Didomi.SDK.Android
 
         public void SetUserAndSetupUI(DidomiUserParameters userParameters)
         {
-            using (var playerClass = new AndroidJavaClass(UnityPlayerFullClassName))
-            {
-                using (var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity"))
-                {
-                    CallSetUser(userParameters, activity);
-                }
-            }
+            using var playerClass = new AndroidJavaClass(UnityPlayerFullClassName);
+            using var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity");
+            CallSetUser(userParameters, activity);
         }
 
         private void CallSetUser(DidomiUserParameters userParameters, AndroidJavaObject activity)
         {
-            if (userParameters is DidomiMultiUserParameters)
-            {
-                // TODO: Can be removed when Android object constructor with List is available
-                DidomiMultiUserParameters multiUserParameters = (DidomiMultiUserParameters)userParameters;
-                AndroidJavaObject userAuth = AndroidObjectMapper.ConvertToJavaUserAuth(multiUserParameters.UserAuth);
-                AndroidJavaObject dcsUserAuth = AndroidObjectMapper.ConvertToJavaUserAuthParams(multiUserParameters.DcsUserAuth);
-                AndroidJavaObject synchronizedUsers = AndroidObjectMapper.ConvertToJavaUserAuthList(multiUserParameters.SynchronizedUsers);
-                var isUnderage = AndroidObjectMapper.ConvertToBooleanAndroidJavaObject(multiUserParameters.IsUnderage);
-
-                CallVoidMethod("setUser", userAuth, synchronizedUsers, activity, isUnderage, dcsUserAuth);
-            }
-            else 
-            {
-                AndroidJavaObject parameters = AndroidObjectMapper.ConvertToJavaDidomiUserParameters(userParameters, activity);
-                CallVoidMethod("setUser", parameters);
-            }
+            AndroidJavaObject parameters = AndroidObjectMapper.ConvertToJavaDidomiUserParameters(userParameters, activity);
+            CallVoidMethod("setUser", parameters);
         }
 
         public void ClearUser()
@@ -528,30 +510,24 @@ namespace IO.Didomi.SDK.Android
         {
             try
             {
-                using (var playerClass = new AndroidJavaClass(UnityPlayerFullClassName))
+                using var playerClass = new AndroidJavaClass(UnityPlayerFullClassName);
+                using var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity");
+                using var _pluginClass = new AndroidJavaClass(PluginName);
+                var application = activity.Call<AndroidJavaObject>("getApplication");
+
+                var pluginInstance = _pluginClass.CallStatic<AndroidJavaObject>("getInstance");
+
+                MapNullValuesToJava(args);
+
+                var obj = new object[args.Length + 1];
+
+                for (int i = 1; i < obj.Length; i++)
                 {
-                    using (var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity"))
-                    {
-                        using (var _pluginClass = new AndroidJavaClass(PluginName))
-                        {
-                            var application = activity.Call<AndroidJavaObject>("getApplication");
-                            
-                            var pluginInstance = _pluginClass.CallStatic<AndroidJavaObject>("getInstance");
-
-                            MapNullValuesToJava(args);
-
-                            var obj = new object[args.Length + 1];
-
-                            for (int i = 1; i < obj.Length; i++)
-                            {
-                                obj[i] = args[i - 1];
-                            }
-
-                            obj[0] = application;
-                            pluginInstance.Call(methodName, obj);
-                        }
-                    }
+                    obj[i] = args[i - 1];
                 }
+
+                obj[0] = application;
+                pluginInstance.Call(methodName, obj);
             }
             catch (Exception ex)
             {
