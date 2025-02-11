@@ -46,7 +46,7 @@ public class AAABeforeSDKInitTestsSuite : SyncUserBaseTests
     /// Tests related to user status synchronization between platforms before SDK was initialized
     public IEnumerator TestSyncBeforeInit()
     {
-        Didomi.GetInstance().SetUser(testUserId);
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(new UserAuthWithoutParams(testUserId)));
         yield return LoadSdk();
         yield return ExpectSyncSuccess("Set user before initialization", true, true, !sdkWasReady);
     }

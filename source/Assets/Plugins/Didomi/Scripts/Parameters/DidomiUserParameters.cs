@@ -80,7 +80,7 @@ namespace IO.Didomi.SDK
             UserAuthParams dcsUserAuth = null,
             bool? isUnderage = null
         ) {
-            this.UserAuth = userAuth;
+            this.UserAuth = userAuth ?? throw new ArgumentNullException(nameof(userAuth));
             this.DcsUserAuth = dcsUserAuth;
             this.IsUnderage = isUnderage;
         }
