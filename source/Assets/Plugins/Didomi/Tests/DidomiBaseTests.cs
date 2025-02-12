@@ -42,7 +42,8 @@ public abstract class DidomiBaseTests
         string languageCode = null,
         string noticeId = "Ar7NPQ72",
         string countryCode = null,
-        string regionCode = null
+        string regionCode = null,
+        bool isUnderage = false
     )
     {
         Didomi didomi = Didomi.GetInstance();
@@ -60,7 +61,8 @@ public abstract class DidomiBaseTests
                 languageCode: languageCode,
                 noticeId: noticeId,
                 countryCode: countryCode,
-                regionCode: regionCode
+                regionCode: regionCode,
+                isUnderage: isUnderage
             ));
         }
         catch (Exception ex)

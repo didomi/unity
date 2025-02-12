@@ -289,28 +289,16 @@ namespace IO.Didomi.SDK.IOS
             DidomiFramework.UpdateSelectedLanguage(languageCode);
         }
 
-        public void SetUser(string organizationUserId)
+        public void SetUser(DidomiUserParameters userParameters)
         {
-            DidomiFramework.SetUser(organizationUserId);
+            string userParametersJson = JsonConvert.SerializeObject(userParameters);
+            DidomiFramework.SetUser(userParametersJson);
         }
 
-        public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
+        public void SetUserAndSetupUI(DidomiUserParameters userParameters)
         {
-            string userAuthParamsJson = JsonConvert.SerializeObject(userAuthParams);
-            string synchronizedUsersJson = IOSObjectMapper.ConvertFromUserAuthParamsListToJson(synchronizedUsers);
-            DidomiFramework.SetUserWithAuthParams(userAuthParamsJson, synchronizedUsersJson);
-        }
-
-        public void SetUserAndSetupUI(string organizationUserId)
-        {
-            DidomiFramework.SetUserAndSetupUI(organizationUserId);
-        }
-
-        public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
-        {
-            string userAuthParamsJson = JsonConvert.SerializeObject(userAuthParams);
-            string synchronizedUsersJson = IOSObjectMapper.ConvertFromUserAuthParamsListToJson(synchronizedUsers);
-            DidomiFramework.SetUserWithAuthParamsAndSetupUI(userAuthParamsJson, synchronizedUsersJson);
+            string userParametersJson = JsonConvert.SerializeObject(userParameters);
+            DidomiFramework.SetUserAndSetupUI(userParametersJson);
         }
 
         public void ClearUser()

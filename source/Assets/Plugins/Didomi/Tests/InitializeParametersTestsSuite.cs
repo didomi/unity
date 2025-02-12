@@ -47,4 +47,12 @@ public class InitializeParametersTestsSuite: DidomiBaseTests
 
         Assert.AreEqual("none", Didomi.GetInstance().GetCurrentUserStatus().Regulation);
     }
+
+    [UnityTest]
+    public IEnumerator TestWithIsUnderage()
+    {
+        yield return LoadSdk(noticeId: noticeId, isUnderage: true);
+
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
+    }
 }

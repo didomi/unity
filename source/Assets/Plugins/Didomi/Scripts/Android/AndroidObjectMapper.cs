@@ -157,6 +157,16 @@ namespace IO.Didomi.SDK.Android
             return null;
         }
 
+        public static AndroidJavaObject ConvertToBooleanAndroidJavaObject(bool? obj) 
+        {
+            if (obj != null)
+            {
+                return new AndroidJavaObject("java.lang.Boolean", obj);
+            }
+
+            return null;
+        }
+
         public static IDictionary<string, string> ConvertToDictionary(AndroidJavaObject obj)
         {
             if (obj != null)
@@ -420,11 +430,57 @@ namespace IO.Didomi.SDK.Android
                     parameters.tvNoticeId,
                     parameters.androidTvEnabled,
                     parameters.countryCode,
-                    parameters.regionCode);
+                    parameters.regionCode,
+                    parameters.isUnderage);
+        }
+
+        public static AndroidJavaObject ConvertToJavaDidomiUserParameters(DidomiUserParameters parameters, AndroidJavaObject activity) {
+            var isUnderage = ConvertToBooleanAndroidJavaObject(parameters.IsUnderage);
+            if (parameters is DidomiMultiUserParameters)
+            {
+                DidomiMultiUserParameters multiUserParameters = (DidomiMultiUserParameters)parameters;
+                return new AndroidJavaObject(
+                    "io.didomi.sdk.DidomiMultiUserParameters",
+                    ConvertToJavaUserAuth(multiUserParameters.UserAuth),
+                    ConvertToJavaUserAuthParams(multiUserParameters.DcsUserAuth),
+                    ConvertToJavaUserAuthList(multiUserParameters.SynchronizedUsers),
+                    activity,
+                    isUnderage);
+            }
+            else
+            {
+                return new AndroidJavaObject(
+                    "io.didomi.sdk.DidomiUserParameters",
+                    ConvertToJavaUserAuth(parameters.UserAuth),
+                    ConvertToJavaUserAuthParams(parameters.DcsUserAuth),
+                    activity,
+                    isUnderage);
+            }
+        }
+
+        public static AndroidJavaObject ConvertToJavaUserAuth(UserAuth parameters)
+        {
+            if (parameters == null)
+            {
+                return null;
+            }
+            
+            if (parameters is UserAuthWithoutParams) {
+                return new AndroidJavaObject(
+                    "io.didomi.sdk.user.model.UserAuthWithoutParams",
+                    parameters.Id);
+            } else {
+                return ConvertToJavaUserAuthParams((UserAuthParams) parameters);
+            }
         }
 
         public static AndroidJavaObject ConvertToJavaUserAuthParams(UserAuthParams parameters)
         {
+            if (parameters == null)
+            {
+                return null;
+            }
+
             AndroidJavaObject expiration = ConvertToJavaLong(parameters.Expiration);
             if (parameters is UserAuthWithEncryptionParams)
             {
@@ -451,22 +507,22 @@ namespace IO.Didomi.SDK.Android
 
         public static AndroidJavaObject ConvertToJavaUserAuthList(IList<UserAuthParams> userAuthParams)
         {
-            if (userAuthParams != null)
+            if (userAuthParams == null)
             {
-                var arrayListJavaObject = new AndroidJavaObject("java.util.ArrayList");
-
-                foreach (var item in userAuthParams)
-                {
-
-                    var itemJavaObject = ConvertToJavaUserAuthParams(item);
-
-                    arrayListJavaObject.Call<bool>("add", itemJavaObject);
-                }
-
-                return arrayListJavaObject;
+                return null;
             }
 
-            return null;
+            var arrayListJavaObject = new AndroidJavaObject("java.util.ArrayList");
+
+            foreach (var item in userAuthParams)
+            {
+
+                var itemJavaObject = ConvertToJavaUserAuthParams(item);
+
+                arrayListJavaObject.Call<bool>("add", itemJavaObject);
+            }
+
+            return arrayListJavaObject;
         }
 
         public static AndroidJavaObject ConvertToJavaCurrentUserStatus(CurrentUserStatus status)

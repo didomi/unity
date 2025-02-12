@@ -302,7 +302,7 @@ void setUserAgent(char* name, char* version)
     [[Didomi shared] setUserAgentWithName: CreateNSString(name) version:CreateNSString(version)];
 }
 
-void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId, char* countryCode, char* regionCode)
+void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId, char* countryCode, char* regionCode, bool isUnderage)
 {
     DidomiInitializeParameters *parameters = [[DidomiInitializeParameters alloc]
         initWithApiKey: CreateNSString(apiKey)
@@ -314,7 +314,7 @@ void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* 
         noticeID: CreateNSStringNullable(noticeId)
         countryCode: CreateNSStringNullable(countryCode)
         regionCode: CreateNSStringNullable(regionCode)
-        isUnderage: false
+        isUnderage: isUnderage
     ];
     [[Didomi shared] initialize: parameters];
 }
@@ -631,18 +631,10 @@ int commitCurrentUserStatusTransaction(
     return convertBoolToInt(result);
 }
 
-void setUser(char* organizationUserId)
-{
-    return [[Didomi shared] setUserWithId: CreateNSString(organizationUserId)];
-}
-
-void setUserAndSetupUI(char* organizationUserId)
-{
-    return [[Didomi shared] setUserWithId: CreateNSString(organizationUserId)
-        containerController: UnityGetGLViewController()];
-}
-
 UserAuthParams * ConvertJsonObjectToUserAuthParams(NSDictionary* jsonObject) {
+    if (jsonObject == NULL) {
+        return nil;
+    }
     id _Nullable initializationVector = jsonObject[@"iv"];
     
     id expiration = jsonObject[@"expiration"];
@@ -691,22 +683,20 @@ UserAuthParams * ConvertJsonObjectToUserAuthParams(NSDictionary* jsonObject) {
     }
 }
 
-UserAuthParams * ConvertJsonToUserAuthParams(NSString* jsonString)
-{
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
-    
-    return ConvertJsonObjectToUserAuthParams(jsonObject);
+id<UserAuth> ConvertJsonObjectToUserAuth(NSDictionary* jsonObject) {
+    id _Nullable algorithm = jsonObject[@"algorithm"];
+    if (algorithm == NULL) {
+        return [[UserAuthWithoutParams alloc] initWithId: jsonObject[@"id"]];
+    } else {
+        return ConvertJsonObjectToUserAuthParams(jsonObject);
+    }
 }
 
-NSArray<UserAuthParams *> * ConvertJsonToUserAuthParamsArray(char* jsonText)
+NSArray<UserAuthParams *> * ConvertJsonArrayToUserAuthParamsArray(NSArray* jsonArray)
 {
-    NSString *jsonString=CreateNSString(jsonText);
-
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+    if (jsonArray == NULL) {
+        return nil;
+    }
 
     NSMutableArray *paramsArray = [NSMutableArray array];
     
@@ -718,32 +708,64 @@ NSArray<UserAuthParams *> * ConvertJsonToUserAuthParamsArray(char* jsonText)
     return paramsArray;
 }
 
-
-void setUserWithAuthParams(char* userAuthParamsJson, char* synchronizedUsersJson)
-{
-    UserAuthParams *userAuthParameters = ConvertJsonToUserAuthParams(CreateNSString(userAuthParamsJson));
-    if (synchronizedUsersJson != NULL) {
-        NSArray<UserAuthParams *> * synchronizedUsers = ConvertJsonToUserAuthParamsArray(synchronizedUsersJson);
-        [[Didomi shared] setUserWithUserAuthParams:userAuthParameters
-            synchronizedUsers: synchronizedUsers];
-    } else {
-        [[Didomi shared] setUserWithUserAuthParams:userAuthParameters];
+DidomiUserParameters * ConvertJsonObjectToDidomiUserParameters(NSDictionary* jsonObject, UIViewController* _Nullable containerController) {
+    id isUnderage = jsonObject[@"isUnderage"];
+    NSArray* synchronizedUsers = jsonObject[@"synchronizedUsers"];
+    BOOL hasMultiUsers = (synchronizedUsers != nil);
+    if ([isUnderage isKindOfClass:[NSNumber class]]) {
+        if (hasMultiUsers) {
+            return [[DidomiMultiUserParameters alloc]
+                    initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
+                    dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
+                    synchronizedUsers: ConvertJsonArrayToUserAuthParamsArray(synchronizedUsers)
+                    containerController: containerController
+                    isUnderage: isUnderage
+            ];
+        } else {
+            return [[DidomiUserParameters alloc]
+                    initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
+                    dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
+                    containerController: containerController
+                    isUnderage: isUnderage
+            ];
+        }
+    } else if ([isUnderage isKindOfClass:[NSNull class]] || isUnderage == nil) {
+        if (hasMultiUsers) {
+            return [[DidomiMultiUserParameters alloc]
+                    initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
+                    dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
+                    synchronizedUsers: ConvertJsonArrayToUserAuthParamsArray(synchronizedUsers)
+                    containerController: containerController
+            ];
+        } else {
+            return [[DidomiUserParameters alloc]
+                    initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
+                    dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
+                    containerController: containerController
+            ];
+        }
     }
+    return nil;
 }
 
-void setUserWithAuthParamsAndSetupUI(char* userAuthParamsJson, char* synchronizedUsersJson)
+DidomiUserParameters * ConvertJsonToDidomiUserParameters(NSString* jsonString, UIViewController* _Nullable containerController)
 {
-    UserAuthParams *userAuthParameters = ConvertJsonToUserAuthParams(CreateNSString(userAuthParamsJson));
-    
-    if (synchronizedUsersJson != NULL) {
-        NSArray<UserAuthParams *> * synchronizedUsers = ConvertJsonToUserAuthParamsArray(synchronizedUsersJson);
-        [[Didomi shared] setUserWithUserAuthParams:userAuthParameters
-            synchronizedUsers: synchronizedUsers
-            containerController: UnityGetGLViewController()];
-    } else {
-        [[Didomi shared] setUserWithUserAuthParams:userAuthParameters
-                               containerController: UnityGetGLViewController()];
-    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+
+    return ConvertJsonObjectToDidomiUserParameters(jsonObject, containerController);
+}
+
+void setUser(char* userParametersJson)
+{
+    DidomiUserParameters* userParameters = ConvertJsonToDidomiUserParameters(CreateNSString(userParametersJson), nil);
+    [[Didomi shared] setUser:userParameters];
+}
+
+void setUserAndSetupUI(char* userParametersJson)
+{
+    DidomiUserParameters* userParameters = ConvertJsonToDidomiUserParameters(CreateNSString(userParametersJson), UnityGetGLViewController());
+    [[Didomi shared] setUser:userParameters];
 }
 
 void clearUser()

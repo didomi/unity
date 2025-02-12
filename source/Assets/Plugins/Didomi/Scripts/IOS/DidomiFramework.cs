@@ -63,7 +63,8 @@ namespace IO.Didomi.SDK.IOS
                 string languageCode,
                 string noticeId,
                 string countryCode,
-                string regionCode
+                string regionCode,
+                bool isUnderage
         );
 #endif
 
@@ -79,7 +80,8 @@ namespace IO.Didomi.SDK.IOS
                 initializeParameters.languageCode,
                 initializeParameters.noticeId,
                 initializeParameters.countryCode,
-                initializeParameters.regionCode
+                initializeParameters.regionCode,
+                initializeParameters.isUnderage
                 );
 #endif
         }
@@ -885,49 +887,25 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void setUser(string organizationUserId);
+        private static extern void setUser(string userParametersJson);
 #endif
 
-        public static void SetUser(string organizationUserId)
+        public static void SetUser(string userParametersJson)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            setUser(organizationUserId);
+            setUser(userParametersJson);
 #endif
         }
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void setUserAndSetupUI(string organizationUserId);
+        private static extern void setUserAndSetupUI(string userParametersJson);
 #endif
 
-        public static void SetUserAndSetupUI(string organizationUserId)
+        public static void SetUserAndSetupUI(string userParametersJson)
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            setUserAndSetupUI(organizationUserId);
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern void setUserWithAuthParams(string userAuthParamsJson, string synchronizedUsersJson);
-#endif
-
-        public static void SetUserWithAuthParams(string userAuthParamsJson, string synchronizedUsersJson)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            setUserWithAuthParams(userAuthParamsJson, synchronizedUsersJson);
-#endif
-        }
-
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-        [DllImport("__Internal")]
-        private static extern void setUserWithAuthParamsAndSetupUI(string userAuthParamsJson, string synchronizedUsersJson);
-#endif
-
-        public static void SetUserWithAuthParamsAndSetupUI(string userAuthParamsJson, string synchronizedUsersJson)
-        {
-#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            setUserWithAuthParamsAndSetupUI(userAuthParamsJson, synchronizedUsersJson);
+            setUserAndSetupUI(userParametersJson);
 #endif
         }
 

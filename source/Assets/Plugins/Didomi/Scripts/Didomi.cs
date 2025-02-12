@@ -600,9 +600,11 @@ namespace IO.Didomi.SDK
         /// Set custom user information from organization
         /// </summary>
         /// <param name="organizationUserId">Organization user id</param>
+        [ObsoleteAttribute("Use SetUser with DidomiUserParameters instead.")]
         public void SetUser(string organizationUserId)
         {
-            didomiForPlatform.SetUser(organizationUserId);
+            var userParameters = new DidomiUserParameters(new UserAuthWithoutParams(organizationUserId));
+            didomiForPlatform.SetUser(userParameters);
         }
 
         /// <summary>
@@ -610,18 +612,25 @@ namespace IO.Didomi.SDK
         /// </summary>
         /// <param name="userAuthParams">Parameters to synchronize the user consent</param>
         /// <param name="synchronizedUsers">Additional users to synchronize, should be <c>null</c> in most cases</param>
+        [ObsoleteAttribute("Use SetUser with DidomiUserParameters instead.")]
         public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers = null)
         {
-            didomiForPlatform.SetUser(userAuthParams, synchronizedUsers);
+            var userParameters = new DidomiMultiUserParameters(
+                userAuth: userAuthParams, 
+                synchronizedUsers: synchronizedUsers
+            );
+            didomiForPlatform.SetUser(userParameters);
         }
 
         /// <summary>
         /// Set custom user information from organization, and call setupUI after synchronization if sdk was initialized
         /// </summary>
         /// <param name="organizationUserId">Organization user id</param>
+        [ObsoleteAttribute("Use SetUserAndSetupUI with DidomiUserParameters instead.")]
         public void SetUserAndSetupUI(string organizationUserId)
         {
-            didomiForPlatform.SetUserAndSetupUI(organizationUserId);
+            var userParameters = new DidomiUserParameters(new UserAuthWithoutParams(organizationUserId));
+            didomiForPlatform.SetUserAndSetupUI(userParameters);
         }
 
         /// <summary>
@@ -629,9 +638,32 @@ namespace IO.Didomi.SDK
         /// </summary>
         /// <param name="userAuthParams">Parameters to synchronize the user consent</param>
         /// <param name="synchronizedUsers">Additional users to synchronize, should be <c>null</c> in most cases</param>
+        [ObsoleteAttribute("Use SetUserAndSetupUI with DidomiUserParameters instead.")]
         public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers = null)
         {
-            didomiForPlatform.SetUserAndSetupUI(userAuthParams, synchronizedUsers);
+            var userParameters = new DidomiMultiUserParameters(
+                userAuth: userAuthParams, 
+                synchronizedUsers: synchronizedUsers
+            );
+            didomiForPlatform.SetUserAndSetupUI(userParameters);
+        }
+
+        /// <summary>
+        /// Set custom user information from organization
+        /// </summary>
+        /// <param name="userParameters">The user parameters</param>
+        public void SetUser(DidomiUserParameters userParameters)
+        {
+            didomiForPlatform.SetUser(userParameters);
+        }
+
+        /// <summary>
+        /// Set custom user information from organization, and call setupUI after synchronization if sdk was initialized
+        /// </summary>
+        /// <param name="userParameters">The user parameters</param>
+        public void SetUserAndSetupUI(DidomiUserParameters userParameters)
+        {
+            didomiForPlatform.SetUserAndSetupUI(userParameters);
         }
 
         /// <summary>

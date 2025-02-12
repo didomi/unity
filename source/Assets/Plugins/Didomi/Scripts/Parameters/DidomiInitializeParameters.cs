@@ -48,9 +48,10 @@ namespace IO.Didomi.SDK
         public string noticeId { get; }
 
         /// <summary>
-        /// ID of the notice configuration to load on TV devices if you are not using app ID targeting.
-        /// If <c>androidTvEnabled</c> is true and SDK is launched on a TV device, this parameter will be used instead of <c>noticeId</c>
+        /// ID of the notice configuration to load on AndroidTV devices if you are not using app ID targeting.
+        /// If <c>androidTvEnabled</c> is true and SDK is launched on a AndroidTV device, this parameter will be used instead of <c>noticeId</c>
         /// to get configuration from console.
+        /// This parameter is ignored on iOS / tvOS.
         /// </summary>
         public string tvNoticeId { get; }
 
@@ -73,6 +74,11 @@ namespace IO.Didomi.SDK
         public string regionCode { get; }
 
         /// <summary>
+        /// If set to true, the SDK will only display the underage notice (false by default).
+        /// </summary>
+        public bool isUnderage { get; }
+
+        /// <summary>
         /// Initialization parameters for Didomi SDK
         /// </summary>
         /// <param name="apiKey">Your API key.</param>
@@ -85,7 +91,7 @@ namespace IO.Didomi.SDK
         /// By default, the consent UI is displayed in the language configured in the device settings, if language is available and enabled by your configuration.
         /// This property allows you to override the default setting and specify a language to display the UI in.
         /// String containing the language code e.g.: "es", "fr", etc.</param>
-        /// <param name="noticeId">ID of the notice configuration to load if your are not using app ID targeting(mobile devices and tvOS).</param>
+        /// <param name="noticeId">ID of the notice configuration to load if your are not using app ID targeting (mobile devices and tvOS).</param>
         /// <param name="tvNoticeId">ID of the notice configuration to load on AndroidTV devices if you are not using app ID targeting.</param>
         /// <param name="androidTvEnabled">If set to <c>true</c>, when launched on a AndroidTV device, the SDK will display TV notice:
         /// <list type="bullet">
@@ -102,6 +108,7 @@ namespace IO.Didomi.SDK
         /// <param name="regionCode">Override user region code when determining the privacy regulation to apply.
         /// Keep null to let the Didomi SDK determine the user region.
         /// Ignored if countryCode is not set.</param>
+        /// <param name="isUnderage">If set to true, the SDK will only display the underage notice (false by default).</param>
         public DidomiInitializeParameters(
             string apiKey,
             string localConfigurationPath = null,
@@ -113,7 +120,8 @@ namespace IO.Didomi.SDK
             string tvNoticeId = null,
             bool androidTvEnabled = false,
             string countryCode = null,
-            string regionCode = null
+            string regionCode = null,
+            bool isUnderage = false
         ) {
             this.apiKey = apiKey;
             this.localConfigurationPath = localConfigurationPath;
@@ -126,6 +134,7 @@ namespace IO.Didomi.SDK
             this.androidTvEnabled = androidTvEnabled;
             this.countryCode = countryCode;
             this.regionCode = regionCode;
+            this.isUnderage = isUnderage;
         }
     }
 }

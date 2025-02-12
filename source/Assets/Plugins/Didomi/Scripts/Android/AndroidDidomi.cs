@@ -367,28 +367,22 @@ namespace IO.Didomi.SDK.Android
             CallVoidMethod("updateSelectedLanguage", languageCode);
         }
 
-        public void SetUser(string organizationUserId)
+        public void SetUser(DidomiUserParameters userParameters)
         {
-            CallVoidMethod("setUser", organizationUserId);
+            CallSetUser(userParameters, null);
         }
 
-        public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
+        public void SetUserAndSetupUI(DidomiUserParameters userParameters)
         {
-            AndroidJavaObject nativeUserAuthParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
-            AndroidJavaObject nativeSynchronizedUsersParams = AndroidObjectMapper.ConvertToJavaUserAuthList(synchronizedUsers);
-            CallVoidMethod("setUser", nativeUserAuthParams, nativeSynchronizedUsersParams);
+            using var playerClass = new AndroidJavaClass(UnityPlayerFullClassName);
+            using var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity");
+            CallSetUser(userParameters, activity);
         }
 
-        public void SetUserAndSetupUI(string organizationUserId)
+        private void CallSetUser(DidomiUserParameters userParameters, AndroidJavaObject activity)
         {
-            CallVoidMethodWithActivityLastArg("setUser", organizationUserId);
-        }
-
-        public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
-        {
-            AndroidJavaObject nativeUserAuthParams = AndroidObjectMapper.ConvertToJavaUserAuthParams(userAuthParams);
-            AndroidJavaObject nativeSynchronizedUsersParams = AndroidObjectMapper.ConvertToJavaUserAuthList(synchronizedUsers);
-            CallVoidMethodWithActivityLastArg("setUser", nativeUserAuthParams, nativeSynchronizedUsersParams);
+            AndroidJavaObject parameters = AndroidObjectMapper.ConvertToJavaDidomiUserParameters(userParameters, activity);
+            CallVoidMethod("setUser", parameters);
         }
 
         public void ClearUser()
@@ -516,30 +510,24 @@ namespace IO.Didomi.SDK.Android
         {
             try
             {
-                using (var playerClass = new AndroidJavaClass(UnityPlayerFullClassName))
+                using var playerClass = new AndroidJavaClass(UnityPlayerFullClassName);
+                using var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity");
+                using var _pluginClass = new AndroidJavaClass(PluginName);
+                var application = activity.Call<AndroidJavaObject>("getApplication");
+
+                var pluginInstance = _pluginClass.CallStatic<AndroidJavaObject>("getInstance");
+
+                MapNullValuesToJava(args);
+
+                var obj = new object[args.Length + 1];
+
+                for (int i = 1; i < obj.Length; i++)
                 {
-                    using (var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity"))
-                    {
-                        using (var _pluginClass = new AndroidJavaClass(PluginName))
-                        {
-                            var application = activity.Call<AndroidJavaObject>("getApplication");
-                            
-                            var pluginInstance = _pluginClass.CallStatic<AndroidJavaObject>("getInstance");
-
-                            MapNullValuesToJava(args);
-
-                            var obj = new object[args.Length + 1];
-
-                            for (int i = 1; i < obj.Length; i++)
-                            {
-                                obj[i] = args[i - 1];
-                            }
-
-                            obj[0] = application;
-                            pluginInstance.Call(methodName, obj);
-                        }
-                    }
+                    obj[i] = args[i - 1];
                 }
+
+                obj[0] = application;
+                pluginInstance.Call(methodName, obj);
             }
             catch (Exception ex)
             {

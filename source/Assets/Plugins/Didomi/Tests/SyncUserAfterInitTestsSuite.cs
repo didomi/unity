@@ -3,6 +3,7 @@ using NUnit.Framework;
 using UnityEngine.TestTools;
 using IO.Didomi.SDK;
 using System.Collections.Generic;
+using System;
 
 /// <summary>
 /// Tests related to user status synchronization between platforms after SDK was initialized
@@ -47,110 +48,269 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     [UnityTest]
     public IEnumerator TestSyncWithIncorrectParameters()
     {
-        Didomi.GetInstance().SetUser(new UserAuthWithEncryptionParams(
-            id: "invalid-user",
-            algorithm: "hash-md5",
-            secretId: secretId,
-            initializationVector: initializationVector,
-            expiration: 3_600
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            new UserAuthWithEncryptionParams(
+                id: "invalid-user",
+                algorithm: "hash-md5",
+                secretId: secretId,
+                initializationVector: initializationVector,
+                expiration: 3_600
+            )
         ));
 
         yield return ExpectSyncError("Incorrect parameters");
     }
 
+    [Test]
+    public void TestForceUserAuthParam()
+    {
+        Assert.That(() => new DidomiUserParameters(null), 
+                  Throws.TypeOf<ArgumentNullException>());
+    }
+
     [UnityTest]
     public IEnumerator TestSyncUser()
+    {
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(new UserAuthWithoutParams(testUserId)));
+        yield return ExpectSyncSuccess("Set user with id", true);
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUserAndSetupUI(new DidomiUserParameters(new UserAuthWithoutParams(testUserId)));
+        yield return ExpectSyncSuccess("Set user with id and setup UI", false);
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            new UserAuthWithEncryptionParams(
+                id: testUserId,
+                algorithm: "aes-256-cbc",
+                secretId: secretId,
+                initializationVector: initializationVector,
+                expiration: 3_600
+            )
+        ));
+        yield return ExpectSyncError("Set user with Encryption params with expiration");
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            new UserAuthWithEncryptionParams(
+                id: testUserId,
+                algorithm: "aes-256-cbc",
+                secretId: secretId,
+                initializationVector: initializationVector
+            )
+        ));
+        yield return ExpectSyncError("Set user with Encryption params without expiration");
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUserAndSetupUI(new DidomiUserParameters(
+            new UserAuthWithEncryptionParams(
+                id: testUserId,
+                algorithm: "aes-256-cbc",
+                secretId: secretId,
+                initializationVector: initializationVector
+            )
+        ));
+        yield return ExpectSyncError("Set user with Encryption params and setup UI");
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: secretId,
+                digest: digest,
+                salt: salt,
+                expiration: 3_600
+            )
+        ));
+        yield return ExpectSyncError("Set user with Hash params with salt and expiration");
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: secretId,
+                digest: digest,
+                salt: null,
+                expiration: 3_600
+            )
+        ));
+        yield return ExpectSyncError("Set user with Hash params with expiration and without salt");
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: secretId,
+                digest: digest,
+                salt: null
+            )
+        ));
+        yield return ExpectSyncError("Set user with Hash params without expiration and without salt");
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUserAndSetupUI(new DidomiUserParameters(
+            new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: secretId,
+                digest: digest,
+                salt: salt,
+                expiration: 3_600
+            )
+        ));
+        yield return ExpectSyncError("Set user with Hash params with salt and expiration and setup UI");
+    }
+
+    [UnityTest]
+    public IEnumerator TestSyncUserWithAdditionalParameters()
+    {
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            userAuth: new UserAuthWithEncryptionParams(
+                id: testUserId,
+                algorithm: "aes-256-cbc",
+                secretId: secretId,
+                initializationVector: initializationVector,
+                expiration: 3_600
+            ),
+            dcsUserAuth: new UserAuthWithEncryptionParams(
+                id: testUserId,
+                algorithm: "aes-256-cbc",
+                secretId: secretId,
+                initializationVector: initializationVector,
+                expiration: 3_600
+            ),
+            isUnderage: true
+        ));
+        yield return ExpectSyncError("Set user with Encryption params, with dcsUser / isUnderage");
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: secretId,
+                digest: digest,
+                salt: salt
+            ),
+            new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: secretId,
+                digest: digest,
+                salt: salt
+            )
+        ));
+        yield return ExpectSyncError("Set user with Hash params, with dcsUser");
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            userAuth: new UserAuthWithEncryptionParams(
+                id: testUserId,
+                algorithm: "aes-256-cbc",
+                secretId: secretId,
+                initializationVector: initializationVector,
+                expiration: 3_600
+            ),
+            isUnderage: true
+        ));
+        yield return ExpectSyncError("Set user with Encryption params, with isUnderage");
+    }
+
+    [UnityTest]
+    public IEnumerator TestSyncWithSynchronizedUsers()
+    {
+        IList<UserAuthParams> synchronizedUsers = new List<UserAuthParams>
+        {
+            new UserAuthWithHashParams(
+                id: syncUserId1,
+                algorithm: "hash-md5",
+                secretId: secretId,
+                digest: digest,
+                salt: salt
+            ),
+            new UserAuthWithEncryptionParams(
+                id: syncUserId2,
+                algorithm: "aes-256-cbc",
+                secretId: secretId,
+                initializationVector: initializationVector
+            )
+        };
+
+        Didomi.GetInstance().SetUser(new DidomiMultiUserParameters(
+            userAuth: new UserAuthWithEncryptionParams(
+                id: testUserId,
+                algorithm: "aes-256-cbc",
+                secretId: secretId,
+                initializationVector: initializationVector,
+                expiration: 3_600
+            ),
+            synchronizedUsers: synchronizedUsers
+        ));
+        yield return ExpectSyncError("Synchronized users with encryption");
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUser(new DidomiMultiUserParameters(
+            userAuth: new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: secretId,
+                digest: digest,
+                salt: salt,
+                expiration: 3_600
+            ),
+            dcsUserAuth: new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: secretId,
+                digest: digest,
+                salt: salt,
+                expiration: 3_600
+            ),
+            synchronizedUsers: synchronizedUsers,
+            isUnderage: false
+        ));
+        yield return ExpectSyncError("Synchronized users with hash, with dcs / underage");
+
+        ResetResults();
+
+        Didomi.GetInstance().SetUserAndSetupUI(new DidomiMultiUserParameters(
+            userAuth: new UserAuthWithHashParams(
+                id: testUserId,
+                algorithm: "hash-md5",
+                secretId: secretId,
+                digest: digest,
+                salt: salt,
+                expiration: 3_600
+            ),
+            synchronizedUsers: synchronizedUsers,
+            isUnderage: true
+        ));
+        yield return ExpectSyncError("Synchronized users with SetupUI, with underage");
+    }
+
+    [UnityTest]
+    [Obsolete]
+    public IEnumerator TestLegacySync()
     {
         Didomi.GetInstance().SetUser(testUserId);
         yield return ExpectSyncSuccess("Set user with id", true);
 
         ResetResults();
 
-        Didomi.GetInstance().SetUserAndSetupUI(testUserId);
-        yield return ExpectSyncSuccess("Set user with id and setup UI", false);
-
-        ResetResults();
-
-        Didomi.GetInstance().SetUser(new UserAuthWithEncryptionParams(
-            id: testUserId,
-            algorithm: "aes-256-cbc",
-            secretId: secretId,
-            initializationVector: initializationVector,
-            expiration: 3_600
-        ));
-        yield return ExpectSyncError("Set user with Encryption params with expiration");
-
-        ResetResults();
-
-        Didomi.GetInstance().SetUser(new UserAuthWithEncryptionParams(
-            id: testUserId,
-            algorithm: "aes-256-cbc",
-            secretId: secretId,
-            initializationVector: initializationVector
-        ));
-        yield return ExpectSyncError("Set user with Encryption params without expiration");
-
-        ResetResults();
-
-        Didomi.GetInstance().SetUserAndSetupUI(new UserAuthWithEncryptionParams(
-            id: testUserId,
-            algorithm: "aes-256-cbc",
-            secretId: secretId,
-            initializationVector: initializationVector
-        ));
-        yield return ExpectSyncError("Set user with Encryption params and setup UI");
-
-        ResetResults();
-
-        Didomi.GetInstance().SetUser(new UserAuthWithHashParams(
-            id: testUserId,
-            algorithm: "hash-md5",
-            secretId: secretId,
-            digest: digest,
-            salt: salt,
-            expiration: 3_600
-        ));
-        yield return ExpectSyncError("Set user with Hash params with salt and expiration");
-
-        ResetResults();
-
-        Didomi.GetInstance().SetUser(new UserAuthWithHashParams(
-            id: testUserId,
-            algorithm: "hash-md5",
-            secretId: secretId,
-            digest: digest,
-            salt: null,
-            expiration: 3_600
-        ));
-        yield return ExpectSyncError("Set user with Hash params with expiration and without salt");
-
-        ResetResults();
-
-        Didomi.GetInstance().SetUser(new UserAuthWithHashParams(
-            id: testUserId,
-            algorithm: "hash-md5",
-            secretId: secretId,
-            digest: digest,
-            salt: null
-        ));
-        yield return ExpectSyncError("Set user with Hash params without expiration and without salt");
-
-        ResetResults();
-
-        Didomi.GetInstance().SetUserAndSetupUI(new UserAuthWithHashParams(
-            id: testUserId,
-            algorithm: "hash-md5",
-            secretId: secretId,
-            digest: digest,
-            salt: salt,
-            expiration: 3_600
-        ));
-        yield return ExpectSyncError("Set user with Hash params with salt and expiration and setup UI");
-    }
-
-    [UnityTest]
-    public IEnumerator TestSyncWithSynchronizedUsers()
-    {
         IList<UserAuthParams> synchronizedUsers = new List<UserAuthParams>
         {
             new UserAuthWithHashParams(
@@ -179,34 +339,5 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
             synchronizedUsers
         );
         yield return ExpectSyncError("Synchronized users with encryption");
-
-        ResetResults();
-
-        Didomi.GetInstance().SetUser(
-            new UserAuthWithHashParams(
-                id: testUserId,
-                algorithm: "hash-md5",
-                secretId: secretId,
-                digest: digest,
-                salt: salt,
-                expiration: 3_600
-            ),
-            synchronizedUsers
-        );
-        yield return ExpectSyncError("Synchronized users with hash");
-
-        ResetResults();
-
-        Didomi.GetInstance().SetUserAndSetupUI(
-            new UserAuthWithHashParams(
-                id: testUserId,
-                algorithm: "hash-md5",
-                secretId: secretId,
-                digest: digest,
-                salt: salt,
-                expiration: 3_600
-            ),
-            synchronizedUsers);
-        yield return ExpectSyncError("Synchronized users with SetupUI");
     }
 }

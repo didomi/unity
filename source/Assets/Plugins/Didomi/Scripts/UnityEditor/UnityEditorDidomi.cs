@@ -297,22 +297,12 @@ namespace IO.Didomi.SDK.UnityEditor
             throw new NotImplementedException();
         }
 
-        public void SetUser(string organizationUserId)
+        public void SetUser(DidomiUserParameters userParameters)
         {
             throw new NotImplementedException();
         }
 
-        public void SetUser(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetUserAndSetupUI(string organizationUserId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetUserAndSetupUI(UserAuthParams userAuthParams, IList<UserAuthParams> synchronizedUsers)
+        public void SetUserAndSetupUI(DidomiUserParameters userParameters)
         {
             throw new NotImplementedException();
         }
