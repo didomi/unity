@@ -42,6 +42,9 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     [OneTimeTearDown]
     public new void TearDownSuite()
     {
+        Didomi.GetInstance().ClearUser();
+        // Notice displayed because of user changes
+        Didomi.GetInstance().HideNotice();
         base.TearDownSuite();
     }
 
