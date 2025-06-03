@@ -554,14 +554,7 @@ namespace IO.Didomi.SDK.Android
             return new AndroidJavaObject(
                 "io.didomi.sdk.models.CurrentUserStatus",
                 purposesMap,
-                vendorsMap,
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
+                vendorsMap
             );
         }
 
