@@ -127,7 +127,7 @@ public class CurrentUserStatusTransactionTestsSuite: DidomiBaseTests
 
         string[] vendorIdsArray = {
             "ipromote",         // IAB vendor 217
-            "amob-txzcQCyq",    // IAB vendor 272
+            "amob-Vd2fVzAM",    // IAB vendor 272
             "152media-Aa6Z6mLC" // IAB vendor 1111
         };
 
