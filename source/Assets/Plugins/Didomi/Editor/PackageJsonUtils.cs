@@ -23,5 +23,7 @@ public class PackageJson
     public string version { get; set; }
     public string iosNativeVersion { get; set; }
     public string androidNativeVersion { get; set; }
+    // Should be the same version of AndroidX AppCompat as the one used in the Didomi Android SDK.
+    public string androidxAppCompatVersion { get; set; }
     public string description { get; set; }
 }
