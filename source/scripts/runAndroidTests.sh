@@ -43,6 +43,7 @@ fi
 
 # Run the tests
 $UNITY_PATH -batchmode -buildTarget Android -runTests -testResults $RESULTS_PATH -testPlatform Android -logFile $LOG_PATH
+result=$?
 
 if [ -z "$connected_devices" ]; then
     # Kill the emulator from the background
@@ -54,7 +55,6 @@ if [ -z "$connected_devices" ]; then
     done
 fi
 
-result=$?
 if [ $result -eq 0 ]
 then
     echo "Android tests passed!"
