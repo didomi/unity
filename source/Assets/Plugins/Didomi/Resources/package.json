@@ -2,7 +2,7 @@
 	"name": "com.didomi.unityplugin",
 	"displayName": "Native Didomi",
 	"agentName": "Didomi Unity SDK",
-	"version": "2.13.0",
+	"version": "2.13.1",
 	"iosNativeVersion": "2.29.1",
 	"androidNativeVersion": "2.29.0",
 	"androidxAppCompatVersion": "1.6.1",
