@@ -84,9 +84,10 @@ class PostProcessorGradleAndroidProject : IPostGenerateGradleAndroidProject
         var unityPlayerFile = $@"build.gradle";
         var unityPlayerFileAbsolutePath = Path.Combine(path, unityPlayerFile);
         var androidSdkVersion = PackageJsonUtils.Read().androidNativeVersion;
+        var androidxAppCompatVersion = PackageJsonUtils.Read().androidxAppCompatVersion;
         var hasAppCompatDependency = File.ReadAllText(unityPlayerFileAbsolutePath).Contains("androidx.appcompat:appcompat:");
         var appCompatDependencyStr = hasAppCompatDependency ? "" : $@"
-        implementation(""androidx.appcompat:appcompat:1.6.1"")  // Same version as Didomi SDK
+        implementation(""androidx.appcompat:appcompat:{androidxAppCompatVersion}"")  // Same version as Didomi SDK
     ";
         var oldValue = "dependencies {";
         var newValue = $@"dependencies {{

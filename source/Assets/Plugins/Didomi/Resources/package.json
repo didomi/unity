@@ -5,5 +5,6 @@
 	"version": "2.13.0",
 	"iosNativeVersion": "2.29.1",
 	"androidNativeVersion": "2.29.0",
+	"androidxAppCompatVersion": "1.6.1",
 	"description": "Unity plugin helps you to use native Didomi functionality on Android and iOS."
 }
