@@ -69,7 +69,13 @@ namespace IO.Didomi.SDK
         [JsonProperty("didomi_dcs")]
         public string DidomiDcs { get; set; } = string.Empty;
 
-        public CurrentUserStatus(): this(new Dictionary<string, PurposeStatus>(), new Dictionary<string, VendorStatus>(), string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty)
+        /// <summary>
+        /// GPP String
+        /// </summary>
+        [JsonProperty("gpp_string")]
+        public string GppString { get; set; } = string.Empty;
+
+        public CurrentUserStatus(): this(new Dictionary<string, PurposeStatus>(), new Dictionary<string, VendorStatus>(), string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty)
         {
         }
 
@@ -82,7 +88,8 @@ namespace IO.Didomi.SDK
             string consentString,
             string additionalConsent,
             string regulation,
-            string didomiDcs
+            string didomiDcs,
+            string gppString
         ) {
             Purposes = purposes;
             Vendors = vendors;
@@ -93,6 +100,7 @@ namespace IO.Didomi.SDK
             AdditionalConsent = additionalConsent;
             Regulation = regulation;
             DidomiDcs = didomiDcs;
+            GppString = gppString;
         }
 
         /// <summary>

@@ -63,8 +63,14 @@ namespace IO.Didomi.SDK
         [JsonProperty("didomi_dcs")]
         private string didomiDcs;
 
+        /// <summary>
+        /// GPP String
+        /// </summary>
+        [JsonProperty("gpp_string")]
+        private string gppString;
+
         // Empty constructor for Json deserialization
-        public UserStatus(): this(null, null, null, null, null, null, null, null, null)
+        public UserStatus(): this(null, null, null, null, null, null, null, null, null, null)
         {
         }
 
@@ -77,7 +83,8 @@ namespace IO.Didomi.SDK
             string consentString,
             string additionalConsent,
             string regulation,
-            string didomiDcs
+            string didomiDcs,
+            string gppString
         ) {
             this.purposes = purposes;
             this.vendors = vendors;
@@ -88,6 +95,7 @@ namespace IO.Didomi.SDK
             this.additionalConsent = additionalConsent;
             this.regulation = regulation;
             this.didomiDcs = didomiDcs;
+            this.gppString = gppString;
         }
 
         public Purposes GetPurposes()
@@ -169,6 +177,15 @@ namespace IO.Didomi.SDK
                 didomiDcs = "";
             }
             return didomiDcs;
+        }
+
+        public string GetGppString()
+        {
+            if (gppString == null)
+            {
+                gppString = "";
+            }
+            return gppString;
         }
 
         /// <summary>

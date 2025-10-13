@@ -62,6 +62,7 @@ public class GetUserStatusTestsSuite: DidomiBaseTests
         Assert.False(string.IsNullOrEmpty(userStatus.GetUpdated()), "No updated date");
         Assert.AreEqual("gdpr", userStatus.GetRegulation(), $"Incorrect regulation: {userStatus.GetRegulation()}");
         Assert.True(string.IsNullOrEmpty(userStatus.GetDidomiDcs()), "didomiDCS should not be present until feature is enabled");
+        Assert.True(string.IsNullOrEmpty(userStatus.GetGppString()), "gppString should not be present until feature is enabled");
     }
 
     [UnityTest]
