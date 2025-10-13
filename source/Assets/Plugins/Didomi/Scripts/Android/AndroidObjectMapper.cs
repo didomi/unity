@@ -379,8 +379,7 @@ namespace IO.Didomi.SDK.Android
                 consentString: obj.Call<string>("getConsentString"),
                 additionalConsent: obj.Call<string>("getAdditionalConsent"),
                 regulation: regulation.Call<string>("getValue"),
-                didomiDcs: obj.Call<string>("getDidomiDcs"),
-                gppString: obj.Call<string>("getGppString")
+                didomiDcs: obj.Call<string>("getDidomiDcs")
             );
 
             return userStatus;
