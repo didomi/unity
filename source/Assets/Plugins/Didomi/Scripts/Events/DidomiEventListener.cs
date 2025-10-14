@@ -178,6 +178,18 @@ namespace IO.Didomi.SDK.Events
         /// The language update was not completed
         /// </summary>
         public event EventHandler<LanguageUpdateFailedEvent> LanguageUpdateFailed;
+        /// <summary>
+        /// An error occurred during DCS signature process
+        /// </summary>
+        public event EventHandler<DcsSignatureErrorEvent> DcsSignatureError;
+        /// <summary>
+        /// DCS signature is ready
+        /// </summary>
+        public event EventHandler<DcsSignatureReadyEvent> DcsSignatureReady;
+        /// <summary>
+        /// An error occurred in the Didomi SDK integration
+        /// </summary>
+        public event EventHandler<IntegrationErrorEvent> IntegrationError;
 
         public DidomiEventListener() { }
 
@@ -426,6 +438,21 @@ namespace IO.Didomi.SDK.Events
         {
             LanguageUpdateFailed?.Invoke(this, @event);
             // Language update was not successful
+        }
+        public void OnDcsSignatureError(DcsSignatureErrorEvent @event)
+        {
+            DcsSignatureError?.Invoke(this, @event);
+            // An error occurred during DCS signature process
+        }
+        public void OnDcsSignatureReady(DcsSignatureReadyEvent @event)
+        {
+            DcsSignatureReady?.Invoke(this, @event);
+            // DCS signature is ready
+        }
+        public void OnIntegrationError(IntegrationErrorEvent @event)
+        {
+            IntegrationError?.Invoke(this, @event);
+            // An error occurred during Didomi SDK integration
         }
     }
 }

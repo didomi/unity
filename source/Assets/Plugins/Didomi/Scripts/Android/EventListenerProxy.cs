@@ -303,6 +303,26 @@ namespace IO.Didomi.SDK.Android
             // An error occurred during language update process
         }
 
+        public void dcsSignatureError(AndroidJavaObject @event)
+        {
+            _eventListener.OnDcsSignatureError(new DcsSignatureErrorEvent());
+            // An error occurred during DCS signature process
+        }
+
+        public void dcsSignatureReady(AndroidJavaObject @event)
+        {
+            _eventListener.OnDcsSignatureReady(new DcsSignatureReadyEvent());
+            // DCS signature is ready
+        }
+
+        public void integrationError(AndroidJavaObject @event)
+        {
+            var IntegrationErrorEvent = ConvertToIntegrationErrorEvent(@event);
+
+            _eventListener.OnIntegrationError(IntegrationErrorEvent);
+            // An error occurred during integration process
+        }
+
         private static ErrorEvent ConvertToErrorEvent(AndroidJavaObject @event)
         {
             var errorMessage = GetErrorMessage(@event);
@@ -427,6 +447,13 @@ namespace IO.Didomi.SDK.Android
 
             return new LanguageUpdateFailedEvent(reason);
         }
+        private static IntegrationErrorEvent ConvertToIntegrationErrorEvent(AndroidJavaObject @event)
+        {
+            var integrationName = GetIntegrationName(@event);
+            var reason = GetReason(@event);
+
+            return new IntegrationErrorEvent(integrationName, reason);
+        }
 
         private static string GetPurposeId(AndroidJavaObject @event)
         {
@@ -481,6 +508,11 @@ namespace IO.Didomi.SDK.Android
         private static string GetReason(AndroidJavaObject @event)
         {
             return AndroidObjectMapper.GetMethodStringValue(@event, "getReason");
+        }
+
+        private static string GetIntegrationName(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getIntegrationName");
         }
     }
 }

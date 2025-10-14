@@ -830,7 +830,7 @@ void removeSyncAcknowledgedCallback(int eventIndex) {
     syncAcknowledgedCallbacks[@(eventIndex)] = nil;
 }
 
-void addEventListener( void (*event_listener_handler) (int, char *), void (*sync_ready_event_listener_handler) (int, char *, int, int))
+void addEventListener( void (*event_listener_handler) (int, char *), void (*sync_ready_event_listener_handler) (int, char *, int, int), void (*integration_error_event_listener_handler) (int, char *, char *))
 {
 
     if(eventListener==nil)
@@ -1079,6 +1079,27 @@ void addEventListener( void (*event_listener_handler) (int, char *), void (*sync
     eventListener.onLanguageUpdateFailed = ^(DDMEventType eventType, NSString * _Nullable reason){
 
         event_listener_handler(eventType, convertNSStringToCString(reason));
+
+    };
+    
+    eventListener.onDCSSignatureError = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
+    eventListener.onDCSSignatureReady = ^(DDMEventType eventType){
+
+        event_listener_handler(eventType, NULL);
+
+    };
+    
+    eventListener.onIntegrationError = ^(DDMIntegrationErrorEvent * event){
+
+        char * integrationName = convertNSStringToCString([event integrationName]);
+        char * reason = convertNSStringToCString([event reason]);
+
+        integration_error_event_listener_handler(DDMEventTypeIntegrationError, integrationName, reason);
 
     };
 
