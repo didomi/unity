@@ -48,8 +48,8 @@ namespace Assets.Plugins.Scripts.IOS
         DDMEventTypePreferencesClickSPICategoryAgree = 38,
         DDMEventTypePreferencesClickSPICategoryDisagree = 39,
         DDMEventTypePreferencesClickSPIPurposeSaveChoices = 40,
-        DDMEventTypeDCSSignatureError = 41,
-        DDMEventTypeDCSSignatureReady = 42,
+        DDMEventTypeDCSSignatureReady = 41,
+        DDMEventTypeDCSSignatureError = 42,
         DDMEventTypeIntegrationError = 43,
         DDMEventTypeError = 1000,
     };
