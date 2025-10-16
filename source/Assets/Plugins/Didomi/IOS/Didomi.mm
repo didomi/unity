@@ -73,6 +73,7 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
     // Enum becomes integer in Objective-C
     NSInteger regulation = [currentUserStatus regulation];
     NSString *didomiDCS = [currentUserStatus didomiDCS];
+    NSString *gppString = [currentUserStatus gppString];
     
     NSMutableDictionary *vendorsStatusJson = [NSMutableDictionary dictionary];
     NSDictionary<NSString *, DDMCurrentUserStatusVendor *> *vendorsStatus = [currentUserStatus vendors];
@@ -102,6 +103,7 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
         @"addtl_consent": additionalConsent,
         @"regulation": [NSNumber numberWithLong: regulation],
         @"didomi_dcs": didomiDCS,
+        @"gpp_string": gppString,
         @"purposes": purposesStatusJson,
         @"vendors": vendorsStatusJson
     };
