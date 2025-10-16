@@ -457,9 +457,11 @@ namespace IO.Didomi.SDK.IOS
 
         public delegate void OnSyncReadyEventListenerDelegate(int eventType, string organizationUserId, int statusApplied, int syncAcknowledgedCallbackIndex);
 
+        public delegate void OnIntegrationErrorEventListenerDelegate(int eventType, string integrationName, string reason);
+
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate, OnSyncReadyEventListenerDelegate syncReadyEventListenerDelegate);
+        private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate, OnSyncReadyEventListenerDelegate syncReadyEventListenerDelegate, OnIntegrationErrorEventListenerDelegate integrationErrorEventListenerDelegate);
 
         [DllImport("__Internal")]
         private static extern int syncAcknowledgedCallback(int callbackIndex);
@@ -472,7 +474,7 @@ namespace IO.Didomi.SDK.IOS
         {
             eventListenerInner = eventListener;
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            addEventListener(CallOnEventListenerDelegate, CallOnSyncReadyEventListenerDelegate);
+            addEventListener(CallOnEventListenerDelegate, CallOnSyncReadyEventListenerDelegate, CallOnIntegrationErrorEventListenerDelegate);
 #endif
         }
 
@@ -604,6 +606,12 @@ namespace IO.Didomi.SDK.IOS
                 case DDMEventType.DDMEventTypeLanguageUpdateFailed:
                     eventListenerInner.OnLanguageUpdateFailed(new LanguageUpdateFailedEvent(argument));
                     break;
+                case DDMEventType.DDMEventTypeDCSSignatureError:
+                    eventListenerInner.OnDcsSignatureError(new DcsSignatureErrorEvent());
+                    break;
+                case DDMEventType.DDMEventTypeDCSSignatureReady:
+                    eventListenerInner.OnDcsSignatureReady(new DcsSignatureReadyEvent());
+                    break;
                 default:
                     break;
             }
@@ -632,6 +640,21 @@ namespace IO.Didomi.SDK.IOS
                         removeSyncAcknowledgedCallback(syncAcknowledgedCallbackIndex);
 #endif
                     }
+                    break;
+            }
+        }
+
+        [AOT.MonoPInvokeCallback(typeof(OnIntegrationErrorEventListenerDelegate))]
+        static void CallOnIntegrationErrorEventListenerDelegate(int eventType, string integrationName, string reason)
+        {
+            DDMEventType eventTypeEnum = (DDMEventType)eventType;
+            switch (eventTypeEnum)
+            {
+                case DDMEventType.DDMEventTypeIntegrationError:
+                    eventListenerInner.OnIntegrationError(new IntegrationErrorEvent(
+                        integrationName,
+                        reason
+                    ));
                     break;
             }
         }

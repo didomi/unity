@@ -50,6 +50,7 @@ namespace Assets.Plugins.Scripts.IOS
         DDMEventTypePreferencesClickSPIPurposeSaveChoices = 40,
         DDMEventTypeDCSSignatureReady = 41,
         DDMEventTypeDCSSignatureError = 42,
+        DDMEventTypeIntegrationError = 43,
         DDMEventTypeError = 1000,
     };
 }
