@@ -1,1 +1,4 @@
 .DS_Store
+packages-lock.json
+**/UserSettings/
+unzip_log.txt
