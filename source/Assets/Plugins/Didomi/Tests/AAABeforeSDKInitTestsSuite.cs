@@ -39,6 +39,13 @@ public class AAABeforeSDKInitTestsSuite : SyncUserBaseTests
     [OneTimeTearDown]
     public new void TearDownSuite()
     {
+        // Update synchronized user token to make sure it doesn't expire in a future test
+        if (Didomi.GetInstance().IsReady())
+        {
+            Didomi.GetInstance().SetUser(new DidomiUserParameters(new UserAuthWithoutParams(testUserId)));
+            Didomi.GetInstance().SetUserDisagreeToAll();
+            Didomi.GetInstance().SetUserAgreeToAll();
+        }
         base.TearDownSuite();
     }
 
