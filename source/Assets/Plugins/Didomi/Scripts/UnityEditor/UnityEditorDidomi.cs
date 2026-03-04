@@ -1,4 +1,4 @@
-﻿using IO.Didomi.SDK.Events;
+using IO.Didomi.SDK.Events;
 using IO.Didomi.SDK.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -7,27 +7,34 @@ using UnityEngine;
 namespace IO.Didomi.SDK.UnityEditor
 {
     /// <summary>
-    /// Mock implementation of IDidomi interface that is called when the app is run on Unity.
+    /// Stub implementation of IDidomi interface that is called when the app is run in Unity Editor.
+    /// Returns empty/default values for all methods.
     /// </summary>
     public class UnityEditorDidomi : IDidomi
     {
+        private const string StubTag = "[Didomi Stub]";
         private bool _isInitialized = false;
         private bool _disableMockUI = false;
         private Action _onReadyAction = null;
 
+        private void LogStub(string methodName)
+        {
+            Debug.Log($"{StubTag} {methodName} called - returning stub value (Unity Editor)");
+        }
+
         public void AddEventListener(DidomiEventListener eventListener)
         {
-            throw new NotImplementedException();
+            LogStub("AddEventListener");
         }
 
         public void AddVendorStatusListener(string vendorId, DidomiVendorStatusListener vendorStatusListener)
         {
-            throw new NotImplementedException();
+            LogStub("AddVendorStatusListener");
         }
 
         public void RemoveVendorStatusListener(string vendorId)
         {
-            throw new NotImplementedException();
+            LogStub("RemoveVendorStatusListener");
         }
 
         /// <summary>
@@ -40,52 +47,62 @@ namespace IO.Didomi.SDK.UnityEditor
 
         public string GetJavaScriptForWebView()
         {
-            throw new NotImplementedException();
+            LogStub("GetJavaScriptForWebView");
+            return "";
         }
 
         public Purpose GetPurpose(string purposeId)
         {
-            throw new NotImplementedException();
+            LogStub("GetPurpose");
+            return new Purpose("", "", "");
         }
 
         public ISet<string> GetRequiredPurposeIds()
         {
-            throw new NotImplementedException();
+            LogStub("GetRequiredPurposeIds");
+            return new HashSet<string>();
         }
 
         public ISet<Purpose> GetRequiredPurposes()
         {
-            throw new NotImplementedException();
+            LogStub("GetRequiredPurposes");
+            return new HashSet<Purpose>();
         }
 
         public ISet<string> GetRequiredVendorIds()
         {
-            throw new NotImplementedException();
+            LogStub("GetRequiredVendorIds");
+            return new HashSet<string>();
         }
 
         public ISet<Vendor> GetRequiredVendors()
         {
-            throw new NotImplementedException();
+            LogStub("GetRequiredVendors");
+            return new HashSet<Vendor>();
         }
 
         public IDictionary<string, string> GetText(string key)
         {
-            throw new NotImplementedException();
+            LogStub("GetText");
+            return new Dictionary<string, string>();
         }
 
         public string GetTranslatedText(string key)
         {
-            throw new NotImplementedException();
+            LogStub("GetTranslatedText");
+            return "";
         }
 
         public CurrentUserStatus GetCurrentUserStatus()
         {
-            throw new NotImplementedException();
+            LogStub("GetCurrentUserStatus");
+            return new CurrentUserStatus();
         }
 
         public bool SetCurrentUserStatus(CurrentUserStatus status)
         {
-            throw new NotImplementedException();
+            LogStub("SetCurrentUserStatus");
+            return false;
         }
 
         public bool CommitCurrentUserStatusTransaction(
@@ -95,47 +112,66 @@ namespace IO.Didomi.SDK.UnityEditor
              ISet<string> disabledPurposes
         )
         {
-            throw new NotImplementedException();
+            LogStub("CommitCurrentUserStatusTransaction");
+            return false;
         }
 
         public UserStatus GetUserStatus()
         {
-            throw new NotImplementedException();
+            LogStub("GetUserStatus");
+            return new UserStatus();
         }
 
         public string GetApplicableRegulation()
         {
-            throw new NotImplementedException();
+            LogStub("GetApplicableRegulation");
+            return "";
         }
 
         public Vendor GetVendor(string vendorId)
         {
-            throw new NotImplementedException();
+            LogStub("GetVendor");
+            return new Vendor(
+                "",
+                "",
+                null,
+                null,
+                new List<string>(),
+                new List<string>(),
+                new List<string>(),
+                new List<string>(),
+                new List<string>(),
+                new List<string>(),
+                null
+            );
         }
 
         public int GetTotalVendorCount()
         {
-            throw new NotImplementedException();
+            LogStub("GetTotalVendorCount");
+            return 0;
         }
 
         public int GetIABVendorCount()
         {
-            throw new NotImplementedException();
+            LogStub("GetIABVendorCount");
+            return 0;
         }
 
         public int GetNonIABVendorCount()
         {
-            throw new NotImplementedException();
+            LogStub("GetNonIABVendorCount");
+            return 0;
         }
 
         public void HideNotice()
         {
-            throw new NotImplementedException();
+            LogStub("HideNotice");
         }
 
         public void HidePreferences()
         {
-            throw new NotImplementedException();
+            LogStub("HidePreferences");
         }
 
         public void Initialize(DidomiInitializeParameters parameters)
@@ -152,17 +188,20 @@ namespace IO.Didomi.SDK.UnityEditor
 
         public bool IsConsentRequired()
         {
-            throw new NotImplementedException();
+            LogStub("IsConsentRequired");
+            return false;
         }
 
         public bool IsNoticeVisible()
         {
-            throw new NotImplementedException();
+            LogStub("IsNoticeVisible");
+            return false;
         }
 
         public bool IsPreferencesVisible()
         {
-            throw new NotImplementedException();
+            LogStub("IsPreferencesVisible");
+            return false;
         }
 
         public bool IsReady()
@@ -172,7 +211,7 @@ namespace IO.Didomi.SDK.UnityEditor
 
         public void OnError(Action didomiCallable)
         {
-            throw new NotImplementedException();
+            LogStub("OnError");
         }
 
         public void OnReady(Action didomiCallable)
@@ -207,31 +246,37 @@ namespace IO.Didomi.SDK.UnityEditor
 
         public bool IsUserConsentStatusPartial()
         {
-            throw new NotImplementedException();
+            LogStub("IsUserConsentStatusPartial");
+            return false;
         }
 
         public bool IsUserLegitimateInterestStatusPartial()
         {
-            throw new NotImplementedException();
+            LogStub("IsUserLegitimateInterestStatusPartial");
+            return false;
         }
 
         public bool IsUserStatusPartial()
         {
-            throw new NotImplementedException();
+            LogStub("IsUserStatusPartial");
+            return false;
         }
 
         public void Reset()
         {
+            LogStub("Reset");
         }
 
         public bool SetUserAgreeToAll()
         {
-            throw new NotImplementedException();
+            LogStub("SetUserAgreeToAll");
+            return true;
         }
 
         public bool SetUserDisagreeToAll()
         {
-            throw new NotImplementedException();
+            LogStub("SetUserDisagreeToAll");
+            return true;
         }
 
         public bool SetUserStatus(
@@ -244,7 +289,8 @@ namespace IO.Didomi.SDK.UnityEditor
             ISet<string> enabledLIVendorIds,
             ISet<string> disabledLIVendorIds)
         {
-            throw new NotImplementedException();
+            LogStub("SetUserStatus");
+            return true;
         }
 
         public bool SetUserStatus(
@@ -253,17 +299,20 @@ namespace IO.Didomi.SDK.UnityEditor
             bool vendorsConsentStatus,
             bool vendorsLIStatus)
         {
-            throw new NotImplementedException();
+            LogStub("SetUserStatus");
+            return true;
         }
 
         public bool ShouldConsentBeCollected()
         {
-            throw new NotImplementedException();
+            LogStub("ShouldConsentBeCollected");
+            return false;
         }
 
         public bool ShouldUserStatusBeCollected()
         {
-            throw new NotImplementedException();
+            LogStub("ShouldUserStatusBeCollected");
+            return false;
         }
 
         public void ShowNotice()
@@ -294,22 +343,22 @@ namespace IO.Didomi.SDK.UnityEditor
 
         public void UpdateSelectedLanguage(string languageCode)
         {
-            throw new NotImplementedException();
+            LogStub("UpdateSelectedLanguage");
         }
 
         public void SetUser(DidomiUserParameters userParameters)
         {
-            throw new NotImplementedException();
+            LogStub("SetUser");
         }
 
         public void SetUserAndSetupUI(DidomiUserParameters userParameters)
         {
-            throw new NotImplementedException();
+            LogStub("SetUserAndSetupUI");
         }
 
         public void ClearUser()
         {
-            throw new NotImplementedException();
+            LogStub("ClearUser");
         }
     }
 }
