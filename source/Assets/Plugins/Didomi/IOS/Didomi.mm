@@ -304,7 +304,7 @@ void setUserAgent(char* name, char* version)
     [[Didomi shared] setUserAgentWithName: CreateNSString(name) version:CreateNSString(version)];
 }
 
-void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId, char* countryCode, char* regionCode, bool isUnderage)
+void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* remoteConfigurationURL, char* providerId, bool disableDidomiRemoteConfig, char* languageCode, char* noticeId, char* countryCode, char* regionCode, bool isUnderage, char* sdkPath, char* apiPath)
 {
     DidomiInitializeParameters *parameters = [[DidomiInitializeParameters alloc]
         initWithApiKey: CreateNSString(apiKey)
@@ -317,6 +317,8 @@ void initializeWithParameters(char* apiKey, char* localConfigurationPath, char* 
         countryCode: CreateNSStringNullable(countryCode)
         regionCode: CreateNSStringNullable(regionCode)
         isUnderage: isUnderage
+        sdkPath: CreateNSStringNullable(sdkPath)
+        apiPath: CreateNSStringNullable(apiPath)
     ];
     [[Didomi shared] initialize: parameters];
 }

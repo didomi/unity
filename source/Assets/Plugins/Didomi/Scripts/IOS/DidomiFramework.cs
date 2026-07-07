@@ -64,7 +64,9 @@ namespace IO.Didomi.SDK.IOS
                 string noticeId,
                 string countryCode,
                 string regionCode,
-                bool isUnderage
+                bool isUnderage,
+                string sdkPath,
+                string apiPath
         );
 #endif
 
@@ -81,7 +83,9 @@ namespace IO.Didomi.SDK.IOS
                 initializeParameters.noticeId,
                 initializeParameters.countryCode,
                 initializeParameters.regionCode,
-                initializeParameters.isUnderage
+                initializeParameters.isUnderage,
+                initializeParameters.sdkPath,
+                initializeParameters.apiPath
                 );
 #endif
         }

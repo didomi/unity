@@ -79,6 +79,18 @@ namespace IO.Didomi.SDK
         public bool isUnderage { get; }
 
         /// <summary>
+        /// Base URL used to load all static files (didomi_config.json, GVL, IAB vendor list).
+        /// Defaults to the Didomi SDK CDN if null. Must use HTTPS.
+        /// </summary>
+        public string sdkPath { get; }
+
+        /// <summary>
+        /// Base URL used for all API requests (Consents API, cross-device sync, API Events).
+        /// Defaults to the Didomi API if null. Must use HTTPS.
+        /// </summary>
+        public string apiPath { get; }
+
+        /// <summary>
         /// Initialization parameters for Didomi SDK
         /// </summary>
         /// <param name="apiKey">Your API key.</param>
@@ -109,6 +121,8 @@ namespace IO.Didomi.SDK
         /// Keep null to let the Didomi SDK determine the user region.
         /// Ignored if countryCode is not set.</param>
         /// <param name="isUnderage">If set to true, the SDK will only display the underage notice (false by default).</param>
+        /// <param name="sdkPath">Base URL for static files. Defaults to Didomi CDN if null. Must use HTTPS.</param>
+        /// <param name="apiPath">Base URL for API requests. Defaults to Didomi API if null. Must use HTTPS.</param>
         public DidomiInitializeParameters(
             string apiKey,
             string localConfigurationPath = null,
@@ -121,7 +135,9 @@ namespace IO.Didomi.SDK
             bool androidTvEnabled = false,
             string countryCode = null,
             string regionCode = null,
-            bool isUnderage = false
+            bool isUnderage = false,
+            string sdkPath = null,
+            string apiPath = null
         ) {
             this.apiKey = apiKey;
             this.localConfigurationPath = localConfigurationPath;
@@ -135,6 +151,8 @@ namespace IO.Didomi.SDK
             this.countryCode = countryCode;
             this.regionCode = regionCode;
             this.isUnderage = isUnderage;
+            this.sdkPath = sdkPath;
+            this.apiPath = apiPath;
         }
     }
 }
