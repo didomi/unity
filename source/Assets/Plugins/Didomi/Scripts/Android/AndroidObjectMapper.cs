@@ -432,7 +432,9 @@ namespace IO.Didomi.SDK.Android
                     parameters.androidTvEnabled,
                     parameters.countryCode,
                     parameters.regionCode,
-                    parameters.isUnderage);
+                    parameters.isUnderage,
+                    parameters.sdkPath,
+                    parameters.apiPath);
         }
 
         public static AndroidJavaObject ConvertToJavaDidomiUserParameters(DidomiUserParameters parameters, AndroidJavaObject activity) {
