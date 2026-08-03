@@ -792,6 +792,8 @@ public class DemoGUI : MonoBehaviour
         eventListener.SyncError += EventListener_SyncError;
         eventListener.LanguageUpdated += EventListener_LanguageUpdated;
         eventListener.LanguageUpdateFailed += EventListener_LanguageUpdateFailed;
+        eventListener.ShowWidget += EventListener_ShowWidget;
+        eventListener.HideWidget += EventListener_HideWidget;
 
         Didomi.GetInstance().AddEventListener(eventListener);
     }
@@ -956,6 +958,16 @@ public class DemoGUI : MonoBehaviour
     private void EventListener_LanguageUpdateFailed(object sender, LanguageUpdateFailedEvent e)
     {
         message += "\nEvent: LanguageUpdateFailed, Reason=" + e.getReason();
+    }
+
+    private void EventListener_ShowWidget(object sender, ShowWidgetEvent e)
+    {
+        message += "\nEvent: ShowWidget, WidgetId=" + e.getWidgetId() + ", LayerName=" + e.getLayerName();
+    }
+
+    private void EventListener_HideWidget(object sender, HideWidgetEvent e)
+    {
+        message += "\nEvent: HideWidget";
     }
 
     private void VendorStatusListener_VendorStatusChanged(object sender, CurrentUserStatus.VendorStatus status)

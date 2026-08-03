@@ -51,6 +51,10 @@ namespace Assets.Plugins.Scripts.IOS
         DDMEventTypeDCSSignatureReady = 41,
         DDMEventTypeDCSSignatureError = 42,
         DDMEventTypeIntegrationError = 43,
+        // Values 44 to 46 are used by events that are not exposed in the Unity SDK
+        // (ConsentChangedWithObject, OnConsentUIReady, OnConsentUIFinished).
+        DDMEventTypeShowWidget = 47,
+        DDMEventTypeHideWidget = 48,
         DDMEventTypeError = 1000,
     };
 }

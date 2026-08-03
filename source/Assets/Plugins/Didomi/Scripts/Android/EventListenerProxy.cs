@@ -323,6 +323,20 @@ namespace IO.Didomi.SDK.Android
             // An error occurred during integration process
         }
 
+        public void showWidget(AndroidJavaObject @event)
+        {
+            var ShowWidgetEvent = ConvertToShowWidgetEvent(@event);
+
+            _eventListener.OnShowWidget(ShowWidgetEvent);
+            // A widget is being shown
+        }
+
+        public void hideWidget(AndroidJavaObject @event)
+        {
+            _eventListener.OnHideWidget(new HideWidgetEvent());
+            // A widget is being hidden
+        }
+
         private static ErrorEvent ConvertToErrorEvent(AndroidJavaObject @event)
         {
             var errorMessage = GetErrorMessage(@event);
@@ -455,6 +469,14 @@ namespace IO.Didomi.SDK.Android
             return new IntegrationErrorEvent(integrationName, reason);
         }
 
+        private static ShowWidgetEvent ConvertToShowWidgetEvent(AndroidJavaObject @event)
+        {
+            var widgetId = GetWidgetId(@event);
+            var layerName = GetLayerName(@event);
+
+            return new ShowWidgetEvent(widgetId, layerName);
+        }
+
         private static string GetPurposeId(AndroidJavaObject @event)
         {
            return AndroidObjectMapper.GetMethodStringValue(@event, "getPurposeId");
@@ -513,6 +535,16 @@ namespace IO.Didomi.SDK.Android
         private static string GetIntegrationName(AndroidJavaObject @event)
         {
             return AndroidObjectMapper.GetMethodStringValue(@event, "getIntegrationName");
+        }
+
+        private static string GetWidgetId(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getWidgetId");
+        }
+
+        private static string GetLayerName(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getLayerName");
         }
     }
 }
