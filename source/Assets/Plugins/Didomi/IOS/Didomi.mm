@@ -834,7 +834,7 @@ void removeSyncAcknowledgedCallback(int eventIndex) {
     syncAcknowledgedCallbacks[@(eventIndex)] = nil;
 }
 
-void addEventListener( void (*event_listener_handler) (int, char *), void (*sync_ready_event_listener_handler) (int, char *, int, int), void (*integration_error_event_listener_handler) (int, char *, char *))
+void addEventListener( void (*event_listener_handler) (int, char *), void (*sync_ready_event_listener_handler) (int, char *, int, int), void (*integration_error_event_listener_handler) (int, char *, char *), void (*show_widget_event_listener_handler) (int, char *, char *))
 {
 
     if(eventListener==nil)
@@ -1104,6 +1104,23 @@ void addEventListener( void (*event_listener_handler) (int, char *), void (*sync
         char * reason = convertNSStringToCString([event reason]);
 
         integration_error_event_listener_handler(DDMEventTypeIntegrationError, integrationName, reason);
+
+    };
+
+    // The iOS SDK exposes the property as `widgetID` while the Android SDK uses `widgetId`.
+    // It is mapped to `widgetId` on the C# side so that both platforms share the same event class.
+    eventListener.onShowWidget = ^(DDMShowWidgetEvent * event){
+
+        char * widgetId = convertNSStringToCString([event widgetID]);
+        char * layerName = convertNSStringToCString([event layerName]);
+
+        show_widget_event_listener_handler(DDMEventTypeShowWidget, widgetId, layerName);
+
+    };
+
+    eventListener.onHideWidget = ^(DDMHideWidgetEvent * event){
+
+        event_listener_handler(DDMEventTypeHideWidget, NULL);
 
     };
 

@@ -463,9 +463,11 @@ namespace IO.Didomi.SDK.IOS
 
         public delegate void OnIntegrationErrorEventListenerDelegate(int eventType, string integrationName, string reason);
 
+        public delegate void OnShowWidgetEventListenerDelegate(int eventType, string widgetId, string layerName);
+
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate, OnSyncReadyEventListenerDelegate syncReadyEventListenerDelegate, OnIntegrationErrorEventListenerDelegate integrationErrorEventListenerDelegate);
+        private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate, OnSyncReadyEventListenerDelegate syncReadyEventListenerDelegate, OnIntegrationErrorEventListenerDelegate integrationErrorEventListenerDelegate, OnShowWidgetEventListenerDelegate showWidgetEventListenerDelegate);
 
         [DllImport("__Internal")]
         private static extern int syncAcknowledgedCallback(int callbackIndex);
@@ -478,7 +480,7 @@ namespace IO.Didomi.SDK.IOS
         {
             eventListenerInner = eventListener;
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            addEventListener(CallOnEventListenerDelegate, CallOnSyncReadyEventListenerDelegate, CallOnIntegrationErrorEventListenerDelegate);
+            addEventListener(CallOnEventListenerDelegate, CallOnSyncReadyEventListenerDelegate, CallOnIntegrationErrorEventListenerDelegate, CallOnShowWidgetEventListenerDelegate);
 #endif
         }
 
@@ -616,6 +618,9 @@ namespace IO.Didomi.SDK.IOS
                 case DDMEventType.DDMEventTypeDCSSignatureReady:
                     eventListenerInner.OnDcsSignatureReady(new DcsSignatureReadyEvent());
                     break;
+                case DDMEventType.DDMEventTypeHideWidget:
+                    eventListenerInner.OnHideWidget(new HideWidgetEvent());
+                    break;
                 default:
                     break;
             }
@@ -658,6 +663,21 @@ namespace IO.Didomi.SDK.IOS
                     eventListenerInner.OnIntegrationError(new IntegrationErrorEvent(
                         integrationName,
                         reason
+                    ));
+                    break;
+            }
+        }
+
+        [AOT.MonoPInvokeCallback(typeof(OnShowWidgetEventListenerDelegate))]
+        static void CallOnShowWidgetEventListenerDelegate(int eventType, string widgetId, string layerName)
+        {
+            DDMEventType eventTypeEnum = (DDMEventType)eventType;
+            switch (eventTypeEnum)
+            {
+                case DDMEventType.DDMEventTypeShowWidget:
+                    eventListenerInner.OnShowWidget(new ShowWidgetEvent(
+                        widgetId,
+                        layerName
                     ));
                     break;
             }

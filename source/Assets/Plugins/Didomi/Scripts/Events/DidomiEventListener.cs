@@ -190,6 +190,14 @@ namespace IO.Didomi.SDK.Events
         /// An error occurred in the Didomi SDK integration
         /// </summary>
         public event EventHandler<IntegrationErrorEvent> IntegrationError;
+        /// <summary>
+        /// A widget has been displayed
+        /// </summary>
+        public event EventHandler<ShowWidgetEvent> ShowWidget;
+        /// <summary>
+        /// A widget has been hidden
+        /// </summary>
+        public event EventHandler<HideWidgetEvent> HideWidget;
 
         public DidomiEventListener() { }
 
@@ -453,6 +461,18 @@ namespace IO.Didomi.SDK.Events
         {
             IntegrationError?.Invoke(this, @event);
             // An error occurred during Didomi SDK integration
+        }
+
+        public void OnShowWidget(ShowWidgetEvent @event)
+        {
+            ShowWidget?.Invoke(this, @event);
+            // A widget is being shown
+        }
+
+        public void OnHideWidget(HideWidgetEvent @event)
+        {
+            HideWidget?.Invoke(this, @event);
+            // A widget is being hidden
         }
     }
 }
