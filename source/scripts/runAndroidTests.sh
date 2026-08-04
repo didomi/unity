@@ -13,6 +13,12 @@ UNITY_PATH=$(awk -F= '/^editor/ {print $2}' $scriptsDir/unity.properties)
 RESULTS_PATH="artifacts/android-test-results.xml"
 LOG_PATH="artifacts/androidTestsRun.log"
 
+# Use a dedicated Gradle home so the build ignores the user's global
+# ~/.gradle/gradle.properties. Settings there (org.gradle.java.home pointing at a
+# JDK newer than Unity's Gradle supports, configuration-cache, configureondemand)
+# break the Android player build. Keeps local runs consistent with CI.
+export GRADLE_USER_HOME="$scriptsDir/../artifacts/.gradle"
+
 # Check for any Android emulator / device
 connected_devices=$(adb devices | grep -v "List" | grep "device$")
 if [ -z "$connected_devices" ]; then
