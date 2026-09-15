@@ -128,6 +128,18 @@ namespace IO.Didomi.SDK.UnityEditor
             return "";
         }
 
+        public string GetUserCountryCode()
+        {
+            LogStub("GetUserCountryCode");
+            return "";
+        }
+
+        public string GetUserRegionCode()
+        {
+            LogStub("GetUserRegionCode");
+            return "";
+        }
+
         public Vendor GetVendor(string vendorId)
         {
             LogStub("GetVendor");

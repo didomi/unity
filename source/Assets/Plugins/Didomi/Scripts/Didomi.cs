@@ -255,6 +255,22 @@ namespace IO.Didomi.SDK
         }
 
         /// <summary>
+        /// Get the country code of the user, as determined by the SDK after initialization.
+        /// </summary>
+        public string GetUserCountryCode()
+        {
+            return didomiForPlatform.GetUserCountryCode();
+        }
+
+        /// <summary>
+        /// Get the region code of the user, as determined by the SDK after initialization.
+        /// </summary>
+        public string GetUserRegionCode()
+        {
+            return didomiForPlatform.GetUserRegionCode();
+        }
+
+        /// <summary>
         /// Get a vendor from its ID
         /// </summary>
         /// <param name="vendorId"></param>

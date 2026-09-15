@@ -356,6 +356,18 @@ int getApplicableRegulation()
     return [didomi applicableRegulation];
 }
 
+char* getUserCountryCode()
+{
+    NSString *countryCode = [Didomi shared].userCountryCode;
+    return cStringCopy([countryCode UTF8String]);
+}
+
+char* getUserRegionCode()
+{
+    NSString *regionCode = [Didomi shared].userRegionCode;
+    return cStringCopy([regionCode UTF8String]);
+}
+
 void hideNotice()
 {
     [[Didomi shared] hideNotice];
