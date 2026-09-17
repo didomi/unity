@@ -186,6 +186,34 @@ namespace IO.Didomi.SDK.IOS
         private static extern int getApplicableRegulation();
 #endif
 
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern string getUserCountryCode();
+#endif
+
+        public static string GetUserCountryCode()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getUserCountryCode();
+#else
+            return String.Empty;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern string getUserRegionCode();
+#endif
+
+        public static string GetUserRegionCode()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return getUserRegionCode();
+#else
+            return String.Empty;
+#endif
+        }
+
         internal static int GetApplicableRegulation()
         {
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR

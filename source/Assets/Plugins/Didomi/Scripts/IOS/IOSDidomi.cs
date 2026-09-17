@@ -149,6 +149,16 @@ namespace IO.Didomi.SDK.IOS
             return IOSObjectMapper.ConvertFromRegulationEnumToString(regulationEnum);
         }
 
+        public string GetUserCountryCode()
+        {
+            return DidomiFramework.GetUserCountryCode();
+        }
+
+        public string GetUserRegionCode()
+        {
+            return DidomiFramework.GetUserRegionCode();
+        }
+
         public void HideNotice()
         {
             DidomiFramework.HideNotice();
