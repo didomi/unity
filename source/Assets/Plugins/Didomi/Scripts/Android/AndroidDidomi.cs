@@ -143,6 +143,16 @@ namespace IO.Didomi.SDK.Android
             return obj.Call<string>("getValue");
         }
 
+        public string GetUserCountryCode()
+        {
+            return CallReturningStringMethod("getUserCountryCode");
+        }
+
+        public string GetUserRegionCode()
+        {
+            return CallReturningStringMethod("getUserRegionCode");
+        }
+
         public Vendor GetVendor(string vendorId)
         {
             var obj = CallReturningJavaObjectMethod("getVendor", vendorId);
