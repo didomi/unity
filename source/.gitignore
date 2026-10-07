@@ -68,3 +68,12 @@ crashlytics-build.properties
 
 
 # End of https://www.gitignore.io/api/unity
+
+# Unity test runner and template upgrade leftovers
+/[Aa]ssets/InitTestScene*
+*.backup
+*.backup.meta
+
+# Native iOS SDK, downloaded by updateNativeSdks.sh
+/[Aa]ssets/Plugins/Didomi/IOS/Didomi.xcframework/
+/[Aa]ssets/Plugins/Didomi/IOS/Didomi.xcframework.meta

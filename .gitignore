@@ -1,4 +1,10 @@
 .DS_Store
-packages-lock.json
-**/UserSettings/
+.utmp
+*.slnx
+
 unzip_log.txt
+
+**/UserSettings/
+
+source/artifacts
+packages-lock.json
