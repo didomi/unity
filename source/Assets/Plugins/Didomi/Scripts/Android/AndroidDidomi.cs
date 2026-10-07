@@ -310,6 +310,31 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
+        public void ShowWidget(DidomiWidgetParameters parameters)
+        {
+            RunOnUiThread(activity =>
+            {
+                var javaParameters = AndroidObjectMapper.ConvertToJavaDidomiWidgetParameters(parameters);
+                CallVoidMethod("showWidget", activity, javaParameters);
+            });
+        }
+
+        public void HideWidget()
+        {
+            RunOnUiThread(activity => CallVoidMethod("hideWidget"));
+        }
+
+        public bool IsWidgetVisible(string widgetId)
+        {
+            if (widgetId == null)
+            {
+                return CallReturningBoolMethod("isWidgetVisible");
+            }
+
+            var javaParameters = AndroidObjectMapper.ConvertToJavaDidomiWidgetParameters(new DidomiWidgetParameters(widgetId));
+            return CallReturningBoolMethod("isWidgetVisible", javaParameters);
+        }
+
         public void Reset()
         {
             CallVoidMethod("reset");
@@ -607,6 +632,33 @@ namespace IO.Didomi.SDK.Android
                 {
                     args[i] = nullObject;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Run an action on the Android UI thread, providing the current activity.
+        /// Exceptions are logged since they cannot be propagated to the caller.
+        /// </summary>
+        private static void RunOnUiThread(Action<AndroidJavaObject> action)
+        {
+            using (var playerClass = new AndroidJavaClass(UnityPlayerFullClassName))
+            {
+                var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity");
+                activity.Call("runOnUiThread", new AndroidJavaRunnable(() =>
+                {
+                    try
+                    {
+                        action(activity);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError(string.Format("Exception:{0}", ex.ToString()));
+                    }
+                    finally
+                    {
+                        activity.Dispose();
+                    }
+                }));
             }
         }
 

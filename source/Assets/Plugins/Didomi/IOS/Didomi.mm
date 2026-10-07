@@ -398,6 +398,25 @@ void showPreferences(int intView)
     [[Didomi shared] showPreferencesWithController:(UnityGetGLViewController()) view:(Views)intView];
 }
 
+void showWidget(char* widgetId, char* layerName)
+{
+    DidomiWidgetParameters *parameters = [[DidomiWidgetParameters alloc]
+        initWithWidgetID:CreateNSStringNullable(widgetId)
+        layerName:CreateNSStringNullable(layerName)];
+    [[Didomi shared] showWidgetWithController:(UnityGetGLViewController()) parameters:parameters];
+}
+
+void hideWidget()
+{
+    [[Didomi shared] hideWidget];
+}
+
+int isWidgetVisible(char* widgetId)
+{
+    DidomiWidgetParameters *parameters = [[DidomiWidgetParameters alloc] initWithWidgetID:CreateNSStringNullable(widgetId)];
+    return convertBoolToInt([[Didomi shared] isWidgetVisibleWithParameters:parameters]);
+}
+
 int isUserConsentStatusPartial()
 {
     return convertBoolToInt([[Didomi shared] isUserConsentStatusPartial]);

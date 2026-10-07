@@ -51,6 +51,9 @@ namespace IO.Didomi.SDK.Interfaces
         void SetupUI();
         void ShowNotice();
         void ShowPreferences(Didomi.Views view);
+        void ShowWidget(DidomiWidgetParameters parameters);
+        void HideWidget();
+        bool IsWidgetVisible(string widgetId);
         void Reset();
         bool SetUserAgreeToAll();
         bool SetUserDisagreeToAll();
