@@ -502,6 +502,7 @@ namespace IO.Didomi.SDK
         /// Show a widget. The SDK must be ready (on iOS, the call is deferred until the SDK is ready).
         /// Widgets are only available when the Didomi UI is rendered by the Web SDK.
         /// A ShowWidget event is triggered when the widget is displayed.
+        /// Beta: this API is in beta - Privacy widget feature is still in development
         /// </summary>
         /// <param name="parameters">Optional: widget ID and layer name. When not provided, the widget and layer are selected by the Rules Engine.</param>
         public void ShowWidget(DidomiWidgetParameters parameters = null)
@@ -512,6 +513,7 @@ namespace IO.Didomi.SDK
         /// <summary>
         /// Hide the currently displayed widget, if any. Unsaved changes are discarded.
         /// A HideWidget event is triggered when the widget is hidden.
+        /// Beta: this API is in beta - Privacy widget feature is still in development
         /// </summary>
         public void HideWidget()
         {
@@ -520,6 +522,7 @@ namespace IO.Didomi.SDK
 
         /// <summary>
         /// Check if a widget is currently displayed.
+        /// Beta: this API is in beta - Privacy widget feature is still in development
         /// </summary>
         /// <param name="widgetId">Optional: ID of the widget to check. When not provided, any displayed widget matches.</param>
         /// <returns>true if the widget (or any widget if no ID is provided) is displayed, false otherwise.</returns>
