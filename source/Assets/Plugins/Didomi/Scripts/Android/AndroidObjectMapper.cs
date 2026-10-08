@@ -461,6 +461,14 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
+        public static AndroidJavaObject ConvertToJavaDidomiWidgetParameters(DidomiWidgetParameters parameters)
+        {
+            return new AndroidJavaObject(
+                "io.didomi.sdk.DidomiWidgetParameters",
+                parameters.WidgetId,
+                parameters.LayerName);
+        }
+
         public static AndroidJavaObject ConvertToJavaUserAuth(UserAuth parameters)
         {
             if (parameters == null)

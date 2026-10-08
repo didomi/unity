@@ -310,6 +310,34 @@ namespace IO.Didomi.SDK.Android
             }
         }
 
+        public void ShowWidget(DidomiWidgetParameters parameters)
+        {
+            using (var playerClass = new AndroidJavaClass(UnityPlayerFullClassName))
+            {
+                using (var activity = playerClass.GetStatic<AndroidJavaObject>("currentActivity"))
+                {
+                    var javaParameters = AndroidObjectMapper.ConvertToJavaDidomiWidgetParameters(parameters);
+                    CallVoidMethod("showWidget", activity, javaParameters);
+                }
+            }
+        }
+
+        public void HideWidget()
+        {
+            CallVoidMethod("hideWidget");
+        }
+
+        public bool IsWidgetVisible(string widgetId)
+        {
+            if (widgetId == null)
+            {
+                return CallReturningBoolMethod("isWidgetVisible");
+            }
+
+            var javaParameters = AndroidObjectMapper.ConvertToJavaDidomiWidgetParameters(new DidomiWidgetParameters(widgetId));
+            return CallReturningBoolMethod("isWidgetVisible", javaParameters);
+        }
+
         public void Reset()
         {
             CallVoidMethod("reset");
