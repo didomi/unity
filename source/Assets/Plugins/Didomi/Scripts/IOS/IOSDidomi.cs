@@ -214,6 +214,21 @@ namespace IO.Didomi.SDK.IOS
              DidomiFramework.ShowPreferences(view);
         }
 
+        public void ShowWidget(DidomiWidgetParameters parameters)
+        {
+            DidomiFramework.ShowWidget(parameters);
+        }
+
+        public void HideWidget()
+        {
+            DidomiFramework.HideWidget();
+        }
+
+        public bool IsWidgetVisible(string widgetId)
+        {
+            return DidomiFramework.IsWidgetVisible(widgetId);
+        }
+
         public bool IsUserConsentStatusPartial()
         {
             return DidomiFramework.IsUserConsentStatusPartial();

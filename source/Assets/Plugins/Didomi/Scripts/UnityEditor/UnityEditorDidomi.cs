@@ -256,6 +256,22 @@ namespace IO.Didomi.SDK.UnityEditor
             ShowPreferencesMockUI();
         }
 
+        public void ShowWidget(DidomiWidgetParameters parameters)
+        {
+            LogStub("ShowWidget");
+        }
+
+        public void HideWidget()
+        {
+            LogStub("HideWidget");
+        }
+
+        public bool IsWidgetVisible(string widgetId)
+        {
+            LogStub("IsWidgetVisible");
+            return false;
+        }
+
         public bool IsUserConsentStatusPartial()
         {
             LogStub("IsUserConsentStatusPartial");

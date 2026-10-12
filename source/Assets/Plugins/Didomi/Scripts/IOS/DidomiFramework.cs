@@ -305,6 +305,44 @@ namespace IO.Didomi.SDK.IOS
 
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
+        private static extern void showWidget(string widgetId, string layerName);
+#endif
+
+        public static void ShowWidget(DidomiWidgetParameters parameters)
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            showWidget(parameters.WidgetId, parameters.LayerName);
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern void hideWidget();
+#endif
+
+        public static void HideWidget()
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            hideWidget();
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern int isWidgetVisible(string widgetId);
+#endif
+
+        public static bool IsWidgetVisible(string widgetId)
+        {
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            return isWidgetVisible(widgetId) == 1;
+#else
+            return false;
+#endif
+        }
+
+#if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [DllImport("__Internal")]
         private static extern int isUserConsentStatusPartial();
 #endif
 
