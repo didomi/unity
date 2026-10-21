@@ -74,12 +74,12 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     [UnityTest]
     public IEnumerator TestSyncUser()
     {
-        Didomi.GetInstance().SetUser(new DidomiUserParameters(new UserAuthWithoutParams(testUserId)));
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(new UserAuthWithoutParams(plainUserId)));
         yield return ExpectSyncSuccess("Set user with id", true);
 
         ResetResults();
 
-        Didomi.GetInstance().SetUserAndSetupUI(new DidomiUserParameters(new UserAuthWithoutParams(testUserId)));
+        Didomi.GetInstance().SetUserAndSetupUI(new DidomiUserParameters(new UserAuthWithoutParams(plainUserId)));
         yield return ExpectSyncSuccess("Set user with id and setup UI", false);
 
         ResetResults();
@@ -309,7 +309,7 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     [Obsolete]
     public IEnumerator TestLegacySync()
     {
-        Didomi.GetInstance().SetUser(testUserId);
+        Didomi.GetInstance().SetUser(plainUserId);
         yield return ExpectSyncSuccess("Set user with id", true);
 
         ResetResults();

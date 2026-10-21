@@ -12,6 +12,10 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
 {
     protected const string testUserId = "d13e49f6255c8729cbb201310f49d70d65f365415a67f034b567b7eac962b944eda131376594ef5e23b025fada4e4259e953ceb45ea57a2ced7872c567e6d1fae8dcc3a9772ead783d8513032e77d3fd";
 
+    // Plain user id used for successful syncs, unique per run: a long-lived id accumulates
+    // server-side history until the sync request exceeds the native SDK timeout.
+    protected static readonly string plainUserId = "unity-tests-" + Guid.NewGuid().ToString("N");
+
     private bool syncError = false;
     private string syncDoneUserId = null;
     private string syncReadyUserId = null;
@@ -98,8 +102,8 @@ public abstract class SyncUserBaseTests : DidomiBaseTests
     {
         yield return WaitForCallback();
 
-        Assert.AreEqual(testUserId, syncDoneUserId, "Sync done User Id - " + message);
-        Assert.AreEqual(testUserId, syncReadyUserId, "Sync ready User Id - " + message);
+        Assert.AreEqual(plainUserId, syncDoneUserId, "Sync done User Id - " + message);
+        Assert.AreEqual(plainUserId, syncReadyUserId, "Sync ready User Id - " + message);
         Assert.IsFalse(syncError, "Sync error - " + message);
         if (completeCheck)
         {

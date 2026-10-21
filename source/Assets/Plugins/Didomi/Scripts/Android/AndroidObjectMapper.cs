@@ -448,7 +448,8 @@ namespace IO.Didomi.SDK.Android
                     ConvertToJavaUserAuthParams(multiUserParameters.DcsUserAuth),
                     ConvertToJavaUserAuthList(multiUserParameters.SynchronizedUsers),
                     activity,
-                    isUnderage);
+                    isUnderage,
+                    null); // userContext (added in native SDK 2.52.0)
             }
             else
             {

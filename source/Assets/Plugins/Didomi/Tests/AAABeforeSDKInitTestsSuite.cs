@@ -42,7 +42,7 @@ public class AAABeforeSDKInitTestsSuite : SyncUserBaseTests
         // Update synchronized user token to make sure it doesn't expire in a future test
         if (Didomi.GetInstance().IsReady())
         {
-            Didomi.GetInstance().SetUser(new DidomiUserParameters(new UserAuthWithoutParams(testUserId)));
+            Didomi.GetInstance().SetUser(new DidomiUserParameters(new UserAuthWithoutParams(plainUserId)));
             Didomi.GetInstance().SetUserDisagreeToAll();
             Didomi.GetInstance().SetUserAgreeToAll();
         }
@@ -53,8 +53,9 @@ public class AAABeforeSDKInitTestsSuite : SyncUserBaseTests
     /// Tests related to user status synchronization between platforms before SDK was initialized
     public IEnumerator TestSyncBeforeInit()
     {
-        Didomi.GetInstance().SetUser(new DidomiUserParameters(new UserAuthWithoutParams(testUserId)));
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(new UserAuthWithoutParams(plainUserId)));
         yield return LoadSdk();
-        yield return ExpectSyncSuccess("Set user before initialization", true, true, !sdkWasReady);
+        // First sync of a fresh user: no remote status exists yet, so nothing is applied
+        yield return ExpectSyncSuccess("Set user before initialization", false, false, !sdkWasReady);
     }
 }
