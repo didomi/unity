@@ -198,6 +198,10 @@ namespace IO.Didomi.SDK.Events
         /// A widget has been hidden
         /// </summary>
         public event EventHandler<HideWidgetEvent> HideWidget;
+        /// <summary>
+        /// The user navigated to another layer of a widget
+        /// </summary>
+        public event EventHandler<WidgetSwitchLayerEvent> WidgetSwitchLayer;
 
         public DidomiEventListener() { }
 
@@ -473,6 +477,12 @@ namespace IO.Didomi.SDK.Events
         {
             HideWidget?.Invoke(this, @event);
             // A widget is being hidden
+        }
+
+        public void OnWidgetSwitchLayer(WidgetSwitchLayerEvent @event)
+        {
+            WidgetSwitchLayer?.Invoke(this, @event);
+            // The user navigated to another layer of a widget
         }
     }
 }

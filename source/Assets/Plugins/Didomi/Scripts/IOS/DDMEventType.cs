@@ -55,6 +55,7 @@ namespace Assets.Plugins.Scripts.IOS
         // (ConsentChangedWithObject, OnConsentUIReady, OnConsentUIFinished).
         DDMEventTypeShowWidget = 47,
         DDMEventTypeHideWidget = 48,
+        DDMEventTypeWidgetSwitchLayer = 49,
         DDMEventTypeError = 1000,
     };
 }

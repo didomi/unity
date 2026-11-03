@@ -794,6 +794,7 @@ public class DemoGUI : MonoBehaviour
         eventListener.LanguageUpdateFailed += EventListener_LanguageUpdateFailed;
         eventListener.ShowWidget += EventListener_ShowWidget;
         eventListener.HideWidget += EventListener_HideWidget;
+        eventListener.WidgetSwitchLayer += EventListener_WidgetSwitchLayer;
 
         Didomi.GetInstance().AddEventListener(eventListener);
     }
@@ -968,6 +969,11 @@ public class DemoGUI : MonoBehaviour
     private void EventListener_HideWidget(object sender, HideWidgetEvent e)
     {
         message += "\nEvent: HideWidget";
+    }
+
+    private void EventListener_WidgetSwitchLayer(object sender, WidgetSwitchLayerEvent e)
+    {
+        message += "\nEvent: WidgetSwitchLayer, WidgetId=" + e.getWidgetId() + ", LayerName=" + e.getLayerName() + ", TargetLayerName=" + e.getTargetLayerName();
     }
 
     private void VendorStatusListener_VendorStatusChanged(object sender, CurrentUserStatus.VendorStatus status)
