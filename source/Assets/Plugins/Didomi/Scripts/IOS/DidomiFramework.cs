@@ -533,9 +533,11 @@ namespace IO.Didomi.SDK.IOS
 
         public delegate void OnWidgetSwitchLayerEventListenerDelegate(int eventType, string widgetId, string layerName, string targetLayerName);
 
+        public delegate void OnWidgetCustomActionEventListenerDelegate(int eventType, string widgetId, string layerName, string customActionId);
+
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
-        private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate, OnSyncReadyEventListenerDelegate syncReadyEventListenerDelegate, OnIntegrationErrorEventListenerDelegate integrationErrorEventListenerDelegate, OnShowWidgetEventListenerDelegate showWidgetEventListenerDelegate, OnWidgetSwitchLayerEventListenerDelegate widgetSwitchLayerEventListenerDelegate);
+        private static extern void addEventListener(OnEventListenerDelegate eventListenerDelegate, OnSyncReadyEventListenerDelegate syncReadyEventListenerDelegate, OnIntegrationErrorEventListenerDelegate integrationErrorEventListenerDelegate, OnShowWidgetEventListenerDelegate showWidgetEventListenerDelegate, OnWidgetSwitchLayerEventListenerDelegate widgetSwitchLayerEventListenerDelegate, OnWidgetCustomActionEventListenerDelegate widgetCustomActionEventListenerDelegate);
 
         [DllImport("__Internal")]
         private static extern int syncAcknowledgedCallback(int callbackIndex);
@@ -548,7 +550,7 @@ namespace IO.Didomi.SDK.IOS
         {
             eventListenerInner = eventListener;
 #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
-            addEventListener(CallOnEventListenerDelegate, CallOnSyncReadyEventListenerDelegate, CallOnIntegrationErrorEventListenerDelegate, CallOnShowWidgetEventListenerDelegate, CallOnWidgetSwitchLayerEventListenerDelegate);
+            addEventListener(CallOnEventListenerDelegate, CallOnSyncReadyEventListenerDelegate, CallOnIntegrationErrorEventListenerDelegate, CallOnShowWidgetEventListenerDelegate, CallOnWidgetSwitchLayerEventListenerDelegate, CallOnWidgetCustomActionEventListenerDelegate);
 #endif
         }
 
@@ -762,6 +764,22 @@ namespace IO.Didomi.SDK.IOS
                         widgetId,
                         layerName,
                         targetLayerName
+                    ));
+                    break;
+            }
+        }
+
+        [AOT.MonoPInvokeCallback(typeof(OnWidgetCustomActionEventListenerDelegate))]
+        static void CallOnWidgetCustomActionEventListenerDelegate(int eventType, string widgetId, string layerName, string customActionId)
+        {
+            DDMEventType eventTypeEnum = (DDMEventType)eventType;
+            switch (eventTypeEnum)
+            {
+                case DDMEventType.DDMEventTypeWidgetCustomAction:
+                    eventListenerInner.OnWidgetCustomAction(new WidgetCustomActionEvent(
+                        widgetId,
+                        layerName,
+                        customActionId
                     ));
                     break;
             }

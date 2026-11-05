@@ -202,6 +202,10 @@ namespace IO.Didomi.SDK.Events
         /// The user navigated to another layer of a widget
         /// </summary>
         public event EventHandler<WidgetSwitchLayerEvent> WidgetSwitchLayer;
+        /// <summary>
+        /// A custom action button was clicked in a widget
+        /// </summary>
+        public event EventHandler<WidgetCustomActionEvent> WidgetCustomAction;
 
         public DidomiEventListener() { }
 
@@ -483,6 +487,12 @@ namespace IO.Didomi.SDK.Events
         {
             WidgetSwitchLayer?.Invoke(this, @event);
             // The user navigated to another layer of a widget
+        }
+
+        public void OnWidgetCustomAction(WidgetCustomActionEvent @event)
+        {
+            WidgetCustomAction?.Invoke(this, @event);
+            // A custom action button was clicked in a widget
         }
     }
 }

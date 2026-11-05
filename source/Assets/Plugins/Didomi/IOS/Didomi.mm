@@ -865,7 +865,7 @@ void removeSyncAcknowledgedCallback(int eventIndex) {
     syncAcknowledgedCallbacks[@(eventIndex)] = nil;
 }
 
-void addEventListener( void (*event_listener_handler) (int, char *), void (*sync_ready_event_listener_handler) (int, char *, int, int), void (*integration_error_event_listener_handler) (int, char *, char *), void (*show_widget_event_listener_handler) (int, char *, char *), void (*widget_switch_layer_event_listener_handler) (int, char *, char *, char *))
+void addEventListener( void (*event_listener_handler) (int, char *), void (*sync_ready_event_listener_handler) (int, char *, int, int), void (*integration_error_event_listener_handler) (int, char *, char *), void (*show_widget_event_listener_handler) (int, char *, char *), void (*widget_switch_layer_event_listener_handler) (int, char *, char *, char *), void (*widget_custom_action_event_listener_handler) (int, char *, char *, char *))
 {
 
     if(eventListener==nil)
@@ -1162,6 +1162,16 @@ void addEventListener( void (*event_listener_handler) (int, char *), void (*sync
         char * targetLayerName = convertNSStringToCString([event targetLayerName]);
 
         widget_switch_layer_event_listener_handler(DDMEventTypeWidgetSwitchLayer, widgetId, layerName, targetLayerName);
+
+    };
+
+    eventListener.onWidgetCustomAction = ^(DDMWidgetCustomActionEvent * event){
+
+        char * widgetId = convertNSStringToCString([event widgetID]);
+        char * layerName = convertNSStringToCString([event layerName]);
+        char * customActionId = convertNSStringToCString([event customActionID]);
+
+        widget_custom_action_event_listener_handler(DDMEventTypeWidgetCustomAction, widgetId, layerName, customActionId);
 
     };
 

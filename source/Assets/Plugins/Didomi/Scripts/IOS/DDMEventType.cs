@@ -56,6 +56,7 @@ namespace Assets.Plugins.Scripts.IOS
         DDMEventTypeShowWidget = 47,
         DDMEventTypeHideWidget = 48,
         DDMEventTypeWidgetSwitchLayer = 49,
+        DDMEventTypeWidgetCustomAction = 50,
         DDMEventTypeError = 1000,
     };
 }
