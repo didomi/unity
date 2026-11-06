@@ -28,6 +28,7 @@ namespace Assets.Plugins.Scripts.IOS
         tipa = 19,
         ucpa = 20,
         vcdpa = 21,
+        custom = 23,
         none = 10000
     };
 }

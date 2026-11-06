@@ -57,11 +57,17 @@ namespace IO.Didomi.SDK
         public string AdditionalConsent { get; set; } = string.Empty;
 
         /// <summary>
-        /// Current regulation, such as "gdpr", "cpra"... or "none"
+        /// Current regulation, such as "gdpr", "cpra", "custom"... or "none"
         /// </summary>
         [JsonProperty("regulation")]
         [JsonConverter(typeof(JsonRegulationConverter))]
         public string Regulation { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Current regulation configuration (if a regulation configuration is provided), or null
+        /// </summary>
+        [JsonProperty("regulation_configuration")]
+        public RegulationConfiguration RegulationConfiguration { get; set; } = null;
 
         /// <summary>
         /// Didomi Consent String

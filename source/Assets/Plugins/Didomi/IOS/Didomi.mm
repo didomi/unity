@@ -61,6 +61,20 @@ char* ConvertComplexDictionaryToString(NSDictionary * dataDict)
 }
 
 /**
+ Method used to map regulation configuration from DDMRegulationConfiguration to a NSDictionary.
+ */
+NSDictionary* MapRegulationConfigurationToDictionary(DDMRegulationConfiguration *regulationConfiguration) {
+    return @{
+        @"id": [regulationConfiguration id],
+        @"versionId": [regulationConfiguration versionId] ?: [NSNull null],
+        @"numericalId": [regulationConfiguration numericalId] ?: [NSNull null],
+        @"regulationName": [regulationConfiguration regulationName],
+        @"tokenStorageName": [regulationConfiguration tokenStorageName],
+        @"mixed": [NSNumber numberWithInt: convertBoolToInt([regulationConfiguration mixed])]
+    };
+}
+
+/**
  Method used to map current user status from DDMCurrentUserStatus to a JSON string.
  */
 char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
@@ -74,6 +88,7 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
     NSInteger regulation = [currentUserStatus regulation];
     NSString *didomiDCS = [currentUserStatus didomiDCS];
     NSString *gppString = [currentUserStatus gppString];
+    DDMRegulationConfiguration *regulationConfiguration = [currentUserStatus regulationConfiguration];
     
     NSMutableDictionary *vendorsStatusJson = [NSMutableDictionary dictionary];
     NSDictionary<NSString *, DDMCurrentUserStatusVendor *> *vendorsStatus = [currentUserStatus vendors];
@@ -104,6 +119,7 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
         @"regulation": [NSNumber numberWithLong: regulation],
         @"didomi_dcs": didomiDCS,
         @"gpp_string": gppString,
+        @"regulation_configuration": regulationConfiguration ? MapRegulationConfigurationToDictionary(regulationConfiguration) : [NSNull null],
         @"purposes": purposesStatusJson,
         @"vendors": vendorsStatusJson
     };
@@ -354,6 +370,15 @@ int getApplicableRegulation()
     Didomi *didomi = [Didomi shared];
     // Enum becomes integer in Objective-C
     return [didomi applicableRegulation];
+}
+
+char* getApplicableRegulationConfiguration()
+{
+    DDMRegulationConfiguration *regulationConfiguration = [[Didomi shared] applicableRegulationConfiguration];
+    if (regulationConfiguration) {
+        return ConvertComplexDictionaryToString(MapRegulationConfigurationToDictionary(regulationConfiguration));
+    }
+    return nil;
 }
 
 char* getUserCountryCode()

@@ -30,6 +30,7 @@ namespace IO.Didomi.SDK.Interfaces
         );
         UserStatus GetUserStatus();
         string GetApplicableRegulation();
+        RegulationConfiguration GetApplicableRegulationConfiguration();
         string GetUserCountryCode();
         string GetUserRegionCode();
         Vendor GetVendor(string vendorId);

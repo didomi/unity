@@ -28,4 +28,18 @@ public class ApplicableRegulationTestsSuite: DidomiBaseTests
         Assert.AreEqual("gdpr", result);
     }
 
+    [Test]
+    public void TestApplicableRegulationConfiguration()
+    {
+        var result = Didomi.GetInstance().GetApplicableRegulationConfiguration();
+        Assert.IsNull(result);
+    }
+
+    [Test]
+    public void TestCurrentUserStatusRegulationConfiguration()
+    {
+        var result = Didomi.GetInstance().GetCurrentUserStatus();
+        Assert.IsNull(result.RegulationConfiguration);
+    }
+
 }

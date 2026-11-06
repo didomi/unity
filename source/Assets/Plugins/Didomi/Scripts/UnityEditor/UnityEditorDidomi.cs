@@ -128,6 +128,12 @@ namespace IO.Didomi.SDK.UnityEditor
             return "";
         }
 
+        public RegulationConfiguration GetApplicableRegulationConfiguration()
+        {
+            LogStub("GetApplicableRegulationConfiguration");
+            return null;
+        }
+
         public string GetUserCountryCode()
         {
             LogStub("GetUserCountryCode");
