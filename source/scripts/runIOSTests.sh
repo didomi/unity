@@ -24,6 +24,9 @@ RESULTS_FILE_NAME="ios-test-results.xml"
 TIMEOUT=${IOS_TESTS_TIMEOUT:-900}
 
 mkdir -p "$projectDir/artifacts"
+
+. "$scriptsDir/ensureUnityClosed.sh"
+ensure_unity_closed "$projectDir" || exit 1
 rm -rf "$PLAYER_PATH" "$DERIVED_DATA_PATH" "$RESULTS_PATH" "$PLAYER_LOG_PATH"
 
 # Generate the Xcode project with tests
