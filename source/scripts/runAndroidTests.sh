@@ -39,6 +39,23 @@ mkdir -p artifacts
 ensure_unity_closed "$projectDir" || exit 1
 
 EMULATOR_SERIAL=""
+EMULATOR_PID=""
+
+# Background processes (Unity, emulator) do not receive Ctrl-C:
+# stop them and restore the project when the script is interrupted.
+on_interrupt() {
+    trap - INT TERM
+    echo "Interrupted, cleaning up..."
+    stop_unity 2>/dev/null
+    rm -f "$PROJECT_SETTINGS_BACKUP"
+    if [ -n "$EMULATOR_SERIAL" ]; then
+        adb -s "$EMULATOR_SERIAL" emu kill >/dev/null 2>&1
+    elif [ -n "$EMULATOR_PID" ]; then
+        kill $EMULATOR_PID 2>/dev/null
+    fi
+    exit 130
+}
+trap on_interrupt INT TERM
 
 # Check for any Android emulator / device
 connected_devices=$(adb devices | grep -v "List" | grep "device$")
@@ -56,6 +73,7 @@ if [ -z "$connected_devices" ]; then
     # without a window and can crash the emulator.
     echo "Launching $DEVICE, please wait a few seconds..."
     emulator -avd "$DEVICE" -no-window -gpu swiftshader_indirect -no-snapshot-save &
+    EMULATOR_PID=$!
 
     # Wait for the emulator to be detected
     adb wait-for-device
@@ -93,30 +111,46 @@ reset_device_state() {
     adb forward --remove-all >/dev/null 2>&1
 }
 
+UNITY_PID=""
+
+# Kill the running Unity test run, if any, and restore the project settings
+# the test framework could not reset (e.g. application identifier).
+stop_unity() {
+    [ -z "$UNITY_PID" ] && return
+    kill $UNITY_PID 2>/dev/null
+    local waited=0
+    while kill -0 $UNITY_PID 2>/dev/null && [ $waited -lt 10 ]; do
+        sleep 1
+        waited=$((waited + 1))
+    done
+    kill -9 $UNITY_PID 2>/dev/null
+    wait $UNITY_PID 2>/dev/null
+    UNITY_PID=""
+    [ -f "$PROJECT_SETTINGS_BACKUP" ] && cp "$PROJECT_SETTINGS_BACKUP" "$PROJECT_SETTINGS"
+}
+
 # Run Unity tests once. Returns Unity's exit code, or 124 if the run timed out.
 run_unity_tests() {
     rm -f "$projectDir/$RESULTS_PATH"
     "$UNITY_PATH" -batchmode -projectPath "$projectDir" -buildTarget Android -runTests \
         -testResults "$RESULTS_PATH" -testPlatform Android -logFile "$LOG_PATH" &
-    local unity_pid=$!
+    UNITY_PID=$!
 
     local elapsed=0
-    while kill -0 $unity_pid 2>/dev/null; do
+    while kill -0 $UNITY_PID 2>/dev/null; do
         if [ $elapsed -ge $TIMEOUT ]; then
             echo "Unity test run exceeded ${TIMEOUT}s, killing it (player/editor connection likely lost)."
-            kill $unity_pid 2>/dev/null
-            sleep 10
-            kill -9 $unity_pid 2>/dev/null
-            wait $unity_pid 2>/dev/null
-            # The test framework could not restore the settings it changed (e.g. application identifier)
-            cp "$PROJECT_SETTINGS_BACKUP" "$PROJECT_SETTINGS"
+            stop_unity
             return 124
         fi
         sleep 5
         elapsed=$((elapsed + 5))
     done
 
-    wait $unity_pid
+    wait $UNITY_PID
+    local status=$?
+    UNITY_PID=""
+    return $status
 }
 
 cp "$PROJECT_SETTINGS" "$PROJECT_SETTINGS_BACKUP"
