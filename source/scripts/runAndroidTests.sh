@@ -41,11 +41,16 @@ ensure_unity_closed "$projectDir" || exit 1
 EMULATOR_SERIAL=""
 EMULATOR_PID=""
 
-# Emulator launcher and its child processes (qemu)
+# Emulator launcher and qemu processes running the AVD started by this script.
+# qemu is also looked up by AVD name, since it is reparented to launchd if the
+# launcher exits first.
 _emulator_pids() {
     [ -z "$EMULATOR_PID" ] && return
-    kill -0 $EMULATOR_PID 2>/dev/null && echo $EMULATOR_PID
-    pgrep -P $EMULATOR_PID 2>/dev/null
+    {
+        kill -0 $EMULATOR_PID 2>/dev/null && echo $EMULATOR_PID
+        pgrep -P $EMULATOR_PID
+        pgrep -f "qemu-system-[^ ]* .*-avd $DEVICE( |\$)"
+    } 2>/dev/null | sort -u
 }
 
 # Stop the emulator started by this script, if any.
