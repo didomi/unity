@@ -13,12 +13,16 @@ public class WidgetsTestsSuite: DidomiBaseTests
 {
     private bool widgetDisplayedEvent = false;
     private bool widgetHiddenEvent = false;
+    private bool widgetSwitchLayerEvent = false;
+    private bool widgetCustomActionEvent = false;
 
     [OneTimeSetUp]
     protected void SetUpSuite()
     {
         eventListener.ShowWidget += EventListener_ShowWidget;
         eventListener.HideWidget += EventListener_HideWidget;
+        eventListener.WidgetSwitchLayer += EventListener_WidgetSwitchLayer;
+        eventListener.WidgetCustomAction += EventListener_WidgetCustomAction;
     }
 
     [UnitySetUp]
@@ -33,6 +37,8 @@ public class WidgetsTestsSuite: DidomiBaseTests
     {
         eventListener.ShowWidget -= EventListener_ShowWidget;
         eventListener.HideWidget -= EventListener_HideWidget;
+        eventListener.WidgetSwitchLayer -= EventListener_WidgetSwitchLayer;
+        eventListener.WidgetCustomAction -= EventListener_WidgetCustomAction;
     }
 
     [TearDown]
@@ -41,6 +47,8 @@ public class WidgetsTestsSuite: DidomiBaseTests
         base.TearDown();
         widgetDisplayedEvent = false;
         widgetHiddenEvent = false;
+        widgetSwitchLayerEvent = false;
+        widgetCustomActionEvent = false;
     }
 
     [Test]
@@ -59,6 +67,8 @@ public class WidgetsTestsSuite: DidomiBaseTests
 
         Assert.False(Didomi.GetInstance().IsWidgetVisible(), "No widget should be visible");
         Assert.False(widgetDisplayedEvent, "ShowWidget event should not be triggered");
+        Assert.False(widgetSwitchLayerEvent, "WidgetSwitchLayer event should not be triggered");
+        Assert.False(widgetCustomActionEvent, "WidgetCustomAction event should not be triggered");
     }
 
     [UnityTest]
@@ -79,5 +89,15 @@ public class WidgetsTestsSuite: DidomiBaseTests
     private void EventListener_HideWidget(object sender, HideWidgetEvent e)
     {
         widgetHiddenEvent = true;
+    }
+
+    private void EventListener_WidgetSwitchLayer(object sender, WidgetSwitchLayerEvent e)
+    {
+        widgetSwitchLayerEvent = true;
+    }
+
+    private void EventListener_WidgetCustomAction(object sender, WidgetCustomActionEvent e)
+    {
+        widgetCustomActionEvent = true;
     }
 }

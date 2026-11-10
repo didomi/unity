@@ -337,6 +337,22 @@ namespace IO.Didomi.SDK.Android
             // A widget is being hidden
         }
 
+        public void widgetSwitchLayer(AndroidJavaObject @event)
+        {
+            var WidgetSwitchLayerEvent = ConvertToWidgetSwitchLayerEvent(@event);
+
+            _eventListener.OnWidgetSwitchLayer(WidgetSwitchLayerEvent);
+            // The user navigated to another layer of a widget
+        }
+
+        public void widgetCustomAction(AndroidJavaObject @event)
+        {
+            var WidgetCustomActionEvent = ConvertToWidgetCustomActionEvent(@event);
+
+            _eventListener.OnWidgetCustomAction(WidgetCustomActionEvent);
+            // A custom action button was clicked in a widget
+        }
+
         private static ErrorEvent ConvertToErrorEvent(AndroidJavaObject @event)
         {
             var errorMessage = GetErrorMessage(@event);
@@ -477,6 +493,24 @@ namespace IO.Didomi.SDK.Android
             return new ShowWidgetEvent(widgetId, layerName);
         }
 
+        private static WidgetSwitchLayerEvent ConvertToWidgetSwitchLayerEvent(AndroidJavaObject @event)
+        {
+            var widgetId = GetWidgetId(@event);
+            var layerName = GetLayerName(@event);
+            var targetLayerName = GetTargetLayerName(@event);
+
+            return new WidgetSwitchLayerEvent(widgetId, layerName, targetLayerName);
+        }
+
+        private static WidgetCustomActionEvent ConvertToWidgetCustomActionEvent(AndroidJavaObject @event)
+        {
+            var widgetId = GetWidgetId(@event);
+            var layerName = GetLayerName(@event);
+            var customActionId = GetCustomActionId(@event);
+
+            return new WidgetCustomActionEvent(widgetId, layerName, customActionId);
+        }
+
         private static string GetPurposeId(AndroidJavaObject @event)
         {
            return AndroidObjectMapper.GetMethodStringValue(@event, "getPurposeId");
@@ -545,6 +579,16 @@ namespace IO.Didomi.SDK.Android
         private static string GetLayerName(AndroidJavaObject @event)
         {
             return AndroidObjectMapper.GetMethodStringValue(@event, "getLayerName");
+        }
+
+        private static string GetTargetLayerName(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getTargetLayerName");
+        }
+
+        private static string GetCustomActionId(AndroidJavaObject @event)
+        {
+            return AndroidObjectMapper.GetMethodStringValue(@event, "getCustomActionId");
         }
     }
 }
