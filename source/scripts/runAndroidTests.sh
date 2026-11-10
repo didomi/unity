@@ -41,6 +41,43 @@ ensure_unity_closed "$projectDir" || exit 1
 EMULATOR_SERIAL=""
 EMULATOR_PID=""
 
+# Emulator launcher and its child processes (qemu)
+_emulator_pids() {
+    [ -z "$EMULATOR_PID" ] && return
+    kill -0 $EMULATOR_PID 2>/dev/null && echo $EMULATOR_PID
+    pgrep -P $EMULATOR_PID 2>/dev/null
+}
+
+# Stop the emulator started by this script, if any.
+# `adb emu kill` is tried first for a clean shutdown, but adb can hang or fail
+# (e.g. while the emulator is still booting), so the processes are killed if
+# they are still running afterwards.
+stop_emulator() {
+    [ -z "$EMULATOR_PID" ] && return
+    echo "Stopping emulator $DEVICE..."
+    local adb_pid=""
+    if [ -n "$EMULATOR_SERIAL" ]; then
+        adb -s "$EMULATOR_SERIAL" emu kill >/dev/null 2>&1 &
+        adb_pid=$!
+    fi
+    local waited=0
+    while [ -n "$(_emulator_pids)" ] && [ $waited -lt 20 ]; do
+        sleep 1
+        waited=$((waited + 1))
+    done
+    [ -n "$adb_pid" ] && kill $adb_pid 2>/dev/null
+    local pids=$(_emulator_pids)
+    if [ -n "$pids" ]; then
+        kill $pids 2>/dev/null
+        sleep 5
+        pids=$(_emulator_pids)
+        [ -n "$pids" ] && kill -9 $pids 2>/dev/null
+    fi
+    wait $EMULATOR_PID 2>/dev/null
+    EMULATOR_PID=""
+    EMULATOR_SERIAL=""
+}
+
 # Background processes (Unity, emulator) do not receive Ctrl-C:
 # stop them and restore the project when the script is interrupted.
 on_interrupt() {
@@ -48,11 +85,7 @@ on_interrupt() {
     echo "Interrupted, cleaning up..."
     stop_unity 2>/dev/null
     rm -f "$PROJECT_SETTINGS_BACKUP"
-    if [ -n "$EMULATOR_SERIAL" ]; then
-        adb -s "$EMULATOR_SERIAL" emu kill >/dev/null 2>&1
-    elif [ -n "$EMULATOR_PID" ]; then
-        kill $EMULATOR_PID 2>/dev/null
-    fi
+    stop_emulator
     exit 130
 }
 trap on_interrupt INT TERM
@@ -126,6 +159,8 @@ stop_unity() {
     kill -9 $UNITY_PID 2>/dev/null
     wait $UNITY_PID 2>/dev/null
     UNITY_PID=""
+    # Helper processes (asset import workers...) can outlive the editor and keep the project locked
+    ensure_unity_closed "$projectDir" >/dev/null
     [ -f "$PROJECT_SETTINGS_BACKUP" ] && cp "$PROJECT_SETTINGS_BACKUP" "$PROJECT_SETTINGS"
 }
 
@@ -171,15 +206,7 @@ done
 reset_device_state
 rm -f "$PROJECT_SETTINGS_BACKUP"
 
-if [ -n "$EMULATOR_SERIAL" ]; then
-    # Kill the emulator started by this script
-    adb -s "$EMULATOR_SERIAL" emu kill
-    # Wait for the emulator to close
-    while adb devices | grep -q "^$EMULATOR_SERIAL"; do
-        echo "Waiting for $DEVICE to close..."
-        sleep 1
-    done
-fi
+stop_emulator
 
 if [ $result -eq 0 ]
 then
