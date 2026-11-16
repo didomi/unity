@@ -249,6 +249,7 @@ namespace IO.Didomi.SDK
         /// Regulation as string such as "gdpr", "cpra"...
         /// If no regulation is applicable, will return "none".
         /// If a regulation configuration is provided, will return "custom" (see GetApplicableRegulationConfiguration).
+        /// Beta: "custom" is in beta and may change in future releases.
         /// </returns>
         public string GetApplicableRegulation()
         {
@@ -257,6 +258,7 @@ namespace IO.Didomi.SDK
 
         /// <summary>
         /// Determine the regulation configuration applicable for the user (identity and version).
+        /// Beta: this API is in beta and may change in future releases.
         /// </summary>
         /// <returns>
         /// The applicable regulation configuration, or null if no regulation configuration is provided.

@@ -65,6 +65,7 @@ namespace IO.Didomi.SDK
 
         /// <summary>
         /// Current regulation configuration (if a regulation configuration is provided), or null
+        /// Beta: this API is in beta and may change in future releases.
         /// </summary>
         [JsonProperty("regulation_configuration")]
         public RegulationConfiguration RegulationConfiguration { get; set; } = null;

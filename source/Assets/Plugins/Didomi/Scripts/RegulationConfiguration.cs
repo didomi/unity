@@ -5,6 +5,7 @@ namespace IO.Didomi.SDK
 {
     /// <summary>
     /// Regulation configuration defined in the console, applicable when the regulation is "custom".
+    /// Beta: this API is in beta and may change in future releases.
     /// </summary>
     [Serializable]
     public class RegulationConfiguration
