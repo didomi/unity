@@ -28,6 +28,7 @@ namespace Assets.Plugins.Scripts.IOS
         tipa = 19,
         ucpa = 20,
         vcdpa = 21,
+        // Regulation configuration defined in the console. Beta: this API is in beta and may change in future releases.
         custom = 23,
         none = 10000
     };

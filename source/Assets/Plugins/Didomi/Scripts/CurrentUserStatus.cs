@@ -58,6 +58,8 @@ namespace IO.Didomi.SDK
 
         /// <summary>
         /// Current regulation, such as "gdpr", "cpra", "custom"... or "none"
+        /// ("custom" if a regulation configuration is provided, see RegulationConfiguration).
+        /// Beta: "custom" is in beta and may change in future releases.
         /// </summary>
         [JsonProperty("regulation")]
         [JsonConverter(typeof(JsonRegulationConverter))]
