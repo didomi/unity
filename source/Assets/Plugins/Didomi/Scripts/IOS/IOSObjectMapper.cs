@@ -167,6 +167,25 @@ namespace IO.Didomi.SDK.IOS
             return result;
         }
 
+        public static RegulationConfiguration ConvertToRegulationConfiguration(string jsonText)
+        {
+            RegulationConfiguration result = null;
+
+            if (!string.IsNullOrWhiteSpace(jsonText))
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject<RegulationConfiguration>(jsonText);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.ToString());
+                }
+            }
+
+            return result;
+        }
+
         public static ISet<Purpose> ConvertToPurposeSet(string jsonText)
         {
             ISet<Purpose> result = null;

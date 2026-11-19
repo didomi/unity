@@ -349,8 +349,33 @@ namespace IO.Didomi.SDK.Android
                 didomiDcs: obj.Call<string>("getDidomiDcs"),
                 gppString: obj.Call<string>("getGppString")
             );
+            currentUserStatus.RegulationConfiguration = ConvertToRegulationConfiguration(obj.Call<AndroidJavaObject>("getRegulationConfiguration"));
 
             return currentUserStatus;
+        }
+
+        public static RegulationConfiguration ConvertToRegulationConfiguration(AndroidJavaObject obj)
+        {
+            if (obj == null)
+            {
+                return null;
+            }
+            var numericalIdObject = obj.Call<AndroidJavaObject>("getNumericalId");
+            int? numericalId = null;
+            if (numericalIdObject != null)
+            {
+                numericalId = numericalIdObject.Call<int>("intValue");
+            }
+            var regulationConfiguration = new RegulationConfiguration(
+                GetMethodStringValue(obj, "getId"),
+                GetMethodStringValue(obj, "getVersionId"),
+                numericalId,
+                GetMethodStringValue(obj, "getRegulationName"),
+                GetMethodStringValue(obj, "getTokenStorageName"),
+                GetMethodBoolValue(obj, "getMixed")
+            );
+
+            return regulationConfiguration;
         }
 
         public static CurrentUserStatus.VendorStatus ConvertToCurrentUserStatusVendor(AndroidJavaObject obj)

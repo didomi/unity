@@ -143,6 +143,13 @@ namespace IO.Didomi.SDK.Android
             return obj.Call<string>("getValue");
         }
 
+        public RegulationConfiguration GetApplicableRegulationConfiguration()
+        {
+            var obj = CallReturningJavaObjectMethod("getApplicableRegulationConfiguration");
+
+            return AndroidObjectMapper.ConvertToRegulationConfiguration(obj);
+        }
+
         public string GetUserCountryCode()
         {
             return CallReturningStringMethod("getUserCountryCode");
