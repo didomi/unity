@@ -62,15 +62,20 @@ char* ConvertComplexDictionaryToString(NSDictionary * dataDict)
 
 /**
  Method used to map regulation configuration from DDMRegulationConfiguration to a NSDictionary.
+ The class is nested in the Swift `Regulation` enum (`Regulation.Configuration`), so the generated
+ Didomi-Swift.h header only forward-declares it (no @interface). Its @objc properties are read
+ through key-value coding instead of direct messages.
  */
 NSDictionary* MapRegulationConfigurationToDictionary(DDMRegulationConfiguration *regulationConfiguration) {
+    NSObject *configuration = (NSObject *)regulationConfiguration;
+    NSNumber *mixed = [configuration valueForKey:@"mixed"];
     return @{
-        @"id": [regulationConfiguration id],
-        @"versionId": [regulationConfiguration versionId] ?: [NSNull null],
-        @"numericalId": [regulationConfiguration numericalId] ?: [NSNull null],
-        @"regulationName": [regulationConfiguration regulationName],
-        @"tokenStorageName": [regulationConfiguration tokenStorageName],
-        @"mixed": [NSNumber numberWithInt: convertBoolToInt([regulationConfiguration mixed])]
+        @"id": [configuration valueForKey:@"id"] ?: [NSNull null],
+        @"versionId": [configuration valueForKey:@"versionId"] ?: [NSNull null],
+        @"numericalId": [configuration valueForKey:@"numericalId"] ?: [NSNull null],
+        @"regulationName": [configuration valueForKey:@"regulationName"] ?: [NSNull null],
+        @"tokenStorageName": [configuration valueForKey:@"tokenStorageName"] ?: [NSNull null],
+        @"mixed": [NSNumber numberWithInt: convertBoolToInt([mixed boolValue])]
     };
 }
 
