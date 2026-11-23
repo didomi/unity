@@ -350,6 +350,7 @@ namespace IO.Didomi.SDK.Android
                 gppString: obj.Call<string>("getGppString")
             );
             currentUserStatus.RegulationConfiguration = ConvertToRegulationConfiguration(obj.Call<AndroidJavaObject>("getRegulationConfiguration"));
+            currentUserStatus.Widget = ConvertToSourceWidget(obj.Call<AndroidJavaObject>("getWidget"));
 
             return currentUserStatus;
         }
@@ -376,6 +377,19 @@ namespace IO.Didomi.SDK.Android
             );
 
             return regulationConfiguration;
+        }
+
+        public static SourceWidget ConvertToSourceWidget(AndroidJavaObject obj)
+        {
+            if (obj == null)
+            {
+                return null;
+            }
+            return new SourceWidget(
+                GetMethodStringValue(obj, "getType"),
+                GetMethodStringValue(obj, "getId"),
+                GetMethodStringValue(obj, "getVersionId")
+            );
         }
 
         public static CurrentUserStatus.VendorStatus ConvertToCurrentUserStatusVendor(AndroidJavaObject obj)

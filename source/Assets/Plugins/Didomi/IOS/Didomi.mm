@@ -80,6 +80,17 @@ NSDictionary* MapRegulationConfigurationToDictionary(DDMRegulationConfiguration 
 }
 
 /**
+ Method used to map the widget that collected the consent from DDMSourceWidget to a NSDictionary.
+ */
+NSDictionary* MapSourceWidgetToDictionary(DDMSourceWidget *widget) {
+    return @{
+        @"type": [widget type] ?: [NSNull null],
+        @"id": [widget id] ?: [NSNull null],
+        @"version_id": [widget versionID] ?: [NSNull null]
+    };
+}
+
+/**
  Method used to map current user status from DDMCurrentUserStatus to a JSON string.
  */
 char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
@@ -94,6 +105,7 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
     NSString *didomiDCS = [currentUserStatus didomiDCS];
     NSString *gppString = [currentUserStatus gppString];
     DDMRegulationConfiguration *regulationConfiguration = [currentUserStatus regulationConfiguration];
+    DDMSourceWidget *widget = [currentUserStatus widget];
     
     NSMutableDictionary *vendorsStatusJson = [NSMutableDictionary dictionary];
     NSDictionary<NSString *, DDMCurrentUserStatusVendor *> *vendorsStatus = [currentUserStatus vendors];
@@ -125,6 +137,7 @@ char* MapCurrentUserStatus(DDMCurrentUserStatus *currentUserStatus) {
         @"didomi_dcs": didomiDCS,
         @"gpp_string": gppString,
         @"regulation_configuration": regulationConfiguration ? MapRegulationConfigurationToDictionary(regulationConfiguration) : [NSNull null],
+        @"widget": widget ? MapSourceWidgetToDictionary(widget) : [NSNull null],
         @"purposes": purposesStatusJson,
         @"vendors": vendorsStatusJson
     };

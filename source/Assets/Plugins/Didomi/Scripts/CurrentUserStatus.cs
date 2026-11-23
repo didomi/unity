@@ -73,6 +73,13 @@ namespace IO.Didomi.SDK
         public RegulationConfiguration RegulationConfiguration { get; set; } = null;
 
         /// <summary>
+        /// Privacy Widget that collected the current consent, or null
+        /// Beta: this API is in beta and may change in future releases.
+        /// </summary>
+        [JsonProperty("widget")]
+        public SourceWidget Widget { get; set; } = null;
+
+        /// <summary>
         /// Didomi Consent String
         /// </summary>
         [JsonProperty("didomi_dcs")]
