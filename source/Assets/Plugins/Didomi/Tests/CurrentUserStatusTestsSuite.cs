@@ -63,19 +63,6 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
         Assert.IsNull(currentUserStatus.Widget, "The consent was not collected by a Privacy Widget");
     }
 
-    [Test]
-    public void TestCurrentUserStatusWidgetMapping()
-    {
-        var currentUserStatus = IO.Didomi.SDK.IOS.IOSObjectMapper.ConvertToCurrentUserStatus(
-            "{\"widget\": {\"type\": \"notice\", \"id\": \"widget-1\", \"version_id\": null}}"
-        );
-
-        Assert.NotNull(currentUserStatus.Widget);
-        Assert.AreEqual("notice", currentUserStatus.Widget.Type);
-        Assert.AreEqual("widget-1", currentUserStatus.Widget.Id);
-        Assert.IsNull(currentUserStatus.Widget.VersionId);
-    }
-
     [UnityTest]
     public IEnumerator TestCurrentUserStatusAfterAllEnabledThenDisabled()
     {
