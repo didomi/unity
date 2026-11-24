@@ -1,9 +1,38 @@
-using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace IO.Didomi.SDK
 {
+    /// <summary>
+    /// Optional context for the current user.
+    /// </summary>
+    public class DidomiUserContext
+    {
+        [JsonProperty("attributes", NullValueHandling = NullValueHandling.Ignore)]
+        public IDictionary<string, string> Attributes { get; }
+
+        [JsonProperty("variables", NullValueHandling = NullValueHandling.Ignore)]
+        public IDictionary<string, string> Variables { get; }
+
+        [JsonProperty("age", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Age { get; }
+
+        [JsonProperty("isLoggedIn", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsLoggedIn { get; }
+
+        public DidomiUserContext(
+            IDictionary<string, string> attributes = null,
+            IDictionary<string, string> variables = null,
+            int? age = null,
+            bool? isLoggedIn = null
+        ) {
+            Attributes = attributes;
+            Variables = variables;
+            Age = age;
+            IsLoggedIn = isLoggedIn;
+        }
+    }
+
     /// <summary>
     /// Organization User parameters
     /// </summary>
@@ -23,7 +52,7 @@ namespace IO.Didomi.SDK
         /// </item>
         /// </list>
         /// </summary>
-        [JsonProperty("userAuth")]
+        [JsonProperty("userAuth", NullValueHandling = NullValueHandling.Ignore)]
         public UserAuth UserAuth { get; }
 
         /// <summary>
@@ -45,6 +74,9 @@ namespace IO.Didomi.SDK
         /// </summary>
         [JsonProperty("isUnderage", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsUnderage { get; }
+
+        [JsonProperty("userContext", NullValueHandling = NullValueHandling.Ignore)]
+        public DidomiUserContext UserContext { get; }
 
         /// <summary>
         /// User parameters for Didomi SDK
@@ -75,14 +107,17 @@ namespace IO.Didomi.SDK
         /// </list>
         /// </param>
         /// <param name="isUnderage">If the user is underage (<c>null</c> will keep the setting from initialization or from a previous call to <c>setUser</c>)</param>
+        /// <param name="userContext">Optional context for the current user.</param>
         public DidomiUserParameters(
-            UserAuth userAuth,
+            UserAuth userAuth = null,
             UserAuthParams dcsUserAuth = null,
-            bool? isUnderage = null
+            bool? isUnderage = null,
+            DidomiUserContext userContext = null
         ) {
-            this.UserAuth = userAuth ?? throw new ArgumentNullException(nameof(userAuth));
+            this.UserAuth = userAuth;
             this.DcsUserAuth = dcsUserAuth;
             this.IsUnderage = isUnderage;
+            this.UserContext = userContext;
         }
     }
 
@@ -145,12 +180,14 @@ namespace IO.Didomi.SDK
         /// </list>
         /// </param>
         /// <param name="isUnderage">If the user is underage (<c>null</c> will keep the setting from initialization or from a previous call to <c>setUser</c>)</param>
+        /// <param name="userContext">Optional context for the current user.</param>
         public DidomiMultiUserParameters(
-            UserAuth userAuth,
+            UserAuth userAuth = null,
             UserAuthParams dcsUserAuth = null,
             IList<UserAuthParams> synchronizedUsers = null,
-            bool? isUnderage = null
-        ) : base(userAuth, dcsUserAuth, isUnderage) {
+            bool? isUnderage = null,
+            DidomiUserContext userContext = null
+        ) : base(userAuth, dcsUserAuth, isUnderage, userContext) {
             this.SynchronizedUsers = synchronizedUsers;
         }
     }

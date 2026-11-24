@@ -749,6 +749,10 @@ UserAuthParams * ConvertJsonObjectToUserAuthParams(NSDictionary* jsonObject) {
 }
 
 id<UserAuth> ConvertJsonObjectToUserAuth(NSDictionary* jsonObject) {
+    if (jsonObject == nil || [jsonObject isKindOfClass:[NSNull class]]) {
+        return nil;
+    }
+
     id _Nullable algorithm = jsonObject[@"algorithm"];
     if (algorithm == NULL) {
         return [[UserAuthWithoutParams alloc] initWithId: jsonObject[@"id"]];
@@ -773,7 +777,25 @@ NSArray<UserAuthParams *> * ConvertJsonArrayToUserAuthParamsArray(NSArray* jsonA
     return paramsArray;
 }
 
+DidomiUserContext * ConvertJsonObjectToUserContext(NSDictionary* jsonObject) {
+    if (jsonObject == nil || [jsonObject isKindOfClass:[NSNull class]]) {
+        return nil;
+    }
+
+    id attributes = jsonObject[@"attributes"];
+    id variables = jsonObject[@"variables"];
+    id age = jsonObject[@"age"];
+    id isLoggedIn = jsonObject[@"isLoggedIn"];
+    return [[DidomiUserContext alloc]
+            initWithAttributes: attributes == [NSNull null] ? nil : attributes
+            variables: variables == [NSNull null] ? nil : variables
+            age: age == [NSNull null] ? nil : age
+            isLoggedIn: isLoggedIn == [NSNull null] ? nil : isLoggedIn
+    ];
+}
+
 DidomiUserParameters * ConvertJsonObjectToDidomiUserParameters(NSDictionary* jsonObject, UIViewController* _Nullable containerController) {
+    DidomiUserContext *userContext = ConvertJsonObjectToUserContext(jsonObject[@"userContext"]);
     id isUnderage = jsonObject[@"isUnderage"];
     NSArray* synchronizedUsers = jsonObject[@"synchronizedUsers"];
     BOOL hasMultiUsers = (synchronizedUsers != nil);
@@ -785,6 +807,7 @@ DidomiUserParameters * ConvertJsonObjectToDidomiUserParameters(NSDictionary* jso
                     synchronizedUsers: ConvertJsonArrayToUserAuthParamsArray(synchronizedUsers)
                     containerController: containerController
                     isUnderage: isUnderage
+                    userContext: userContext
             ];
         } else {
             return [[DidomiUserParameters alloc]
@@ -792,6 +815,7 @@ DidomiUserParameters * ConvertJsonObjectToDidomiUserParameters(NSDictionary* jso
                     dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
                     containerController: containerController
                     isUnderage: isUnderage
+                    userContext: userContext
             ];
         }
     } else if ([isUnderage isKindOfClass:[NSNull class]] || isUnderage == nil) {
@@ -801,12 +825,14 @@ DidomiUserParameters * ConvertJsonObjectToDidomiUserParameters(NSDictionary* jso
                     dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
                     synchronizedUsers: ConvertJsonArrayToUserAuthParamsArray(synchronizedUsers)
                     containerController: containerController
+                    userContext: userContext
             ];
         } else {
             return [[DidomiUserParameters alloc]
                     initWithUserAuth: ConvertJsonObjectToUserAuth(jsonObject[@"userAuth"])
                     dcsUserAuth: ConvertJsonObjectToUserAuthParams(jsonObject[@"dcsUserAuth"])
                     containerController: containerController
+                    userContext: userContext
             ];
         }
     }

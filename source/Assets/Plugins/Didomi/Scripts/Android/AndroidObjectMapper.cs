@@ -474,7 +474,7 @@ namespace IO.Didomi.SDK.Android
                     ConvertToJavaUserAuthList(multiUserParameters.SynchronizedUsers),
                     activity,
                     isUnderage,
-                    null); // userContext (added in native SDK 2.52.0)
+                    ConvertToJavaUserContext(parameters.UserContext));
             }
             else
             {
@@ -483,8 +483,39 @@ namespace IO.Didomi.SDK.Android
                     ConvertToJavaUserAuth(parameters.UserAuth),
                     ConvertToJavaUserAuthParams(parameters.DcsUserAuth),
                     activity,
-                    isUnderage);
+                    isUnderage,
+                    ConvertToJavaUserContext(parameters.UserContext));
             }
+        }
+
+        public static AndroidJavaObject ConvertToJavaUserContext(DidomiUserContext context)
+        {
+            if (context == null)
+            {
+                return null;
+            }
+
+            return new AndroidJavaObject(
+                "io.didomi.sdk.user.model.UserContext",
+                ConvertToJavaStringMap(context.Attributes),
+                ConvertToJavaStringMap(context.Variables),
+                context.Age.HasValue ? new AndroidJavaObject("java.lang.Integer", context.Age.Value) : null,
+                ConvertToBooleanAndroidJavaObject(context.IsLoggedIn));
+        }
+
+        private static AndroidJavaObject ConvertToJavaStringMap(IDictionary<string, string> values)
+        {
+            if (values == null)
+            {
+                return null;
+            }
+
+            var map = new AndroidJavaObject("java.util.HashMap");
+            foreach (var pair in values)
+            {
+                map.Call<AndroidJavaObject>("put", pair.Key, pair.Value);
+            }
+            return map;
         }
 
         public static AndroidJavaObject ConvertToJavaDidomiWidgetParameters(DidomiWidgetParameters parameters)
