@@ -60,6 +60,7 @@ public class CurrentUserStatusTestsSuite: DidomiBaseTests
         Assert.AreEqual("gdpr", currentUserStatus.Regulation, $"Incorrect regulation: {currentUserStatus.Regulation}");
         Assert.True(string.IsNullOrEmpty(currentUserStatus.DidomiDcs), "didomiDcs should not be present until feature is enabled");
         Assert.True(string.IsNullOrEmpty(currentUserStatus.GppString), "gppString should not be present until feature is enabled");
+        Assert.IsNull(currentUserStatus.Widget, "The consent was not collected by a Privacy Widget");
     }
 
     [UnityTest]
