@@ -145,6 +145,27 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     }
 
     [UnityTest]
+    public IEnumerator TestMultiUserContextWithoutSynchronizedUsers()
+    {
+        Didomi.GetInstance().SetUser(new DidomiMultiUserParameters(
+            userContext: new DidomiUserContext(age: 18, isLoggedIn: true)
+        ));
+        yield return null;
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
+    }
+
+    [UnityTest]
+    public IEnumerator TestMultiUserContextWithoutSynchronizedUsersAndSetupUI()
+    {
+        Didomi.GetInstance().SetUserAndSetupUI(new DidomiMultiUserParameters(
+            userContext: new DidomiUserContext(age: 18, isLoggedIn: true)
+        ));
+        yield return new WaitForSeconds(1);
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
+        Assert.IsTrue(Didomi.GetInstance().IsNoticeVisible(), "Notice should be visible after SetUserAndSetupUI");
+    }
+
+    [UnityTest]
     public IEnumerator TestEmptyUserContext()
     {
         Didomi.GetInstance().SetUser(new DidomiUserParameters(userContext: new DidomiUserContext()));

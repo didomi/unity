@@ -575,12 +575,11 @@ namespace IO.Didomi.SDK.Android
 
         public static AndroidJavaObject ConvertToJavaUserAuthList(IList<UserAuthParams> userAuthParams)
         {
+            var arrayListJavaObject = new AndroidJavaObject("java.util.ArrayList");
             if (userAuthParams == null)
             {
-                return null;
+                return arrayListJavaObject;
             }
-
-            var arrayListJavaObject = new AndroidJavaObject("java.util.ArrayList");
 
             foreach (var item in userAuthParams)
             {
