@@ -1,6 +1,7 @@
 using System.Collections;
 using NUnit.Framework;
 using UnityEngine.TestTools;
+using UnityEngine;
 using IO.Didomi.SDK;
 using System.Collections.Generic;
 using System;
@@ -33,10 +34,12 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
         ResetResults();
     }
 
-    [TearDown]
-    public new void TearDown()
+    [UnityTearDown]
+    public new IEnumerator TearDown()
     {
         base.TearDown();
+        Didomi.GetInstance().HideNotice();
+        yield return new WaitForSeconds(1);
     }
 
     [OneTimeTearDown]
@@ -65,10 +68,123 @@ public class SyncUserAfterInitTestsSuite : SyncUserBaseTests
     }
 
     [Test]
-    public void TestForceUserAuthParam()
+    public void TestOptionalUserAuthParam()
     {
-        Assert.That(() => new DidomiUserParameters(null), 
-                  Throws.TypeOf<ArgumentNullException>());
+        Assert.IsNull(new DidomiUserParameters().UserAuth);
+        Assert.IsNull(new DidomiUserParameters(null).UserAuth);
+        Assert.IsNull(new DidomiMultiUserParameters().UserAuth);
+        Assert.IsNull(new DidomiMultiUserParameters(null).UserAuth);
+    }
+
+    [UnityTest]
+    public IEnumerator TestUserContext()
+    {
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            userContext: new DidomiUserContext(
+                attributes: new Dictionary<string, string> { { "tier", "premium" } },
+                variables: new Dictionary<string, string> { { "source", "unity" } },
+                age: 18,
+                isLoggedIn: true
+            )
+        ));
+        yield return null;
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
+    }
+
+    [UnityTest]
+    public IEnumerator TestUserContextAndSetupUI()
+    {
+        Didomi.GetInstance().SetUserAndSetupUI(new DidomiUserParameters(
+            userContext: new DidomiUserContext(
+                attributes: new Dictionary<string, string> { { "tier", "premium" } },
+                variables: new Dictionary<string, string> { { "source", "unity" } },
+                age: 18,
+                isLoggedIn: true
+            )
+        ));
+        yield return new WaitForSeconds(1);
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
+        Assert.IsTrue(Didomi.GetInstance().IsNoticeVisible(), "Notice should be visible after SetUserAndSetupUI");
+    }
+
+    [UnityTest]
+    public IEnumerator TestMultiUserContext()
+    {
+        Didomi.GetInstance().SetUser(new DidomiMultiUserParameters(
+            synchronizedUsers: new List<UserAuthParams> {
+                new UserAuthWithHashParams(syncUserId1, "hash-md5", secretId, digest, salt)
+            },
+            userContext: new DidomiUserContext(
+                attributes: new Dictionary<string, string> { { "tier", "premium" } },
+                variables: new Dictionary<string, string> { { "source", "unity" } },
+                age: 0,
+                isLoggedIn: false
+            )
+        ));
+        yield return null;
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
+    }
+
+    [UnityTest]
+    public IEnumerator TestMultiUserContextAndSetupUI()
+    {
+        Didomi.GetInstance().SetUserAndSetupUI(new DidomiMultiUserParameters(
+            synchronizedUsers: new List<UserAuthParams> {
+                new UserAuthWithHashParams(syncUserId1, "hash-md5", secretId, digest, salt)
+            },
+            userContext: new DidomiUserContext(
+                attributes: new Dictionary<string, string> { { "tier", "premium" } },
+                variables: new Dictionary<string, string> { { "source", "unity" } },
+                age: 0,
+                isLoggedIn: false
+            )
+        ));
+        yield return new WaitForSeconds(1);
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
+        Assert.IsTrue(Didomi.GetInstance().IsNoticeVisible(), "Notice should be visible after SetUserAndSetupUI");
+    }
+
+    [UnityTest]
+    public IEnumerator TestMultiUserContextWithoutSynchronizedUsers()
+    {
+        Didomi.GetInstance().SetUser(new DidomiMultiUserParameters(
+            userContext: new DidomiUserContext(age: 18, isLoggedIn: true)
+        ));
+        yield return null;
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
+    }
+
+    [UnityTest]
+    public IEnumerator TestMultiUserContextWithoutSynchronizedUsersAndSetupUI()
+    {
+        Didomi.GetInstance().SetUserAndSetupUI(new DidomiMultiUserParameters(
+            userContext: new DidomiUserContext(age: 18, isLoggedIn: true)
+        ));
+        yield return new WaitForSeconds(1);
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
+        Assert.IsTrue(Didomi.GetInstance().IsNoticeVisible(), "Notice should be visible after SetUserAndSetupUI");
+    }
+
+    [UnityTest]
+    public IEnumerator TestEmptyUserContext()
+    {
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(userContext: new DidomiUserContext()));
+        yield return null;
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
+    }
+
+    [UnityTest]
+    public IEnumerator TestEmptyUserContextMaps()
+    {
+        Didomi.GetInstance().SetUser(new DidomiUserParameters(
+            userAuth: null,
+            userContext: new DidomiUserContext(
+                attributes: new Dictionary<string, string>(),
+                variables: new Dictionary<string, string>()
+            )
+        ));
+        yield return null;
+        Assert.IsTrue(Didomi.GetInstance().IsReady());
     }
 
     [UnityTest]
